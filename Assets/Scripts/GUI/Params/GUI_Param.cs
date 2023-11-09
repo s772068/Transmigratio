@@ -13,9 +13,11 @@ public class GUI_Param : MonoBehaviour {
     private List<string> values = new();
     private E_Param type;
     private int val;
+
     public Action<int> OnClick;
 
     public int Index { private get; set; }
+
     /// <summary>
     /// ToDo
     /// </summary>
@@ -52,7 +54,6 @@ public class GUI_Param : MonoBehaviour {
 
     public int Value {
         set {
-            if(value == 62) print("62");
             val = value;
             progress.Value = value;
             valTxt.text = (values.Count == 0 ?

@@ -302,7 +302,7 @@ namespace WorldMapStrategyKit {
         int GetCityNearPoint(Vector2 localPoint, int countryIndex) {
             if (visibleCities == null)
                 return -1;
-            if (Application.isPlaying) {
+            if (isPlaying) {
                 //												float hitPrecission = CITY_HIT_PRECISION * _cityIconSize * _cityHitTestPrecision;
                 float rl = localPoint.x - currentCityScale.x; // hitPrecission;
                 float rr = localPoint.x + currentCityScale.x; // hitPrecission;

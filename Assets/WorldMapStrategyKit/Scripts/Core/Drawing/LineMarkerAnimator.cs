@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 
 namespace WorldMapStrategyKit {
@@ -19,7 +19,7 @@ namespace WorldMapStrategyKit {
         /// <summary>
         /// The color of the line.
         /// </summary>
-        public Color color;
+        public Color color = Misc.ColorWhite;
 
         /// <summary>
         /// Line width (default: 0.01f)
@@ -44,7 +44,7 @@ namespace WorldMapStrategyKit {
         /// <summary>
         /// Specifies the duration in seconds for the line before it fades out
         /// </summary>
-        public float autoFadeAfter = 0;
+        public float autoFadeAfter;
 
         /// <summary>
         /// The duration of the fade out.
@@ -59,7 +59,7 @@ namespace WorldMapStrategyKit {
         /// <summary>
         /// Duration of a cycle in seconds. 0.1f can be a good value. 0 = no animation.
         /// </summary>
-        public float dashAnimationDuration = 0f;
+        public float dashAnimationDuration;
 
         /// <summary>
         /// Number of points for the line. By default it will create a number of points based on path length and the MINIMUM_POINTS constant.
@@ -123,10 +123,16 @@ namespace WorldMapStrategyKit {
         /// </summary>
         public bool reverseMode;
 
+        /// <summary>
+        /// The current position of the head of the line
+        /// </summary>
+        [NonSerialized]
+        public Vector2 currentMap2DPosition;
 
         /* Internal fields */
         float startTime, startAutoFadeTime;
         List<Vector3> vertices;
+        List<Vector2> map2dPositions;
         LineRenderer lr;
         LineRenderer2 lrd;
         // for dashed lines
@@ -141,10 +147,45 @@ namespace WorldMapStrategyKit {
         SpriteRenderer capSpriteRenderer;
         MeshRenderer capMeshRenderer;
         Color capStartColor;
+        bool needStart;
+        Vector3 lastMapperCamPosition;
+        float elevationStart, elevationEnd;
 
+        static class ShaderParams {
+            public static int ViewportInvMatrix = Shader.PropertyToID("_ViewportInvProj");
 
-        // Use this for initialization
-        void Start() {
+            public const string VIEWPORT_CROP = "_VIEWPORT_CROP";
+        }
+
+        void OnEnable() {
+            needStart = true;
+        }
+
+        void OnDisable() {
+            // reset properties due to pooling
+            if (lr != null) lr.enabled = false;
+            if (lrd != null) lrd.enabled = false;
+            color = Misc.ColorWhite;
+            lineWidth = 0.01f;
+            arcElevation = 0;
+            drawingDuration = 0;
+            autoFadeAfter = 0;
+            fadeOutDuration = 1.0f;
+            dashInterval = 0;
+            dashAnimationDuration = 0;
+            startCap = null;
+            startCapFlipDirection = false;
+            startCapScale = Misc.Vector3one;
+            startCapOffset = 0.1f;
+            endCap = null;
+            endCapFlipDirection = false;
+            endCapScale = Misc.Vector3one;
+            endCapOffset = 0.1f;
+            reverseMode = false;
+        }
+
+        void DoInit() {
+            needStart = false;
 
             startAutoFadeTime = float.MaxValue;
             colorTransparent = new Color(color.r, color.g, color.b, 0);
@@ -155,6 +196,7 @@ namespace WorldMapStrategyKit {
 
             // Compute path points on viewport or on 2D map
             usesViewport = map.renderViewportIsEnabled && arcElevation > 0;
+            isFading = false;
 
             // Make line compatible with wrapping mode by offseting vertices according to the minimum distance
             if (map.wrapHorizontally) {
@@ -172,6 +214,12 @@ namespace WorldMapStrategyKit {
                 }
             }
 
+            // Prepare elevation range
+            if (usesViewport) {
+                elevationStart = map.ComputeEarthHeight(path[0], false);
+                elevationEnd = map.ComputeEarthHeight(path[path.Length - 1], false);
+            }
+
             // Create line vertices
             if (dashInterval > 0) {
                 SetupDashedLine();
@@ -181,17 +229,17 @@ namespace WorldMapStrategyKit {
 
             useArrowStartCap = startCap != null;
             useArrowEndCap = endCap != null;
-
-            Update();
         }
 
 
         // Update is called once per frame
         void Update() {
+            if (needStart) DoInit();
             UpdateLine();
             if (map.time >= startAutoFadeTime) {
                 UpdateFade();
             }
+            lineMaterial.SetMatrix(ShaderParams.ViewportInvMatrix, map.renderViewport.transform.worldToLocalMatrix);
         }
 
 
@@ -299,7 +347,10 @@ namespace WorldMapStrategyKit {
             t = (t - autoFadeAfter) / fadeOutDuration;
             if (t >= 1.0f) {
                 t = 1.0f;
-                Destroy(gameObject);
+                if (lineMaterial != null) {
+                    Destroy(lineMaterial);
+                }
+                LinesPool.Release(gameObject);
             }
 
             Color fadeColor = Color.Lerp(color, colorTransparent, t);
@@ -330,7 +381,7 @@ namespace WorldMapStrategyKit {
             // hide wrapping segments
             if (!map.wrapHorizontally) return;
 
-            Vector3 disp = map.renderViewport.transform.forward * (1f + map.renderViewportElevationFactor);
+            Vector3 disp = map.renderViewport.transform.forward * 100f;
             int vertexCount = vertices.Count - 1;
             float worldWrapDistance = map.renderViewport.transform.localScale.x * 0.5f;
             for (int k = 0; k < vertexCount; k++) {
@@ -341,6 +392,10 @@ namespace WorldMapStrategyKit {
                     v1 += disp;
                     vertices.Insert(k + 1, v1);
                     vertices.Insert(k + 1, v0);
+                    Vector2 mapPos0 = map2dPositions[k];
+                    Vector2 mapPos1 = map2dPositions[k + 1];
+                    map2dPositions.Insert(k + 1, mapPos1);
+                    map2dPositions.Insert(k + 1, mapPos0);
                     break;
                 }
             }
@@ -355,16 +410,23 @@ namespace WorldMapStrategyKit {
             if (numPoints <= 0)
                 numPoints = Mathf.Max(MINIMUM_POINTS, path.Length - 1);
             startTime = map.time;
-            if (!usesViewport) {
-                arcElevation *= 100f;
-            }
             lr = transform.GetComponent<LineRenderer>();
             if (lr == null) {
                 lr = gameObject.AddComponent<LineRenderer>();
+            } else {
+                lr.enabled = true;
             }
             lr.useWorldSpace = usesViewport;
             lineMaterial = Instantiate(lineMaterial);
             lineMaterial.color = color;
+
+            if (usesViewport) {
+                lineMaterial.EnableKeyword(ShaderParams.VIEWPORT_CROP);
+            } else {
+                lineMaterial.DisableKeyword(ShaderParams.VIEWPORT_CROP);
+                arcElevation *= 100f;
+            }
+
             lr.material = lineMaterial; // needs to instantiate to preserve individual color so can't use sharedMaterial
             lr.startColor = color;
             lr.endColor = color;
@@ -372,22 +434,25 @@ namespace WorldMapStrategyKit {
             lr.endWidth = lineWidth;
         }
 
-        void CreateLineVertices() {
+        bool CreateLineVertices() {
 
             if (vertices == null) {
                 vertices = new List<Vector3>(numPoints + 1);
+                map2dPositions = new List<Vector2>(numPoints + 1);
             } else {
+                if (!usesViewport) return false; // line vertices already created and no need to recompute vertices since viewport is not enabled
+
+                // if mapper cam has not moved, return and reuse vertices
+                Vector3 mapperCamPosition = map.currentCamera.transform.position;
+                if (mapperCamPosition == lastMapperCamPosition) return false;
+                lastMapperCamPosition = mapperCamPosition;
+
                 vertices.Clear();
+                map2dPositions.Clear();
             }
 
-            float elevationStart = 0, elevationEnd = 0;
-            if (usesViewport) {
-                lineWidth *= 6.0f;
-                elevationStart = map.ComputeEarthHeight(path[0], false);
-                elevationEnd = map.ComputeEarthHeight(path[path.Length - 1], false);
-            }
-
-            Vector3 mapPos;
+            Vector2 mapPos;
+            Vector3 worldPos = Misc.Vector3zero;
             for (int s = 0; s <= numPoints; s++) {
                 float t = (float)s / numPoints;
                 int index = (int)((path.Length - 1) * t);
@@ -396,39 +461,52 @@ namespace WorldMapStrategyKit {
                 t0 -= index;
                 mapPos = Vector2.Lerp(path[index], path[findex], t0);
                 if (usesViewport) {
-                    if (map.renderViewportRect.Contains(map.Map2DToRenderViewport(mapPos))) {
-                        float elevation = Mathf.Lerp(elevationStart, elevationEnd, t);
-                        elevation += arcElevation > 0 ? Mathf.Sin(t * Mathf.PI) * arcElevation : 0;
-                        mapPos = map.Map2DToWorldPosition(mapPos, elevation, HEIGHT_OFFSET_MODE.ABSOLUTE_CLAMPED, false);
-                        vertices.Add(mapPos);
-                    }
+                    float elevation = Mathf.Lerp(elevationStart, elevationEnd, t);
+                    elevation += arcElevation > 0 ? Mathf.Sin(t * Mathf.PI) * arcElevation : 0;
+                    worldPos = map.Map2DToWorldPosition(mapPos, elevation, HEIGHT_OFFSET_MODE.ABSOLUTE_CLAMPED, false);
+                    vertices.Add(worldPos);
                 } else {
+                    worldPos.x = mapPos.x;
+                    worldPos.y = mapPos.y;
                     if (arcElevation > 0) {
-                        mapPos.z = -Mathf.Sin(t0 * Mathf.PI) * arcElevation;
+                        worldPos.z = -Mathf.Sin(t0 * Mathf.PI) * arcElevation;
                     }
-                    vertices.Add(mapPos);
+                    vertices.Add(worldPos);
                 }
+                map2dPositions.Add(mapPos);
             }
 
             WorldWrapLine();
+
+            return true;
         }
 
         void UpdateContinousLine(float t) {
-            CreateLineVertices();
+            if (!CreateLineVertices() && t >= 1f) return;
 
             int vertexCount = vertices.Count;
             float vertexIndex = 1 + (vertexCount - 2) * t;
             int currentVertex = (int)(vertexIndex);
-            lr.positionCount = currentVertex + 1;
             if (currentVertex >= 0 && currentVertex < vertexCount) {
+                lr.positionCount = currentVertex + 1;
                 for (int k = 0; k < currentVertex; k++) {
                     lr.SetPosition(k, vertices[k]);
                 }
                 // adjust last segment
-                Vector3 nextVertexPos = vertices[currentVertex];
                 Vector3 currentVertexPos = vertices[currentVertex > 0 ? currentVertex - 1 : 0];
-                float subt = vertexIndex - currentVertex;
-                Vector3 progress = t >= 1f ? nextVertexPos : Vector3.Lerp(currentVertexPos, nextVertexPos, subt);
+                Vector3 nextVertexPos = vertices[currentVertex];
+                Vector3 progress;
+                Vector3 nextMapPos = map2dPositions[currentVertex];
+                if (t >= 1f) {
+                    progress = nextVertexPos;
+                    currentMap2DPosition = nextMapPos;
+                } else {
+                    float subt = vertexIndex - currentVertex;
+                    progress = Vector3.Lerp(currentVertexPos, nextVertexPos, subt);
+
+                    Vector3 currentMapPos = map2dPositions[currentVertex > 0 ? currentVertex - 1 : 0];
+                    currentMap2DPosition = Vector3.Lerp(currentMapPos, nextMapPos, subt);
+                }
                 lr.SetPosition(currentVertex, progress);
 
                 // set line cap positions
@@ -457,26 +535,34 @@ namespace WorldMapStrategyKit {
             lrd = transform.GetComponent<LineRenderer2>();
             if (lrd == null) {
                 lrd = gameObject.AddComponent<LineRenderer2>();
+            } else {
+                lrd.enabled = true;
             }
             lrd.useWorldSpace = usesViewport; // needed since thickness should be independent of parent scale
-            if (!usesViewport) {
+            lineMaterial = Instantiate(lineMaterial);  // needs to instantiate to preserve individual color so can't use sharedMaterial
+            lineMaterial.color = color;
+
+            if (usesViewport) {
+                lineMaterial.EnableKeyword(ShaderParams.VIEWPORT_CROP);
+            } else {
+                lineMaterial.DisableKeyword(ShaderParams.VIEWPORT_CROP);
                 lineWidth /= map.transform.localScale.x;
             }
-            lineMaterial = Instantiate(lineMaterial);
-            lineMaterial.color = color;
-            lrd.material = lineMaterial; // needs to instantiate to preserve individual color so can't use sharedMaterial
+
+            lrd.material = lineMaterial;
             lrd.SetColors(color, color);
             lrd.SetWidth(lineWidth, lineWidth);
         }
 
         void CreateDashedLineVertices() {
 
-            // Prepare elevation range
-            float elevationStart = 0, elevationEnd = 0;
-            if (usesViewport) {
-                lineWidth *= 6.0f;
-                elevationStart = map.ComputeEarthHeight(path[0], false);
-                elevationEnd = map.ComputeEarthHeight(path[path.Length - 1], false);
+            // Compute dash segments
+            if (vertices == null) {
+                vertices = new List<Vector3>(100);
+                map2dPositions = new List<Vector2>(100);
+            } else {
+                vertices.Clear();
+                map2dPositions.Clear();
             }
 
             // Calculate total line distance
@@ -500,18 +586,13 @@ namespace WorldMapStrategyKit {
                 startingDistance = elapsed * step;
             }
 
-            // Compute dash segments
-            if (vertices == null) {
-                vertices = new List<Vector3>(100);
-            } else {
-                vertices.Clear();
-            }
-
             if (totalDistance == 0)
                 return;
 
             int pair = 0;
-            Vector3 mapPos;
+            Vector2 mapPos;
+            Vector3 worldPos = Misc.Vector3zero;
+
             for (float distanceAcum = startingDistance; distanceAcum < totalDistance + step; distanceAcum += dashInterval, pair++) {
                 float t0 = Mathf.Clamp01(distanceAcum / totalDistance);
                 float t = t0 * (path.Length - 1);
@@ -525,20 +606,22 @@ namespace WorldMapStrategyKit {
                 mapPos = Vector2.Lerp(path[index], path[findex], t);
 
                 if (usesViewport) {
-                    if (map.renderViewportRect.Contains(map.Map2DToRenderViewport(mapPos))) {
-                        float elevation = Mathf.Lerp(elevationStart, elevationEnd, t0);
-                        elevation += arcElevation > 0 ? Mathf.Sin(t0 * Mathf.PI) * arcElevation : 0;
-                        Vector3 sPos = map.Map2DToWorldPosition(mapPos, elevation, HEIGHT_OFFSET_MODE.ABSOLUTE_CLAMPED, false);
-                        if (vertices.Count > 0 || (pair % 2 == 0)) {
-                            vertices.Add(sPos);
-                        }
+                    float elevation = Mathf.Lerp(elevationStart, elevationEnd, t0);
+                    elevation += arcElevation > 0 ? Mathf.Sin(t0 * Mathf.PI) * arcElevation : 0;
+                    worldPos = map.Map2DToWorldPosition(mapPos, elevation, HEIGHT_OFFSET_MODE.ABSOLUTE_CLAMPED, false);
+                    if (vertices.Count > 0 || (pair % 2 == 0)) {
+                        vertices.Add(worldPos);
                     }
                 } else {
+                    worldPos.x = mapPos.x;
+                    worldPos.y = mapPos.y;
                     if (arcElevation > 0) {
-                        mapPos.z = -Mathf.Sin(t0 * Mathf.PI) * arcElevation;
+                        worldPos.z = -Mathf.Sin(t0 * Mathf.PI) * arcElevation;
                     }
-                    vertices.Add(mapPos);
+                    vertices.Add(worldPos);
                 }
+
+                map2dPositions.Add(mapPos);
             }
 
             WorldWrapLine();
@@ -560,12 +643,16 @@ namespace WorldMapStrategyKit {
                 // adjust last segment
                 Vector3 nextVertexPos = vertices[currentVertex];
                 Vector3 progress;
+                Vector3 nextMapPos = map2dPositions[currentVertex];
                 if (t >= 1) {
                     progress = nextVertexPos;
+                    currentMap2DPosition = nextMapPos;
                 } else {
                     Vector3 currentVertexPos = vertices[currentVertex > 0 ? currentVertex - 1 : 0];
                     float subt = vertexIndex - currentVertex;
                     progress = Vector3.Lerp(currentVertexPos, nextVertexPos, subt);
+                    Vector3 currentMapPos = map2dPositions[currentVertex > 0 ? currentVertex - 1 : 0];
+                    currentMap2DPosition = Vector3.Lerp(currentMapPos, nextMapPos, subt);
                 }
                 lrd.SetPosition(currentVertex, progress);
 
@@ -581,19 +668,13 @@ namespace WorldMapStrategyKit {
                     t += 0.1f;
                     if (t > 1f)
                         t = 1f;
-                    float elevationStart = 0, elevationEnd = 0;
-                    if (usesViewport) {
-                        lineWidth *= 6.0f;
-                        elevationStart = map.ComputeEarthHeight(path[0], false);
-                        elevationEnd = map.ComputeEarthHeight(path[path.Length - 1], false);
-                    }
                     int index = (int)((path.Length - 1) * t);
                     int findex = Mathf.Min(index + 1, path.Length - 1);
                     float t0 = t * (path.Length - 1);
                     t0 -= index;
                     Vector3 mapPos = Vector2.Lerp(path[index], path[findex], t0);
                     if (usesViewport) {
-                        if (map.renderViewportRect.Contains(map.Map2DToRenderViewport(mapPos))) {
+                        if (map.renderViewportRect.Contains(map.Map2DToWrappedRenderViewport(mapPos))) {
                             float elevation = Mathf.Lerp(elevationStart, elevationEnd, t);
                             elevation += arcElevation > 0 ? Mathf.Sin(t * Mathf.PI) * arcElevation : 0;
                             mapPos = map.Map2DToWorldPosition(mapPos, elevation, HEIGHT_OFFSET_MODE.ABSOLUTE_CLAMPED, false);

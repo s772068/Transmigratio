@@ -185,7 +185,7 @@ namespace WorldMapStrategyKit {
         }
 
 
-        public bool combineCountrySurfacesActive => _combineCountrySurfaces && Application.isPlaying;
+        public bool combineCountrySurfacesActive => _combineCountrySurfaces && isPlaying;
 
         /// <summary>
         /// Set whether country highlight will switch the color to highlight color.
@@ -906,7 +906,7 @@ namespace WorldMapStrategyKit {
                     _countryLabelsColor = value;
                     isDirty = true;
                     if (gameObject.activeInHierarchy) {
-                        if (!Application.isPlaying || _countryLabelsTextEngine != TEXT_ENGINE.TextMeshStandard) {
+                        if (!isPlaying || _countryLabelsTextEngine != TEXT_ENGINE.TextMeshStandard) {
                             DrawMapLabels();
                         } else {
                             if (labelsFont != null && labelsFont.material != null) {
@@ -1318,7 +1318,7 @@ namespace WorldMapStrategyKit {
             for (int oc = 0; oc < countryCount; oc++) {
                 int c = _countriesOrderedBySize[oc];
                 Country country = _countries[c];
-                if (country.hidden && Application.isPlaying)
+                if (country.hidden && isPlaying)
                     continue;
                 if (!country.regionsRect2D.Contains(localPosition))
                     continue;
@@ -1519,7 +1519,7 @@ namespace WorldMapStrategyKit {
         /// Returns a list of countries that are visible in the game view
         /// </summary>
         public List<Country> GetVisibleCountries() {
-            Camera cam = Application.isPlaying ? currentCamera : Camera.current;
+            Camera cam = isPlaying ? currentCamera : Camera.current;
             return GetVisibleCountries(cam);
         }
 

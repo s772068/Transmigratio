@@ -67,7 +67,7 @@ namespace WorldMapStrategyKit {
 			}
 		}
 
-		Vector3 lastCursorPos;
+		Vector2 lastCursorPos;
 		public string errorMsg;
 
 		void Update () {

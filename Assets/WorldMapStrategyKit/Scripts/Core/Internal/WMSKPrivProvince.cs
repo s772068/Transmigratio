@@ -248,7 +248,7 @@ namespace WorldMapStrategyKit {
             int numCountries = _countries.Length;
             List<Country> targetCountries = new List<Country>(numCountries);
             for (int k = 0; k < numCountries; k++) {
-                if (!_countries[k].hidden || !Application.isPlaying) {
+                if (!_countries[k].hidden || !isPlaying) {
                     targetCountries.Add(_countries[k]);
                 }
             }

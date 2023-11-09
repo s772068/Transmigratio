@@ -29,10 +29,26 @@ namespace WorldMapStrategyKit {
 
         // Overlay & Viewport
         RenderTexture overlayRT, overlayRTwrapped;
-        Camera _currentCamera, _wrapCamera, mapperCam;
+        Camera _mainCamera, _currentCamera, _wrapCamera, mapperCam;
         GameObject _wrapCameraObj;
         Material viewportMat;
         ViewportMode viewportMode;
+
+        readonly Vector3[] quadMeshVertices = new Vector3[] {
+                new Vector2 (-0.5f, 0.5f),
+                new Vector2 (0.5f, 0.5f),
+                new Vector2 (0.5f, -0.5f),
+                new Vector2 (-0.5f, -0.5f)
+            };
+
+        readonly int[] quadMeshIndices = new int[] { 0, 1, 2, 3 };
+
+        readonly Vector2[] quadMeshUVs = new Vector2[] {
+                new Vector2 (0, 1),
+                new Vector2 (1, 1),
+                new Vector2 (1, 0),
+                new Vector2 (0, 0)
+            };
 
         // Terrain support
         Material terrainMat;
@@ -55,14 +71,19 @@ namespace WorldMapStrategyKit {
         bool lastRenderViewportGood;
         float _renderViewportScaleFactor;
         Vector3 lastRenderViewportRotation, lastRenderViewportPosition;
-        readonly List<Region> extrudedRegions = new List<Region>();
         Vector2[] viewportUV;
         Vector3[] viewportElevationPointsAdjusted;
         int[] viewportIndices;
         int viewportIndicesLength;
 
+        /// <summary>
+        /// A scaling multiplier that depends on the current camera distance to the map
+        /// </summary>
         public float renderViewportScaleFactor { get { return renderViewportIsEnabled ? _renderViewportScaleFactor : transform.localScale.y / (lastDistanceFromCamera + 1f); } }
 
+        /// <summary>
+        /// A multiplier of renderViewportScaleFactor that takes into account Earth ground elevation multiplier
+        /// </summary>
         public float renderViewportElevationFactor { get { return _renderViewportElevationFactor; } }
 
         // Curvature
@@ -127,43 +148,14 @@ namespace WorldMapStrategyKit {
                 return;
             }
 
-            float baseElevation = 24.0f / 255.0f;
-            int tw = _heightMapTexture.width;
-            int extrudedRegionCount = extrudedRegions != null ? extrudedRegions.Count : 0;
-
-            if (extrudedRegionCount > 0) {
-                Vector2 p;
-                for (int e = 0; e < extrudedRegionCount; e++) {
-                    Region region = extrudedRegions[e];
-                    int j0 = (int)((region.rect2D.yMin + 0.5) * heightmapTextureHeight);
-                    int j1 = (int)((region.rect2D.yMax + 0.5) * heightmapTextureHeight);
-                    if (j1 >= heightmapTextureHeight) j1 = heightmapTextureHeight - 1;
-                    int k0 = (int)((region.rect2D.xMin + 0.5) * heightmapTextureWidth);
-                    int k1 = (int)((region.rect2D.xMax + 0.5) * heightmapTextureWidth);
-                    if (k1 >= heightmapTextureWidth) k1 = heightmapTextureWidth - 1;
-                    for (int j = j0; j <= j1; j++) {
-                        int jj = j * heightmapTextureWidth;
-                        p.y = (j + 0.5f) / heightmapTextureHeight - 0.5f;
-                        for (int k = k0; k <= k1; k++) {
-                            p.x = (k + 0.5f) / heightmapTextureWidth - 0.5f;
-                            if (region.Contains(p)) {
-                                viewportElevationPoints[jj + k] = region.extrusionAmount;
-                            }
-                        }
-                    }
+            const float baseElevation = 24.0f / 255.0f;
+            int length = heightMapColors.Length;
+            for (int k = 0; k < length; k++) {
+                float gCol = heightMapColors[k].r / 255f - baseElevation;
+                if (gCol < 0) {
+                    gCol = 0;
                 }
-            } else {
-                for (int j = 0; j < heightmapTextureHeight; j++) {
-                    int jj = j * heightmapTextureWidth;
-                    int texjj = (j * _heightMapTexture.height / heightmapTextureHeight) * _heightMapTexture.width;
-                    for (int k = 0; k < heightmapTextureWidth; k++) {
-                        int pos = texjj + k * tw / heightmapTextureWidth;
-                        float gCol = heightMapColors[pos].r / 255f - baseElevation;
-                        if (gCol < 0)
-                            gCol = 0;
-                        viewportElevationPoints[jj + k] = gCol;
-                    }
-                }
+                viewportElevationPoints[k] = gCol;
             }
 
             MarkCustomRouteMatrixDirty();
@@ -177,25 +169,15 @@ namespace WorldMapStrategyKit {
                     disposalManager.MarkForDisposal(mesh);
             }
             mesh.Clear();
-            mesh.vertices = new Vector3[] {
-                new Vector2 (-0.5f, 0.5f),
-                new Vector2 (0.5f, 0.5f),
-                new Vector2 (0.5f, -0.5f),
-                new Vector2 (-0.5f, -0.5f)
-            };
-            mesh.SetIndices(new int[] { 0, 1, 2, 3 }, MeshTopology.Quads, 0);
-            mesh.uv = new Vector2[] {
-                new Vector2 (0, 1),
-                new Vector2 (1, 1),
-                new Vector2 (1, 0),
-                new Vector2 (0, 0)
-            };
+            mesh.vertices = quadMeshVertices;
+            mesh.SetIndices(quadMeshIndices, MeshTopology.Quads, 0);
+            mesh.uv = quadMeshUVs;
             mesh.RecalculateNormals();
             mf.sharedMesh = mesh;
         }
 
         /// <summary>
-        /// Similar to EarthGetElevationInfo but feeds from Terrain heightmap itself
+        /// Similar to EarthGetElevationInfo but feeds from Terrain heightmap itself (used in Unity terrain mode)
         /// </summary>
         void TerrainGetElevationData() {
             if (viewportElevationPoints == null || viewportElevationPoints.Length == 0) {
@@ -479,7 +461,6 @@ namespace WorldMapStrategyKit {
 
         #endregion
 
-
         #region Render viewport setup
 
         void AssignRenderViewport(GameObject o) {
@@ -570,7 +551,7 @@ namespace WorldMapStrategyKit {
             }
 
             // Check correct window rect
-            if (Application.isPlaying && (_windowRect.width == 0 || _windowRect.height == 0)) {
+            if (isPlaying && (_windowRect.width == 0 || _windowRect.height == 0)) {
                 _windowRect = new Rect(-0.5f, -0.5f, 1, 1);
             }
 
@@ -665,7 +646,7 @@ namespace WorldMapStrategyKit {
             mapperCam.backgroundColor = Misc.ColorClear;
             mapperCam.targetTexture = overlayRT;
             mapperCam.nearClipPlane = renderViewportIsTerrain ? 0.3f : 0.01f;
-            mapperCam.farClipPlane = Mathf.Min(cam.farClipPlane, 1000);
+            mapperCam.farClipPlane = _currentCamera != null ? GetFrustumDistance(_currentCamera) + 50f : 500f;
             mapperCam.renderingPath = _renderViewportRenderingPath;
             mapperCam.enabled = true;
 
@@ -691,11 +672,11 @@ namespace WorldMapStrategyKit {
                 _wrapCamera = _wrapCameraObj.GetComponent<Camera>();
                 _wrapCamera.tag = "Untagged";
                 _wrapCamera.aspect = mapperCam.aspect;
-                _wrapCamera.cullingMask = 1 << camObj.layer;
-                _wrapCamera.clearFlags = CameraClearFlags.SolidColor;
-                _wrapCamera.backgroundColor = Misc.ColorClear;
-                _wrapCamera.nearClipPlane = renderViewportIsTerrain ? 0.3f : 0.01f;
-                _wrapCamera.farClipPlane = Mathf.Min(cam.farClipPlane, 1000);
+                _wrapCamera.cullingMask = mapperCam.cullingMask;
+                _wrapCamera.clearFlags = mapperCam.clearFlags;
+                _wrapCamera.backgroundColor = mapperCam.backgroundColor;
+                _wrapCamera.nearClipPlane = mapperCam.nearClipPlane;
+                _wrapCamera.farClipPlane = mapperCam.farClipPlane;
                 _wrapCamera.renderingPath = _renderViewportRenderingPath;
                 firstSnapshot = true;
             }
@@ -790,7 +771,7 @@ namespace WorldMapStrategyKit {
             UpdateViewport();
 
             // Shot!
-            if (firstSnapshot && !Application.isPlaying) {
+            if (firstSnapshot && !isPlaying) {
                 mapperCam.Render();
             }
         }
@@ -833,7 +814,7 @@ namespace WorldMapStrategyKit {
             if (mapperCam != null) {
                 Quaternion camRot = cameraMain.transform.rotation;
                 Vector3 camPos = cameraMain.transform.position;
-                bool cameraHasMoved = camPos != lastMainCameraPos || camRot != lastMainCameraRot || !Application.isPlaying;
+                bool cameraHasMoved = camPos != lastMainCameraPos || camRot != lastMainCameraRot || !isPlaying;
                 if (cameraHasMoved) {
                     lastMainCameraPos = camPos;
                     lastMainCameraRot = camRot;
@@ -869,7 +850,6 @@ namespace WorldMapStrategyKit {
         }
 
         #endregion
-
 
         #region Wrap camera setup
 
@@ -1092,7 +1072,6 @@ namespace WorldMapStrategyKit {
 
         #endregion
 
-
         #region internal viewport API
 
         void UpdateViewport() {
@@ -1135,7 +1114,7 @@ namespace WorldMapStrategyKit {
         /// Updates renderViewportRect field
         /// </summary>
         void ComputeViewportRect(bool useSceneViewWindow = false) {
-            if (!useSceneViewWindow && lastRenderViewportGood && Application.isPlaying)
+            if (!useSceneViewWindow && lastRenderViewportGood && isPlaying)
                 return;
 
             lastRenderViewportGood = true;
@@ -1201,7 +1180,7 @@ namespace WorldMapStrategyKit {
             if (viewportMode != ViewportMode.Viewport3D || _renderViewportUIPanel == null)
                 return;
 
-            if (Application.isPlaying && panelUIOldPosition == _renderViewportUIPanel.position && panelUIOldSize == _renderViewportUIPanel.sizeDelta) {
+            if (isPlaying && panelUIOldPosition == _renderViewportUIPanel.position && panelUIOldSize == _renderViewportUIPanel.sizeDelta) {
                 return;
             }
 
@@ -1233,7 +1212,7 @@ namespace WorldMapStrategyKit {
             }
 
 #if UNITY_EDITOR
-            if (!Application.isPlaying && panelUIOldSize != _renderViewportUIPanel.sizeDelta) {
+            if (!isPlaying && panelUIOldSize != _renderViewportUIPanel.sizeDelta) {
                 SetupViewport();
             }
 #endif

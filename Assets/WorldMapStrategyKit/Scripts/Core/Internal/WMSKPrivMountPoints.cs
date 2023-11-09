@@ -94,7 +94,7 @@ namespace WorldMapStrategyKit
 			Transform t = transform.Find ("Mount Points");
 			if (t != null)
 				DestroyImmediate (t.gameObject);
-			if (Application.isPlaying || mountPoints == null)
+			if (isPlaying || mountPoints == null)
 				return;
 
 			mountPointsLayer = new GameObject ("Mount Points");

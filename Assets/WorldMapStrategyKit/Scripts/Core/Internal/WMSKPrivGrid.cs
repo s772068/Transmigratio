@@ -570,7 +570,7 @@ namespace WorldMapStrategyKit {
         #region Highlighting
 
         void GridCheckMousePos() {
-            if (!Application.isPlaying || !_showGrid)
+            if (!isPlaying || !_showGrid)
                 return;
 
             if (!lastMouseMapHitPosGood) {

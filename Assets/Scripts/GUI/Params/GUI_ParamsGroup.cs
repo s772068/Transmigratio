@@ -7,7 +7,7 @@ using System;
 public class GUI_ParamsGroup : MonoBehaviour {
     [SerializeField] private Text label;
     [SerializeField] private Transform content;
-    [SerializeField] private GUI_Param paramPref; // Move to holder
+    [SerializeField] private GUI_Param paramPref;
 
     private List<GUI_Param> paramList = new();
     private Image background;
@@ -27,17 +27,17 @@ public class GUI_ParamsGroup : MonoBehaviour {
         }
     }
 
-    public void Init(Data data, PrefabsHolder prefabsHolder) {
+    public void Init(Data data) {
         Label = data.Label;
         Height = data.Height;
         BackgroundColor = data.BackgroundColor;
         for(int i = 0; i < data.Params.Length; ++i) {
-            paramList.Add(Build(data.Params[i], prefabsHolder));
+            paramList.Add(Build(data.Params[i]));
         }
     }
 
-    private GUI_Param Build(GUI_Param.Data data, PrefabsHolder prefabsHolder) {
-        GUI_Param param = Instantiate(prefabsHolder.Param, content);
+    private GUI_Param Build(GUI_Param.Data data) {
+        GUI_Param param = Instantiate(paramPref, content);
         param.Index = paramList.Count;
         param.Init(data);
         param.OnClick = ClickParam;

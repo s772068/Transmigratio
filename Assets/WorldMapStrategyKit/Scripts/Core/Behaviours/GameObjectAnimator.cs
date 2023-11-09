@@ -28,185 +28,28 @@ namespace WorldMapStrategyKit {
 
         #region GameObject Animator Properties
 
+
         /// <summary>
         /// User defined value. Could be the unit or resource type.
         /// </summary>
+        [Header("User-defined Data")]
+        [Tooltip("User defined value. Could be the unit or resource type.")]
         public int type;
 
         /// <summary>
         /// User-defined value for unit grouping. Some methogs accepts this value, like ToggleGroupVisibility method.
         /// </summary>
+        [Tooltip("User-defined value for unit grouping. Some methogs accepts this value, like ToggleGroupVisibility method.")]
         public int group;
 
         /// <summary>
         /// User-defined value to specify to which player belongs this unit.
         /// </summary>
+        [Tooltip("User-defined value to specify to which player belongs this unit.")]
         public int player;
 
 
-        bool _visible = true;
-        /// <summary>
-        /// Controls general object visibility.
-        /// </summary>
-        public bool visible {
-            get { return _visible; }
-            set {
-                if (_visible != value) {
-                    _visible = value;
-                    UpdateVisibility(true);
-                    UpdateTransformAndVisibility();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Scales/rotates object even if it's out of viewport
-        /// </summary>
-        public bool updateWhenOffScreen;
-
-        /// <summary>
-        /// Returns true if the gameobject is currently visible inside the viewport.
-        /// </summary>
-        public bool isVisibleInViewport;
-
-        /// <summary>
-        /// Current destination if it's moving. If unit moves along a path, destination marks the next step position.
-        /// </summary>
-        public Vector2 destination;
-
-        /// <summary>
-        /// Previous position when the unit moves. If unit moves along a path, prevStop records the next previous step position.
-        /// </summary>
-        public Vector2 prevStop;
-
-        /// <summary>
-        /// Duration of the translation if it's moving.
-        /// </summary>
-        public float duration;
-
-        /// <summary>
-        /// Ease type for the movement. Default = Linear.
-        /// </summary>
-        public EASE_TYPE easeType = EASE_TYPE.Linear;
-
-        /// <summary>
-        /// If the gameobject is moving across the map.
-        /// </summary>
-        public bool isMoving;
-
-        [SerializeField]
-        Vector2 _currentMap2DLocation;
-
-        /// <summary>
-        /// Current map local coordinate of the gameobject (x,y in the range of -0.5...0.5)
-        /// </summary>
-        public Vector2 currentMap2DLocation { get { return _currentMap2DLocation; } }
-
-        /// <summary>
-        /// Altitude from ground of the gameobject since start of movement. A zero means object is grounded.
-        /// </summary>
-        public float altitudeStart;
-
-        /// <summary>
-        /// Altitude from ground of the gameobject at the end of movement. A zero means object is grounded. A value of -1 means use altitudeStart.
-        /// </summary>
-        public float altitudeEnd = -1;
-
-        /// <summary>
-        /// Synonym for altitudeStart.
-        /// </summary>
-        public float altitude {
-            get { return altitudeStart; }
-            set { altitudeStart = value; }
-        }
-
-        [Obsolete("Use altitudeStart instead.")]
-        public float height {
-            get { return altitudeStart; }
-            set { altitudeStart = value; }
-        }
-
-        /// <summary>
-        /// Height mode. See HEIGHT_OFFSET_MODE possible values:
-        /// - ABSOLUTE_ALTITUDE: gameobject is set to given altitude ignoring terrain,
-        /// - ABSOLUTE_CLAMPED: gameobject is set to given altitude but never below terrain (default value, if initial or default altitude is greater than zero).
-        /// - RELATIVE_TO_GROUND: altitude is added to terrain height below current gameobject position (default value, if initial or default altitude is left to zero).
-        /// </summary>
-        public HEIGHT_OFFSET_MODE heightMode = HEIGHT_OFFSET_MODE.ABSOLUTE_CLAMPED;
-
-        /// <summary>
-        /// Whether the gameobject will scale automatically when user zooms in/out into the viewport
-        /// </summary>
-        public bool autoScale = true;
-        public float autoScaleMin = 0; // if zero, system will pick the global renderViewportGOAutoScaleMin setting
-        public float autoScaleMax = 0; // if zero, system will pick the global renderViewportGOAutoScaleMax setting
-
-        bool _follow = false;
-
-        /// <summary>
-        /// If the camera should focus and follow this game object while moving
-        /// </summary>
-        public bool follow {
-            get { return _follow; }
-            set {
-                _follow = value;
-                followStartTime = map.time;
-                followStartZoomLevel = map != null ? map.GetZoomLevel() : 1f;
-                if (!map.GetCurrentMapLocation(out followStart2DLocation))
-                    followStart2DLocation = map.transform.InverseTransformPoint(map.currentCamera.transform.position);
-            }
-        }
-
-        /// <summary>
-        /// The follow zoom level of the camera (0..1).
-        /// </summary>
-        public float followZoomLevel = 0.1f;
-
-        /// <summary>
-        /// The follow duration in seconds. Measure the speed of change for the camera position.
-        /// </summary>
-        public float followDuration = 1f;
-
-        /// <summary>
-        /// When the game object moves, it will rotate around the map Y axis towards the movement direction effectively adapting to the terrain contour. Use this only for moveable units.
-        /// </summary>
-        public bool autoRotation = false;
-
-        /// <summary>
-        /// If set to true, the game object will maintain it's current rotation when moved over the viewport. Note that autoRotation overrides this property, so if you set autoRotation = true, preserveOriginalRotation will be ignored.
-        /// </summary>
-        public bool preserveOriginalRotation = false;
-
-        /// <summary>
-        /// The auto-rotation speed (0..1, 1=immediate rotation).
-        /// </summary>
-        public float rotationSpeed = 0.1f;
-
-        /// <summary>
-        /// Type of terrain the unit can pass through.
-        /// </summary>
-        public TERRAIN_CAPABILITY terrainCapability = TERRAIN_CAPABILITY.Any;
-
-        /// <summary>
-        /// Minimun altitude this unit move over (0..1).
-        /// </summary>
-        public float minAltitude = 0.0f;
-
-        /// <summary>
-        /// Maximum altitude this unit move over (0..1).
-        /// </summary>
-        public float maxAltitude = 1.0f;
-
-        /// <summary>
-        /// The max search cost for the path finding algorithm. A value of -1 will use the global default max defined by pathFindingMaxCost
-        /// </summary>
-        public float maxSearchCost = -1;
-
-        /// <summary>
-        /// The max movement steps for the path finding algorithm. A value of -1 will use the global default max defined by pathFindingMaxSteps
-        /// </summary>
-        public int maxSearchSteps = -1;
-
+        [Tooltip("A user-defined unique identifier useful to get a quick reference to this GO with VGOGet method.")]
         [SerializeField]
         int _uniqueId;
 
@@ -228,93 +71,292 @@ namespace WorldMapStrategyKit {
         }
 
 
+        [SerializeField]
+        [Header("Visibility")]
+        bool _visible = true;
+
+        /// <summary>
+        /// Controls general object visibility.
+        /// </summary>
+        public bool visible {
+            get { return _visible; }
+            set {
+                if (_visible != value) {
+                    _visible = value;
+                    UpdateVisibility(true);
+                    UpdateTransformAndVisibility();
+                }
+            }
+        }
+
+        /// <summary>
+        /// The minimum zoom level for this unit to be visible. Similar to LOD. When the map is fully zoomed in, this value is near zero.
+        /// </summary>
+        [Tooltip("The minimum zoom level for this unit to be visible. Similar to LOD. When the map is fully zoomed in, this value is near zero.")]
+        public float minZoomLevel;
+
+        /// <summary>
+        /// The maximum zoom level for this unit to be visible. Similar to LOD. When the map is fully zoomed out, this value is 1.
+        /// </summary>
+        [Tooltip("The maximum zoom level for this unit to be visible. Similar to LOD. When the map is fully zoomed out, this value is 1.")]
+        public float maxZoomLevel = 2f;
+
+        /// <summary>
+        /// Scales/rotates object even if it's out of viewport
+        /// </summary>
+        [Tooltip("Scales/rotates object even if it's out of viewport")]
+        public bool updateWhenOffScreen;
+
+
+        /// <summary>
+        /// Returns true if the gameobject is currently visible inside the viewport.
+        /// </summary>
+        [Header("Current State")]
+        [Tooltip("Returns true if the gameobject is currently visible inside the viewport.")]
+        public bool isVisibleInViewport;
+
+        [SerializeField]
+        [Tooltip("Sets/gets current map local coordinate of the gameobject (x,y in the range of -0.5...0.5)")]
+        Vector2 _currentMap2DLocation;
+
+        /// <summary>
+        /// Sets/gets current map local coordinate of the gameobject (x,y in the range of -0.5...0.5)
+        /// </summary>
+        public Vector2 currentMap2DLocation { get { return _currentMap2DLocation; } set { _currentMap2DLocation = value; } }
+
+        /// <summary>
+        /// If the gameobject is moving across the map.
+        /// </summary>
+        [Tooltip("If the gameobject is moving across the map.")]
+        public bool isMoving;
+        /// <summary>
+        /// The starting location in map local coordinates.
+        /// </summary>
+        [Tooltip("The starting location in map local coordinates.")]
+        public Vector2 startingMap2DLocation;
+
+        /// <summary>
+        /// The destination in map local coordinates.
+        /// </summary>
+        [Tooltip("The destination in map local coordinates.")]
+        public Vector2 endingMap2DLocation;
+
+        /// <summary>
+        /// Current destination if it's moving. If unit moves along a path, destination marks the next step position.
+        /// </summary>
+        [Tooltip("Current destination if it's moving. If unit moves along a path, destination marks the next step position.")]
+        public Vector2 destination;
+
+        /// <summary>
+        /// Previous position when the unit moves. If unit moves along a path, prevStop records the next previous step position.
+        /// </summary>
+        [Tooltip("Previous position when the unit moves. If unit moves along a path, prevStop records the next previous step position.")]
+        public Vector2 prevStop;
+
+        /// <summary>
+        /// True is mouse is currently over the gameobject
+        /// </summary>
+        [Tooltip("True is mouse is currently over the gameobject")]
+        public bool mouseIsOver;
+
+
+        /// <summary>
+        /// Type of terrain the unit can pass through.
+        /// </summary>
+        [Header("Navigation")]
+        [Tooltip("Type of terrain the unit can pass through.")]
+        public TERRAIN_CAPABILITY terrainCapability = TERRAIN_CAPABILITY.Any;
+
+        /// <summary>
+        /// Minimun altitude this unit move over (0..1).
+        /// </summary>
+        [Tooltip("Minimun altitude this unit move over (0..1).")]
+        public float minAltitude;
+
+        /// <summary>
+        /// Maximum altitude this unit move over (0..1).
+        /// </summary>
+        [Tooltip("Maximum altitude this unit move over (0..1).")]
+        public float maxAltitude = 1.0f;
+
+        /// <summary>
+        /// The max search cost for the path finding algorithm. A value of -1 will use the global default max defined by pathFindingMaxCost
+        /// </summary>
+        [Tooltip("The max search cost for the path finding algorithm. A value of -1 will use the global default max defined by pathFindingMaxCost")]
+        public float maxSearchCost = -1;
+
+        /// <summary>
+        /// The max movement steps for the path finding algorithm. A value of -1 will use the global default max defined by pathFindingMaxSteps
+        /// </summary>
+        [Tooltip("The max movement steps for the path finding algorithm. A value of -1 will use the global default max defined by pathFindingMaxSteps")]
+        public int maxSearchSteps = -1;
+
+        /// <summary>
+        /// If set to true, the unit can change orientation but won't move.
+        /// </summary>
+        [Tooltip("If set to true, the unit can change orientation but won't move.")]
+        public bool isStatic;
+
+        /// <summary>
+        /// Duration of the translation if it's moving.
+        /// </summary>
+        [Tooltip("Previous position when the unit moves. If unit moves along a path, prevStop records the next previous step position.")]
+        public float duration;
+
+        /// <summary>
+        /// Ease type for the movement. Default = Linear.
+        /// </summary>
+        [Tooltip("Ease type for the movement. Default = Linear.")]
+        public EASE_TYPE easeType = EASE_TYPE.Linear;
+
+        /// <summary>
+        /// Altitude from ground of the gameobject since start of movement. A zero means object is grounded.
+        /// </summary>
+        [Tooltip("Altitude from ground of the gameobject since start of movement. A zero means object is grounded.")]
+        public float altitudeStart;
+
+        /// <summary>
+        /// Altitude from ground of the gameobject at the end of movement. A zero means object is grounded. A value of -1 means use altitudeStart.
+        /// </summary>
+        [Tooltip("Altitude from ground of the gameobject at the end of movement. A zero means object is grounded. A value of -1 means use altitudeStart.")]
+        public float altitudeEnd = -1;
+
+        /// <summary>
+        /// Synonym for altitudeStart. Also sets altitudeEnd.
+        /// </summary>
+        public float altitude {
+            get { return altitudeStart; }
+            set { altitudeStart = value; altitudeEnd = value; }
+        }
+
+        /// <summary>
+        /// Useful for arc trajectories (eg. missiles). Set this value to greater than 1 to produce a parabole.
+        /// </summary>
+        [Tooltip("Useful for arc trajectories (eg. cannons). Set this value to greater than 1 to produce a parabole.")]
+        public float arcMultiplier = 1f;
+
+
+        /// <summary>
+        /// Height mode. See HEIGHT_OFFSET_MODE possible values:
+        /// - ABSOLUTE_ALTITUDE: gameobject is set to given altitude ignoring terrain,
+        /// - ABSOLUTE_CLAMPED: gameobject is set to given altitude but never below terrain (default value, if initial or default altitude is greater than zero).
+        /// - RELATIVE_TO_GROUND: altitude is added to terrain height below current gameobject position (default value, if initial or default altitude is left to zero).
+        /// </summary>
+        [Tooltip("Height mode.")]
+        [Header("Positioning")]
+        public HEIGHT_OFFSET_MODE heightMode = HEIGHT_OFFSET_MODE.ABSOLUTE_CLAMPED;
+
+        /// <summary>
+        /// Specifies the Y coordinate of the pivot. If pivot is at bottom of the game object, you don't have to change this value (0). But if the pivot is at center, set this value to 0.5f. If pivot is at top, set this value to 1f.
+        /// </summary>
+        [Tooltip("Specifies the Y coordinate of the pivot. If pivot is at bottom of the game object, you don't have to change this value (0). But if the pivot is at center, set this value to 0.5f. If pivot is at top, set this value to 1f.")]
+        public float pivotY;
+
+        /// <summary>
+        /// Whether the gameobject will scale automatically when user zooms in/out into the viewport
+        /// </summary>
+        [Header("Scaling")]
+        [Tooltip("Whether the gameobject will scale automatically when user zooms in/out into the viewport")]
+        public bool autoScale = true;
+
+        /// <summary>
+        /// Specifies which gameobject will receive the autoscale modifier. If none specified, the system will apply autoscale to the transform where the GameObjectAnimator component is.
+        /// </summary>
+        [Tooltip("Specifies which gameobject will receive the autoscale modifier. If none specified, the system will apply autoscale to the transform where the GameObjectAnimator component is.")]
+        public Transform autoScaleTarget;
+
+        /// <summary>
+        /// If zero, system will pick the global renderViewportGOAutoScaleMin setting
+        /// </summary>
+        [Tooltip("If zero, system will pick the global renderViewportGOAutoScaleMin setting")]
+        public float autoScaleMin;
+
+        /// <summary>
+        /// If zero, system will pick the global renderViewportGOAutoScaleMax setting
+        /// </summary>
+        [Tooltip("If zero, system will pick the global renderViewportGOAutoScaleMax setting")]
+        public float autoScaleMax;
+
+
+        bool _follow;
+
+        /// <summary>
+        /// If the camera should focus and follow this game object while moving
+        /// </summary>
+        public bool follow {
+            get { return _follow; }
+            set {
+                _follow = value;
+                followStartTime = map.time;
+                followStartZoomLevel = map != null ? map.GetZoomLevel() : 1f;
+                if (!map.GetCurrentMapLocation(out followStart2DLocation))
+                    followStart2DLocation = map.transform.InverseTransformPoint(map.currentCamera.transform.position);
+            }
+        }
+
+        /// <summary>
+        /// The follow zoom level of the camera (0..1).
+        /// </summary>
+        [Tooltip("The follow zoom level of the camera (0..1).")]
+        public float followZoomLevel = 0.1f;
+
+        /// <summary>
+        /// The follow duration in seconds. Measure the speed of change for the camera position.
+        /// </summary>
+        [Tooltip("The follow duration in seconds. Measure the speed of change for the camera position.")]
+        public float followDuration = 1f;
+
+        /// <summary>
+        /// When the game object moves, it will rotate around the map Y axis towards the movement direction effectively adapting to the terrain contour. Use this only for moveable units.
+        /// </summary>
+        [Header("Rotation")]
+        [Tooltip("When the game object moves, it will rotate around the map Y axis towards the movement direction effectively adapting to the terrain contour. Use this only for moveable units.")]
+        public bool autoRotation;
+
+        /// <summary>
+        /// If set to true, the game object will maintain it's current rotation when moved over the viewport. Note that autoRotation overrides this property, so if you set autoRotation = true, preserveOriginalRotation will be ignored.
+        /// </summary>
+        [Tooltip("If set to true, the game object will maintain it's current rotation when moved over the viewport. Note that autoRotation overrides this property, so if you set autoRotation = true, preserveOriginalRotation will be ignored.")]
+        public bool preserveOriginalRotation;
+
+        /// <summary>
+        /// The auto-rotation speed (0..1, 1=immediate rotation).
+        /// </summary>
+        [Tooltip("The auto-rotation speed (0..1, 1=immediate rotation).")]
+        public float rotationSpeed = 0.1f;
+
         /// <summary>
         /// Use this property to add/retrieve custom attributes for this country
         /// </summary>
         public JSONObject attrib { get; set; }
 
         /// <summary>
-        /// Specifies the Y coordinate of the pivot. If pivot is at bottom of the game object, you don't have to change this value (0). But if the pivot is at center, set this value to 0.5f. If pivot is at top, set this value to 1f.
-        /// </summary>
-        public float pivotY;
-
-        /// <summary>
         /// Set to false to disable any buoyancy effect over this unit (animation due to sea waves).
         /// </summary>
+        [Header("Other")]
+        [Tooltip("Specifies the Y coordinate of the pivot. If pivot is at bottom of the game object, you don't have to change this value (0). But if the pivot is at center, set this value to 0.5f. If pivot is at top, set this value to 1f.")]
         public bool enableBuoyancyEffect = true;
-
-        /// <summary>
-        /// Useful for arc trajectories (eg. cannons). Set this value to greater than 1 to produce a parabole.
-        /// </summary>
-        public float arcMultiplier = 1f;
-
-        /// <summary>
-        /// If set to true, the unit can change orientation but won't move. This value is cleared after unit has ended rotation.
-        /// </summary>
-        public bool isStatic;
-
-        /// <summary>
-        /// The starting location in map local coordinates.
-        /// </summary>
-        public Vector2 startingMap2DLocation;
-
-        /// <summary>
-        /// The destination in map local coordinates.
-        /// </summary>
-        public Vector2 endingMap2DLocation;
-
-        /// <summary>
-        /// The original scale of the game object when WMSK_MoveTo() was used first. Used for restoring go scale after switching from viewport to 2d mode.
-        /// </summary>
-        public Vector3 originalScale;
-
-        /// <summary>
-        /// The minimum zoom level for this unit to be visible. Similar to LOD. When the map is fully zoomed in, this value is near zero.
-        /// </summary>
-        public float minZoomLevel;
-
-        /// <summary>
-        /// The maximum zoom level for this unit to be visible. Similar to LOD. When the map is fully zoomed out, this value is 1.
-        /// </summary>
-        public float maxZoomLevel = 2f;
 
         /// <summary>
         /// If set to true, other map events won't be triggered when clicking on this unit (like OnClick)
         /// </summary>
-        public bool blocksRayCast = false;
-
-        /// <summary>
-        /// True is mouse is currently over the gameobject
-        /// </summary>
-        public bool mouseIsOver;
+        [Tooltip("If set to true, other map events won't be triggered when clicking on this unit (like OnClick)")]
+        public bool blocksRayCast;
 
         /// <summary>
         /// List of renderers for this unit that will be enabled/disabled when it enters or exits the map
         /// </summary>
+        [NonSerialized]
         public List<Renderer> managedRenderers;
 
         /// <summary>
         /// List of renderers for this unit that will be enabled/disabled when it enters or exits the map
         /// </summary>
+        [NonSerialized]
         public List<Canvas> managedCanvases;
 
         #endregion
 
-
-        /// <summary>
-        /// Returns true if the last known pos of the gameobject was on water
-        /// </summary>
-        public bool lastKnownPosIsOnWater { get { return _isOnWater; } }
-
-        /// <summary>
-        /// Returns true if the unit is currently on water (useful for hybrid units)
-        /// </summary>
-        public bool isOnWater {
-            get {
-                CheckWaterPos();
-                return _isOnWater;
-            }
-        }
 
         #region GameObject Animator Events
 
@@ -396,10 +438,49 @@ namespace WorldMapStrategyKit {
 
         #endregion
 
+        #region Local state
+
+        bool activeSelf;
+
+        /// <summary>
+        /// The original scale of the game object when WMSK_MoveTo() was used first. Used for restoring go scale after switching from viewport to 2d mode.
+        /// </summary>
+        [NonSerialized]
+        public Vector3 originalScale;
+
+
+        /// <summary>
+        /// Returns true if the last known pos of the gameobject was on water
+        /// </summary>
+        public bool lastKnownPosIsOnWater => _isOnWater;
+
+        /// <summary>
+        /// Returns true if the unit is currently on water (useful for hybrid units)
+        /// </summary>
+        public bool isOnWater {
+            get {
+                CheckWaterPos();
+                return _isOnWater;
+            }
+        }
+
+        bool holdPosition;
+
+        bool unitCanMove => !(isStatic || holdPosition);
+
+        #endregion
+
+        void OnEnable() {
+            activeSelf = true;
+        }
+
+        void OnDisable() {
+            activeSelf = false;
+        }
 
         void OnValidate() {
             if (!Application.isPlaying && map != null) {
-                UpdateTransformAndVisibility(true);
+                UpdateTransformAndVisibility(true, false);
             }
         }
 
@@ -615,7 +696,7 @@ namespace WorldMapStrategyKit {
         }
 
         public void LookAt(Vector2 destination) {
-            isStatic = true;
+            holdPosition = true;
             MoveTo(destination, 2f);
         }
 
@@ -672,6 +753,7 @@ namespace WorldMapStrategyKit {
         Quaternion lastComputedRotation;
         Vector2 lastComputedMap2DLocation;
         float lastComputedZoomLevel;
+        float lastComputedAltitude;
         Vector4 rawWorldPos;
         bool isAffectedByBuoyancy;
         float progress;
@@ -854,7 +936,10 @@ namespace WorldMapStrategyKit {
                     this.startingMap2DLocation = map.WorldToMap2DPosition(transform.position);
                 }
 
-                this.originalScale = transform.localScale;
+                if (autoScaleTarget == null) {
+                    autoScaleTarget = transform;
+                }
+                this.originalScale = autoScaleTarget.localScale;
 
                 PerformUpdateLoop();
 
@@ -866,9 +951,9 @@ namespace WorldMapStrategyKit {
             prevStop = startingMap2DLocation;
 
             SetupDirection(destination);
-            UpdateTransformAndVisibility(true);
+            UpdateTransformAndVisibility(true, false);
 
-            if (duration > 0 && !isStatic) {
+            if (duration > 0 && unitCanMove) {
                 if (OnMoveStart != null)
                     OnMoveStart(this);
                 map.BubbleEvent(map.OnVGOMoveStart, this);
@@ -896,6 +981,11 @@ namespace WorldMapStrategyKit {
         }
 
         public void PerformUpdateLoop() {
+            SetupContext(map);
+            PerformUpdateLoopWithContext(false);
+        }
+
+        public void PerformUpdateLoopWithContext(bool useCachedMVP) {
             mouseEventProcessedThisFrame = false;
 
             if (isMoving) {
@@ -908,7 +998,7 @@ namespace WorldMapStrategyKit {
                     }
 
                     MoveGameObject();
-                    UpdateTransformAndVisibility();
+                    UpdateTransformAndVisibilityWithContext(false, useCachedMVP);
                     CheckEvents();
 
                     // Follow object?
@@ -935,7 +1025,7 @@ namespace WorldMapStrategyKit {
             if (elapsed >= duration || duration <= 0) {
                 progress = 1.0f;
                 isMoving = false;
-                if (duration > 0 && !isStatic) {
+                if (duration > 0 && unitCanMove) {
                     moveHasEnded = true;
                 }
             } else {
@@ -962,7 +1052,7 @@ namespace WorldMapStrategyKit {
             }
 
             // Update position and visibility
-            if (!isStatic) {
+            if (unitCanMove) {
                 if (route != null) {
                     int index = (int)((route.Count - 1) * progress);
                     int findex = Mathf.Min(index + 1, route.Count - 1);
@@ -1000,10 +1090,13 @@ namespace WorldMapStrategyKit {
                 }
                 if (altitudeEnd != altitudeStart) {
                     currentAltitude = Mathf.Lerp(altitudeStart, altitudeEnd, progress);
+                    if (arcMultiplier > 1f) {
+                        currentAltitude += Mathf.Sin(progress * Mathf.PI) * arcMultiplier;
+                    }
                     hasMoved = true;
                 }
-            } else if (progress >= 1f) { // end of movement - clear isStatic flag
-                isStatic = false;
+            } else if (progress >= 1f) { // end of movement - clear holdPosition flag (used for lookat)
+                holdPosition = false;
             }
 
             CheckWaterPos();
@@ -1026,8 +1119,8 @@ namespace WorldMapStrategyKit {
 
         Vector2 LerpMove(Vector2 from, Vector2 to, float t) {
             if (map.wrapHorizontally) {
-                from = map.Map2DToRenderViewport(from);
-                to = map.Map2DToRenderViewport(to);
+                from = map.Map2DToWrappedRenderViewport(from);
+                to = map.Map2DToWrappedRenderViewport(to);
                 to = Vector2.Lerp(from, to, t);
                 if (to.x < -0.5f)
                     to.x += 1f;
@@ -1059,25 +1152,70 @@ namespace WorldMapStrategyKit {
         /// Updates GO's position, rotation, scale and visibility according to its current map position and direction
         /// </summary>
         public void UpdateTransformAndVisibility() {
-            UpdateTransformAndVisibility(false);
+            UpdateTransformAndVisibility(false, false);
         }
 
+        /// <summary>
+        /// Recalculates "currentMap2DLocation" and height. Call it after you change the unit position in your code.
+        /// </summary>
+        public void RecalculateMap2DLocation() {
+            RecalculateMap2DLocation(heightMode);
+        }
+
+        /// <summary>
+        /// Recalculates "currentMap2DLocation" and height. Call it after you change the unit position in your code.
+        /// </summary>
+        public void RecalculateMap2DLocation(HEIGHT_OFFSET_MODE heightMode) {
+            _currentMap2DLocation = map.WorldToMap2DPosition(transform.position, out currentAltitude, heightMode, transform.localScale.y * pivotY);
+            UpdateTransformAndVisibility();
+        }
 
         bool lastNormalValid;
         Vector3 lastSurfaceNormal;
         Vector2 lastNormalCheckMapPos;
 
+        struct VGOContext {
+            public bool renderViewportIsEnabled;
+            public bool renderViewportIsTerrain;
+            public Quaternion renderViewportRotation;
+            public Vector3 renderViewportRotationEulerAngles;
+            public float desiredScale;
+            public float renderViewportGOAutoScaleMin, renderViewportGOAutoScaleMax;
+            public Vector3 mapInvForward;
+            public Rect renderViewportRect;
+        }
+
+        static VGOContext context;
+
         /// <summary>
         /// Updates GO's position, rotation, scale and visibility according to its current map position and direction
         /// </summary>
-        public void UpdateTransformAndVisibility(bool forceUpdateRotation) {
+        public void UpdateTransformAndVisibility(bool forceUpdateRotation, bool useCachedMVP) {
+            SetupContext(map);
+            UpdateTransformAndVisibilityWithContext(forceUpdateRotation, useCachedMVP);
+        }
 
-            bool renderViewportIsTerrain = map.renderViewportIsTerrain;
+        public static void SetupContext(WMSK map) {
+            context.renderViewportIsTerrain = map.renderViewportIsTerrain;
+            context.renderViewportIsEnabled = map.renderViewportIsEnabled;
+            context.renderViewportRotation = map.renderViewport.transform.rotation;
+            context.renderViewportRotationEulerAngles = context.renderViewportRotation.eulerAngles;
+            context.desiredScale = map.renderViewportScaleFactor * map.renderViewportGOAutoScaleMultiplier;
+            context.renderViewportGOAutoScaleMin = map.renderViewportGOAutoScaleMin;
+            context.renderViewportGOAutoScaleMax = map.renderViewportGOAutoScaleMax;
+            context.mapInvForward = -map.transform.forward;
+            context.renderViewportRect = map.renderViewportRect;
+        }
+
+        /// <summary>
+        /// Updates GO's position, rotation, scale and visibility according to its current map position and direction
+        /// </summary>
+        public void UpdateTransformAndVisibilityWithContext(bool forceUpdateRotation, bool useCachedMVP) {
 
             // if gameobject is not inside the viewport area, hide it's renderers and early exit
             bool wasVisible = isVisibleInViewport;
-            if (!renderViewportIsTerrain) {
-                UpdateVisibility(false);
+            if (!context.renderViewportIsTerrain) {
+                UpdateVisibilityWithContext(false);
             }
 
             if (!updateWhenOffScreen && !isVisibleInViewport)
@@ -1092,50 +1230,55 @@ namespace WorldMapStrategyKit {
             }
 
             // Adjust scale
-            if (autoScale && !renderViewportIsTerrain) {
-                if (map.renderViewportIsEnabled) {
-                    float desiredScale = map.renderViewportScaleFactor * map.renderViewportGOAutoScaleMultiplier;
-                    float minScale = autoScaleMin > 0 ? autoScaleMin : map.renderViewportGOAutoScaleMin;
-                    float maxScale = autoScaleMax > 0 ? autoScaleMax : map.renderViewportGOAutoScaleMax;
+            if (autoScale && !context.renderViewportIsTerrain) {
+                if (context.renderViewportIsEnabled) {
+                    float desiredScale = context.desiredScale;
+                    float minScale = autoScaleMin > 0 ? autoScaleMin : context.renderViewportGOAutoScaleMin;
+                    float maxScale = autoScaleMax > 0 ? autoScaleMax : context.renderViewportGOAutoScaleMax;
                     if (desiredScale < minScale) {
                         desiredScale = minScale;
                     } else if (desiredScale > maxScale) {
                         desiredScale = maxScale;
                     }
-                    t.localScale = this.originalScale * desiredScale;
-                } else if (t.localScale != originalScale) {
-                    t.localScale = originalScale;
+                    autoScaleTarget.localScale = this.originalScale * desiredScale;
+                } else if (autoScaleTarget.localScale != originalScale) {
+                    autoScaleTarget.localScale = originalScale;
                 }
             }
 
             // Adjust world position having into account terrain elevation
-            if (lastComputedMap2DLocation != _currentMap2DLocation || lastComputedZoomLevel != map.lastKnownZoomLevel) {
+            if (lastComputedZoomLevel != map.lastKnownZoomLevel || lastComputedMap2DLocation != _currentMap2DLocation || currentAltitude != lastComputedAltitude) {
                 lastComputedMap2DLocation = _currentMap2DLocation;
                 lastComputedZoomLevel = map.lastKnownZoomLevel;
-                float h = currentAltitude;
-                if (arcMultiplier > 1f) {
-                    h += Mathf.Sin(progress * Mathf.PI) * arcMultiplier;
-                }
-                rawWorldPos = map.Map2DToRawWorldPosition(_currentMap2DLocation, h, t.localScale.y * pivotY, heightMode, false);
+                lastComputedAltitude = currentAltitude;
+                rawWorldPos = map.Map2DToRawWorldPosition(_currentMap2DLocation, currentAltitude, t.localScale.y * pivotY, heightMode, false);
             }
-            Vector3 worldPos = map.RawWorldToWorldPosition(rawWorldPos);
+
+            Vector3 worldPos;
+            if (context.renderViewportIsTerrain || !context.renderViewportIsEnabled) {
+                worldPos.x = rawWorldPos.x;
+                worldPos.y = rawWorldPos.y;
+                worldPos.z = rawWorldPos.z;
+            } else {
+                worldPos = map.RawWorldToWorldPosition(rawWorldPos, useCachedMVP);
+            }
             t.position = worldPos;
 
             // Make it climb up/down the slope
-            if (isVisibleInViewport || renderViewportIsTerrain) {
+            if (isVisibleInViewport || context.renderViewportIsTerrain) {
                 // if not autorotates according to terrain, align it with the renderViewport rotation
                 if ((!autoRotation && !preserveOriginalRotation)) {
-                    if (spriteRotation == 0 || renderViewportIsTerrain) {
-                        t.rotation = map.renderViewport.transform.rotation;
+                    if (spriteRotation == 0 || context.renderViewportIsTerrain) {
+                        t.rotation = context.renderViewportRotation;
                     } else {
-                        Vector3 rva = map.renderViewport.transform.rotation.eulerAngles;
+                        Vector3 rva = context.renderViewportRotationEulerAngles;
                         rva.x += spriteRotation;
                         t.rotation = Quaternion.Euler(rva);
                     }
                     // otherwise, calculate the normal and align to it
                 } else if ((isMoving || forceUpdateRotation) && autoRotation) {
                     Vector3 normal;
-                    if (map.renderViewportIsEnabled) {
+                    if (context.renderViewportIsEnabled) {
                         if (lastNormalCheckMapPos != _currentMap2DLocation) {
                             lastNormalValid = map.wrapHorizontally ? map.RenderViewportGetNormal(_currentMap2DLocation, out normal) : map.RenderViewportGetNormal(worldPos, out normal);
                             lastNormalCheckMapPos = _currentMap2DLocation;
@@ -1145,7 +1288,7 @@ namespace WorldMapStrategyKit {
                         }
                     } else {
                         lastNormalValid = true;
-                        normal = -map.transform.forward;
+                        normal = context.mapInvForward;
                     }
                     if (lastNormalValid) {
                         if (destinationDirection != Misc.Vector3zero) {
@@ -1185,12 +1328,21 @@ namespace WorldMapStrategyKit {
         /// </summary>
         /// <param name="forceRefreshVisibility">If set to <c>true</c> force refresh visibility.</param>
         public void UpdateVisibility(bool forceRefreshVisibility) {
+            SetupContext(map);
+            UpdateVisibilityWithContext(forceRefreshVisibility);
+        }
 
-            bool shouldBeVisible = visible && (!map.renderViewportIsEnabled || (gameObject.activeSelf && map.renderViewportRect.Contains(map.Map2DToRenderViewport(_currentMap2DLocation))));
+        /// <summary>
+        /// Updates the visibility of the unit. Units outside of viewport area are hidden automatically.
+        /// </summary>
+        /// <param name="forceRefreshVisibility">If set to <c>true</c> force refresh visibility.</param>
+        public void UpdateVisibilityWithContext(bool forceRefreshVisibility) {
+
+            float mapZoomLevel = map.lastKnownZoomLevel;
+            bool shouldBeVisible = _visible && mapZoomLevel >= minZoomLevel && mapZoomLevel <= maxZoomLevel;
 
             if (shouldBeVisible) {
-                float mapZoomLevel = map.lastKnownZoomLevel;
-                shouldBeVisible = mapZoomLevel >= minZoomLevel && mapZoomLevel <= maxZoomLevel;
+                shouldBeVisible = !context.renderViewportIsEnabled || (activeSelf && context.renderViewportRect.Contains(map.Map2DToWrappedRenderViewport(_currentMap2DLocation)));
             }
 
             if (shouldBeVisible != isVisibleInViewport || forceRefreshVisibility) {
@@ -1219,11 +1371,11 @@ namespace WorldMapStrategyKit {
             if (managedRenderers == null) {
                 managedRenderers = new List<Renderer>();
             }
-            GetComponentsInChildren<Renderer>(true, managedRenderers);
+            GetComponentsInChildren(true, managedRenderers);
             if (managedCanvases == null) {
                 managedCanvases = new List<Canvas>();
             }
-            GetComponentsInChildren<Canvas>(true, managedCanvases);
+            GetComponentsInChildren(true, managedCanvases);
         }
 
         void CheckWaterPos() {

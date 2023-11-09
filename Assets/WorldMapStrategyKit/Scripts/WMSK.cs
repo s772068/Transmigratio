@@ -129,14 +129,24 @@ namespace WorldMapStrategyKit {
         /// <value>The camera main.</value>
         public Camera cameraMain {
             get {
-                if (_customCamera == null)
-                    return Camera.main;
-                else
-                    return _customCamera;
+                if (_customCamera != null) return _customCamera;
+
+                if (_mainCamera != null) return _mainCamera;
+
+                _mainCamera = Camera.main;
+                if (_mainCamera != null) return _mainCamera;
+
+                Camera[] cameras = FindObjectsOfType<Camera>(true);
+                foreach (Camera cam in cameras) {
+                    if (cam.CompareTag("MainCamera")) {
+                        _mainCamera = cam;
+                        break;
+                    }
+                }
+
+                return _mainCamera;
             }
         }
-
-
 
         [SerializeField]
         bool _prewarm = false;
@@ -259,17 +269,85 @@ namespace WorldMapStrategyKit {
                 case ViewportMode.None:
                     return transform.InverseTransformPoint(position);
                 case ViewportMode.Terrain:
-                    position.z += WMSK_TERRAIN_MODE_Y_OFFSET;
+                    position.y += WMSK_TERRAIN_MODE_Y_OFFSET;
                     return transform.InverseTransformPoint(position);
                 default:
+                    // transform from world position to viewport gameobject local space
                     Vector3 viewportPos = _renderViewport.transform.InverseTransformPoint(position);
                     viewportPos.x += 0.5f;
                     viewportPos.y += 0.5f;
                     viewportPos.z = lastDistanceFromCamera;
+
+                    // transform from viewport local space to the 2D map in world space
                     Vector3 worldPos = currentCamera.ViewportToWorldPoint(viewportPos);
+
+                    // transform the world space to local
                     return transform.InverseTransformPoint(worldPos);
             }
         }
+
+        /// <summary>
+        /// Returns the position in map local coordinates (x, y) and also the altitude
+        /// </summary>
+        public Vector2 WorldToMap2DPosition(Vector3 worldPos, out float altitude, HEIGHT_OFFSET_MODE heightOffsetMode = HEIGHT_OFFSET_MODE.ABSOLUTE_CLAMPED, float pivotHeight = 0) {
+            Vector3 localPos;
+            switch (viewportMode) {
+                case ViewportMode.None:
+                    localPos = transform.InverseTransformPoint(worldPos);
+                    altitude = localPos.z;
+                    break;
+                case ViewportMode.Terrain:
+                    altitude = worldPos.y;
+                    worldPos.y += WMSK_TERRAIN_MODE_Y_OFFSET;
+                    localPos = transform.InverseTransformPoint(worldPos);
+                    switch (heightOffsetMode) {
+                        case HEIGHT_OFFSET_MODE.RELATIVE_TO_GROUND:
+                            altitude -= terrain.SampleHeight(worldPos);
+                            break;
+                        case HEIGHT_OFFSET_MODE.ABSOLUTE_CLAMPED:
+                            break;
+                        case HEIGHT_OFFSET_MODE.ABSOLUTE_ALTITUDE:
+                            break;
+                    }
+                    break;
+                default:
+                    // viewport
+                    // transform from world position to viewport gameobject local space
+                    Vector3 viewportPos = _renderViewport.transform.InverseTransformPoint(worldPos);
+                    altitude = -viewportPos.z;
+                    if (currentCurvature != 0) {
+                        altitude += Mathf.Cos(viewportPos.x * Mathf.PI) * currentCurvature;
+                    }
+                    viewportPos.x += 0.5f;
+                    viewportPos.y += 0.5f;
+                    viewportPos.z = lastDistanceFromCamera;
+
+                    // transform from viewport local space to the 2D map in world space
+                    Vector3 rawWorldPos = currentCamera.ViewportToWorldPoint(viewportPos);
+
+                    // transform the world space to local
+                    localPos = transform.InverseTransformPoint(rawWorldPos);
+                    localPos = Map2DToWrappedRenderViewport(localPos);
+
+                    // adjust altitude
+                    altitude -= pivotHeight;
+                    switch (heightOffsetMode) {
+                        case HEIGHT_OFFSET_MODE.RELATIVE_TO_GROUND:
+                            altitude -= ComputeEarthHeight(localPos, true);
+                            break;
+                        case HEIGHT_OFFSET_MODE.ABSOLUTE_CLAMPED:
+                            break;
+                        case HEIGHT_OFFSET_MODE.ABSOLUTE_ALTITUDE:
+                            break;
+                    }
+                    altitude /= _renderViewportElevationFactor;
+
+                    break;
+            }
+
+            return localPos;
+        }
+
 
         public float WorldToAltitude(Vector3 position) {
             Vector2 mapPos = WorldToMap2DPosition(position);
@@ -282,7 +360,7 @@ namespace WorldMapStrategyKit {
         /// For instance, if current render viewport views part of the left-side map on the right side, then
         /// the returned coordinate will have an x > 0.5f
         /// </summary>
-        public Vector2 Map2DToRenderViewport(Vector2 position) {
+        public Vector2 Map2DToWrappedRenderViewport(Vector2 position) {
             if (!_wrapHorizontally)
                 return position;
             if (position.x < _renderViewportRect.xMax - 1f) {
@@ -331,8 +409,8 @@ namespace WorldMapStrategyKit {
         /// </summary>
         public Vector3 Map2DToWorldPosition(Vector2 position, float baseHeight, float pivotHeight, HEIGHT_OFFSET_MODE heightOffsetMode, bool ignoreViewport) {
             Vector4 rawWorldPos = Map2DToRawWorldPosition(position, baseHeight, pivotHeight, heightOffsetMode, ignoreViewport);
-            if (ignoreViewport) return rawWorldPos;
-            return RawWorldToWorldPosition(rawWorldPos);
+            if (ignoreViewport || renderViewportIsTerrain || !renderViewportIsEnabled) return rawWorldPos;
+            return RawWorldToWorldPosition(rawWorldPos, false);
         }
 
         /// <summary>
@@ -388,29 +466,67 @@ namespace WorldMapStrategyKit {
             }
             float height = baseHeight + pivotHeight;
 
-            position = Map2DToRenderViewport(position); // makes it compatible with wrapping mode
-            worldPos = transform.TransformPoint(position);                  // converts it to world position
+            position = Map2DToWrappedRenderViewport(position); // makes it compatible with wrapping mode
 
-            return new Vector4(worldPos.x, worldPos.y, worldPos.z, height);
+            // avoid implicit Vector2 -> Vector3 conversion by reusing worldPos
+            worldPos.x = position.x;
+            worldPos.y = position.y;
+            worldPos.z = 0;
+            worldPos = transform.TransformPoint(worldPos);                  // converts it to world position
+
+            // return world position + height
+            Vector4 res;
+            res.x = worldPos.x;
+            res.y = worldPos.y;
+            res.z = worldPos.z;
+            res.w = height;
+            return res;
 
         }
 
-        public Vector3 RawWorldToWorldPosition(Vector4 rawWorldPos) {
+        Matrix4x4 currentCameraMVP;
+        void PrecomputeCameraMVPMatrices() {
+            Matrix4x4 V = _currentCamera.worldToCameraMatrix;
+            Matrix4x4 P = _currentCamera.projectionMatrix;
+            currentCameraMVP = P * V;
+        }
 
-            Vector3 worldPos = rawWorldPos; // convert to vector3
-            if (renderViewportIsTerrain || !renderViewportIsEnabled) {
-                return worldPos;
+        Vector2 FastWorldToViewportPoint(ref Vector3 point) {
+
+            Vector2 res;
+            res.x = currentCameraMVP.m00 * point.x + currentCameraMVP.m01 * point.y + currentCameraMVP.m02 * point.z + currentCameraMVP.m03;
+            res.y = currentCameraMVP.m10 * point.x + currentCameraMVP.m11 * point.y + currentCameraMVP.m12 * point.z + currentCameraMVP.m13;
+            float w = currentCameraMVP.m30 * point.x + currentCameraMVP.m31 * point.y + currentCameraMVP.m32 * point.z + currentCameraMVP.m33;
+            res.x /= w;
+            res.y /= w;
+            res.x *= 0.5f;
+            res.y *= 0.5f;
+            return res;
+
+        }
+
+        public Vector3 RawWorldToWorldPosition(Vector4 rawWorldPos, bool useCachedMVP) {
+
+            Vector3 worldPos;
+            worldPos.x = rawWorldPos.x;
+            worldPos.y = rawWorldPos.y;
+            worldPos.z = rawWorldPos.z;
+
+            Vector2 viewportPos;
+            if (useCachedMVP) {
+                viewportPos = FastWorldToViewportPoint(ref worldPos);
+            } else {
+                Vector3 viewportPos3D = _currentCamera.WorldToViewportPoint(worldPos);    // maps to camera clip space which equals to current render viewport view
+                viewportPos.x = viewportPos3D.x - 0.5f;
+                viewportPos.y = viewportPos3D.y - 0.5f;
             }
-
-            Vector3 viewportPos = _currentCamera.WorldToViewportPoint(worldPos);    // maps to camera clip space which equals to current render viewport view
-            viewportPos.x -= 0.5f;
-            viewportPos.y -= 0.5f;
 
             float height = rawWorldPos.w;
             if (currentCurvature != 0) {
                 height -= Mathf.Cos(viewportPos.x * Mathf.PI) * currentCurvature;
             }
 
+            // reuse worldPos as local pos
             worldPos.x = viewportPos.x;
             worldPos.y = viewportPos.y;
             worldPos.z = -height;
@@ -420,6 +536,14 @@ namespace WorldMapStrategyKit {
             return worldPos;
         }
 
+        /// <summary>
+        /// Hides all surfaces
+        /// </summary>
+        public void HideSurfaces() {
+            HideCountrySurfaces();
+            HideProvinceSurfaces();
+            HideCellSurfaces();
+        }
 
         /// <summary>
         /// Destroys everything: countries, frontiers, cities, mountpoints

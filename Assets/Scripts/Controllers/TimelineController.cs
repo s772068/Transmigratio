@@ -1,22 +1,38 @@
 using System.Collections;
 using UnityEngine;
-using Zenject;
 
-public class TimelineController : MonoSingleton<TimelineController> {
+public class TimelineController : BaseController {
     [SerializeField] private float interval;
 
-    [Inject] private MapHolder holder;
+    private MigrationController migrationController;
+    private EventsController eventsController;
+    private CalcController calcController;
 
     private bool isActive;
 
-    public void Active(bool val) {
-        isActive = val;
-        if (val) StartCoroutine(Active(holder.map));
+    public override GameController GameController {
+        set {
+            migrationController = value.Get<MigrationController>();
+            eventsController = value.Get<EventsController>();
+            calcController = value.Get<CalcController>();
+        }
     }
 
-    private IEnumerator Active(S_Map map) {
+    private void Start() {
+        Active = true;
+    }
+
+    public bool Active {
+        set {
+            isActive = value;
+            if (value) StartCoroutine(UpdateActive());
+        }
+    }
+
+    private IEnumerator UpdateActive() {
         while (isActive) {
-            //GameEvents.Step();
+            // eventsController.Call();
+            migrationController.StartMigration(default);
             yield return new WaitForSeconds(interval);
         }
     }

@@ -181,32 +181,42 @@ namespace WorldMapStrategyKit {
         }
 
         /// <summary>
-        /// Marks a list of regions to extrude by a given amount (0..1)
+        /// Sets the elevation of a list of regions (0..1)
         /// </summary>
-        /// <param name="amount">Amount in the 0..1 range.</param>
-        public void RegionSetCustomElevation(List<Region> regions, float amount) {
+        /// <param name="elevation">Amount in the 0..1 range.</param>
+        public void RegionSetCustomElevation(List<Region> regions, float elevation) {
             if (regions == null)
                 return;
             int count = regions.Count;
-            bool changes = false;
             for (int k = 0; k < count; k++) {
-                Region region = regions[k];
-                if (region != null) {
-                    if (region.extrusionAmount != amount) {
-                        region.extrusionAmount = amount;
-                        changes = true;
-                    }
-                    if (!extrudedRegions.Contains(region)) {
-                        extrudedRegions.Add(region);
-                        changes = true;
+                RegionSetCustomElevation(regions[k], elevation);
+            }
+            // TODO: need updateviewport?
+        }
+
+        /// <summary>
+        /// Sets heightmap elevation for a given region
+        /// </summary>
+        public void RegionSetCustomElevation(Region region, float elevation) {
+            int j0 = (int)((region.rect2D.yMin + 0.5) * heightmapTextureHeight);
+            int j1 = (int)((region.rect2D.yMax + 0.5) * heightmapTextureHeight);
+            if (j1 >= heightmapTextureHeight) j1 = heightmapTextureHeight - 1;
+            int k0 = (int)((region.rect2D.xMin + 0.5) * heightmapTextureWidth);
+            int k1 = (int)((region.rect2D.xMax + 0.5) * heightmapTextureWidth);
+            if (k1 >= heightmapTextureWidth) k1 = heightmapTextureWidth - 1;
+            Vector2 p;
+            for (int j = j0; j <= j1; j++) {
+                int jj = j * heightmapTextureWidth;
+                p.y = (j + 0.5f) / heightmapTextureHeight - 0.5f;
+                for (int k = k0; k <= k1; k++) {
+                    p.x = (k + 0.5f) / heightmapTextureWidth - 0.5f;
+                    if (region.Contains(p)) {
+                        viewportElevationPoints[jj + k] = elevation;
                     }
                 }
             }
-            if (changes) {
-                earthLastElevation = -1;
-                if (renderViewportIsEnabled) {
-                    UpdateViewport();
-                }
+            if (renderViewportIsEnabled) {
+                shouldCheckBoundaries = true; // updates viewport
             }
         }
 
@@ -218,44 +228,55 @@ namespace WorldMapStrategyKit {
             if (regions == null)
                 return;
             int count = regions.Count;
-            bool changes = false;
             for (int k = 0; k < count; k++) {
-                regions[k].extrusionAmount = 0;
-                if (extrudedRegions.Contains(regions[k])) {
-                    changes = true;
-                    extrudedRegions.Remove(regions[k]);
-                }
-            }
-            if (changes) {
-                earthLastElevation = -1;
-                if (renderViewportIsEnabled) {
-                    UpdateViewport();
-                }
+                RegionRemoveCustomElevation(regions[k]);
             }
         }
 
 
         /// <summary>
+        /// Sets heightmap elevation for a given region
+        /// </summary>
+        /// <param name="region"></param>
+        /// <param name="amount"></param>
+        public void RegionRemoveCustomElevation(Region region) {
+            int j0 = (int)((region.rect2D.yMin + 0.5) * heightmapTextureHeight);
+            int j1 = (int)((region.rect2D.yMax + 0.5) * heightmapTextureHeight);
+            if (j1 >= heightmapTextureHeight) j1 = heightmapTextureHeight - 1;
+            int k0 = (int)((region.rect2D.xMin + 0.5) * heightmapTextureWidth);
+            int k1 = (int)((region.rect2D.xMax + 0.5) * heightmapTextureWidth);
+            if (k1 >= heightmapTextureWidth) k1 = heightmapTextureWidth - 1;
+
+            const float baseElevation = 24.0f / 255.0f;
+            Vector2 p;
+
+            for (int j = j0; j <= j1; j++) {
+                int jj = j * heightmapTextureWidth;
+                p.y = (j + 0.5f) / heightmapTextureHeight - 0.5f;
+                for (int k = k0; k <= k1; k++) {
+                    p.x = (k + 0.5f) / heightmapTextureWidth - 0.5f;
+                    if (region.Contains(p)) {
+                        float gCol = heightMapColors[jj + k].r / 255f - baseElevation;
+                        if (gCol < 0) {
+                            gCol = 0;
+                        }
+                        viewportElevationPoints[jj + k] = gCol;
+                    }
+                }
+            }
+
+            if (renderViewportIsEnabled) {
+                shouldCheckBoundaries = true; // updates viewport
+            }
+        }
+
+        /// <summary>
         /// Removes any extrusion from all regions
         /// </summary>
         public void RegionRemoveAllCustomElevations() {
-            if (extrudedRegions == null)
-                return;
-            bool changes = false;
-            int count = extrudedRegions.Count;
-            for (int k = 0; k < count; k++) {
-                Region region = extrudedRegions[k];
-                if (region.extrusionAmount > 0) {
-                    extrudedRegions[k].extrusionAmount = 0;
-                    changes = true;
-                }
-            }
-            extrudedRegions.Clear();
-            if (changes) {
-                earthLastElevation = -1;
-                if (renderViewportIsEnabled) {
-                    UpdateViewport();
-                }
+            earthLastElevation = -1;
+            if (renderViewportIsEnabled) {
+                UpdateViewport();
             }
         }
 

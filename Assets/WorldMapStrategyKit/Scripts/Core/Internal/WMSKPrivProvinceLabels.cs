@@ -59,7 +59,7 @@ namespace WorldMapStrategyKit {
         /// </summary>
         void DrawProvinceLabelsInt(Country country, Color color = default(Color)) {
 
-            if (!Application.isPlaying || !gameObject.activeInHierarchy || country == null || country.hidden || provinces == null || country.provinces == null)
+            if (!isPlaying || !gameObject.activeInHierarchy || country == null || country.hidden || provinces == null || country.provinces == null)
                 return;
 
             countryProvincesLabelsShown = country;
@@ -277,7 +277,7 @@ namespace WorldMapStrategyKit {
             textProvinceRoot.transform.localScale = new Vector3(1.0f / mw, 1.0f / mh, 1);
 
             // Adjusts alpha based on distance to camera
-            if (Application.isPlaying) {
+            if (isPlaying) {
                 FadeProvinceLabels();
             }
 

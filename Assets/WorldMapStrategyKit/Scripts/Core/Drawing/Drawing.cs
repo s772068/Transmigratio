@@ -235,11 +235,12 @@ namespace WorldMapStrategyKit {
         /// Draws a dashed line.
         /// </summary>
         /// <param name="points">Sequence of pair of points.</param>
-        public static void DrawDashedLine(GameObject parent, List<Vector3> points, float thickness, bool worldSpace, Material sharedMaterial, ref Vector3[] meshPoints, ref int[] triPoints, ref Vector2[] uv) {
+        public static MeshFilter DrawDashedLine(GameObject parent, List<Vector3> points, float thickness, bool worldSpace, Material sharedMaterial, ref Vector3[] meshPoints, ref int[] triPoints, ref Vector2[] uv) {
             MeshFilter meshFilter = parent.AddComponent<MeshFilter>();
             UpdateDashedLine(meshFilter, points, thickness, worldSpace, ref meshPoints, ref triPoints, ref uv);
             Renderer renderer = parent.AddComponent<MeshRenderer>();
             renderer.sharedMaterial = sharedMaterial;
+            return meshFilter;
         }
 
         public static void UpdateDashedLine(MeshFilter meshFilter, List<Vector3> points, float thickness, bool worldSpace, ref Vector3[] meshPoints, ref int[] triPoints, ref Vector2[] uv) {
@@ -252,13 +253,12 @@ namespace WorldMapStrategyKit {
             if (numPoints > 65000)
                 return;
 
-            Mesh mesh = meshFilter.sharedMesh;
-            bool reassignMesh = false;
-            if (mesh == null || meshPoints == null || mesh.vertexCount != numPoints) {
-                meshPoints = new Vector3[numPoints];
-                triPoints = new int[numPoints];
-                uv = new Vector2[numPoints];
-                reassignMesh = true;
+            if (meshPoints == null || meshPoints.Length < numPoints) {
+                int newCapacity = meshPoints == null ? 256 : (meshPoints.Length + 1) * 2;
+                if (newCapacity < numPoints) newCapacity = numPoints;
+                meshPoints = new Vector3[newCapacity];
+                triPoints = new int[newCapacity];
+                uv = new Vector2[newCapacity];
             }
 
             int mp = 0;
@@ -394,20 +394,18 @@ namespace WorldMapStrategyKit {
                 mp += 24;
             }
 
+            Mesh mesh = meshFilter.sharedMesh;
             if (mesh == null) {
                 mesh = new Mesh();
                 mesh.hideFlags = HideFlags.DontSave;
-            }
-            if (reassignMesh) {
+            } else {
                 mesh.Clear();
             }
-            mesh.vertices = meshPoints;
-            mesh.uv = uv;
-            mesh.triangles = triPoints;
+            mesh.SetVertices(meshPoints, 0, numPoints);
+            mesh.SetUVs(0, uv, 0, numPoints);
+            mesh.SetTriangles(triPoints, 0, numPoints, 0);
             mesh.RecalculateNormals();
-            mesh.RecalculateBounds();
-            if (reassignMesh)
-                meshFilter.sharedMesh = mesh;
+            meshFilter.sharedMesh = mesh;
         }
 
         static int[][] contourX;
@@ -647,34 +645,34 @@ namespace WorldMapStrategyKit {
 
                 // first triangle
                 // 1
-                px = Mathf.Cos(angle0) * (ringWidthMax * width);
-                py = Mathf.Sin(angle0) * (ringWidthMax * height);
-                points[++pointIndex] = new Vector3(px, py, 0);
-                uv[pointIndex] = new Vector2(1, 1);
+                px = Mathf.Cos(angle0) * ringWidthMax;
+                py = Mathf.Sin(angle0) * ringWidthMax;
+                points[++pointIndex] = new Vector3(px * width, py * height, 0);
+                uv[pointIndex] = new Vector2(px + 0.5f, py + 0.5f);
                 // 2
-                px = Mathf.Cos(angle0) * (ringWidthMin * width);
-                py = Mathf.Sin(angle0) * (ringWidthMin * height);
-                points[++pointIndex] = new Vector3(px, py, 0);
-                uv[pointIndex] = new Vector2(1, 0);
+                px = Mathf.Cos(angle0) * ringWidthMin;
+                py = Mathf.Sin(angle0) * ringWidthMin;
+                points[++pointIndex] = new Vector3(px * width, py * height, 0);
+                uv[pointIndex] = new Vector2(px + 0.5f, py + 0.5f);
                 // 3
-                px = Mathf.Cos(angle1) * (ringWidthMax * width);
-                py = Mathf.Sin(angle1) * (ringWidthMax * height);
-                points[++pointIndex] = new Vector3(px, py, 0);
-                uv[pointIndex] = new Vector2(0, 1);
+                px = Mathf.Cos(angle1) * ringWidthMax;
+                py = Mathf.Sin(angle1) * ringWidthMax;
+                points[++pointIndex] = new Vector3(px * width, py * height, 0);
+                uv[pointIndex] = new Vector2(px + 0.5f, py + 0.5f);
 
                 // second triangle
                 if (ringWidthMin != 0) {
                     // 1
                     points[++pointIndex] = points[pointIndex - 2];
-                    uv[pointIndex] = new Vector2(1, 0);
+                    uv[pointIndex] = uv[pointIndex - 2];
                     // 2
-                    px = Mathf.Cos(angle1) * (ringWidthMin * width);
-                    py = Mathf.Sin(angle1) * (ringWidthMin * height);
-                    points[++pointIndex] = new Vector3(px, py, 0);
-                    uv[pointIndex] = new Vector2(0, 0);
+                    px = Mathf.Cos(angle1) * ringWidthMin;
+                    py = Mathf.Sin(angle1) * ringWidthMin;
+                    points[++pointIndex] = new Vector3(px * width, py * height, 0);
+                    uv[pointIndex] = new Vector2(px + 0.5f, py + 0.5f);
                     // 3
                     points[++pointIndex] = points[pointIndex - 3];
-                    uv[pointIndex] = new Vector2(0, 1);
+                    uv[pointIndex] = uv[pointIndex - 3];
                 }
             }
 

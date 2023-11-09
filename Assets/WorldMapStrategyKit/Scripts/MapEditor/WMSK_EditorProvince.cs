@@ -255,7 +255,7 @@ namespace WorldMapStrategyKit {
 
 
         string GetProvinceMergeIndexByGUISelection() {
-            if (GUIProvinceTransferToProvinceIndex < 0 || GUIProvinceTransferToProvinceIndex >= provinceNames.Length)
+            if (GUIProvinceTransferToProvinceIndex < 0 || _provinceNames == null || GUIProvinceTransferToProvinceIndex >= _provinceNames.Length)
                 return "";
             string[] s = _provinceNames[GUIProvinceTransferToProvinceIndex].Split(new char[] {
                 '(',

@@ -49,21 +49,27 @@ namespace WorldMapStrategyKit {
         void UpdateViewportObjectsLoop() {
             // Update animators
             CheckVGOsArrayDirty();
+            GameObjectAnimator.SetupContext(this);
+            PrecomputeCameraMVPMatrices();
             for (int k = 0; k < vgosCount; k++) {
                 GameObjectAnimator vgo = vgos[k];
-                if (vgo.isMoving || vgo.mouseIsOver || (vgo.lastKnownPosIsOnWater && vgo.enableBuoyancyEffect)) {
-                    vgo.PerformUpdateLoop();
+                if (vgo.isMoving || vgo.mouseIsOver || (vgo.enableBuoyancyEffect && vgo.lastKnownPosIsOnWater)) {
+                    vgo.PerformUpdateLoopWithContext(true);
                 }
             }
         }
 
-
-        void UpdateViewportObjectsTransformAndVisibility() {
+        /// <summary>
+        /// Refresh viewport gameobjects position, rotation, scale and visibility
+        /// </summary>
+        public void UpdateViewportObjectsTransformAndVisibility() {
             // Update animators
             CheckVGOsArrayDirty();
+            PrecomputeCameraMVPMatrices();
+            GameObjectAnimator.SetupContext(this);
             for (int k = 0; k < vgosCount; k++) {
                 GameObjectAnimator vgo = vgos[k];
-                vgo.UpdateTransformAndVisibility();
+                vgo.UpdateTransformAndVisibilityWithContext(false, true);
             }
         }
 
@@ -76,18 +82,21 @@ namespace WorldMapStrategyKit {
             }
         }
 
+        
         void RepositionViewportObjects() {
+            PrecomputeCameraMVPMatrices();
+            GameObjectAnimator.SetupContext(this);
             if (renderViewportIsEnabled) {
                 for (int k = 0; k < vgosCount; k++) {
                     GameObjectAnimator go = vgos[k];
                     go.transform.SetParent(null, true);
-                    go.UpdateTransformAndVisibility(true);
+                    go.UpdateTransformAndVisibilityWithContext(true, true);
                 }
             } else {
                 for (int k = 0; k < vgosCount; k++) {
                     GameObjectAnimator go = vgos[k];
-                    go.transform.localScale = go.originalScale;
-                    go.UpdateTransformAndVisibility(true);
+                    go.autoScaleTarget.localScale = go.originalScale;
+                    go.UpdateTransformAndVisibilityWithContext(true, true);
                 }
             }
         }

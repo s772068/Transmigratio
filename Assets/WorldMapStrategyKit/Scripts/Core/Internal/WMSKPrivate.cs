@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
 using WorldMapStrategyKit.PolygonClipping;
+using UnityEngine.EventSystems;
 
 namespace WorldMapStrategyKit {
 
@@ -116,7 +117,7 @@ namespace WorldMapStrategyKit {
 
         int layerMask {
             get {
-                if (Application.isPlaying && renderViewportIsEnabled)
+                if (isPlaying && renderViewportIsEnabled)
                     return 1 << renderViewport.layer;
                 else
                     return 1 << gameObject.layer;
@@ -158,7 +159,7 @@ namespace WorldMapStrategyKit {
 
 
         bool needRedraw;
-
+        bool isPlaying;
 
         #region Game loop events
 
@@ -182,10 +183,12 @@ namespace WorldMapStrategyKit {
 
         void OnEnable() {
 
+            isPlaying = Application.isPlaying;
+
             if (_countries == null) {
 #if UNITY_EDITOR
                 // skip double initialization when entering playmode
-                if (!Application.isPlaying && UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) return;
+                if (!isPlaying && UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) return;
 #endif
                 Init();
             }
@@ -203,6 +206,8 @@ namespace WorldMapStrategyKit {
         private void OnValidate() {
             _staticInteractionVelocityThreshold = Mathf.Max(0, _staticInteractionVelocityThreshold);
             _navigationTime = Mathf.Max(0, _navigationTime);
+            _mouseDragThreshold = Mathf.Max(0, _mouseDragThreshold);
+            _mouseDragSensitivity = Mathf.Max(0, _mouseDragSensitivity);
         }
 
         void OnDestroy() {
@@ -264,7 +269,7 @@ namespace WorldMapStrategyKit {
                 RedrawNow();
             }
 
-            if (currentCamera == null || !Application.isPlaying) {
+            if (currentCamera == null || !isPlaying) {
                 // For some reason, when saving the scene, the renderview port loses the attached rendertexture.
                 // No event is fired, except for Update(), so we need to refresh the attached rendertexture of the render viewport here.
                 SetupViewport();
@@ -275,6 +280,9 @@ namespace WorldMapStrategyKit {
             if (updateDoneThisFrame)
                 return;
             updateDoneThisFrame = true;
+
+            ApplyCameraTilt();
+
 
             CheckMouseOver();
 
@@ -425,7 +433,7 @@ namespace WorldMapStrategyKit {
             } else if (!renderViewportIsTerrain) {
                 // Map has not moved
 #if UNITY_EDITOR
-                if (viewportColliderNeedsUpdate > 0 && !Application.isPlaying) viewportColliderNeedsUpdate = 1; // forces immediate update while not in playmode
+                if (viewportColliderNeedsUpdate > 0 && !isPlaying) viewportColliderNeedsUpdate = 1; // forces immediate update while not in playmode
 #endif
                 if (--viewportColliderNeedsUpdate == 1) {
                     Mesh ms;
@@ -463,6 +471,8 @@ namespace WorldMapStrategyKit {
             if (_showGrid) {
                 GridUpdateHighlightFade();  // Fades current selection
             }
+
+            CheckInteractiveMarkers();
         }
 
         void CheckMouseOver() {
@@ -472,12 +482,27 @@ namespace WorldMapStrategyKit {
             // legacy input manager will use the OnMouseEnter events to detect mouse over
         }
 
+        readonly List<RaycastResult> raycastAllResults = new List<RaycastResult>();
+        private bool RaycastWithMask() {
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, raycastAllResults);
+            int hitCount = raycastAllResults.Count;
+            for (int k = 0; k < hitCount; k++) {
+                var hit = raycastAllResults[k];
+                if ((_blockingMask & (1 << hit.gameObject.layer)) != 0) return true;
+            }
+            return false;
+        }
+
         void CheckPointerOverUI() {
 
             // Check whether the points is on an UI element, then avoid user interaction
             if (respectOtherUI && !hasDragged) {
-                if (UnityEngine.EventSystems.EventSystem.current != null) {
-                    if (Application.isMobilePlatform && input.touchCount > 0 && UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject(input.GetFingerIdFromTouch(0))) {
+                if (EventSystem.current != null) {
+                    if (_blockingMask > 0) {
+                        canInteract = !RaycastWithMask();
+                    } else if (Application.isMobilePlatform && input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject(input.GetFingerIdFromTouch(0))) {
                         canInteract = false;
                     } else if (input.IsPointerOverUI()) {
                         canInteract = false;
@@ -510,7 +535,7 @@ namespace WorldMapStrategyKit {
             updateDoneThisFrame = false;
 
             if (renderViewportIsTerrain) {
-                if (_enableFreeCamera || !Application.isPlaying) {
+                if (_enableFreeCamera || !isPlaying) {
                     SyncMapperCamWithMainCamera(); // catch any camera change between Update and LateUpdate
                 }
                 SyncMainCameraWithMapperCam();
@@ -536,7 +561,7 @@ namespace WorldMapStrategyKit {
                 Vector3 camPos = cameraMain.transform.position;
                 float currentMapVelocity = Vector3.Distance(prevMapPosition, mapPos) * deltaTime;
                 float currentCamVelocity = Vector3.Distance(prevCameraPosition, camPos) * deltaTime;
-                mapVelocity = (mapVelocity + currentCamVelocity) * 0.5f;
+                mapVelocity = (mapVelocity + currentMapVelocity) * 0.5f;
                 cameraVelocity = (cameraVelocity + currentCamVelocity) * 0.5f;
                 prevMapPosition = mapPos;
                 prevCameraPosition = camPos;
@@ -685,7 +710,7 @@ namespace WorldMapStrategyKit {
         }
 
         bool canUserDrag {
-            get { return _allowUserDrag && canInteractWhileFlying; }
+            get { return _allowUserDrag && canInteractWhileFlying && !markerDragging; }
         }
 
         bool canUserUseKeys {
@@ -925,20 +950,20 @@ namespace WorldMapStrategyKit {
                 if (canUserUseKeys) {
                     Vector3 keyDragDirection = Misc.Vector3zero;
                     bool pressed = false;
-                    if (input.GetKey(_keyUp)) {
-                        keyDragDirection = Misc.Vector3down;
+                    if (input.GetKey(_keyUpName)) {
+                        keyDragDirection = Misc.Vector3up;
                         pressed = true;
                     }
-                    if (input.GetKey(_keyDown)) {
-                        keyDragDirection += Misc.Vector3up;
+                    if (input.GetKey(_keyDownName)) {
+                        keyDragDirection += Misc.Vector3down;
                         pressed = true;
                     }
-                    if (input.GetKey(_keyLeft)) {
-                        keyDragDirection += Misc.Vector3right;
-                        pressed = true;
-                    }
-                    if (input.GetKey(_keyRight)) {
+                    if (input.GetKey(_keyLeftName)) {
                         keyDragDirection += Misc.Vector3left;
+                        pressed = true;
+                    }
+                    if (input.GetKey(_keyRightName)) {
+                        keyDragDirection += Misc.Vector3right;
                         pressed = true;
                     }
                     if (pressed) {
@@ -963,20 +988,26 @@ namespace WorldMapStrategyKit {
 
                 if (dragging) {
                     if (buttonLeftPressed) {
-                        if (canUserDrag || canUserUseKeys) {
+                        if (canUserDrag) {
                             if (_dragConstantSpeed) {
                                 if (lastMouseMapHitPosGood && mouseIsOver) {
-                                    dragDirection = lastMouseMapLocalHitPos - mouseDragStartLocalHitPos;
+                                    dragDirection = mouseDragStartLocalHitPos - lastMouseMapLocalHitPos;
                                     dragDirection.x = ApplyDragThreshold(dragDirection.x);
                                     dragDirection.y = ApplyDragThreshold(dragDirection.y);
                                     if (dragDirection.x != 0 || dragDirection.y != 0) {
-                                        dragDirection = transform.TransformVector(dragDirection);
-                                        _currentCamera.transform.Translate(-dragDirection, Space.World);
+                                        // from map local space to world space
+                                        Vector3 projDirection = transform.TransformVector(dragDirection);
+                                        // translate camera in world space
+                                        _currentCamera.transform.Translate(projDirection, Space.World);
+
+                                        dragDirection = DragWorldToScreenSpace(projDirection);
+
+                                        // start damping
                                         dragDampingStart = Time.time;
                                     }
                                 }
                             } else {
-                                dragDirection = input.mousePosition - mouseDragStart;
+                                dragDirection = mouseDragStart - input.mousePosition;
                                 dragDirection.x = ApplyDragThreshold(dragDirection.x);
                                 dragDirection.y = ApplyDragThreshold(dragDirection.y);
                                 if (dragDirection.x != 0 || dragDirection.y != 0) {
@@ -987,8 +1018,9 @@ namespace WorldMapStrategyKit {
                                     }
                                     dragDampingStart = Time.time;
                                     dragDirection *= dragSpeed;
-                                    // Drag along the map plane
-                                    _currentCamera.transform.Translate(-dragDirection * deltaTime, transform);
+
+                                    Vector3 projDirection = DragScreenToMapSpace(dragDirection);
+                                    _currentCamera.transform.Translate(projDirection * deltaTime, transform);
                                 }
                             }
                         }
@@ -1015,19 +1047,19 @@ namespace WorldMapStrategyKit {
                 float my = input.mousePosition.y;
                 if (mx >= 0 && mx < Screen.width && my >= 0 && my < Screen.height) {
                     if (my < _screenEdgeThickness) {
-                        dragDirection = Misc.Vector3up;
-                        onEdge = true;
-                    }
-                    if (my >= Screen.height - _screenEdgeThickness) {
                         dragDirection = Misc.Vector3down;
                         onEdge = true;
                     }
+                    if (my >= Screen.height - _screenEdgeThickness) {
+                        dragDirection = Misc.Vector3up;
+                        onEdge = true;
+                    }
                     if (mx < _screenEdgeThickness) {
-                        dragDirection = Misc.Vector3right;
+                        dragDirection = Misc.Vector3left;
                         onEdge = true;
                     }
                     if (mx >= Screen.width - _screenEdgeThickness) {
-                        dragDirection = Misc.Vector3left;
+                        dragDirection = Misc.Vector3right;
                         onEdge = true;
                     }
                 }
@@ -1056,10 +1088,54 @@ namespace WorldMapStrategyKit {
                     dragDampingStart = 0f;
                 }
                 dragging = true;
-                _currentCamera.transform.Translate(-dragDirection * (t * deltaTime), transform);
+
+                Vector3 projDirection = DragScreenToMapSpace(dragDirection);
+                // translate camera position
+                _currentCamera.transform.Translate(projDirection * (t * deltaTime), transform);
             }
 
         }
+
+
+        /// <summary>
+        /// This function converts from world space to screen space
+        /// </summary>
+        Vector3 DragWorldToScreenSpace(Vector3 direction) {
+            direction = transform.InverseTransformDirection(direction);
+            if (viewportMode == ViewportMode.Terrain) {
+                direction = new Vector3(direction.x, 0, direction.y);
+            } else {
+                direction = renderViewport.transform.TransformDirection(direction);
+            }
+            direction = viewCamera.transform.InverseTransformDirection(direction);
+            return direction;
+        }
+
+
+        /// <summary>
+        /// This function converts a screen space drag direction to a world space direction which is used
+        /// to translate the mapper cam (= main camera in standalone mode)
+        /// </summary>
+        Vector3 DragScreenToMapSpace(Vector3 direction) {
+            // convert direction from screen space to view camera space
+            direction = viewCamera.transform.TransformDirection(direction);
+            if (viewportMode == ViewportMode.Terrain) {
+                direction = new Vector3(direction.x, direction.z, 0);
+            } else {
+                // project onto viewport plane
+                direction = Vector3.ProjectOnPlane(direction, renderViewport.transform.forward);
+                // convert to viewport local space
+                direction = renderViewport.transform.InverseTransformDirection(direction);
+            }
+            return direction;
+        }
+
+        public void CancelMapDrag() {
+            dragging = false;
+            hasDragged = false;
+            dragDampingStart = 0;
+        }
+
 
         public void OnMouseEnter() {
             mouseIsOver = true;
@@ -1069,22 +1145,24 @@ namespace WorldMapStrategyKit {
             // Make sure it's outside of map
             Vector3 mousePos = input.mousePosition;
             bool mouseWithinRect = true;
-            Camera cam = cameraMain;
-            if (cam != null && Display.RelativeMouseAt(mousePos).z == cam.targetDisplay && mousePos.x >= cam.pixelRect.xMin && mousePos.x < cam.pixelRect.xMax && mousePos.y >= cam.pixelRect.yMin && mousePos.y < cam.pixelRect.yMax) {
-                mouseWithinRect = true;
-            }
-            if (mouseWithinRect) {
-                Ray ray = cameraMain.ScreenPointToRay(mousePos);
-                int hitCount = Physics.RaycastNonAlloc(ray.origin, ray.direction, tempHits, 2000);
-                for (int k = 0; k < hitCount; k++) {
-                    if (tempHits[k].collider.name.Equals(WMSKMiniMap.MINIMAP_NAME)) {
-                        mouseIsOver = false;
-                        return;
-                    }
+            Camera cam = viewCamera;
+            if (cam != null) {
+                if (Display.RelativeMouseAt(mousePos).z == cam.targetDisplay && mousePos.x >= cam.pixelRect.xMin && mousePos.x < cam.pixelRect.xMax && mousePos.y >= cam.pixelRect.yMin && mousePos.y < cam.pixelRect.yMax) {
+                    mouseWithinRect = true;
                 }
-                for (int k = 0; k < hitCount; k++) {
-                    if (tempHits[k].collider.gameObject == _renderViewport)
-                        return;
+                if (mouseWithinRect) {
+                    Ray ray = cam.ScreenPointToRay(mousePos);
+                    int hitCount = Physics.RaycastNonAlloc(ray.origin, ray.direction, tempHits, 2000);
+                    for (int k = 0; k < hitCount; k++) {
+                        if (tempHits[k].collider.name.Equals(WMSKMiniMap.MINIMAP_NAME)) {
+                            mouseIsOver = false;
+                            return;
+                        }
+                    }
+                    for (int k = 0; k < hitCount; k++) {
+                        if (tempHits[k].collider.gameObject == _renderViewport)
+                            return;
+                    }
                 }
             }
 
@@ -1116,9 +1194,15 @@ namespace WorldMapStrategyKit {
 
 #if UNITY_EDITOR
             UnityEditor.PrefabInstanceStatus prefabInstanceStatus = UnityEditor.PrefabUtility.GetPrefabInstanceStatus(gameObject);
+#if UNITY_2022_1_OR_NEWER
+            if (prefabInstanceStatus != UnityEditor.PrefabInstanceStatus.NotAPrefab) {
+                UnityEditor.PrefabUtility.UnpackPrefabInstance(gameObject, UnityEditor.PrefabUnpackMode.Completely, UnityEditor.InteractionMode.AutomatedAction);
+            }
+#else
             if (prefabInstanceStatus != UnityEditor.PrefabInstanceStatus.NotAPrefab && prefabInstanceStatus != UnityEditor.PrefabInstanceStatus.Disconnected) {
                 UnityEditor.PrefabUtility.UnpackPrefabInstance(gameObject, UnityEditor.PrefabUnpackMode.Completely, UnityEditor.InteractionMode.AutomatedAction);
             }
+#endif
 #endif
 
             if (input == null) {
@@ -1153,6 +1237,8 @@ namespace WorldMapStrategyKit {
             SetupVGOs();
 
             SetupViewport();
+
+            SetupCameraTiltMode();
 
             // Labels materials
             ReloadFont();
@@ -1255,7 +1341,7 @@ namespace WorldMapStrategyKit {
             CheckRouteLandAndWaterMask();
 
             // Redraw frontiers and cities -- destroy layers if they already exists
-            if (!Application.isPlaying) {
+            if (!isPlaying) {
                 Redraw();
             }
 
@@ -1315,7 +1401,7 @@ namespace WorldMapStrategyKit {
                 showLatitudeLines = showLongitudeLines = false;
             }
 
-            if (Application.isPlaying) {
+            if (isPlaying) {
 
                 if (GetComponent<Rigidbody>() == null) {
                     Rigidbody rb = gameObject.AddComponent<Rigidbody>();
@@ -1457,7 +1543,7 @@ namespace WorldMapStrategyKit {
             }
             DestroyImmediate(go);
 
-            if (!Application.isPlaying || Time.time - lastGCTime > 10f) {
+            if (!isPlaying || Time.time - lastGCTime > 10f) {
                 lastGCTime = Time.time;
                 Resources.UnloadUnusedAssets();
                 GC.Collect();
@@ -1566,7 +1652,7 @@ namespace WorldMapStrategyKit {
             if (!gameObject.activeInHierarchy)
                 return;
 
-            if (Application.isPlaying) {
+            if (isPlaying) {
                 needRedraw = true;
             } else {
                 RedrawNow();
@@ -1754,7 +1840,7 @@ namespace WorldMapStrategyKit {
             }
 
             if (_showTiles) {
-                if (Application.isPlaying) {
+                if (isPlaying) {
                     if (tilesRoot == null) {
                         InitTileSystem();
                     } else {
@@ -1871,7 +1957,7 @@ namespace WorldMapStrategyKit {
             }
 
 
-            Ray ray = cameraMain.ScreenPointToRay(screenPos);
+            Ray ray = viewCamera.ScreenPointToRay(screenPos);
             int hitCount = Physics.RaycastNonAlloc(ray.origin, ray.direction, tempHits, 2000, layerMask);
             if (hitCount > 0) {
                 for (int k = 0; k < hitCount; k++) {
@@ -2190,16 +2276,24 @@ namespace WorldMapStrategyKit {
             if (cam == null)
                 return 1;
 
+            return GetFrustumDistance(cam);
+        }
+
+        /// <summary>
+        /// Returns the distance from camera to map according to fit to window width/height parameters
+        /// </summary>
+        /// <returns>The frustum distance.</returns>
+        float GetFrustumDistance(Camera cam) {
             float fv = cam.fieldOfView;
             float aspect = cam.aspect;
             float radAngle = fv * Mathf.Deg2Rad;
             float distance, frustumDistanceW, frustumDistanceH;
             if (currentCamera.orthographic) {
-                if (_fitWindowHeight) {
-                    float orthographicSize = mapHeight * 0.5f * _windowRect.height;
-                    maxFrustumDistance = orthographicSize;
-                } else if (_fitWindowWidth) {
+                if (_fitWindowWidth) {
                     float orthographicSize = mapWidth * 0.5f * _windowRect.width / aspect;
+                    maxFrustumDistance = orthographicSize;
+                } else if (_fitWindowHeight) {
+                    float orthographicSize = mapHeight * 0.5f * _windowRect.height;
                     maxFrustumDistance = orthographicSize;
                 } else {
                     maxFrustumDistance = float.MaxValue;
@@ -2209,15 +2303,18 @@ namespace WorldMapStrategyKit {
             } else {
                 frustumDistanceH = mapHeight * _windowRect.height * 0.5f / Mathf.Tan(radAngle * 0.5f);
                 frustumDistanceW = (mapWidth * _windowRect.width / aspect) * 0.5f / Mathf.Tan(radAngle * 0.5f);
-                if (_fitWindowHeight) {
+                if (_fitWindowWidth && _fitWindowHeight) {
                     distance = Mathf.Min(frustumDistanceH, frustumDistanceW);
                     maxFrustumDistance = distance;
+                } else if (_fitWindowHeight) {
+                    distance = frustumDistanceH;
+                    maxFrustumDistance = distance;
                 } else if (_fitWindowWidth) {
-                    distance = Mathf.Max(frustumDistanceH, frustumDistanceW);
+                    distance = frustumDistanceW;
                     maxFrustumDistance = distance;
                 } else {
                     Plane plane = new Plane(-transform.forward, transform.position);
-                    distance = plane.GetDistanceToPoint(cam.transform.position);
+                    distance = plane.GetDistanceToPoint(cameraMain.transform.position);
                     maxFrustumDistance = float.MaxValue;
                 }
             }

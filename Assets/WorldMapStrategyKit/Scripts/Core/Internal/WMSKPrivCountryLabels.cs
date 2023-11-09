@@ -236,7 +236,7 @@ namespace WorldMapStrategyKit {
             textRoot.transform.localScale = new Vector3(1.0f / mapWidth, 1.0f / mapHeight, 1);
 
             // Adjusts alpha based on distance to camera
-            if (Application.isPlaying) {
+            if (isPlaying) {
                 FadeCountryLabels();
             }
         }
@@ -460,7 +460,7 @@ namespace WorldMapStrategyKit {
                 country.labelMeshHeight = tm.bounds.size.y;
             }
 
-            if (Application.isPlaying) {
+            if (isPlaying) {
                 RepositionTextsDelayed();
                 //StartCoroutine(RepositionTextsDelayed());
             } else {

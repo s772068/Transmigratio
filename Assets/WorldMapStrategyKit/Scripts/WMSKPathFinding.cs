@@ -455,10 +455,11 @@ namespace WorldMapStrategyKit {
         /// Resets the custom route matrix. Use this custom route matrix to set location customized costs.
         /// </summary>
         public void PathFindingCustomRouteMatrixReset() {
-            if (_customRouteMatrix == null || _customRouteMatrix.Length == 0) {
-                _customRouteMatrix = new float[EARTH_ROUTE_SPACE_WIDTH * EARTH_ROUTE_SPACE_HEIGHT];
+            int length = EARTH_ROUTE_SPACE_WIDTH * EARTH_ROUTE_SPACE_HEIGHT;
+            if (_customRouteMatrix == null || _customRouteMatrix.Length != length) {
+                _customRouteMatrix = new float[length];
             }
-            for (int k = 0; k < _customRouteMatrix.Length; k++) {
+            for (int k = 0; k < length; k++) {
                 _customRouteMatrix[k] = -1;
             }
             if (_pathFindingVisualizeMatrixCost) {

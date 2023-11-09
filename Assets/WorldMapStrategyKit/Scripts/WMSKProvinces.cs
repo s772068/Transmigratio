@@ -705,8 +705,7 @@ namespace WorldMapStrategyKit {
         /// Returns the index of a province in the provinces array by its reference.
         /// </summary>
         public int GetProvinceIndex(Province province) {
-            int provinceIndex;
-            if (provinceLookup.TryGetValue(province, out provinceIndex))
+            if (provinceLookup.TryGetValue(province, out int provinceIndex))
                 return provinceIndex;
             else
                 return -1;
@@ -753,8 +752,21 @@ namespace WorldMapStrategyKit {
         /// <param name="localPosition">Map coordinates in the range of (-0.5 .. 0.5)</param>
         public int GetProvinceIndex(Vector2 localPosition) {
             // verify if hitPos is inside any country polygon
-            int provinceIndex, provinceRegionIndex;
-            if (GetProvinceRegionIndex(localPosition, -1, out provinceIndex, out provinceRegionIndex)) {
+            if (GetProvinceRegionIndex(localPosition, -1, out int provinceIndex, out _)) {
+                return provinceIndex;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Gets the index of the province that contains the provided map coordinates. This will ignore hidden countries.
+        /// </summary>
+        /// <returns>The province index.</returns>
+        /// <param name="localPosition">Map coordinates in the range of (-0.5 .. 0.5)</param>
+        /// <param name="regionIndex">The index of the province region</param>
+        public int GetProvinceRegionIndex(Vector2 localPosition, out int regionIndex) {
+            // verify if hitPos is inside any country polygon
+            if (GetProvinceRegionIndex(localPosition, -1, out int provinceIndex, out regionIndex)) {
                 return provinceIndex;
             }
             return -1;
@@ -767,8 +779,7 @@ namespace WorldMapStrategyKit {
         /// <param name="localPosition">Map coordinates in the range of (-0.5 .. 0.5)</param>
         public int GetProvinceIndex(Vector2 localPosition, int countryIndex) {
             // verify if hitPos is inside any country polygon
-            int provinceIndex, provinceRegionIndex;
-            if (GetProvinceRegionIndex(localPosition, countryIndex, out provinceIndex, out provinceRegionIndex)) {
+            if (GetProvinceRegionIndex(localPosition, countryIndex, out int provinceIndex, out _)) {
                 return provinceIndex;
             }
             return -1;
@@ -781,8 +792,7 @@ namespace WorldMapStrategyKit {
         /// <param name="localPosition">Map coordinates in the range of (-0.5 .. 0.5)</param>
         public Region GetProvinceRegion(Vector2 localPosition) {
             // verify if hitPos is inside any country polygon
-            int provinceIndex, provinceRegionIndex;
-            if (GetProvinceRegionIndex(localPosition, -1, out provinceIndex, out provinceRegionIndex)) {
+            if (GetProvinceRegionIndex(localPosition, -1, out int provinceIndex, out int provinceRegionIndex)) {
                 return provinces[provinceIndex].regions[provinceRegionIndex];
             }
             return null;
@@ -846,7 +856,7 @@ namespace WorldMapStrategyKit {
                     cc1 = countryIndex + 1;
                 }
                 for (int c = cc0; c < cc1; c++) {
-                    Country country = _countries[_countriesOrderedBySize[c]];
+                    Country country = countryIndex < 0 ? _countries[_countriesOrderedBySize[c]] : _countries[c];
                     if (country.hidden)
                         continue;
                     if (country.regionsRect2D.Contains(localPosition)) {
@@ -854,15 +864,15 @@ namespace WorldMapStrategyKit {
                             continue;
                         int pp = country.provinces.Length;
                         for (int p = 0; p < pp; p++) {
-                            Province prov = country.provinces[p];
-                            if (prov.regions == null)
-                                ReadProvincePackedString(prov);
-                            int rr = prov.regions.Count;
+                            Province province = country.provinces[p];
+                            EnsureProvinceDataIsLoaded(province);
+                            if (!province.regionsRect2D.Contains(localPosition)) continue;
+                            int rr = province.regions.Count;
                             for (int r = 0; r < rr; r++) {
-                                Region reg = prov.regions[r];
+                                Region reg = province.regions[r];
                                 if (reg.rect2DArea < candidateRegionSize && reg.Contains(localPosition)) {
                                     candidateRegionSize = reg.rect2DArea;
-                                    candidateProvinceIndex = GetProvinceIndex(prov);
+                                    candidateProvinceIndex = GetProvinceIndex(province);
                                     candidateProvinceRegionIndex = r;
                                 }
                             }
@@ -1771,7 +1781,7 @@ namespace WorldMapStrategyKit {
         /// Returns a list of provinces that are visible in the Game View
         /// </summary>
         public List<Province> GetVisibleProvinces() {
-            Camera cam = Application.isPlaying ? currentCamera : Camera.current;
+            Camera cam = isPlaying ? currentCamera : Camera.current;
             return GetVisibleProvinces(cam);
         }
 

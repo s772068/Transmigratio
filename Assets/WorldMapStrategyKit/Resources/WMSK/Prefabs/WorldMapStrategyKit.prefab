@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 76.60254}
   m_LocalScale: {x: 200, y: 100, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8490079947986486489}
   - {fileID: 3650898005382825892}
@@ -56,9 +57,12 @@ MeshRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -70,6 +74,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -82,6 +87,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &11456068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,16 +115,17 @@ MonoBehaviour:
   _citiesCountryCapitalColor: {r: 1, g: 1, b: 0, a: 1}
   _cityIconSize: 1
   _citySpot: {fileID: 155644, guid: 6d781cf17b1d45a7a935010b1040e8df, type: 3}
-  _citySpotCapitalRegion: {fileID: 155644, guid: 88e021ef043ec434fb7c60ae2ab4b966,
-    type: 3}
-  _citySpotCapitalCountry: {fileID: 155644, guid: 35e12dd60b53a4c8c836fa3936577971,
-    type: 3}
+  _citySpotCapitalRegion: {fileID: 155644, guid: 88e021ef043ec434fb7c60ae2ab4b966, type: 3}
+  _citySpotCapitalCountry: {fileID: 155644, guid: 35e12dd60b53a4c8c836fa3936577971, type: 3}
   _minPopulation: 2630
   _maxCitiesPerCountry: 0
   _cityClassAlwaysShow: 4
+  _cityAttributeFile: citiesAttrib
   _enableCountryHighlight: 1
   _highlightAllCountryRegions: 0
+  _combineCountrySurfaces: 0
   _highlightCountryRecolor: 1
+  _highlightCountryKeepTexture: 1
   _highlightMaxScreenAreaSize: 1
   _showFrontiers: 1
   _frontiersCoastlines: 1
@@ -128,6 +135,7 @@ MonoBehaviour:
   _thickerFrontiers: 0
   _frontiersDynamicWidth: 1
   _frontiersWidth: 0.05
+  _frontiersMaxPixelWidth: 50
   _showOutline: 1
   _outlineColor: {r: 0, g: 0, b: 0, a: 1}
   _outlineDetail: 0
@@ -138,6 +146,8 @@ MonoBehaviour:
   _frontiersDetail: 0
   _showCountryNames: 0
   _countryLabelsTextEngine: 0
+  _countryLabelsRenderingMode: 0
+  _countryLabelsElevation: 0.5
   _countryLabelsLength: 0.8
   _countryLabelsHorizontality: 2
   _countryLabelsCurvature: 1
@@ -151,11 +161,14 @@ MonoBehaviour:
   _showLabelsShadow: 1
   _countryLabelsColor: {r: 1, g: 1, b: 1, a: 1}
   _countryLabelsShadowColor: {r: 0, g: 0, b: 0, a: 1}
+  _countryLabelsShadowOffset: {x: 0.4, y: -0.4}
+  _countryLabelsUseCentroid: 0
   _countryLabelsFont: {fileID: 12800000, guid: 0891da2fef40841199f2cc4ce600593b, type: 3}
-  _countryLabelsFontTMPro: {fileID: 11400000, guid: c0ff91ef7b70b422fa0ce973e13b54d6,
-    type: 2}
+  _countryLabelsFontTMPro: {fileID: 11400000, guid: c0ff91ef7b70b422fa0ce973e13b54d6, type: 2}
+  _countryLabelsFontTMProMaterial: {fileID: 0}
   _countryLabelsOutlineColor: {r: 0, g: 0, b: 0, a: 1}
   _countryLabelsOutlineWidth: 0.1
+  _countryAttributeFile: countriesAttrib
   _labelsElevation: 0.001
   _showWorld: 1
   _earthStyle: 7
@@ -166,6 +179,8 @@ MonoBehaviour:
   _earthTexture: {fileID: 0}
   _earthTextureScale: {x: 1, y: 1}
   _earthTextureOffset: {x: 0, y: 0}
+  _showWater: 1
+  _scenicWaterMask: {fileID: 0}
   _waterColor: {r: 0, g: 0.41568628, b: 0.5803922, a: 1}
   _waterLevel: 0.1
   _waterFoamThreshold: 0.1
@@ -186,8 +201,14 @@ MonoBehaviour:
   _gridMaxDistance: 1000
   _gridMinDistance: 0.01
   _navigationTime: 4
+  _allowInteractionWhileFlying: 0
+  _staticInteractionVelocityThreshold: 0.1
   _fitWindowWidth: 1
   _fitWindowHeight: 1
+  fitWindowHeightLimitTop: 1
+  fitWindowHeightLimitBottom: 0
+  fitWindowWidthLimitRight: 1
+  fitWindowWidthLimitLeft: 0
   _flyToScreenCenter: {x: 0.5, y: 0.5}
   _wrapHorizontally: 0
   _windowRect:
@@ -198,10 +219,10 @@ MonoBehaviour:
     height: 1
   _allowUserKeys: 0
   _dragKeySpeedMultiplier: 0.1
-  _keyUp: 119
-  _keyDown: 115
-  _keyLeft: 97
-  _keyRight: 100
+  _keyUpName: w
+  _keyDownName: s
+  _keyLeftName: a
+  _keyRightName: d
   _dragFlipDirection: 0
   _dragConstantSpeed: 0
   _dragDampingDuration: 0.5
@@ -209,6 +230,9 @@ MonoBehaviour:
   _allowScrollOnScreenEdges: 0
   _screenEdgeThickness: 2
   _centerOnRightClick: 1
+  _blockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   _allowUserZoom: 1
   _zoomMaxDistance: 10
   _zoomMinDistance: 0.01
@@ -219,6 +243,19 @@ MonoBehaviour:
   _mouseWheelSensitivity: 0.5
   _mouseDragSensitivity: 0.5
   _mouseDragThreshold: 0
+  _enableCameraTilt: 0
+  _cameraNearTiltAngle: -30
+  _cameraFarTiltAngle: 0
+  _cameraTiltSmoothing: 0.2
+  _fitViewportToScreen: 0
+  _minCameraDistanceToViewport: 20
+  _enableCameraOrbit: 0
+  _orbitMaxZoomLevel: 0.5
+  _orbitLeftKeyName: q
+  _orbitRightKeyName: e
+  _orbitRotationSpeed: 1
+  _orbitRotationDamping: 5
+  _orbitKeepZoomDistance: 0
   _showCursor: 1
   _cursorColor: {r: 0.8039216, g: 0.3529412, b: 0.23529412, a: 1}
   _cursorFollowMouse: 1
@@ -231,27 +268,37 @@ MonoBehaviour:
   _pathFindingHeuristicFormula: 2
   _pathFindingMaxCost: 2000
   _pathFindingMaxSteps: 2000
+  _enablePathFindingSystem: 1
   _pathFindingVisualizeMatrixCost: 0
   _pathFindingEnableCustomRouteMatrix: 0
-  _waterMask: {fileID: 2800000, guid: c1e266319b1d849df83a96bb3f79cc61, type: 3}
-  _waterMaskLevel: 16
+  _pathFindingLandMap: {fileID: 2800000, guid: de51d733964114772a23266fbede50d3, type: 3}
+  _pathFindingWaterMap: {fileID: 2800000, guid: 1d344b707482d46a1940a72c5fcb6b93, type: 3}
+  findRouteIsBusy: 0
   _showProvinces: 0
   _enableProvinceHighlight: 0
   _highlightAllProvinceRegions: 0
+  _highlightProvinceKeepTexture: 1
   _drawAllProvinces: 0
   _provincesDashBorders: 0
   _provincesDashAmount: 0.5
   _provincesFillColor: {r: 0, g: 0, b: 1, a: 0.7}
   _provincesColor: {r: 1, g: 1, b: 1, a: 1}
+  _provinceAttributeFile: provincesAttrib
   _provincesCoastlines: 1
   _showProvinceNames: 0
   _showAllCountryProvinceNames: 1
   _provinceLabelsVisibility: 0
   _provinceLabelsAbsoluteMinimumSize: 0.05
   _provinceLabelsSize: 0.2
+  _provinceLabelsEnableAutomaticFade: 1
+  _provinceLabelsAutoFadeMaxHeight: 0.2
+  _provinceLabelsAutoFadeMaxHeightFallOff: 0.5
+  _provinceLabelsAutoFadeMinHeight: 0.018
+  _provinceLabelsAutoFadeMinHeightFallOff: 0.005
   _showProvinceLabelsShadow: 1
   _provinceLabelsColor: {r: 0, g: 1, b: 1, a: 1}
   _provinceLabelsShadowColor: {r: 0, g: 0, b: 0, a: 1}
+  _provinceLabelsShadowOffset: {x: 0.4, y: -0.4}
   _provinceLabelsFont: {fileID: 0}
   _tileMaxConcurrentDownloads: 10
   _tileMaxTileLoadsPerFrame: 2
@@ -326,7 +373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8490079947986486489}
   - component: {fileID: 2204337874729469328}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mount Points
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,6 +390,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 459182}
   m_RootOrder: 0
@@ -387,6 +435,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.00001}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 459182}
   m_RootOrder: 2
@@ -410,9 +459,12 @@ MeshRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -424,6 +476,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -436,6 +489,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6274858634003644569
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +518,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.00001}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 459182}
   m_RootOrder: 1
@@ -487,9 +542,12 @@ MeshRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -501,6 +559,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -513,3 +572,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

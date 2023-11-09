@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using WorldMapStrategyKit.PathFinding;
+using UnityEngine.Rendering;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace WorldMapStrategyKit {
     [CustomEditor(typeof(WMSK))]
@@ -9,7 +12,8 @@ namespace WorldMapStrategyKit {
 
         enum KEY_PRESET {
             WASD = 0,
-            ArrowKeys = 1
+            ArrowKeys = 1,
+            QAOP = 2
         }
 
 
@@ -118,6 +122,8 @@ namespace WorldMapStrategyKit {
             GUILayout.Label(_headerTexture, GUILayout.ExpandWidth(true));
             GUI.skin.label.alignment = TextAnchor.MiddleLeft;
             EditorGUILayout.Separator();
+
+            CheckDepthPrimingMode();
 
             EditorGUILayout.BeginVertical();
             expandWindowSection = EditorGUILayout.Foldout(expandWindowSection, "Window Settings", sectionHeaderStyle);
@@ -768,11 +774,13 @@ namespace WorldMapStrategyKit {
                     _map.cursorAlwaysVisible = EditorGUILayout.Toggle("   Always Visible", _map.cursorAlwaysVisible);
                 }
                 _map.respectOtherUI = EditorGUILayout.Toggle("Respect Other UI", _map.respectOtherUI);
-
+                if (_map.respectOtherUI) {
+                    _map.blockingMask = LayerMaskField(new GUIContent("   Blocking Mask", "This option let you specify which UI elements can block the interaction"), _map.blockingMask);
+                }
                 _map.allowUserDrag = EditorGUILayout.Toggle("Allow User Drag", _map.allowUserDrag);
                 if (_map.allowUserDrag) {
                     _map.mouseDragSensitivity = EditorGUILayout.Slider("   Speed", _map.mouseDragSensitivity, 0.1f, 3);
-                    _map.mouseDragThreshold = EditorGUILayout.IntField(new GUIContent("   Drag Threshold", "Enter a threshold value to avoid accidental map dragging when clicking on HiDpi screens. Values of 5, 10, 20 or more, depending on the sensitivity of the screen."), _map.mouseDragThreshold);
+                    _map.mouseDragThreshold = EditorGUILayout.FloatField(new GUIContent("   Drag Threshold", "Enter a threshold value to avoid accidental map dragging when clicking on HiDpi screens. Values of 5, 10, 20 or more, depending on the sensitivity of the screen."), _map.mouseDragThreshold);
                     _map.centerOnRightClick = EditorGUILayout.Toggle("   Right Click Centers", _map.centerOnRightClick);
                     _map.dragConstantSpeed = EditorGUILayout.Toggle("   Constant Drag Speed", _map.dragConstantSpeed);
                     _map.dragDampingDuration = EditorGUILayout.FloatField(new GUIContent("   Damping Duration", "The duration of the damping rotation after a drag until the Earth stops completely."), _map.dragDampingDuration);
@@ -784,41 +792,76 @@ namespace WorldMapStrategyKit {
 
                 _map.allowUserKeys = EditorGUILayout.Toggle("Allow Keys", _map.allowUserKeys);
                 if (_map.allowUserKeys) {
-                    _map.dragKeySpeedMultiplier = EditorGUILayout.FloatField("   Speed Multiplier", _map.dragKeySpeedMultiplier);
-                    _map.dragFlipDirection = EditorGUILayout.Toggle("   Flip Direction", _map.dragFlipDirection);
+                    EditorGUI.indentLevel++;
+                    _map.dragKeySpeedMultiplier = EditorGUILayout.FloatField("Speed Multiplier", _map.dragKeySpeedMultiplier);
+                    _map.dragFlipDirection = EditorGUILayout.Toggle("Flip Direction", _map.dragFlipDirection);
 
                     EditorGUILayout.BeginHorizontal();
-                    keyPreset = (KEY_PRESET)EditorGUILayout.EnumPopup("   Key Presets", keyPreset);
+                    keyPreset = (KEY_PRESET)EditorGUILayout.EnumPopup("Key Presets", keyPreset);
                     if (GUILayout.Button("Apply", GUILayout.Width(60))) {
                         switch (keyPreset) {
                             case KEY_PRESET.WASD:
-                                _map.keyUp = KeyCode.W;
-                                _map.keyDown = KeyCode.S;
-                                _map.keyLeft = KeyCode.A;
-                                _map.keyRight = KeyCode.D;
+                                _map.keyUpName = "w";
+                                _map.keyDownName = "s";
+                                _map.keyLeftName = "a";
+                                _map.keyRightName = "d";
                                 break;
                             case KEY_PRESET.ArrowKeys:
-                                _map.keyUp = KeyCode.UpArrow;
-                                _map.keyDown = KeyCode.DownArrow;
-                                _map.keyLeft = KeyCode.LeftArrow;
-                                _map.keyRight = KeyCode.RightArrow;
+                                _map.keyUpName = "up";
+                                _map.keyDownName = "down";
+                                _map.keyLeftName = "left";
+                                _map.keyRightName = "right";
+                                break;
+                            case KEY_PRESET.QAOP:
+                                _map.keyUpName = "q";
+                                _map.keyDownName = "a";
+                                _map.keyLeftName = "o";
+                                _map.keyRightName = "p";
                                 break;
                         }
                     }
                     EditorGUILayout.EndHorizontal();
-                    _map.keyUp = (KeyCode)EditorGUILayout.EnumPopup("   Up Key", _map.keyUp);
-                    _map.keyDown = (KeyCode)EditorGUILayout.EnumPopup("   Down Key", _map.keyDown);
-                    _map.keyLeft = (KeyCode)EditorGUILayout.EnumPopup("   Left Key", _map.keyLeft);
-                    _map.keyRight = (KeyCode)EditorGUILayout.EnumPopup("   Right Key", _map.keyRight);
+                    _map.keyUpName = EditorGUILayout.TextField("Up Key", _map.keyUpName);
+                    _map.keyDownName = EditorGUILayout.TextField("Down Key", _map.keyDownName);
+                    _map.keyLeftName = EditorGUILayout.TextField("Left Key", _map.keyLeftName);
+                    _map.keyRightName = EditorGUILayout.TextField("Right Key", _map.keyRightName);
+                    EditorGUI.indentLevel--;
                 }
 
                 _map.allowUserZoom = EditorGUILayout.Toggle("Allow User Zoom", _map.allowUserZoom);
                 if (_map.allowUserZoom) {
-                    _map.mouseWheelSensitivity = EditorGUILayout.Slider("   Speed", _map.mouseWheelSensitivity, 0.1f, 3);
-                    _map.zoomDampingDuration = EditorGUILayout.FloatField("   Damping Duration", _map.zoomDampingDuration);
-                    _map.invertZoomDirection = EditorGUILayout.Toggle("   Invert Direction", _map.invertZoomDirection);
-                    _map.zoomMinDistance = EditorGUILayout.FloatField(new GUIContent("   Distance Min", "0 = default min distance. This is a multiplier to the height of the map."), _map.zoomMinDistance);
-                    _map.zoomMaxDistance = EditorGUILayout.FloatField(new GUIContent("   Distance Max", "10m = default max distance. This is a multiplier to the height of the map."), _map.zoomMaxDistance);
+                    EditorGUI.indentLevel++;
+                    _map.mouseWheelSensitivity = EditorGUILayout.Slider("Speed", _map.mouseWheelSensitivity, 0.1f, 3);
+                    _map.zoomDampingDuration = EditorGUILayout.FloatField("Damping Duration", _map.zoomDampingDuration);
+                    _map.invertZoomDirection = EditorGUILayout.Toggle("Invert Direction", _map.invertZoomDirection);
+                    _map.zoomMinDistance = EditorGUILayout.FloatField(new GUIContent("Distance Min", "0 = default min distance. This is a multiplier to the height of the map."), _map.zoomMinDistance);
+                    _map.zoomMaxDistance = EditorGUILayout.FloatField(new GUIContent("Distance Max", "10m = default max distance. This is a multiplier to the height of the map."), _map.zoomMaxDistance);
+                    _map.enableCameraTilt = EditorGUILayout.Toggle(new GUIContent("Enable Camera Tilt", "Tilts the camera when zooming."), _map.enableCameraTilt);
+                    if (_map.enableCameraTilt) {
+                        EditorGUI.indentLevel++;
+                        _map.cameraNearTiltAngle = EditorGUILayout.Slider(new GUIContent("Near Tilt Angle"), _map.cameraNearTiltAngle, -60, 60);
+                        _map.cameraFarTiltAngle = EditorGUILayout.Slider(new GUIContent("Far Tilt Angle"), _map.cameraFarTiltAngle, -60, 60);
+                        _map.cameraTiltSmoothing = EditorGUILayout.Slider(new GUIContent("Smoothing"), _map.cameraTiltSmoothing, 0, 1);
+                        _map.fitViewportToScreen = EditorGUILayout.Toggle(new GUIContent("Fit Viewport To Screen", "Ensures viewport fills the screen. If needed, camera will move towards the viewport in order to make the viewport fill the screen."), _map.fitViewportToScreen);
+                        if (_map.fitViewportToScreen) {
+                            EditorGUI.indentLevel++;
+                            _map.minCameraDistanceToViewport = EditorGUILayout.FloatField(new GUIContent("Min Distance To Viewport"), _map.minCameraDistanceToViewport);
+                            EditorGUI.indentLevel--;
+                        }
+                        _map.enableCameraOrbit = EditorGUILayout.Toggle(new GUIContent("Enable Camera Orbit", "Allows rotation around target point when in tilted mode."), _map.enableCameraOrbit);
+                        if (_map.enableCameraOrbit) {
+                            EditorGUI.indentLevel++;
+                            _map.orbitLeftKeyName = EditorGUILayout.TextField(new GUIContent("Left Key Name"), _map.orbitLeftKeyName);
+                            _map.orbitRightKeyName = EditorGUILayout.TextField(new GUIContent("Far Key Name"), _map.orbitRightKeyName);
+                            _map.orbitMaxZoomLevel = EditorGUILayout.Slider(new GUIContent("Max Zoom Level"), _map.orbitMaxZoomLevel, 0, 1);
+                            _map.orbitRotationSpeed = EditorGUILayout.FloatField(new GUIContent("Rotation Speed"), _map.orbitRotationSpeed);
+                            _map.orbitRotationDamping = EditorGUILayout.FloatField(new GUIContent("Rotation Damping"), _map.orbitRotationDamping);
+                            _map.orbitKeepZoomDistance = EditorGUILayout.Toggle(new GUIContent("Keep Zoom Level", "Keeps current zoom level while rotating. If disabled, zoom level may be adjusted to ensure viewport fills the screen when Fit Viewport to Screen option is enabled."), _map.orbitKeepZoomDistance);
+                            EditorGUI.indentLevel--;
+                        }
+                        EditorGUI.indentLevel--;
+                    }
+                    EditorGUI.indentLevel--;
                 }
 
                 _map.navigationTime = EditorGUILayout.FloatField("Navigation Time", _map.navigationTime);
@@ -1254,6 +1297,68 @@ namespace WorldMapStrategyKit {
 
         #endregion
 
+        readonly List<string> layers = new List<string>();
+        readonly List<int> layerNumbers = new List<int>();
+        LayerMask LayerMaskField(GUIContent label, LayerMask layerMask) {
+            layers.Clear();
+            layerNumbers.Clear();
+            for (int i = 0; i < 32; i++) {
+                string layerName = LayerMask.LayerToName(i);
+                if (layerName != "") {
+                    layers.Add(layerName);
+                    layerNumbers.Add(i);
+                }
+            }
+            int maskWithoutEmpty = 0;
+            for (int i = 0; i < layerNumbers.Count; i++) {
+                if (((1 << layerNumbers[i]) & layerMask.value) > 0)
+                    maskWithoutEmpty |= (1 << i);
+            }
+            maskWithoutEmpty = EditorGUILayout.MaskField(label, maskWithoutEmpty, layers.ToArray());
+            int mask = 0;
+            for (int i = 0; i < layerNumbers.Count; i++) {
+                if ((maskWithoutEmpty & (1 << i)) > 0)
+                    mask |= (1 << layerNumbers[i]);
+            }
+            layerMask.value = mask;
+            return layerMask;
+        }
+
+
+        #region SRP utils
+
+        void CheckDepthPrimingMode() {
+            RenderPipelineAsset pipe = GraphicsSettings.currentRenderPipeline;
+            if (pipe == null) return;
+            // Check depth priming mode
+            FieldInfo renderers = pipe.GetType().GetField("m_RendererDataList", BindingFlags.NonPublic | BindingFlags.Instance);
+            if (renderers == null) return;
+            foreach (var renderer in (object[])renderers.GetValue(pipe)) {
+                if (renderer == null) continue;
+                FieldInfo depthPrimingModeField = renderer.GetType().GetField("m_DepthPrimingMode", BindingFlags.NonPublic | BindingFlags.Instance);
+                int depthPrimingMode = -1;
+                if (depthPrimingModeField != null) {
+                    depthPrimingMode = (int)depthPrimingModeField.GetValue(renderer);
+                }
+
+                FieldInfo renderingModeField = renderer.GetType().GetField("m_RenderingMode", BindingFlags.NonPublic | BindingFlags.Instance);
+                int renderingMode = -1;
+                if (renderingModeField != null) {
+                    renderingMode = (int)renderingModeField.GetValue(renderer);
+                }
+
+                if (renderingMode == 0 && depthPrimingMode != 0) {
+                    EditorGUILayout.HelpBox("Depth Priming Mode in URP asset must be disabled.", MessageType.Warning);
+                    if (GUILayout.Button("Show Pipeline Asset")) {
+                        Selection.activeObject = (Object)renderer;
+                        GUIUtility.ExitGUI();
+                    }
+                    EditorGUILayout.Separator();
+                }
+            }
+        }
+
+        #endregion
 
     }
 

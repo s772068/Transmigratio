@@ -10,7 +10,7 @@ public class GUI_RegionPanel : GUI_BasePanel {
     [Header("Other")]
     [SerializeField] private Transform content;
     [SerializeField] private Button closeBtn;
-    [SerializeField] private GUI_ParamsGroup groupPref; // ToDo: Move to holder
+    [SerializeField] private GUI_ParamsGroup groupPref;
 
     private List<GUI_ParamsGroup> groupList = new();
 
@@ -19,24 +19,25 @@ public class GUI_RegionPanel : GUI_BasePanel {
 
     public GUI_ParamsGroup GetGroup(int index) => groupList[index];
     public GUI_Param GetParam(int groupIndex, int paramIndex) => groupList[groupIndex].GetParam(paramIndex);
-    public PrefabsHolder PrefabsHolder { private get; set; }
     public string CountryName { set => countryName.text = value; }
     public string CloseString { set => closeTxt.text = value; }
 
-    public void Init(Data data, PrefabsHolder prefabsHolder) {
+    public void Init(Data data) {
         CountryName = data.CountryName;
         CloseString = data.CloseString;
         for (int i = 0; i < data.Groups.Length; ++i) {
-            groupList.Add(Build(data.Groups[i], prefabsHolder));
+            groupList.Add(Build(data.Groups[i]));
         }
     }
 
-    private GUI_ParamsGroup Build(GUI_ParamsGroup.Data data, PrefabsHolder prefabsHolder) {
-        GUI_ParamsGroup group = Instantiate(prefabsHolder.ParamsGroup, content);
+    private GUI_ParamsGroup Build(GUI_ParamsGroup.Data data) {
+        GUI_ParamsGroup group = Instantiate(groupPref, content);
         group.Index = groupList.Count;
-        group.Init(data, prefabsHolder);
+        group.Init(data);
         group.OnClickParam = ClickParam;
         return group;
+    }
+    public void UpdatePanel(ref S_Country value) {
     }
 
     private void ClickParam(int groupIndex, int paramIndex) => print(groupIndex + " | " + paramIndex); // OnClickParam?.Invoke(groupIndex, paramIndex);
@@ -49,15 +50,15 @@ public class GUI_RegionPanel : GUI_BasePanel {
     }
 
     public void Close() {
-        OnClose?.Invoke();
         Destroy(gameObject);
+        OnClose?.Invoke();
     }
 
     private void OnDestroy() {
         Clear();
     }
 
-    [System.Serializable]
+    [Serializable]
     public struct Data {
         public string CountryName;
         public string CloseString;

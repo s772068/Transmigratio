@@ -14,44 +14,57 @@ namespace WorldMapStrategyKit {
         public Color color;
         public List<Vector3> vertices;
         public bool useWorldSpace;
-        public MeshFilter lineMeshFilter;
 
-        bool needRedraw;
+
+        MeshFilter lineMeshFilter;
+        MeshRenderer lineRenderer;
+
+        bool needLineRebuild;
         Vector3[] meshVertices;
         int[] meshTriangles;
         Vector2[] meshUV;
 
         void Start() {
-            Update();
+            LateUpdate();
+        }
+
+        void OnDisable() {
+            if (lineRenderer != null) {
+                lineRenderer.enabled = false;
+            }
+        }
+
+        void OnEnable() {
+            if (lineRenderer != null) {
+                lineRenderer.enabled = true;
+            }
         }
 
         // Update is called once per frame
-        void Update() {
-            if (needRedraw) {
-                if (material != null && material.color != color) {
-                    material = Instantiate(material);
-                    //material.hideFlags = HideFlags.DontSave;
-                    material.color = color;
-                }
-                if (lineMeshFilter != null) {
-                    Drawing.UpdateDashedLine(lineMeshFilter, vertices, width, useWorldSpace, ref meshVertices, ref meshTriangles, ref meshUV);
-                } else {
-                    Drawing.DrawDashedLine(gameObject, vertices, width, useWorldSpace, material, ref meshVertices, ref meshTriangles, ref meshUV);
-                    lineMeshFilter = gameObject.GetComponent<MeshFilter>();
-                }
-                needRedraw = false;
-            }
+        void LateUpdate() {
+            if (!needLineRebuild) return;
 
+            if (lineMeshFilter != null) {
+                Drawing.UpdateDashedLine(lineMeshFilter, vertices, width, useWorldSpace, ref meshVertices, ref meshTriangles, ref meshUV);
+            } else {
+                material.color = color;
+                lineMeshFilter = Drawing.DrawDashedLine(gameObject, vertices, width, useWorldSpace, material, ref meshVertices, ref meshTriangles, ref meshUV);
+                lineRenderer = lineMeshFilter.GetComponent<MeshRenderer>();
+            }
+            needLineRebuild = false;
         }
 
         public void SetWidth(float startWidth, float endWidth) {
             this.width = startWidth;
-            needRedraw = true;
+            needLineRebuild = true;
         }
 
         public void SetColors(Color startColor, Color endColor) {
             this.color = startColor;
-            needRedraw = true;
+            material.color = color;
+            if (lineRenderer != null) {
+                lineRenderer.sharedMaterial = material;
+            }
         }
 
         public void SetVertexCount(int vertexCount) {
@@ -60,7 +73,7 @@ namespace WorldMapStrategyKit {
             } else {
                 vertices.Clear();
             }
-            needRedraw = true;
+            needLineRebuild = true;
         }
 
         public void SetPosition(int index, Vector3 position) {
@@ -69,7 +82,7 @@ namespace WorldMapStrategyKit {
             } else {
                 vertices[index] = position;
             }
-            needRedraw = true;
+            needLineRebuild = true;
         }
 
     }

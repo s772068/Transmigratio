@@ -45,11 +45,6 @@ namespace WorldMapStrategyKit {
         public List<Region> neighbours { get; set; }
 
         /// <summary>
-        /// Used by the extrusion APIs
-        /// </summary>
-        public float extrusionAmount;
-
-        /// <summary>
         /// Country or province whose this region belongs to
         /// </summary>
         /// <value>The entity.</value>
@@ -121,7 +116,6 @@ namespace WorldMapStrategyKit {
             c.customBorder.width = this.customBorder.width;
             c.customBorder.textureTiling = this.customBorder.textureTiling;
             c.customBorder.tintColor = this.customBorder.tintColor;
-            c.extrusionAmount = this.extrusionAmount;
             c._centroid = this._centroid;
             c._centroidCalculated = this._centroidCalculated;
             c.neighbours.AddRange(neighbours);

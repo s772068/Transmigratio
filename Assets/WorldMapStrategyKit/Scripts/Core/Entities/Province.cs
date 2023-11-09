@@ -67,7 +67,9 @@ namespace WorldMapStrategyKit {
             if (regions != null) {
                 p.regions = new List<Region>(regions.Count);
                 for (int k = 0; k < regions.Count; k++) {
-                    p.regions.Add(regions[k].Clone());
+                    Region newRegion = regions[k].Clone();
+                    newRegion.entity = p;
+                    p.regions.Add(newRegion);
                 }
             }
             p.center = center;

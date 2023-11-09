@@ -271,7 +271,7 @@ namespace WorldMapStrategyKit {
                     _gridMaxDistance = value;
                     isDirty = true;
                     if (_showGrid) {
-                        if (!Application.isPlaying) {
+                        if (!isPlaying) {
                             CheckGridRect();    // if it's playing, CheckGridRect() is called during Update()
                         }
                         AdjustsGridAlpha();
@@ -293,7 +293,7 @@ namespace WorldMapStrategyKit {
                     _gridMinDistance = value;
                     isDirty = true;
                     if (_showGrid) {
-                        if (!Application.isPlaying) {
+                        if (!isPlaying) {
                             CheckGridRect();    // if it's playing, CheckGridRect() is called during Update()
                         }
                         AdjustsGridAlpha();
@@ -552,6 +552,7 @@ namespace WorldMapStrategyKit {
         /// Uncolorize/hide all cells.
         /// </summary>
         public void HideCellSurfaces() {
+            if (cells == null) return;
             for (int k = 0; k < cells.Length; k++) {
                 HideCellSurface(k);
             }
@@ -1029,7 +1030,7 @@ namespace WorldMapStrategyKit {
                 for (int oc = 0; oc < countryCount; oc++) {
                     int c = _countriesOrderedBySize[oc];
                     Country country = _countries[c];
-                    if (country.hidden && Application.isPlaying)
+                    if (country.hidden && isPlaying)
                         continue;
                     if (!cell.Intersects(country.regionsRect2D))
                         continue;

@@ -13,6 +13,21 @@ namespace WorldMapStrategyKit {
 
     public partial class WMSK : MonoBehaviour {
 
+        #region Markers related events
+
+        public delegate void OnMarkerPointerClickEvent(MarkerClickHandler marker, int buttonIndex);
+        public delegate void OnMarkerEvent(MarkerClickHandler marker);
+
+        public OnMarkerPointerClickEvent OnMarkerMouseDown;
+        public OnMarkerPointerClickEvent OnMarkerMouseUp;
+        public OnMarkerEvent OnMarkerMouseEnter;
+        public OnMarkerEvent OnMarkerMouseExit;
+        public OnMarkerEvent OnMarkerDragStart;
+        public OnMarkerEvent OnMarkerDragEnd;
+
+        #endregion
+
+
         #region Public properties
 
         [SerializeField]
@@ -90,15 +105,15 @@ namespace WorldMapStrategyKit {
             }
         }
 
-        Vector3
+        Vector2
             _cursorLocation;
 
-        public Vector3 cursorLocation {
+        public Vector2 cursorLocation {
             get {
                 return _cursorLocation;
             }
             set {
-                if (_cursorLocation.x != value.x || _cursorLocation.z != value.z || _cursorLocation.y != value.y) {
+                if (_cursorLocation.x != value.x || _cursorLocation.y != value.y) {
                     _cursorLocation = value;
                     if (cursorLayerVLine != null) {
                         Vector3 pos = cursorLayerVLine.transform.localPosition;
@@ -275,8 +290,9 @@ namespace WorldMapStrategyKit {
         /// <param name="scale">Scale.</param>
         /// <param name="enableEvents">If set to <c>true</c>, a MarkerClickHandler script will be attached to the sprite gameObject. You can use the OnMarkerClick field to hook your mouse click handler.</param>
         /// <param name="autoScale">If set to <c>true></c>, the scale of this marker will be modified according to zoom distance to preserve screen size.</param>
-        public void AddMarker2DSprite(GameObject sprite, Vector3 planeLocation, float scale, bool enableEvents = false, bool autoScale = false) {
-            AddMarker2DSprite(sprite, planeLocation, new Vector2(scale, scale * mapWidth / mapHeight), enableEvents, autoScale);
+        /// <returns>Returns a MarkerClickHandler reference if enableEvents is true</returns>
+        public MarkerClickHandler AddMarker2DSprite(GameObject sprite, Vector3 planeLocation, float scale, bool enableEvents = false, bool autoScale = false) {
+            return AddMarker2DSprite(sprite, planeLocation, new Vector2(scale, scale * mapWidth / mapHeight), enableEvents, autoScale);
         }
 
         /// <summary>
@@ -287,10 +303,11 @@ namespace WorldMapStrategyKit {
         /// <param name="scale">Scale for x and y axis.</param>
         /// <param name="enableEvents">If set to <c>true</c>, a MarkerClickHandler script will be attached to the sprite gameObject. You can use the OnMarkerClick field to hook your mouse click handler.</param>
         /// <param name="autoScale">If set to <c>true></c>, the scale of this marker will be modified according to zoom distance to preserve screen size.</param>
-        public void AddMarker2DSprite(GameObject sprite, Vector3 planeLocation, Vector2 scale, bool enableEvents = false, bool autoScale = false) {
+        /// <returns>Returns a MarkerClickHandler reference if enableEvents is true</returns>
+        public MarkerClickHandler AddMarker2DSprite(GameObject sprite, Vector3 planeLocation, Vector2 scale, bool enableEvents = false, bool autoScale = false) {
 
             if (sprite == null)
-                return;
+                return null;
 
             CheckMarkersLayer();
 
@@ -304,17 +321,22 @@ namespace WorldMapStrategyKit {
                 SetGameObjectLayer(sprite);
             }
 
-            if (enableEvents) {
-                if (GetComponent<MarkerClickHandler>() == null) {
-                    sprite.AddComponent<MarkerClickHandler>().map = this;
-                }
-            }
-
             if (autoScale) {
-                if (GetComponent<MarkerAutoScale>() == null) {
+                if (sprite.GetComponent<MarkerAutoScale>() == null) {
                     sprite.AddComponent<MarkerAutoScale>();
                 }
             }
+
+            if (enableEvents) {
+                MarkerClickHandler handler = sprite.GetComponent<MarkerClickHandler>();
+                if (handler == null) { 
+                    handler = sprite.AddComponent<MarkerClickHandler>();
+                }
+                return handler;
+            }
+
+            return null;
+
         }
 
         void SetGameObjectLayer(GameObject o) {
@@ -351,14 +373,19 @@ namespace WorldMapStrategyKit {
         /// <summary>
         /// Adds a custom marker (gameobject) to the map on specified location and with custom scale multiplier.
         /// </summary>
-        public void AddMarker3DObject(GameObject marker, Vector3 planeLocation, float scale = 1f) {
-            AddMarker3DObject(marker, planeLocation, marker.transform.localScale * scale);
+        /// <returns>Returns a MarkerClickHandler reference if enableEvents is true</returns>
+        public MarkerClickHandler AddMarker3DObject(GameObject marker, Vector3 planeLocation, float scale = 1f, bool enableEvents = false) {
+            return AddMarker3DObject(marker, planeLocation, marker.transform.localScale * scale, enableEvents: enableEvents);
         }
 
         /// <summary>
         /// Adds a custom marker (gameobject) to the map on specified location and with custom scale.
         /// </summary>
-        public void AddMarker3DObject(GameObject marker, Vector3 planeLocation, Vector3 scale, float pivotY = 0.5f) {
+        /// <returns>Returns a MarkerClickHandler reference if enableEvents is true</returns>
+        public MarkerClickHandler AddMarker3DObject(GameObject marker, Vector3 planeLocation, Vector3 scale, float pivotY = 0.5f, bool enableEvents = false) {
+
+            if (marker == null) return null;
+
             // Try to get the height of the object
             float height = 0;
             if (marker.GetComponent<MeshFilter>() != null)
@@ -376,6 +403,16 @@ namespace WorldMapStrategyKit {
 
             marker.transform.SetParent(markersLayer.transform, true);
             marker.transform.localPosition = planeLocation + Misc.Vector3back * h * pivotY;
+
+            if (enableEvents) {
+                MarkerClickHandler handler = marker.GetComponent<MarkerClickHandler>();
+                if (handler == null) {
+                    handler = marker.AddComponent<MarkerClickHandler>();
+                }
+                return handler;
+            }
+
+            return null;
         }
 
 
@@ -537,13 +574,19 @@ namespace WorldMapStrategyKit {
         /// <param name="arcElevation">arc elevation (-0.5 .. 0.5)</param>
         public LineMarkerAnimator AddLine(Vector2[] points, Material lineMaterial, float arcElevation, float lineWidth) {
             CheckMarkersLayer();
-            GameObject newLine = new GameObject("MarkerLine");
-            newLine.layer = gameObject.layer;
+
+            GameObject line = LinesPool.Get();
+            if (line == null) {
+                line = new GameObject("MarkerLine", typeof(LineMarkerAnimator));
+                LinesPool.Push(line);
+            }
+
+            line.layer = gameObject.layer;
             bool usesRenderViewport = renderViewportIsEnabled && arcElevation > 0;
             if (!usesRenderViewport) {
-                newLine.transform.SetParent(markersLayer.transform, false);
+                line.transform.SetParent(markersLayer.transform, false);
             }
-            LineMarkerAnimator lma = newLine.AddComponent<LineMarkerAnimator>();
+            LineMarkerAnimator lma = line.GetComponent<LineMarkerAnimator>();
             lma.map = this;
             lma.path = points;
             lma.color = Color.white;
@@ -561,8 +604,9 @@ namespace WorldMapStrategyKit {
         /// <param name="color">Color</param>
         /// <param name="overdraw">If this circle can draw over other shapes</param>
         /// <param name="renderOrder">Order for rendering this circle</param>
-        public GameObject AddCircle(Vector2 position, float kmRadius, Color color, bool overdraw = true, int renderOrder = 1) {
-            return AddCircle(position, kmRadius, 0, 1, color, overdraw, renderOrder);
+        /// <param name="enableEvents">Circle will emit click events through the marker events: OnMarkerClick, etc.</param>
+        public GameObject AddCircle(Vector2 position, float kmRadius, Color color, bool overdraw = true, int renderOrder = 1, bool enableEvents = false) {
+            return AddCircle(position, kmRadius, 0, 1, color, overdraw, renderOrder, enableEvents);
         }
 
 
@@ -575,24 +619,26 @@ namespace WorldMapStrategyKit {
         /// <param name="color">Color</param>
         /// <param name="overdraw">If this circle can draw over other shapes</param>
         /// <param name="renderOrder">Order for rendering this circle</param>
-        public GameObject AddCircle(float latitude, float longitude, float kmRadius, float ringWidthStart, float ringWidthEnd, Color color, bool overdraw = true, int renderOrder = 1) {
-            return AddCircle(Conversion.GetLocalPositionFromLatLon(latitude, longitude), kmRadius, ringWidthStart, ringWidthEnd, color, overdraw, renderOrder);
+        /// <param name="enableEvents">Circle will emit click events through the marker events: OnMarkerClick, etc.</param>
+        public GameObject AddCircle(float latitude, float longitude, float kmRadius, float ringWidthStart, float ringWidthEnd, Color color, bool overdraw = true, int renderOrder = 1, bool enableEvents = false) {
+            return AddCircle(Conversion.GetLocalPositionFromLatLon(latitude, longitude), kmRadius, ringWidthStart, ringWidthEnd, color, overdraw, renderOrder, enableEvents);
         }
 
 
         /// <summary>
         /// Adds a custom marker (circle) to the map on specified location and with custom size in km.
         /// </summary>
-        /// <param name="position">Position for the center of the circle.</param>
+        /// <param name="position">Position in local map coordinates for the center of the circle.</param>
         /// <param name="kmRadius">Radius in KM.</param>
         /// <param name="ringWidthStart">Ring inner limit (0..1). Pass 0 to draw a full circle.</param>
         /// <param name="ringWidthEnd">Ring outer limit (0..1). Pass 1 to draw a full circle.</param>
         /// <param name="color">Color</param>
         /// <param name="overdraw">If this circle can draw over other shapes</param>
         /// <param name="renderOrder">Order for rendering this circle</param>
-        public GameObject AddCircle(Vector2 position, float kmRadius, float ringWidthStart, float ringWidthEnd, Color color, bool overdraw = true, int renderOrder = 1) {
+        /// <param name="enableEvents">Circle will emit click events through the marker events: OnMarkerClick, etc.</param>
+        public GameObject AddCircle(Vector2 position, float kmRadius, float ringWidthStart, float ringWidthEnd, Color color, bool overdraw = true, int renderOrder = 1, bool enableEvents = false) {
             CheckMarkersLayer();
-            float rw = 2.0f * Mathf.PI * Conversion.EARTH_RADIUS_KM;
+            float rw = Mathf.PI * Conversion.EARTH_RADIUS_KM;
             float w = kmRadius / rw;
             float h = w * 2f;
             Material mat = GetColoredMarkerMaterial(color);
@@ -600,7 +646,7 @@ namespace WorldMapStrategyKit {
                 mat = Instantiate(mat);
                 if (!overdraw) mat.renderQueue++;
                 mat.renderQueue += renderOrder * 2;
-                mat.SetInt("_StencilComp", (int)UnityEngine.Rendering.CompareFunction.NotEqual);
+                mat.SetInt(ShaderParams.StencilComp, (int)UnityEngine.Rendering.CompareFunction.NotEqual);
                 disposalManager.MarkForDisposal(mat);
             }
             GameObject marker = Drawing.DrawCircle("MarkerCircle", position, w, h, 0, Mathf.PI * 2.0f, ringWidthStart, ringWidthEnd, 32, mat);
@@ -609,6 +655,11 @@ namespace WorldMapStrategyKit {
                 marker.transform.localPosition = new Vector3(position.x, position.y, -0.01f);
                 marker.layer = markersLayer.layer;
             }
+            if (enableEvents) {
+                MarkerClickHandler handler = marker.AddComponent<MarkerClickHandler>();
+                handler.ComputeTrianglesInLocalCoordinates();
+            }
+
             return marker;
         }
 
@@ -616,42 +667,50 @@ namespace WorldMapStrategyKit {
         /// <summary>
         /// Adds a custom marker (circle) to the map on specified latitude/longitude and with custom size in km. Circle segments will follow latitude/longitude with accuracy so it can look distorted on a 2D map.
         /// </summary>
+        /// <param name="position">Position in local map coordinates for the center of the circle.</param>
         /// <param name="kmRadius">Radius in KM.</param>
         /// <param name="ringWidthStart">Ring inner limit (0..1). Pass 0 to draw a full circle.</param>
         /// <param name="ringWidthEnd">Ring outer limit (0..1). Pass 1 to draw a full circle.</param>
         /// <param name="color">Color</param>
         /// <param name="overdraw">If this circle can draw over other shapes</param>
         /// <param name="renderOrder">Order for rendering this circle</param>
-        public GameObject AddCircleOnSphere(Vector2 latlon, float kmRadius, float ringWidthStart, float ringWidthEnd, Color color, bool overdraw = true, int renderOrder = 1) {
-            return AddCircleOnSphere(latlon.x, latlon.y, kmRadius, ringWidthStart, ringWidthEnd, color, overdraw, renderOrder);
-        }
-
-
-        /// <summary>
-        /// Adds a custom marker (circle) to the map on specified latitude/longitude and with custom size in km. Circle segments will follow latitude/longitude with accuracy so it can look distorted on a 2D map.
-        /// </summary>
-        /// <param name="kmRadius">Radius in KM.</param>
-        /// <param name="ringWidthStart">Ring inner limit (0..1). Pass 0 to draw a full circle.</param>
-        /// <param name="ringWidthEnd">Ring outer limit (0..1). Pass 1 to draw a full circle.</param>
-        /// <param name="color">Color</param>
-        /// <param name="overdraw">If this circle can draw over other shapes</param>
-        /// <param name="renderOrder">Order for rendering this circle</param>
-        public GameObject AddCircleOnSphere(float latitude, float longitude, float kmRadius, float ringWidthStart, float ringWidthEnd, Color color, bool overdraw = true, int renderOrder = 1) {
+        /// <param name="enableEvents">Circle will emit click events through the marker events: OnMarkerClick, etc.</param>
+        public GameObject AddCircleOnSphere(Vector2 position, float kmRadius, float ringWidthStart, float ringWidthEnd, Color color, bool overdraw = true, int renderOrder = 1, bool enableEvents = false) {
             CheckMarkersLayer();
             Material mat = GetColoredMarkerMaterial(color);
             if (!overdraw || renderOrder != 0) {
                 mat = Instantiate(mat);
                 if (!overdraw) mat.renderQueue++;
                 mat.renderQueue += renderOrder * 2;
-                mat.SetInt("_StencilComp", (int)UnityEngine.Rendering.CompareFunction.NotEqual);
+                mat.SetInt(ShaderParams.StencilComp, (int)UnityEngine.Rendering.CompareFunction.NotEqual);
                 disposalManager.MarkForDisposal(mat);
             }
-            GameObject marker = Drawing.DrawCircleOnSphere("MarkerCircle", latitude, longitude, kmRadius, 0, Mathf.PI * 2.0f, ringWidthStart, ringWidthEnd, 32, mat);
+            Vector2 latLon = Conversion.GetLatLonFromLocalPosition(position);
+            GameObject marker = Drawing.DrawCircleOnSphere("MarkerCircle", latLon.x, latLon.y, kmRadius, 0, Mathf.PI * 2.0f, ringWidthStart, ringWidthEnd, 32, mat);
             if (marker != null) {
                 marker.transform.SetParent(markersLayer.transform, false);
                 marker.layer = markersLayer.layer;
             }
+            if (enableEvents) {
+                MarkerClickHandler handler = marker.AddComponent<MarkerClickHandler>();
+                handler.ComputeTrianglesInLocalCoordinates();
+            }
             return marker;
+        }
+
+
+        /// <summary>
+        /// Adds a custom marker (circle) to the map on specified latitude/longitude and with custom size in km. Circle segments will follow latitude/longitude with accuracy so it can look distorted on a 2D map.
+        /// </summary>
+        /// <param name="kmRadius">Radius in KM.</param>
+        /// <param name="ringWidthStart">Ring inner limit (0..1). Pass 0 to draw a full circle.</param>
+        /// <param name="ringWidthEnd">Ring outer limit (0..1). Pass 1 to draw a full circle.</param>
+        /// <param name="color">Color</param>
+        /// <param name="overdraw">If this circle can draw over other shapes</param>
+        /// <param name="renderOrder">Order for rendering this circle</param>
+        /// <param name="enableEvents">Circle will emit click events through the marker events: OnMarkerClick, etc.</param>
+        public GameObject AddCircleOnSphere(float latitude, float longitude, float kmRadius, float ringWidthStart, float ringWidthEnd, Color color, bool overdraw = true, int renderOrder = 1, bool enableEvents = false) {
+            return AddCircleOnSphere(Conversion.GetLocalPositionFromLatLon(latitude, longitude), kmRadius, ringWidthStart, ringWidthEnd, color, overdraw, renderOrder, enableEvents);
         }
 
         /// <summary>
@@ -689,7 +748,7 @@ namespace WorldMapStrategyKit {
             results.Clear();
             if (markersLayer == null)
                 return;
-            markersLayer.transform.GetComponentsInChildren<Transform>(results);
+            markersLayer.transform.GetComponentsInChildren(results);
             results.RemoveAt(0); // removes parent
         }
 
@@ -801,6 +860,43 @@ namespace WorldMapStrategyKit {
             }
             results.Clear();
             results.AddRange(ttmp);
+        }
+
+
+        List<Transform> markersTmp;
+        /// <summary>
+        /// Returns the marker existing at the map coordinates
+        /// </summary>
+        public Transform GetMarker(Vector2 mapLocation, float expandMarkerBoundsAmount = 0) {
+            if (markersTmp == null) markersTmp = new List<Transform>();
+            GetMarkers(markersTmp);
+            return GetMarker(mapLocation, markersTmp, expandMarkerBoundsAmount);
+        }
+
+        /// <summary>
+        /// Returns the marker existing at the map coordinates from a given list of markers
+        /// </summary>
+        public Transform GetMarker(Vector2 mapLocation, List<Transform> fromMarkers, float expandMarkerBoundsAmount = 0) {
+
+            Vector3 worldClick = Map2DToWorldPosition(mapLocation, 0, HEIGHT_OFFSET_MODE.ABSOLUTE_CLAMPED, ignoreViewport: true);
+            int cc = fromMarkers.Count;
+            for (int k = 0; k < cc; k++) {
+                Transform t = fromMarkers[k];
+                Renderer r = t.GetComponentInChildren<Renderer>();
+                if (r == null) continue;
+                Bounds bounds = r.bounds;
+                bounds.Expand(expandMarkerBoundsAmount);
+                if (bounds.Contains(worldClick)) return t;
+            }
+            return null;
+        }
+
+
+        /// <summary>
+        /// Cancels an ongoing marker drag
+        /// </summary>
+        public bool CancelMarkerDrag(bool returnToStartPosition = true) {
+            return CancelDrag(returnToStartPosition);
         }
 
 

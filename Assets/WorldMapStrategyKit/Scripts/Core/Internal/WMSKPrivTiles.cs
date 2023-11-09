@@ -129,7 +129,7 @@ namespace WorldMapStrategyKit {
 				Directory.CreateDirectory (cachePath);
 			}
 
-			if (!Application.isPlaying)
+			if (!isPlaying)
 				return;
 
 			if (_tileTransparentLayer) {
@@ -171,7 +171,7 @@ namespace WorldMapStrategyKit {
 			else
 				cachedTiles = new Dictionary<int, TileInfo> ();
 
-			if (Application.isPlaying)
+			if (isPlaying)
 				PurgeCacheOldFiles ();
 
 			if (tilesRoot == null) {
@@ -265,7 +265,7 @@ namespace WorldMapStrategyKit {
 		}
 
 		void LateUpdateTiles () {
-			if (!Application.isPlaying || cachedTiles == null)
+			if (!isPlaying || cachedTiles == null)
 				return;
 
 			if (Time.time - lastDisposalTime > 3) {

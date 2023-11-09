@@ -82,7 +82,7 @@ namespace WorldMapStrategyKit {
             // Setup main toolbar
             mainToolbarIcons = new GUIContent[7];
             mainToolbarIcons[0] = new GUIContent("Select", icons[0], "Selection mode");
-            mainToolbarIcons[1] = new GUIContent("Reshape", icons[1], "Change the shape of this entity");
+            mainToolbarIcons[1] = new GUIContent("Edit", icons[1], "Change the shape of this entity or delete selection");
             mainToolbarIcons[2] = new GUIContent("Create", icons[12], "Add a new entity to this layer");
             mainToolbarIcons[3] = new GUIContent("Random", icons[20], "Randomly generates a map");
             mainToolbarIcons[4] = new GUIContent("Map Tools", icons[21], "Global Map Tools");
@@ -1986,7 +1986,7 @@ namespace WorldMapStrategyKit {
             for (int i = 0; i < points.Length; i++) {
                 oldPoint = mapTransform.TransformPoint(points[i]);
                 float handleSize = HandleUtility.GetHandleSize(oldPoint) * HANDLE_SIZE;
-                var fmh_1989_61_638215979901448304 = mapTransform.rotation; newPoint = Handles.FreeMoveHandle(oldPoint, handleSize, pointSnap,
+                var fmh_1989_61_638321484499202370 = mapTransform.rotation; newPoint = Handles.FreeMoveHandle(oldPoint, handleSize, pointSnap,
                                                    (handleControlID, position, rotation, size, eventType) => {
                                                        controlIds[i] = handleControlID;
                                                        Handles.DotHandleCap(handleControlID, position, rotation, size, eventType);
@@ -2171,7 +2171,7 @@ namespace WorldMapStrategyKit {
             Vector3 oldPoint = mapTransform.TransformPoint(cityPos);
             float handleSize = HANDLE_SIZE * 1.2f;
 
-            var fmh_2174_65_638215979901482056 = mapTransform.rotation; Vector3 newPoint = Handles.FreeMoveHandle(oldPoint, handleSize, pointSnap,
+            var fmh_2174_65_638321484499237023 = mapTransform.rotation; Vector3 newPoint = Handles.FreeMoveHandle(oldPoint, handleSize, pointSnap,
                                                    (handleControlID, position, rotation, size, eventType) => {
                                                        Handles.RectangleHandleCap(handleControlID, position, rotation, size, eventType);
                                                    });
@@ -2257,7 +2257,7 @@ namespace WorldMapStrategyKit {
             Vector3 oldPoint = mapTransform.TransformPoint(mountPointPos);
             float handleSize = HandleUtility.GetHandleSize(oldPoint) * HANDLE_SIZE * 2.0f;
 
-            var fmh_2260_65_638215979901487355 = mapTransform.rotation; Vector3 newPoint = Handles.FreeMoveHandle(oldPoint, handleSize, pointSnap,
+            var fmh_2260_65_638321484499242128 = mapTransform.rotation; Vector3 newPoint = Handles.FreeMoveHandle(oldPoint, handleSize, pointSnap,
                                                                    (handleControlID, position, rotation, size, eventType) => {
                                                                        Handles.RectangleHandleCap(handleControlID, position, rotation, size, eventType);
                                                                    });

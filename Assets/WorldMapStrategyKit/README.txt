@@ -42,7 +42,43 @@ Version history
 ---------------
 
 Current version
+- API: change for consistency: AddCircleOnSphere first parameter now refers to local map coordinates instead of lat/lon
+- API: AddCircle / AddCircleOnSphere methods now support "enableEvents" parameter. Can be used to capture mouse events on the circle with OnMarkerEnter/Exit/Down, etc.
+
+Version 14.5
+- Added "Blocking Mask" under "Respect Other UI" option to filter which UI elements can block interaction
+
+Version 14.4
+- API: added "currentMap2DPosition" property to LineMarkerAnimator
+- [Fix] Added missing ISO codes for Norway and France
+- [Fix] LineMarkerAnimator component fixes
+
+Version 14.3
+- Lines now use an internal pool
+- [Fix] Fixed province merge issue using Map Editor
+
+Version 14.2
+- Added "Fit Viewport To Screen" option (under Camera Tilt section). Tries to fill the screen with viewport when tilting / orbiting is enabled.
+
+Version 14.1
+- Added "Camera Tilt" option (under Interaction/Allow User Zoom section)
+- Added "Camera Orbit" option (requires camera tilt mode)
+- A warning is now shown in the inspector if Depth Priming Mode is enabled in URP
+
+Version 14.0
+- New demo scene 517 Markers Clicking & Dragging
+- New demo scene 516 Terraforming
+- CHANGE: MarkerClickHandler mouse events are now moved to WMSK (ie. use map.OnMarkerMouseDown)
+- Optimization: improved performance of interaction over markers
+- Optimization: improved performance of rectangle selection
+- API: AddMarker3DObject() now receives "enableEvents" parameter to detect click & drag events over the gameobject
+- API: added EarthSetCustomElevation, EarthRaiseElevation, EarthLowerElevation, EarthResetElevation
+- API: added GetMarker overloads that take into account map coordinates
+
+Version 13.5
 - Added "Velocity Threshold" parameter to "Allow Interaction When Flying" option
+- Tile system: added 3 more tile servers
+- [Fix] Updated Google Maps No Labels tile server address
 
 Version 13.4.2
 - [Fix] Fixed Map Editor backup issue

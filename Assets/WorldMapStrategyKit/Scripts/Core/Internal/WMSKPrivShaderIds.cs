@@ -27,6 +27,8 @@ namespace WorldMapStrategyKit {
             public static int FaceColor = Shader.PropertyToID("_FaceColor");
             public static int UnderlayColor = Shader.PropertyToID("_UnderlayColor");
 
+            public static int StencilComp = Shader.PropertyToID("_StencilComp");
+
             public static int AnimationAcumOffset = Shader.PropertyToID("_AnimationAcumOffset");
             public static int AnimationStartTime = Shader.PropertyToID("_AnimationStartTime");
             public static int AnimationSpeed = Shader.PropertyToID("_AnimationSpeed");

@@ -104,12 +104,18 @@ namespace WorldMapStrategyKit {
 			this.provinces = new Province[0];
 		}
 
+		/// <summary>
+		/// Returns a copy of the country. This method will duplicate the country and make a separate copy of frontiers and regions.
+		/// </summary>
+		/// <returns></returns>
 		public Country Clone() {
 			Country c = new Country(name, continent, uniqueId);
 			c.center = center;
             c.regions = new List<Region>(regions.Count);
             for (int k=0;k<regions.Count;k++) {
-                c.regions.Add(regions[k].Clone());
+				Region newRegion = regions[k].Clone();
+				newRegion.entity = c;
+                c.regions.Add(newRegion);
             }
 			c.customLabel = customLabel;
 			c.labelColor = labelColor;
