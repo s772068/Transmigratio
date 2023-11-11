@@ -1,29 +1,31 @@
 using UnityEngine;
 
 public class HUD : BaseController {
-    [SerializeField] private GUI_PathPanel migrationPanel;
-    [SerializeField] private GUI_RegionPanel regionPanel;
-    [SerializeField] private GUI_EventPanel eventPanel;
-    
-    private MigrationController migrationController;
-    private EventsController eventsController;
-    private WmskController wmskController;
-    private SaveController saveController;
+    [SerializeField] private GUI_CountryPanel countryPanel;
+    //[SerializeField] private GUI_EventPanel eventPanel;
 
-    public int PathIndex { private get; set; }
-    public int CountryIndex { private get; set; }
+    private LocalizationController localization;
+    //private MigrationController migration;
+    //private EventsController events;
+    //private WmskController wmsk;
+    //private SaveController save;
+
+    private int _migrationIndex;
+    private int _countryIndex;
+    private int _eventIndex;
 
     public override GameController GameController {
         set {
-            migrationController = value.Get<MigrationController>();
-            eventsController = value.Get<EventsController>();
-            wmskController = value.Get<WmskController>();
-            saveController = value.Get<SaveController>();
+            localization = value.Get<LocalizationController>();
+            //migration = value.Get<MigrationController>();
+            //events = value.Get<EventsController>();
+            //wmsk = value.Get<WmskController>();
+            //save = value.Get<SaveController>();
         }
     }
 
     #region Datas
-    private GUI_RegionPanel.Data RegionData => new() {
+    private GUI_CountryPanel.Data RegionData => new() {
         CountryName = "Новозеландия",
         CloseString = "Спрятать",
         Groups = new GUI_ParamsGroup.Data[] {
@@ -122,61 +124,30 @@ public class HUD : BaseController {
             }
         }
     };
-
-    private GUI_PathPanel.Data MigrationData => new() {
-        Label = "Путь миграции",
-        Path = "Из А в Б",
-        Description = "Люди переселяются в новые места в поисках лучшей жизни. Вместе с людьми перемещаются знания, культура, технологии и болезни",
-        BreakString = "Прервать",
-        CloseString = "Спрятать",
-        IconIndex = 0,
-        Paramiter = new() {
-            Label = "Интенсивность",
-            Value = 62,
-            Metric = "%",
-            Progress = new() {
-                Range = new Vector2(0, 100),
-                FillColor = new Vector4(255, 162, 0, 255),
-                BackgroundColor = new Vector4(176, 160, 160, 255)
-            }
-        }
-    };
     #endregion
 
-    public bool OpenRegionPanel(ref S_Country country) {
-        if(regionPanel.gameObject.activeSelf) return false;
-        regionPanel.gameObject.SetActive(true);
-        regionPanel.Init(RegionData);
-        regionPanel.OnClose = () => regionPanel.gameObject.SetActive(false);
+    public bool OpenCountryPanel(ref S_Country country) {
+        if(countryPanel.gameObject.activeSelf) return false;
+        countryPanel.gameObject.SetActive(true);
+        countryPanel.Init(RegionData);
+        countryPanel.OnClose = () => countryPanel.gameObject.SetActive(false);
         return true;
     }
 
-    public bool OpenMigrationPanel() {
-        if (migrationPanel.gameObject.activeSelf) return false;
-        migrationPanel.gameObject.SetActive(true);
-        migrationPanel.Init(MigrationData);
-        migrationPanel.OnClose = () => migrationPanel.gameObject.SetActive(false);
-        return true;
-    }
+    //public bool OpenEventPanel(S_Event data, int countryIndex, int eventIndex) {
+    //    if(eventPanel.gameObject.activeSelf) return false;
+    //    _eventIndex = eventIndex;
+    //    eventPanel.gameObject.SetActive(true);
+    //    eventPanel.Init(data);
+    //    eventPanel.OnClickResult = (int index) =>  events.ClickResult(countryIndex, eventIndex, index);
+    //    eventPanel.OnClose = () => eventPanel.gameObject.SetActive(false);
+    //    return true;
+    //}
 
-    public bool OpenEventPanel(S_Event data, int countryIndex, int eventIndex) {
-        if(eventPanel.gameObject.activeSelf) return false;
-        eventPanel.gameObject.SetActive(true);
-        eventPanel.Init(data);
-        eventPanel.OnClickResult = (int index) =>  eventsController.ClickResult(countryIndex, eventIndex, index);
-        eventPanel.OnClose = () => eventPanel.gameObject.SetActive(false);
-        return true;
-    }
-
-    public bool UpdateRegionPanel(ref S_Country country) {
-        if(regionPanel.enabled) return false;
-        regionPanel.UpdatePanel(ref country);
-        return true;
-    }
-
-    public bool UpdateMigrationPanel(int value) {
-        if (migrationPanel.enabled) return false;
-        migrationPanel.UpdatePanel(value);
+    public bool UpdateCountryPanel(ref S_Country country, int index) {
+        if(index != _countryIndex) return false;
+        if(!countryPanel.gameObject.activeSelf) return false;
+        countryPanel.UpdatePanel(ref country);
         return true;
     }
 }

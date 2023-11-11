@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System;
+using System.IO;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Button))]
 public class GUI_Param : MonoBehaviour {
@@ -61,6 +63,11 @@ public class GUI_Param : MonoBehaviour {
                           values[val]) +
                           Metric;
         }
+    }
+
+    public void Localization(S_LocalizationParamiter localization) {
+        Label = localization.Label;
+        Metric = localization.Metric;
     }
 
     public void Init(Data data) {

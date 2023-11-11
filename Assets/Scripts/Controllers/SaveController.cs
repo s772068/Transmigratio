@@ -1,6 +1,7 @@
 using WorldMapStrategyKit;
 
 public class SaveController : BaseController {
+    public Language localization;
     public int intervention;
     public S_Country[] countries;
 
@@ -24,5 +25,10 @@ public class SaveController : BaseController {
                 countries[i].neighbours.Add(wmsk.countries[i].neighbours[j]);
             }
         }
+    }
+
+    public enum Language {
+        Eng,
+        Ru
     }
 }

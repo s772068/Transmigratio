@@ -13,6 +13,8 @@ public class GUI_EventPanel : MonoBehaviour {
     
     private List<GUI_EventResult> results = new();
 
+    [HideInInspector] public int index;
+
     public Action<int> OnClickResult;
     public Action OnClose;
 
@@ -24,21 +26,18 @@ public class GUI_EventPanel : MonoBehaviour {
         Name = data.Name;
         Description = data.Description;
         Icon = iconSprites[data.IconIndex];
-        for (int i = 0; i < data.Results.Length; ++i) {
-            results.Add(Build(data.Results[i]));
-        }
     }
 
-    private GUI_EventResult Build(S_EventResult data) {
+    public GUI_EventResult Build(S_EventResult data, int resultIndex) {
         GUI_EventResult result = Instantiate(resultPref, content);
-        result.Index = results.Count;
+        result.Index = resultIndex;
         result.Init(data);
         result.OnClick = ClickResult;
         return result;
     }
 
-    public void ClickResult(int resIndex) {
-        OnClickResult?.Invoke(resIndex);
+    public void ClickResult(int resultIndex) {
+        OnClickResult?.Invoke(resultIndex);
         Clear();
         gameObject.SetActive(false);
     }

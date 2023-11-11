@@ -1,14 +1,16 @@
+using System.Collections;
 using UnityEngine;
 using System;
-using System.Collections;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class IconMarker : MonoBehaviour {
     private SpriteRenderer sr;
-    private int liveTime;
+    private float liveTime;
+
+    public int index;
 
     public Sprite Sprite { set => sr.sprite = value; }
-    public int LiveTime { set => liveTime = value; }
+    public float LiveTime { set => liveTime = value; }
     
     public Action<IconMarker> OnClick;
 

@@ -1,9 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System;
-using System.Collections.Generic;
 
-public class GUI_PathPanel : GUI_BasePanel {
+public class GUI_MigrationPanel : GUI_BasePanel {
     [Header("Text")]
     [SerializeField] private Text label;
     [SerializeField] private Text pathTxt;
@@ -15,8 +15,14 @@ public class GUI_PathPanel : GUI_BasePanel {
     [SerializeField] private Button closeBtn;
     [Header("Other")]
     [SerializeField] private Image icon;
-    [SerializeField] private GUI_Param paramiter;
+    [SerializeField] private Paramiter paramiter;
     [SerializeField] private List<Sprite> iconSprites;
+
+    private float maxPopulation;
+    private string pathFormat;
+    private Vector3 scale = new Vector3(1, 1, 1);
+
+    [HideInInspector] public int index;
 
     public Action OnBreak;
     public Action OnClose;
@@ -25,29 +31,46 @@ public class GUI_PathPanel : GUI_BasePanel {
     public string Path { set => pathTxt.text = value; }
     public string Description { set => description.text = value; }
     public Sprite Icon { set => icon.sprite = value; }
-    public int ParamiterValue { set => paramiter.Value = value; }
+
+    public float Population {
+        set {
+            scale.x = value / maxPopulation;
+            paramiter.Fill.rectTransform.localScale = scale;
+            paramiter.Population.text = (int)(scale.x * 100) + "%";
+        }
+    }
+
     public string BreakString { set => breakTxt.text = value; }
     public string CloseString { set => closeTxt.text = value; }
 
-    public void Init(Data data) {
-        Label = data.Label;
-        Path = data.Path;
-        Icon = iconSprites[data.IconIndex];
-        Description = data.Description;
-        BreakString = data.BreakString;
-        CloseString = data.CloseString;
-        paramiter.Init(data.Paramiter);
+    public void Localization(S_LocalizationMigration localization) {
+        Label = localization.Label;
+        pathFormat = localization.Path;
+        Description = localization.Description;
+        BreakString = localization.BreakString;
+        CloseString = localization.CloseString;
+        paramiter.Label.text = localization.Paramiter.Label;
     }
 
-    public void UpdatePanel(int value) {
-        paramiter.Value = value;
+    public void Init(S_Migration data, string from, string to) {
+        Icon = iconSprites[data.IconIndex];
+        Path = string.Format(pathFormat, from, to);
+        maxPopulation = data.MaxPopulation;
+        Population = data.Population;
+    }
+
+    public void UpdatePanel(int population) {
+        Population = population;
     }
 
     public void Break() => OnBreak?.Invoke();
+    public void Close() => OnClose?.Invoke();
 
-    public void Close() {
-        OnClose?.Invoke();
-        Destroy(gameObject);
+    [System.Serializable]
+    public struct Paramiter {
+        public Image Fill;
+        public Text Label;
+        public Text Population;
     }
 
     [System.Serializable]

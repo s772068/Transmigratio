@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 
-public class GUI_RegionPanel : GUI_BasePanel {
+public class GUI_CountryPanel : GUI_BasePanel {
     [Header("Text")]
     [SerializeField] private Text countryName;
     [SerializeField] private Text closeTxt;

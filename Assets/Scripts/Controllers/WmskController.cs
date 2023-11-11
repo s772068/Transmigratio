@@ -10,18 +10,20 @@ public class WmskController : BaseController {
     [SerializeField] private int eventMarkerLiveTime;
     [SerializeField] private Sprite[] markerSprites;
 
-    private SaveController save;
+    private MigrationController migration;
     private EventsController events;
+    private SaveController save;
     private HUD hud;
     
     private WMSK wmsk;
     private int selectedIndex = -1;
-    private List<S_LineMigration> lineMigrations;
+    private List<S_LineMigration> lineMigrations = new();
     
     public Action<int> OnClick;
 
     public override GameController GameController {
         set {
+            migration = value.Get<MigrationController>();
             save = value.Get<SaveController>();
             events = value.Get<EventsController>();
             hud  = value.Get<HUD>();
@@ -59,13 +61,13 @@ public class WmskController : BaseController {
     }
 
     public void CreateEventMarker(S_Event e, int eventIndex, int countryIndex) {
-        CreateIconMarker(wmsk.GetCountry(countryIndex).center, e.MarkerIndex, eventMarkerLiveTime, (IconMarker owner) => {
-            hud.OpenEventPanel(e, countryIndex, eventIndex);
+        CreateIconMarker(wmsk.GetCountry(countryIndex).center, e.MarkerIndex, events.MarkerLiveTime, (IconMarker owner) => {
+            events.OpenPanel(e, countryIndex, eventIndex);
             owner.DestroyGO();
         });
     }
 
-    private IconMarker CreateIconMarker(Vector3 position, int markerIndex, int liveTime, Action<IconMarker> OnClick) {
+    private IconMarker CreateIconMarker(Vector3 position, int markerIndex, float liveTime, Action<IconMarker> OnClick) {
         IconMarker marker = Instantiate(iconMarker);
         marker.Sprite = markerSprites[markerIndex];
         marker.LiveTime = liveTime;
@@ -74,11 +76,11 @@ public class WmskController : BaseController {
         return marker;
     }
 
-    public void StartMigration(S_Migration migration) {
-        Vector2 start = wmsk.GetCountry(migration.From).center;
-        Vector2 end = wmsk.GetCountry(migration.To).center;
+    public void StartMigration(S_Migration data, int index) {
+        Vector2 start = wmsk.GetCountry(data.From).center;
+        Vector2 end = wmsk.GetCountry(data.To).center;
 
-        IconMarker marker = CreateIconMarker(start, migration.MarkerIndex, -1, (IconMarker marker) => { });
+        IconMarker marker = CreateIconMarker(start, data.MarkerIndex, -1, (IconMarker marker) => migration.OpenPanel(data, index));
 
         Color color = Color.red;
         float lineWidth = 0.5f;
