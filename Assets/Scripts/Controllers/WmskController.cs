@@ -12,8 +12,6 @@ public class WmskController : BaseController {
 
     private MigrationController migration;
     private EventsController events;
-    private SaveController save;
-    private HUD hud;
     
     private WMSK wmsk;
     private int selectedIndex = -1;
@@ -24,9 +22,7 @@ public class WmskController : BaseController {
     public override GameController GameController {
         set {
             migration = value.Get<MigrationController>();
-            save = value.Get<SaveController>();
             events = value.Get<EventsController>();
-            hud  = value.Get<HUD>();
         }
     }
 
@@ -49,10 +45,6 @@ public class WmskController : BaseController {
     }
 
     private void ClickMarker(MarkerClickHandler marker, int buttonIndex) => marker.GetComponent<IconMarker>()?.Click();
-
-    private void Print(IconMarker owner) {
-        print("Click: " + owner.name);
-    }
 
     private void SelectCountry(int index) {
         wmsk.ToggleCountrySurface(selectedIndex, false, Color.clear);

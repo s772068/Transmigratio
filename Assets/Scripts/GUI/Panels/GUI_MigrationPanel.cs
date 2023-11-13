@@ -15,7 +15,7 @@ public class GUI_MigrationPanel : GUI_BasePanel {
     [SerializeField] private Button closeBtn;
     [Header("Other")]
     [SerializeField] private Image icon;
-    [SerializeField] private Paramiter paramiter;
+    [SerializeField] private GUI_Paramiter paramiter;
     [SerializeField] private List<Sprite> iconSprites;
 
     private float maxPopulation;
@@ -34,22 +34,21 @@ public class GUI_MigrationPanel : GUI_BasePanel {
 
     public float Population {
         set {
-            scale.x = value / maxPopulation;
-            paramiter.Fill.rectTransform.localScale = scale;
-            paramiter.Population.text = (int)(scale.x * 100) + "%";
+            paramiter.Fill = value / maxPopulation;
+            paramiter.Value = (int)(scale.x * 100) + "%";
         }
     }
 
     public string BreakString { set => breakTxt.text = value; }
     public string CloseString { set => closeTxt.text = value; }
 
-    public void Localization(S_LocalizationMigration localization) {
-        Label = localization.Label;
-        pathFormat = localization.Path;
-        Description = localization.Description;
-        BreakString = localization.BreakString;
-        CloseString = localization.CloseString;
-        paramiter.Label.text = localization.Paramiter.Label;
+    public void Localization(SL_Migration migration, SL_System system) {
+        Label = migration.Label;
+        pathFormat = migration.Path;
+        Description = migration.Description;
+        BreakString = system.Break;
+        CloseString = system.Close;
+        paramiter.Label = migration.Paramiter.Label;
     }
 
     public void Init(S_Migration data, string from, string to) {
@@ -65,22 +64,4 @@ public class GUI_MigrationPanel : GUI_BasePanel {
 
     public void Break() => OnBreak?.Invoke();
     public void Close() => OnClose?.Invoke();
-
-    [System.Serializable]
-    public struct Paramiter {
-        public Image Fill;
-        public Text Label;
-        public Text Population;
-    }
-
-    [System.Serializable]
-    public struct Data {
-        public string Label;
-        public string Path;
-        public string Description;
-        public string BreakString;
-        public string CloseString;
-        public int IconIndex;
-        public GUI_Param.Data Paramiter;
-    }
 }

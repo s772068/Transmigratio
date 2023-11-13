@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.Localization.Editor;
 using UnityEngine;
 
 public class MigrationController : BaseController {
@@ -11,13 +10,13 @@ public class MigrationController : BaseController {
 
     private LocalizationController localization;
     private WmskController wmsk;
-    private SaveController save;
+    private MapController map;
 
     public override GameController GameController {
         set {
             localization = value.Get<LocalizationController>();
             wmsk = value.Get<WmskController>();
-            save = value.Get<SaveController>();
+            map = value.Get<MapController>();
         }
     }
 
@@ -25,10 +24,10 @@ public class MigrationController : BaseController {
         if (panel.gameObject.activeSelf) return false;
         panel.index = index;
         panel.gameObject.SetActive(true);
-        panel.Localization(localization.array[(int) save.localization].migration);
-        panel.Init(data,
-            save.countries[data.From].names[(int) save.localization],
-            save.countries[data.To].names[(int) save.localization]);
+        panel.Localization(localization.Localization.Migration,
+                           localization.Localization.System);
+        panel.Init(data, localization.Localization.Countries[data.From],
+                         localization.Localization.Countries[data.To]);
         panel.Population = migrations[panel.index].Population;
         panel.OnClose = () => panel.gameObject.SetActive(false);
         return true;
@@ -44,12 +43,12 @@ public class MigrationController : BaseController {
             migration = migrations[i];
             if (populationsPerTick < migration.MaxPopulation - migration.Population) {
                 migration.Population += populationsPerTick;
-                save.countries[migration.From].population -= populationsPerTick;
-                save.countries[migration.To].population += populationsPerTick;
+                map.countries[migration.From].Population -= populationsPerTick;
+                map.countries[migration.To].Population += populationsPerTick;
                 migrations[i] = migration;
             } else {
-                save.countries[migration.From].population -= migration.MaxPopulation - migration.Population;
-                save.countries[migration.To].population += migration.MaxPopulation - migration.Population;
+                map.countries[migration.From].Population -= migration.MaxPopulation - migration.Population;
+                map.countries[migration.To].Population += migration.MaxPopulation - migration.Population;
                 panel.Close();
                 EndMigration(i);
             }

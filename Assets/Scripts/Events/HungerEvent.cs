@@ -1,8 +1,9 @@
 using UnityEngine;
 
 public class HungerEvent : BaseEvent {
-    private protected SaveController save;
     private protected MigrationController migration;
+    private protected ResourcesController resources;
+    private protected MapController map;
     private int migrateCountryIndex;
     private int migratePopulation;
     private int costIntervention;
@@ -55,15 +56,16 @@ public class HungerEvent : BaseEvent {
     public HungerEvent(GameController gameController, int migratePopulation, int costIntervention) {
         this.migratePopulation = migratePopulation;
         this.costIntervention = costIntervention;
-        save = gameController.Get<SaveController>();
         migration = gameController.Get<MigrationController>();
+        resources = gameController.Get<ResourcesController>();
+        map = gameController.Get<MapController>();
     }
 
     public override bool CheckBuild(int countryIndex, int resultIndex) =>
         resultIndex switch {
             0 => true,
             1 => CheckMigration(countryIndex),
-            2 => save.intervention >= costIntervention,
+            2 => resources.intervention >= costIntervention,
             _ => false
         };
 
@@ -76,9 +78,9 @@ public class HungerEvent : BaseEvent {
     }
 
     private bool CheckMigration(int countryIndex) {
-        for(int i = 0; i < save.countries[countryIndex].neighbours.Count; ++i) {
-            if (save.countries[save.countries[countryIndex].neighbours[i]].population == 0) {
-                migrateCountryIndex = save.countries[countryIndex].neighbours[i];
+        for(int i = 0; i < map.countries[countryIndex].Neighbours.Count; ++i) {
+            if (map.countries[map.countries[countryIndex].Neighbours[i]].Population == 0) {
+                migrateCountryIndex = map.countries[countryIndex].Neighbours[i];
                 return true;
             }
         }
@@ -100,7 +102,7 @@ public class HungerEvent : BaseEvent {
     }
 
     private void Intervene() {
-        save.intervention -= costIntervention;
+        resources.intervention -= costIntervention;
         Debug.Log("Intervene");
     }
 }

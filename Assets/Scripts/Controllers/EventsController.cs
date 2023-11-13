@@ -11,7 +11,8 @@ public class EventsController : BaseController {
     
     private GameController game;
     private WmskController wmsk;
-    private SaveController save;
+    private MapController map;
+    private LocalizationController localization;
 
     public float MarkerLiveTime => markerLiveTime;
 
@@ -19,23 +20,24 @@ public class EventsController : BaseController {
         set {
             game = value;
             wmsk = value.Get<WmskController>();
-            save = value.Get<SaveController>();
+            map = value.Get<MapController>();
+            localization = value.Get<LocalizationController>();
         }
     }
 
     public void Call() {
         foreach(KeyValuePair<int, List<int>> pair in eventLog) {
-            if (Random.Range(0, 1f) <= chances[save.countries[pair.Key].eventChanceIndex]) {
-                save.countries[pair.Key].eventChanceIndex = 0;
+            if (Random.Range(0, 1f) <= chances[map.countries[pair.Key].EventChanceIndex]) {
+                map.countries[pair.Key].EventChanceIndex = 0;
                 int numEvent = Random.Range(0, pair.Value.Count - 1);
                 int eventIndex = pair.Value[numEvent];
-                wmsk.CreateEventMarker(events[eventIndex].Data((int) save.localization), eventIndex, pair.Key);
+                wmsk.CreateEventMarker(events[eventIndex].Data(localization.LocalIndex), eventIndex, pair.Key);
                 pair.Value.RemoveAt(numEvent);
-                save.countries[pair.Key].events.Add(eventIndex);
+                map.countries[pair.Key].Events.Add(eventIndex);
                 if(pair.Value.Count == 0) eventLog.Remove(pair.Key);
                 return;
             } else {
-                ++save.countries[pair.Key].eventChanceIndex;
+                ++map.countries[pair.Key].EventChanceIndex;
             }
         }
     }
@@ -68,8 +70,8 @@ public class EventsController : BaseController {
     }
 
     private void InitEventLog() {
-        for (int i = 0; i < save.countries.Length; ++i) {
-            if (save.countries[i].population > 0) {
+        for (int i = 0; i < map.countries.Length; ++i) {
+            if (map.countries[i].Population > 0) {
                 AddEventsForCountry(i);
             }
         }

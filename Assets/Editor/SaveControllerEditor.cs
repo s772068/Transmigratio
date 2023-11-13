@@ -1,11 +1,11 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(SaveController))]
+[CustomEditor(typeof(GameController))]
 public class SaveControllerEditor : Editor {
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
-        SaveController child = (SaveController) target;
+        GameController child = (GameController) target;
         if (GUILayout.Button("Load")) {
             child.Load();
         }

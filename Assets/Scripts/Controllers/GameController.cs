@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
@@ -10,6 +11,22 @@ public class GameController : MonoBehaviour {
             }
         }
         return null;
+    }
+
+    public void Save() {
+        for (int i = 0; i < controllers.Length; ++i) {
+            if (controllers[i] is ISave) {
+                (controllers[i] as ISave).Save();
+            }
+        }
+    }
+
+    public void Load() {
+        for (int i = 0; i < controllers.Length; ++i) {
+            if (controllers[i] is ISave) {
+                (controllers[i] as ISave).Load();
+            }
+        }
     }
 
     private void Awake() {

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 154452006612689303}
   - component: {fileID: 1511843690870688716}
-  - component: {fileID: 765690197559687865}
+  - component: {fileID: 3541163532539885607}
   - component: {fileID: 3095192624695806379}
   m_Layer: 5
   m_Name: Paramiter
@@ -50,7 +50,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154452006612689302}
   m_CullTransparentMesh: 1
---- !u!114 &765690197559687865
+--- !u!114 &3541163532539885607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,12 +69,12 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.78431374}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 1, g: 1, b: 1, a: 0.78431374}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -106,9 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568195c062283b94d9d04e685c42c28a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fill: {fileID: 8671386337364280844}
   label: {fileID: 7242205510691593497}
-  valTxt: {fileID: 154452006651511572}
-  progress: {fileID: 5109634137903762789}
+  val: {fileID: 154452006651511572}
 --- !u!1 &154452006651511574
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,8 +356,6 @@ GameObject:
   - component: {fileID: 1851038353855976238}
   - component: {fileID: 7506654275314680210}
   - component: {fileID: 236478382266870897}
-  - component: {fileID: 8917692510038248684}
-  - component: {fileID: 5109634137903762789}
   m_Layer: 5
   m_Name: ProgressBar
   m_TagString: Untagged
@@ -424,29 +422,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8917692510038248684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8270927021490471356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
---- !u!114 &5109634137903762789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8270927021490471356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee5240e33d7abf446854b2908a3e69e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fill: {fileID: 8671386337364280844}
