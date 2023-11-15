@@ -25,14 +25,33 @@ public class GUI_CountryPanel : GUI_BasePanel {
 
     [HideInInspector] public int index;
 
-    public Action<int, int> OnClickParam;
+    private int populationVal;
+    private string emptyPopulation;
+
+    public Action<int> OnClickParam;
     public Action OnClose;
 
     public string Terrain { set => terrain.Value = value; }
     public string Climate { set => climate.Value = value; }
     public int Flora { set { flora.Value = value.ToString(); flora.Fill = 100f / value; } }
     public int Fauna { set { fauna.Value = value.ToString(); fauna.Fill = 100f / value; } }
-    public int Population { set => population.Value = value.ToString(); }
+    public int Population {
+        set {
+            population.Value = value > 0 ? value.ToString() : emptyPopulation;
+            if (populationVal > 0 && value == 0) {
+                production.gameObject.SetActive(false);
+                economics.gameObject.SetActive(false);
+                goverment.gameObject.SetActive(false);
+                civilization.gameObject.SetActive(false);
+            } else if(populationVal == 0 && value > 0) {
+                production.gameObject.SetActive(true);
+                economics.gameObject.SetActive(true);
+                goverment.gameObject.SetActive(true);
+                civilization.gameObject.SetActive(true);
+            }
+            populationVal = value;
+        }
+    }
     public string Production { set => production.Value = value; }
     public string Economics { set => economics.Value = value; }
     public string Goverment { set => goverment.Value = value; }
@@ -49,29 +68,18 @@ public class GUI_CountryPanel : GUI_BasePanel {
 
         populationGroupName.text = map.PopulationGroup;
         population.Label = map.Population;
+        emptyPopulation = map.EmptyPopulation;
         production.Label = map.Production;
-        economics.Label = map.Economic;
+        economics.Label = map.Economics;
         goverment.Label = map.Goverment;
         civilization.Label = map.Civilization;
+
+        // print(system.Close);
         
         closeTxt.text = system.Close;
     }
 
-    private int FindMaxIndex(int[] arr) {
-        int res = -1;
-        int value = -1;
-        for(int i = 0; i < arr.Length; ++i) {
-            if (arr[i] > value) {
-                res = i;
-            }
-        }
-        return res;
-    }
-
-    public void UpdatePanel(ref S_Country value) {
-    }
-
-    public void ClickParam(int groupIndex, int paramIndex) =>  OnClickParam?.Invoke(groupIndex, paramIndex);
+    public void ClickParam(int paramiter) =>  OnClickParam?.Invoke(paramiter);
 
     public void Close() => OnClose?.Invoke();
 }

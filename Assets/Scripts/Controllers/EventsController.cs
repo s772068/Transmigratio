@@ -12,7 +12,7 @@ public class EventsController : BaseController {
     private GameController game;
     private WmskController wmsk;
     private MapController map;
-    private LocalizationController localization;
+    private SettingsController settings;
 
     public float MarkerLiveTime => markerLiveTime;
 
@@ -21,7 +21,7 @@ public class EventsController : BaseController {
             game = value;
             wmsk = value.Get<WmskController>();
             map = value.Get<MapController>();
-            localization = value.Get<LocalizationController>();
+            settings = value.Get<SettingsController>();
         }
     }
 
@@ -31,7 +31,7 @@ public class EventsController : BaseController {
                 map.countries[pair.Key].EventChanceIndex = 0;
                 int numEvent = Random.Range(0, pair.Value.Count - 1);
                 int eventIndex = pair.Value[numEvent];
-                wmsk.CreateEventMarker(events[eventIndex].Data(localization.LocalIndex), eventIndex, pair.Key);
+                wmsk.CreateEventMarker(events[eventIndex].Data(settings.Language), eventIndex, pair.Key);
                 pair.Value.RemoveAt(numEvent);
                 map.countries[pair.Key].Events.Add(eventIndex);
                 if(pair.Value.Count == 0) eventLog.Remove(pair.Key);

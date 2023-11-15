@@ -8,13 +8,13 @@ public class MigrationController : BaseController {
     private List<S_Migration> migrations = new();
     private S_Migration migration;
 
-    private LocalizationController localization;
+    private SettingsController settings;
     private WmskController wmsk;
     private MapController map;
 
     public override GameController GameController {
         set {
-            localization = value.Get<LocalizationController>();
+            settings = value.Get<SettingsController>();
             wmsk = value.Get<WmskController>();
             map = value.Get<MapController>();
         }
@@ -24,10 +24,10 @@ public class MigrationController : BaseController {
         if (panel.gameObject.activeSelf) return false;
         panel.index = index;
         panel.gameObject.SetActive(true);
-        panel.Localization(localization.Localization.Migration,
-                           localization.Localization.System);
-        panel.Init(data, localization.Localization.Countries[data.From],
-                         localization.Localization.Countries[data.To]);
+        panel.Localization(settings.Localization.Migration,
+                           settings.Localization.System);
+        panel.Init(data, settings.Localization.Countries[data.From],
+                         settings.Localization.Countries[data.To]);
         panel.Population = migrations[panel.index].Population;
         panel.OnClose = () => panel.gameObject.SetActive(false);
         return true;

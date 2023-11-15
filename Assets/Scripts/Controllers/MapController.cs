@@ -1,15 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MapController : BaseController, ISave {
-    [SerializeField] private GUI_CountryPanel panel;
+    [SerializeField] private GUI_CountryPanel countryPanel;
+    [SerializeField] private GUI_ParamDetailsPanel paramDetailsPanel;
     public S_Country[] countries;
 
-    private LocalizationController localization;
+    private SettingsController settings;
 
     public override GameController GameController {
         set {
-            localization = value.Get<LocalizationController>();
-            value.Get<WmskController>().OnClick += OpenPanel;
+            settings = value.Get<SettingsController>();
+            value.Get<WmskController>().OnClick += OpenCountryPanel;
         }
     }
 
@@ -36,36 +38,111 @@ public class MapController : BaseController, ISave {
                 updaters[i].Calc(ref countries[j]);
             }
         }
-        if (panel.gameObject.activeSelf) InitPanel(countries[panel.index]);
+        if (countryPanel.gameObject.activeSelf) UpdateCountryPanel();
     }
 
-    public void OpenPanel(int index) {
-        if (panel.gameObject.activeSelf) return;
-        panel.gameObject.SetActive(true);
-        panel.index = index;
-        LocalizationPanel(index);
-        InitPanel(countries[index]);
-        panel.OnClose = () => panel.gameObject.SetActive(false);
-        // panel.OnClickResult = (int index) => ClickResult(countryIndex, eventIndex, index);
+    public void OpenCountryPanel(int index) {
+        if (countryPanel.gameObject.activeSelf) return;
+        countryPanel.gameObject.SetActive(true);
+        countryPanel.index = index;
+        LocalizationCountryPanel();
+        UpdateCountryPanel();
+        countryPanel.OnClose = () => countryPanel.gameObject.SetActive(false);
+        countryPanel.OnClickParam = (int paramIndex) => OpenParamDetailsPanel(paramIndex);
     }
 
-    private void LocalizationPanel(int index) {
-        panel.Localization(localization.Localization.Countries[index],
-                           localization.Localization.System,
-                           localization.Localization.Map);
+    private void LocalizationCountryPanel() {
+        countryPanel.Localization(settings.Localization.Countries[countryPanel.index],
+                           settings.Localization.System,
+                           settings.Localization.Map);
     }
 
-    private void InitPanel(S_Country country) {
-        panel.Terrain = localization.Localization.Terrains[FindMaxIndex(country.Terrain)];
-        panel.Climate = localization.Localization.Climates[FindMaxIndex(country.Climate)];
-        panel.Flora = country.Flora;
-        panel.Fauna = country.Fauna;
-        panel.Population = country.Population;
-        panel.Production = localization.Localization.Production[FindMaxIndex(country.Production)];
-        panel.Economics = localization.Localization.Economics[FindMaxIndex(country.Economics)];
-        panel.Goverment = localization.Localization.Goverments[FindMaxIndex(country.Goverment)];
-        panel.Civilization = localization.Localization.Civilizations[FindMaxIndex(country.Civilization)];
+    private void UpdateCountryPanel() {
+        countryPanel.Terrain = settings.Localization.Terrains[FindMaxIndex(countries[countryPanel.index].Terrain)];
+        countryPanel.Climate = settings.Localization.Climates[FindMaxIndex(countries[countryPanel.index].Climate)];
+        countryPanel.Flora = countries[countryPanel.index].Flora;
+        countryPanel.Fauna = countries[countryPanel.index].Fauna;
+        countryPanel.Population = countries[countryPanel.index].Population;
+        countryPanel.Production = settings.Localization.Productions[FindMaxIndex(countries[countryPanel.index].Production)];
+        countryPanel.Economics = settings.Localization.Economics[FindMaxIndex(countries[countryPanel.index].Economics)];
+        countryPanel.Goverment = settings.Localization.Goverments[FindMaxIndex(countries[countryPanel.index].Goverment)];
+        countryPanel.Civilization = settings.Localization.Civilizations[FindMaxIndex(countries[countryPanel.index].Civilization)];
     }
+
+    public void OpenParamDetailsPanel(int paramIndex) {
+        if (paramDetailsPanel.gameObject.activeSelf) paramDetailsPanel.Clear();
+        else paramDetailsPanel.gameObject.SetActive(true);
+        paramDetailsPanel.Clear();
+        paramDetailsPanel.index = paramIndex;
+        paramDetailsPanel.CloseTxt = settings.Localization.System.Close;
+        InitParamDetails();
+        SortParamDetails();
+    }
+
+    private void InitParamDetails() {
+        switch (paramDetailsPanel.index) {
+            case 0:
+                paramDetailsPanel.Label = settings.Localization.Map.Terrain;
+                for(int i = 0; i < countries[countryPanel.index].Terrain.Length; ++i) {
+                    paramDetailsPanel.AddLegend(settings.Theme.TerrainColor(i),
+                                                settings.Localization.Terrains[i],
+                                                countries[countryPanel.index].Terrain[i]);
+                }
+                break;
+            case 1:
+                paramDetailsPanel.Label = settings.Localization.Map.Climate;
+                for (int i = 0; i < countries[countryPanel.index].Climate.Length; ++i) {
+                    paramDetailsPanel.AddLegend(settings.Theme.ClimateColor(i),
+                                                settings.Localization.Climates[i],
+                                                countries[countryPanel.index].Climate[i]);
+                }
+                break;
+            case 2:
+                paramDetailsPanel.Label = settings.Localization.Map.Production;
+                for (int i = 0; i < countries[countryPanel.index].Production.Length; ++i) {
+                    paramDetailsPanel.AddLegend(settings.Theme.ProductionColor(i),
+                                                settings.Localization.Productions[i],
+                                                countries[countryPanel.index].Production[i]);
+                }
+                break;
+            case 3:
+                paramDetailsPanel.Label = settings.Localization.Map.Economics;
+                for (int i = 0; i < countries[countryPanel.index].Economics.Length; ++i) {
+                    paramDetailsPanel.AddLegend(settings.Theme.EconomicsColor(i),
+                                                settings.Localization.Economics[i],
+                                                countries[countryPanel.index].Economics[i]);
+                }
+                break;
+            case 4:
+                paramDetailsPanel.Label = settings.Localization.Map.Goverment;
+                for (int i = 0; i < countries[countryPanel.index].Goverment.Length; ++i) {
+                    paramDetailsPanel.AddLegend(settings.Theme.GovermentColor(i),
+                                                settings.Localization.Goverments[i],
+                                                countries[countryPanel.index].Goverment[i]);
+                }
+                break;
+            case 5:
+                paramDetailsPanel.Label = settings.Localization.Map.Civilization;
+                for (int i = 0; i < countries[countryPanel.index].Civilization.Length; ++i) {
+                    paramDetailsPanel.AddLegend(settings.Theme.CivilizationColor(i),
+                                                settings.Localization.Civilizations[i],
+                                                countries[countryPanel.index].Civilization[i]);
+                }
+                break;
+        }
+    }
+
+    private void SortParamDetails() {
+        switch (paramDetailsPanel.index) {
+            case 0: paramDetailsPanel.SortPanel(countries[countryPanel.index].Terrain); break;
+            case 1: paramDetailsPanel.SortPanel(countries[countryPanel.index].Climate); break;
+            case 2: paramDetailsPanel.SortPanel(countries[countryPanel.index].Production); break;
+            case 3: paramDetailsPanel.SortPanel(countries[countryPanel.index].Economics); break;
+            case 4: paramDetailsPanel.SortPanel(countries[countryPanel.index].Goverment); break;
+            case 5: paramDetailsPanel.SortPanel(countries[countryPanel.index].Civilization); break;
+        }
+    }
+
 
     private int FindMaxIndex(int[] arr) {
         int res = -1;

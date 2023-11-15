@@ -48,7 +48,7 @@ public class GUI_MigrationPanel : GUI_BasePanel {
         Description = migration.Description;
         BreakString = system.Break;
         CloseString = system.Close;
-        paramiter.Label = migration.Paramiter.Label;
+        paramiter.Label = migration.ParamiterName;
     }
 
     public void Init(S_Migration data, string from, string to) {
