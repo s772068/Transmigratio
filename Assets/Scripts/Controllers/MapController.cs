@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MapController : BaseController, ISave {
@@ -39,6 +38,7 @@ public class MapController : BaseController, ISave {
             }
         }
         if (countryPanel.gameObject.activeSelf) UpdateCountryPanel();
+        if (paramDetailsPanel.gameObject.activeSelf) UpdateParamDetails();
     }
 
     public void OpenCountryPanel(int index) {
@@ -129,6 +129,17 @@ public class MapController : BaseController, ISave {
                                                 countries[countryPanel.index].Civilization[i]);
                 }
                 break;
+        }
+    }
+
+    private void UpdateParamDetails() {
+        switch (paramDetailsPanel.index) {
+            case 0: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Terrain); break;
+            case 1: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Climate); break;
+            case 2: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Production); break;
+            case 3: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Economics); break;
+            case 4: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Goverment); break;
+            case 5: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Civilization); break;
         }
     }
 

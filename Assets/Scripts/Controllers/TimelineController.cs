@@ -35,9 +35,9 @@ public class TimelineController : BaseController {
 
     private IEnumerator UpdateActive() {
         while (isActive) {
-            // mapController.UpdateParams();
             // eventsController.Call();
             // migrationController.UpdateMigration();
+            mapController.UpdateParams();
             yield return new WaitForSeconds(interval);
         }
     }

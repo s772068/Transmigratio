@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-using System;
 
 public class GUI_ParamDetailsPanel : GUI_BasePanel {
     [SerializeField] private Text label;
@@ -29,6 +28,15 @@ public class GUI_ParamDetailsPanel : GUI_BasePanel {
         newLegend.Label = label;
         newLegend.Value = value;
         legendElements.Add(newLegend);
+    }
+
+    public void UpdatePanel(int[] values) {
+        allValues = 0;
+        for (int i = 0; i < values.Length; ++i) {
+            legendElements[i].Value = values[i];
+            allValues += values[i];
+        }
+        SortPanel(values);
     }
 
     public void SortPanel(int[] values) {
