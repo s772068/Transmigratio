@@ -8,18 +8,13 @@ public class GUI_CountryPanel : GUI_BasePanel {
     [SerializeField] private Text closeTxt;
     [Header("Ecology")]
     [SerializeField] private Text ecologyGroupName;
-    [SerializeField] private GUI_Paramiter terrain;
-    [SerializeField] private GUI_Paramiter climate;
     [SerializeField] private GUI_Paramiter flora;
     [SerializeField] private GUI_Paramiter fauna;
     [Header("Population")]
     [SerializeField] private Text populationGroupName;
     [SerializeField] private GUI_Paramiter population;
-    [SerializeField] private GUI_Paramiter production;
-    [SerializeField] private GUI_Paramiter economics;
-    [SerializeField] private GUI_Paramiter goverment;
-    [SerializeField] private GUI_Paramiter civilization;
     [Header("Other")]
+    [SerializeField] private GUI_Paramiter[] paramiters;
     [SerializeField] private Transform content;
     [SerializeField] private Button closeBtn;
 
@@ -31,48 +26,50 @@ public class GUI_CountryPanel : GUI_BasePanel {
     public Action<int> OnClickParam;
     public Action OnClose;
 
-    public string Terrain { set => terrain.Value = value; }
-    public string Climate { set => climate.Value = value; }
+    // public string Terrain { set => terrain.Value = value; }
+    // public string Climate { set => climate.Value = value; }
     public int Flora { set { flora.Value = value.ToString(); flora.Fill = 100f / value; } }
     public int Fauna { set { fauna.Value = value.ToString(); fauna.Fill = 100f / value; } }
     public int Population {
         set {
             population.Value = value > 0 ? value.ToString() : emptyPopulation;
             if (populationVal > 0 && value == 0) {
-                production.gameObject.SetActive(false);
-                economics.gameObject.SetActive(false);
-                goverment.gameObject.SetActive(false);
-                civilization.gameObject.SetActive(false);
+                ShowParamiters(false);
             } else if(populationVal == 0 && value > 0) {
-                production.gameObject.SetActive(true);
-                economics.gameObject.SetActive(true);
-                goverment.gameObject.SetActive(true);
-                civilization.gameObject.SetActive(true);
+                ShowParamiters(true);
             }
             populationVal = value;
         }
     }
-    public string Production { set => production.Value = value; }
-    public string Economics { set => economics.Value = value; }
-    public string Goverment { set => goverment.Value = value; }
-    public string Civilization { set => civilization.Value = value; }
+    //public string Production { set => production.Value = value; }
+    //public string Economics { set => economics.Value = value; }
+    //public string Goverment { set => goverment.Value = value; }
+    //public string Civilization { set => civilization.Value = value; }
+
+    public void SetParam(int index, string value) {
+        paramiters[index].Value = value;
+    }
 
     public void Localization(string name, SL_System system, SL_Map map) {
         countryName.text = name;
 
         ecologyGroupName.text = map.EcologyGroup;
-        terrain.Label = map.Terrain;
-        climate.Label = map.Climate;
+        // terrain.Label = map.Terrain;
+        // climate.Label = map.Climate;
         flora.Label = map.Flora;
         fauna.Label = map.Fauna;
 
         populationGroupName.text = map.PopulationGroup;
         population.Label = map.Population;
         emptyPopulation = map.EmptyPopulation;
-        production.Label = map.Production;
-        economics.Label = map.Economics;
-        goverment.Label = map.Goverment;
-        civilization.Label = map.Civilization;
+        // production.Label = map.Production;
+        // economics.Label = map.Economics;
+        // goverment.Label = map.Goverment;
+        // civilization.Label = map.Civilization;
+
+        for(int i = 0; i < paramiters.Length; ++i) {
+            paramiters[i].Label = map.Paramiters[i].Name;
+        }
 
         // print(system.Close);
         
@@ -82,4 +79,11 @@ public class GUI_CountryPanel : GUI_BasePanel {
     public void ClickParam(int paramiter) =>  OnClickParam?.Invoke(paramiter);
 
     public void Close() => OnClose?.Invoke();
+
+    private void ShowParamiters(bool isShow) {
+        for (int i = 0; i < paramiters.Length; ++i) {
+            if (!paramiters[i].IsHideble) return;
+            paramiters[i].gameObject.SetActive(isShow);
+        }
+    }
 }

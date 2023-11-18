@@ -525,50 +525,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
---- !u!1 &139932740
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 139932741}
-  - component: {fileID: 139932742}
-  m_Layer: 0
-  m_Name: Mount Points
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &139932741
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139932740}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2036419723}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &139932742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139932740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &175166127
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -649,6 +605,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175166127}
   m_CullTransparentMesh: 1
+--- !u!114 &245521907 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9026975154640627282, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+  m_PrefabInstance: {fileID: 1067237417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568195c062283b94d9d04e685c42c28a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &258151836 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1438250600450049423, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+  m_PrefabInstance: {fileID: 1067237417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568195c062283b94d9d04e685c42c28a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &301291026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,7 +1305,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 426855126}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1908526023}
+        m_TargetAssemblyTypeName: LayersController, Assembly-CSharp
+        m_MethodName: MapPainting
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &426855126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1569,6 +1559,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445701268}
   m_CullTransparentMesh: 1
+--- !u!114 &489425498 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5672208142807063833, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+  m_PrefabInstance: {fileID: 1067237417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568195c062283b94d9d04e685c42c28a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &493568805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1797,7 +1798,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 715973317}
+        m_Texture: {fileID: 1080146971}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -2163,12 +2164,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllers:
-  - {fileID: 1583956660}
   - {fileID: 2070588744}
   - {fileID: 1759527920}
   - {fileID: 615606227}
-  - {fileID: 1841659155}
+  - {fileID: 1583956660}
   - {fileID: 1168439442}
+  - {fileID: 1908526023}
+  - {fileID: 1841659155}
   - {fileID: 1732670978}
 --- !u!4 &669565846
 Transform:
@@ -2182,11 +2184,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1583956661}
   - {fileID: 2070588743}
   - {fileID: 1759527921}
   - {fileID: 615606228}
+  - {fileID: 1583956661}
   - {fileID: 1168439443}
+  - {fileID: 1908526024}
   - {fileID: 1841659156}
   - {fileID: 1732670977}
   m_Father: {fileID: 0}
@@ -2403,43 +2406,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689109400}
   m_CullTransparentMesh: 1
---- !u!84 &715973317
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!114 &797897818 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 196307875458819763, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+  m_PrefabInstance: {fileID: 1067237417}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568195c062283b94d9d04e685c42c28a, type: 3}
   m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 1920
-  m_Height: 960
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 8
-  m_MipMap: 1
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 2
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
+  m_EditorClassIdentifier: 
 --- !u!1 &815221196
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,6 +2802,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 859268574}
   m_CullTransparentMesh: 1
+--- !u!1 &891652455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 891652456}
+  - component: {fileID: 891652457}
+  m_Layer: 0
+  m_Name: Mount Points
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &891652456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891652455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2036419723}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &891652457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891652455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &908800935
 GameObject:
   m_ObjectHideFlags: 0
@@ -3401,6 +3422,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -22.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7972778557107818127, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+      propertyPath: paramiters.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972778557107818127, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+      propertyPath: paramiters.Array.data[0]
+      value: 
+      objectReference: {fileID: 1803162135}
+    - target: {fileID: 7972778557107818127, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+      propertyPath: paramiters.Array.data[1]
+      value: 
+      objectReference: {fileID: 489425498}
+    - target: {fileID: 7972778557107818127, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+      propertyPath: paramiters.Array.data[2]
+      value: 
+      objectReference: {fileID: 245521907}
+    - target: {fileID: 7972778557107818127, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+      propertyPath: paramiters.Array.data[3]
+      value: 
+      objectReference: {fileID: 797897818}
+    - target: {fileID: 7972778557107818127, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+      propertyPath: paramiters.Array.data[4]
+      value: 
+      objectReference: {fileID: 258151836}
+    - target: {fileID: 7972778557107818127, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+      propertyPath: paramiters.Array.data[5]
+      value: 
+      objectReference: {fileID: 1659233730}
     - target: {fileID: 7972778557107818224, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3532,6 +3581,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f1db8f8fe65a747a30f5efd10cf34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!84 &1080146971
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 1920
+  m_Height: 960
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 8
+  m_MipMap: 1
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 2
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &1122026987
 GameObject:
   m_ObjectHideFlags: 0
@@ -5508,6 +5594,17 @@ Transform:
   m_Father: {fileID: 319484243}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1659233730 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7520135151325153931, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+  m_PrefabInstance: {fileID: 1067237417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568195c062283b94d9d04e685c42c28a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1702881792
 GameObject:
   m_ObjectHideFlags: 0
@@ -5954,665 +6051,1503 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countryPanel: {fileID: 1067237419}
   paramDetailsPanel: {fileID: 807445333666381676}
+  maxMapParamIndexes:
+  - Name: 
+    Value: 0
+  - Name: 
+    Value: 0
+  - Name: 
+    Value: 0
+  - Name: 
+    Value: 0
+  - Name: 
+    Value: 0
+  - Name: 
+    Value: 0
   countries:
-  - Population: 1000
+  - Name: Central Asia
+    Population: 1000
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 02000000020000000200000002000000
-    Terrain: 010000000100000001000000010000000100000001000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 02000000020000000200000002000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 010000000100000001000000010000000100000001000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 02000000060000000a0000001b0000001f0000002400000034000000
     Events: 
-  - Population: 1000
+  - Name: Patagonia
+    Population: 1000
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 090000002b000000
     Events: 
-  - Population: 0
+  - Name: Caucasus
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 000000002200000034000000
     Events: 
-  - Population: 0
+  - Name: New Zealand
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 
     Events: 
-  - Population: 0
+  - Name: Antarctica
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 
     Events: 
-  - Population: 0
+  - Name: Australia
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 
     Events: 
-  - Population: 0
+  - Name: Hindustan
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 000000000a0000001c000000
     Events: 
-  - Population: 0
+  - Name: Malaysia
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 1c000000
     Events: 
-  - Population: 0
+  - Name: Central America
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 230000002f00000031000000
     Events: 
-  - Population: 7000
+  - Name: Andes
+    Population: 7000
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 01000000230000002b00000009000000
     Events: 
-  - Population: 0
+  - Name: Himalayas
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 00000000060000000e0000001c0000001f000000
     Events: 
-  - Population: 0
+  - Name: South Africa
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 0f00000011000000
     Events: 
-  - Population: 0
+  - Name: Northwest Territiries
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 0c0000002d0000002f0000003000000029000000
     Events: 
-  - Population: 0
+  - Name: Alps
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 10000000190000002c000000
     Events: 
-  - Population: 0
+  - Name: China
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 0a0000001c0000001f0000002100000028000000
     Events: 
-  - Population: 0
+  - Name: Central Africa
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 0b0000001100000014000000180000001e000000
     Events: 
-  - Population: 0
+  - Name: Central Europe
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 0d000000120000001600000019000000220000002c0000003300000036000000
     Events: 
-  - Population: 0
+  - Name: East Africa
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 0f0000000b00000014000000
     Events: 
-  - Population: 0
+  - Name: North Europe
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 1700000010000000
     Events: 
-  - Population: 0
+  - Name: North Africa
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 14000000150000001e000000
     Events: 
-  - Population: 0
+  - Name: Nile
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 11000000130000000f0000001e00000024000000
     Events: 
-  - Population: 0
+  - Name: Iberia
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 1900000013000000
     Events: 
-  - Population: 0
+  - Name: Baltic
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 100000001700000036000000
     Events: 
-  - Population: 0
+  - Name: Karelia
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 12000000160000002500000036000000
     Events: 
-  - Population: 0
+  - Name: West Africa
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 0f0000001e000000
     Events: 
-  - Population: 0
+  - Name: West Europe
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 29000000150000000d00000010000000
     Events: 
-  - Population: 0
+  - Name: Japan
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 
     Events: 
-  - Population: 0
+  - Name: Central Great Steppe
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 000000001f0000002200000026000000270000002800000036000000
     Events: 
-  - Population: 0
+  - Name: South East Asia
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 0e0000000a0000000600000007000000
     Events: 
-  - Population: 0
+  - Name: Madagascar
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 
     Events: 
-  - Population: 0
+  - Name: Sahara
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 180000000f0000001400000013000000
     Events: 
-  - Population: 0
+  - Name: East Great Steppe
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 1b000000000000000a0000000e00000028000000
     Events: 
-  - Population: 0
+  - Name: Arabia
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 24000000
     Events: 
-  - Population: 0
+  - Name: Far East
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 0e00000028000000
     Events: 
-  - Population: 0
+  - Name: West Great Steppe
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 020000001b000000100000003300000036000000
     Events: 
-  - Population: 0
+  - Name: North Andes
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 09000000080000002b000000
     Events: 
-  - Population: 0
+  - Name: Middle East
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 14000000200000000000000034000000
     Events: 
-  - Population: 0
+  - Name: North Ural
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 17000000260000002700000036000000
     Events: 
-  - Population: 0
+  - Name: Ural
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 250000001b0000002700000036000000
     Events: 
-  - Population: 0
+  - Name: Siberia
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 25000000260000001b00000028000000
     Events: 
-  - Population: 0
+  - Name: Altai
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 270000001b0000001f0000000e00000021000000
     Events: 
-  - Population: 0
+  - Name: North Atlantic
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 19000000290000000c0000003000000035000000
     Events: 
-  - Population: 0
+  - Name: Antilles
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 2a000000
     Events: 
-  - Population: 5500
+  - Name: Amasonia
+    Population: 5500
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 230000000900000001000000
     Events: 
-  - Population: 0
+  - Name: Apennine Peninsula
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 100000000d00000033000000
     Events: 
-  - Population: 0
+  - Name: Alaska
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 0c000000
     Events: 
-  - Population: 0
+  - Name: North America West Coast
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 2f000000
     Events: 
-  - Population: 0
+  - Name: Cordillera
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 080000000c0000002e00000031000000
     Events: 
-  - Population: 0
+  - Name: Great Lakes
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 290000000c0000003100000035000000
     Events: 
-  - Population: 0
+  - Name: Great Plains
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 300000002f000000080000003200000035000000
     Events: 
-  - Population: 0
+  - Name: Florida
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 3100000035000000
     Events: 
-  - Population: 0
+  - Name: Balkan
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 22000000100000002c0000003300000034000000
     Events: 
-  - Population: 0
+  - Name: Asia Minor
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 24000000000000000200000033000000
     Events: 
-  - Population: 0
+  - Name: North America East Coast
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 29000000300000003100000032000000
     Events: 
-  - Population: 0
+  - Name: East European Plain
+    Population: 0
     EventChanceIndex: 0
     Flora: 100
     Fauna: 100
-    Climate: 00000000000000000000000000000000
-    Terrain: 000000000000000000000000000000000000000000000000
-    Production: 0000000000000000
-    Civilization: 0000000000000000
-    Economics: 0000000000000000
-    Goverment: 0000000000000000
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Paramiters:
+    - Name: Climate
+      MaxValueIndex: 0
+      Value: 00000000000000000000000000000000
+    - Name: Terrain
+      MaxValueIndex: 0
+      Value: 000000000000000000000000000000000000000000000000
+    - Name: Production
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Civilization
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Economics
+      MaxValueIndex: 0
+      Value: 0100000001000000
+    - Name: Goverment
+      MaxValueIndex: 0
+      Value: 0100000001000000
     Neighbours: 220000001b0000002600000025000000170000001600000010000000
     Events: 
 --- !u!1 &1759527919
@@ -6904,6 +7839,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800425107}
   m_CullTransparentMesh: 1
+--- !u!114 &1803162135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3700705104529675465, guid: 26259a4a543eb044991d2b2efd127c11, type: 3}
+  m_PrefabInstance: {fileID: 1067237417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568195c062283b94d9d04e685c42c28a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1841659154
 GameObject:
   m_ObjectHideFlags: 0
@@ -6947,6 +7893,50 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841659154}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 669565846}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1908526022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1908526024}
+  - component: {fileID: 1908526023}
+  m_Layer: 0
+  m_Name: Layers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1908526023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908526022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333f01cb0a09e5f449b09ce03499eed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1908526024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908526022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -7737,7 +8727,7 @@ Transform:
   m_Children:
   - {fileID: 1707219435}
   - {fileID: 493568806}
-  - {fileID: 139932741}
+  - {fileID: 891652456}
   m_Father: {fileID: 2106133419}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

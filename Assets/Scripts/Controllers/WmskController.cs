@@ -12,7 +12,8 @@ public class WmskController : BaseController {
 
     private MigrationController migration;
     private EventsController events;
-    
+    private MapController map;
+
     private WMSK wmsk;
     private int selectedIndex = -1;
     private List<S_LineMigration> lineMigrations = new();
@@ -23,6 +24,7 @@ public class WmskController : BaseController {
         set {
             migration = value.Get<MigrationController>();
             events = value.Get<EventsController>();
+            map = value.Get<MapController>();
         }
     }
 
@@ -40,16 +42,30 @@ public class WmskController : BaseController {
     }
 
     private void Click(float x, float y, int buttonIndex) {
-        SelectCountry(wmsk.GetCountryIndex(new Vector2(x, y)));
+        int index = wmsk.GetCountryIndex(new Vector2(x, y));
+        if (index < 0 || index > wmsk.countries.Length - 1) return;
+        UpdateSelectIndex(index);
         OnClick?.Invoke(selectedIndex);
     }
 
     private void ClickMarker(MarkerClickHandler marker, int buttonIndex) => marker.GetComponent<IconMarker>()?.Click();
 
-    private void SelectCountry(int index) {
-        wmsk.ToggleCountrySurface(selectedIndex, false, Color.clear);
+    private void UpdateSelectIndex(int index) {
+        wmsk.ToggleCountrySurface(selectedIndex, false,
+            selectedIndex < map.countries.Length &&
+            selectedIndex > 0 ?
+            map.countries[selectedIndex].Color : Color.clear);
         selectedIndex = index;
         wmsk.ToggleCountrySurface(selectedIndex, true, selectColor);
+    }
+
+    public void CountryPainting(int countryIndex, Color color) {
+        CountryDecorator decorator = new();
+        decorator.includeAllRegions = true;
+        decorator.isColorized = true;
+        decorator.fillColor = color;
+        wmsk.decorator.SetCountryDecorator(0, wmsk.countries[countryIndex].name, decorator);
+        //wmsk.ToggleCountrySurface(countryIndex, true, color);
     }
 
     public void CreateEventMarker(S_Event e, int eventIndex, int countryIndex) {

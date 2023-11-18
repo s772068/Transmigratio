@@ -78,7 +78,7 @@ public class HungerEvent : BaseEvent {
     }
 
     private bool CheckMigration(int countryIndex) {
-        for(int i = 0; i < map.countries[countryIndex].Neighbours.Count; ++i) {
+        for(int i = 0; i < map.countries[countryIndex].Neighbours.Length; ++i) {
             if (map.countries[map.countries[countryIndex].Neighbours[i]].Population == 0) {
                 migrateCountryIndex = map.countries[countryIndex].Neighbours[i];
                 return true;

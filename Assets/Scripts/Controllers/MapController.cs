@@ -3,6 +3,7 @@ using UnityEngine;
 public class MapController : BaseController, ISave {
     [SerializeField] private GUI_CountryPanel countryPanel;
     [SerializeField] private GUI_ParamDetailsPanel paramDetailsPanel;
+    public S_Value<int>[] maxMapParamIndexes;
     public S_Country[] countries;
 
     private SettingsController settings;
@@ -15,8 +16,10 @@ public class MapController : BaseController, ISave {
     }
 
     private BaseMapUpdater[] updaters = {
-        // new MU_Add(),
-        // new MU_Multy()
+        /*
+        new MU_Add(),
+        new MU_Multy()
+        */
     };
 
     public void Save() {
@@ -52,21 +55,18 @@ public class MapController : BaseController, ISave {
     }
 
     private void LocalizationCountryPanel() {
-        countryPanel.Localization(settings.Localization.Countries[countryPanel.index],
+        countryPanel.Localization(settings.Localization.Map.Countries[countryPanel.index],
                            settings.Localization.System,
                            settings.Localization.Map);
     }
 
     private void UpdateCountryPanel() {
-        countryPanel.Terrain = settings.Localization.Terrains[FindMaxIndex(countries[countryPanel.index].Terrain)];
-        countryPanel.Climate = settings.Localization.Climates[FindMaxIndex(countries[countryPanel.index].Climate)];
         countryPanel.Flora = countries[countryPanel.index].Flora;
         countryPanel.Fauna = countries[countryPanel.index].Fauna;
         countryPanel.Population = countries[countryPanel.index].Population;
-        countryPanel.Production = settings.Localization.Productions[FindMaxIndex(countries[countryPanel.index].Production)];
-        countryPanel.Economics = settings.Localization.Economics[FindMaxIndex(countries[countryPanel.index].Economics)];
-        countryPanel.Goverment = settings.Localization.Goverments[FindMaxIndex(countries[countryPanel.index].Goverment)];
-        countryPanel.Civilization = settings.Localization.Civilizations[FindMaxIndex(countries[countryPanel.index].Civilization)];
+        for (int i = 0; i < countries[countryPanel.index].Paramiters.Length; ++i) {
+            countryPanel.SetParam(i, settings.Localization.Map.Paramiters[i].Value[countries[countryPanel.index].Paramiters[i].MaxValueIndex]);
+        }
     }
 
     public void OpenParamDetailsPanel(int paramIndex) {
@@ -80,90 +80,37 @@ public class MapController : BaseController, ISave {
     }
 
     private void InitParamDetails() {
-        switch (paramDetailsPanel.index) {
-            case 0:
-                paramDetailsPanel.Label = settings.Localization.Map.Terrain;
-                for(int i = 0; i < countries[countryPanel.index].Terrain.Length; ++i) {
-                    paramDetailsPanel.AddLegend(settings.Theme.TerrainColor(i),
-                                                settings.Localization.Terrains[i],
-                                                countries[countryPanel.index].Terrain[i]);
-                }
-                break;
-            case 1:
-                paramDetailsPanel.Label = settings.Localization.Map.Climate;
-                for (int i = 0; i < countries[countryPanel.index].Climate.Length; ++i) {
-                    paramDetailsPanel.AddLegend(settings.Theme.ClimateColor(i),
-                                                settings.Localization.Climates[i],
-                                                countries[countryPanel.index].Climate[i]);
-                }
-                break;
-            case 2:
-                paramDetailsPanel.Label = settings.Localization.Map.Production;
-                for (int i = 0; i < countries[countryPanel.index].Production.Length; ++i) {
-                    paramDetailsPanel.AddLegend(settings.Theme.ProductionColor(i),
-                                                settings.Localization.Productions[i],
-                                                countries[countryPanel.index].Production[i]);
-                }
-                break;
-            case 3:
-                paramDetailsPanel.Label = settings.Localization.Map.Economics;
-                for (int i = 0; i < countries[countryPanel.index].Economics.Length; ++i) {
-                    paramDetailsPanel.AddLegend(settings.Theme.EconomicsColor(i),
-                                                settings.Localization.Economics[i],
-                                                countries[countryPanel.index].Economics[i]);
-                }
-                break;
-            case 4:
-                paramDetailsPanel.Label = settings.Localization.Map.Goverment;
-                for (int i = 0; i < countries[countryPanel.index].Goverment.Length; ++i) {
-                    paramDetailsPanel.AddLegend(settings.Theme.GovermentColor(i),
-                                                settings.Localization.Goverments[i],
-                                                countries[countryPanel.index].Goverment[i]);
-                }
-                break;
-            case 5:
-                paramDetailsPanel.Label = settings.Localization.Map.Civilization;
-                for (int i = 0; i < countries[countryPanel.index].Civilization.Length; ++i) {
-                    paramDetailsPanel.AddLegend(settings.Theme.CivilizationColor(i),
-                                                settings.Localization.Civilizations[i],
-                                                countries[countryPanel.index].Civilization[i]);
-                }
-                break;
+        paramDetailsPanel.Label = settings.Localization.Map.Paramiters[paramDetailsPanel.index].Name;
+        for (int i = 0; i < countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value.Length; ++i) {
+            paramDetailsPanel.AddLegend(settings.Theme.GetColor(paramDetailsPanel.index, i),
+                                        settings.Localization.Map.Paramiters[paramDetailsPanel.index].Value[i],
+                                        countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value[i]);
         }
     }
 
     private void UpdateParamDetails() {
-        switch (paramDetailsPanel.index) {
-            case 0: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Terrain); break;
-            case 1: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Climate); break;
-            case 2: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Production); break;
-            case 3: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Economics); break;
-            case 4: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Goverment); break;
-            case 5: paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Civilization); break;
-        }
+        paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value);
     }
 
     private void SortParamDetails() {
-        switch (paramDetailsPanel.index) {
-            case 0: paramDetailsPanel.SortPanel(countries[countryPanel.index].Terrain); break;
-            case 1: paramDetailsPanel.SortPanel(countries[countryPanel.index].Climate); break;
-            case 2: paramDetailsPanel.SortPanel(countries[countryPanel.index].Production); break;
-            case 3: paramDetailsPanel.SortPanel(countries[countryPanel.index].Economics); break;
-            case 4: paramDetailsPanel.SortPanel(countries[countryPanel.index].Goverment); break;
-            case 5: paramDetailsPanel.SortPanel(countries[countryPanel.index].Civilization); break;
-        }
+        paramDetailsPanel.SortPanel(countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value);
     }
 
-
-    private int FindMaxIndex(int[] arr) {
-        int res = -1;
-        int value = -1;
-        for (int i = 0; i < arr.Length; ++i) {
-            if (arr[i] > value) {
-                value = arr[i];
-                res = i;
+    /*InitCountries
+    private void InitCountries() {
+        WorldMapStrategyKit.WMSK wmsk = WorldMapStrategyKit.WMSK.instance;
+        for (int i = 0; i < countries.Length; ++i) {
+            countries[i].Name = settings.Localization.Map.Countries[i];
+            if (i > wmsk.countries.Length - 1) break;
+            countries[i].Neighbours = new int[wmsk.countries[i].neighbours.Length];
+            for (int j = 0; j < wmsk.countries[i].neighbours.Length; ++j) {
+                countries[i].Neighbours[j] = wmsk.countries[i].neighbours[j];
             }
         }
-        return res;
     }
+
+    public override void Init() {
+        InitCountries();
+    }
+    */
 }

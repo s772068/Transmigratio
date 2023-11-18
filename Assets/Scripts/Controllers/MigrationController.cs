@@ -26,8 +26,8 @@ public class MigrationController : BaseController {
         panel.gameObject.SetActive(true);
         panel.Localization(settings.Localization.Migration,
                            settings.Localization.System);
-        panel.Init(data, settings.Localization.Countries[data.From],
-                         settings.Localization.Countries[data.To]);
+        panel.Init(data, settings.Localization.Map.Countries[data.From],
+                         settings.Localization.Map.Countries[data.To]);
         panel.Population = migrations[panel.index].Population;
         panel.OnClose = () => panel.gameObject.SetActive(false);
         return true;
