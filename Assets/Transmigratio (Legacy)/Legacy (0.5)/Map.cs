@@ -51,8 +51,8 @@ public class Map
 
     public void Init()
     {
-        wmsk = new WMSK();
-        wmsk = WMSK.instance;
+        // wmsk = new WMSK();
+        // wmsk = WMSK.instance;
 
         wmsk.OnCountryClick += Map_OnCountryClick;
         string json;

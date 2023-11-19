@@ -17,7 +17,7 @@ public class WmskController : BaseController {
     private WMSK wmsk;
     private int selectedIndex = -1;
     private List<S_LineMigration> lineMigrations = new();
-    
+
     public Action<int> OnClick;
 
     public override GameController GameController {
@@ -60,12 +60,7 @@ public class WmskController : BaseController {
     }
 
     public void CountryPainting(int countryIndex, Color color) {
-        CountryDecorator decorator = new();
-        decorator.includeAllRegions = true;
-        decorator.isColorized = true;
-        decorator.fillColor = color;
-        wmsk.decorator.SetCountryDecorator(0, wmsk.countries[countryIndex].name, decorator);
-        //wmsk.ToggleCountrySurface(countryIndex, true, color);
+        wmsk.ToggleCountrySurface(countryIndex, true, color);
     }
 
     public void CreateEventMarker(S_Event e, int eventIndex, int countryIndex) {
@@ -119,6 +114,10 @@ public class WmskController : BaseController {
         wmsk = WMSK.instance;
         wmsk.OnClick += Click;
         wmsk.OnMarkerMouseDown += ClickMarker;
+        // For havn't friezes at first change colors
+        for (int i = 0; i < wmsk.countries.Length; ++i) {
+            wmsk.ToggleCountrySurface(i, true, Color.clear);
+        }
     }
 
     private void Start() {
