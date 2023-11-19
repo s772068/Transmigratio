@@ -28,8 +28,8 @@ public class GUI_CountryPanel : GUI_BasePanel {
 
     // public string Terrain { set => terrain.Value = value; }
     // public string Climate { set => climate.Value = value; }
-    public int Flora { set { flora.Value = value.ToString(); flora.Fill = 100f / value; } }
-    public int Fauna { set { fauna.Value = value.ToString(); fauna.Fill = 100f / value; } }
+    public int Flora { set { flora.Value = value.ToString(); flora.Fill = value / 100f; } }
+    public int Fauna { set { fauna.Value = value.ToString(); fauna.Fill = value / 100f; } }
     public int Population {
         set {
             population.Value = value > 0 ? value.ToString() : emptyPopulation;

@@ -74,9 +74,9 @@ public class VolcanoEvent : BaseEvent {
     }
 
     private bool CheckMigration(int countryIndex) {
-        for (int i = 0; i < map.countries[countryIndex].Neighbours.Length; ++i) {
-            if (map.countries[map.countries[countryIndex].Neighbours[i]].Population == 0) {
-                migrateCountryIndex = map.countries[countryIndex].Neighbours[i];
+        for (int i = 0; i < map.data.Countries[countryIndex].Neighbours.Length; ++i) {
+            if (map.data.Countries[map.data.Countries[countryIndex].Neighbours[i]].Population == 0) {
+                migrateCountryIndex = map.data.Countries[countryIndex].Neighbours[i];
                 return true;
             }
         }

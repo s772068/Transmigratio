@@ -52,9 +52,9 @@ public class WmskController : BaseController {
 
     private void UpdateSelectIndex(int index) {
         wmsk.ToggleCountrySurface(selectedIndex, false,
-            selectedIndex < map.countries.Length &&
+            selectedIndex < map.data.Countries.Length &&
             selectedIndex > 0 ?
-            map.countries[selectedIndex].Color : Color.clear);
+            map.data.Countries[selectedIndex].Color : Color.clear);
         selectedIndex = index;
         wmsk.ToggleCountrySurface(selectedIndex, true, selectColor);
     }

@@ -25,19 +25,21 @@ public class EventsController : BaseController {
         }
     }
 
+    public string GetEventName(int index) => events[index].Data(settings.Language).Name;
+
     public void Call() {
         foreach(KeyValuePair<int, List<int>> pair in eventLog) {
-            if (Random.Range(0, 1f) <= chances[map.countries[pair.Key].EventChanceIndex]) {
-                map.countries[pair.Key].EventChanceIndex = 0;
+            if (Random.Range(0, 1f) <= chances[map.data.Countries[pair.Key].EventChanceIndex]) {
+                map.data.Countries[pair.Key].EventChanceIndex = 0;
                 int numEvent = Random.Range(0, pair.Value.Count - 1);
                 int eventIndex = pair.Value[numEvent];
                 wmsk.CreateEventMarker(events[eventIndex].Data(settings.Language), eventIndex, pair.Key);
                 pair.Value.RemoveAt(numEvent);
-                map.countries[pair.Key].Events.Add(eventIndex);
+                map.data.Countries[pair.Key].Events.Add(eventIndex);
                 if(pair.Value.Count == 0) eventLog.Remove(pair.Key);
                 return;
             } else {
-                ++map.countries[pair.Key].EventChanceIndex;
+                ++map.data.Countries[pair.Key].EventChanceIndex;
             }
         }
     }
@@ -70,8 +72,8 @@ public class EventsController : BaseController {
     }
 
     private void InitEventLog() {
-        for (int i = 0; i < map.countries.Length; ++i) {
-            if (map.countries[i].Population > 0) {
+        for (int i = 0; i < map.data.Countries.Length; ++i) {
+            if (map.data.Countries[i].Population > 0) {
                 AddEventsForCountry(i);
             }
         }

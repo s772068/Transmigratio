@@ -3,17 +3,19 @@ using UnityEngine;
 
 public class TimelineController : BaseController {
     private float interval;
-    private MigrationController migrationController;
-    private EventsController eventsController;
-    private MapController mapController;
+    private ResourcesController resources;
+    private MigrationController migration;
+    private EventsController events;
+    private MapController map;
 
     private bool isActive;
 
     public override GameController GameController {
         set {
-            migrationController = value.Get<MigrationController>();
-            eventsController = value.Get<EventsController>();
-            mapController = value.Get<MapController>();
+            resources = value.Get<ResourcesController>();
+            migration = value.Get<MigrationController>();
+            events = value.Get<EventsController>();
+            map = value.Get<MapController>();
         }
     }
 
@@ -35,9 +37,10 @@ public class TimelineController : BaseController {
 
     private IEnumerator UpdateActive() {
         while (isActive) {
-            // eventsController.Call();
-            // migrationController.UpdateMigration();
-            mapController.UpdateParams();
+            // events.Call();
+            // migration.UpdateMigration();
+            map.UpdateParams();
+            resources.UpdateResources();
             yield return new WaitForSeconds(interval);
         }
     }

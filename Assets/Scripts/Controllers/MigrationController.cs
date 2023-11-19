@@ -43,12 +43,12 @@ public class MigrationController : BaseController {
             migration = migrations[i];
             if (populationsPerTick < migration.MaxPopulation - migration.Population) {
                 migration.Population += populationsPerTick;
-                map.countries[migration.From].Population -= populationsPerTick;
-                map.countries[migration.To].Population += populationsPerTick;
+                map.data.Countries[migration.From].Population -= populationsPerTick;
+                map.data.Countries[migration.To].Population += populationsPerTick;
                 migrations[i] = migration;
             } else {
-                map.countries[migration.From].Population -= migration.MaxPopulation - migration.Population;
-                map.countries[migration.To].Population += migration.MaxPopulation - migration.Population;
+                map.data.Countries[migration.From].Population -= migration.MaxPopulation - migration.Population;
+                map.data.Countries[migration.To].Population += migration.MaxPopulation - migration.Population;
                 panel.Close();
                 EndMigration(i);
             }

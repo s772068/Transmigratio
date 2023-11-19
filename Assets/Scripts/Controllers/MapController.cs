@@ -1,17 +1,22 @@
+using UnityEngine.UI;
 using UnityEngine;
 
 public class MapController : BaseController, ISave {
+    [SerializeField] private Text populationTxt;
     [SerializeField] private GUI_CountryPanel countryPanel;
     [SerializeField] private GUI_ParamDetailsPanel paramDetailsPanel;
-    public S_Value<int>[] maxMapParamIndexes;
-    public S_Country[] countries;
+    [SerializeField] private GUI_ShortRegionInfo shortRegionInfo;
+    public S_Map data;
 
+    private EventsController events;
     private SettingsController settings;
 
     public override GameController GameController {
         set {
+            events = value.Get<EventsController>();
             settings = value.Get<SettingsController>();
-            value.Get<WmskController>().OnClick += OpenCountryPanel;
+            value.Get<WmskController>().OnClick = InitShortRegion;
+            shortRegionInfo.OnClick = OpenCountryPanel;
         }
     }
 
@@ -23,25 +28,20 @@ public class MapController : BaseController, ISave {
     };
 
     public void Save() {
-        IOHelper.SaveToJson(new S_Map() {
-            countries = countries
-        });
+        IOHelper.SaveToJson(data);
     }
 
     public void Load() {
-        IOHelper.LoadFromJson(out S_Map data);
-        countries = data.countries;
+        IOHelper.LoadFromJson(out data);
     }
 
     public void UpdateParams() {
         for (int i = 0; i < updaters.Length; ++i) {
-            updaters[i].Update(ref countries);
-            for (int j = 0; j < countries.Length; ++j) {
-                updaters[i].Calc(ref countries[j]);
-            }
+            updaters[i].Update(ref data);
         }
         if (countryPanel.gameObject.activeSelf) UpdateCountryPanel();
         if (paramDetailsPanel.gameObject.activeSelf) UpdateParamDetails();
+        populationTxt.text = settings.Localization.Map.Population + "\n" + data.AllPopulation;
     }
 
     public void OpenCountryPanel(int index) {
@@ -61,11 +61,11 @@ public class MapController : BaseController, ISave {
     }
 
     private void UpdateCountryPanel() {
-        countryPanel.Flora = countries[countryPanel.index].Flora;
-        countryPanel.Fauna = countries[countryPanel.index].Fauna;
-        countryPanel.Population = countries[countryPanel.index].Population;
-        for (int i = 0; i < countries[countryPanel.index].Paramiters.Length; ++i) {
-            countryPanel.SetParam(i, settings.Localization.Map.Paramiters[i].Value[countries[countryPanel.index].Paramiters[i].MaxValueIndex]);
+        countryPanel.Flora = data.Countries[countryPanel.index].Flora;
+        countryPanel.Fauna = data.Countries[countryPanel.index].Fauna;
+        countryPanel.Population = data.Countries[countryPanel.index].Population;
+        for (int i = 0; i < data.Countries[countryPanel.index].Paramiters.Length; ++i) {
+            countryPanel.SetParam(i, settings.Localization.Map.Paramiters[i].Value[data.Countries[countryPanel.index].Paramiters[i].MaxValueIndex]);
         }
     }
 
@@ -81,19 +81,25 @@ public class MapController : BaseController, ISave {
 
     private void InitParamDetails() {
         paramDetailsPanel.Label = settings.Localization.Map.Paramiters[paramDetailsPanel.index].Name;
-        for (int i = 0; i < countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value.Length; ++i) {
+        for (int i = 0; i < data.Countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value.Length; ++i) {
             paramDetailsPanel.AddLegend(settings.Theme.GetColor(paramDetailsPanel.index, i),
                                         settings.Localization.Map.Paramiters[paramDetailsPanel.index].Value[i],
-                                        countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value[i]);
+                                        data.Countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value[i]);
         }
     }
 
+    public void InitShortRegion(int index) {
+        shortRegionInfo.CountryName = settings.Localization.Map.Countries[index];
+        shortRegionInfo.PopulationName = settings.Localization.Map.Population + "\n" + data.Countries[index].Population;
+        shortRegionInfo.EventName = data.Countries[index].Events.Count > 0 ? events.GetEventName(data.Countries[index].Events[0]) : "";
+    }
+
     private void UpdateParamDetails() {
-        paramDetailsPanel.UpdatePanel(countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value);
+        paramDetailsPanel.UpdatePanel(data.Countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value);
     }
 
     private void SortParamDetails() {
-        paramDetailsPanel.SortPanel(countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value);
+        paramDetailsPanel.SortPanel(data.Countries[countryPanel.index].Paramiters[paramDetailsPanel.index].Value);
     }
 
     /*InitCountries
