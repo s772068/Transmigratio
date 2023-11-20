@@ -53,12 +53,12 @@ public class HungerEvent : BaseEvent {
             _ => default
         };
 
-    public HungerEvent(GameController gameController, int migratePopulation, int costIntervention) {
+    public HungerEvent(GameController game, int migratePopulation, int costIntervention) {
         this.migratePopulation = migratePopulation;
         this.costIntervention = costIntervention;
-        migration = gameController.Get<MigrationController>();
-        resources = gameController.Get<ResourcesController>();
-        map = gameController.Get<MapController>();
+        migration = game.Get<MigrationController>();
+        resources = game.Get<ResourcesController>();
+        map = game.Get<MapController>();
     }
 
     public override bool CheckBuild(int countryIndex, int resultIndex) =>

@@ -31,13 +31,4 @@ public class SettingsController : BaseController, ISave {
         language = (E_Language) data.Language;
         theme = (E_Theme) data.Theme;
     }
-
-    public enum E_Language {
-        Eng,
-        Ru
-    }
-
-    public enum E_Theme {
-        Standart
-    }
 }
