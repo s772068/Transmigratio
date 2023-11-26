@@ -51,21 +51,21 @@ public class WmskController : BaseController {
     private void ClickMarker(MarkerClickHandler marker, int buttonIndex) => marker.GetComponent<IconMarker>()?.Click();
 
     private void UpdateSelectIndex(int index) {
-        wmsk.ToggleCountrySurface(selectedIndex, false,
-            selectedIndex < map.data.Countries.Length &&
-            selectedIndex > 0 ?
-            map.data.Countries[selectedIndex].Color : Color.clear);
+        wmsk.ToggleCountrySurface(selectedIndex, true,
+            selectedIndex < map.data.Regions.Length &&
+            selectedIndex >= 0 ?
+            map.data.Regions[selectedIndex].Color : Color.clear);
         selectedIndex = index;
         wmsk.ToggleCountrySurface(selectedIndex, true, selectColor);
     }
 
-    public void CountryPainting(int countryIndex, Color color) {
-        wmsk.ToggleCountrySurface(countryIndex, true, color);
+    public void RegionPainting(int regionIndex, Color color) {
+        wmsk.ToggleCountrySurface(regionIndex, true, color);
     }
 
-    public void CreateEventMarker(S_Event e, int eventIndex, int countryIndex) {
-        CreateIconMarker(wmsk.GetCountry(countryIndex).center, e.MarkerIndex, events.MarkerLiveTime, (IconMarker owner) => {
-            events.OpenPanel(e, countryIndex, eventIndex);
+    public void CreateEventMarker(S_Event e, int eventIndex, int regionIndex) {
+        CreateIconMarker(wmsk.GetCountry(regionIndex).center, e.MarkerIndex, events.MarkerLiveTime, (IconMarker owner) => {
+            events.OpenPanel(e, regionIndex, eventIndex);
             owner.DestroyGO();
         });
     }

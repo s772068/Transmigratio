@@ -50,31 +50,31 @@ public class GUI_CountryPanel : GUI_BasePanel {
         paramiters[index].Value = value;
     }
 
-    public void Localization(string name, SL_System system, SL_Map map) {
-        countryName.text = name;
-
-        ecologyGroupName.text = map.EcologyGroup;
-        // terrain.Label = map.Terrain;
-        // climate.Label = map.Climate;
-        flora.Label = map.Flora;
-        fauna.Label = map.Fauna;
-
-        populationGroupName.text = map.PopulationGroup;
-        population.Label = map.Population;
-        emptyPopulation = map.EmptyPopulation;
-        // production.Label = map.Production;
-        // economics.Label = map.Economics;
-        // goverment.Label = map.Goverment;
-        // civilization.Label = map.Civilization;
-
-        for(int i = 0; i < paramiters.Length; ++i) {
-            paramiters[i].Label = map.Paramiters[i].Name;
-        }
-
-        // print(system.Close);
-        
-        closeTxt.text = system.Close;
-    }
+    // public void Localization(string name, SL_System system, SL_Map map) {
+    //     countryName.text = name;
+    // 
+    //     ecologyGroupName.text = map.EcologyGroup;
+    //     // terrain.Label = map.Terrain;
+    //     // climate.Label = map.Climate;
+    //     flora.Label = map.Flora;
+    //     fauna.Label = map.Fauna;
+    // 
+    //     populationGroupName.text = map.PopulationGroup;
+    //     population.Label = map.Population;
+    //     emptyPopulation = map.EmptyPopulation;
+    //     // production.Label = map.Production;
+    //     // economics.Label = map.Economics;
+    //     // goverment.Label = map.Goverment;
+    //     // civilization.Label = map.Civilization;
+    // 
+    //     for(int i = 0; i < paramiters.Length; ++i) {
+    //         paramiters[i].Label = map.Paramiters[i].Name;
+    //     }
+    // 
+    //     // print(system.Close);
+    //     
+    //     closeTxt.text = system.Close;
+    // }
 
     public void ClickParam(int paramiter) =>  OnClickParam?.Invoke(paramiter);
 

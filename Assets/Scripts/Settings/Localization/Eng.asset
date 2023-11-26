@@ -24,43 +24,74 @@ MonoBehaviour:
     Break: Break
     Close: Close
   Map:
-    EcologyGroup: Ecology
-    Flora: Flora
-    Fauna: Fauna
-    PopulationGroup: People in the area
-    Population: Population
-    EmptyPopulation: Population is absent
-    Paramiters:
-    - Name: Climates
+    Ecology:
+      Name: Ecology
       Value:
-      - Ecuatorial
-      - Tropical
-      - Temperate
-      - Polar
-    - Name: Terrains
-      Value:
-      - Plain
-      - Forest
-      - Desert
-      - Mountain
-      - Steppe
-      - Tundra
-    - Name: Civilizations
-      Value:
-      - Uncivilized tribes
-      - Sumerians
-    - Name: Productions
-      Value:
-      - Primitive communism
-      - Slave society
-    - Name: Economics
-      Value:
-      - Hunters-collectors
-      - Farmers
-    - Name: Goverments
-      Value:
-      - Leaderism
-      - Monarchy
+      - Name: Terrain
+        Description: Terrain (Description)
+        Value:
+        - Name: Plain
+          Description: Plain (Description)
+        - Name: Forest
+          Description: Forest (Description)
+        - Name: Desert
+          Description: Desert (Description)
+        - Name: Mountain
+          Description: Mountain (Description)
+        - Name: Steppe
+          Description: Steppe (Description)
+        - Name: Tundra
+          Description: Tundra (Description)
+      - Name: Climates
+        Description: Climates (Description)
+        Value:
+        - Name: Ecuatorial
+          Description: Ecuatorial (Description)
+        - Name: Tropical
+          Description: Tropical (Description)
+        - Name: Temperate
+          Description: Temperate (Description)
+        - Name: Polar
+          Description: Polar (Description)
+      - Name: Flora
+        Description: Flora (Description)
+        Value: []
+      - Name: Fauna
+        Description: Fauna (Description)
+        Value: []
+    Civilization:
+      GroupName: People in the area
+      Population: Population
+      EmptyPopulation: Population is absent
+      Paramiters:
+      - Name: Production
+        Description: Productions (Description)
+        Value:
+        - Name: Primitive communism
+          Description: Primitive communism (Description)
+        - Name: Slave society
+          Description: Slave society (Description)
+      - Name: Economics
+        Description: Economics (Description)
+        Value:
+        - Name: Hunters-collectors
+          Description: Hunters-collectors (Description)
+        - Name: Farmers
+          Description: Farmers (Description)
+      - Name: Goverment
+        Description: Goverment (Description)
+        Value:
+        - Name: Leaderism
+          Description: Leaderism (Description)
+        - Name: Monarchy
+          Description: Monarchy (Description)
+      - Name: Civilization
+        Description: Civilization (Description)
+        Value:
+        - Name: Uncivilized tribes
+          Description: Uncivilized tribes  (Description)
+        - Name: Sumerians
+          Description: Sumerians  (Description)
     Countries:
     - Central Asia
     - Patagonia
@@ -117,3 +148,15 @@ MonoBehaviour:
     - Asia Minor
     - North America East Coast
     - East European Plain
+  Layers:
+    Name: SelectLayer
+    Layers:
+    - Terrain
+    - Climate
+    - Flora
+    - Fauna
+    - Population
+    - Production
+    - Economics
+    - Goverment
+    - Civilization

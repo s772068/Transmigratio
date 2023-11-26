@@ -1,18 +1,33 @@
 using UnityEngine.UI;
 using UnityEngine;
-using System;
 
 public class GUI_ShortRegionInfo : MonoBehaviour {
     [SerializeField] private Text countryName;
-    [SerializeField] private Text populationName;
+    [SerializeField] private Text population;
     [SerializeField] private Text eventName;
-    public Action<int> OnClick;
+    [Space]
+    [SerializeField] private GUIP_Region regionPanel;
+    [Space]
+    [SerializeField] private SettingsController settings;
+    [SerializeField] private EventsController events;
+    [SerializeField] private WmskController wmsk;
+    [SerializeField] private MapController map;
 
-    public int Index { private get; set; }
+    private int regionIndex;
 
-    public string CountryName { set => countryName.text = value; }
-    public string PopulationName { set => populationName.text = value; }
-    public string EventName { set => eventName.text = value; }
+    public void Click() => regionPanel.Open(regionIndex);
+    
+    private void UpdatePanel(int regionIndex) {
+        this.regionIndex = regionIndex;
+        countryName.text = settings.Localization.Map.Countries[regionIndex];
+        population.text = settings.Localization.Map.Civilization.Population + "\n" +
+                          map.data.Regions[regionIndex].AllPopulations;
+        eventName.text = map.data.Regions[regionIndex].Events.Count > 0 ?
+                         events.GetEventName(0) :
+                         "";
+    }
 
-    public void Click() => OnClick?.Invoke(Index);
+    private void Awake() {
+        wmsk.OnClick += UpdatePanel;
+    }
 }
