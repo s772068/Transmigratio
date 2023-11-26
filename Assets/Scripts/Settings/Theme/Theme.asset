@@ -12,19 +12,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab85c1c7477ad74294e5a82f720d096, type: 3}
   m_Name: Theme
   m_EditorClassIdentifier: 
-  Paramiters:
-  - Name: Climates
-    Value: 05000000030000000200000000000000
+  Ecology:
   - Name: Terrains
-    Value: 040000000200000005000000000000000600000001000000
-  - Name: Civilizations
-    Value: 0600000002000000
+    DescriptionSprite: 0
+    Value:
+    - Name: Plain
+      Color: 4
+      DescriptionSprite: 0
+    - Name: Forest
+      Color: 2
+      DescriptionSprite: 0
+    - Name: Desert
+      Color: 5
+      DescriptionSprite: 0
+    - Name: Mountain
+      Color: 0
+      DescriptionSprite: 0
+    - Name: Steppe
+      Color: 6
+      DescriptionSprite: 0
+    - Name: Tundra
+      Color: 1
+      DescriptionSprite: 0
+  - Name: Climates
+    DescriptionSprite: 0
+    Value:
+    - Name: Ecuatorial
+      Color: 5
+      DescriptionSprite: 0
+    - Name: Tropical
+      Color: 3
+      DescriptionSprite: 0
+    - Name: Temperate
+      Color: 2
+      DescriptionSprite: 0
+    - Name: Polar
+      Color: 0
+      DescriptionSprite: 0
+  - Name: Flora
+    DescriptionSprite: 0
+    Value: []
+  - Name: Fauna
+    DescriptionSprite: 0
+    Value: []
+  Civilization:
   - Name: Production
-    Value: 0700000006000000
+    DescriptionSprite: 0
+    Value:
+    - Name: Primitive communism
+      Color: 7
+      DescriptionSprite: 0
+    - Name: Slave society
+      Color: 6
+      DescriptionSprite: 0
   - Name: Economics
-    Value: 0200000003000000
+    DescriptionSprite: 0
+    Value:
+    - Name: Hunters-collectors
+      Color: 2
+      DescriptionSprite: 0
+    - Name: Farmers
+      Color: 3
+      DescriptionSprite: 0
   - Name: Goverments
-    Value: 0000000007000000
+    DescriptionSprite: 0
+    Value:
+    - Name: Leaderism
+      Color: 0
+      DescriptionSprite: 0
+    - Name: Monarchy
+      Color: 7
+      DescriptionSprite: 0
+  - Name: Civilizations
+    DescriptionSprite: 0
+    Value:
+    - Name: Uncivilized tribes
+      Color: 6
+      DescriptionSprite: 0
+    - Name: Sumerians
+      Color: 2
+      DescriptionSprite: 0
   Colors:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0, g: 0.6392157, b: 1, a: 1}
@@ -34,3 +101,5 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 0, a: 1}
   - {r: 1, g: 0.5882353, b: 0, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
+  Sprites:
+  - {fileID: 21300000, guid: 9cfa39010fe314547b3c17a05ff5f403, type: 3}
