@@ -1,44 +1,132 @@
 using System;
 using UnityEngine;
 
-public class GUIP_Region : MonoBehaviour {
+// States
+// 1: Region
+// 2: Civilization
+public class GUIP_Region : MonoBehaviour, IGameConnecter {
+    [SerializeField] private GameObject groupButtons;
     [SerializeField] private GUIE_RegionParamiters paramiters;
     [SerializeField] private GUIE_RegionDetails details;
     [SerializeField] private GUIE_RegionInfo info;
-    [Space]
-    [SerializeField] private GUIP_Civilization civilization;
-    [Space]
-    [SerializeField] private SettingsController Settings;
-    [SerializeField] private MapController Map;
+    
+    private SettingsController settings;
+    private WmskController wmsk;
+    private MapController map;
+
+    private int state;
+    private int viewGroupIndex = -1;
 
     public Action<int, int> OnClickCivilizationBtn;
 
-    public void Open(int regionIndex) {
-        if (gameObject.activeSelf) return;
-        gameObject.SetActive(true);
+    public GameController GameController {
+        set {
+            value.Get(out map);
+            paramiters.Map = map;
+            details.Map = map;
 
-        Map.OnUpdate += UpdatePanel;
-        paramiters.OnClickParamiter += InitDetails;
-        paramiters.OnClickParamiter += UpdateParamiterInfo;
-        details.OnClickDetail += UpdateDetailInfo;
-        info.OnClickButton += OpenCivilization;
+            value.Get(out settings);
+            paramiters.Settings = settings;
+            details.Settings = settings;
+            info.Settings = settings;
 
-        paramiters.regionIndex = regionIndex;
-        Localization();
-        UpdatePanel();
+            value.Get(out wmsk);
+        }
+    }
+
+    public void Open() {
+        if (!gameObject.activeSelf) {
+            gameObject.SetActive(true);
+            state = 0;
+        }
+        else state = 1;
+        Initialization();
     }
 
     public void Close() {
-        Map.OnUpdate -= UpdatePanel;
-        Map.OnUpdate -= details.UpdateDetails;
+        details.Clear();
+        info.Clear();
+
+        map.OnUpdate -= paramiters.UpdateEcology;
+        map.OnUpdate -= paramiters.UpdateCivilization;
+        map.OnUpdate -= details.UpdateDetails;
         paramiters.OnClickParamiter -= InitDetails;
         paramiters.OnClickParamiter -= UpdateParamiterInfo;
         details.OnClickDetail -= UpdateDetailInfo;
-        info.OnClickButton -= OpenCivilization;
+        info.OnClickButton -= Open;
 
+        --state;
+        if (state >= 0) Initialization();
+        else gameObject.SetActive(false);
+    }
+
+    public void ShowEcology() {
+        if (viewGroupIndex != 0) {
+            viewGroupIndex = 0;
+            UpdateEcology();
+        }
+    }
+
+    public void ShowCivilization() {
+        if (viewGroupIndex != 1) {
+            viewGroupIndex = 1;
+            UpdateCivilization();
+        }
+    }
+
+    private void Clear() {
         details.Clear();
         info.Clear();
-        gameObject.SetActive(false);
+
+        map.OnUpdate -= paramiters.UpdateEcology;
+        map.OnUpdate -= paramiters.UpdateCivilization;
+        map.OnUpdate -= details.UpdateDetails;
+        paramiters.OnClickParamiter -= InitDetails;
+        paramiters.OnClickParamiter -= UpdateParamiterInfo;
+        details.OnClickDetail -= UpdateDetailInfo;
+        info.OnClickButton -= Open;
+    }
+
+    private void Initialization() {
+        Clear();
+
+        paramiters.regionIndex = wmsk.SelectedIndex;
+        paramiters.State = state;
+
+        paramiters.OnClickParamiter += InitDetails;
+        paramiters.OnClickParamiter += UpdateParamiterInfo;
+        details.OnClickDetail += UpdateDetailInfo;
+
+        Localization();
+
+        switch (state) {
+            case 0: InitializationRegionState(); break;
+            case 1: InitializationCivilizationState(); break;
+        }
+    }
+
+    private void InitializationRegionState() {
+        paramiters.civilizationIndex = -1;
+        details.civilizationIndex = -1;
+
+        groupButtons.SetActiveFlexalon(true);
+        paramiters.ShowPortrait(false);
+
+        info.OnClickButton += Open;
+
+        ShowEcology();
+    }
+
+    private void InitializationCivilizationState() {
+        int civilizationIndex = info.detailIndex > -1 ?
+            info.detailIndex : map.data.Regions[paramiters.regionIndex].MaxPopulationsIndex;
+        paramiters.civilizationIndex = civilizationIndex;
+        details.civilizationIndex = civilizationIndex;
+
+        groupButtons.SetActiveFlexalon(false);
+        paramiters.ShowPortrait(true);
+
+        UpdateCivilization();
     }
 
     private void Localization() {
@@ -47,14 +135,9 @@ public class GUIP_Region : MonoBehaviour {
         paramiters.LocalizationCivilization();
     }
 
-    private void UpdatePanel() {
-        paramiters.UpdateEcology();
-        paramiters.UpdateCivilization();
-    }
-
     private void InitDetails() {
-        Map.OnUpdate -= details.UpdateDetails;
-        Map.OnUpdate += details.UpdateDetails;
+        map.OnUpdate -= details.UpdateDetails;
+        map.OnUpdate += details.UpdateDetails;
         details.regionIndex = paramiters.regionIndex;
         details.groupIndex = paramiters.groupIndex;
         details.paramiterIndex = paramiters.paramiterIndex;
@@ -73,20 +156,17 @@ public class GUIP_Region : MonoBehaviour {
         info.UpdateInfo();
     }
 
-    public void OpenCivilization() {
-        civilization.Open(paramiters.regionIndex,
-            Map.data.Regions[paramiters.regionIndex].MaxPopulationsIndex);
+    private void UpdateCivilization() {
+        map.OnUpdate -= paramiters.UpdateEcology;
+        map.OnUpdate += paramiters.UpdateCivilization;
+        paramiters.ShowCivilization();
     }
 
-    private void Awake() {
-        paramiters.Map = Map;
-        details.Map = Map;
-
-        paramiters.Settings = Settings;
-        details.Settings = Settings;
-        info.Settings = Settings;
-
-        paramiters.civilizationIndex = -1;
-        details.civilizationIndex = -1;
+    private void UpdateEcology() {
+        map.OnUpdate -= paramiters.UpdateCivilization;
+        map.OnUpdate += paramiters.UpdateEcology;
+        paramiters.ShowEcology();
     }
+
+    public void Init() { }
 }

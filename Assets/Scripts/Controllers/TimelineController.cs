@@ -1,47 +1,42 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
-public class TimelineController : BaseController {
+public class TimelineController : MonoBehaviour, IGameConnecter {
+    [SerializeField, Min(0)] private float speedPlayGame;
+    [SerializeField, Min(0)] private float speedFastPlayGame;
+    
     private float interval;
-    private ResourcesController resources;
-    private MigrationController migration;
-    private EventsController events;
-    private MapController map;
 
-    private bool isActive;
+    public Action<int> OnSelectRegion;
+    public Action OnTick;
 
-    public override GameController GameController {
-        set {
-            resources = value.Get<ResourcesController>();
-            migration = value.Get<MigrationController>();
-            events = value.Get<EventsController>();
-            map = value.Get<MapController>();
-        }
-    }
+    private bool isTick;
 
     public float Interval {
         set {
             if (value == 0) {
-                isActive = false;
+                isTick = false;
             } else if (interval == 0 && value > 0) {
-                isActive = true;
+                isTick = true;
                 StartCoroutine(UpdateActive());
             }
             interval = value;
         }
     }
 
-    private void Start() {
-        Interval = 1;
-    }
+    public GameController GameController { set { } }
+
+    public void Pouse() => Interval = 0;
+    public void Play() => Interval = 1 / speedPlayGame;
+    public void Forward() => Interval = 1 / speedFastPlayGame;
 
     private IEnumerator UpdateActive() {
-        while (isActive) {
-            // events.Call();
-            // migration.UpdateMigration();
-            map.UpdateParams();
-            resources.UpdateResources();
+        while (isTick) {
+            OnTick?.Invoke();
             yield return new WaitForSeconds(interval);
         }
     }
+
+    public void Init() { }
 }

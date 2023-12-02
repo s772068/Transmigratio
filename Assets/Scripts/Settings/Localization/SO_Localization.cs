@@ -7,5 +7,6 @@ public class SO_Localization : ScriptableObject {
     public SL_Resources Resources;
     public SL_System System;
     public SL_Map Map;
-    public SL_LayerSelect Layers;
+    public S_Value<string[]> Layers;
+    public S_Value<S_Value<string>[]> Info;
 }

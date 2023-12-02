@@ -30,29 +30,29 @@ MonoBehaviour:
       - Name: Terrain
         Description: Terrain (Description)
         Value:
-        - Name: Plain
-          Description: Plain (Description)
-        - Name: Forest
-          Description: Forest (Description)
+        - Name: Vegetable
+          Description: Vegetable (Description)
         - Name: Desert
           Description: Desert (Description)
-        - Name: Mountain
-          Description: Mountain (Description)
         - Name: Steppe
           Description: Steppe (Description)
-        - Name: Tundra
-          Description: Tundra (Description)
+        - Name: Forest
+          Description: Forest (Description)
+        - Name: Swampier
+          Description: Swampier (Description)
+        - Name: Mountain
+          Description: Mountain (Description)
       - Name: Climates
         Description: Climates (Description)
         Value:
-        - Name: Ecuatorial
-          Description: Ecuatorial (Description)
-        - Name: Tropical
-          Description: Tropical (Description)
-        - Name: Temperate
-          Description: Temperate (Description)
         - Name: Polar
           Description: Polar (Description)
+        - Name: Temperate
+          Description: Temperate (Description)
+        - Name: Tropical
+          Description: Tropical (Description)
+        - Name: Ecuatorial
+          Description: Ecuatorial (Description)
       - Name: Flora
         Description: Flora (Description)
         Value: []
@@ -62,95 +62,97 @@ MonoBehaviour:
     Civilization:
       GroupName: People in the area
       Population: Population
-      EmptyPopulation: Population is absent
+      EmptyPopulation: is absent
       Paramiters:
-      - Name: Production
-        Description: Productions (Description)
+      - Name: ProdMode
+        Description: ProdMode (Description)
         Value:
         - Name: Primitive communism
           Description: Primitive communism (Description)
         - Name: Slave society
           Description: Slave society (Description)
-      - Name: Economics
-        Description: Economics (Description)
+      - Name: EcoCulture
+        Description: EcoCulture (Description)
         Value:
         - Name: Hunters-collectors
           Description: Hunters-collectors (Description)
         - Name: Farmers
           Description: Farmers (Description)
-      - Name: Goverment
-        Description: Goverment (Description)
+      - Name: Government
+        Description: Government (Description)
         Value:
         - Name: Leaderism
           Description: Leaderism (Description)
         - Name: Monarchy
           Description: Monarchy (Description)
-      - Name: Civilization
-        Description: Civilization (Description)
+      - Name: Politic
+        Description: Politic (Description)
         Value:
         - Name: Uncivilized tribes
           Description: Uncivilized tribes  (Description)
-        - Name: Sumerians
-          Description: Sumerians  (Description)
+        - Name: Aztecs
+          Description: Aztecs  (Description)
     Countries:
-    - Central Asia
-    - Patagonia
-    - Caucasus
-    - New Zealand
-    - Antarctica
-    - Australia
-    - Hindustan
-    - Malaysia
-    - Central America
-    - Andes
-    - Himalayas
-    - South Africa
-    - Northwest Territiries
-    - Alps
-    - China
-    - Central Africa
-    - Central Europe
-    - East Africa
-    - North Europe
-    - North Africa
-    - Nile
-    - Iberia
-    - Baltic
-    - Karelia
-    - West Africa
-    - West Europe
-    - Japan
-    - Central Great Steppe
-    - South East Asia
-    - Madagascar
-    - Sahara
-    - East Great Steppe
-    - Arabia
-    - Far East
-    - West Great Steppe
-    - North Andes
-    - Middle East
-    - North Ural
-    - Ural
-    - Siberia
-    - Altai
-    - North Atlantic
-    - Antilles
-    - Amasonia
-    - Apennine Peninsula
-    - Alaska
-    - North America West Coast
-    - Cordillera
-    - Great Lakes
-    - Great Plains
-    - Florida
-    - Balkan
-    - Asia Minor
-    - North America East Coast
-    - East European Plain
+      Name: Region
+      Value:
+      - Central Asia
+      - Patagonia
+      - Caucasus
+      - New Zealand
+      - Antarctica
+      - Australia
+      - Hindustan
+      - Malaysia
+      - Central America
+      - Andes
+      - Himalayas
+      - South Africa
+      - Northwest Territiries
+      - Alps
+      - China
+      - Central Africa
+      - Central Europe
+      - East Africa
+      - North Europe
+      - North Africa
+      - Nile
+      - Iberia
+      - Baltic
+      - Karelia
+      - West Africa
+      - West Europe
+      - Japan
+      - Central Great Steppe
+      - South East Asia
+      - Madagascar
+      - Sahara
+      - East Great Steppe
+      - Arabia
+      - Far East
+      - West Great Steppe
+      - North Andes
+      - Middle East
+      - North Ural
+      - Ural
+      - Siberia
+      - Altai
+      - North Atlantic
+      - Antilles
+      - Amasonia
+      - Apennine Peninsula
+      - Alaska
+      - North America West Coast
+      - Cordillera
+      - Great Lakes
+      - Great Plains
+      - Florida
+      - Balkan
+      - Asia Minor
+      - North America East Coast
+      - East European Plain
   Layers:
     Name: SelectLayer
-    Layers:
+    Value:
     - Terrain
     - Climate
     - Flora
@@ -160,3 +162,11 @@ MonoBehaviour:
     - Economics
     - Goverment
     - Civilization
+  Info:
+    Name: Informatin
+    Value:
+    - Name: Start game
+      Value: In the field of Homo Sapiens there was a group of highly developed primates
+        known as {2}. They are able to communicate and verbally transmit knowledge
+        to the next generations, which gives them the ability to accumulate knowledge
+        with each new generation.

@@ -1,12 +1,13 @@
 using UnityEngine;
 
 public class GUIP_Civilization : MonoBehaviour {
+    [SerializeField] private GameController gameController;
     [SerializeField] private GUIE_RegionParamiters paramiters;
     [SerializeField] private GUIE_RegionDetails details;
     [SerializeField] private GUIE_RegionInfo info;
 
-    [SerializeField] private SettingsController Settings;
-    [SerializeField] private MapController Map;
+    private SettingsController Settings;
+    private MapController Map;
 
     public void Open(int regionIndex, int civilizationIndex) {
         if (gameObject.activeSelf) return;

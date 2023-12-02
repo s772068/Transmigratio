@@ -1,9 +1,47 @@
-using System.Linq;
+using AYellowpaper.SerializedCollections;
 
+// Example: GetRegion => IndexRegion => GetCivilization => IndexCivilization => GetParamiter => IndexParamiter => IndexDetail
 [System.Serializable]
 public struct S_Map {
-    public S_Value<int[]>[] Civilizations;
+    public int[][] Civilizations;
     public S_Region[] Regions;
+    public SerializedDictionary<string, int> CivilizationsIndexes;
+    public SerializedDictionary<string, int> CivilizationsRegionsIndexes;
+    public SerializedDictionary<string, int> RegionsNameIndexes;
+
+    public int this[int regionIndex, params string[] val] {
+        get {
+            switch (val[0]) {
+                case "Civilizations": return Civilizations[CivilizationsIndexes[val[1]]][CivilizationsIndexes[val[2]]];
+                case "Regions": return Regions[regionIndex][val[1], val[2], val[3], val[4], val[5]];
+                default: return 0;
+            }
+        }
+        set {
+            switch (val[0]) {
+                case "Civilizations": Civilizations[CivilizationsIndexes[val[1]]][CivilizationsIndexes[val[2]]] = value; break;
+                case "Regions": Regions[regionIndex][val[1], val[2], val[3], val[4], val[5]] = value; break;
+                default: return;
+            }
+        }
+    }
+
+    public int this[params int[] val] {
+        get {
+            switch (val[0]) {
+                case 0: return Civilizations[val[1]][val[2]];
+                case 1: return Regions[val[1]][val[2], val[3], val[4], val[5], val[6]];
+                default: return 0;
+            }
+        }
+        set {
+            switch (val[0]) {
+                case 0: Civilizations[val[1]][val[2]] = value; break;
+                case 1: Regions[val[1]][val[2], val[3], val[4], val[5], val[6]] = value; break;
+                default: return;
+            }
+        }
+    }
 
     public int MaxCivilizationStage {
         get {
@@ -41,20 +79,6 @@ public struct S_Map {
         }
     }
 
-    public int MaxCivilizationIndex(int paramiterIndex) {
-        int max = -1;
-        int index = -1;
-        int value;
-        for (int i = 0; i < Regions.Length; ++i) {
-            value = Regions[i].MaxCivilizationValue(paramiterIndex);
-            if (value > max) {
-                max = value;
-                index = i;
-            }
-        }
-        return index;
-    }
-
     public int MaxEcologyIndex(int paramiterIndex) {
         int max = -1;
         int index = -1;
@@ -69,18 +93,20 @@ public struct S_Map {
         return index;
     }
 
-    public int MaxCivilizationValue(int paramiterIndex) {
+    public int MaxCivilizationIndex(int paramiterIndex) {
         int max = -1;
+        int index = -1;
         int value;
         for (int i = 0; i < Regions.Length; ++i) {
             value = Regions[i].MaxCivilizationValue(paramiterIndex);
             if (value > max) {
                 max = value;
+                index = i;
             }
         }
-        return max;
+        return index;
     }
-    
+
     public int MaxEcologyValue(int paramiterIndex) {
         int max = -1;
         int value;
@@ -93,18 +119,30 @@ public struct S_Map {
         return max;
     }
 
-    public int AllCivilizationVlaues(int paramiterIndex) {
+    public int MaxCivilizationValue(int paramiterIndex) {
+        int max = -1;
+        int value;
+        for (int i = 0; i < Regions.Length; ++i) {
+            value = Regions[i].MaxCivilizationValue(paramiterIndex);
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
+    }
+
+    public int AllEcologyVlaues(int paramiterIndex, int detailIndex) {
         int all = 0;
         for (int i = 0; i < Regions.Length; ++i) {
-            all += Regions[i].AllCivilizationVlaues(paramiterIndex);
+            all += Regions[i].Ecology[paramiterIndex].Details[detailIndex];
         }
         return all;
     }
 
-    public int AllEcologyVlaues(int paramiterIndex) {
+    public int AllCivilizationVlaues(int paramiterIndex, int detailIndex) {
         int all = 0;
         for (int i = 0; i < Regions.Length; ++i) {
-            all += Regions[i].Ecology[paramiterIndex].AllVlaues;
+            all += Regions[i].AllCivilizationVlaues(paramiterIndex, detailIndex);
         }
         return all;
     }

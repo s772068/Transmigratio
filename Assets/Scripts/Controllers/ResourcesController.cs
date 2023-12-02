@@ -1,19 +1,10 @@
-using UnityEngine.UI;
 using UnityEngine;
 
-public class ResourcesController : BaseController, ISave {
-    [SerializeField] private GUI_ProgressBar progressBar;
-    [SerializeField] private Text progressTxt;
+public class ResourcesController : MonoBehaviour, ISave, IGameConnecter {
     [Range(0, 100)]
     public int intervention;
 
-    private SettingsController settings;
-    
-    public override GameController GameController {
-        set {
-            settings = value.Get<SettingsController>();
-        }
-    }
+    public GameController GameController { set { } }
 
     public void Save() {
         IOHelper.SaveToJson(new S_Resources() {
@@ -26,8 +17,5 @@ public class ResourcesController : BaseController, ISave {
         intervention = data.intervention;
     }
 
-    public void UpdateResources() {
-        progressBar.Fill = intervention / 100f;
-        progressTxt.text = settings.Localization.Resources.Intervention + " " + intervention + "%";
-    }
+    public void Init() { }
 }

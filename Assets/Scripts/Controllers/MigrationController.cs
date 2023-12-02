@@ -1,22 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MigrationController : BaseController {
+public class MigrationController : MonoBehaviour, IGameConnecter {
     [SerializeField] private GUI_MigrationPanel panel;
     [SerializeField] private int populationsPerTick;
 
     private List<S_Migration> migrations = new();
     private S_Migration migration;
 
+    private TimelineController timeline;
     private SettingsController settings;
     private WmskController wmsk;
-    private MapController map;
 
-    public override GameController GameController {
+    public GameController GameController {
         set {
-            settings = value.Get<SettingsController>();
-            wmsk = value.Get<WmskController>();
-            map = value.Get<MapController>();
+            value.Get(out timeline);
+            value.Get(out settings);
+            value.Get(out wmsk);
         }
     }
 
@@ -26,8 +26,8 @@ public class MigrationController : BaseController {
         panel.gameObject.SetActive(true);
         panel.Localization(settings.Localization.Migration,
                            settings.Localization.System);
-        panel.Init(data, settings.Localization.Map.Countries[data.From],
-                         settings.Localization.Map.Countries[data.To]);
+        panel.Init(data, settings.Localization.Map.Countries.Value[data.From],
+                         settings.Localization.Map.Countries.Value[data.To]);
         panel.Population = migrations[panel.index].Population;
         panel.OnClose = () => panel.gameObject.SetActive(false);
         return true;
@@ -59,5 +59,9 @@ public class MigrationController : BaseController {
     public void EndMigration(int index) {
         wmsk.EndMigration(index);
         migrations.RemoveAt(index);
+    }
+
+    public void Init() {
+        timeline.OnTick += UpdateMigration;
     }
 }

@@ -1,33 +1,53 @@
 using UnityEngine.UI;
 using UnityEngine;
 
-public class GUI_ShortRegionInfo : MonoBehaviour {
+public class GUI_ShortRegionInfo : MonoBehaviour, IGameConnecter {
     [SerializeField] private Text countryName;
     [SerializeField] private Text population;
     [SerializeField] private Text eventName;
-    [Space]
-    [SerializeField] private GUIP_Region regionPanel;
-    [Space]
-    [SerializeField] private SettingsController settings;
-    [SerializeField] private EventsController events;
-    [SerializeField] private WmskController wmsk;
-    [SerializeField] private MapController map;
 
-    private int regionIndex;
+    private int _regionIndex;
 
-    public void Click() => regionPanel.Open(regionIndex);
-    
-    private void UpdatePanel(int regionIndex) {
-        this.regionIndex = regionIndex;
-        countryName.text = settings.Localization.Map.Countries[regionIndex];
-        population.text = settings.Localization.Map.Civilization.Population + "\n" +
-                          map.data.Regions[regionIndex].AllPopulations;
-        eventName.text = map.data.Regions[regionIndex].Events.Count > 0 ?
-                         events.GetEventName(0) :
-                         "";
+    private SettingsController settings;
+    private TimelineController timeline;
+    private EventsController events;
+    private WmskController wmsk;
+    private MapController map;
+
+    public GameController GameController {
+        set {
+            value.Get(out settings);
+            value.Get(out timeline);
+            value.Get(out events);
+            value.Get(out wmsk);
+            value.Get(out map);
+        }
     }
 
-    private void Awake() {
-        wmsk.OnClick += UpdatePanel;
+    private void SelectRegion(int regionIndex) {
+        _regionIndex = regionIndex;
+        UpdatePanel();
+    }
+
+        private void UpdatePanel() {
+        if (_regionIndex == -1) return;
+        countryName.text = _regionIndex == -1 ?
+            settings.Localization.Map.Countries.Name :
+            settings.Localization.Map.Countries.Value[_regionIndex];
+        population.text = _regionIndex == -1 ?
+            settings.Localization.Map.Countries.Name :
+            settings.Localization.Map.Civilization.Population + "\n" +
+            (map.data.Regions[_regionIndex].AllPopulations == 0 ?
+            settings.Localization.Map.Civilization.EmptyPopulation :
+            map.data.Regions[_regionIndex].AllPopulations);
+
+        //eventName.text = _regionIndex == -1 ?
+        //    "" : map.data.Regions[_regionIndex].Events.Count > 0 ?
+        //        events.GetEventName(0) : "";
+    }
+
+    public void Init() {
+        wmsk.OnClick += SelectRegion;
+        timeline.OnTick += UpdatePanel;
     }
 }

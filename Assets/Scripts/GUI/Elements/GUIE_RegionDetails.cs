@@ -5,9 +5,11 @@ using System;
 
 public class GUIE_RegionDetails : MonoBehaviour {
     [SerializeField] private Text paramiterLabel;
+    [SerializeField] private Text richnessTxt;
     [SerializeField] private GUI_PieElement pieElement;
     [SerializeField] private GUI_Legend legend;
     [SerializeField] private Transform pieContent;
+    [SerializeField] private Transform legendsPanel;
     [SerializeField] private Transform legendContent;
 
     [HideInInspector] public int regionIndex;
@@ -30,10 +32,12 @@ public class GUIE_RegionDetails : MonoBehaviour {
         civilizationIndex < 0 ? paramiterIndex == Settings.Localization.Map.Civilization.Paramiters.Length - 1 ?
             Map.data.Regions[regionIndex].ArrayPopulation :
             Map.data.Regions[regionIndex].ArrayCivilizationParamiters(paramiterIndex) :
-            Map.data.Regions[regionIndex].Civilizations[civilizationIndex].Paramiters[paramiterIndex].Values;
+            Map.data.Regions[regionIndex].Civilizations[civilizationIndex].Paramiters[paramiterIndex].Details;
 
     public void Initialization() {
         Clear();
+        pieContent.gameObject.SetActive(true);
+        legendsPanel.gameObject.SetActive(true);
         switch (groupIndex) {
             case 0: InitEcology(); break;
             case 1: InitCivilization(); break;
@@ -42,6 +46,8 @@ public class GUIE_RegionDetails : MonoBehaviour {
     }
 
     public void Clear() {
+        richnessTxt.text = "";
+        paramiterLabel.text = "";
         allValues = 0;
         for (int i = 0; i < legendElements.Count; ++i) {
             legendElements[i].DestroyGO();
@@ -49,12 +55,14 @@ public class GUIE_RegionDetails : MonoBehaviour {
         }
         legendElements.Clear();
         pieElements.Clear();
+        pieContent.gameObject.SetActive(false);
+        legendsPanel.gameObject.SetActive(false);
     }
 
     private void InitEcology() {
         SL_Paramiter<SL_Detail[]> paramitersStrings = Settings.Localization.Map.Ecology.Value[paramiterIndex];
         paramiterLabel.text = paramitersStrings.Name;
-        values = Map.data.Regions[regionIndex].Ecology[paramiterIndex].Values;
+        values = Map.data.Regions[regionIndex].Ecology[paramiterIndex].Details;
         for (int i = 0; i < values.Length; ++i) {
             AddLegend(Settings.Theme.GetEcologyColor(paramiterIndex, i),
                       Settings.Localization.Map.Ecology.Value[paramiterIndex].Value[i].Name,
@@ -67,7 +75,7 @@ public class GUIE_RegionDetails : MonoBehaviour {
         paramiterLabel.text = paramitersStrings.Name;
         values = CivilizationValues;
         for (int i = 0; i < values.Length; ++i) {
-            AddLegend(Settings.Theme.GetCivilizationColor(paramiterIndex, i),
+            AddLegend(Settings.Theme.GetCivilizationColor(paramiterIndex + 1, i),
                       Settings.Localization.Map.Civilization.Paramiters[paramiterIndex].Value[i].Name,
                       values[i]);
         }
@@ -89,7 +97,7 @@ public class GUIE_RegionDetails : MonoBehaviour {
 
     public void UpdateDetails() {
         values = groupIndex == 1 ? CivilizationValues :
-            Map.data.Regions[regionIndex].Ecology[paramiterIndex].Values;
+            Map.data.Regions[regionIndex].Ecology[paramiterIndex].Details;
         allValues = 0;
         for (int i = 0; i < values.Length; ++i) {
             legendElements[i].Value = values[i];

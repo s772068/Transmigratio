@@ -1,53 +1,90 @@
+using UnityEngine.UI;
 using UnityEngine;
 
-public class GUIP_LayersSelect : MonoBehaviour {
-    [SerializeField] private SettingsController settings;
-    [SerializeField] private LayersController layers;
-    [SerializeField] private MapController map;
-    
-    private int[] values;
-    
+public class GUIP_LayersSelect : MonoBehaviour, IGameConnecter {
+    [SerializeField] private GameController game;
+    [SerializeField] private Text Label;
+    [SerializeField] private Text[] LayersTxts;
+
+    private SettingsController settings;
+    private WmskController wmsk;
+    private MapController map;
+
+    private int _layerIndex = -1;
+
+    private ILayer[] layers = {
+        new TerrainLayer(),
+        new ClimateLayer(),
+        new FloraLayer(),
+        new FaunaLayer(),
+        new PopulationLayer(),
+        new ProductionLayer(),
+        new EconomicsLayer(),
+        new GovermentLayer()
+        // new CivilizationLayer()
+    };
+
+    public GameController GameController {
+        set {
+            value.Get(out settings);
+            value.Get(out wmsk);
+            value.Get(out map);
+        }
+    }
+
     public void Open() {
         if (gameObject.activeSelf) return;
         gameObject.SetActive(true);
-        values = new int[map.data.Regions.Length];
         Localization();
+        map.OnUpdate += UpdateLayer;
     }
 
     public void Close() {
+        map.OnUpdate -= UpdateLayer;
+        Clear();
         gameObject.SetActive(false);
     }
 
-    public void Click(int paramiterIndex) {
-        int max = 0;
-        if (paramiterIndex >= 0 && paramiterIndex <= 3) {
-            max = map.data.MaxEcologyValue(paramiterIndex);
-            for(int i = 0; i < values.Length; ++i) {
-                values[i] = map.data.Regions[i].Ecology[paramiterIndex].MaxValue;
-            }
+    public void Click(int layerIndex) {
+        if(layerIndex < 0 || layers.Length - 1 < layerIndex) return;
+        _layerIndex = layerIndex;
+        layers[_layerIndex].Show(settings, wmsk, map, _layerIndex);
+    }
+
+    private void Clear() {
+        for (int i = 0; i < map.data.Regions.Length; ++i) {
+            map.data.Regions[i].Color = Color.clear;
+            wmsk.RegionPainting(i, Color.clear);
         }
-        if(paramiterIndex == 4) {
-            max = map.data.MaxPopulationValue;
-            for (int i = 0; i < values.Length; ++i) {
-                values[i] = map.data.Regions[i].MaxPopulationsValue;
-            }
-        }
-        if(paramiterIndex >= 5 && paramiterIndex <= 7) {
-            paramiterIndex -= 5;
-            max = map.data.MaxCivilizationValue(paramiterIndex);
-            for (int i = 0; i < values.Length; ++i) {
-                values[i] = map.data.Regions[i].MaxCivilizationValue(paramiterIndex);
-            }
-        }
-        if(paramiterIndex == 8) {
-            max = map.data.MaxCivilizationStage;
-            for (int i = 0; i < values.Length; ++i) {
-                values[i] = map.data.Regions[i].MaxCivilizationStage;
-            }
-        }
-        layers.Painting(max, values);
+    }
+
+    private void UpdateLayer() {
+        if(_layerIndex < 0 || layers.Length - 1 < _layerIndex) return;
+        layers[_layerIndex].Show(settings, wmsk, map, _layerIndex);
     }
 
     private void Localization() {
+        Label.text = settings.Localization.Layers.Name;
+        for(int i = 0; i < settings.Localization.Layers.Value.Length; ++i) {
+            LayersTxts[i].text = settings.Localization.Layers.Value[i];
+        }
+    }
+
+    private void Painting(int maxValue, int[] paramiters) {
+        if (maxValue == 0) return;
+
+        Color color;
+
+        for (int i = 0; i < paramiters.Length; ++i) {
+            color = Color.HSVToRGB(paramiters[i] / maxValue * 7f / 9f, 1f, 1f);
+            map.data.Regions[i].Color = color;
+            wmsk.RegionPainting(i, color);
+        }
+    }
+
+    public void Init() {
+        game.Get(out settings);
+        game.Get(out wmsk);
+        game.Get(out map);
     }
 }

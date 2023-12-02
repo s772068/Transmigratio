@@ -1,9 +1,9 @@
 using UnityEngine;
 
 public class HungerEvent : BaseEvent {
-    private protected MigrationController migration;
-    private protected ResourcesController resources;
-    private protected MapController map;
+    private MigrationController migration;
+    private ResourcesController resources;
+    private MapController map;
     private int migrateCountryIndex;
     private int migratePopulation;
     private int costIntervention;
@@ -56,9 +56,9 @@ public class HungerEvent : BaseEvent {
     public HungerEvent(GameController game, int migratePopulation, int costIntervention) {
         this.migratePopulation = migratePopulation;
         this.costIntervention = costIntervention;
-        migration = game.Get<MigrationController>();
-        resources = game.Get<ResourcesController>();
-        map = game.Get<MapController>();
+        game.Get(out migration);
+        game.Get(out resources);
+        game.Get(out map);
     }
 
     public override bool CheckBuild(int countryIndex, int resultIndex) =>

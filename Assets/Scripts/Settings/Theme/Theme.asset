@@ -16,90 +16,138 @@ MonoBehaviour:
   - Name: Terrains
     DescriptionSprite: 0
     Value:
-    - Name: Plain
-      Color: 4
-      DescriptionSprite: 0
-    - Name: Forest
-      Color: 2
+    - Name: Vegetable
+      Color: 15
       DescriptionSprite: 0
     - Name: Desert
-      Color: 5
-      DescriptionSprite: 0
-    - Name: Mountain
-      Color: 0
+      Color: 2
       DescriptionSprite: 0
     - Name: Steppe
-      Color: 6
-      DescriptionSprite: 0
-    - Name: Tundra
       Color: 1
+      DescriptionSprite: 0
+    - Name: Forest
+      Color: 3
+      DescriptionSprite: 0
+    - Name: Swampier
+      Color: 8
+      DescriptionSprite: 0
+    - Name: Mountain
+      Color: 7
       DescriptionSprite: 0
   - Name: Climates
     DescriptionSprite: 0
     Value:
-    - Name: Ecuatorial
-      Color: 5
+    - Name: Polar
+      Color: 9
+      DescriptionSprite: 0
+    - Name: Temperate
+      Color: 8
       DescriptionSprite: 0
     - Name: Tropical
       Color: 3
       DescriptionSprite: 0
-    - Name: Temperate
-      Color: 2
-      DescriptionSprite: 0
-    - Name: Polar
-      Color: 0
+    - Name: Ecuatorial
+      Color: 7
       DescriptionSprite: 0
   - Name: Flora
     DescriptionSprite: 0
-    Value: []
+    Value:
+    - Name: Absent
+      Color: 0
+      DescriptionSprite: 0
+    - Name: Little
+      Color: 1
+      DescriptionSprite: 0
+    - Name: Medium
+      Color: 8
+      DescriptionSprite: 0
+    - Name: Lots
+      Color: 3
+      DescriptionSprite: 0
   - Name: Fauna
     DescriptionSprite: 0
-    Value: []
+    Value:
+    - Name: Little
+      Color: 0
+      DescriptionSprite: 0
+    - Name: Medium
+      Color: 2
+      DescriptionSprite: 0
+    - Name: Lots
+      Color: 3
+      DescriptionSprite: 0
   Civilization:
-  - Name: Production
+  - Name: Population
+    DescriptionSprite: 0
+    Value:
+    - Name: Little
+      Color: 0
+      DescriptionSprite: 0
+    - Name: Medium
+      Color: 2
+      DescriptionSprite: 0
+    - Name: Lots
+      Color: 3
+      DescriptionSprite: 0
+  - Name: ProdMode
     DescriptionSprite: 0
     Value:
     - Name: Primitive communism
-      Color: 7
+      Color: 14
       DescriptionSprite: 0
     - Name: Slave society
-      Color: 6
+      Color: 10
       DescriptionSprite: 0
-  - Name: Economics
+  - Name: EcoCulture
     DescriptionSprite: 0
     Value:
     - Name: Hunters-collectors
-      Color: 2
+      Color: 0
       DescriptionSprite: 0
     - Name: Farmers
-      Color: 3
+      Color: 1
       DescriptionSprite: 0
-  - Name: Goverments
+  - Name: Governments
     DescriptionSprite: 0
     Value:
     - Name: Leaderism
       Color: 0
       DescriptionSprite: 0
     - Name: Monarchy
-      Color: 7
+      Color: 9
       DescriptionSprite: 0
-  - Name: Civilizations
+  - Name: Politic
     DescriptionSprite: 0
     Value:
     - Name: Uncivilized tribes
       Color: 6
-      DescriptionSprite: 0
-    - Name: Sumerians
+      DescriptionSprite: 1
+    - Name: Aztecs
       Color: 2
-      DescriptionSprite: 0
+      DescriptionSprite: 2
   Colors:
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0, g: 0.6392157, b: 1, a: 1}
-  - {r: 0, g: 0.49803922, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0, a: 1}
-  - {r: 0.67058825, g: 1, b: 0, a: 1}
-  - {r: 1, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0.5882353, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.84705883, g: 0.65882355, b: 0.3647059, a: 1}
+  - {r: 0.8, g: 0.54901963, b: 0.3372549, a: 1}
+  - {r: 0.7647059, g: 0.47058824, b: 0.32941177, a: 1}
+  - {r: 0.70980394, g: 0.41568628, b: 0.3019608, a: 1}
+  - {r: 0.61960787, g: 0.40392157, b: 0.2784314, a: 1}
+  - {r: 0.57254905, g: 0.29411766, b: 0.25882354, a: 1}
+  - {r: 0.64705884, g: 0.39607844, b: 0.24705882, a: 1}
+  - {r: 0.53333336, g: 0.34509805, b: 0.5254902, a: 1}
+  - {r: 0.6745098, g: 0.46666667, b: 0.5254902, a: 1}
+  - {r: 0.5803922, g: 0.3019608, b: 0.42745098, a: 1}
+  - {r: 0.62352943, g: 0.49411765, b: 0.8117647, a: 1}
+  - {r: 0.52156866, g: 0.44705883, b: 0.7058824, a: 1}
+  - {r: 0.28235295, g: 0.49803922, b: 0.50980395, a: 1}
+  - {r: 0.31764707, g: 0.6117647, b: 0.49411765, a: 1}
+  - {r: 0.30980393, g: 0.44313726, b: 0.3372549, a: 1}
+  - {r: 0.5019608, g: 0.64705884, b: 0.6784314, a: 1}
+  - {r: 0.3254902, g: 0.33333334, b: 0.53333336, a: 1}
+  - {r: 0.34509805, g: 0.2901961, b: 0.48235294, a: 1}
+  - {r: 0.5882353, g: 0.64705884, b: 0.43137255, a: 1}
+  - {r: 0.4392157, g: 0.57254905, b: 0.3372549, a: 1}
+  - {r: 0.84313726, g: 0.25490198, b: 0.21568628, a: 1}
   Sprites:
   - {fileID: 21300000, guid: 9cfa39010fe314547b3c17a05ff5f403, type: 3}
+  - {fileID: 21300000, guid: 8a09a18577d247645938ade635083a2d, type: 3}
+  - {fileID: 21300000, guid: faaf681ebc0ab5e49a00df60f585c8fd, type: 3}

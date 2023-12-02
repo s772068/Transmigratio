@@ -1,34 +1,36 @@
+using System.Collections.Generic;
 using WorldMapStrategyKit;
 using UnityEngine;
 using System;
-using System.Collections.Generic;
 
-public class WmskController : BaseController {
+public class WmskController : MonoBehaviour, IGameConnecter {
     [SerializeField] private GameObject arrow;
     [SerializeField] private IconMarker iconMarker;
     [SerializeField] private Color selectColor;
     [SerializeField] private int eventMarkerLiveTime;
     [SerializeField] private Sprite[] markerSprites;
 
+    
     private MigrationController migration;
     private EventsController events;
     private MapController map;
-
+    
     private WMSK wmsk;
+
     private int selectedIndex = -1;
     private List<S_LineMigration> lineMigrations = new();
 
     public Action<int> OnClick;
 
-    public override GameController GameController {
+    public int SelectedIndex => selectedIndex;
+
+    public GameController GameController {
         set {
-            migration = value.Get<MigrationController>();
-            events = value.Get<EventsController>();
-            map = value.Get<MapController>();
+            value.Get(out migration);
+            value.Get(out events);
+            value.Get(out map);
         }
     }
-
-    public int SelectedIndex => selectedIndex;
 
     public void GetNeighbours(out int[] res, int index) {
         res = wmsk.countries[index].neighbours;
@@ -65,7 +67,7 @@ public class WmskController : BaseController {
 
     public void CreateEventMarker(S_Event e, int eventIndex, int regionIndex) {
         CreateIconMarker(wmsk.GetCountry(regionIndex).center, e.MarkerIndex, events.MarkerLiveTime, (IconMarker owner) => {
-            events.OpenPanel(e, regionIndex, eventIndex);
+            // events.OpenPanel(e, regionIndex, eventIndex);
             owner.DestroyGO();
         });
     }
@@ -110,17 +112,14 @@ public class WmskController : BaseController {
         lineMigrations.RemoveAt(index);
     }
 
-    public override void Init() {
+    public void Init() {
         wmsk = WMSK.instance;
         wmsk.OnClick += Click;
         wmsk.OnMarkerMouseDown += ClickMarker;
+        
         // For havn't friezes at first change colors
         for (int i = 0; i < wmsk.countries.Length; ++i) {
             wmsk.ToggleCountrySurface(i, true, Color.clear);
         }
-    }
-
-    private void Start() {
-        // AddTrajectories(0, 3);
     }
 }

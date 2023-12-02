@@ -2,13 +2,30 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class GUI_ProgressBar : MonoBehaviour {
+    [SerializeField] private Image background;
     [SerializeField] private Image fill;
+    [SerializeField] private Color color;
+    [SerializeField] private float maxValue = 1f;
+    [SerializeField] private bool isSlider;
 
-    private Vector3 scale = Vector3.one;
+    public float MinValue { private get; set; }
+    public float MaxValue {
+        get => maxValue;
+        set => maxValue = value;
+    }
 
-    public float Fill { set {
-            scale.x = value;
-            fill.rectTransform.localScale = scale;
+    public float Value {
+        set {
+            Color = color;
+            if (isSlider) fill.fillAmount = (value - MinValue) / (maxValue - MinValue);
+            else fill.fillAmount = 1;
         }
-    } 
+    }
+
+    public Color Color {
+        set {
+            color = value;
+            fill.color = value;
+        }
+    }
 }

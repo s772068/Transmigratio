@@ -33,10 +33,7 @@ public class GUI_MigrationPanel : GUI_BasePanel {
     public Sprite Icon { set => icon.sprite = value; }
 
     public float Population {
-        set {
-            paramiter.Fill = value / maxPopulation;
-            paramiter.Value = (int)(scale.x * 100) + "%";
-        }
+        set => paramiter.SetValue(value);
     }
 
     public string BreakString { set => breakTxt.text = value; }

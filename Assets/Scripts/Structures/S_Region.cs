@@ -4,25 +4,80 @@
 // 2: Flora
 // 3: Fauna
 
-using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
+using UnityEngine;
 
 [System.Serializable]
 public struct S_Region {
     public string Name;
+    public Color Color;
     public int EventChanceIndex;
-    public int FreePeople;
-    public UnityEngine.Color Color;
-    public List<int> Events;
-    public S_Paramiter[] Ecology;
-    public List<S_Civilization> Civilizations;
+    public int TakenFood;
+    public int[] Events;
     public int[] Neighbours;
+    public S_Paramiter[] Ecology;
+    public S_Civilization[] Civilizations;
+    public SerializedDictionary<string, int> EventsNameIndexes;
+    public SerializedDictionary<string, int> NeighboursNameIndexes;
+    public SerializedDictionary<string, int> EcologyNameIndexes;
+    public SerializedDictionary<string, int> CivilizationsNameIndexes;
+
+    public int this[params string[] val] {
+        get {
+            switch (val[0]) {
+                case "EventChanceIndex": return EventChanceIndex;
+                case "TakenFood": return TakenFood;
+                case "Events": return Events[EventsNameIndexes[val[1]]];
+                case "Neighbours": return Neighbours[NeighboursNameIndexes[val[1]]];
+                case "Ecology": return Ecology[EcologyNameIndexes[val[1]]] [val[2]];
+                case "Civilizations": return Civilizations[CivilizationsNameIndexes[val[1]]] [val[2], val[3], val[4]];
+                default: return 0;
+            }
+        }
+        set {
+            switch (val[0]) {
+                case "EventChanceIndex": EventChanceIndex = value; break;
+                case "TakenFood": TakenFood = value; break;
+                case "Events": Events[EventsNameIndexes[val[1]]] = value; break;
+                case "Neighbours": Neighbours[NeighboursNameIndexes[val[1]]] = value; break;
+                case "Ecology": Ecology[EcologyNameIndexes[val[1]]] [val[2]] = value; break;
+                case "Civilizations": Civilizations[CivilizationsNameIndexes[val[1]]] [val[2], val[3], val[4]] = value; break;
+                default: return;
+            }
+        }
+    }
+
+    public int this[params int[] val] {
+        get { // 5
+            switch (val[0]) {
+                case 0: return EventChanceIndex;
+                case 1: return TakenFood;
+                case 2: return Events[val[1]];
+                case 3: return Neighbours[val[1]];
+                case 4: return Ecology[val[1]][val[2]];
+                case 5: return Civilizations[val[1]][val[2], val[3], val[4]];
+                default: return 0;
+            }
+        }
+        set {
+            switch (val[0]) {
+                case 0: EventChanceIndex = value; break;
+                case 1: TakenFood = value; break;
+                case 2: Events[val[1]] = value; break;
+                case 3: Neighbours[val[1]] = value; break;
+                case 4: Ecology[val[1]][val[2]] = value; break;
+                case 5: Civilizations[val[1]][val[2], val[3], val[4]] = value; break;
+                default: return;
+            }
+        }
+    }
 
     public int MaxCivilizationStage {
         get {
             int stage = -1;
             int max = -1;
-            for (int i = 0; i < Civilizations.Count; ++i) {
-                if (i >= Civilizations.Count) return MaxCivilizationStage;
+            for (int i = 0; i < Civilizations.Length; ++i) {
+                if (i >= Civilizations.Length) return MaxCivilizationStage;
                 if (Civilizations[i].Stage > max) {
                     max = Civilizations[i].Stage;
                     stage = i;
@@ -36,8 +91,8 @@ public struct S_Region {
         get {
             int index = -1;
             int max = -1;
-            for(int i = 0; i < Civilizations.Count; ++i) {
-                if (i >= Civilizations.Count) return MaxPopulationsIndex;
+            for(int i = 0; i < Civilizations.Length; ++i) {
+                if (i >= Civilizations.Length) return MaxPopulationsIndex;
                 if (Civilizations[i].Population > max) {
                     max = Civilizations[i].Population;
                     index = i;
@@ -50,8 +105,8 @@ public struct S_Region {
     public int MaxPopulationsValue {
         get {
             int max = 0;
-            for (int i = 0; i < Civilizations.Count; ++i) {
-                if (i >= Civilizations.Count) return MaxPopulationsValue;
+            for (int i = 0; i < Civilizations.Length; ++i) {
+                if (i >= Civilizations.Length) return MaxPopulationsValue;
                 if (Civilizations[i].Population > max) {
                     max = Civilizations[i].Population;
                 }
@@ -63,8 +118,8 @@ public struct S_Region {
     public int AllPopulations {
         get {
             int all = 0;
-            for(int i = 0; i < Civilizations.Count; ++i) {
-                if (i >= Civilizations.Count) return AllPopulations;
+            for(int i = 0; i < Civilizations.Length; ++i) {
+                if (i >= Civilizations.Length) return AllPopulations;
                 all += Civilizations[i].Population;
             }
             return all;
@@ -73,7 +128,7 @@ public struct S_Region {
 
     public int[] ArrayPopulation {
         get {
-            int[] arr = new int[Civilizations.Count];
+            int[] arr = new int[Civilizations.Length];
             for(int i = 0; i < arr.Length; ++i) {
                 if (i >= arr.Length) return ArrayPopulation;
                 arr[i] = Civilizations[i].Population;
@@ -82,13 +137,23 @@ public struct S_Region {
         }
     }
 
+    public int StageToIndex(int stage) {
+        int index = -1;
+        for (int i = 0; i < Civilizations.Length; ++i) {
+            if (Civilizations[i].Stage == stage) {
+                index = i; break;
+            }
+        }
+        return index;
+    }
+
     public int[] ArrayCivilizationParamiters(int paramiterIndex) {
-        if(Civilizations.Count < 0) return new int[0];
-        int[] arr = new int[Civilizations[0].Paramiters[paramiterIndex].Values.Length];
-        for (int i = 0; i < Civilizations.Count; ++i) {
-            if (i >= Civilizations.Count) ArrayCivilizationParamiters(paramiterIndex);
-            for (int j = 0; j < Civilizations[i].Paramiters[paramiterIndex].Values.Length; ++j) {
-                arr[j] += Civilizations[i].Paramiters[paramiterIndex].Values[j];
+        if(Civilizations.Length < 0) return new int[0];
+        int[] arr = new int[Civilizations[0].Paramiters[paramiterIndex].Details.Length];
+        for (int i = 0; i < Civilizations.Length; ++i) {
+            if (i >= Civilizations.Length) ArrayCivilizationParamiters(paramiterIndex);
+            for (int j = 0; j < Civilizations[i].Paramiters[paramiterIndex].Details.Length; ++j) {
+                arr[j] += Civilizations[i].Paramiters[paramiterIndex][j];
             }
         }
         return arr;
@@ -98,8 +163,8 @@ public struct S_Region {
         int max = -1;
         int index = -1;
         int value;
-        for(int i = 0; i < Civilizations.Count; ++i) {
-            if (i >= Civilizations.Count) MaxCivilizationIndex(paramiterIndex);
+        for(int i = 0; i < Civilizations.Length; ++i) {
+            if (i >= Civilizations.Length) MaxCivilizationIndex(paramiterIndex);
             value = Civilizations[i].Paramiters[paramiterIndex].MaxValue;
             if(value > max) {
                 max = value;
@@ -112,8 +177,8 @@ public struct S_Region {
     public int MaxCivilizationValue(int paramiterIndex) {
         int max = -1;
         int value;
-        for (int i = 0; i < Civilizations.Count; ++i) {
-            if (i >= Civilizations.Count) MaxCivilizationValue(paramiterIndex);
+        for (int i = 0; i < Civilizations.Length; ++i) {
+            if (i >= Civilizations.Length) MaxCivilizationValue(paramiterIndex);
             value = Civilizations[i].Paramiters[paramiterIndex].MaxValue;
             if (value > max) {
                 max = value;
@@ -122,12 +187,67 @@ public struct S_Region {
         return max;
     }
 
-    public int AllCivilizationVlaues(int paramiterIndex) {
+    public int AllCivilizationVlaues(int paramiterIndex, int detailIndex) {
         int all = 0;
-        for (int i = 0; i < Civilizations.Count; ++i) {
-            if (i >= Civilizations.Count) AllCivilizationVlaues(paramiterIndex);
-            all += Civilizations[i].Paramiters[paramiterIndex].AllVlaues;
+        for (int i = 0; i < Civilizations.Length; ++i) {
+            if (i >= Civilizations.Length) AllCivilizationVlaues(paramiterIndex, detailIndex);
+            all += Civilizations[i].Paramiters[paramiterIndex][detailIndex];
         }
         return all;
+    }
+
+    public void AddEvent(int value) {
+        EventsNameIndexes[Events.Length.ToString()] = Events.Length;
+        Events.Add(value);
+    }
+
+    public void AddEvent(string name, int value) {
+        EventsNameIndexes[name] = Events.Length;
+        Events.Add(value);
+    }
+
+    public void RemoveEvent(int index) {
+        EventsNameIndexes.Remove(index.ToString());
+        Events.Remove(index);
+    }
+
+    public void RemoveEvent(string name) {
+        Events.Remove(EventsNameIndexes[name]);
+        EventsNameIndexes[name] = Events.Length;
+    }
+
+    public void ClearEvent() {
+        EventsNameIndexes.Clear();
+        Events.Clear();
+    }
+
+    public void AddCivilization(S_Civilization value) {
+        CivilizationsNameIndexes[Civilizations.Length.ToString()] = Civilizations.Length;
+        Civilizations.Add(value);
+    }
+
+    public void AddCivilization(string name, S_Civilization value) {
+        CivilizationsNameIndexes[name] = Civilizations.Length;
+        Civilizations.Add(value);
+    }
+
+    public void RemoveCivilization(int index) {
+        CivilizationsNameIndexes.Remove(index.ToString());
+        Civilizations.Remove(index);
+    }
+
+    public void RemoveCivilization(string name) {
+        Civilizations.Remove(CivilizationsNameIndexes[name]);
+        CivilizationsNameIndexes[name] = Civilizations.Length;
+    }
+
+    public void ClearCivilization() {
+        CivilizationsNameIndexes.Clear();
+        Civilizations.Clear();
+    }
+
+    public void ClearAll() {
+        CivilizationsNameIndexes.Clear();
+        Civilizations.Clear();
     }
 }

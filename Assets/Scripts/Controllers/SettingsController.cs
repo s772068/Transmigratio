@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SettingsController : BaseController, ISave {
+public class SettingsController : MonoBehaviour, ISave, IGameConnecter {
     [SerializeField] private E_Language language;
     [SerializeField] private E_Theme theme;
     [SerializeField] private SO_Localization[] localizations;
@@ -18,6 +18,7 @@ public class SettingsController : BaseController, ISave {
         get => (int) language;
         set => language = (E_Language) value;
     }
+    public GameController GameController { set { } }
 
     public void Save() {
         IOHelper.SaveToJson(new S_Settings() {
@@ -31,4 +32,6 @@ public class SettingsController : BaseController, ISave {
         language = (E_Language) data.Language;
         theme = (E_Theme) data.Theme;
     }
+
+    public void Init() { }
 }
