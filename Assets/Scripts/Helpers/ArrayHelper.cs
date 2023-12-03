@@ -1,5 +1,3 @@
-using UnityEditor.Localization.Plugins.XLIFF.V12;
-
 public static class ArrayHelper {
     public static T[] Add<T>(this T[] owner, T newObject) {
         if (newObject == null) return owner;

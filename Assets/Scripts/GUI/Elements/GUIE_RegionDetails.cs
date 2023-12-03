@@ -5,7 +5,6 @@ using System;
 
 public class GUIE_RegionDetails : MonoBehaviour {
     [SerializeField] private Text paramiterLabel;
-    [SerializeField] private Text richnessTxt;
     [SerializeField] private GUI_PieElement pieElement;
     [SerializeField] private GUI_Legend legend;
     [SerializeField] private Transform pieContent;
@@ -46,7 +45,6 @@ public class GUIE_RegionDetails : MonoBehaviour {
     }
 
     public void Clear() {
-        richnessTxt.text = "";
         paramiterLabel.text = "";
         allValues = 0;
         for (int i = 0; i < legendElements.Count; ++i) {

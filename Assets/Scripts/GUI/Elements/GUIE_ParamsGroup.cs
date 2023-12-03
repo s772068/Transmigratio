@@ -1,4 +1,3 @@
-using UnityEngine.UI;
 using UnityEngine;
 
 public class GUIE_ParamsGroup : MonoBehaviour {
@@ -6,9 +5,9 @@ public class GUIE_ParamsGroup : MonoBehaviour {
 
     public int CountParamiters => paramiters.Length;
 
-    public void SetParamiterLabel(int index, string label) {
+    public void SetParamiterPictogram(int index, Sprite sprite) {
         Show(index, true);
-        paramiters[index].Label = label;
+        paramiters[index].Pictogram = sprite;
     }
     public void SetParamiterMetric(int index, string value) {
         Show(index, true);

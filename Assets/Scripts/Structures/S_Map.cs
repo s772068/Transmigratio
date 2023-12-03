@@ -6,17 +6,15 @@ public struct S_Map {
     public int[][] Civilizations;
     public S_Region[] Regions;
     public SerializedDictionary<string, int> CivilizationsIndexes;
-    public SerializedDictionary<string, int> CivilizationsRegionsIndexes;
+    public SerializedDictionary<string, int> CivilizationsRegionsIndexes; // ?
     public SerializedDictionary<string, int> RegionsNameIndexes;
 
     public int this[int regionIndex, params string[] val] {
-        get {
-            switch (val[0]) {
-                case "Civilizations": return Civilizations[CivilizationsIndexes[val[1]]][CivilizationsIndexes[val[2]]];
-                case "Regions": return Regions[regionIndex][val[1], val[2], val[3], val[4], val[5]];
-                default: return 0;
-            }
-        }
+        get => val[0] switch {
+            "Civilizations" => Civilizations[CivilizationsIndexes[val[1]]][CivilizationsIndexes[val[2]]],
+            "Regions" => Regions[regionIndex][val[1], val[2], val[3], val[4], val[5]],
+            _ => 0
+        };
         set {
             switch (val[0]) {
                 case "Civilizations": Civilizations[CivilizationsIndexes[val[1]]][CivilizationsIndexes[val[2]]] = value; break;
@@ -27,19 +25,35 @@ public struct S_Map {
     }
 
     public int this[params int[] val] {
-        get {
-            switch (val[0]) {
-                case 0: return Civilizations[val[1]][val[2]];
-                case 1: return Regions[val[1]][val[2], val[3], val[4], val[5], val[6]];
-                default: return 0;
-            }
-        }
+        get => val[0] switch {
+            0 => Civilizations[val[1]][val[2]],
+            1 => Regions[val[1]][val[2], val[3], val[4], val[5], val[6]],
+            _ => 0
+        };
         set {
             switch (val[0]) {
                 case 0: Civilizations[val[1]][val[2]] = value; break;
                 case 1: Regions[val[1]][val[2], val[3], val[4], val[5], val[6]] = value; break;
                 default: return;
             }
+        }
+    }
+
+    public int CountCivilizationRegions {
+        get {
+            int count = 0;
+            bool hasUnCiv = false;
+            for(int regionIndex = 0; regionIndex < Regions.Length; ++regionIndex) {
+                if (!hasUnCiv) {
+                    for (int civIndex = 0; civIndex < Regions[regionIndex].Civilizations.Length; ++civIndex) {
+                        if (Regions[regionIndex].Civilizations[civIndex].Stage == 0) {
+                            hasUnCiv = true;
+                            ++count;
+                        }
+                    }
+                } else count += Regions[regionIndex].Civilizations.Length;
+            }
+            return count;
         }
     }
 
@@ -134,7 +148,7 @@ public struct S_Map {
     public int AllEcologyVlaues(int paramiterIndex, int detailIndex) {
         int all = 0;
         for (int i = 0; i < Regions.Length; ++i) {
-            all += Regions[i].Ecology[paramiterIndex].Details[detailIndex];
+            all += Regions[i].Ecology[paramiterIndex].details[detailIndex].Value;
         }
         return all;
     }

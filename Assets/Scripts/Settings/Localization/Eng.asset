@@ -23,6 +23,10 @@ MonoBehaviour:
   System:
     Break: Break
     Close: Close
+    SelectRegion: SelectRegion
+    Settings: Settings
+    Layers: Layers
+    Notifications: Notification
   Map:
     Ecology:
       Name: Ecology
@@ -60,7 +64,7 @@ MonoBehaviour:
         Description: Fauna (Description)
         Value: []
     Civilization:
-      GroupName: People in the area
+      Name: People in the region
       Population: Population
       EmptyPopulation: is absent
       Paramiters:
@@ -166,7 +170,7 @@ MonoBehaviour:
     Name: Informatin
     Value:
     - Name: Start game
-      Value: In the field of Homo Sapiens there was a group of highly developed primates
-        known as {2}. They are able to communicate and verbally transmit knowledge
+      Value: In the field of {0} there was a group of highly developed primates known
+        as Homo Sapiens. They are able to communicate and verbally transmit knowledge
         to the next generations, which gives them the ability to accumulate knowledge
         with each new generation.

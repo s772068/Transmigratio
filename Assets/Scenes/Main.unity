@@ -1042,50 +1042,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92497492}
   m_CullTransparentMesh: 1
---- !u!1 &95091262
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 95091263}
-  - component: {fileID: 95091264}
-  m_Layer: 0
-  m_Name: Mount Points
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &95091263
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 95091262}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2036419723}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &95091264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 95091262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &111381366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,7 +1832,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a5572411cb15e48bf3f17aa1352ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: {fileID: 35058508}
   paramiters:
   - {fileID: 71145370}
   - {fileID: 2026765866}
@@ -2271,17 +2226,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3049488239345897697, guid: 8fbe5b19dfa6a2b47a5c715c596c724b, type: 3}
   m_PrefabInstance: {fileID: 410904793}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &410904795 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8985733910336222039, guid: 8fbe5b19dfa6a2b47a5c715c596c724b, type: 3}
-  m_PrefabInstance: {fileID: 410904793}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b286d39f0b99644bf1e4330f2594a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &411549215
 GameObject:
   m_ObjectHideFlags: 0
@@ -2401,12 +2345,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d95502cc18b76a4fa2b47dd72abfdcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groupButtons: {fileID: 0}
+  EcologyBtnTxt: {fileID: 0}
+  CivilizationBtnTxt: {fileID: 0}
   paramiters: {fileID: 1529154766933304126}
   details: {fileID: 6881770834077084136}
   info: {fileID: 1732978630}
-  civilization: {fileID: 343693111}
-  Settings: {fileID: 1583956660}
-  Map: {fileID: 1732670978}
 --- !u!1 &426039399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2500,11 +2444,6 @@ MonoBehaviour:
   countryName: {fileID: 811776491}
   population: {fileID: 798406935}
   eventName: {fileID: 1178635663}
-  regionPanel: {fileID: 411549220}
-  settings: {fileID: 1583956660}
-  events: {fileID: 1168439442}
-  wmsk: {fileID: 1841659155}
-  map: {fileID: 1732670978}
 --- !u!1 &426855123
 GameObject:
   m_ObjectHideFlags: 0
@@ -4051,6 +3990,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519ca052f0100db4b8344a0f863ef6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedPlayGame: 0
+  speedFastPlayGame: 0
 --- !u!4 &615606228
 Transform:
   m_ObjectHideFlags: 0
@@ -4646,14 +4587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11324d82f3081db41a128f0c86418b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllers:
-  - {fileID: 2070588744}
-  - {fileID: 1759527920}
-  - {fileID: 615606227}
-  - {fileID: 1583956660}
-  - {fileID: 1168439442}
-  - {fileID: 1841659155}
-  - {fileID: 1732670978}
+  connecters: []
 --- !u!4 &669565846
 Transform:
   m_ObjectHideFlags: 0
@@ -5243,7 +5177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regionName: {fileID: 649848942}
-  img: {fileID: 563280437}
+  portrait: {fileID: 0}
   ecologyGroup: {fileID: 0}
   civilizationGroup: {fileID: 338415450}
   regionIndex: 0
@@ -5527,7 +5461,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 1539779855}
+        m_Texture: {fileID: 1203460886}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -5928,16 +5862,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25af846b12e210498f89ff2e0bb52a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resources: {fileID: 2070588744}
-  timeline: {fileID: 615606227}
-  settings: {fileID: 1583956660}
-  map: {fileID: 1732670978}
   populationTxt: {fileID: 1564617612}
   interventionTxt: {fileID: 842109352}
   interventionsPB: {fileID: 2064317121}
   selectRegionBtn: {fileID: 1193567849}
-  speedPlayGame: 1
-  speedFastPlayGame: 2
 --- !u!1 &842109350
 GameObject:
   m_ObjectHideFlags: 0
@@ -7497,10 +7425,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506b32f18778d7e49b8be4e6d3d06656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 1583956660}
-  wmsk: {fileID: 1841659155}
-  map: {fileID: 1732670978}
-  _paramiterIndex: -1
+  game: {fileID: 0}
+  Label: {fileID: 0}
+  LayersTxts: []
 --- !u!1 &1168439441
 GameObject:
   m_ObjectHideFlags: 0
@@ -7530,8 +7457,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89495dc3dda3f554a90fccb3e6995985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 410904795}
+  icon: {fileID: 0}
+  eventName: {fileID: 0}
+  description: {fileID: 0}
+  content: {fileID: 0}
+  resultPref: {fileID: 0}
   markerLiveTime: 5
+  iconSprites: []
   chances:
   - 0.083333336
   - 0.16666667
@@ -7926,6 +7858,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193567847}
   m_CullTransparentMesh: 1
+--- !u!84 &1203460886
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 1920
+  m_Height: 960
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 8
+  m_MipMap: 1
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 2
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &1231590216
 GameObject:
   m_ObjectHideFlags: 0
@@ -10267,6 +10236,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568195c062283b94d9d04e685c42c28a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1484908754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1484908755}
+  - component: {fileID: 1484908756}
+  m_Layer: 0
+  m_Name: Mount Points
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1484908755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484908754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2036419723}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1484908756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484908754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1486067436
 GameObject:
   m_ObjectHideFlags: 0
@@ -10670,43 +10683,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568195c062283b94d9d04e685c42c28a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!84 &1539779855
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 1920
-  m_Height: 960
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 8
-  m_MipMap: 1
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 2
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &1550593000
 GameObject:
   m_ObjectHideFlags: 0
@@ -10804,6 +10780,7 @@ MonoBehaviour:
   pieElement: {fileID: 4925349691218475453, guid: 73c4bafdac70ee34aa0fcf40952fb5f0, type: 3}
   legend: {fileID: 416837427678893500, guid: 6326978d244ea044c8030d02930978dd, type: 3}
   pieContent: {fileID: 669105761}
+  legendsPanel: {fileID: 0}
   legendContent: {fileID: 649785508}
   regionIndex: 0
   groupIndex: 0
@@ -12569,1880 +12546,3757 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147285cbe9f00614e9118068d0c7d18c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  populationTxt: {fileID: 1564617612}
+  SettingsLabel: {fileID: 0}
+  LayersLabel: {fileID: 0}
+  NotificationLabel: {fileID: 0}
   data:
-    Civilizations: []
     Regions:
     - Name: Central Asia
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
+      Neighbours: 02000000060000000a0000001b0000001f0000002400000034000000
       Ecology:
       - Name: Terrain
-        Values: 010000000200000003000000040000000500000006000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Climate
-        Values: 08000000060000000400000009000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Flora
-        Values: 19000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Fauna
-        Values: 14000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       Civilizations:
       - Stage: 3
         Population: 1000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0100000002000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0700000008000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 090000000a000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
       - Stage: 8
         Population: 4000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0300000004000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0500000006000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0c0000000b000000
-      Neighbours: 02000000060000000a0000001b0000001f0000002400000034000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Patagonia
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
+      Neighbours: 090000002b000000
       Ecology:
       - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Climate
-        Values: 4b000000540000004400000027000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Flora
-        Values: 1e000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Fauna
-        Values: 50000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       Civilizations:
       - Stage: 0
         Population: 1000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0300000003000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0400000004000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0500000005000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
       - Stage: 1
         Population: 2500
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0700000007000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0800000008000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0900000009000000
-      Neighbours: 090000002b000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Caucasus
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 000000002200000034000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: New Zealand
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
+      Neighbours: 
       Ecology:
       - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Climate
-        Values: 4b000000540000004400000027000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Flora
-        Values: 1e000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Fauna
-        Values: 50000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       Civilizations:
       - Stage: 0
         Population: 1000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0300000003000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0400000004000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0500000005000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
       - Stage: 1
         Population: 2000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0700000007000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0800000008000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0900000009000000
-      Neighbours: 
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Antarctica
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
+      Neighbours: 
       Ecology:
       - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Climate
-        Values: 4b000000540000004400000027000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Flora
-        Values: 1e000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Fauna
-        Values: 50000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       Civilizations:
       - Stage: 0
         Population: 1000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0300000003000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0400000004000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0500000005000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
       - Stage: 1
         Population: 2000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0700000007000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0800000008000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0900000009000000
-      Neighbours: 
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Australia
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
+      Neighbours: 
       Ecology:
       - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Climate
-        Values: 4b000000540000004400000027000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Flora
-        Values: 1e000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Fauna
-        Values: 50000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       Civilizations:
       - Stage: 0
         Population: 1000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0300000003000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0400000004000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0500000005000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
       - Stage: 1
         Population: 2000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0700000007000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0800000008000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0900000009000000
-      Neighbours: 
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Hindustan
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 000000000a0000001c000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Malaysia
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 1c000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Central America
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 230000002f00000031000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Andes
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 01000000230000002b00000009000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Himalayas
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 00000000060000000e0000001c0000001f000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: South Africa
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 0f00000011000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Northwest Territiries
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 0c0000002d0000002f0000003000000029000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Alps
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 10000000190000002c000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: China
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 0a0000001c0000001f0000002100000028000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Central Africa
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 0b0000001100000014000000180000001e000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Central Europe
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 0d000000120000001600000019000000220000002c0000003300000036000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: East Africa
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 0f0000000b00000014000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: North Europe
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 1700000010000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: North Africa
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 14000000150000001e000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Nile
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 11000000130000000f0000001e00000024000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Iberia
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 1900000013000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Baltic
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 100000001700000036000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Karelia
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 12000000160000002500000036000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: West Africa
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 0f0000001e000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: West Europe
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 29000000150000000d00000010000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Japan
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
+      Neighbours: 
       Ecology:
       - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Climate
-        Values: 4b000000540000004400000027000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Flora
-        Values: 1e000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Fauna
-        Values: 50000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       Civilizations:
       - Stage: 0
         Population: 1000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0300000003000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0400000004000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0500000005000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
       - Stage: 1
         Population: 2000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0700000007000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0800000008000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0900000009000000
-      Neighbours: 
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Central Great Steppe
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 000000001f0000002200000026000000270000002800000036000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: South East Asia
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 0e0000000a0000000600000007000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Madagascar
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Sahara
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 180000000f0000001400000013000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: East Great Steppe
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 1b000000000000000a0000000e00000028000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Arabia
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 24000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Far East
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 0e00000028000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: West Great Steppe
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 020000001b000000100000003300000036000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: North Andes
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 09000000080000002b000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Middle East
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 14000000200000000000000034000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: North Ural
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 17000000260000002700000036000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Ural
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 250000001b0000002700000036000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Siberia
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 25000000260000001b00000028000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Altai
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 270000001b0000001f0000000e00000021000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: North Atlantic
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 19000000290000000c0000003000000035000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Antilles
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 2a000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Amasonia
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 230000000900000001000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Apennine Peninsula
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 100000000d00000033000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Alaska
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 0c000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: North America West Coast
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 2f000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Cordillera
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 080000000c0000002e00000031000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Great Lakes
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 290000000c0000003100000035000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Great Plains
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 300000002f000000080000003200000035000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Florida
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 3100000035000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Balkan
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 22000000100000002c0000003300000034000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: Asia Minor
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 24000000000000000200000033000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
     - Name: North America East Coast
-      EventChanceIndex: 0
-      FreePeople: 0
       Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
       Events: 
-      Ecology:
-      - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
-      - Name: Climate
-        Values: 4b000000540000004400000027000000
-      - Name: Flora
-        Values: 1e000000
-      - Name: Fauna
-        Values: 50000000
-      Civilizations:
-      - Stage: 0
-        Population: 1000
-        Paramiters:
-        - Name: Production
-          Values: 0300000003000000
-        - Name: Economics
-          Values: 0400000004000000
-        - Name: Goverment
-          Values: 0500000005000000
-      - Stage: 1
-        Population: 2000
-        Paramiters:
-        - Name: Production
-          Values: 0700000007000000
-        - Name: Economics
-          Values: 0800000008000000
-        - Name: Goverment
-          Values: 0900000009000000
       Neighbours: 29000000300000003100000032000000
-    - Name: East European Plain
-      EventChanceIndex: 0
-      FreePeople: 0
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      Events: 
       Ecology:
       - Name: Terrain
-        Values: 0c0000000700000008000000090000000a0000000b000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Climate
-        Values: 4b000000540000004400000027000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Flora
-        Values: 1e000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       - Name: Fauna
-        Values: 50000000
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
       Civilizations:
       - Stage: 0
         Population: 1000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0300000003000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0400000004000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0500000005000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
       - Stage: 1
         Population: 2000
+        TakenFood: 0
         Paramiters:
         - Name: Production
-          Values: 0700000007000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Economics
-          Values: 0800000008000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
         - Name: Goverment
-          Values: 0900000009000000
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
+    - Name: East European Plain
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      EventChanceIndex: 0
+      TakenFood: 0
+      Events: 
       Neighbours: 220000001b0000002600000025000000170000001600000010000000
+      Ecology:
+      - Name: Terrain
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Climate
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Flora
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      - Name: Fauna
+        details: []
+        detailsNamesIndexes:
+          _serializedList: []
+      Civilizations:
+      - Stage: 0
+        Population: 1000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      - Stage: 1
+        Population: 2000
+        TakenFood: 0
+        Paramiters:
+        - Name: Production
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Economics
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        - Name: Goverment
+          details: []
+          detailsNamesIndexes:
+            _serializedList: []
+        ParamitersNameIndexes:
+          _serializedList: []
+      EventsNameIndexes:
+        _serializedList: []
+      NeighboursNameIndexes:
+        _serializedList: []
+      EcologyNameIndexes:
+        _serializedList: []
+      CivilizationsNameIndexes:
+        _serializedList: []
+    CivilizationsIndexes:
+      _serializedList: []
+    CivilizationsRegionsIndexes:
+      _serializedList: []
+    RegionsNameIndexes:
+      _serializedList: []
 --- !u!1 &1732978626
 GameObject:
   m_ObjectHideFlags: 0
@@ -16642,7 +18496,7 @@ Transform:
   m_Children:
   - {fileID: 1707219435}
   - {fileID: 493568806}
-  - {fileID: 95091263}
+  - {fileID: 1484908755}
   m_Father: {fileID: 2106133419}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19172,7 +21026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regionName: {fileID: 1529154767371879776}
-  img: {fileID: 0}
+  portrait: {fileID: 0}
   ecologyGroup: {fileID: 9084219125195713733}
   civilizationGroup: {fileID: 8276041485272096026}
   regionIndex: 0
@@ -19768,7 +21622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBar: {fileID: 0}
-  label: {fileID: 294714508098922869}
+  pictogram: {fileID: 0}
   val: {fileID: 7111970555221948280}
 --- !u!224 &5612057211006796940
 RectTransform:
@@ -21126,6 +22980,7 @@ MonoBehaviour:
   pieElement: {fileID: 4925349691218475453, guid: 73c4bafdac70ee34aa0fcf40952fb5f0, type: 3}
   legend: {fileID: 416837427678893500, guid: 6326978d244ea044c8030d02930978dd, type: 3}
   pieContent: {fileID: 1813264667860838774}
+  legendsPanel: {fileID: 0}
   legendContent: {fileID: 4007946257802707003}
   regionIndex: 0
   groupIndex: 0
@@ -21579,7 +23434,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a5572411cb15e48bf3f17aa1352ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: {fileID: 2239216099597580883}
   paramiters:
   - {fileID: 1269744513}
   - {fileID: 611970748}
@@ -21702,7 +23556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a5572411cb15e48bf3f17aa1352ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label: {fileID: 3127434466172980592}
   paramiters:
   - {fileID: 1458440046}
   - {fileID: 1801880646}

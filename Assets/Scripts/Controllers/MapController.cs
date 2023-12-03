@@ -1,3 +1,4 @@
+using UnityEngine.UI;
 using UnityEngine;
 using System;
 
@@ -45,6 +46,14 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
             for (int j = 0; j < wmsk.countries[i].neighbours.Length; ++j) {
                 data.Regions[i].Neighbours[j] = wmsk.countries[i].neighbours[j];
             }
+            string[] names = {
+                "Plain",
+                "Forest",
+                "Desert",
+                "Mountain",
+                "Steppe",
+                "Tundra"
+            };
         }
     }
 
@@ -53,17 +62,47 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
         data.Regions[regionIndex].Civilizations = data.Regions[regionIndex].Civilizations.Add(new() {
             Stage = 0,
             Population = 1000,
+            TakenFood = 100,
             Paramiters = new S_Paramiter[] {
                     new() {
-                        Details = new int[] { 100, 0 }
+                        Name = "ProdMode",
+                        details = new S_Value<int>[] {
+                            new() { Name = "Primitive communism", Value = 100 },
+                            new() { Name = "Slave society", Value = 0 }
+                        },
+                        detailsNamesIndexes = new() {
+                            { "Primitive communism", 0 },
+                            { "Slave society", 1 }
+                        }
                     },
                     new() {
-                        Details = new int[] { 100, 0 }
+                        Name = "EcoCulture",
+                        details = new S_Value<int>[] {
+                            new() { Name = "Hunters-collectors", Value = 100 },
+                            new() { Name = "Farmers", Value = 0}
+                        },
+                        detailsNamesIndexes = new() {
+                            { "Hunters-collectors", 0 },
+                            { "Farmers", 1 }
+                        }
                     },
                     new() {
-                        Details = new int[] { 100, 0 }
+                        Name = "Government",
+                        details = new S_Value<int>[] {
+                            new() { Name = "Leaderism", Value = 100 },
+                            new() { Name = "Monarchy", Value = 0 }
+                        },
+                        detailsNamesIndexes = new() {
+                            { "Leaderism communism", 0 },
+                            { "Slave Monarchy", 1 }
+                        }
                     }
-                }
+                },
+            ParamitersNameIndexes = new() {
+                {"ProdMode", 0 },
+                {"EcoCulture", 1 },
+                {"Government", 2 },
+            }
         });
     }
 

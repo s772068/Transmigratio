@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 // States
 // 1: Region
 // 2: Civilization
 public class GUIP_Region : MonoBehaviour, IGameConnecter {
     [SerializeField] private GameObject groupButtons;
+    [SerializeField] private Text EcologyBtnTxt;
+    [SerializeField] private Text CivilizationBtnTxt;
     [SerializeField] private GUIE_RegionParamiters paramiters;
     [SerializeField] private GUIE_RegionDetails details;
     [SerializeField] private GUIE_RegionInfo info;
@@ -57,7 +60,10 @@ public class GUIP_Region : MonoBehaviour, IGameConnecter {
 
         --state;
         if (state >= 0) Initialization();
-        else gameObject.SetActive(false);
+        else {
+            viewGroupIndex = -1;
+            gameObject.SetActive(false);
+        }
     }
 
     public void ShowEcology() {
@@ -131,8 +137,8 @@ public class GUIP_Region : MonoBehaviour, IGameConnecter {
 
     private void Localization() {
         paramiters.LocalizationName();
-        paramiters.LocalizationEcology();
-        paramiters.LocalizationCivilization();
+        EcologyBtnTxt.text = settings.Localization.Map.Ecology.Name;
+        CivilizationBtnTxt.text = settings.Localization.Map.Civilization.Name;
     }
 
     private void InitDetails() {

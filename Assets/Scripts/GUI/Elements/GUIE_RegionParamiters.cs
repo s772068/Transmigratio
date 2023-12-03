@@ -1,7 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
 using System;
-using static UnityEngine.AdaptivePerformance.Provider.AdaptivePerformanceSubsystemDescriptor;
 
 public class GUIE_RegionParamiters : MonoBehaviour {
     [SerializeField] private Text regionName;
@@ -47,21 +46,7 @@ public class GUIE_RegionParamiters : MonoBehaviour {
     public void LocalizationName() => regionName.text = Settings.Localization.Map.Countries.Value[regionIndex];
     public void LocalizationPartret() => portrait.sprite = Settings.Theme.GetCivilizationSprite(3, -1);
 
-    public void LocalizationEcology() {
-        for (int i = 0; i < Settings.Localization.Map.Ecology.Value.Length; ++i) {
-            ecologyGroup.SetParamiterLabel(i, Settings.Localization.Map.Ecology.Value[i].Name);
-        }
-    }
-
-    public void LocalizationCivilization() {
-        civilizationGroup.SetParamiterLabel(0, Settings.Localization.Map.Civilization.Population);
-        for (int i = 1; i < civilizationGroup.CountParamiters; ++i) {
-            civilizationGroup.SetParamiterLabel(i, Settings.Localization.Map.Civilization.Paramiters[i - 1].Name);
-        }
-    }
-
     public void UpdateEcology() {
-        if(!ecologyGroup.gameObject.activeSelf) return;
         UpdateEcology(0);
         UpdateEcology(1);
         ecologyGroup.SetParamiterValue(2, Map.data.Regions[regionIndex].Ecology[2].MaxValue);
@@ -69,7 +54,6 @@ public class GUIE_RegionParamiters : MonoBehaviour {
     }
 
     public void UpdateCivilization() {
-        if (!civilizationGroup.gameObject.activeSelf) return;
         int population = civilizationIndex < 0 ?
             Map.data.Regions[regionIndex].AllPopulations :
             Map.data.Regions[regionIndex].Civilizations[civilizationIndex].Population;

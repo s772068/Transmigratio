@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class GUI_Paramiter : MonoBehaviour {
     [SerializeField] private GUI_ProgressBar progressBar;
-    [SerializeField] private Text label;
+    [SerializeField] private Image pictogram;
     [SerializeField] private Text val;
     
     private string metric;
 
-    public string Label { set => label.text = value; }
+    public Sprite Pictogram { set => pictogram.sprite = value; }
     public string Metric { set => metric = value; }
     public float MinValue { set => progressBar.MinValue = value;}
     public float MaxValue { set => progressBar.MaxValue = value; }

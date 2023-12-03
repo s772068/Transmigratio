@@ -17,27 +17,24 @@ public struct S_Region {
     public int[] Neighbours;
     public S_Paramiter[] Ecology;
     public S_Civilization[] Civilizations;
+    [Space]
     public SerializedDictionary<string, int> EventsNameIndexes;
     public SerializedDictionary<string, int> NeighboursNameIndexes;
     public SerializedDictionary<string, int> EcologyNameIndexes;
     public SerializedDictionary<string, int> CivilizationsNameIndexes;
 
     public int this[params string[] val] {
-        get {
-            switch (val[0]) {
-                case "EventChanceIndex": return EventChanceIndex;
-                case "TakenFood": return TakenFood;
-                case "Events": return Events[EventsNameIndexes[val[1]]];
-                case "Neighbours": return Neighbours[NeighboursNameIndexes[val[1]]];
-                case "Ecology": return Ecology[EcologyNameIndexes[val[1]]] [val[2]];
-                case "Civilizations": return Civilizations[CivilizationsNameIndexes[val[1]]] [val[2], val[3], val[4]];
-                default: return 0;
-            }
-        }
+        get => val[0] switch {
+            "EventChanceIndex" => EventChanceIndex,
+            "Events" => Events[EventsNameIndexes[val[1]]],
+            "Neighbours" => Neighbours[NeighboursNameIndexes[val[1]]],
+            "Ecology" => Ecology[EcologyNameIndexes[val[1]]][val[2]],
+            "Civilizations" => Civilizations[CivilizationsNameIndexes[val[1]]][val[2], val[3], val[4]],
+            _ => 0
+        };
         set {
             switch (val[0]) {
                 case "EventChanceIndex": EventChanceIndex = value; break;
-                case "TakenFood": TakenFood = value; break;
                 case "Events": Events[EventsNameIndexes[val[1]]] = value; break;
                 case "Neighbours": Neighbours[NeighboursNameIndexes[val[1]]] = value; break;
                 case "Ecology": Ecology[EcologyNameIndexes[val[1]]] [val[2]] = value; break;
@@ -48,25 +45,21 @@ public struct S_Region {
     }
 
     public int this[params int[] val] {
-        get { // 5
-            switch (val[0]) {
-                case 0: return EventChanceIndex;
-                case 1: return TakenFood;
-                case 2: return Events[val[1]];
-                case 3: return Neighbours[val[1]];
-                case 4: return Ecology[val[1]][val[2]];
-                case 5: return Civilizations[val[1]][val[2], val[3], val[4]];
-                default: return 0;
-            }
-        }
+        get => val[0] switch {
+            0 => EventChanceIndex,
+            1 => Events[val[1]],
+            2 => Neighbours[val[1]],
+            3 => Ecology[val[1]][val[2]],
+            4 => Civilizations[val[1]][val[2], val[3], val[4]],
+            _ => 0
+        };
         set {
             switch (val[0]) {
                 case 0: EventChanceIndex = value; break;
-                case 1: TakenFood = value; break;
-                case 2: Events[val[1]] = value; break;
-                case 3: Neighbours[val[1]] = value; break;
-                case 4: Ecology[val[1]][val[2]] = value; break;
-                case 5: Civilizations[val[1]][val[2], val[3], val[4]] = value; break;
+                case 1: Events[val[1]] = value; break;
+                case 2: Neighbours[val[1]] = value; break;
+                case 3: Ecology[val[1]][val[2]] = value; break;
+                case 4: Civilizations[val[1]][val[2], val[3], val[4]] = value; break;
                 default: return;
             }
         }
@@ -149,10 +142,10 @@ public struct S_Region {
 
     public int[] ArrayCivilizationParamiters(int paramiterIndex) {
         if(Civilizations.Length < 0) return new int[0];
-        int[] arr = new int[Civilizations[0].Paramiters[paramiterIndex].Details.Length];
+        int[] arr = new int[Civilizations[0].Paramiters[paramiterIndex].details.Length];
         for (int i = 0; i < Civilizations.Length; ++i) {
             if (i >= Civilizations.Length) ArrayCivilizationParamiters(paramiterIndex);
-            for (int j = 0; j < Civilizations[i].Paramiters[paramiterIndex].Details.Length; ++j) {
+            for (int j = 0; j < Civilizations[i].Paramiters[paramiterIndex].details.Length; ++j) {
                 arr[j] += Civilizations[i].Paramiters[paramiterIndex][j];
             }
         }

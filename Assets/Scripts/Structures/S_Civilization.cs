@@ -11,24 +11,25 @@ using System.Collections;
 public struct S_Civilization : IEnumerator<S_Paramiter> {
     public int Stage;
     public int Population;
+    public int TakenFood;
     public S_Paramiter[] Paramiters;
     public SerializedDictionary<string, int> ParamitersNameIndexes;
 
     private int _index;
 
     public int this[params string[] val] {
-        get {
-            switch (val[0]) {
-                case "Stage": return Stage;
-                case "Population": return Population;
-                case "Paramiters": return Paramiters[ParamitersNameIndexes[val[1]]] [val[2]];
-                default: return 0;
-            }
-        }
+        get => val[0] switch {
+            "Stage" => Stage,
+            "Population" => Population,
+            "TakenFood" => TakenFood,
+            "Paramiters" => Paramiters[ParamitersNameIndexes[val[1]]][val[2]],
+            _ => 0
+        };
         set {
             switch (val[0]) {
                 case "Stage": Stage = value; break;
                 case "Population": Population = value; break;
+                case "TakenFood": TakenFood = value; break;
                 case "Paramiters": Paramiters[ParamitersNameIndexes[val[1]]] [val[2]] = value; break;
                 default: return;
             }
@@ -36,19 +37,19 @@ public struct S_Civilization : IEnumerator<S_Paramiter> {
     }
     
     public int this[params int[] val] {
-        get {
-            switch (val[0]) {
-                case 0: return Stage;
-                case 1: return Population;
-                case 2: return Paramiters[val[1]][val[2]];
-                default: return 0;
-            }
-        }
+        get => val[0] switch {
+            0 => Stage,
+            1 => Population,
+            2 => TakenFood,
+            3 => Paramiters[val[1]][val[2]],
+            _ => 0
+        };
         set {
             switch (val[0]) {
                 case 0: Stage = value; break;
                 case 1: Population = value; break;
-                case 2: Paramiters[val[1]][val[2]] = value; break;
+                case 2: TakenFood = value; break;
+                case 3: Paramiters[val[1]][val[2]] = value; break;
                 default: return;
             }
         }

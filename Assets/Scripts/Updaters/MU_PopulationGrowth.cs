@@ -1,47 +1,53 @@
+using Unity.VisualScripting.FullSerializer;
+
 public struct MU_PopulationGrowth : IUpdater {
-    //void SetPopulation(ref S_Region region, int civilizationStage, int value) {
-    //  UnityEngine.Debug.Log(region.Civilizations[region.StageToIndex(civilizationStage)].Population);
-    //  UnityEngine.Debug.Log(region.Civilizations[region.StageToIndex(civilizationStage)].Population);
-    //UnityEngine.Debug.Log(region.Civilizations.ToArray()[region.StageToIndex(civilizationStage)].Population);
-    //UnityEngine.Debug.Log(value);
-    //region.Civilizations.ToArray()[region.StageToIndex(civilizationStage)].Population = value;
-    //region.Civilizations[region.StageToIndex(civilizationStage)].Population += value;
-    //UnityEngine.Debug.Log(region.Civilizations.ToArray()[region.StageToIndex(civilizationStage)].Population);
-    //}
-    
-
-    private int Population {
-        get => _map[1, regionIndex, 5, 0, 1, -1, -1];
-        set => _map[1, regionIndex, 5, 0, 1, -1, -1] = value;
-    }
-    private int TakenFood {
-        get => _map[1, regionIndex, 1, -1, -1, -1, -1];
-        set => _map[1, regionIndex, 1, -1, -1, -1, -1] = value;
-    }
-
-    private int Leaderism => _map[1, regionIndex, 5, 0, 2, 2, 0];
-    private int Monarchy => _map[1, regionIndex, 5, 0, 2, 2, 1];
-
     private S_Map _map;
-    private int regionIndex;
-    private int state;
+
+    private int _regionIndex;
+    private int _civIndex;
+
+    private int _population;
+    private int _takenFood;
+
+    private int _takenFoodForTick;
+    private int _populationGrowth;
+    private float _governmentObstacle;
+
+    private int Population { set => _map[1, _regionIndex, 4, _civIndex, 1, -1, -1] = value; }
+    private int TakenFood { set => _map[1, _regionIndex, 4, _civIndex, 2, -1, -1] = value;}
 
     public void Update(S_Map map) {
         _map = map;
-        for(int i = 0; i < _map.Regions.Length; ++i) {
-            regionIndex = i;
-            Population = 19;
-            TakenFood = 19;
+        for(_regionIndex = 0; _regionIndex < map.Regions.Length; ++_regionIndex) {
+            Update(map.Regions[_regionIndex]);
         }
-        //UnityEngine.Debug.Log("Leaderism" + Leaderism);
-        //UnityEngine.Debug.Log("Monarchy" + Monarchy);
-        // UnityEngine.Debug.Log(_map.Regions[0].Civilizations.Length);
-
-
-            //_map[1, 0, 1, 0, 0, 0] = 19; true
     }
 
-    private void UpdateRegion(S_Region region) {
+    private void Update(S_Region region) {
+        for (_civIndex = 0; _civIndex < region.Civilizations.Length; ++_civIndex) {
+            Update(region.Civilizations[_civIndex]);
+        }
+    }
 
+    private void Update(S_Civilization civilization) {
+        _takenFood = civilization.TakenFood;
+        _population = civilization.Population;
+        for (int i = 0; i < civilization.Paramiters.Length; ++i) {
+            _governmentObstacle = civilization.Stage switch {
+                0 => 0.4f,
+                1 => 0.45f,
+                _ => 0f
+            };
+            if (_takenFood > (int) (_population / 100f)) _takenFoodForTick = _population / 10;
+            _populationGrowth = (int) ((_population / 100f) * _takenFoodForTick * _governmentObstacle);
+            // UnityEngine.Debug.Log("Population: " + (_population / 100f));
+            // UnityEngine.Debug.Log("takenFoodForTick: " + _takenFoodForTick);
+            // UnityEngine.Debug.Log("GovernmentObstacle: " + _governmentObstacle);
+            _takenFood -= _takenFoodForTick;
+            _population += _populationGrowth;
+        }
+        TakenFood = _takenFood;
+        Population = _population;
+        // UnityEngine.Debug.Log(_population);
     }
 }

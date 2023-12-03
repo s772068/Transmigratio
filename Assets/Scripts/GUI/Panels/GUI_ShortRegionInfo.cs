@@ -31,9 +31,11 @@ public class GUI_ShortRegionInfo : MonoBehaviour, IGameConnecter {
 
         private void UpdatePanel() {
         if (_regionIndex == -1) return;
+        
         countryName.text = _regionIndex == -1 ?
             settings.Localization.Map.Countries.Name :
             settings.Localization.Map.Countries.Value[_regionIndex];
+        
         population.text = _regionIndex == -1 ?
             settings.Localization.Map.Countries.Name :
             settings.Localization.Map.Civilization.Population + "\n" +

@@ -1,4 +1,3 @@
-using UnityEditor.Localization.Editor;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Settings/Localization", fileName = "Localization")]
