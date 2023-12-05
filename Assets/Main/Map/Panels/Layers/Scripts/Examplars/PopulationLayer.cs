@@ -5,6 +5,7 @@ public struct PopulationLayer : ILayer {
         int count = settings.Theme.CountCivilizationDetails(layerIndex);
         int max = map.data.MaxPopulationValue;
         for (int i = 0, detailIndex = 0, percent; i < map.data.Regions.Length; ++i) {
+            if (map.data.Regions[i].Civilizations.Length == 0) return;
             percent = map.data.Regions[i].AllPopulations * 100 / max;
             if (percent < 25) {
                 detailIndex = 0;

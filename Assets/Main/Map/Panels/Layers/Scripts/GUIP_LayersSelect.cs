@@ -40,12 +40,11 @@ public class GUIP_LayersSelect : MonoBehaviour, IGameConnecter {
     }
 
     public void Close() {
-        map.OnUpdate -= UpdateLayer;
-        Clear();
         gameObject.SetActive(false);
     }
 
     public void Click(int layerIndex) {
+        Clear();
         if(layerIndex < 0 || layers.Length - 1 < layerIndex) return;
         _layerIndex = layerIndex;
         layers[_layerIndex].Show(settings, wmsk, map, _layerIndex);
@@ -86,5 +85,10 @@ public class GUIP_LayersSelect : MonoBehaviour, IGameConnecter {
         game.Get(out settings);
         game.Get(out wmsk);
         game.Get(out map);
+    }
+    
+    public void OnDestroy() {
+        map.OnUpdate -= UpdateLayer;
+        Clear();
     }
 }

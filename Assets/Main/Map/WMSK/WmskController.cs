@@ -65,9 +65,9 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         wmsk.ToggleCountrySurface(regionIndex, true, color);
     }
 
-    public void CreateEventMarker(S_Event e, int eventIndex, int regionIndex) {
-        CreateIconMarker(wmsk.GetCountry(regionIndex).center, e.MarkerIndex, events.MarkerLiveTime, (IconMarker owner) => {
-            // events.OpenPanel(e, regionIndex, eventIndex);
+    public void CreateEventMarker(S_Event data, int eventIndex, int regionIndex) {
+        CreateIconMarker(wmsk.GetCountry(regionIndex).center, data.MarkerIndex, events.MarkerLiveTime, (IconMarker owner) => {
+            events.OpenPanel(data, eventIndex, regionIndex);
             owner.DestroyGO();
         });
     }

@@ -11,12 +11,14 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
     private TimelineController timeline;
     private SettingsController settings;
     private WmskController wmsk;
+    private MapController map;
 
     public GameController GameController {
         set {
             value.Get(out timeline);
             value.Get(out settings);
             value.Get(out wmsk);
+            value.Get(out map);
         }
     }
 
@@ -39,13 +41,19 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
     }
 
     public void UpdateMigration() {
+        int civIndex;
         for(int i = 0; i < migrations.Count; ++i) {
             migration = migrations[i];
             if (populationsPerTick < migration.MaxPopulation - migration.Population) {
                 migration.Population += populationsPerTick;
-//                map.data.Regions[migration.From].Population -= populationsPerTick;
-//                map.data.Regions[migration.To].Population += populationsPerTick;
-                migrations[i] = migration;
+                //civIndex = map.data.Regions[migration.From].StageToIndex(migration.Stage);
+                //map.data.Regions[migration.From].Civilizations[civIndex].Population -= populationsPerTick;
+                //if (Random.Range()/*Удаление населения с 5 - 30 % вероятностью*/) {
+                //} else {
+                //    civIndex = map.data.Regions[migration.To].StageToIndex(migration.Stage);
+                //    map.data.Regions[migration.To].Civilizations[civIndex].Population += populationsPerTick;
+                //}
+                //migrations[i] = migration;
             } else {
 //                map.data.Regions[migration.From].Population -= migration.MaxPopulation - migration.Population;
 //                map.data.Regions[migration.To].Population += migration.MaxPopulation - migration.Population;
@@ -63,5 +71,9 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
 
     public void Init() {
         timeline.OnTick += UpdateMigration;
+    }
+
+    private void OnDestroy() {
+        timeline.OnTick -= UpdateMigration;
     }
 }

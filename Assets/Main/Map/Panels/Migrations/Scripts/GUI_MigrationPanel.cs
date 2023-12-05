@@ -6,7 +6,7 @@ using System;
 public class GUI_MigrationPanel : GUI_BasePanel {
     [Header("Text")]
     [SerializeField] private Text label;
-    [SerializeField] private Text pathTxt;
+    // [SerializeField] private Text pathTxt;
     [SerializeField] private Text description;
     [SerializeField] private Text breakTxt;
     [SerializeField] private Text closeTxt;
@@ -28,7 +28,7 @@ public class GUI_MigrationPanel : GUI_BasePanel {
     public Action OnClose;
 
     public string Label { set => label.text = value; }
-    public string Path { set => pathTxt.text = value; }
+    // public string Path { set => pathTxt.text = value; }
     public string Description { set => description.text = value; }
     public Sprite Icon { set => icon.sprite = value; }
 
@@ -49,7 +49,7 @@ public class GUI_MigrationPanel : GUI_BasePanel {
 
     public void Init(S_Migration data, string from, string to) {
         Icon = iconSprites[data.IconIndex];
-        Path = string.Format(pathFormat, from, to);
+        // Path = string.Format(pathFormat, from, to);
         maxPopulation = data.MaxPopulation;
         Population = data.Population;
     }

@@ -65,6 +65,22 @@ public struct S_Region {
         }
     }
 
+    public int Eat {
+        get {
+            int farmers = AllCivilizationVlaues(1, 0);
+            int hunters = AllCivilizationVlaues(1, 1);
+            int flora = Ecology[2][0];
+            int fauna = Ecology[3][0];
+            return farmers.Proportion(hunters) > 50 ? flora : fauna;
+        }
+        set {
+            int farmers = AllCivilizationVlaues(1, 0);
+            int hunters = AllCivilizationVlaues(1, 1);
+            if (farmers.Proportion(hunters) > 50) Ecology[2][0] = value;
+            else                                  Ecology[3][0] = value;
+        }
+    }
+
     public int MaxCivilizationStage {
         get {
             int stage = -1;

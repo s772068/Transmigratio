@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 
 [RequireComponent(typeof(Button))]
-public class GUI_EventResult : MonoBehaviour {
+public class GUIE_EventResult : MonoBehaviour {
     [SerializeField] private Text nameResult;
     [SerializeField] private Text description;
 

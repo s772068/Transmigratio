@@ -62,21 +62,16 @@ public struct MU_FoodAppropriated : IUpdater {
         _hunters = civilization.Paramiters[1][0];
         _farmers = civilization.Paramiters[1][1];
 
-        _farmersProportion = Proportion(_farmers, _hunters);
-        _huntersProportion = Proportion(_hunters, _farmers);
+        _farmersProportion = _farmers.Proportion(_hunters);
+        _huntersProportion = _hunters.Proportion(_farmers);
 
         _kr = _floraKr * _farmersProportion +
               _faunaKr * _huntersProportion;
 
-        _prodMedeK = Proportion(_pc, _slavery) * 0.6f +
-            Proportion(_slavery, _pc) * 0.7f;
+        _prodMedeK = _pc.Proportion(_slavery) * 0.6f +
+            _slavery.Proportion(_pc) * 0.7f;
 
         TakenFood = _takenFood = (int) (_population / 61f * _kr * _prodMedeK);
-
-        UnityEngine.Debug.Log("Population: " + _population / 61f);
-        UnityEngine.Debug.Log("KR: " + _kr);
-        UnityEngine.Debug.Log("ProdMedeK" + _prodMedeK);
-        UnityEngine.Debug.Log("TakenFood: " + _takenFood);
 
         Flora = (int) (_flora -
                        _takenFood * _farmersProportion /
@@ -84,13 +79,5 @@ public struct MU_FoodAppropriated : IUpdater {
         Fauna = (int) (_fauna -
                        _takenFood * _huntersProportion /
                        (100 * _civNumberRegOfPresence));
-    }
-
-    private float Proportion(params float[]vals) {
-        float all = 0;
-        for(int i = 0; i < vals.Length; ++i) {
-            all += vals[i];
-        }
-        return vals[0] / all;
     }
 }

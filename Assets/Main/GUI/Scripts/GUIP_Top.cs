@@ -27,6 +27,7 @@ public class GUIP_Top : MonoBehaviour, IGameConnecter {
     }
 
     public void SelectRegion() {
+        if (wmsk.SelectedIndex < 0) return;
         selectRegionBtn.gameObject.SetActive(false);
         timeline.OnSelectRegion?.Invoke(wmsk.SelectedIndex);
         timeline.Play();

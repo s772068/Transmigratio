@@ -15,6 +15,7 @@ public class IconMarker : MonoBehaviour {
     public Action<IconMarker> OnClick;
 
     public void Click() => OnClick?.Invoke(this);
+    
     public void DestroyGO() => Destroy(gameObject);
 
     private void Awake() {

@@ -52,4 +52,9 @@ public class GUI_ShortRegionInfo : MonoBehaviour, IGameConnecter {
         wmsk.OnClick += SelectRegion;
         timeline.OnTick += UpdatePanel;
     }
+
+    private void OnDestroy() {
+        wmsk.OnClick -= SelectRegion;
+        timeline.OnTick -= UpdatePanel;
+    }
 }

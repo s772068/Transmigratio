@@ -108,11 +108,12 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
 
     public void Init() {
         InitCountries();
-        timeline.OnTick = UpdateParams;
+        timeline.OnTick += UpdateParams;
         timeline.OnSelectRegion += EmergenceFirstCivilization;
     }
 
     private void OnDestroy() {
+        timeline.OnTick -= UpdateParams;
         timeline.OnSelectRegion -= EmergenceFirstCivilization;
     }
 }

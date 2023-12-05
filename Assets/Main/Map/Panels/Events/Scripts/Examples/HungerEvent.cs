@@ -4,7 +4,7 @@ public class HungerEvent : BaseEvent {
     private MigrationController migration;
     private ResourcesController resources;
     private MapController map;
-    private int migrateCountryIndex;
+    private int migrateRegionIndex;
     private int migratePopulation;
     private int costIntervention;
 
@@ -61,28 +61,39 @@ public class HungerEvent : BaseEvent {
         game.Get(out map);
     }
 
-    public override bool CheckBuild(int countryIndex, int resultIndex) =>
+    public override bool CheckActivate(ref S_Region region) {
+        if (region.Civilizations.Length == 0) return false;
+        int farmers = region.AllCivilizationVlaues(1,0);
+        int hunters = region.AllCivilizationVlaues(1,1);
+        int flora = region.Ecology[2][0];
+        int fauna = region.Ecology[3][0];
+        int eat = Proportion(farmers, hunters) > 50 ? flora : fauna;
+        // return false;
+        return eat <= 0;
+    }
+
+    public override bool CheckBuild(int regionIndex, int resultIndex) =>
         resultIndex switch {
             0 => true,
-            1 => CheckMigration(countryIndex),
+            1 => CheckMigration(regionIndex),
             2 => resources.intervention >= costIntervention,
             _ => false
         };
 
-    public override void Use(int countryIndex, int index) {
+    public override void Use(int regionIndex, int index) {
         switch (index) {
             case 0: Nothing(); break;
-            case 1: Migration(countryIndex); break;
+            case 1: Migration(regionIndex); break;
             case 2: Intervene(); break;
         }
     }
 
-    private bool CheckMigration(int countryIndex) {
-        for(int i = 0; i < map.data.Regions[countryIndex].Neighbours.Length; ++i) {
-//            if (map.data.Regions[map.data.Regions[countryIndex].Neighbours[i]].Population == 0) {
-                migrateCountryIndex = map.data.Regions[countryIndex].Neighbours[i];
+    private bool CheckMigration(int regionIndex) {
+        for(int i = 0; i < map.data.Regions[regionIndex].Neighbours.Length; ++i) {
+            if (map.data.Regions[map.data.Regions[regionIndex].Neighbours[i]].Civilizations.Length == 0) {
+                migrateRegionIndex = map.data.Regions[regionIndex].Neighbours[i];
                 return true;
-//            }
+            }
         }
         return false;
     }
@@ -95,7 +106,7 @@ public class HungerEvent : BaseEvent {
         Debug.Log("Migration");
         S_Migration migrationData = new S_Migration {
             From = from,
-            To = migrateCountryIndex,
+            To = migrateRegionIndex,
             MaxPopulation = migratePopulation
         };
         migration.StartMigration(migrationData);
@@ -104,5 +115,12 @@ public class HungerEvent : BaseEvent {
     private void Intervene() {
         resources.intervention -= costIntervention;
         Debug.Log("Intervene");
+    }
+    private float Proportion(params float[] vals) {
+        float all = 0;
+        for (int i = 0; i < vals.Length; ++i) {
+            all += vals[i];
+        }
+        return vals[0] / all;
     }
 }
