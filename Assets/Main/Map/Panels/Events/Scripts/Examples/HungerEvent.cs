@@ -76,7 +76,7 @@ public class HungerEvent : BaseEvent {
         resultIndex switch {
             0 => true,
             1 => CheckMigration(regionIndex),
-            2 => resources.intervention >= costIntervention,
+            2 => 100 >= resources.intervention + costIntervention,
             _ => false
         };
 
@@ -113,7 +113,7 @@ public class HungerEvent : BaseEvent {
     }
 
     private void Intervene() {
-        resources.intervention -= costIntervention;
+        resources.Intervention += costIntervention;
         Debug.Log("Intervene");
     }
     private float Proportion(params float[] vals) {

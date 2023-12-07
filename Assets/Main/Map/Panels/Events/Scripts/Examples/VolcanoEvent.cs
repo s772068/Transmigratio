@@ -75,7 +75,7 @@ public class VolcanoEvent : BaseEvent {
         resultIndex switch {
             0 => true,
             1 => CheckMigration(regionIndex),
-            2 => resources.intervention >= costIntervention,
+            2 => 100 >= resources.intervention + costIntervention,
             _ => false
         };
 
@@ -114,8 +114,8 @@ public class VolcanoEvent : BaseEvent {
     }
 
     private void Intervene() {
-        resources.intervention -= costIntervention;
         Debug.Log("Intervene");
+        resources.Intervention += costIntervention;
         // Realise volcanoes action
     }
 }

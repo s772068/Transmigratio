@@ -20,10 +20,12 @@ public class GUIP_Info : MonoBehaviour, IGameConnecter {
         if (!gameObject.activeSelf) {
             gameObject.SetActive(true);
             Localization(regionIndex);
+            timeline.Pouse();
         }
     }
 
     public void Close() {
+        timeline.Play();
         gameObject.SetActive(false);
     }
 

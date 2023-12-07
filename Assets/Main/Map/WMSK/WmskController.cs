@@ -4,15 +4,19 @@ using UnityEngine;
 using System;
 
 public class WmskController : MonoBehaviour, IGameConnecter {
-    [SerializeField] private GameObject arrow;
+    [SerializeField] private GameObject startArrow;
+    [SerializeField] private GameObject endArrow;
+    [SerializeField] private Material lineArrow;
+    [SerializeField] private float arrowInter;
     [SerializeField] private IconMarker iconMarker;
     [SerializeField] private Color selectColor;
     [SerializeField] private int eventMarkerLiveTime;
     [SerializeField] private Sprite[] markerSprites;
 
-    
     private MigrationController migration;
     private EventsController events;
+    private SettingsController settings;
+    private TimelineController timeline;
     private MapController map;
     
     private WMSK wmsk;
@@ -28,6 +32,8 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         set {
             value.Get(out migration);
             value.Get(out events);
+            value.Get(out settings);
+            value.Get(out timeline);
             value.Get(out map);
         }
     }
@@ -85,25 +91,59 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         Vector2 start = wmsk.GetCountry(data.From).center;
         Vector2 end = wmsk.GetCountry(data.To).center;
 
-        IconMarker marker = CreateIconMarker(start, data.MarkerIndex, -1, (IconMarker marker) => migration.OpenPanel(data, index));
+        // IconMarker marker = CreateIconMarker(start, data.MarkerIndex, -1, (IconMarker marker) => migration.OpenPanel(data, index));
 
         Color color = Color.red;
         float lineWidth = 0.5f;
         float elevation = 0f;
 
         LineMarkerAnimator lma = wmsk.AddLine(start, end, color, elevation, lineWidth);
-        lma.drawingDuration = 4.0f;
-        // lma.autoFadeAfter = 2.0f;
-        
-        //lma.drawingDuration = 2.0f;
+
+        float drawingDuration = UnityEngine.Random.Range(2f, 4f);
+        float autoFadeAfter = drawingDuration + UnityEngine.Random.Range(1.5f, 2f);
+        lma.autoFadeAfter = autoFadeAfter;
+        lma.drawingDuration = drawingDuration + 1;
         lma.dashInterval = 0.01f;
-        lma.dashAnimationDuration = 0.25f;
+        lma.dashAnimationDuration = drawingDuration;
 
-        lma.endCap = arrow;
+        lma.startCap = startArrow;
+        lma.startCapOffset = 0.5f;
+        lma.startCapScale = new Vector3(1f, 1f, 1f);
+
+        lma.lineMaterial = lineArrow;
+        lma.lineWidth = 2;
+
+        lma.endCap = endArrow;
         lma.endCapOffset = 0.5f;
-        lma.endCapScale = new Vector3(3f, 3f, 1f);
+        lma.endCapScale = new Vector3(1f, 1f, 1f);
+    }
 
-        lineMigrations.Add(new S_LineMigration { Lma = lma, Marker = marker });
+    private void CreateArrow() {
+        Vector2 start = wmsk.GetCountry(UnityEngine.Random.Range(0, 54)).center;
+        Vector2 end = wmsk.GetCountry(UnityEngine.Random.Range(0, 54)).center;
+        Color color = Color.red;
+        float lineWidth = 0.5f;
+        float elevation = 0f;
+
+        LineMarkerAnimator lma = wmsk.AddLine(start, end, color, elevation, lineWidth);
+
+        float drawingDuration = UnityEngine.Random.Range(2f, 4f);
+        float autoFadeAfter = drawingDuration + UnityEngine.Random.Range(1.5f, 2f);
+        lma.autoFadeAfter = autoFadeAfter;
+        lma.drawingDuration = drawingDuration + 1;
+        lma.dashInterval = 0.01f;
+        lma.dashAnimationDuration = drawingDuration;
+
+        lma.startCap = startArrow;
+        lma.startCapOffset = 0.5f;
+        lma.startCapScale = new Vector3(1f, 1f, 1f);
+
+        lma.lineMaterial = lineArrow;
+        lma.lineWidth = 2;
+
+        lma.endCap = endArrow;
+        lma.endCapOffset = 0.5f;
+        lma.endCapScale = new Vector3(1f, 1f, 1f);
     }
 
     public void EndMigration(int index) {
@@ -121,5 +161,10 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         for (int i = 0; i < wmsk.countries.Length; ++i) {
             wmsk.ToggleCountrySurface(i, true, Color.clear);
         }
+        timeline.OnArrows += CreateArrow;
+    }
+
+    public void OnDestroy() {
+        timeline.OnTick -= CreateArrow;
     }
 }

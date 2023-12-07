@@ -7,6 +7,8 @@ public class SO_Theme : ScriptableObject {
     [SerializeField] private Color[] Colors;
     [SerializeField] private Sprite[] Sprites;
 
+    public Color Color(int index) => Colors[index];
+    public Sprite Sprite(int index) => Sprites[index];
     public int CountEcologyParamiters => Ecology.Length;
     public int CountCivilizationParamiters => Civilization.Length;
 

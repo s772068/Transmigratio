@@ -90,7 +90,14 @@ public class EventsController : MonoBehaviour, IGameConnecter {
         events.Add(new VolcanoEvent(game, 100, 3));
         events.Add(new HungerEvent(game, 100, 5));
         // InitEventLog();
-        timeline.OnTick += Call;
+        //timeline.OnTick += Call;
+        timeline.OnEvents += CreateEvent;
+    }
+
+    private void CreateEvent() {
+        int eventIndex = Random.Range(0, 2);
+        int regionIndex = Random.Range(0, map.data.Regions.Length);
+        wmsk.CreateEventMarker(events[eventIndex].Data(settings.Language), eventIndex, regionIndex);
     }
 
     private void OnDestroy() {
