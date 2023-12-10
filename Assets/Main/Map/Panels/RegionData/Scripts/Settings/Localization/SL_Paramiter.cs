@@ -1,8 +1,8 @@
-using UnityEngine;
+using AYellowpaper.SerializedCollections;
 
 [System.Serializable]
-public struct SL_Paramiter<TValue> {
+public struct SL_Paramiter {
     public string Name;
     public string Description;
-    public TValue Value;
+    public SerializedDictionary<string, SL_Detail> Details;
 }

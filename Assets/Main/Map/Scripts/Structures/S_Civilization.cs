@@ -4,92 +4,171 @@
 // 2: Governments
 
 using AYellowpaper.SerializedCollections;
-using System.Collections.Generic;
-using System.Collections;
+using System.Linq;
+using UnityEngine;
 
 [System.Serializable]
-public struct S_Civilization : IEnumerator<S_Paramiter> {
-    public int Stage;
-    public int Population;
-    public int TakenFood;
-    public S_Paramiter[] Paramiters;
-    public SerializedDictionary<string, int> ParamitersNameIndexes;
+public class S_Civilization {
+    [SerializeField] private int population;
+    [SerializeField] private float takenFood;
+    [SerializeField] private SerializedDictionary<string, SerializedDictionary<string, float>> paramiters = new();
 
-    private int _index;
+    public SerializedDictionary<string, float> this[string paramiter] {
+        get => paramiters[paramiter];
+        set { Set(paramiter, value); }
+    }
+    public float this[string paramiter, string detail] {
+        get => paramiters[paramiter][detail];
+        set { Set(paramiter, detail, value); }
+    }
 
-    public int this[params string[] val] {
-        get => val[0] switch {
-            "Stage" => Stage,
-            "Population" => Population,
-            "TakenFood" => TakenFood,
-            "Paramiters" => Paramiters[ParamitersNameIndexes[val[1]]][val[2]],
-            _ => 0
-        };
-        set {
-            switch (val[0]) {
-                case "Stage": Stage = value; break;
-                case "Population": Population = value; break;
-                case "TakenFood": TakenFood = value; break;
-                case "Paramiters": Paramiters[ParamitersNameIndexes[val[1]]] [val[2]] = value; break;
-                default: return;
-            }
-        }  
+    public int Population {
+        get => population;
+        set => population = value;
+    }
+
+    public float TakenFood {
+        get => takenFood;
+        set => takenFood = value;
+    }
+
+    public string[] ParamitersKeys => paramiters.Keys.ToArray();
+    public string[] DetailsKeys(string paramiter) => paramiters[paramiter].Keys.ToArray();
+    public float[] DetailsValues(string paramiter) => paramiters[paramiter].Values.ToArray();
+
+    public SerializedDictionary<string, float> Get(string paramiter) {
+        if (paramiters == null) return null;
+        if (!paramiters.ContainsKey(paramiter)) return null;
+        return paramiters[paramiter];
+    }
+    public float Get(string paramiter, string detail) {
+        if (paramiters == null) return -1f;
+        if (!paramiters.ContainsKey(paramiter)) return -1f;
+        return paramiters[paramiter][detail];
+    }
+
+    #region Set
+    public void Set(S_Civilization civilization) {
+        population = civilization.population;
+        takenFood = civilization.takenFood;
+
+        Set(civilization.paramiters);
+    }
+
+    public void Set(SerializedDictionary<string, SerializedDictionary<string, float>> values) {
+        foreach(var value in values) {
+            Set(value.Key, value.Value);
+        }
     }
     
-    public int this[params int[] val] {
-        get => val[0] switch {
-            0 => Stage,
-            1 => Population,
-            2 => TakenFood,
-            3 => Paramiters[val[1]][val[2]],
-            _ => 0
-        };
-        set {
-            switch (val[0]) {
-                case 0: Stage = value; break;
-                case 1: Population = value; break;
-                case 2: TakenFood = value; break;
-                case 3: Paramiters[val[1]][val[2]] = value; break;
-                default: return;
+    public void Set(string paramiter, SerializedDictionary<string, float> values) {
+        foreach(var value in values) {
+            Set(paramiter, value.Key, value.Value);
+        }
+    }
+    
+    public void Set(string paramiter, string detail, float value) {
+        if (paramiters == null) paramiters = new();
+
+        if (!paramiters.ContainsKey(paramiter))
+            paramiters.Add(paramiter, new());
+
+        if (!paramiters[paramiter].ContainsKey(detail))
+            paramiters[paramiter].Add(detail, new());
+
+        paramiters[paramiter][detail] = value;
+    }
+    #endregion
+
+    #region AllValues
+    public float AllValues {
+        get {
+            float all = 0;
+            foreach (var paramiter in paramiters) {
+                foreach(var detail in paramiter.Value) {
+                    all += detail.Value;
+                }
             }
+            return all;
         }
     }
 
-    public void Add(S_Paramiter value) {
-        ParamitersNameIndexes[Paramiters.Length.ToString()] = Paramiters.Length;
-        Paramiters.Add(value);
+    public float AllValuesByDetail(string detail) {
+        float all = 0;
+        foreach (var paramiter in paramiters) {
+            all += paramiter.Value[detail];
+        }
+        return all;
+    }
+    #endregion
+
+    #region MaxKey
+    public string MaxKey {
+        get {
+            string key = "";
+            float max = -1;
+            foreach (var paramiter in paramiters) {
+                foreach (var detail in paramiter.Value) {
+                    if (detail.Value > max) {
+                        key = detail.Key;
+                        max = detail.Value;
+                    }
+                }
+            }
+            return key;
+        }
     }
 
-    public void Add(string name, S_Paramiter value) {
-        ParamitersNameIndexes[name] = Paramiters.Length;
-        Paramiters.Add(value);
+    public string MaxKeyByDetail(string detail) {
+        string key = "";
+        float max = -1;
+        foreach (var paramiter in paramiters) {
+            if (paramiter.Value[detail] > max) {
+                key = paramiter.Key;
+                max = paramiter.Value[detail];
+            }
+        }
+        return key;
+    }
+    #endregion
+
+    #region MaxValue
+    public float MaxValue {
+        get {
+            float max = -1;
+            foreach (var paramiter in paramiters) {
+                foreach (var detail in paramiter.Value) {
+                    if (detail.Value > max) {
+                        max = detail.Value;
+                    }
+                }
+            }
+            return max;
+        }
     }
 
-    public void Remove(int index) {
-        ParamitersNameIndexes.Remove(index.ToString());
-        Paramiters.Remove(index);
+    public float MaxValueByDetail(string detail) {
+        float max = -1;
+        foreach (var paramiter in paramiters) {
+            if (paramiter.Value[detail] > max) {
+                max = paramiter.Value[detail];
+            }
+        }
+        return max;
+    }
+    #endregion
+
+    #region Remove
+    public bool Remove(string paramiter, string detail) {
+        return paramiters[paramiter].Remove(detail);
     }
 
-    public void Remove(string name) {
-        Paramiters.Remove(ParamitersNameIndexes[name]);
-        ParamitersNameIndexes[name] = Paramiters.Length;
+    public bool Remove(string paramiter) {
+        return paramiters.Remove(paramiter);
     }
 
     public void Clear() {
-        ParamitersNameIndexes.Clear();
-        Paramiters.Clear();
+        paramiters.Clear();
     }
-
-    public S_Paramiter Current => Paramiters[_index];
-
-    object IEnumerator.Current => Current;
-
-    public bool MoveNext() {
-        ++_index;
-        return _index < Paramiters.Length;
-    }
-
-    public void Reset() => _index = -1;
-
-    public void Dispose() { }
+    #endregion
 }

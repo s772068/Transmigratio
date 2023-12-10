@@ -1,163 +1,171 @@
 using AYellowpaper.SerializedCollections;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using WorldMapStrategyKit;
 
 // Example: GetRegion => IndexRegion => GetCivilization => IndexCivilization => GetParamiter => IndexParamiter => IndexDetail
 [System.Serializable]
-public struct S_Map {
-    public int[][] Civilizations;
-    public S_Region[] Regions;
-    public SerializedDictionary<string, int> CivilizationsIndexes;
-    public SerializedDictionary<string, int> CivilizationsRegionsIndexes; // ?
-    public SerializedDictionary<string, int> RegionsNameIndexes;
+public class S_Map {
+    [SerializeField] public Dictionary<string, Dictionary<string, int>> civilizations = new();
+    [SerializeField] public SerializedDictionary<string, S_Region> regions = new();
 
-    public int this[int regionIndex, params string[] val] {
-        get => val[0] switch {
-            "Civilizations" => Civilizations[CivilizationsIndexes[val[1]]][CivilizationsIndexes[val[2]]],
-            "Regions" => Regions[regionIndex][val[1], val[2], val[3], val[4], val[5]],
-            _ => 0
-        };
-        set {
-            switch (val[0]) {
-                case "Civilizations": Civilizations[CivilizationsIndexes[val[1]]][CivilizationsIndexes[val[2]]] = value; break;
-                case "Regions": Regions[regionIndex][val[1], val[2], val[3], val[4], val[5]] = value; break;
-                default: return;
-            }
-        }
+    public int CountRegionsInCivilization(string civilization) => civilizations[civilization].Count;
+
+    #region Set
+    #region Region
+    public void Set(string region, S_Region value) {
+        if (!regions.ContainsKey(region)) regions[region] = new();
+        regions[region].Set(value);
+    }
+    #endregion
+
+    #region Ecology
+    public void Set(string region, SerializedDictionary<string, S_Paramiter> values) {
+        if (!regions.ContainsKey(region)) regions[region] = new();
+        regions[region].Set(values);
     }
 
-    public int this[params int[] val] {
-        get => val[0] switch {
-            0 => Civilizations[val[1]][val[2]],
-            1 => Regions[val[1]][val[2], val[3], val[4], val[5], val[6]],
-            _ => 0
-        };
-        set {
-            switch (val[0]) {
-                case 0: Civilizations[val[1]][val[2]] = value; break;
-                case 1: Regions[val[1]][val[2], val[3], val[4], val[5], val[6]] = value; break;
-                default: return;
-            }
-        }
+    public void Set(string region, string eco, S_Paramiter value) {
+        if (!regions.ContainsKey(region)) regions[region] = new();
+        regions[region].Set(eco, value);
     }
 
-    public int CountCivilizationRegions {
+    public void Set(string region, string eco, SerializedDictionary<string, float> values) {
+        if (!regions.ContainsKey(region)) regions[region] = new();
+        regions[region].Set(eco, values);
+    }
+
+    public void Set(string region, string eco, string detail, float value) {
+        if (!regions.ContainsKey(region)) regions = new();
+        regions[region].Set(eco, detail, value);
+    }
+    #endregion
+
+    #region Civilization
+    
+    public void Set(string region, SerializedDictionary<string, S_Civilization> values) {
+        if (!regions.ContainsKey(region)) regions[region] = new();
+        regions[region].Set(values);
+    }
+    
+    public void Set(string region, string civilization, S_Civilization value) {
+        if (!regions.ContainsKey(region)) regions[region] = new();
+        regions[region].Set(civilization, value);
+    }
+    
+    public void Set(string region, string civilization, SerializedDictionary<string, SerializedDictionary<string, float>> values) {
+        if (!regions.ContainsKey(region)) regions[region] = new();
+        regions[region].Set(civilization, values);
+    }
+    
+    public void Set(string region, string civilization, string paramiter, SerializedDictionary<string, float> values) {
+        if (!regions.ContainsKey(region)) regions[region] = new();
+        regions[region].Set(civilization, paramiter, values);
+    }
+
+    public void Set(string region, string civilization, string paramiter, string detail, float value) {
+        if (!regions.ContainsKey(region)) regions[region] = new();
+        regions[region].Set(civilization, paramiter, detail, value);
+    }
+    #endregion
+    #endregion
+
+    public int AllPopulations {
         get {
-            int count = 0;
-            bool hasUnCiv = false;
-            for(int regionIndex = 0; regionIndex < Regions.Length; ++regionIndex) {
-                if (!hasUnCiv) {
-                    for (int civIndex = 0; civIndex < Regions[regionIndex].Civilizations.Length; ++civIndex) {
-                        if (Regions[regionIndex].Civilizations[civIndex].Stage == 0) {
-                            hasUnCiv = true;
-                            ++count;
-                        }
-                    }
-                } else count += Regions[regionIndex].Civilizations.Length;
+            int all = 0;
+            foreach (var region in regions) {
+                all += region.Value.AllPopulations;
             }
-            return count;
+            return all;
         }
     }
 
-    public int MaxCivilizationStage {
-        get {
-            int stage = -1;
-            int max = -1;
-            for (int i = 0; i < Regions.Length; ++i) {
-                if (Regions[i].MaxCivilizationStage > max) {
-                    max = Regions[i].MaxCivilizationStage;
-                    stage = i;
-                }
+    public string MaxEcologyKey(string paramiter) {
+        string key = "";
+        float max = -1f;
+        foreach (var region in regions) {
+            if (region.Value.MaxEcoValueByParamiter(paramiter) > max) {
+                max = region.Value.MaxEcoValueByParamiter(paramiter);
+                key = region.Key;
             }
-            return stage;
         }
+        return key;
+    }
+
+    public string MaxCivilizationKey(string paramiter) {
+        float max = -1f;
+        string key = "";
+        foreach (var region in regions) {
+            if (region.Value.MaxCivValueByParamiter(paramiter) > max) {
+                max = region.Value.MaxCivValueByParamiter(paramiter);
+                key = region.Key;
+            }
+        }
+        return key;
     }
 
     public int MaxPopulationValue {
         get {
             int max = 0;
-            for (int i = 0; i < Regions.Length; ++i) {
-                if(max < Regions[i].AllPopulations) {
-                    max = Regions[i].MaxPopulationsValue;
+            foreach (var region in regions) {
+                if (max < region.Value.AllPopulations) {
+                    max = region.Value.AllPopulations;
                 }
             }
             return max;
         }
     }
 
-    public int AllPopulations {
-        get {
-            int all = 0;
-            for (int i = 0; i < Regions.Length; ++i) {
-                all += Regions[i].AllPopulations;
-            }
-            return all;
-        }
-    }
-
-    public int MaxEcologyIndex(int paramiterIndex) {
-        int max = -1;
-        int index = -1;
-        int value;
-        for (int i = 0; i < Regions.Length; ++i) {
-            value = Regions[i].Ecology[paramiterIndex].MaxValue;
-            if (value > max) {
-                max = value;
-                index = i;
-            }
-        }
-        return index;
-    }
-
-    public int MaxCivilizationIndex(int paramiterIndex) {
-        int max = -1;
-        int index = -1;
-        int value;
-        for (int i = 0; i < Regions.Length; ++i) {
-            value = Regions[i].MaxCivilizationValue(paramiterIndex);
-            if (value > max) {
-                max = value;
-                index = i;
-            }
-        }
-        return index;
-    }
-
-    public int MaxEcologyValue(int paramiterIndex) {
-        int max = -1;
-        int value;
-        for (int i = 0; i < Regions.Length; ++i) {
-            value = Regions[i].Ecology[paramiterIndex].MaxValue;
-            if (value > max) {
-                max = value;
+    public float MaxEcologyValue(string paramiter) {
+        float max = -1f;
+        foreach (var region in regions) {
+            if (region.Value.MaxEcoValueByParamiter(paramiter) > max) {
+                max = region.Value.MaxEcoValueByParamiter(paramiter);
             }
         }
         return max;
     }
 
-    public int MaxCivilizationValue(int paramiterIndex) {
-        int max = -1;
-        int value;
-        for (int i = 0; i < Regions.Length; ++i) {
-            value = Regions[i].MaxCivilizationValue(paramiterIndex);
-            if (value > max) {
-                max = value;
+    public float MaxCivilizationValue(string paramiter) {
+        float max = -1f;
+        foreach (var region in regions) {
+            if (region.Value.MaxCivValueByParamiter(paramiter) > max) {
+                max = region.Value.MaxCivValueByParamiter(paramiter);
             }
         }
         return max;
     }
 
-    public int AllEcologyVlaues(int paramiterIndex, int detailIndex) {
-        int all = 0;
-        for (int i = 0; i < Regions.Length; ++i) {
-            all += Regions[i].Ecology[paramiterIndex].details[detailIndex].Value;
-        }
-        return all;
+    #region Remove
+    public bool RemoveCivilizatin(string civilization) {
+        return civilizations.Remove(civilization);
     }
+    public bool RemoveRegionInCivilizatin(string civilization, string region) {
+        return civilizations[civilization].Remove(region);
+    }
+    public bool RemoveRegion(string region) {
+        return regions.Remove(region);
+    }
+    public void Clear() {
+        civilizations.Clear();
+        regions.Clear();
+    }
+    #endregion
 
-    public int AllCivilizationVlaues(int paramiterIndex, int detailIndex) {
-        int all = 0;
-        for (int i = 0; i < Regions.Length; ++i) {
-            all += Regions[i].AllCivilizationVlaues(paramiterIndex, detailIndex);
-        }
-        return all;
-    }
+    //public int AllEcologyVlaues(int paramiterIndex, int detailIndex) {
+    //    int all = 0;
+    //    for (int i = 0; i < Regions.Length; ++i) {
+    //        all += Regions[i].Ecology[paramiterIndex].details[detailIndex].Value;
+    //    }
+    //    return all;
+    //}
+
+    //public int AllCivilizationVlaues(int paramiterIndex, int detailIndex) {
+    //    int all = 0;
+    //    for (int i = 0; i < Regions.Length; ++i) {
+    //        all += Regions[i].AllCivilizationVlaues(paramiterIndex, detailIndex);
+    //    }
+    //    return all;
+    //}
 }

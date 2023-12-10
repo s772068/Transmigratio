@@ -1,91 +1,75 @@
 using AYellowpaper.SerializedCollections;
-using System.Collections.Generic;
-using System.Collections;
+using System.Linq;
 
 [System.Serializable]
-public struct S_Paramiter : IEnumerator<int> {
-    public string Name;
-    public S_Value<int>[] details;
-    public SerializedDictionary<string, int> detailsNamesIndexes;
+public class S_Paramiter {
+    [UnityEngine.SerializeField] private SerializedDictionary<string, float> details = new();
 
-    private int _index;
+    public string[] Keys => details.Keys.ToArray();
+    public float[] Values => details.Values.ToArray();
 
-    public int this[int detailIndex] {
-        get => details[detailIndex].Value;
-        set => details[detailIndex].Value = value;
-    }
-
-    public int this[string DetailName] {
-        get => details[detailsNamesIndexes[DetailName]].Value;
-        set => details[detailsNamesIndexes[DetailName]].Value = value;
-    }
-
-    public int[] Details {
+    public float AllValues {
         get {
-            int[] arr = new int[details.Length];
-            for (int i = 0; i < arr.Length; ++i) {
-                arr[i] = details[i].Value;
+            float all = 0;
+            foreach (var detail in details) {
+                all += detail.Value;
             }
-            return arr;
+            return all;
         }
-        //set {
-        //    details = new int[value.Length];
-        //    for (int i = 0; i < value.Length; ++i) {
-        //        details[i] = value[i];
-        //    }
-        //}
     }
-
-    public int MaxIndex {
+    public string MaxKey {
         get {
-            int index = -1;
-            int max = -1;
-            for (int i = 0; i < Details.Length; ++i) {
-                if (details[i].Value > max) {
-                    index = i;
-                    max = details[i].Value;
+            string key = "";
+            float max = -1;
+            foreach (var detail in details) {
+                if (detail.Value > max) {
+                    key = detail.Key;
+                    max = detail.Value;
                 }
             }
-            return index;
+            return key;
         }
     }
-    public int MaxValue {
+    public float MaxValue {
         get {
-            int max = -1;
-            for (int i = 0; i < Details.Length; ++i) {
-                if (details[i].Value > max) {
-                    max = details[i].Value;
+            float max = -1;
+            foreach (var detail in details) {
+                if (detail.Value > max) {
+                    max = detail.Value;
                 }
             }
             return max;
         }
     }
 
-    public void Add(string name, int value) {
-        detailsNamesIndexes[name] = details.Length;
-        details.Add(new() { Name = name, Value = value });
+    public float Get(string detail) {
+        if (details == null) return -1f;
+        if (!details.ContainsKey(detail)) return -1f;
+        return details[detail];
+    }
+    // True
+    public void Set(S_Paramiter value) {
+        Set(value.details);
     }
 
-    public void Remove(string name) {
-        details.Remove(detailsNamesIndexes[name]);
-        detailsNamesIndexes[name] = details.Length;
+    // True
+    public void Set(SerializedDictionary<string, float> values) {
+        foreach (var value in values) {
+            Set(value.Key, value.Value);
+        }
+    }
+
+    // True
+    public void Set(string detail, float value) {
+        if (details == null) details = new();
+        details[detail] = value;
+    }
+
+    public bool Remove(string name) {
+        return details.Remove(name);
     }
 
     public void Clear() {
-        detailsNamesIndexes.Clear();
         details.Clear();
     }
-
-    public int Current => details[_index].Value;
-
-    object IEnumerator.Current => Current;
-
-    public bool MoveNext() {
-        ++_index;
-        return _index < details.Length;
-    }
-
-    public void Reset() => _index = -1;
-
-    public void Dispose() { }
 }
