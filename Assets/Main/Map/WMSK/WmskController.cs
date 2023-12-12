@@ -54,9 +54,9 @@ public class WmskController : MonoBehaviour, IGameConnecter {
 
     private void UpdateSelectIndex(int index) {
         wmsk.ToggleCountrySurface(selectedIndex, true,
-            selectedIndex < map.data.Regions.Length &&
+            selectedIndex < map.data.CountRegions &&
             selectedIndex >= 0 ?
-            map.data.Regions[selectedIndex].Color : Color.clear);
+            map.data.GetColor(selectedIndex) : Color.clear);
         selectedIndex = index;
         wmsk.ToggleCountrySurface(selectedIndex, true, selectColor);
     }

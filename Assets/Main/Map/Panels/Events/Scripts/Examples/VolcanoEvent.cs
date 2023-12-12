@@ -59,13 +59,13 @@ public class VolcanoEvent : BaseEvent {
     }
 
     public override bool CheckActivate(ref S_Region region) {
-        if(region.Civilizations.Length == 0) return false;
-        if (region.EventChanceIndex > -1) {
-            if (Random.Range(0, 1f) <= chances[region.EventChanceIndex]) {
-                region.EventChanceIndex = -1;
+        if(region.GetCountCivilizations() == 0) return false;
+        if (region.GetEventChanceIndex() > -1) {
+            if (Random.Range(0, 1f) <= chances[region.GetEventChanceIndex()]) {
+                region.SetEventChanceIndex(-1);
                 return true;
             } else {
-                ++region.EventChanceIndex;
+                region.SetEventChanceIndex(region.GetEventChanceIndex() + 1);
                 return false;
             }
         } else return false;
@@ -88,11 +88,10 @@ public class VolcanoEvent : BaseEvent {
     }
 
     private bool CheckMigration(int regionIndex) {
-        int[] neighbours = map.data.Regions[regionIndex].Neighbours;
-        for (int i = 0; i < neighbours.Length; ++i) {
+        for (int i = 0; i < map.data.GetRegion(regionIndex).GetCountNeighbours(); ++i) {
             // if(neighbours)
-            if (map.data.Regions[map.data.Regions[regionIndex].Neighbours[i]].Civilizations.Length == 0) {
-                migrateRegionIndex = map.data.Regions[regionIndex].Neighbours[i];
+            if (map.data.GetRegion(map.data.GetRegion(regionIndex).GetNeighbour(i)).GetCountCivilizations() == 0) {
+                migrateRegionIndex = map.data.GetRegion(regionIndex).GetNeighbour(i);
                 return true;
             }
         }

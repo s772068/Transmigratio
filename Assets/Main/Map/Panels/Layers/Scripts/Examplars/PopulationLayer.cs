@@ -3,10 +3,10 @@ public struct PopulationLayer : ILayer {
         UnityEngine.Color color;
         layerIndex -= settings.Theme.CountEcologyParamiters;
         int count = settings.Theme.CountCivilizationDetails(layerIndex);
-        int max = map.data.MaxPopulationValue;
-        for (int i = 0, detailIndex = 0, percent; i < map.data.Regions.Length; ++i) {
-            if (map.data.Regions[i].Civilizations.Length == 0) return;
-            percent = map.data.Regions[i].AllPopulations * 100 / max;
+        int max = map.data.GetAllPopulations();
+        for (int i = 0, detailIndex = 0, percent; i < map.data.CountRegions; ++i) {
+            if (map.data.GetRegion(i).GetCountCivilizations() == 0) return;
+            percent = map.data.GetRegion(i).GetAllPopulations() * 100 / max;
             if (percent < 25) {
                 detailIndex = 0;
             } else if (25 <= percent && percent <= 75) {
@@ -16,7 +16,7 @@ public struct PopulationLayer : ILayer {
             }
             color = settings.Theme.GetEcologyColor(layerIndex, detailIndex);
             color.a = percent / 100;
-            map.data.Regions[i].Color = color;
+            map.data.GetRegion(i).SetColor(color);
             wmsk.RegionPainting(i, color);
         }
     }

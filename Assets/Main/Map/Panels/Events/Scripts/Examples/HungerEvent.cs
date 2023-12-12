@@ -62,14 +62,14 @@ public class HungerEvent : BaseEvent {
     }
 
     public override bool CheckActivate(ref S_Region region) {
-        if (region.Civilizations.Length == 0) return false;
-        int farmers = region.AllCivilizationVlaues(1,0);
-        int hunters = region.AllCivilizationVlaues(1,1);
-        int flora = region.Ecology[2][0];
-        int fauna = region.Ecology[3][0];
-        int eat = Proportion(farmers, hunters) > 50 ? flora : fauna;
-        // return false;
-        return eat <= 0;
+        if (region.GetCountCivilizations() == 0) return false;
+        // int farmers = region.AllCivilizationVlaues(1,0);
+        // int hunters = region.AllCivilizationVlaues(1,1);
+        // int flora = region.Ecology[2][0];
+        // int fauna = region.Ecology[3][0];
+        // int eat = Proportion(farmers, hunters) > 50 ? flora : fauna;
+        return false;
+        // return eat <= 0;
     }
 
     public override bool CheckBuild(int regionIndex, int resultIndex) =>
@@ -89,9 +89,9 @@ public class HungerEvent : BaseEvent {
     }
 
     private bool CheckMigration(int regionIndex) {
-        for(int i = 0; i < map.data.Regions[regionIndex].Neighbours.Length; ++i) {
-            if (map.data.Regions[map.data.Regions[regionIndex].Neighbours[i]].Civilizations.Length == 0) {
-                migrateRegionIndex = map.data.Regions[regionIndex].Neighbours[i];
+        for(int i = 0; i < map.data.GetRegion(regionIndex).GetCountNeighbours(); ++i) {
+            if (map.data.GetRegion(map.data.GetRegion(regionIndex).GetNeighbour(i)).GetCountCivilizations() == 0) {
+                migrateRegionIndex = map.data.GetRegion(regionIndex).GetNeighbour(i);
                 return true;
             }
         }

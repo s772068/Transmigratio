@@ -260,7 +260,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -2, y: 0.000030517578}
-  m_SizeDelta: {x: 1200, y: 776.9025}
+  m_SizeDelta: {x: 1200, y: 840}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &24728174
 MonoBehaviour:
@@ -279,25 +279,25 @@ MonoBehaviour:
   LayoutPosition: {x: 0, y: 0, z: 0}
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
-    m_Center: {x: 600, y: -388.45126, z: 0}
-    m_Extent: {x: 600, y: 388.45126, z: 0}
+    m_Center: {x: 600, y: -420, z: 0}
+    m_Extent: {x: 600, y: 420, z: 0}
   LayoutBounds:
-    m_Center: {x: 600, y: -388.45126, z: 0}
-    m_Extent: {x: 600, y: 388.45126, z: 0}
+    m_Center: {x: 600, y: -420, z: 0}
+    m_Extent: {x: 600, y: 420, z: 0}
   RotatedAndScaledBounds:
-    m_Center: {x: 600, y: -388.45126, z: 0}
-    m_Extent: {x: 600, y: 388.45126, z: 0}
+    m_Center: {x: 600, y: -420, z: 0}
+    m_Extent: {x: 600, y: 420, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 1200, y: 776.9025, z: 0}
+  FillSize: {x: 1200, y: 840, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
-  TargetPosition: {x: -602, y: 157.00003, z: 0}
+  TargetPosition: {x: -602, y: 420.00003, z: 0}
   TargetRotation: {x: -0, y: -0, z: -0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
-  TargetRectSize: {x: 1200, y: 776.9025, z: 0}
-  TransformPosition: {x: -602, y: 388.4513, z: 0}
+  TargetRectSize: {x: 1200, y: 840, z: 0}
+  TransformPosition: {x: -602, y: 420.00003, z: 0}
   TransformRotation: {x: -0, y: -0, z: -0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
-  TransformRectSize: {x: 1200, y: 776.9025}
+  TransformRectSize: {x: 1200, y: 840}
 --- !u!114 &24728175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,7 +638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 154452006612689303, guid: a8024c37e6740794f86ac9b3badd5c87, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 178.95126
+      value: 210.5
       objectReference: {fileID: 0}
     - target: {fileID: 154452006612689303, guid: a8024c37e6740794f86ac9b3badd5c87, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1244,6 +1244,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92497492}
   m_CullTransparentMesh: 1
+--- !u!1 &95751646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 95751647}
+  - component: {fileID: 95751648}
+  m_Layer: 0
+  m_Name: Mount Points
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &95751647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95751646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2036419723}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &95751648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95751646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &111381366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2561,7 +2605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &411549216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3555,7 +3599,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 274.95126}
+  m_AnchoredPosition: {x: 0, y: 306.5}
   m_SizeDelta: {x: 383.33334, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &592691182
@@ -3628,7 +3672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parent: {fileID: 840511298}
   SiblingIndex: 0
-  LayoutPosition: {x: 0, y: 274.95126, z: 0}
+  LayoutPosition: {x: 0, y: 306.5, z: 0}
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -3642,11 +3686,11 @@ MonoBehaviour:
   ComponentScale: {x: 1, y: 1, z: 1}
   FillSize: {x: 383.33334, y: 0, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
-  TargetPosition: {x: 0, y: 274.95126, z: 0}
+  TargetPosition: {x: 0, y: 306.5, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
   TargetRectSize: {x: 383.33334, y: 60, z: 0}
-  TransformPosition: {x: 0, y: 274.95126, z: 0}
+  TransformPosition: {x: 0, y: 306.5, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
   TransformRectSize: {x: 383.33334, y: 60}
@@ -4136,7 +4180,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 191.66669, y: 0}
-  m_SizeDelta: {x: 766.6667, y: 609.9025}
+  m_SizeDelta: {x: 766.6667, y: 673}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &653284259
 MonoBehaviour:
@@ -4212,24 +4256,24 @@ MonoBehaviour:
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 383.33334, y: 304.95126, z: 0}
+    m_Extent: {x: 383.33334, y: 336.5, z: 0}
   LayoutBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 383.33334, y: 304.95126, z: 0}
+    m_Extent: {x: 383.33334, y: 336.5, z: 0}
   RotatedAndScaledBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 383.33334, y: 304.95126, z: 0}
+    m_Extent: {x: 383.33334, y: 336.5, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 383.33334, y: 609.9025, z: 0}
+  FillSize: {x: 383.33334, y: 673, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
   TargetPosition: {x: 191.66669, y: 0, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
-  TargetRectSize: {x: 766.6667, y: 609.9025, z: 0}
+  TargetRectSize: {x: 766.6667, y: 673, z: 0}
   TransformPosition: {x: 191.66669, y: 0, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
-  TransformRectSize: {x: 766.6667, y: 609.9025}
+  TransformRectSize: {x: 766.6667, y: 673}
 --- !u!114 &653284261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4333,7 +4377,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -58.5}
-  m_SizeDelta: {x: 1150, y: 609.9025}
+  m_SizeDelta: {x: 1150, y: 673}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &656974742
 MonoBehaviour:
@@ -4409,24 +4453,24 @@ MonoBehaviour:
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 575, y: 304.95126, z: 0}
+    m_Extent: {x: 575, y: 336.5, z: 0}
   LayoutBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 575, y: 304.95126, z: 0}
+    m_Extent: {x: 575, y: 336.5, z: 0}
   RotatedAndScaledBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 575, y: 304.95126, z: 0}
+    m_Extent: {x: 575, y: 336.5, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 1150, y: 609.9025, z: 0}
+  FillSize: {x: 1150, y: 673, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
-  TargetPosition: {x: 600, y: -446.95126, z: 0}
+  TargetPosition: {x: 600, y: -478.5, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
-  TargetRectSize: {x: 1150, y: 609.9025, z: 0}
-  TransformPosition: {x: 600, y: -446.95126, z: 0}
+  TargetRectSize: {x: 1150, y: 673, z: 0}
+  TransformPosition: {x: 600, y: -478.5, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
-  TransformRectSize: {x: 1150, y: 609.9025}
+  TransformRectSize: {x: 1150, y: 673}
 --- !u!114 &656974744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4822,7 +4866,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 549.9025}
+  m_SizeDelta: {x: 0, y: 613}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &698814346
 MonoBehaviour:
@@ -4940,25 +4984,25 @@ MonoBehaviour:
   LayoutPosition: {x: 0, y: 0, z: 0}
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
-    m_Center: {x: 0, y: -274.95126, z: 0}
-    m_Extent: {x: 191.66667, y: 274.95126, z: 0}
+    m_Center: {x: 0, y: -306.5, z: 0}
+    m_Extent: {x: 191.66667, y: 306.5, z: 0}
   LayoutBounds:
-    m_Center: {x: 0, y: -274.95126, z: 0}
-    m_Extent: {x: 191.66667, y: 274.95126, z: 0}
+    m_Center: {x: 0, y: -306.5, z: 0}
+    m_Extent: {x: 191.66667, y: 306.5, z: 0}
   RotatedAndScaledBounds:
-    m_Center: {x: 0, y: -274.95126, z: 0}
-    m_Extent: {x: 191.66667, y: 274.95126, z: 0}
+    m_Center: {x: 0, y: -306.5, z: 0}
+    m_Extent: {x: 191.66667, y: 306.5, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 383.33334, y: 549.9025, z: 0}
+  FillSize: {x: 383.33334, y: 613, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
-  TargetPosition: {x: 0, y: 274.95126, z: 0}
+  TargetPosition: {x: 0, y: 306.5, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
-  TargetRectSize: {x: 383.33334, y: 549.9025, z: 0}
-  TransformPosition: {x: 0, y: 274.95126, z: 0}
+  TargetRectSize: {x: 383.33334, y: 613, z: 0}
+  TransformPosition: {x: 0, y: 306.5, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
-  TransformRectSize: {x: 383.33334, y: 549.9025}
+  TransformRectSize: {x: 383.33334, y: 613}
 --- !u!222 &698814351
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5548,7 +5592,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 189.16667, y: 0}
-  m_SizeDelta: {x: 378.33334, y: 599.9025}
+  m_SizeDelta: {x: 378.33334, y: 663}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &786321981
 MonoBehaviour:
@@ -5586,24 +5630,24 @@ MonoBehaviour:
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 189.16667, y: 299.95126, z: 0}
+    m_Extent: {x: 189.16667, y: 331.5, z: 0}
   LayoutBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 189.16667, y: 299.95126, z: 0}
+    m_Extent: {x: 189.16667, y: 331.5, z: 0}
   RotatedAndScaledBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 189.16667, y: 299.95126, z: 0}
+    m_Extent: {x: 189.16667, y: 331.5, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 766.6667, y: 609.9025, z: 0}
+  FillSize: {x: 766.6667, y: 673, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
   TargetPosition: {x: 189.16667, y: 0, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
-  TargetRectSize: {x: 378.33334, y: 599.9025, z: 0}
+  TargetRectSize: {x: 378.33334, y: 663, z: 0}
   TransformPosition: {x: 189.16667, y: 0, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
-  TransformRectSize: {x: 378.33334, y: 599.9025}
+  TransformRectSize: {x: 378.33334, y: 663}
 --- !u!114 &786321983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5710,7 +5754,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 1456180698}
+        m_Texture: {fileID: 2014703228}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -6193,7 +6237,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -383.3333, y: 0}
-  m_SizeDelta: {x: 383.33334, y: 609.9025}
+  m_SizeDelta: {x: 383.33334, y: 673}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &840511299
 MonoBehaviour:
@@ -6269,24 +6313,24 @@ MonoBehaviour:
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 191.66667, y: 304.95126, z: 0}
+    m_Extent: {x: 191.66667, y: 336.5, z: 0}
   LayoutBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 191.66667, y: 304.95126, z: 0}
+    m_Extent: {x: 191.66667, y: 336.5, z: 0}
   RotatedAndScaledBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 191.66667, y: 304.95126, z: 0}
+    m_Extent: {x: 191.66667, y: 336.5, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 383.33334, y: 609.9025, z: 0}
+  FillSize: {x: 383.33334, y: 673, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
   TargetPosition: {x: -383.3333, y: 0, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
-  TargetRectSize: {x: 383.33334, y: 609.9025, z: 0}
+  TargetRectSize: {x: 383.33334, y: 673, z: 0}
   TransformPosition: {x: -383.3333, y: 0, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
-  TransformRectSize: {x: 383.33334, y: 609.9025}
+  TransformRectSize: {x: 383.33334, y: 673}
 --- !u!114 &840511301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7799,50 +7843,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoTxt: {fileID: 2047974397}
---- !u!1 &973139445
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 973139446}
-  - component: {fileID: 973139447}
-  m_Layer: 0
-  m_Name: Mount Points
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &973139446
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973139445}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2036419723}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &973139447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973139445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &987102760
 GameObject:
   m_ObjectHideFlags: 0
@@ -7881,7 +7881,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -30}
-  m_SizeDelta: {x: 383.33334, y: 549.9025}
+  m_SizeDelta: {x: 383.33334, y: 613}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &987102762
 MonoBehaviour:
@@ -7901,24 +7901,24 @@ MonoBehaviour:
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 191.66667, y: 274.95126, z: 0}
+    m_Extent: {x: 191.66667, y: 306.5, z: 0}
   LayoutBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 191.66667, y: 274.95126, z: 0}
+    m_Extent: {x: 191.66667, y: 306.5, z: 0}
   RotatedAndScaledBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 191.66667, y: 274.95126, z: 0}
+    m_Extent: {x: 191.66667, y: 306.5, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 383.33334, y: 549.9025, z: 0}
+  FillSize: {x: 383.33334, y: 613, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
   TargetPosition: {x: 0, y: -30, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
-  TargetRectSize: {x: 383.33334, y: 549.9025, z: 0}
+  TargetRectSize: {x: 383.33334, y: 613, z: 0}
   TransformPosition: {x: 0, y: -30, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
-  TransformRectSize: {x: 383.33334, y: 549.9025}
+  TransformRectSize: {x: 383.33334, y: 613}
 --- !u!114 &987102763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8166,7 +8166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -252.95126}
+  m_AnchoredPosition: {x: 0, y: -284.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1034850575
@@ -8239,7 +8239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parent: {fileID: 786321980}
   SiblingIndex: 2
-  LayoutPosition: {x: 0, y: -253.95126, z: 0}
+  LayoutPosition: {x: 0, y: -285.5, z: 0}
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -8253,11 +8253,11 @@ MonoBehaviour:
   ComponentScale: {x: 1, y: 1, z: 1}
   FillSize: {x: 0, y: 0, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
-  TargetPosition: {x: 0, y: -252.95126, z: 0}
+  TargetPosition: {x: 0, y: -284.5, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
   TargetRectSize: {x: 200, y: 50, z: 0}
-  TransformPosition: {x: 0, y: -252.95126, z: 0}
+  TransformPosition: {x: 0, y: -284.5, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
   TransformRectSize: {x: 200, y: 50}
@@ -9145,7 +9145,7 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 52.083332, y: 62.5, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 383.33334, y: 609.9025, z: 0}
+  FillSize: {x: 383.33334, y: 673, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
   TargetPosition: {x: 0, y: 145, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -9279,7 +9279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 154452006612689303, guid: a8024c37e6740794f86ac9b3badd5c87, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 114.95126
+      value: 146.5
       objectReference: {fileID: 0}
     - target: {fileID: 154452006612689303, guid: a8024c37e6740794f86ac9b3badd5c87, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10156,7 +10156,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -99}
-  m_SizeDelta: {x: 338.33334, y: 237.90253}
+  m_SizeDelta: {x: 338.33334, y: 301}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269352215
 MonoBehaviour:
@@ -10232,24 +10232,24 @@ MonoBehaviour:
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 169.16667, y: 118.95126, z: 0}
+    m_Extent: {x: 169.16667, y: 150.5, z: 0}
   LayoutBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 169.16667, y: 118.95126, z: 0}
+    m_Extent: {x: 169.16667, y: 150.5, z: 0}
   RotatedAndScaledBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 169.16667, y: 118.95126, z: 0}
+    m_Extent: {x: 169.16667, y: 150.5, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 378.33334, y: 237.90253, z: 0}
+  FillSize: {x: 378.33334, y: 301, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
   TargetPosition: {x: 0, y: -99, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
-  TargetRectSize: {x: 338.33334, y: 237.90253, z: 0}
+  TargetRectSize: {x: 338.33334, y: 301, z: 0}
   TransformPosition: {x: 0, y: -99, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
-  TransformRectSize: {x: 338.33334, y: 237.90253}
+  TransformRectSize: {x: 338.33334, y: 301}
 --- !u!114 &1269352217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10489,7 +10489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 139.95126}
+  m_AnchoredPosition: {x: 0, y: 171.5}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1298336423
@@ -10506,7 +10506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parent: {fileID: 1939032405}
   SiblingIndex: 1
-  LayoutPosition: {x: 0, y: 139.95126, z: 0}
+  LayoutPosition: {x: 0, y: 171.5, z: 0}
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -10520,11 +10520,11 @@ MonoBehaviour:
   ComponentScale: {x: 1, y: 1, z: 1}
   FillSize: {x: 0, y: 0, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
-  TargetPosition: {x: 0, y: 139.95126, z: 0}
+  TargetPosition: {x: 0, y: 171.5, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
   TargetRectSize: {x: 200, y: 200, z: 0}
-  TransformPosition: {x: 0, y: 139.95126, z: 0}
+  TransformPosition: {x: 0, y: 171.5, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
   TransformRectSize: {x: 200, y: 200}
@@ -11588,43 +11588,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416971109}
   m_CullTransparentMesh: 1
---- !u!84 &1456180698
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 1046
-  m_Height: 523
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 8
-  m_MipMap: 1
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 2
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &1479568440
 GameObject:
   m_ObjectHideFlags: 0
@@ -11934,7 +11897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 154.95126}
+  m_AnchoredPosition: {x: 0, y: 186.5}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1548711166
@@ -12007,7 +11970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parent: {fileID: 786321980}
   SiblingIndex: 0
-  LayoutPosition: {x: 0, y: 153.95126, z: 0}
+  LayoutPosition: {x: 0, y: 185.5, z: 0}
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -12021,11 +11984,11 @@ MonoBehaviour:
   ComponentScale: {x: 1, y: 1, z: 1}
   FillSize: {x: 0, y: 0, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
-  TargetPosition: {x: 0, y: 154.95126, z: 0}
+  TargetPosition: {x: 0, y: 186.5, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
   TargetRectSize: {x: 250, y: 250, z: 0}
-  TransformPosition: {x: 0, y: 154.95126, z: 0}
+  TransformPosition: {x: 0, y: 186.5, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
   TransformRectSize: {x: 250, y: 250}
@@ -13031,7 +12994,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 283.95126}
+  m_AnchoredPosition: {x: 0, y: 315.5}
   m_SizeDelta: {x: 1150, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1714200951
@@ -13130,7 +13093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parent: {fileID: 24728173}
   SiblingIndex: 0
-  LayoutPosition: {x: 0, y: 304.95126, z: 0}
+  LayoutPosition: {x: 0, y: 336.5, z: 0}
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -13524,13 +13487,13 @@ MonoBehaviour:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 169, y: 0, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 338, y: 317.90253, z: 0}
+  FillSize: {x: 338, y: 381, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
-  TargetPosition: {x: 0, y: 158.95126, z: 0}
+  TargetPosition: {x: 0, y: 190.5, z: 0}
   TargetRotation: {x: -0, y: -0, z: -0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
   TargetRectSize: {x: 338, y: 0, z: 0}
-  TransformPosition: {x: 0, y: 158.95126, z: 0}
+  TransformPosition: {x: 0, y: 190.5, z: 0}
   TransformRotation: {x: -0, y: -0, z: -0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
   TransformRectSize: {x: 338, y: 0}
@@ -13643,5183 +13606,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    Regions:
-    - Name: Central Asia
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 02000000060000000a0000001b0000001f0000002400000034000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 20
-        - Name: Forest
-          Value: 15
-        - Name: Desert
-          Value: 20
-        - Name: Mountain
-          Value: 45
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 30
-        - Name: Temperate
-          Value: 70
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 50
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Patagonia
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 090000002b000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 15
-        - Name: Forest
-          Value: 10
-        - Name: Desert
-          Value: 5
-        - Name: Mountain
-          Value: 15
-        - Name: Steppe
-          Value: 10
-        - Name: Tundra
-          Value: 45
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 95
-        - Name: Polar
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Caucasus
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 000000002200000034000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 5
-        - Name: Forest
-          Value: 5
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 90
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 95
-        - Name: Polar
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: New Zealand
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 50
-        - Name: Forest
-          Value: 30
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 20
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 5
-        - Name: Tropical
-          Value: 25
-        - Name: Temperate
-          Value: 70
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 15
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Antarctica
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 0
-        - Name: Forest
-          Value: 0
-        - Name: Desert
-          Value: 30
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 60
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 100
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Australia
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 10
-        - Name: Forest
-          Value: 5
-        - Name: Desert
-          Value: 55
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 20
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 20
-        - Name: Tropical
-          Value: 60
-        - Name: Temperate
-          Value: 20
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 15
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Hindustan
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 000000000a0000001c000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 55
-        - Name: Forest
-          Value: 35
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 65
-        - Name: Tropical
-          Value: 30
-        - Name: Temperate
-          Value: 5
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 90
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 70
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Malaysia
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 1c000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 20
-        - Name: Forest
-          Value: 70
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 85
-        - Name: Tropical
-          Value: 15
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 65
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 60
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Central America
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 230000002f00000031000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 25
-        - Name: Forest
-          Value: 55
-        - Name: Desert
-          Value: 5
-        - Name: Mountain
-          Value: 15
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 25
-        - Name: Tropical
-          Value: 70
-        - Name: Temperate
-          Value: 5
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 55
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Andes
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 01000000230000002b00000009000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 5
-        - Name: Forest
-          Value: 10
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 75
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 5
-        - Name: Tropical
-          Value: 20
-        - Name: Temperate
-          Value: 70
-        - Name: Polar
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Himalayas
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 00000000060000000e0000001c0000001f000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 5
-        - Name: Forest
-          Value: 0
-        - Name: Desert
-          Value: 5
-        - Name: Mountain
-          Value: 90
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 10
-        - Name: Temperate
-          Value: 90
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: South Africa
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 0f00000011000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 45
-        - Name: Forest
-          Value: 20
-        - Name: Desert
-          Value: 5
-        - Name: Mountain
-          Value: 25
-        - Name: Steppe
-          Value: 5
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 90
-        - Name: Temperate
-          Value: 10
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Northwest Territiries
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 0c0000002d0000002f0000003000000029000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 0
-        - Name: Forest
-          Value: 10
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 20
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 70
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 30
-        - Name: Polar
-          Value: 70
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Alps
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 10000000190000002c000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 5
-        - Name: Forest
-          Value: 15
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 80
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 95
-        - Name: Polar
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: China
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 0a0000001c0000001f0000002100000028000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 75
-        - Name: Forest
-          Value: 15
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 10
-        - Name: Temperate
-          Value: 90
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 90
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Central Africa
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 0b0000001100000014000000180000001e000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 30
-        - Name: Forest
-          Value: 60
-        - Name: Desert
-          Value: 5
-        - Name: Mountain
-          Value: 5
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 90
-        - Name: Tropical
-          Value: 10
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 60
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Central Europe
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 0d000000120000001600000019000000220000002c0000003300000036000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 45
-        - Name: Forest
-          Value: 45
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 100
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 60
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: East Africa
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 0f0000000b00000014000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 15
-        - Name: Forest
-          Value: 30
-        - Name: Desert
-          Value: 10
-        - Name: Mountain
-          Value: 45
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 80
-        - Name: Tropical
-          Value: 20
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: North Europe
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 1700000010000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 5
-        - Name: Forest
-          Value: 15
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 60
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 80
-        - Name: Polar
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: North Africa
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 14000000150000001e000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 50
-        - Name: Forest
-          Value: 15
-        - Name: Desert
-          Value: 30
-        - Name: Mountain
-          Value: 5
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 20
-        - Name: Tropical
-          Value: 80
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 60
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Nile
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 11000000130000000f0000001e00000024000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 70
-        - Name: Forest
-          Value: 5
-        - Name: Desert
-          Value: 25
-        - Name: Mountain
-          Value: 0
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 15
-        - Name: Tropical
-          Value: 80
-        - Name: Temperate
-          Value: 5
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 80
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Iberia
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 1900000013000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 30
-        - Name: Forest
-          Value: 10
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 60
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 15
-        - Name: Temperate
-          Value: 85
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Baltic
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 100000001700000036000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 60
-        - Name: Forest
-          Value: 40
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 0
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 95
-        - Name: Polar
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Karelia
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 12000000160000002500000036000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 25
-        - Name: Forest
-          Value: 25
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 15
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 60
-        - Name: Polar
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: West Africa
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 0f0000001e000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 10
-        - Name: Forest
-          Value: 85
-        - Name: Desert
-          Value: 5
-        - Name: Mountain
-          Value: 0
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 85
-        - Name: Tropical
-          Value: 15
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 50
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: West Europe
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 29000000150000000d00000010000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 60
-        - Name: Forest
-          Value: 30
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 5
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 100
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 60
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 70
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Japan
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 30
-        - Name: Forest
-          Value: 25
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 45
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 5
-        - Name: Temperate
-          Value: 95
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Central Great Steppe
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 000000001f0000002200000026000000270000002800000036000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 10
-        - Name: Forest
-          Value: 0
-        - Name: Desert
-          Value: 15
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 65
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 95
-        - Name: Polar
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 70
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: South East Asia
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 0e0000000a0000000600000007000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 20
-        - Name: Forest
-          Value: 65
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 15
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 75
-        - Name: Tropical
-          Value: 25
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 70
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 50
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Madagascar
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 15
-        - Name: Forest
-          Value: 75
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 50
-        - Name: Tropical
-          Value: 50
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 50
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Sahara
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 180000000f0000001400000013000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 0
-        - Name: Forest
-          Value: 5
-        - Name: Desert
-          Value: 75
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 10
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 40
-        - Name: Tropical
-          Value: 60
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 3
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: East Great Steppe
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 1b000000000000000a0000000e00000028000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 5
-        - Name: Forest
-          Value: 0
-        - Name: Desert
-          Value: 10
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 75
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 95
-        - Name: Polar
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 75
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Arabia
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 24000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 10
-        - Name: Forest
-          Value: 10
-        - Name: Desert
-          Value: 80
-        - Name: Mountain
-          Value: 0
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 5
-        - Name: Tropical
-          Value: 80
-        - Name: Temperate
-          Value: 15
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Far East
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 0e00000028000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 20
-        - Name: Forest
-          Value: 50
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 20
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 65
-        - Name: Polar
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: West Great Steppe
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 020000001b000000100000003300000036000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 30
-        - Name: Forest
-          Value: 10
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 50
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 100
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 70
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: North Andes
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 09000000080000002b000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 15
-        - Name: Forest
-          Value: 15
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 70
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 90
-        - Name: Tropical
-          Value: 10
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 30
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Middle East
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 14000000200000000000000034000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 65
-        - Name: Forest
-          Value: 20
-        - Name: Desert
-          Value: 10
-        - Name: Mountain
-          Value: 5
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 30
-        - Name: Temperate
-          Value: 70
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 100
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: North Ural
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 17000000260000002700000036000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 15
-        - Name: Forest
-          Value: 10
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 35
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 50
-        - Name: Polar
-          Value: 50
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Ural
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 250000001b0000002700000036000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 25
-        - Name: Forest
-          Value: 20
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 40
-        - Name: Steppe
-          Value: 10
-        - Name: Tundra
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 95
-        - Name: Polar
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Siberia
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 25000000260000001b00000028000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 15
-        - Name: Forest
-          Value: 40
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 5
-        - Name: Steppe
-          Value: 5
-        - Name: Tundra
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 45
-        - Name: Polar
-          Value: 55
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 50
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Altai
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 270000001b0000001f0000000e00000021000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 20
-        - Name: Forest
-          Value: 5
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 55
-        - Name: Steppe
-          Value: 5
-        - Name: Tundra
-          Value: 15
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 60
-        - Name: Polar
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: North Atlantic
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 19000000290000000c0000003000000035000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 10
-        - Name: Forest
-          Value: 15
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 15
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 60
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 45
-        - Name: Polar
-          Value: 55
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Antilles
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 2a000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 65
-        - Name: Forest
-          Value: 20
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 15
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 20
-        - Name: Tropical
-          Value: 80
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 45
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Amasonia
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 230000000900000001000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 5
-        - Name: Forest
-          Value: 80
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 15
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 75
-        - Name: Tropical
-          Value: 25
-        - Name: Temperate
-          Value: 0
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 70
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Apennine Peninsula
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 100000000d00000033000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 55
-        - Name: Forest
-          Value: 30
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 15
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 15
-        - Name: Temperate
-          Value: 85
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 75
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Alaska
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 0c000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 0
-        - Name: Forest
-          Value: 10
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 0
-        - Name: Steppe
-          Value: 40
-        - Name: Tundra
-          Value: 50
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 25
-        - Name: Polar
-          Value: 75
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 20
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: North America West Coast
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 2f000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 15
-        - Name: Forest
-          Value: 45
-        - Name: Desert
-          Value: 5
-        - Name: Mountain
-          Value: 35
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 40
-        - Name: Temperate
-          Value: 60
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 25
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Cordillera
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 080000000c0000002e00000031000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 15
-        - Name: Forest
-          Value: 15
-        - Name: Desert
-          Value: 5
-        - Name: Mountain
-          Value: 55
-        - Name: Steppe
-          Value: 10
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 20
-        - Name: Temperate
-          Value: 75
-        - Name: Polar
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Great Lakes
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 290000000c0000003100000035000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 50
-        - Name: Forest
-          Value: 30
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 5
-        - Name: Steppe
-          Value: 10
-        - Name: Tundra
-          Value: 5
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 90
-        - Name: Polar
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 45
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Great Plains
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 300000002f000000080000003200000035000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 30
-        - Name: Forest
-          Value: 10
-        - Name: Desert
-          Value: 5
-        - Name: Mountain
-          Value: 5
-        - Name: Steppe
-          Value: 50
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 100
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 70
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Florida
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 3100000035000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 55
-        - Name: Forest
-          Value: 40
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 5
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 35
-        - Name: Temperate
-          Value: 65
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 60
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Balkan
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 22000000100000002c0000003300000034000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 15
-        - Name: Forest
-          Value: 15
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 70
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 100
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 40
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: Asia Minor
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 24000000000000000200000033000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 40
-        - Name: Forest
-          Value: 10
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 50
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 100
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 70
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 50
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: North America East Coast
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 29000000300000003100000032000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 50
-        - Name: Forest
-          Value: 40
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 10
-        - Name: Steppe
-          Value: 0
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 100
-        - Name: Polar
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 60
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 35
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    - Name: East European Plain
-      Color: {r: 0, g: 0, b: 0, a: 0}
-      EventChanceIndex: 0
-      TakenFood: 0
-      Events: 
-      Neighbours: 220000001b0000002600000025000000170000001600000010000000
-      Ecology:
-      - Name: Terrain
-        details:
-        - Name: Plain
-          Value: 55
-        - Name: Forest
-          Value: 40
-        - Name: Desert
-          Value: 0
-        - Name: Mountain
-          Value: 0
-        - Name: Steppe
-          Value: 5
-        - Name: Tundra
-          Value: 0
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Plain
-            Value: 0
-          - Key: Forest
-            Value: 1
-          - Key: Desert
-            Value: 2
-          - Key: Mountain
-            Value: 3
-          - Key: Steppe
-            Value: 4
-          - Key: Tundra
-            Value: 5
-      - Name: Climate
-        details:
-        - Name: Ecuatorial
-          Value: 0
-        - Name: Tropical
-          Value: 0
-        - Name: Temperate
-          Value: 90
-        - Name: Polar
-          Value: 10
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Ecuatorial
-            Value: 0
-          - Key: Tropical
-            Value: 1
-          - Key: Temperate
-            Value: 2
-          - Key: Polar
-            Value: 3
-      - Name: Flora
-        details:
-        - Name: Flora
-          Value: 50
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Flora
-            Value: 0
-      - Name: Fauna
-        details:
-        - Name: Fauna
-          Value: 25
-        detailsNamesIndexes:
-          _serializedList:
-          - Key: Fauna
-            Value: 0
-      Civilizations: []
-      EventsNameIndexes:
-        _serializedList: []
-      NeighboursNameIndexes:
-        _serializedList: []
-      EcologyNameIndexes:
-        _serializedList:
-        - Key: Terrain
-          Value: 0
-        - Key: Climate
-          Value: 1
-        - Key: Flora
-          Value: 2
-        - Key: Fauna
-          Value: 3
-      CivilizationsNameIndexes:
-        _serializedList:
-        - Key: Stage
-          Value: 0
-        - Key: Population
-          Value: 1
-        - Key: Paramiters
-          Value: 2
-    CivilizationsIndexes:
-      _serializedList: []
-    CivilizationsRegionsIndexes:
-      _serializedList: []
-    RegionsNameIndexes:
-      _serializedList: []
+    regions:
+    - _name: 
+      _color: {r: 0, g: 0, b: 0, a: 0}
+      _eventChanceIndex: 0
+      _ecology:
+      - details: 000000000000000000000000000000000000000000000000
+      - details: 00000000000000000000000000000000
+      - details: 00000000
+      - details: 00000000
+      _civilizations: []
+      _neighbours: 
+      events: 
 --- !u!1 &1743614273
 GameObject:
   m_ObjectHideFlags: 0
@@ -18995,7 +13793,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -119}
-  m_SizeDelta: {x: 338, y: 317.90253}
+  m_SizeDelta: {x: 338, y: 381}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1781296010
 MonoBehaviour:
@@ -19084,24 +13882,24 @@ MonoBehaviour:
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 169, y: 158.95126, z: 0}
+    m_Extent: {x: 169, y: 190.5, z: 0}
   LayoutBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 169, y: 158.95126, z: 0}
+    m_Extent: {x: 169, y: 190.5, z: 0}
   RotatedAndScaledBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 169, y: 158.95126, z: 0}
+    m_Extent: {x: 169, y: 190.5, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 0, y: 339.90253, z: 0}
+  FillSize: {x: 0, y: 403, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
   TargetPosition: {x: 0, y: -119, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
-  TargetRectSize: {x: 338, y: 317.90253, z: 0}
+  TargetRectSize: {x: 338, y: 381, z: 0}
   TransformPosition: {x: 0, y: -119, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
-  TransformRectSize: {x: 338, y: 317.90253}
+  TransformRectSize: {x: 338, y: 381}
 --- !u!114 &1781296013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19884,7 +14682,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -189.16667, y: 0}
-  m_SizeDelta: {x: 378.33334, y: 599.9025}
+  m_SizeDelta: {x: 378.33334, y: 663}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1939032406
 MonoBehaviour:
@@ -19983,24 +14781,24 @@ MonoBehaviour:
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 189.16667, y: 299.95126, z: 0}
+    m_Extent: {x: 189.16667, y: 331.5, z: 0}
   LayoutBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 189.16667, y: 299.95126, z: 0}
+    m_Extent: {x: 189.16667, y: 331.5, z: 0}
   RotatedAndScaledBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 189.16667, y: 299.95126, z: 0}
+    m_Extent: {x: 189.16667, y: 331.5, z: 0}
   ComponentScale: {x: 1, y: 1, z: 1}
-  FillSize: {x: 766.6667, y: 609.9025, z: 0}
+  FillSize: {x: 766.6667, y: 673, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
   TargetPosition: {x: -189.16667, y: 0, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
-  TargetRectSize: {x: 378.33334, y: 599.9025, z: 0}
+  TargetRectSize: {x: 378.33334, y: 663, z: 0}
   TransformPosition: {x: -189.16667, y: 0, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
-  TransformRectSize: {x: 378.33334, y: 599.9025}
+  TransformRectSize: {x: 378.33334, y: 663}
 --- !u!114 &1939032409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20272,6 +15070,43 @@ MonoBehaviour:
   saves:
   - _underlyingValue: {fileID: 2070588744}
   - _underlyingValue: {fileID: 1732670978}
+--- !u!84 &2014703228
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 1920
+  m_Height: 960
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 8
+  m_MipMap: 1
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 2
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &2021855384
 GameObject:
   m_ObjectHideFlags: 0
@@ -20898,7 +15733,7 @@ Transform:
   m_Children:
   - {fileID: 1707219435}
   - {fileID: 493568806}
-  - {fileID: 973139446}
+  - {fileID: 95751647}
   m_Father: {fileID: 2106133419}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21404,7 +16239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 269.95126}
+  m_AnchoredPosition: {x: 0, y: 301.5}
   m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2053770684
@@ -21421,7 +16256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parent: {fileID: 1939032405}
   SiblingIndex: 0
-  LayoutPosition: {x: 0, y: 269.95126, z: 0}
+  LayoutPosition: {x: 0, y: 301.5, z: 0}
   LayoutRotation: {x: 0, y: 0, z: 0, w: 1}
   AdapterBounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -21435,11 +16270,11 @@ MonoBehaviour:
   ComponentScale: {x: 1, y: 1, z: 1}
   FillSize: {x: 0, y: 0, z: 0}
   ShrinkSize: {x: 999999, y: 999999, z: 999999}
-  TargetPosition: {x: 0, y: 269.95126, z: 0}
+  TargetPosition: {x: 0, y: 301.5, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 1, y: 1, z: 1}
   TargetRectSize: {x: 300, y: 60, z: 0}
-  TransformPosition: {x: 0, y: 269.95126, z: 0}
+  TransformPosition: {x: 0, y: 301.5, z: 0}
   TransformRotation: {x: 0, y: 0, z: 0, w: 1}
   TransformScale: {x: 1, y: 1, z: 1}
   TransformRectSize: {x: 300, y: 60}
@@ -23491,7 +18326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 154452006612689303, guid: a8024c37e6740794f86ac9b3badd5c87, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 50.951263
+      value: 82.5
       objectReference: {fileID: 0}
     - target: {fileID: 154452006612689303, guid: a8024c37e6740794f86ac9b3badd5c87, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -23778,7 +18613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 154452006612689303, guid: a8024c37e6740794f86ac9b3badd5c87, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 242.95126
+      value: 274.5
       objectReference: {fileID: 0}
     - target: {fileID: 154452006612689303, guid: a8024c37e6740794f86ac9b3badd5c87, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

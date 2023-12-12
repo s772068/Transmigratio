@@ -40,9 +40,9 @@ public class GUIP_Top : MonoBehaviour, IGameConnecter {
 
     private void UpdatePlatform() {
         populationTxt.text = populationStr + "\n" +
-            (map.data.AllPopulations == 0 ?
+            (map.data.GetAllPopulations() == 0 ?
             settings.Localization.Map.Civilization.EmptyPopulation :
-            map.data.AllPopulations);
+            map.data.GetAllPopulations());
         interventionTxt.text = interventionStr + " " + resources.intervention + "%";
         interventionsPB.Value = resources.intervention;
     }

@@ -39,9 +39,9 @@ public class GUI_ShortRegionInfo : MonoBehaviour, IGameConnecter {
         population.text = _regionIndex == -1 ?
             settings.Localization.Map.Countries.Name :
             settings.Localization.Map.Civilization.Population + "\n" +
-            (map.data.Regions[_regionIndex].AllPopulations == 0 ?
+            (map.data.GetRegion(_regionIndex).GetAllPopulations() == 0 ?
             settings.Localization.Map.Civilization.EmptyPopulation :
-            map.data.Regions[_regionIndex].AllPopulations);
+            map.data.GetRegion(_regionIndex).GetAllPopulations());
 
         //eventName.text = _regionIndex == -1 ?
         //    "" : map.data.Regions[_regionIndex].Events.Count > 0 ?

@@ -29,9 +29,9 @@ public class GUIE_RegionDetails : MonoBehaviour {
     
     private int[] CivilizationValues =>
         civilizationIndex < 0 ? paramiterIndex == Settings.Localization.Map.Civilization.Paramiters.Length - 1 ?
-            Map.data.Regions[regionIndex].ArrayPopulation :
-            Map.data.Regions[regionIndex].ArrayCivilizationParamiters(paramiterIndex) :
-            Map.data.Regions[regionIndex].Civilizations[civilizationIndex].Paramiters[paramiterIndex].Details;
+            Map.data.GetRegion(regionIndex).GetArrayPopulations() :
+            Map.data.GetRegion(regionIndex).GetArrayCivilizationByParamiters(paramiterIndex) :
+            Map.data.GetRegion(regionIndex).GetArrayCivilizationDetails(civilizationIndex, paramiterIndex);
 
     public void Initialization() {
         Clear();
@@ -60,7 +60,7 @@ public class GUIE_RegionDetails : MonoBehaviour {
     private void InitEcology() {
         SL_Paramiter<SL_Detail[]> paramitersStrings = Settings.Localization.Map.Ecology.Value[paramiterIndex];
         paramiterLabel.text = paramitersStrings.Name;
-        values = Map.data.Regions[regionIndex].Ecology[paramiterIndex].Details;
+        values = Map.data.GetRegion(regionIndex).GetEcologyDetails(paramiterIndex);
         for (int i = 0; i < values.Length; ++i) {
             AddLegend(Settings.Theme.GetEcologyColor(paramiterIndex, i),
                       Settings.Localization.Map.Ecology.Value[paramiterIndex].Value[i].Name,
@@ -95,7 +95,7 @@ public class GUIE_RegionDetails : MonoBehaviour {
 
     public void UpdateDetails() {
         values = groupIndex == 1 ? CivilizationValues :
-            Map.data.Regions[regionIndex].Ecology[paramiterIndex].Details;
+            Map.data.GetRegion(regionIndex).GetEcologyDetails(paramiterIndex);
         allValues = 0;
         for (int i = 0; i < values.Length; ++i) {
             legendElements[i].Value = values[i];

@@ -28,13 +28,15 @@ public class EventsController : MonoBehaviour, IGameConnecter {
     }
 
     public void Call() {
-        for (int eventIndex = 0; eventIndex < events.Count; ++eventIndex) {
-            for (int regionIndex = 0; regionIndex < map.data.Regions.Length; ++regionIndex) {
-                if (events[eventIndex].CheckActivate(ref map.data.Regions[regionIndex])) {
-                    wmsk.CreateEventMarker(events[eventIndex].Data(settings.Language), eventIndex, regionIndex);
-                }
-            }
-        }
+        //for (int eventIndex = 0; eventIndex < events.Count; ++eventIndex) {
+        //    for (int regionIndex = 0; regionIndex < map.data.CountRegions; ++regionIndex) {
+        //        if (events[eventIndex].CheckActivate(ref map.data.GetRegion(regionIndex))) {
+        //            wmsk.CreateEventMarker(events[eventIndex].Data(settings.Language), eventIndex, regionIndex);
+        //        }
+        //    }
+        //}
+
+
         // foreach (KeyValuePair<int, List<int>> pair in eventLog) {
         //     if (Random.Range(0, 1f) <= chances[map.data.Regions[pair.Key].EventChanceIndex]) {
         //         map.data.Regions[pair.Key].EventChanceIndex = 0;

@@ -3,93 +3,70 @@
 // 1: Economics
 // 2: Governments
 
-using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
-using System.Collections;
+using UnityEngine;
 
 [System.Serializable]
-public struct S_Civilization : IEnumerator<S_Paramiter> {
-    public int Stage;
-    public int Population;
-    public int TakenFood;
-    public S_Paramiter[] Paramiters;
-    public SerializedDictionary<string, int> ParamitersNameIndexes;
+public struct S_Civilization {
+    [SerializeField] private int _population;
+    [SerializeField] private int _takenFood;
+    [SerializeField] private float _governmentObstacle;
+    [SerializeField] private List<S_Paramiter> _paramiters;
 
-    private int _index;
 
-    public int this[params string[] val] {
-        get => val[0] switch {
-            "Stage" => Stage,
-            "Population" => Population,
-            "TakenFood" => TakenFood,
-            "Paramiters" => Paramiters[ParamitersNameIndexes[val[1]]][val[2]],
-            _ => 0
-        };
-        set {
-            switch (val[0]) {
-                case "Stage": Stage = value; break;
-                case "Population": Population = value; break;
-                case "TakenFood": TakenFood = value; break;
-                case "Paramiters": Paramiters[ParamitersNameIndexes[val[1]]] [val[2]] = value; break;
-                default: return;
-            }
-        }  
+    public int GetCountParamiters() => _paramiters.Count;
+    public int GetCountDetails(int paramiter) => _paramiters[paramiter].GetCountDetails();
+
+
+    public S_Paramiter[] GetParamiters() => _paramiters.ToArray();
+    public int[] GetDetails(int paramiter) => _paramiters[paramiter].GetDetails();
+
+
+    public int GetPopulation() => _population;
+    public int GetTakenFood() => _takenFood;
+    public float GetGovernmentObstacle() => _governmentObstacle;
+    public S_Paramiter GetParamiter(int index) => _paramiters[index];
+    public int GetDetail(int paramiter, int detail) => _paramiters[paramiter].GetDetail(detail);
+
+
+    public void SetPopulation(int value) => _population = value;
+    public void SetTakenFood(int value) => _takenFood = value;
+    public void SetGovernmentObstacle(float value) => _governmentObstacle = value;
+    public void SetParamiter(int index, S_Paramiter value) => _paramiters[index] = value;
+    public void SetDetail(int paramiter, int detail, int value) => _paramiters[paramiter].SetDetail(detail, value);
+    public void SetParamiters(S_Paramiter[] paramiters) {
+        for(int i = 0; i < paramiters.Length; ++i) {
+            _paramiters[i] = paramiters[i];
+        }
     }
-    
-    public int this[params int[] val] {
-        get => val[0] switch {
-            0 => Stage,
-            1 => Population,
-            2 => TakenFood,
-            3 => Paramiters[val[1]][val[2]],
-            _ => 0
-        };
-        set {
-            switch (val[0]) {
-                case 0: Stage = value; break;
-                case 1: Population = value; break;
-                case 2: TakenFood = value; break;
-                case 3: Paramiters[val[1]][val[2]] = value; break;
-                default: return;
-            }
+    public void SetDetails(int paramiter, int[] details) {
+        for(int i = 0; i < details.Length; ++i) {
+            _paramiters[paramiter].SetDetail(i, details[i]);
         }
     }
 
-    public void Add(S_Paramiter value) {
-        ParamitersNameIndexes[Paramiters.Length.ToString()] = Paramiters.Length;
-        Paramiters.Add(value);
+
+    public void AddParamiter(S_Paramiter value) {
+        if (_paramiters == null)
+            _paramiters = new();
+        _paramiters.Add(value);
     }
-
-    public void Add(string name, S_Paramiter value) {
-        ParamitersNameIndexes[name] = Paramiters.Length;
-        Paramiters.Add(value);
+    public void AddDetail(int paramiter, int value) {
+        if (_paramiters == null)
+            _paramiters = new();
+        _paramiters[paramiter].AddDetail(value);
     }
+    public void RemoveParamiter(S_Paramiter value) => _paramiters.Remove(value);
+    public void RemoveDetail(int paramiter, int value) => _paramiters[paramiter].RemoveDetail(value);
 
-    public void Remove(int index) {
-        ParamitersNameIndexes.Remove(index.ToString());
-        Paramiters.Remove(index);
-    }
+    public void RemoveParamiterAt(int value) => _paramiters.RemoveAt(value);
+    public void RemoveDetailAt(int paramiter, int detail) => _paramiters[paramiter].RemoveDetailAt(detail);
 
-    public void Remove(string name) {
-        Paramiters.Remove(ParamitersNameIndexes[name]);
-        ParamitersNameIndexes[name] = Paramiters.Length;
-    }
+    public void ClearParamiters() => _paramiters.Clear();
+    public void ClearDetails(int paramiter) => _paramiters[paramiter].ClearDetails();
 
-    public void Clear() {
-        ParamitersNameIndexes.Clear();
-        Paramiters.Clear();
-    }
 
-    public S_Paramiter Current => Paramiters[_index];
-
-    object IEnumerator.Current => Current;
-
-    public bool MoveNext() {
-        ++_index;
-        return _index < Paramiters.Length;
-    }
-
-    public void Reset() => _index = -1;
-
-    public void Dispose() { }
+    public int GetRichness(int paramiter) => _paramiters[paramiter].AllDetails;
+    public int GetMaxDetail(int paramiter) => _paramiters[paramiter].MaxDetail;
+    public int GetMaxIndex(int paramiter) => _paramiters[paramiter].MaxIndex;
 }

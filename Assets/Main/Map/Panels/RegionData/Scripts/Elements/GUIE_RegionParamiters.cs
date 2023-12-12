@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using System;
+using System.Runtime.CompilerServices;
 
 public class GUIE_RegionParamiters : MonoBehaviour {
     [SerializeField] private Text regionName;
@@ -49,14 +50,14 @@ public class GUIE_RegionParamiters : MonoBehaviour {
     public void UpdateEcology() {
         UpdateEcology(0);
         UpdateEcology(1);
-        ecologyGroup.SetParamiterValue(2, Map.data.Regions[regionIndex].Ecology[2].MaxValue);
-        ecologyGroup.SetParamiterValue(3, Map.data.Regions[regionIndex].Ecology[3].MaxValue);
+        ecologyGroup.SetParamiterValue(2, Map.data.GetRegion(regionIndex).GetEcologyParamiter(2).MaxDetail);
+        ecologyGroup.SetParamiterValue(3, Map.data.GetRegion(regionIndex).GetEcologyParamiter(3).MaxDetail);
     }
 
     public void UpdateCivilization() {
         int population = civilizationIndex < 0 ?
-            Map.data.Regions[regionIndex].AllPopulations :
-            Map.data.Regions[regionIndex].Civilizations[civilizationIndex].Population;
+            Map.data.GetRegion(regionIndex).GetAllPopulations() :
+            Map.data.GetRegion(regionIndex).GetPopulation(civilizationIndex);
         if (population > 0) {
             civilizationGroup.SetParamiterValue(0, population.ToString());
             for (int i = 0; i < civilizationGroup.CountParamiters - 2; ++i) {
@@ -66,7 +67,7 @@ public class GUIE_RegionParamiters : MonoBehaviour {
                 civilizationGroup.SetParamiterValue(civilizationGroup.CountParamiters - 1,
                     Settings.Localization.Map.Civilization.
                     Paramiters[Settings.Localization.Map.Civilization.Paramiters.Length - 1].
-                    Value[Map.data.Regions[regionIndex].MaxPopulationsIndex].Name);
+                    Value[Map.data.GetMaxPopulationsIndex(regionIndex)].Name);
             } else {
                 portrait.sprite = Settings.Theme.GetCivilizationSprite(civilizationGroup.CountParamiters - 1, civilizationIndex);
                 UpdateCivilization(civilizationGroup.CountParamiters - 2);
@@ -80,17 +81,17 @@ public class GUIE_RegionParamiters : MonoBehaviour {
     }
 
     private void UpdateEcology(int _paramiterIndex) {
-        int maxValueIndex = Map.data.Regions[regionIndex].Ecology[_paramiterIndex].MaxIndex;
+        int maxValueIndex = Map.data.GetRegion(regionIndex).GetEcologyParamiter(_paramiterIndex).MaxIndex;
         string str = Settings.Localization.Map.Ecology.Value[_paramiterIndex].Value[maxValueIndex].Name;
         ecologyGroup.SetParamiterValue(_paramiterIndex, str);
     }
 
     private void UpdateCivilization(int _paramiterIndex) {
         int currentCivilizationIndex = civilizationIndex < 0 ?
-            Map.data.Regions[regionIndex].MaxCivilizationIndex(_paramiterIndex) :
+            Map.data.GetRegion(regionIndex).GetCivilizationMaxIndex(_paramiterIndex) :
             civilizationIndex;
-        if (_paramiterIndex < Map.data.Regions[regionIndex].Civilizations[currentCivilizationIndex].Paramiters.Length) {
-            int maxValueIndex = Map.data.Regions[regionIndex].Civilizations[currentCivilizationIndex].Paramiters[_paramiterIndex].MaxIndex;
+        if (_paramiterIndex < Map.data.GetRegion(regionIndex).GetCountCivilizationParamiters(currentCivilizationIndex)) {
+            int maxValueIndex = Map.data.GetRegion(regionIndex).GetCivilizationMaxIndex(currentCivilizationIndex, _paramiterIndex);
             civilizationGroup.SetParamiterValue(_paramiterIndex + 1,
                 Settings.Localization.Map.Civilization.Paramiters[_paramiterIndex].Value[maxValueIndex].Name);
         } else {

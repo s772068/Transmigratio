@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class MapController : MonoBehaviour, ISave, IGameConnecter {
     public S_Map data;
@@ -11,8 +12,8 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
     public Action OnUpdate;
 
     private IUpdater[] updaters = {
-        new MU_FoodAppropriated(),
-        new MU_PopulationGrowth()
+    //    new MU_FoodAppropriated(),
+    //    new MU_PopulationGrowth()
     };
 
     public GameController GameController {
@@ -39,12 +40,10 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
 
     private void InitCountries() {
         WorldMapStrategyKit.WMSK wmsk = WorldMapStrategyKit.WMSK.instance;
-        for (int i = 0; i < data.Regions.Length; ++i) {
-            data.Regions[i].Name = settings.Localization.Map.Countries.Value[i];
+        for (int i = 0; i < data.CountRegions; ++i) {
             if (i > wmsk.countries.Length - 1) break;
-            data.Regions[i].Neighbours = new int[wmsk.countries[i].neighbours.Length];
             for (int j = 0; j < wmsk.countries[i].neighbours.Length; ++j) {
-                data.Regions[i].Neighbours[j] = wmsk.countries[i].neighbours[j];
+                data.GetRegion(i).AddNeighbour(wmsk.countries[i].neighbours[j]);
             }
             string[] names = {
                 "Plain",
@@ -58,58 +57,28 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
     }
 
     private void EmergenceFirstCivilization(int regionIndex) {
-        if(regionIndex < 0 || regionIndex > data.Regions.Length - 1) return;
-        data.Regions[regionIndex].Civilizations = data.Regions[regionIndex].Civilizations.Add(new() {
-            Stage = 0,
-            Population = 1000,
-            TakenFood = 100,
-            Paramiters = new S_Paramiter[] {
-                    new() {
-                        Name = "ProdMode",
-                        details = new S_Value<int>[] {
-                            new() { Name = "Primitive communism", Value = 100 },
-                            new() { Name = "Slave society", Value = 0 }
-                        },
-                        detailsNamesIndexes = new() {
-                            { "Primitive communism", 0 },
-                            { "Slave society", 1 }
-                        }
-                    },
-                    new() {
-                        Name = "EcoCulture",
-                        details = new S_Value<int>[] {
-                            new() { Name = "Hunters-collectors", Value = 100 },
-                            new() { Name = "Farmers", Value = 0}
-                        },
-                        detailsNamesIndexes = new() {
-                            { "Hunters-collectors", 0 },
-                            { "Farmers", 1 }
-                        }
-                    },
-                    new() {
-                        Name = "Government",
-                        details = new S_Value<int>[] {
-                            new() { Name = "Leaderism", Value = 100 },
-                            new() { Name = "Monarchy", Value = 0 }
-                        },
-                        detailsNamesIndexes = new() {
-                            { "Leaderism communism", 0 },
-                            { "Slave Monarchy", 1 }
-                        }
-                    }
-                },
-            ParamitersNameIndexes = new() {
-                {"ProdMode", 0 },
-                {"EcoCulture", 1 },
-                {"Government", 2 },
-            }
-        });
+        if(regionIndex < 0 || regionIndex > data.CountRegions - 1) return;
+        
+        S_Paramiter paramiter = new();
+        paramiter.AddDetail(100);
+        paramiter.AddDetail(0);
+
+        S_Civilization civilization = new();
+        civilization.SetPopulation(1000);
+        civilization.SetTakenFood(100);
+        civilization.SetGovernmentObstacle(0.4f);
+        civilization.AddParamiter(paramiter);
+        civilization.AddParamiter(paramiter);
+        civilization.AddParamiter(paramiter);
+
+        data.GetRegion(regionIndex).AddCivilization(civilization);
     }
 
     public void Init() {
         InitCountries();
         timeline.OnTick += UpdateParams;
         timeline.OnSelectRegion += EmergenceFirstCivilization;
+        // data.GetRegion(0).GetCivilization(0).Population = 100;
     }
 
     private void OnDestroy() {

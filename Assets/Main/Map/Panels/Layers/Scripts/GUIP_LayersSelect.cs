@@ -51,8 +51,8 @@ public class GUIP_LayersSelect : MonoBehaviour, IGameConnecter {
     }
 
     private void Clear() {
-        for (int i = 0; i < map.data.Regions.Length; ++i) {
-            map.data.Regions[i].Color = Color.clear;
+        for (int i = 0; i < map.data.CountRegions; ++i) {
+            map.data.GetRegion(i).SetColor(Color.clear);
             wmsk.RegionPainting(i, Color.clear);
         }
     }
@@ -76,7 +76,7 @@ public class GUIP_LayersSelect : MonoBehaviour, IGameConnecter {
 
         for (int i = 0; i < paramiters.Length; ++i) {
             color = Color.HSVToRGB(paramiters[i] / maxValue * 7f / 9f, 1f, 1f);
-            map.data.Regions[i].Color = color;
+            map.data.GetRegion(i).SetColor(color);
             wmsk.RegionPainting(i, color);
         }
     }
