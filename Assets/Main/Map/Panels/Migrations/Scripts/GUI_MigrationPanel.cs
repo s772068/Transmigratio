@@ -47,11 +47,11 @@ public class GUI_MigrationPanel : GUI_BasePanel {
         CloseString = system.Close;
     }
 
-    public void Init(S_Migration data, string from, string to) {
-        Icon = iconSprites[data.IconIndex];
+    public void Init(MigrationData data, string from, string to) {
+        // Icon = iconSprites[data.IconIndex];
         // Path = string.Format(pathFormat, from, to);
-        maxPopulation = data.MaxPopulation;
-        Population = data.Population;
+        // maxPopulation = data.MaxPercent;
+        // Population = data.Population;
     }
 
     public void UpdatePanel(int population) {

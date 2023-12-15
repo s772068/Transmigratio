@@ -1,120 +1,95 @@
+using System;
 using UnityEngine;
+using WorldMapStrategyKit;
 
-public class VolcanoEvent : BaseEvent {
+public struct VolcanoEvent : I_Event {
+    private const float MIGRATE_PERCENT = 10f;
+    private const int COST_INTERVENTION = 3;
+
     private MigrationController migration;
     private ResourcesController resources;
     private MapController map;
-    private int migrateRegionIndex;
+
+    private int region;
+    private int migrateRegion;
     private int migratePopulation;
-    private int costIntervention;
-    private float[] chances = { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f};
 
-    public override S_Event Data(int localization) =>
-        localization switch {
-            0 => new S_Event {
-                Name = "Volcano",
-                Description = "Volcano description",
-                Results = new S_EventResult[] {
-                    new() {
-                        Name = "Nothing",
-                        Description = "Volcano nothing"
-                    },
-                    new() {
-                        Name = "Migration",
-                        Description = "Volcano migration"
-                    },
-                    new() {
-                        Name = "Intervene",
-                        Description = "Volcano intervene"
-                    }
-                }
-            },
-            1 => new S_Event {
-                Name = "Извержение вулкана",
-                Description = "Вулкан извергается",
-                Results = new S_EventResult[] {
-                    new() {
-                        Name = "Не вмешиваться",
-                        Description = "Без вмешательства"
-                    },
-                    new() {
-                        Name = "Миграция",
-                        Description = "Миграция людей"
-                    },
-                    new() {
-                        Name = "Утихомирить вулкан",
-                        Description = "Утихомирить вулкан"
-                    }
-                }
-            },
-            _ => default
-        };
+    private float[] chances; // = { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f};
 
-    public VolcanoEvent(GameController game, int migratePopulation, int costIntervention) {
-        this.migratePopulation = migratePopulation;
-        this.costIntervention = costIntervention;
-        game.Get(out migration);
-        game.Get(out resources);
-        game.Get(out map);
+    public int Index { get; set; }
+    public int Region => region;
+    public int MigrateRegion => migrateRegion;
+    public int MigratePopulation => migratePopulation;
+    public int CountResults => 3;
+
+    public GameController Game {
+        set {
+            value.Get(out migration);
+            value.Get(out resources);
+            value.Get(out map);
+        }
     }
 
-    public override bool CheckActivate(ref S_Region region) {
-        if(region.GetCountCivilizations() == 0) return false;
-        if (region.GetEventChanceIndex() > -1) {
-            if (Random.Range(0, 1f) <= chances[region.GetEventChanceIndex()]) {
-                region.SetEventChanceIndex(-1);
-                return true;
-            } else {
-                region.SetEventChanceIndex(region.GetEventChanceIndex() + 1);
-                return false;
-            }
-        } else return false;
+    public bool Init() {
+        region = Randomizer.Random(map.data.CountRegions);
+        return true;
     }
 
-    public override bool CheckBuild(int regionIndex, int resultIndex) =>
-        resultIndex switch {
+    public bool TryActivate() {
+        //if(region.GetCountCivilizations() == 0) return false;
+        //if (region.GetEventChanceIndex() > -1) {
+        //    if (random.NextDouble() <= chances[region.GetEventChanceIndex()]) {
+        //        region.SetEventChanceIndex(-1);
+        //        return true;
+        //    } else {
+        //        region.SetEventChanceIndex(region.GetEventChanceIndex() + 1);
+        //        return false;
+        //    }
+        //} else return false;
+        return true;
+    }
+
+    public bool CheckBuild(int index) =>
+        index switch {
             0 => true,
-            1 => CheckMigration(regionIndex),
-            2 => resources.intervention >= costIntervention,
+            1 => CheckMigration(),
+            2 => resources.intervention >= COST_INTERVENTION,
             _ => false
         };
 
-    public override void Use(int regionIndex, int index) {
-        switch (index) {
-            case 0: ActivateVolcano(); break;
-            case 1: Migration(regionIndex); break;
-            case 2: Intervene(); break;
-        }
+    private bool CheckMigration() {
+        if (!map.data.GetRandomNeighbour(Region, out migrateRegion)) return false;
+        migratePopulation = (int) (map.data.GetRegion(migrateRegion).GetAllPopulations() * MIGRATE_PERCENT / 100f);
+        return true;
     }
 
-    private bool CheckMigration(int regionIndex) {
-        for (int i = 0; i < map.data.GetRegion(regionIndex).GetCountNeighbours(); ++i) {
-            // if(neighbours)
-            if (map.data.GetRegion(map.data.GetRegion(regionIndex).GetNeighbour(i)).GetCountCivilizations() == 0) {
-                migrateRegionIndex = map.data.GetRegion(regionIndex).GetNeighbour(i);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void ActivateVolcano() {
-        Debug.Log("ActivateVolcano");
-    }
-
-    private void Migration(int from) {
-        Debug.Log("Migration");
-        S_Migration migrationData = new S_Migration {
-            From = from,
-            To = migrateRegionIndex,
-            MaxPopulation = migratePopulation
+    public bool Use(int result) =>
+        result switch {
+            0 => Activate(),
+            1 => Migration(),
+            2 => Intervene(),
+            _ => false
         };
-        migration.StartMigration(migrationData);
+
+    private bool Activate() {
+        Debug.Log("Activate");
+        return true;
     }
 
-    private void Intervene() {
-        resources.intervention -= costIntervention;
+    private bool Migration() {
+        Debug.Log("Migration");
+        MigrationData migrationData = new MigrationData {
+            From = Region,
+            To = MigrateRegion
+        };
+        //migration.StartMigration(migrationData);
+        return true;
+    }
+
+    private bool Intervene() {
         Debug.Log("Intervene");
+        resources.intervention -= COST_INTERVENTION;
         // Realise volcanoes action
+        return true;
     }
 }

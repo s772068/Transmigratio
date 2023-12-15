@@ -3,7 +3,7 @@ public struct PopulationLayer : ILayer {
         UnityEngine.Color color;
         layerIndex -= settings.Theme.CountEcologyParamiters;
         int count = settings.Theme.CountCivilizationDetails(layerIndex);
-        int max = map.data.GetAllPopulations();
+        int max = map.data.GetPopulations();
         for (int i = 0, detailIndex = 0, percent; i < map.data.CountRegions; ++i) {
             if (map.data.GetRegion(i).GetCountCivilizations() == 0) return;
             percent = map.data.GetRegion(i).GetAllPopulations() * 100 / max;

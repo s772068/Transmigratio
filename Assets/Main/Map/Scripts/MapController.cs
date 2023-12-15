@@ -64,6 +64,7 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
         paramiter.AddDetail(0);
 
         S_Civilization civilization = new();
+        civilization.SetID(5);
         civilization.SetPopulation(1000);
         civilization.SetTakenFood(100);
         civilization.SetGovernmentObstacle(0.4f);
@@ -71,18 +72,18 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
         civilization.AddParamiter(paramiter);
         civilization.AddParamiter(paramiter);
 
-        data.GetRegion(regionIndex).AddCivilization(civilization);
+        data.AddCivilization(regionIndex, civilization);
     }
 
     public void Init() {
         InitCountries();
-        timeline.OnTick += UpdateParams;
+        timeline.OnUpdateData += UpdateParams;
         timeline.OnSelectRegion += EmergenceFirstCivilization;
         // data.GetRegion(0).GetCivilization(0).Population = 100;
     }
 
     private void OnDestroy() {
-        timeline.OnTick -= UpdateParams;
+        timeline.OnUpdateData -= UpdateParams;
         timeline.OnSelectRegion -= EmergenceFirstCivilization;
     }
 }

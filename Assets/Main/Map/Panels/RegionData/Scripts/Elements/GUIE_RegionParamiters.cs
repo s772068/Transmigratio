@@ -50,8 +50,8 @@ public class GUIE_RegionParamiters : MonoBehaviour {
     public void UpdateEcology() {
         UpdateEcology(0);
         UpdateEcology(1);
-        ecologyGroup.SetParamiterValue(2, Map.data.GetRegion(regionIndex).GetEcologyParamiter(2).MaxDetail);
-        ecologyGroup.SetParamiterValue(3, Map.data.GetRegion(regionIndex).GetEcologyParamiter(3).MaxDetail);
+        ecologyGroup.SetParamiterValue(2, (int) Map.data.GetRegion(regionIndex).GetEcologyParamiter(2).MaxDetail);
+        ecologyGroup.SetParamiterValue(3, (int) Map.data.GetRegion(regionIndex).GetEcologyParamiter(3).MaxDetail);
     }
 
     public void UpdateCivilization() {

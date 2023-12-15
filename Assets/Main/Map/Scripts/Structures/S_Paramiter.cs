@@ -2,18 +2,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct S_Paramiter {
-    [SerializeField] private List<int> details;
+public class S_Paramiter {
+    [SerializeField] private List<float> details = new();
 
     public int GetCountDetails() => details.Count;
-    public int[] GetDetails() => details.ToArray();
-    public int GetDetail(int index) => details[index];
-    public int SetDetail(int index, int value) => details[index] = value;
-    public void AddDetail(int detail) {
+    public float[] GetDetails() => details.ToArray();
+    public float GetDetail(int index) => details[index];
+    public float SetDetail(int index, float value) => details[index] = value;
+    
+    public void CopyTo(S_Paramiter paramiter) {
+        if(details == null) details = new();
+        for(int i = 0; i < paramiter.GetCountDetails(); ++i) {
+            if(i == details.Count)
+                details.Add(paramiter.GetDetail(i));
+            else
+                details[i] = paramiter.GetDetail(i);
+        }
+    }
+
+    public void AddDetail(float detail) {
         if (details == null) details = new();
         details.Add(detail);
     }
-    public void RemoveDetail(int detail) {
+    public void RemoveDetail(float detail) {
         details.Remove(detail);
         if (details.Count == 0) details = null;
     }
@@ -26,9 +37,9 @@ public struct S_Paramiter {
         details = null;
     }
 
-    public int AllDetails {
+    public float AllDetails {
         get {
-            int all = 0;
+            float all = 0;
             for(int i = 0; i < details.Count; ++i) {
                 all += details[i];
             }
@@ -36,11 +47,11 @@ public struct S_Paramiter {
         }
     }
 
-    public int MaxDetail {
+    public float MaxDetail {
         get {
-            int max = -1;
+            float max = -1;
             for (int i = 0; i < details.Count; ++i) {
-                int value = details[i];
+                float value = details[i];
                 if (max < value) {
                     max = value;
                 }
@@ -52,9 +63,9 @@ public struct S_Paramiter {
     public int MaxIndex {
         get {
             int index = -1;
-            int max = -1;
+            float max = -1;
             for (int i = 0; i < details.Count; ++i) {
-                int value = details[i];
+                float value = details[i];
                 if (max < value) {
                     max = value;
                     index = i;

@@ -2,13 +2,13 @@ using UnityEngine;
 using System.IO;
 
 public static class IOHelper {
-    public static void SaveToJson<T>(this T t) where T : struct {
+    public static void SaveToJson<T>(this T t) {
         string jsonData = JsonUtility.ToJson(t);
         string path = Application.persistentDataPath + "/" + typeof(T) + ".json";
         File.WriteAllText(path, jsonData);
     }
 
-    public static bool LoadFromJson<T>(out T owner) where T : struct {
+    public static bool LoadFromJson<T>(out T owner) {
         owner = default;
         string path = Application.persistentDataPath + "/" + typeof(T) + ".json";
         

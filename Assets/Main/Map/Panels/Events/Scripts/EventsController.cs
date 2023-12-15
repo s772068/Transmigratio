@@ -1,13 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EventsController : MonoBehaviour, IGameConnecter {
+    [SerializeField] private GUIP_Notifications notifications;
     [SerializeField] private GUIP_Event panel;
-    [SerializeField] private float markerLiveTime;
-    [SerializeField] private float[] chances;
+    [SerializeField, Min(0)] private float markerLiveTime;
+    // [SerializeField] private float[] chances;
+    // [SerializeField, Range(0, 100)] private float migratePercent;
 
-    private List<BaseEvent> events = new();
-    private Dictionary<int, List<int>> eventLog = new();
+    private List<I_Event> events;
+    private Dictionary<int, List<int>> logs = new();
 
     private SettingsController settings;
     private TimelineController timeline;
@@ -15,7 +18,7 @@ public class EventsController : MonoBehaviour, IGameConnecter {
     private WmskController wmsk;
     private MapController map;
 
-    public float MarkerLiveTime => markerLiveTime;
+    public Action<I_Event> OnOpenPanel;
 
     public GameController GameController {
         set {
@@ -25,6 +28,62 @@ public class EventsController : MonoBehaviour, IGameConnecter {
             wmsk = value.Get<WmskController>();
             map = value.Get<MapController>();
         }
+    }
+
+    public void CreateRandomEvent() {
+        CreateEvent(Randomizer.Random(events.Count));
+        //++countTryCreateEvent;
+        //if (! &&
+        //    countTryCreateEvent < 100)
+        //    CreateRandomEvent();
+    }
+
+    public bool CreateEvent(int eventIndex) {
+        I_Event e = events[eventIndex];
+        e.Index = eventIndex;
+        e.Game = game;
+        if (!e.Init()) return false;
+        if (!CreateMarker(e)) return false;
+        if (!logs.ContainsKey(e.Region)) logs.Add(e.Region, new());
+        notifications.AddEvent(e);
+        logs[e.Region].Add(eventIndex);
+        return true;
+    }
+
+    //private bool CreateHungryEvent() {
+    //    print(migratePopulation);
+    //    HungerEvent e = new HungerEvent() {
+    //        Game = game,
+    //        Region = region,
+    //        MigrateRegion = migrateRegion,
+    //        MigratePopulation = 100,
+    //        MarkerLiveTime = 5
+    //    };
+
+    //    events.Add(e);
+    //    return CreateMarker(e, 1, region);
+    //}
+
+    //private void CreateVolcanoEvent() {
+    //    events.Add(new VolcanoEvent() { Game = game });
+    //    return CreateMarker(e, 1, region);
+    //}
+
+    private bool CreateMarker(I_Event e) {
+        if (!wmsk.GetRegionPosition(e.Region, out Vector3 position)) return false;
+        Sprite sprite = settings.Theme.GetEventMarker(e.Index);
+        wmsk.CreateMarker(position, markerLiveTime, sprite, (IconMarker owner) => {
+            OnOpenPanel?.Invoke(e);
+            owner.DestroyGO();
+        });
+        return true;
+    }
+
+    public void UpdateEvent() {
+        //for(int i = 0; i < eventLog.Count; ++i) {
+
+        //}
+        //print("Update Event");
     }
 
     public void Call() {
@@ -53,32 +112,33 @@ public class EventsController : MonoBehaviour, IGameConnecter {
         // }
     }
 
-    public bool OpenPanel(S_Event data, int eventIndex, int countryIndex) {
-        if (panel.gameObject.activeSelf) return false;
-        panel.index = eventIndex;
-        panel.gameObject.SetActive(true);
-        panel.Init(data);
-
-        for (int i = 0; i < data.Results.Length; ++i) {
-            if (events[eventIndex].CheckBuild(countryIndex, i))
-                panel.Build(data.Results[i], i);
-        }
-
-        panel.OnClickResult = (int index) => ClickResult(eventIndex, countryIndex, index);
-        panel.OnClose = () => panel.gameObject.SetActive(false);
+    public bool OpenPanel(I_Event e, int eventIndex, int region) {
         return true;
+        //    if (panel.gameObject.activeSelf) return false;
+        //    panel.index = eventIndex;
+        //    panel.gameObject.SetActive(true);
+        //    panel.Init(data);
+
+        //    for (int i = 0; i < data.Results.Length; ++i) {
+        //        if (events[eventIndex].CheckBuild(region, i))
+        //            panel.Build(data.Results[i], i);
+        //    }
+
+        //    panel.OnClickResult = (int result) => ClickResult(eventIndex, region, result);
+        //    panel.OnClose = () => panel.gameObject.SetActive(false);
+        //    return true;
     }
 
-    public void ClickResult(int eventIndex, int countryIndex, int resultIndex) {
-        events[eventIndex].Use(countryIndex, resultIndex);
-    }
+    //public void ClickResult(int eventIndex, int countryIndex, int resultIndex) {
+    //    events[eventIndex].Use(countryIndex, resultIndex);
+    //}
 
-    public void AddEventsForRegion(int regionIndex) {
-        eventLog[regionIndex] = new();
-        for (int i = 0; i < events.Count; ++i) {
-            eventLog[regionIndex].Add(i);
-        }
-    }
+    //public void AddEventsForRegion(int regionIndex) {
+    //    eventLog[regionIndex] = new();
+    //    for (int i = 0; i < events.Count; ++i) {
+    //        eventLog[regionIndex].Add(i);
+    //    }
+    //}
 
     // private void InitEventLog() {
     //     for (int i = 0; i < map.data.Regions.Length; ++i) {
@@ -89,14 +149,29 @@ public class EventsController : MonoBehaviour, IGameConnecter {
     // }
 
     public void Init() {
-        events.Add(new VolcanoEvent(game, 100, 3));
-        events.Add(new HungerEvent(game, 100, 5));
         // InitEventLog();
-        timeline.OnTick += Call;
+        timeline.OnCreateEvent += CreateRandomEvent;
+        timeline.OnUpdateData += UpdateEvent;
+
+        events = new() {
+            new VolcanoEvent(),
+            new HungerEvent()
+        };
     }
 
     private void OnDestroy() {
-        timeline.OnTick -= Call;
+        timeline.OnCreateEvent += CreateRandomEvent;
+        timeline.OnUpdateData -= UpdateEvent;
     }
 }
 
+public interface I_Event {
+    int Index { get; set; }
+    GameController Game { set; }
+    int CountResults{ get; }
+    int Region { get; }
+    bool Init();
+    bool CheckBuild(int i);
+    bool TryActivate();
+    bool Use(int result);
+}

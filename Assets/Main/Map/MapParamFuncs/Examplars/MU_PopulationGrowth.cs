@@ -7,10 +7,10 @@ public struct MU_PopulationGrowth : IUpdater {
     private int _civIndex;
 
     private int _population;
-    private int _takenFood;
+    private float _takenFood;
 
-    private int _takenFoodForTick;
     private int _populationGrowth;
+    private float _takenFoodForTick;
     private float _governmentObstacle;
 
     // private int Population { set => _map[1, _regionIndex, 4, _civIndex, 1, -1, -1] = value; }

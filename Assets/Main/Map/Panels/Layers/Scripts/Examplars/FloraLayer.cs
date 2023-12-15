@@ -2,8 +2,8 @@ public struct FloraLayer : ILayer {
     public void Show(SettingsController settings, WmskController wmsk, MapController map, int layerIndex) {
         UnityEngine.Color color;
         int count = settings.Theme.CountEcologyDetails(layerIndex);
-        for (int i = 0, detailIndex = 0, percent; i < map.data.CountRegions; ++i) {
-            percent = map.data.GetRegion(i).GetEcologyParamiter(layerIndex).MaxDetail;
+        for (int i = 0, detailIndex = 0; i < map.data.CountRegions; ++i) {
+            float percent = map.data.GetRegion(i).GetEcologyParamiter(layerIndex).MaxDetail;
             if(percent < 25) {
                 detailIndex = 0;
             } else if(25 <= percent && percent <= 75) {

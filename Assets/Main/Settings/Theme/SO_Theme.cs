@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Settings/Theme", fileName = "Theme")]
 public class SO_Theme : ScriptableObject {
     [SerializeField] private ST_Paramiter<ST_Detail[]>[] Ecology;
     [SerializeField] private ST_Paramiter<ST_Detail[]>[] Civilization;
+    [SerializeField] private List<ST_Event> Events;
     [SerializeField] private Color[] Colors;
     [SerializeField] private Sprite[] Sprites;
 
@@ -25,4 +27,7 @@ public class SO_Theme : ScriptableObject {
         detailIndex < 0 ?
         Sprites[Civilization[paramiterIndex].DescriptionSprite] :
         Sprites[Civilization[paramiterIndex].Value[detailIndex].DescriptionSprite];
+
+    public Sprite GetEventIcon(int eventIndex) => Sprites[Events[eventIndex].IconSprite];
+    public Sprite GetEventMarker(int eventIndex) => Sprites[Events[eventIndex].MarkerSprite];
 }

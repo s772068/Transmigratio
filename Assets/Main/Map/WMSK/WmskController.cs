@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using WorldMapStrategyKit;
 using UnityEngine;
 using System;
+using UnityEditor.Build.Pipeline;
 
 public class WmskController : MonoBehaviour, IGameConnecter {
     [SerializeField] private GameObject arrow;
@@ -10,9 +11,6 @@ public class WmskController : MonoBehaviour, IGameConnecter {
     [SerializeField] private int eventMarkerLiveTime;
     [SerializeField] private Sprite[] markerSprites;
 
-    
-    private MigrationController migration;
-    private EventsController events;
     private MapController map;
     
     private WMSK wmsk;
@@ -26,66 +24,65 @@ public class WmskController : MonoBehaviour, IGameConnecter {
 
     public GameController GameController {
         set {
-            value.Get(out migration);
-            value.Get(out events);
             value.Get(out map);
         }
     }
 
-    public void GetNeighbours(out int[] res, int index) {
-        res = wmsk.countries[index].neighbours;
+    public bool GetNeighbours(int region, out int[] neighbours) {
+        neighbours = null;
+        if (region < 0 || wmsk.countries.Length >= region) return false;
+        if (wmsk.countries[region].neighbours == null ||
+            wmsk.countries[region].neighbours.Length == 0) return false;
+        neighbours = wmsk.countries[region].neighbours;
+        return true;
     }
 
-    public void GetNeighbours(out Country[] res, int index) {
-        res = new Country[wmsk.countries[index].neighbours.Length];
-        for(int i = 0; i < res.Length; ++i) {
-            res[i] = wmsk.GetCountry(wmsk.countries[index].neighbours[i]);
-        }
+    public bool GetRegionPosition(int region, out Vector3 position) {
+        position = Vector3.zero;
+        if(region < 0 || wmsk.countries.Length <= region) return false;
+        position = wmsk.countries[region].center;
+        return true;
     }
 
-    private void Click(float x, float y, int buttonIndex) {
-        int index = wmsk.GetCountryIndex(new Vector2(x, y));
-        if (index < 0 || index > wmsk.countries.Length - 1) return;
-        UpdateSelectIndex(index);
-        OnClick?.Invoke(selectedIndex);
-    }
-
-    private void ClickMarker(MarkerClickHandler marker, int buttonIndex) => marker.GetComponent<IconMarker>()?.Click();
-
-    private void UpdateSelectIndex(int index) {
-        wmsk.ToggleCountrySurface(selectedIndex, true,
-            selectedIndex < map.data.CountRegions &&
-            selectedIndex >= 0 ?
-            map.data.GetColor(selectedIndex) : Color.clear);
-        selectedIndex = index;
-        wmsk.ToggleCountrySurface(selectedIndex, true, selectColor);
-    }
-
-    public void RegionPainting(int regionIndex, Color color) {
-        wmsk.ToggleCountrySurface(regionIndex, true, color);
-    }
-
-    public void CreateEventMarker(S_Event data, int eventIndex, int regionIndex) {
-        CreateIconMarker(wmsk.GetCountry(regionIndex).center, data.MarkerIndex, events.MarkerLiveTime, (IconMarker owner) => {
-            events.OpenPanel(data, eventIndex, regionIndex);
-            owner.DestroyGO();
-        });
-    }
-
-    private IconMarker CreateIconMarker(Vector3 position, int markerIndex, float liveTime, Action<IconMarker> OnClick) {
+    public IconMarker CreateMarker(Vector3 position, float liveTime, Sprite sprite, Action<IconMarker> OnClick) {
         IconMarker marker = Instantiate(iconMarker);
-        marker.Sprite = markerSprites[markerIndex];
+        marker.Sprite = sprite;
         marker.LiveTime = liveTime;
         marker.OnClick += OnClick;
         wmsk.AddMarker2DSprite(marker.gameObject, position, new Vector2(0.025f, 0.05f), true);
         return marker;
     }
 
-    public void StartMigration(S_Migration data, int index) {
+    public void RegionPainting(int region, Color color) {
+        wmsk.ToggleCountrySurface(region, true, color);
+    }
+
+    private void CreateLine() {
+
+    }
+
+    private void ClickMap(float x, float y, int buttonIndex) {
+        int index = wmsk.GetCountryIndex(new Vector2(x, y));
+        if (index < 0 || index > wmsk.countries.Length - 1) return;
+
+        wmsk.ToggleCountrySurface(selectedIndex, true,
+            selectedIndex < map.data.CountRegions &&
+            selectedIndex >= 0 ?
+            map.data.GetColor(selectedIndex) : Color.clear);
+        selectedIndex = index;
+        wmsk.ToggleCountrySurface(selectedIndex, true, selectColor);
+
+        OnClick?.Invoke(selectedIndex);
+    }
+
+    private void ClickMarker(MarkerClickHandler marker, int buttonIndex) => marker.GetComponent<IconMarker>()?.Click();
+    
+    #region PutInMigration
+    public void StartMigration(MigrationData data, int index) {
         Vector2 start = wmsk.GetCountry(data.From).center;
         Vector2 end = wmsk.GetCountry(data.To).center;
 
-        IconMarker marker = CreateIconMarker(start, data.MarkerIndex, -1, (IconMarker marker) => migration.OpenPanel(data, index));
+        // IconMarker marker = CreateMarker(start, 0, null, (IconMarker marker) => { }/*migration.OpenPanel(data, index)*/);
 
         Color color = Color.red;
         float lineWidth = 0.5f;
@@ -103,7 +100,7 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         lma.endCapOffset = 0.5f;
         lma.endCapScale = new Vector3(3f, 3f, 1f);
 
-        lineMigrations.Add(new S_LineMigration { Lma = lma, Marker = marker });
+        lineMigrations.Add(new S_LineMigration { Lma = lma });
     }
 
     public void EndMigration(int index) {
@@ -111,10 +108,11 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         lineMigrations[index].Lma.FadeOut(0);
         lineMigrations.RemoveAt(index);
     }
+    #endregion
 
     public void Init() {
         wmsk = WMSK.instance;
-        wmsk.OnClick += Click;
+        wmsk.OnClick += ClickMap;
         wmsk.OnMarkerMouseDown += ClickMarker;
         
         // For havn't friezes at first change colors
