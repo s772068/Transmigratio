@@ -17,8 +17,7 @@ public class GUI_ProgressBar : MonoBehaviour {
     public float Value {
         set {
             Color = color;
-            if (isSlider) fill.fillAmount = (value - MinValue) / (maxValue - MinValue);
-            else fill.fillAmount = 1;
+            fill.fillAmount = (value - MinValue) / (maxValue - MinValue);
         }
     }
 

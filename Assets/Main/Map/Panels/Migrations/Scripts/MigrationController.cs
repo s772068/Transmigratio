@@ -1,25 +1,31 @@
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Linq;
+using System;
 
 public class MigrationController : MonoBehaviour, IGameConnecter {
-    [SerializeField] private GUI_MigrationPanel panel;
+    [SerializeField] private GUIP_Migration panel;
     [SerializeField, Range(0, 100)] private int percentToMigration;
     [SerializeField, Range(0, 100)] private int percentPerTick;
+    [SerializeField] GameObject startLine;
+    [SerializeField] IconMarker endLine;
+    [SerializeField] Material lineMaterial;
+    [SerializeField] Sprite markerSprite;
 
     private Dictionary<int, MigrationData> migrations = new();
     // private S_Migration migration;
 
     private TimelineController timeline;
-    private SettingsController settings;
     private WmskController wmsk;
     private MapController map;
+
+    public Action<int, int, int> OnOpenPanel;
+    public Action<int, int> OnUpdatePanel;
+    public Action<int> OnClosePanel;
 
     public GameController GameController {
         set {
             value.Get(out timeline);
-            value.Get(out settings);
             value.Get(out wmsk);
             value.Get(out map);
         }
@@ -60,6 +66,8 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
             To = to
         };
         migrations.Add(from, newMigration);
+
+        CreateLine(newMigration);
     }
 
     private void UpdateMigration() {
@@ -72,12 +80,15 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
             // print(migration.Percent + " -> " + (migration.Percent + migration.PercentPerTick));
             
             if (migration.Percent + percentPerTick > 100) {
+                OnClosePanel?.Invoke(migration.From);
+                migration.Line.FadeOut(0);
+                migration.Marker.DestroyGO();
                 migrations.Remove(migration.From);
                 continue;
             }
             else migration.Percent += percentPerTick;
-            print(migration.Percent);
-            
+            OnUpdatePanel?.Invoke(migration.From, migration.Percent);
+
             S_Civilization from = map.data.GetCivilization(migration.From, migration.CivID);
             S_Civilization to = map.data.GetCivilization(migration.To, migration.CivID);
             S_Civilization step = migration.Step;
@@ -143,6 +154,32 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
         //    if (migration.Percent > migration.MaxPercent)
         //        migrations.Remove(val.Key);
         //}
+    }
+
+    private bool CreateMarker(MigrationData data) {
+        if (!wmsk.GetRegionPosition(data.From, out Vector2 position)) return false;
+        wmsk.GetRegionPosition(data.From, out Vector2 startPosition);
+        wmsk.GetRegionPosition(data.To, out Vector2 endPosition);
+        Vector2 center = (startPosition + endPosition) / 2;
+        data.Marker = wmsk.CreateMarker(center, -1, markerSprite, (IconMarker owner) => {
+            OnOpenPanel?.Invoke(data.From, data.To, data.Percent);
+        });
+        return true;
+    }
+
+    public void CreateLine(MigrationData data) {
+        wmsk.GetRegionPosition(data.From, out Vector2 start);
+        wmsk.GetRegionPosition(data.To, out Vector2 end);
+
+        // IconMarker marker = CreateMarker(start, 0, null, (IconMarker marker) => { }/*migration.OpenPanel(data, index)*/);
+
+        Color color = Color.red;
+        Vector3 startCapScale = new Vector3(0.5f, 0.5f, 1f);
+        Vector3 endCapScale = new Vector3(0.5f, 0.5f, 1f);
+        
+        CreateMarker(data);
+        
+        data.Line = wmsk.CreateLine(start, end, color, lineMaterial, startLine, endLine.gameObject, startCapScale, endCapScale, lineWidth: 3);
     }
 
     private float GetParamStep(float from, float to) {

@@ -11,9 +11,13 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     [SerializeField, Min(0)] private float updateDataInterval;
     [SerializeField, Min(0)] private float updateMigrationInterval;
     [SerializeField, Min(0)] private float updateYearInterval;
+    [SerializeField, Min(0)] private float intervalShowFactAboutEarth;
+    [SerializeField, Min(0)] private float endGame;
     [SerializeField, Min(0)] private int yearInterval;
     [SerializeField] private int startYear;
     [SerializeField, Range(0, 100)] private int eventOrMigration;
+
+    private InfoController info;
     
     private int year;
     private float interval;
@@ -22,6 +26,8 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     private float timeToAction = 0;
     private float timeToUpdateMigration = 0;
     private float timeToUpdateYear = 0;
+    private float timeToShowFactAboutEarth = 0;
+    private float timeToEndGame = 0;
 
     public Action<int> OnSelectRegion;
     public Action OnUpdateData;
@@ -29,21 +35,24 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     public Action OnCreateMigration;
     public Action OnCreateEvent;
     public Action OnUpdateYear;
-    
+
     public float Interval {
         set {
             if (value == 0) {
                 isTick = false;
             } else if (interval == 0 && value > 0) {
                 isTick = true;
-                // OnCreateMigration();
                 StartCoroutine(UpdateActive());
             }
             interval = value;
         }
     }
 
-    public GameController GameController { set { } }
+    public GameController GameController {
+        set {
+            value.Get(out info);
+        }
+    }
 
     public void Pouse() => Interval = 0;
     public void Play() => Interval = tick;
@@ -60,8 +69,9 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
                 timeToAction %= actionInterval;
                 ChoiseAction();
             }
+            
             timeToAction += interval;
-            print("Wait: " + (actionInterval - timeToAction));
+            // print("Wait: " + (actionInterval - timeToAction));
 
             if (timeToUpdateYear > timeToUpdateYear % updateYearInterval) {
                 timeToUpdateYear %= updateYearInterval;
@@ -79,7 +89,20 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
                 timeToUpdateMigration %= updateDataInterval;
                 OnUpdateMigration?.Invoke();
             }
-            timeToUpdateData += interval;
+            timeToUpdateMigration += interval;
+
+            if (timeToShowFactAboutEarth > timeToShowFactAboutEarth % intervalShowFactAboutEarth) {
+                timeToShowFactAboutEarth %= intervalShowFactAboutEarth;
+                info.FactAboutEarth();
+            }
+            timeToShowFactAboutEarth += interval;
+
+            if (timeToEndGame > timeToEndGame % endGame) {
+                timeToEndGame %= endGame;
+                info.EndGame();
+            }
+            timeToEndGame += interval;
+            // print("TimeToEndGame: " + (endGame - timeToEndGame));
             yield return new WaitForSeconds(interval);
         }
     }
@@ -104,7 +127,7 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     public void Init() {
         tick = Mathf.Min(tick, updateYearInterval, updateDataInterval, actionInterval);
         
-        year = startYear;
+        year = startYear;        
         PrintYear();
     }
 }

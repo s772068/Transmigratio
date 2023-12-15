@@ -7,8 +7,6 @@ public class IconMarker : MonoBehaviour {
     private SpriteRenderer sr;
     private float liveTime;
 
-    public int index;
-
     public Sprite Sprite { set => sr.sprite = value; }
     public float LiveTime { set => liveTime = value; }
     

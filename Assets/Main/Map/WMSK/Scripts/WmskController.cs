@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using WorldMapStrategyKit;
 using UnityEngine;
 using System;
-using UnityEditor.Build.Pipeline;
 
 public class WmskController : MonoBehaviour, IGameConnecter {
     [SerializeField] private GameObject arrow;
@@ -16,7 +15,7 @@ public class WmskController : MonoBehaviour, IGameConnecter {
     private WMSK wmsk;
 
     private int selectedIndex = -1;
-    private List<S_LineMigration> lineMigrations = new();
+    //private List<S_LineMigration> lineMigrations = new();
 
     public Action<int> OnClick;
 
@@ -37,14 +36,14 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         return true;
     }
 
-    public bool GetRegionPosition(int region, out Vector3 position) {
-        position = Vector3.zero;
+    public bool GetRegionPosition(int region, out Vector2 position) {
+        position = Vector2.zero;
         if(region < 0 || wmsk.countries.Length <= region) return false;
         position = wmsk.countries[region].center;
         return true;
     }
 
-    public IconMarker CreateMarker(Vector3 position, float liveTime, Sprite sprite, Action<IconMarker> OnClick) {
+    public IconMarker CreateMarker(Vector2 position, float liveTime, Sprite sprite, Action<IconMarker> OnClick) {
         IconMarker marker = Instantiate(iconMarker);
         marker.Sprite = sprite;
         marker.LiveTime = liveTime;
@@ -57,8 +56,30 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         wmsk.ToggleCountrySurface(region, true, color);
     }
 
-    private void CreateLine() {
+    public LineMarkerAnimator CreateLine(Vector2 start, Vector2 end, Color color,
+        Material lineMaterial, GameObject startCap, GameObject endCap,
+        Vector3 startCapScale, Vector3 endCapScale,
+        float startCapOffset = 0.5f, float endCapOffset = 0.5f,
+        float elevation = 0f, float lineWidth = 0.5f, float drawingDuration = 4f, float dashInterval = 0.01f, float dashAnimationDuration = 0.25f) {
 
+        LineMarkerAnimator lma = wmsk.AddLine(start, end, color, elevation, lineWidth);
+        lma.drawingDuration = drawingDuration;
+        // lma.autoFadeAfter = 2.0f;
+
+        //lma.drawingDuration = 2.0f;
+        lma.dashInterval = dashInterval;
+        lma.dashAnimationDuration = dashAnimationDuration;
+
+        lma.startCap = startCap;
+        lma.startCapOffset = startCapOffset;
+        lma.startCapScale = startCapScale;
+
+        lma.lineMaterial = lineMaterial;
+
+        lma.endCap = endCap;
+        lma.endCapOffset = endCapOffset;
+        lma.endCapScale = endCapScale;
+        return lma;
     }
 
     private void ClickMap(float x, float y, int buttonIndex) {
@@ -78,36 +99,36 @@ public class WmskController : MonoBehaviour, IGameConnecter {
     private void ClickMarker(MarkerClickHandler marker, int buttonIndex) => marker.GetComponent<IconMarker>()?.Click();
     
     #region PutInMigration
-    public void StartMigration(MigrationData data, int index) {
-        Vector2 start = wmsk.GetCountry(data.From).center;
-        Vector2 end = wmsk.GetCountry(data.To).center;
+    //public void StartMigration(MigrationData data, int index) {
+    //    Vector2 start = wmsk.GetCountry(data.From).center;
+    //    Vector2 end = wmsk.GetCountry(data.To).center;
 
-        // IconMarker marker = CreateMarker(start, 0, null, (IconMarker marker) => { }/*migration.OpenPanel(data, index)*/);
+    //    // IconMarker marker = CreateMarker(start, 0, null, (IconMarker marker) => { }/*migration.OpenPanel(data, index)*/);
 
-        Color color = Color.red;
-        float lineWidth = 0.5f;
-        float elevation = 0f;
+    //    Color color = Color.red;
+    //    float lineWidth = 0.5f;
+    //    float elevation = 0f;
 
-        LineMarkerAnimator lma = wmsk.AddLine(start, end, color, elevation, lineWidth);
-        lma.drawingDuration = 4.0f;
-        // lma.autoFadeAfter = 2.0f;
+    //    LineMarkerAnimator lma = wmsk.AddLine(start, end, color, elevation, lineWidth);
+    //    lma.drawingDuration = 4.0f;
+    //    // lma.autoFadeAfter = 2.0f;
         
-        //lma.drawingDuration = 2.0f;
-        lma.dashInterval = 0.01f;
-        lma.dashAnimationDuration = 0.25f;
+    //    //lma.drawingDuration = 2.0f;
+    //    lma.dashInterval = 0.01f;
+    //    lma.dashAnimationDuration = 0.25f;
 
-        lma.endCap = arrow;
-        lma.endCapOffset = 0.5f;
-        lma.endCapScale = new Vector3(3f, 3f, 1f);
+    //    lma.endCap = arrow;
+    //    lma.endCapOffset = 0.5f;
+    //    lma.endCapScale = new Vector3(3f, 3f, 1f);
 
-        lineMigrations.Add(new S_LineMigration { Lma = lma });
-    }
+    //    lineMigrations.Add(new S_LineMigration { Lma = lma });
+    //}
 
-    public void EndMigration(int index) {
-        lineMigrations[index].Marker.DestroyGO();
-        lineMigrations[index].Lma.FadeOut(0);
-        lineMigrations.RemoveAt(index);
-    }
+    //public void EndMigration(int index) {
+    //    lineMigrations[index].Marker.DestroyGO();
+    //    lineMigrations[index].Lma.FadeOut(0);
+    //    lineMigrations.RemoveAt(index);
+    //}
     #endregion
 
     public void Init() {

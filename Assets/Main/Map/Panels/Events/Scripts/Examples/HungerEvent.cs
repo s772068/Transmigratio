@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.AdaptivePerformance.Provider.AdaptivePerformanceSubsystemDescriptor;
 
 public struct HungerEvent : I_Event {
     private const float MIGRATE_PERCENT = 10f;
@@ -6,6 +7,8 @@ public struct HungerEvent : I_Event {
 
     private MigrationController migration;
     private ResourcesController resources;
+    private SettingsController settings;
+    private InfoController info;
     private MapController map;
 
     private int region;
@@ -22,6 +25,8 @@ public struct HungerEvent : I_Event {
         set {
             value.Get(out migration);
             value.Get(out resources);
+            value.Get(out settings);
+            value.Get(out info);
             value.Get(out map);
         }
     }
@@ -65,12 +70,12 @@ public struct HungerEvent : I_Event {
         };
 
     public bool Nothing() {
-        Debug.Log("Nothing");
+        info.EventResult(settings.Localization.Events[0].Results[0].Info);
         return true;
     }
 
     public bool Migration() {
-        Debug.Log("Migration");
+        info.EventResult(settings.Localization.Events[0].Results[1].Info);
         MigrationData migrationData = new MigrationData {
             From = Region,
             To = MigrateRegion
@@ -80,7 +85,7 @@ public struct HungerEvent : I_Event {
     }
 
     public bool Intervene() {
-        Debug.Log("Intervene");
+        info.EventResult(settings.Localization.Events[0].Results[0].Info);
         resources.intervention -= COST_INTERVENTION;
         // Realise volcanoes action
         return true;

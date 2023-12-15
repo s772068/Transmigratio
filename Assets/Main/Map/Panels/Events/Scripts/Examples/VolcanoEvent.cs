@@ -8,6 +8,8 @@ public struct VolcanoEvent : I_Event {
 
     private MigrationController migration;
     private ResourcesController resources;
+    private SettingsController settings;
+    private InfoController info;
     private MapController map;
 
     private int region;
@@ -26,6 +28,8 @@ public struct VolcanoEvent : I_Event {
         set {
             value.Get(out migration);
             value.Get(out resources);
+            value.Get(out settings);
+            value.Get(out info);
             value.Get(out map);
         }
     }
@@ -73,11 +77,13 @@ public struct VolcanoEvent : I_Event {
 
     private bool Activate() {
         Debug.Log("Activate");
+        info.EventResult(settings.Localization.Events[0].Results[0].Info);
         return true;
     }
 
     private bool Migration() {
         Debug.Log("Migration");
+        info.EventResult(settings.Localization.Events[0].Results[1].Info);
         MigrationData migrationData = new MigrationData {
             From = Region,
             To = MigrateRegion
@@ -88,6 +94,7 @@ public struct VolcanoEvent : I_Event {
 
     private bool Intervene() {
         Debug.Log("Intervene");
+        info.EventResult(settings.Localization.Events[0].Results[2].Info);
         resources.intervention -= COST_INTERVENTION;
         // Realise volcanoes action
         return true;

@@ -23,10 +23,10 @@ public class EventsController : MonoBehaviour, IGameConnecter {
     public GameController GameController {
         set {
             game = value;
-            settings = value.Get<SettingsController>();
-            timeline = value.Get<TimelineController>();
-            wmsk = value.Get<WmskController>();
-            map = value.Get<MapController>();
+            value.Get(out settings);
+            value.Get(out timeline);
+            value.Get(out wmsk);
+            value.Get(out map);
         }
     }
 
@@ -70,7 +70,7 @@ public class EventsController : MonoBehaviour, IGameConnecter {
     //}
 
     private bool CreateMarker(I_Event e) {
-        if (!wmsk.GetRegionPosition(e.Region, out Vector3 position)) return false;
+        if (!wmsk.GetRegionPosition(e.Region, out Vector2 position)) return false;
         Sprite sprite = settings.Theme.GetEventMarker(e.Index);
         wmsk.CreateMarker(position, markerLiveTime, sprite, (IconMarker owner) => {
             OnOpenPanel?.Invoke(e);

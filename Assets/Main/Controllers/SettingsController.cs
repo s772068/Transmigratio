@@ -49,6 +49,7 @@ public class SettingsController : MonoBehaviour, ISave, IGameConnecter {
     }
 
     public void Exit() {
+        print("Exit");
         Application.Quit();
     }
 }

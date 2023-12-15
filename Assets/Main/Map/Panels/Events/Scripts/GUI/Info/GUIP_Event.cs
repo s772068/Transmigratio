@@ -11,11 +11,15 @@ public class GUIP_Event : MonoBehaviour, IGameConnecter {
     [SerializeField] private GUIE_EventResult resultPref;
     [SerializeField] private List<Sprite> iconSprites;
     
-    private EventsController events;
+    private TimelineController timeline;
     private SettingsController settings;
+    private EventsController events;
+    private InfoController info;
 
     private List<GUIE_EventResult> elements = new();
     private I_Event _e;
+
+    private bool _isShowInfo;
 
     public Action OnClickResult;
     public Action OnClose;
@@ -25,13 +29,22 @@ public class GUIP_Event : MonoBehaviour, IGameConnecter {
     public Sprite Icon { set => icon.sprite = value; }
     public GameController GameController {
         set {
+            value.Get(out timeline);
             value.Get(out settings);
             value.Get(out events);
+            value.Get(out info);
         }
     }
 
     public void Open(I_Event e) {
-        if (!gameObject.activeSelf) gameObject.SetActive(true);
+        if (!gameObject.activeSelf) {
+            gameObject.SetActive(true);
+            if (_isShowInfo) {
+                _isShowInfo = false;
+                info.EventInfo();
+            }
+            timeline.Pouse();
+        }
         
         Clear();
         _e = e;
@@ -71,6 +84,7 @@ public class GUIP_Event : MonoBehaviour, IGameConnecter {
         OnClickResult?.Invoke();
         _e.Use(result);
         Clear();
+        timeline.Play();
         gameObject.SetActive(false);
     }
 
@@ -84,10 +98,12 @@ public class GUIP_Event : MonoBehaviour, IGameConnecter {
     public void Close() {
         Clear();
         OnClose?.Invoke();
+        timeline.Pouse();
         gameObject.SetActive(false);
     }
 
     public void Init() {
+        _isShowInfo = true;
         events.OnOpenPanel += Open;
     }
 

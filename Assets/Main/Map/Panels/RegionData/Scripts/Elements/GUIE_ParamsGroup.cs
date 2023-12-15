@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class GUIE_ParamsGroup : MonoBehaviour {
-    [SerializeField] private GUI_Paramiter[] paramiters;
+    [SerializeField] private GUIE_Paramiter[] paramiters;
 
     public int CountParamiters => paramiters.Length;
 

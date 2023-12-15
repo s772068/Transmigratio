@@ -16,9 +16,11 @@ public class GUIP_Region : MonoBehaviour, IGameConnecter {
     private SettingsController settings;
     private WmskController wmsk;
     private MapController map;
+    private InfoController learnInfo;
 
     private int state;
     private int viewGroupIndex = -1;
+    private bool isShowLearnInfo;
 
     public Action<int, int> OnClickCivilizationBtn;
 
@@ -34,12 +36,17 @@ public class GUIP_Region : MonoBehaviour, IGameConnecter {
             info.Settings = settings;
 
             value.Get(out wmsk);
+            value.Get(out learnInfo);
         }
     }
 
     public void Open() {
         if (!gameObject.activeSelf) {
             gameObject.SetActive(true);
+            if (isShowLearnInfo) {
+                isShowLearnInfo = false;
+                learnInfo.RegionInfo();
+            }
             state = 0;
         }
         else state = 1;
@@ -174,5 +181,7 @@ public class GUIP_Region : MonoBehaviour, IGameConnecter {
         paramiters.ShowEcology();
     }
 
-    public void Init() { }
+    public void Init() {
+        isShowLearnInfo = true;
+    }
 }

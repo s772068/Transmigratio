@@ -1,7 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 
-public class GUI_Paramiter : MonoBehaviour {
+public class GUIE_Paramiter : MonoBehaviour {
     [SerializeField] private GUI_ProgressBar progressBar;
     [SerializeField] private Image pictogram;
     [SerializeField] private Text val;
