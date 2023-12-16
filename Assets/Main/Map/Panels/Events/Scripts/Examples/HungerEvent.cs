@@ -86,7 +86,7 @@ public struct HungerEvent : I_Event {
 
     public bool Intervene() {
         info.EventResult(settings.Localization.Events[0].Results[0].Info);
-        resources.intervention -= COST_INTERVENTION;
+        resources.intervention += COST_INTERVENTION;
         // Realise volcanoes action
         return true;
     }

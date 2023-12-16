@@ -95,7 +95,7 @@ public struct VolcanoEvent : I_Event {
     private bool Intervene() {
         Debug.Log("Intervene");
         info.EventResult(settings.Localization.Events[0].Results[2].Info);
-        resources.intervention -= COST_INTERVENTION;
+        resources.intervention += COST_INTERVENTION;
         // Realise volcanoes action
         return true;
     }
