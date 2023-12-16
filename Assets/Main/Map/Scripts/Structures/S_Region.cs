@@ -123,6 +123,15 @@ public class S_Region {
     public bool HasCivilization(S_Civilization civilization) => _civilizations.ContainsValue(civilization);
 
 
+    public bool GetRandomCivilizationID(out int civID) {
+        civID = 0;
+        if(_civilizations != null && _civilizations.Count > 0) {
+            int random = Randomizer.Random(_civilizations.Count);
+            civID = _civilizations.Keys.ToArray()[random];
+            return true;
+        }
+        return false;
+    }
     public int GetCivilizationID(int civID) => _civilizations[civID].GetID();
     public int GetPopulation(int civID) => _civilizations[civID].GetPopulation();
     public float GetTakenFood(int civID) => _civilizations[civID].GetTakenFood();

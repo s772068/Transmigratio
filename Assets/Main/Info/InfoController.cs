@@ -30,39 +30,49 @@ public class InfoController : MonoBehaviour, IGameConnecter {
     public void StartGame() {
         panel.Info = settings.Localization.Info.Value[0].Value;
         panel.Open();
+        timeline.Pouse();
     }
 
     public void SelectRegion(int regionIndex) {
         panel.Info = string.Format(settings.Localization.Info.Value[1].Value, settings.Localization.Map.Countries.Value[regionIndex]);
         panel.Open();
-        panel.OnClose += timeline.Play;
-        timeline.OnSelectRegion += SelectRegion;
+        panel.OnClose = timeline.Play;
+        timeline.Pouse();
     }
 
     public void RegionInfo() {
         panel.Info = settings.Localization.Info.Value[2].Value;
         panel.Open();
+        panel.OnClose = timeline.Pouse;
+        timeline.Pouse();
     }
 
     public void EventInfo() {
         panel.Info = settings.Localization.Info.Value[3].Value;
         panel.Open();
+        panel.OnClose = timeline.Pouse;
+        timeline.Pouse();
     }
 
     public void EventResult(string info) {
         panel.Info = info;
         panel.Open();
+        panel.OnClose = timeline.TurnPlay;
+        timeline.Pouse();
     }
 
     public void FactAboutEarth() {
         if (!isShowFactAboutEarth) return;
         panel.Info = settings.Localization.Info.Value[4].Value;
         panel.Open();
+        panel.OnClose = timeline.TurnPlay;
+        timeline.Pouse();
     }
 
     public void EndGame() {
         panel.Info = settings.Localization.Info.Value[5].Value;
         panel.Open();
+        panel.OnClose = timeline.Pouse;
         panel.OnClose += settings.Exit;
     }
 }

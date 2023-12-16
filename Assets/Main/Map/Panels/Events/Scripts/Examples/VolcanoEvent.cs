@@ -57,7 +57,7 @@ public struct VolcanoEvent : I_Event {
         index switch {
             0 => true,
             1 => CheckMigration(),
-            2 => resources.intervention >= COST_INTERVENTION,
+            2 => resources.intervention <= 100 - COST_INTERVENTION,
             _ => false
         };
 
@@ -82,13 +82,9 @@ public struct VolcanoEvent : I_Event {
     }
 
     private bool Migration() {
-        Debug.Log("Migration");
         info.EventResult(settings.Localization.Events[0].Results[1].Info);
-        MigrationData migrationData = new MigrationData {
-            From = Region,
-            To = MigrateRegion
-        };
-        //migration.StartMigration(migrationData);
+        map.data.GetRandomCivilizationID(region, out int civID);
+        migration.CreateMigration(region, MigrateRegion, civID);
         return true;
     }
 

@@ -151,7 +151,7 @@ public class S_Map {
     public bool HasCivilization(int region, int civID) => _regions[region].HasCivilization(civID);
     public bool HasCivilization(int region, S_Civilization civilization) => _regions[region].HasCivilization(civilization);
 
-
+    public bool GetRandomCivilizationID(int region, out int civID) => _regions[region].GetRandomCivilizationID(out civID);
     public int GetCivilizationID(int region, int id) => _regions[region].GetCivilizationID(id);
     public int GetPopulation(int region, int civID) => _regions[region].GetPopulation(civID);
     public float GetTakenFood(int region, int civID) => _regions[region].GetTakenFood(civID);

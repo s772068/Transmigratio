@@ -84,7 +84,6 @@ public class GUIP_Event : MonoBehaviour, IGameConnecter {
         OnClickResult?.Invoke();
         _e.Use(result);
         Clear();
-        timeline.Play();
         gameObject.SetActive(false);
     }
 
@@ -98,7 +97,7 @@ public class GUIP_Event : MonoBehaviour, IGameConnecter {
     public void Close() {
         Clear();
         OnClose?.Invoke();
-        timeline.Pouse();
+        _e.Use(0);
         gameObject.SetActive(false);
     }
 

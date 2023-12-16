@@ -30,7 +30,6 @@ public class GUIP_Top : MonoBehaviour, IGameConnecter {
         if (wmsk.SelectedIndex < 0) return;
         selectRegionBtn.gameObject.SetActive(false);
         timeline.OnSelectRegion?.Invoke(wmsk.SelectedIndex);
-        timeline.Play();
     }
 
     private void Localization() {
@@ -49,6 +48,7 @@ public class GUIP_Top : MonoBehaviour, IGameConnecter {
 
     public void Init() {
         map.OnUpdate += UpdatePlatform;
+        timeline.OnSelectRegion += (int index) => UpdatePlatform();
         Localization();
         UpdatePlatform();
     }
