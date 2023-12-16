@@ -64,7 +64,7 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
         paramiter.AddDetail(0);
 
         S_Civilization civilization = new();
-        civilization.SetID(5);
+        civilization.SetID(0);
         civilization.SetPopulation(1000);
         civilization.SetTakenFood(100);
         civilization.SetGovernmentObstacle(0.4f);
