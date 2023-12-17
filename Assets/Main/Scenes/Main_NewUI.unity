@@ -1705,8 +1705,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1416971110}
   - {fileID: 1719615905}
+  - {fileID: 1416971110}
   - {fileID: 1329648051}
   - {fileID: 1800425108}
   m_Father: {fileID: 319484243}
@@ -2210,6 +2210,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301291026}
   m_CullTransparentMesh: 1
+--- !u!1 &309721823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309721824}
+  - component: {fileID: 309721825}
+  m_Layer: 0
+  m_Name: Mount Points
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &309721824
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309721823}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2036419723}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &309721825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309721823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &319484242
 GameObject:
   m_ObjectHideFlags: 0
@@ -3359,6 +3403,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568195c062283b94d9d04e685c42c28a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!84 &537506843
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 1920
+  m_Height: 960
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 8
+  m_MipMap: 1
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 2
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &562033154
 GameObject:
   m_ObjectHideFlags: 0
@@ -5731,7 +5812,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 1477245908}
+        m_Texture: {fileID: 537506843}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -6531,7 +6612,7 @@ MonoBehaviour:
   ecologyGroup: {fileID: 698814346}
   civilizationGroup: {fileID: 668403606}
   regionIndex: 0
-  civilizationIndex: 0
+  civID: 0
   groupIndex: 0
   paramiterIndex: 0
 --- !u!1 &842381410
@@ -11260,7 +11341,7 @@ MonoBehaviour:
   updateDataInterval: 1
   updateMigrationInterval: 1
   updateYearInterval: 1
-  intervalShowFactAboutEarth: 5
+  intervalShowFactAboutEarth: 500
   endGame: 180
   yearInterval: 10
   startYear: -40000
@@ -11735,50 +11816,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1438405076
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1438405077}
-  - component: {fileID: 1438405078}
-  m_Layer: 0
-  m_Name: Mount Points
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1438405077
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438405076}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2036419723}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1438405078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438405076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1469102745
 GameObject:
   m_ObjectHideFlags: 0
@@ -12024,43 +12061,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469324090}
   m_CullTransparentMesh: 1
---- !u!84 &1477245908
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 1920
-  m_Height: 960
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 8
-  m_MipMap: 1
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 2
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &1479568440
 GameObject:
   m_ObjectHideFlags: 0
@@ -14108,1324 +14108,1269 @@ MonoBehaviour:
     _regions:
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
     - _name: 
       _color: {r: 0, g: 0, b: 0, a: 0}
-      _eventChanceIndex: 0
+      _takenFood: 0
       _ecology:
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
-        - 0
-        - 0
-        - 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       - details:
-        - 0
+        - _value: 0
       _civilizations:
         _serializedList: []
       _neighbours: 
-      events: 
 --- !u!1 &1740549735
 GameObject:
   m_ObjectHideFlags: 0
@@ -16827,7 +16772,7 @@ MonoBehaviour:
   legendContent: {fileID: 1731303445}
   regionIndex: 0
   groupIndex: 0
-  civilizationIndex: 0
+  civID: 0
   paramiterIndex: 0
   detailIndex: 0
 --- !u!114 &1939032407
@@ -17735,7 +17680,7 @@ Transform:
   m_Children:
   - {fileID: 1707219435}
   - {fileID: 493568806}
-  - {fileID: 1438405077}
+  - {fileID: 309721824}
   m_Father: {fileID: 2106133419}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

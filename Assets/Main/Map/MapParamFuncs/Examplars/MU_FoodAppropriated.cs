@@ -38,38 +38,38 @@ public struct MU_FoodAppropriated : IUpdater {
         _map = map;
         _civNumberRegOfPresence = map.CountCivilizations;
         for (_regionIndex = 0; _regionIndex < map.CountRegions; ++_regionIndex) {
-            Update(map.GetRegion(_regionIndex));
+            //Update(map.GetRegion(_regionIndex));
         }
     }
-    public void Update(S_Region region) {
-        for (_civIndex = 0; _civIndex < region.GetCountCivilizations(); ++_civIndex) {
-            //_flora = region.Ecology[2][0];
-            //_fauna = region.Ecology[3][0];
+    //public void Update(S_Region region) {
+        //for (_civIndex = 0; _civIndex < region.GetCountCivilizations(); ++_civIndex) {
+        //    //_flora = region.Ecology[2][0];
+        //    //_fauna = region.Ecology[3][0];
 
-            _floraKr = _flora > 50 ? 1.1f : 0.9f;
-            _faunaKr = _fauna > 50 ? 1.1f : 0.9f;
+        //    _floraKr = _flora > 50 ? 1.1f : 0.9f;
+        //    _faunaKr = _fauna > 50 ? 1.1f : 0.9f;
 
-            Update(region.GetCivilization(_civIndex));
-        }
-    }
+        //    Update(region.GetCivilization(_civIndex));
+        //}
+    //}
 
-    public void Update(S_Civilization civilization) {
-        _population = civilization.GetPopulation();
+    //public void Update(S_Civilization civilization) {
+        //_population = civilization.GetPopulation();
 
-        // _pc = civilization.Paramiters[0][0]; ;
-        // _slavery = civilization.Paramiters[0][1];
-        // 
-        // _hunters = civilization.Paramiters[1][0];
-        // _farmers = civilization.Paramiters[1][1];
+        //// _pc = civilization.Paramiters[0][0]; ;
+        //// _slavery = civilization.Paramiters[0][1];
+        //// 
+        //// _hunters = civilization.Paramiters[1][0];
+        //// _farmers = civilization.Paramiters[1][1];
 
-        _farmersProportion = _farmers.Proportion(_hunters);
-        _huntersProportion = _hunters.Proportion(_farmers);
+        //_farmersProportion = _farmers.Proportion(_hunters);
+        //_huntersProportion = _hunters.Proportion(_farmers);
 
-        _kr = _floraKr * _farmersProportion +
-              _faunaKr * _huntersProportion;
+        //_kr = _floraKr * _farmersProportion +
+        //      _faunaKr * _huntersProportion;
 
-        _prodMedeK = _pc.Proportion(_slavery) * 0.6f +
-            _slavery.Proportion(_pc) * 0.7f;
+        //_prodMedeK = _pc.Proportion(_slavery) * 0.6f +
+        //    _slavery.Proportion(_pc) * 0.7f;
 
         // TakenFood = _takenFood = (int) (_population / 61f * _kr * _prodMedeK);
         // 
@@ -79,5 +79,5 @@ public struct MU_FoodAppropriated : IUpdater {
         // Fauna = (int) (_fauna -
         //                _takenFood * _huntersProportion /
         //                (100 * _civNumberRegOfPresence));
-    }
+    //}
 }

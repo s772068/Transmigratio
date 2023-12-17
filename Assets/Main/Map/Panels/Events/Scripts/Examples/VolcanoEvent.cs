@@ -83,7 +83,7 @@ public struct VolcanoEvent : I_Event {
 
     private bool Migration() {
         info.EventResult(settings.Localization.Events[0].Results[1].Info);
-        map.data.GetRandomCivilizationID(region, out int civID);
+        map.data.GetRandomCivilizationID(region, out float civID);
         migration.CreateMigration(region, MigrateRegion, civID);
         return true;
     }

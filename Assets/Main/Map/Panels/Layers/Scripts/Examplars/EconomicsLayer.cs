@@ -4,7 +4,7 @@ public struct EconomicsLayer : ILayer {
         int paramiterIndex = layerIndex - settings.Theme.CountEcologyParamiters - 1;
         for (int i = 0; i < map.data.CountRegions; ++i) {
             if (map.data.GetRegion(i).GetCountCivilizations() == 0) return;
-            color = settings.Theme.GetCivilizationColor(paramiterIndex, map.data.GetRegion(i).GetCivilizationMaxIndex(paramiterIndex));
+            color = settings.Theme.GetCivilizationColor(paramiterIndex, (int) map.data.GetCivilizationMaxIndex(i, paramiterIndex));
             map.data.GetRegion(i).SetColor(color);
             wmsk.RegionPainting(i, color);
         }

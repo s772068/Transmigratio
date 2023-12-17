@@ -59,20 +59,22 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
     private void EmergenceFirstCivilization(int regionIndex) {
         if(regionIndex < 0 || regionIndex > data.CountRegions - 1) return;
         
-        S_Paramiter paramiter = new();
-        paramiter.AddDetail(100);
-        paramiter.AddDetail(0);
+        S_Paramiter prodMode = new();
+        prodMode.AddDetail(100);
+        prodMode.AddDetail(0);
 
-        S_Civilization civilization = new();
-        civilization.SetID(0);
-        civilization.SetPopulation(1000);
-        civilization.SetTakenFood(100);
-        civilization.SetGovernmentObstacle(0.4f);
-        civilization.AddParamiter(paramiter);
-        civilization.AddParamiter(paramiter);
-        civilization.AddParamiter(paramiter);
+        S_Paramiter economics = new();
+        economics.AddDetail(100);
+        economics.AddDetail(0);
+        
+        S_Paramiter goverment = new();
+        goverment.AddDetail(100);
+        goverment.AddDetail(0);
 
-        data.AddCivilization(regionIndex, civilization);
+        data.AddCivilizationParamiter(0, prodMode);
+        data.AddCivilizationParamiter(0, economics);
+        data.AddCivilizationParamiter(0, goverment);
+        data.SetPopulation(regionIndex, 0, 1000);
     }
 
     public void Init() {

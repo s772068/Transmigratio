@@ -13,7 +13,7 @@ public class GUIE_RegionDetails : MonoBehaviour {
 
     [HideInInspector] public int regionIndex;
     [HideInInspector] public int groupIndex;
-    [HideInInspector] public int civilizationIndex;
+    [HideInInspector] public float civID;
     [HideInInspector] public int paramiterIndex;
     [HideInInspector] public int detailIndex;
 
@@ -28,10 +28,11 @@ public class GUIE_RegionDetails : MonoBehaviour {
     public MapController Map { private get; set; }
     
     private float[] CivilizationValues =>
-        civilizationIndex < 0 ? paramiterIndex == Settings.Localization.Map.Civilization.Paramiters.Length - 1 ?
-            Map.data.GetRegion(regionIndex).GetArrayPopulations() :
-            Map.data.GetRegion(regionIndex).GetArrayCivilizationByParamiters(paramiterIndex) :
-            Map.data.GetRegion(regionIndex).GetArrayCivilizationDetails(civilizationIndex, paramiterIndex);
+        civID < 0 ?
+            paramiterIndex == Settings.Localization.Map.Civilization.Paramiters.Length - 1 ?
+                Map.data.GetArrayPopulations(regionIndex) :
+                Map.data.GetCivilizationDetailsByRegion(regionIndex, paramiterIndex) :
+            Map.data.GetCivilizationDetails(regionIndex, civID, paramiterIndex);
 
     public void Initialization() {
         Clear();

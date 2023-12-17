@@ -18,33 +18,33 @@ public struct MU_PopulationGrowth : IUpdater {
 
     public void Update(S_Map map) {
         _map = map;
-        for(_regionIndex = 0; _regionIndex < map.CountRegions; ++_regionIndex) {
-            Update(map.GetRegion(_regionIndex));
+        for (_regionIndex = 0; _regionIndex < map.CountRegions; ++_regionIndex) {
+            //Update(map.GetRegion(_regionIndex));
         }
     }
 
-    private void Update(S_Region region) {
-        for (_civIndex = 0; _civIndex < region.GetCountCivilizations(); ++_civIndex) {
-            Update(region.GetCivilization(_civIndex));
-        }
-    }
+    //private void Update(S_Region region) {
+    //    for (_civIndex = 0; _civIndex < region.GetCountCivilizations(); ++_civIndex) {
+            //Update(region.GetCivilization(_civIndex));
+    //    }
+    //}
 
-    private void Update(S_Civilization civilization) {
-        _takenFood = civilization.GetTakenFood();
-        _population = civilization.GetPopulation();
-        for (int i = 0; i < civilization.GetCountParamiters(); ++i) {
-            _governmentObstacle = civilization.GetGovernmentObstacle();
-            if (_takenFood > (int) (_population / 100f)) _takenFoodForTick = _population / 10;
-            _populationGrowth = (int) ((_population / 100f) * _takenFoodForTick * _governmentObstacle);
-            // UnityEngine.Debug.Log("Population: " + (_population / 100f));
-            // UnityEngine.Debug.Log("takenFoodForTick: " + _takenFoodForTick);
-            // UnityEngine.Debug.Log("GovernmentObstacle: " + _governmentObstacle);
-            _takenFood -= _takenFoodForTick;
-            _population += _populationGrowth;
-        }
-        // TakenFood = _takenFood;
-        // Population = _population;
+    //private void Update(S_Civilization civilization) {
+        //    _takenFood = civilization.GetTakenFood();
+        //    _population = civilization.GetPopulation();
+        //    for (int i = 0; i < civilization.GetCountParamiters(); ++i) {
+        //        _governmentObstacle = civilization.GetGovernmentObstacle();
+        //        if (_takenFood > (int) (_population / 100f)) _takenFoodForTick = _population / 10;
+        //        _populationGrowth = (int) ((_population / 100f) * _takenFoodForTick * _governmentObstacle);
+        //        // UnityEngine.Debug.Log("Population: " + (_population / 100f));
+        //        // UnityEngine.Debug.Log("takenFoodForTick: " + _takenFoodForTick);
+        //        // UnityEngine.Debug.Log("GovernmentObstacle: " + _governmentObstacle);
+        //        _takenFood -= _takenFoodForTick;
+        //        _population += _populationGrowth;
+        //    }
+        //    // TakenFood = _takenFood;
+        //    // Population = _population;
 
-        // UnityEngine.Debug.Log(_population);
-    }
+        //    // UnityEngine.Debug.Log(_population);
+    //}
 }

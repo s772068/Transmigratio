@@ -10,7 +10,7 @@ public class GUIE_RegionParamiters : MonoBehaviour {
     [SerializeField] private GUIE_ParamsGroup civilizationGroup;
     
     [HideInInspector] public int regionIndex;
-    [HideInInspector] public int civilizationIndex;
+    [HideInInspector] public float civID;
     [HideInInspector] public int groupIndex;
     [HideInInspector] public int paramiterIndex;
 
@@ -55,9 +55,9 @@ public class GUIE_RegionParamiters : MonoBehaviour {
     }
 
     public void UpdateCivilization() {
-        int population = civilizationIndex < 0 ?
+        int population = civID < 0 ?
             Map.data.GetRegion(regionIndex).GetAllPopulations() :
-            Map.data.GetRegion(regionIndex).GetPopulation(civilizationIndex);
+            Map.data.GetRegion(regionIndex).GetPopulation(civID);
         if (population > 0) {
             civilizationGroup.SetParamiterValue(0, population.ToString());
             for (int i = 0; i < civilizationGroup.CountParamiters - 2; ++i) {
@@ -67,9 +67,9 @@ public class GUIE_RegionParamiters : MonoBehaviour {
                 civilizationGroup.SetParamiterValue(civilizationGroup.CountParamiters - 1,
                     Settings.Localization.Map.Civilization.
                     Paramiters[Settings.Localization.Map.Civilization.Paramiters.Length - 1].
-                    Value[Map.data.GetMaxPopulationsIndex(regionIndex)].Name);
+                    Value[(int) Map.data.GetMaxPopulationsIndex(regionIndex)].Name);
             } else {
-                portrait.sprite = Settings.Theme.GetCivilizationSprite(civilizationGroup.CountParamiters - 1, civilizationIndex);
+                portrait.sprite = Settings.Theme.GetCivilizationSprite(civilizationGroup.CountParamiters - 1, (int)civID);
                 UpdateCivilization(civilizationGroup.CountParamiters - 2);
             }
         } else {
@@ -81,17 +81,17 @@ public class GUIE_RegionParamiters : MonoBehaviour {
     }
 
     private void UpdateEcology(int _paramiterIndex) {
-        int maxValueIndex = Map.data.GetRegion(regionIndex).GetEcologyParamiter(_paramiterIndex).MaxIndex;
+        int maxValueIndex = Map.data.GetEcologyParamiter(regionIndex, _paramiterIndex).MaxIndex;
         string str = Settings.Localization.Map.Ecology.Value[_paramiterIndex].Value[maxValueIndex].Name;
         ecologyGroup.SetParamiterValue(_paramiterIndex, str);
     }
 
     private void UpdateCivilization(int _paramiterIndex) {
-        int currentCivilizationIndex = civilizationIndex < 0 ?
-            Map.data.GetRegion(regionIndex).GetCivilizationMaxIndex(_paramiterIndex) :
-            civilizationIndex;
-        if (_paramiterIndex < Map.data.GetRegion(regionIndex).GetCountCivilizationParamiters(currentCivilizationIndex)) {
-            int maxValueIndex = Map.data.GetRegion(regionIndex).GetCivilizationMaxIndex(currentCivilizationIndex, _paramiterIndex);
+        float currentCivID = civID < 0 ?
+            Map.data.GetCivilizationMaxIndex(regionIndex, _paramiterIndex) :
+            civID;
+        if (_paramiterIndex < Map.data.GetCountCivilizationParamiters(currentCivID)) {
+            int maxValueIndex = Map.data.GetCivilizationMaxIndex(currentCivID, _paramiterIndex);
             civilizationGroup.SetParamiterValue(_paramiterIndex + 1,
                 Settings.Localization.Map.Civilization.Paramiters[_paramiterIndex].Value[maxValueIndex].Name);
         } else {

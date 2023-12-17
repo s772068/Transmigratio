@@ -3,18 +3,25 @@ using UnityEngine;
 
 [System.Serializable]
 public class S_Paramiter {
-    [SerializeField] private List<float> details = new();
+    [SerializeField] private List<S_Detail> details = new();
 
     public int GetCountDetails() => details.Count;
-    public float[] GetDetails() => details.ToArray();
-    public float GetDetail(int index) => details[index];
-    public float SetDetail(int index, float value) => details[index] = value;
+    public float[] GetDetails() {
+        float[] res = new float[details.Count];
+        for(int i = 0; i < details.Count; ++i) {
+            res[i] = details[i].GetValue();
+        }
+        return res;
+    }
+    public S_Detail GetDetail(int index) => details[index];
+    public float GetValue(int index) => details[index].GetValue();
+    public float SetDetail(int index, float value) => details[index].SetValue(value);
     
     public void CopyTo(S_Paramiter paramiter) {
         if(details == null) details = new();
         for(int i = 0; i < paramiter.GetCountDetails(); ++i) {
             if(i == details.Count)
-                details.Add(paramiter.GetDetail(i));
+                AddDetail(paramiter.GetDetails()[i]);
             else
                 details[i] = paramiter.GetDetail(i);
         }
@@ -22,12 +29,11 @@ public class S_Paramiter {
 
     public void AddDetail(float detail) {
         if (details == null) details = new();
-        details.Add(detail);
+        S_Detail newDetail = new();
+        newDetail.SetValue(detail);
+        details.Add(newDetail);
     }
-    public void RemoveDetail(float detail) {
-        details.Remove(detail);
-        if (details.Count == 0) details = null;
-    }
+
     public void RemoveDetailAt(int index) {
         details.RemoveAt(index);
         if (details.Count == 0) details = null;
@@ -41,7 +47,7 @@ public class S_Paramiter {
         get {
             float all = 0;
             for(int i = 0; i < details.Count; ++i) {
-                all += details[i];
+                all += details[i].GetValue();
             }
             return all;
         }
@@ -51,7 +57,7 @@ public class S_Paramiter {
         get {
             float max = -1;
             for (int i = 0; i < details.Count; ++i) {
-                float value = details[i];
+                float value = details[i].GetValue();
                 if (max < value) {
                     max = value;
                 }
@@ -65,7 +71,7 @@ public class S_Paramiter {
             int index = -1;
             float max = -1;
             for (int i = 0; i < details.Count; ++i) {
-                float value = details[i];
+                float value = details[i].GetValue();
                 if (max < value) {
                     max = value;
                     index = i;

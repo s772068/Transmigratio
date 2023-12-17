@@ -119,8 +119,8 @@ public class GUIP_Region : MonoBehaviour, IGameConnecter {
     }
 
     private void InitializationRegionState() {
-        paramiters.civilizationIndex = -1;
-        details.civilizationIndex = -1;
+        paramiters.civID = -1;
+        details.civID = -1;
 
         groupButtons.SetActiveFlexalon(true);
         paramiters.ShowPortrait(false);
@@ -131,10 +131,10 @@ public class GUIP_Region : MonoBehaviour, IGameConnecter {
     }
 
     private void InitializationCivilizationState() {
-        int civilizationIndex = info.detailIndex > -1 ?
+        float civID = info.detailIndex > -1 ?
             info.detailIndex : map.data.GetMaxPopulationsIndex(paramiters.regionIndex);
-        paramiters.civilizationIndex = civilizationIndex;
-        details.civilizationIndex = civilizationIndex;
+        paramiters.civID = civID;
+        details.civID = civID;
 
         groupButtons.SetActiveFlexalon(false);
         paramiters.ShowPortrait(true);
