@@ -6,13 +6,14 @@ using System.Linq;
 
 [Serializable]
 public class S_Map {
-    [SerializeField] private SerializedDictionary<float, S_Civ> civilizations = new();
+    [SerializeField] private SerializedDictionary<float, S_Civilization> civilizations = new();
     [SerializeField] private List<S_Region> _regions = new();
 
     #region Civilizations
+    public int GetCountRegionsInCivilization(float civID) => civilizations[civID].CountRegions;
     public int CountCivilizations => civilizations.Count;
     public float[] GetCivilizationKeys() => civilizations.Keys.ToArray();
-    public S_Civ GetCivilization(int id) => civilizations[id];
+    public S_Civilization GetCivilization(int id) => civilizations[id];
     public bool GetRandomRegion(float civID, out int region) => civilizations[civID].GetRandomRegion(out region);
     public void AddCivilizationsRegion(float civID, int region) {
         if (civilizations == null) civilizations = new();
@@ -148,6 +149,13 @@ public class S_Map {
     public bool GetRandomCivilizationID(int region, out float civID) => _regions[region].GetRandomCivilizationID(out civID);
     public int GetPopulation(int region, float civID) => _regions[region].GetPopulation(civID);
     public float GetTakenFood(int region) => _regions[region].GetTakenFood();
+    public float GetTakenFood(float civID) {
+        float res = 0f;
+        for(int i = 0; i < civilizations[civID].CountRegions; ++i) {
+            res += GetTakenFood(civilizations[civID].GetRegion(i));
+        }
+        return res;
+    }
     public float GetAllTakenFood() {
         float res = 0;
         for (int i = 0; i < _regions.Count; ++i) {
@@ -155,19 +163,28 @@ public class S_Map {
         }
         return res;
     }
+
+    public float GetReserveFood(float civID) => civilizations[civID].GetReserveFood();
     public float GetGovernmentObstacle(float civID) => civilizations[civID].GetGovernmentObstacle();
 
     public void CopyCivilization(int from, int to, float civID) {
         _regions[to].SetPopulation(civID, _regions[from].GetPopulation(civID));
         if(civID < 1) {
-            civilizations.Add(from / 100f, civilizations[civID]);
+            civilizations.Add((from + 1) / 100f, civilizations[civID]);
             civilizations.Remove(civID);
         }
     }
 
     public void SetPopulation(int region, float civID, int population) { AddCivilizationsRegion(civID, region); _regions[region].SetPopulation(civID, population); }
-    public void SetTakenFood(int region, float civID, int value) => _regions[region].SetTakenFood(civID, value);
-    public void SetGovernmentObstacle(float civID, int value) => civilizations[civID].SetGovernmentObstacle(value);
+    public void SetTakenFood(int region, float value) => _regions[region].SetTakenFood(value);
+    public void SetReserveFood(float civID, float value) => civilizations[civID].SetReserveFood(value);
+    public void SetGovernmentObstacle(float civID, float value) => civilizations[civID].SetGovernmentObstacle(value);
+    public void SetPopulation(float civID, int _populationGrowth) {
+        int countRegionsInCivilization = civilizations[civID].CountRegions;
+        for (int j = 0; j < countRegionsInCivilization; ++j) {
+            SetPopulation(GetRegionIndexFromCivilization(civID, j), civID, _populationGrowth / countRegionsInCivilization);
+        }
+    }
 
 
     public void AddCivilizationParamiter(float civID, S_Paramiter value) {
@@ -177,6 +194,13 @@ public class S_Map {
     }
     
     public int GetPopulations(int region) => _regions[region].GetAllPopulations();
+    public int GetPopulations(float civID) {
+        int res = 0;
+        for(int i = 0; i < civilizations[civID].CountRegions; ++i) {
+            res += GetPopulation(civilizations[civID].GetRegion(i), civID);
+        }
+        return res;
+    }
     public int GetPopulations() {
         int res = 0;
         for(int i = 0; i < _regions.Count; ++i) {
@@ -185,6 +209,18 @@ public class S_Map {
         return res;
     }
 
+    public float GetCivilizationAllByDetails(float civID, int detail) => civilizations[civID].GetAllByDetail(detail);
+    public float GetCivilizationAllParamtier(float civID, int paramiter, int detail) => civilizations[civID].GetAllByDetail(detail);
+    public float GetCivilizationAllParamtier(int region, int paramiter, int detail) {
+        float all = 0f;
+        for(int i = 0; i < _regions[region].GetCountCivilizations(); ++i) {
+            all += GetCivilizationAllParamtier(
+                _regions[region].GetCivilizationID(i),
+                paramiter,
+                detail);
+        }
+        return all;
+    }
 
     public int GetMaxPopulations(int region) => _regions[region].GetAllPopulations();
     public int GetMaxPopulations() {
@@ -261,5 +297,7 @@ public class S_Map {
     //}
 
     public void ClearAll() => _regions.Clear();
+
+    public int GetRegionIndexFromCivilization(float civID, int index) => civilizations[civID].GetRegion(index);
     #endregion
 }

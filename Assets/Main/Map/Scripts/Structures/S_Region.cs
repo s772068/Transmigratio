@@ -89,6 +89,7 @@ public class S_Region {
 
     #region Civilizations
     public int GetCountCivilizations() => _civilizations.Count;
+    public float GetCivilizationID(int index) => _civilizations.Keys.ToArray()[index];
     
 
     public float[] GetArrayPopulations() {
@@ -129,7 +130,7 @@ public class S_Region {
         else
             _civilizations[civID] = value;
     }
-    public void SetTakenFood(float civID, int value) => _takenFood = value;
+    public void SetTakenFood(float value) => _takenFood = value;
     
     public int GetAllPopulations() {
         int all = 0;

@@ -1,50 +1,46 @@
-using Unity.VisualScripting.FullSerializer;
+using UnityEngine;
 
 public struct MU_PopulationGrowth : IUpdater {
-    private S_Map _map;
-
-    private int _regionIndex;
-    private int _civIndex;
+    //private int _regionIndex;
+    private float _civID;
 
     private int _population;
-    private float _takenFood;
-
     private int _populationGrowth;
-    private float _takenFoodForTick;
+    private float _takenFood;
+    private float _reserveFood;
+    private float _requestFood;
+    private float _givenFood;
     private float _governmentObstacle;
 
-    // private int Population { set => _map[1, _regionIndex, 4, _civIndex, 1, -1, -1] = value; }
-    // private int TakenFood { set => _map[1, _regionIndex, 4, _civIndex, 2, -1, -1] = value;}
-
     public void Update(S_Map map) {
-        _map = map;
-        for (_regionIndex = 0; _regionIndex < map.CountRegions; ++_regionIndex) {
-            //Update(map.GetRegion(_regionIndex));
+        for (int i = 0; i < map.CountCivilizations; ++i) {
+            _civID = map.GetCivilizationKeys()[i];
+            _governmentObstacle = map.GetGovernmentObstacle(_civID);
+            _reserveFood = map.GetReserveFood(_civID);
+            _population = map.GetPopulations(_civID);
+            _takenFood = map.GetTakenFood(_civID);
+
+            Debug.Log($"CivID: {_civID}");
+            Debug.Log($"GovernmentObstacle: {_governmentObstacle}");
+            Debug.Log($"ReserveFood: {_reserveFood}");
+            Debug.Log($"Population: {_population}");
+            Debug.Log($"TakenFood: {_takenFood}");
+
+            _requestFood = _population / 150;
+            _givenFood = _reserveFood > _requestFood ? _requestFood : _reserveFood;
+
+            Debug.Log($"RequestFood: {_population} / 150 = {_reserveFood}");
+            Debug.Log($"GivenFood: {_reserveFood} > {_requestFood} ? {_requestFood} : {_reserveFood} = {_givenFood}");
+
+            _populationGrowth = (int) (((_requestFood - _givenFood) == 0f ? _population : -_population) / 100 * _givenFood * _governmentObstacle);
+
+            Debug.Log($"PopulationGrowth: (({_requestFood} - {_givenFood}) == 0 ? {_population} : {-_population}) / 100 * {_givenFood} * {_governmentObstacle} = {_populationGrowth}");
+            Debug.Log($"ReserveFood: {_reserveFood} + {_takenFood} - {_givenFood} = {_reserveFood + _takenFood - _givenFood}");
+
+            map.SetPopulation(_civID, _population + _populationGrowth);
+            map.SetReserveFood(_civID, _reserveFood + _takenFood - _givenFood);
+
+
         }
     }
-
-    //private void Update(S_Region region) {
-    //    for (_civIndex = 0; _civIndex < region.GetCountCivilizations(); ++_civIndex) {
-            //Update(region.GetCivilization(_civIndex));
-    //    }
-    //}
-
-    //private void Update(S_Civilization civilization) {
-        //    _takenFood = civilization.GetTakenFood();
-        //    _population = civilization.GetPopulation();
-        //    for (int i = 0; i < civilization.GetCountParamiters(); ++i) {
-        //        _governmentObstacle = civilization.GetGovernmentObstacle();
-        //        if (_takenFood > (int) (_population / 100f)) _takenFoodForTick = _population / 10;
-        //        _populationGrowth = (int) ((_population / 100f) * _takenFoodForTick * _governmentObstacle);
-        //        // UnityEngine.Debug.Log("Population: " + (_population / 100f));
-        //        // UnityEngine.Debug.Log("takenFoodForTick: " + _takenFoodForTick);
-        //        // UnityEngine.Debug.Log("GovernmentObstacle: " + _governmentObstacle);
-        //        _takenFood -= _takenFoodForTick;
-        //        _population += _populationGrowth;
-        //    }
-        //    // TakenFood = _takenFood;
-        //    // Population = _population;
-
-        //    // UnityEngine.Debug.Log(_population);
-    //}
 }
