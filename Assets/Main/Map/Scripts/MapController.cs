@@ -1,13 +1,10 @@
-using UnityEngine.UI;
 using UnityEngine;
 using System;
-using System.Collections.Generic;
 
 public class MapController : MonoBehaviour, ISave, IGameConnecter {
     public S_Map data;
     
     private TimelineController timeline;
-    private SettingsController settings;
 
     public Action OnUpdate;
 
@@ -19,7 +16,6 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
     public GameController GameController {
         set {
             value.Get(out timeline);
-            value.Get(out settings);
         }
     }
 
@@ -36,24 +32,6 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
             updaters[i].Update(data);
         }
         OnUpdate?.Invoke();
-    }
-
-    private void InitCountries() {
-        WorldMapStrategyKit.WMSK wmsk = WorldMapStrategyKit.WMSK.instance;
-        for (int i = 0; i < data.CountRegions; ++i) {
-            if (i > wmsk.countries.Length - 1) break;
-            for (int j = 0; j < wmsk.countries[i].neighbours.Length; ++j) {
-                data.GetRegion(i).AddNeighbour(wmsk.countries[i].neighbours[j]);
-            }
-            string[] names = {
-                "Plain",
-                "Forest",
-                "Desert",
-                "Mountain",
-                "Steppe",
-                "Tundra"
-            };
-        }
     }
 
     private void EmergenceFirstCivilization(int regionIndex) {
@@ -78,10 +56,8 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
     }
 
     public void Init() {
-        InitCountries();
         timeline.OnUpdateData += UpdateParams;
         timeline.OnSelectRegion += EmergenceFirstCivilization;
-        // data.GetRegion(0).GetCivilization(0).Population = 100;
     }
 
     private void OnDestroy() {

@@ -15,7 +15,7 @@ public class S_Paramiter {
     }
     public S_Detail GetDetail(int index) => details[index];
     public float GetValue(int index) => details[index].GetValue();
-    public float SetDetail(int index, float value) => details[index].SetValue(value);
+    public void SetDetail(int index, float value) => details[index].SetValue(value);
     
     public void CopyTo(S_Paramiter paramiter) {
         if(details == null) details = new();
