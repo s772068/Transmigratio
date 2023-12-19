@@ -15,7 +15,7 @@ public class S_Region {
     [SerializeField] private Color _color;
     [SerializeField] private float _takenFood;
     [SerializeField] private List<S_Paramiter> _ecology = new();
-    [SerializeField] private SerializedDictionary<float, int> _civilizations = new();
+    [SerializeField] private SerializedDictionary<float, float> _civilizations = new();
     [SerializeField] private List<int> _neighbours = new();
 
     public string GetName() => _name;
@@ -113,7 +113,7 @@ public class S_Region {
         }
         return false;
     }
-    public int GetPopulation(float civID) => _civilizations[civID];
+    public float GetPopulation(float civID) => _civilizations[civID];
     public float GetTakenFood() => _takenFood;
 
     
@@ -123,7 +123,7 @@ public class S_Region {
     }
 
 
-    public void SetPopulation(float civID, int value) {
+    public void SetPopulation(float civID, float value) {
         if (_civilizations == null) _civilizations = new();
         if (!_civilizations.ContainsKey(civID))
             _civilizations.Add(civID, value);
@@ -132,19 +132,19 @@ public class S_Region {
     }
     public void SetTakenFood(float value) => _takenFood = value;
     
-    public int GetAllPopulations() {
-        int all = 0;
-        foreach (int civilization in _civilizations.Values) {
+    public float GetAllPopulations() {
+        float all = 0;
+        foreach (float civilization in _civilizations.Values) {
             all += civilization;
         }
         return all;
     }
 
     public float GetMaxPopulationsIndex() {
-        int max = -1;
+        float max = -1;
         float index = -1;
         foreach (var civilization in _civilizations) {
-            int value = civilization.Value;
+            float value = civilization.Value;
             if (max < value) {
                 max = value;
                 index = civilization.Key;

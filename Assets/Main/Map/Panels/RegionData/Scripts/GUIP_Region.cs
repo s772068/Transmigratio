@@ -132,7 +132,7 @@ public class GUIP_Region : MonoBehaviour, IGameConnecter {
 
     private void InitializationCivilizationState() {
         float civID = info.detailIndex > -1 ?
-            info.detailIndex : map.data.GetMaxPopulationsIndex(paramiters.regionIndex);
+            info.detailIndex : map.data.GetMaxPopulationIndex(paramiters.regionIndex);
         paramiters.civID = civID;
         details.civID = civID;
 

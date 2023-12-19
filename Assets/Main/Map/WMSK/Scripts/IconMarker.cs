@@ -11,6 +11,7 @@ public class IconMarker : MonoBehaviour {
     public float LiveTime { set => liveTime = value; }
     
     public Action<IconMarker> OnClick;
+    public Action OnTimeDestroy;
 
     public void Click() => OnClick?.Invoke(this);
     
@@ -27,6 +28,7 @@ public class IconMarker : MonoBehaviour {
     private IEnumerator LiveTimer() {
         if (liveTime < 0) yield break;
         yield return new WaitForSeconds(liveTime);
+        OnTimeDestroy?.Invoke();
         Destroy(gameObject);
     }
 }

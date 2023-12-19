@@ -4,7 +4,7 @@ using WorldMapStrategyKit;
 public struct MU_FoodAppropriated : IUpdater {
     private int _regionIndex;
 
-    private int _population;
+    private float _population;
     private float _flora;
     private float _fauna;
     private float _hunters;

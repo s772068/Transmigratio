@@ -56,8 +56,8 @@ public class GUIE_RegionParamiters : MonoBehaviour {
 
     public void UpdateCivilization() {
         int population = civID < 0 ?
-            Map.data.GetRegion(regionIndex).GetAllPopulations() :
-            Map.data.GetRegion(regionIndex).GetPopulation(civID);
+            (int) Map.data.GetRegion(regionIndex).GetAllPopulations() :
+            (int) Map.data.GetRegion(regionIndex).GetPopulation(civID);
         if (population > 0) {
             civilizationGroup.SetParamiterValue(0, population.ToString());
             for (int i = 0; i < civilizationGroup.CountParamiters - 2; ++i) {
@@ -67,7 +67,7 @@ public class GUIE_RegionParamiters : MonoBehaviour {
                 civilizationGroup.SetParamiterValue(civilizationGroup.CountParamiters - 1,
                     Settings.Localization.Map.Civilization.
                     Paramiters[Settings.Localization.Map.Civilization.Paramiters.Length - 1].
-                    Value[(int) Map.data.GetMaxPopulationsIndex(regionIndex)].Name);
+                    Value[(int) Map.data.GetMaxPopulationIndex(regionIndex)].Name);
             } else {
                 portrait.sprite = Settings.Theme.GetCivilizationSprite(civilizationGroup.CountParamiters - 1, (int)civID);
                 UpdateCivilization(civilizationGroup.CountParamiters - 2);

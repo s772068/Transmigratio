@@ -4,13 +4,13 @@ using System.Linq;
 using System;
 
 public class MigrationController : MonoBehaviour, IGameConnecter {
-    [SerializeField] private GUIP_Migration panel;
-    [SerializeField, Range(0, 100)] private int percentToMigration;
-    [SerializeField, Range(0, 100)] private int percentPerTick;
     [SerializeField] GameObject startLine;
     [SerializeField] IconMarker endLine;
     [SerializeField] Material lineMaterial;
     [SerializeField] Sprite markerSprite;
+    [SerializeField] int minPopulationToMigration; 
+    [SerializeField, Range(0, 100)] private int percentToMigration;
+    [SerializeField, Range(0, 100)] private int percentPerTick;
 
     private Dictionary<int, MigrationData> migrations = new();
 
@@ -31,10 +31,39 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
     }
 
     private void CreateMigration() {
-        float civID = map.data.GetCivilizationKeys()[Randomizer.Random(map.data.CountCivilizations)];
-        if (!map.data.GetRandomRegion(civID, out int from)) return;
+        float[] civArr = map.data.GetArrayCivilizationsID();
+        
+        int from = 0;
+        int to = 0;
+        float civID = 0;
+
+        Dictionary<int, float> civs = new();
+        Dictionary<int, List<int>> neighbours = new();
+
+        for(int i = 0; i < civArr.Length; ++i) {
+            civID = civArr[i];
+            for(int j = 0; j < map.data.GetCountRegionsInCivilization(civArr[i]); ++j) {
+                from = map.data.GetRegionIndexFromCivilization(civArr[i], j);
+                if (migrations.ContainsKey(from)) continue;
+                for(int k = 0; k < map.data.GetCountNeighbours(from); ++k) {
+                    to = map.data.GetNeighbour(from, k);
+                    if(map.data.GetEcologyDetail(from, 3, 0) < map.data.GetEcologyDetail(to, 3, 0) &&
+                        map.data.GetPopulations(from) >= minPopulationToMigration &&
+                        map.data.GetPopulations(to) <= minPopulationToMigration &&
+                        !migrations.ContainsKey(to)) {
+                        if(!civs      .ContainsKey(from)) civs.Add(from, civID);
+                        if (!neighbours.ContainsKey(from)) neighbours.Add(from, new());
+                        neighbours[from].Add(to);
+                    }
+                }
+            }
+        }
+
+        if (civs.Count == 0) return;
+        from = civs.Keys.ToArray()[Randomizer.Random(civs.Count)];
         if (migrations.ContainsKey(from)) return;
-        if (!map.data.GetRandomNeighbour(from, out int to)) return;
+        civID = civs[from];
+        to = neighbours[from][Randomizer.Random(neighbours[from].Count)];
         if (migrations.ContainsKey(to)) return;
         CreateMigration(from, to, civID);
     }
@@ -46,9 +75,13 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
         }
 
         float toCivID = fromCivID < 1 ? (to + 1) / 100f : fromCivID;
-        int fromPop = map.data.GetPopulation(from, fromCivID);
-        int toPop   = map.data.GetPopulation(to, toCivID);
+        float fromPop = map.data.GetPopulation(from, fromCivID);
+        float toPop   = map.data.GetPopulation(to, toCivID);
+        // print($"From: {from} | To: {to}");
+        // print($"FromPop: {fromPop} | ToPop: {toPop}");
         int step    = (int) GetParamStep(fromPop, toPop);
+
+        // print($"Step: {step}");
 
         MigrationData newMigration = new MigrationData {
             FromCivID = fromCivID,
@@ -68,21 +101,43 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
             MigrationData migration = migrations.Values.ToArray()[i];
 
             if (migration.Percent + percentPerTick > 100) {
-                OnClosePanel?.Invoke(migration.From);
-                migration.Line.FadeOut(0);
-                migration.Marker.DestroyGO();
-                migrations.Remove(migration.From);
+                DestroyMigration(migration.From);
                 continue;
             }
             else migration.Percent += percentPerTick;
             OnUpdatePanel?.Invoke(migration.From, migration.Percent);
 
-            int populationFrom = map.data.GetPopulation(migration.From, migration.FromCivID);
-            int populationTo = map.data.GetPopulation(migration.To, migration.ToCivID);
+            float populationFrom = map.data.GetPopulation(migration.From, migration.FromCivID);
+            float populationTo = map.data.GetPopulation(migration.To, migration.ToCivID);
 
             map.data.SetPopulation(migration.From, migration.FromCivID, populationFrom - migration.Step);
             map.data.SetPopulation(migration.To,   migration.ToCivID, populationTo   + migration.Step);
         }
+    }
+
+    public void DestroyMigration(int from) {
+        OnClosePanel?.Invoke(from);
+        migrations[from].Line.FadeOut(0);
+        migrations[from].Marker.DestroyGO();
+        migrations.Remove(from);
+    }
+
+    public void AmplifyMigration(int from) {
+        // 100 - percent
+        // step = 500 = 15%
+        // end = step / stepPercent * (100 - percent)
+
+        // print($"Migration From: {migrations[from].Step} / {percentPerTick} * (100 - {migrations[from].Percent}) = {migrations[from].Step / percentPerTick * (100 - migrations[from].Percent)}");
+        // print($"Migration: {migrations[from].Step} / {percentPerTick} * (100 - {migrations[from].Percent}) = {migrations[from].Step / percentPerTick * (100 - migrations[from].Percent)}");
+
+        map.data.SetPopulation(migrations[from].From, migrations[from].FromCivID,
+            map.data.GetPopulation(migrations[from].From, migrations[from].FromCivID) -
+            (migrations[from].Step / percentPerTick * (100 - migrations[from].Percent)));
+        
+        map.data.SetPopulation(migrations[from].To, migrations[from].ToCivID,
+            map.data.GetPopulation(migrations[from].To, migrations[from].ToCivID) +
+            (migrations[from].Step / percentPerTick * (100 - migrations[from].Percent)));
+        DestroyMigration(from);
     }
 
     private bool CreateMarker(MigrationData data) {
@@ -92,7 +147,8 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
         Vector2 center = (startPosition + endPosition) / 2;
         data.Marker = wmsk.CreateMarker(center, -1, markerSprite, (IconMarker owner) => {
             OnOpenPanel?.Invoke(data.From, data.To, data.Percent);
-        });
+        },
+        () => { });
         return true;
     }
 
@@ -113,19 +169,22 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
         float different = to - from;
         if (different == 0) return 0;
         float orientation = different / Mathf.Abs(different);
+        // print($"Orientation: {different} / {Mathf.Abs(different)} = {orientation}");
 
         float path = different * (percentToMigration / 100f) * orientation;
+        // print($"Path: {different} * ({percentToMigration} / 100) * {orientation} = {path}");
+        // print($"Step: {path} / {percentPerTick} = {path / percentPerTick}");
 
         return path / percentPerTick;
     }
 
     public void Init() {
-        timeline.OnCreateMigration += CreateMigration;
+        timeline.OnUpdateData += CreateMigration;
         timeline.OnUpdateData += UpdateMigration;
     }
 
     private void OnDestroy() {
-        timeline.OnCreateMigration -= CreateMigration;
+        timeline.OnUpdateData -= CreateMigration;
         timeline.OnUpdateData -= UpdateMigration;
     }
 }

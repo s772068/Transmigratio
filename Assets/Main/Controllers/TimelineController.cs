@@ -7,7 +7,7 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     [SerializeField] private Text yearTxt;
     [SerializeField, Min(1)] private float accelerator;
     [SerializeField, Min(0)] private float tick;
-    [SerializeField, Min(0)] private float actionInterval;
+    [SerializeField, Min(0)] private float volcanoInterval;
     [SerializeField, Min(0)] private float updateDataInterval;
     [SerializeField, Min(0)] private float updateMigrationInterval;
     [SerializeField, Min(0)] private float updateYearInterval;
@@ -22,7 +22,7 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     private int year;
     private float interval;
     private bool isTick;
-    private float timeToAction = 0;
+    private float timeToVolcano = 0;
     private float timeToUpdateYear = 0;
     private float timeToUpdateData = 0;
     private float timeToUpdateMigration = 0;
@@ -31,8 +31,7 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
 
     public Action<int> OnSelectRegion;
     public Action OnUpdateData;
-    public Action OnUpdateMigration;
-    public Action OnCreateMigration;
+    public Action OnCreateVolcano;
     public Action OnCreateEvent;
     public Action OnUpdateYear;
 
@@ -70,13 +69,11 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
             
             yield return new WaitForSeconds(interval);
 
-            if (timeToAction > timeToAction % actionInterval) {
-                timeToAction %= actionInterval;
-                ChoiseAction();
+            if (timeToVolcano > timeToVolcano % volcanoInterval) {
+                timeToVolcano %= volcanoInterval;
+                OnCreateVolcano?.Invoke();
             }
-            
-            timeToAction += tick;
-            // print("Wait: " + (actionInterval - timeToAction));
+            timeToVolcano += tick;
 
             timeToUpdateYear += tick;
             if (timeToUpdateYear >= timeToUpdateYear % updateYearInterval) {
@@ -89,12 +86,6 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
                 OnUpdateData?.Invoke();
             }
             timeToUpdateData += tick;
-
-            if (timeToUpdateMigration > timeToUpdateMigration % updateMigrationInterval) {
-                timeToUpdateMigration %= updateDataInterval;
-                OnUpdateMigration?.Invoke();
-            }
-            timeToUpdateMigration += tick;
 
             //if (timeToShowFactAboutEarth > timeToShowFactAboutEarth % intervalShowFactAboutEarth) {
             //    timeToShowFactAboutEarth %= intervalShowFactAboutEarth;
@@ -111,14 +102,6 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
         }
     }
 
-    private void ChoiseAction() {
-        if (Randomizer.Random(100) < eventOrMigration) {
-            OnCreateMigration?.Invoke();
-        } else {
-            OnCreateEvent?.Invoke();
-        }
-    }
-
     private void UpdateYear() {
         year += yearInterval;
         PrintYear();
@@ -129,7 +112,7 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     }
 
     public void Init() {
-        tick = Mathf.Min(tick, updateYearInterval, updateDataInterval, actionInterval);
+        tick = Mathf.Min(tick, updateYearInterval, updateDataInterval, volcanoInterval);
         
         year = startYear;        
         PrintYear();

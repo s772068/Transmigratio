@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using WorldMapStrategyKit;
 
@@ -18,7 +19,7 @@ public struct VolcanoEvent : I_Event {
 
     private float[] chances; // = { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f};
 
-    public int Index { get; set; }
+    public int Index => 0;
     public int Region => region;
     public int MigrateRegion => migrateRegion;
     public int MigratePopulation => migratePopulation;
@@ -35,22 +36,14 @@ public struct VolcanoEvent : I_Event {
     }
 
     public bool Init() {
-        region = Randomizer.Random(map.data.CountRegions);
+        map.data.GetRandomCivilization().GetRandomRegion(out region);
         return true;
     }
 
     public bool TryActivate() {
-        //if(region.GetCountCivilizations() == 0) return false;
-        //if (region.GetEventChanceIndex() > -1) {
-        //    if (random.NextDouble() <= chances[region.GetEventChanceIndex()]) {
-        //        region.SetEventChanceIndex(-1);
-        //        return true;
-        //    } else {
-        //        region.SetEventChanceIndex(region.GetEventChanceIndex() + 1);
-        //        return false;
-        //    }
-        //} else return false;
-        return true;
+        // Population > 0
+        // Раз в заданное время происходит в случайном регионе
+        return map.data.GetPopulations(region) > 0;
     }
 
     public bool CheckBuild(int index) =>
@@ -76,20 +69,32 @@ public struct VolcanoEvent : I_Event {
         };
 
     private bool Activate() {
+        // (Населиние && Флора && Фауна) / 2
         Debug.Log("Activate");
+        map.data.SetEcologyDetail(Region, 0, 2, map.data.GetEcologyDetail(Region, 0, 2) / 2);
+        map.data.SetEcologyDetail(Region, 0, 3, map.data.GetEcologyDetail(Region, 0, 3) / 2);
+        for(int i = 0; i < map.data.GetCountCivilizations(Region); ++i) {
+            float civID = map.data.GetCivilizationID(Region, 0);
+            map.data.SetPopulation(Region, civID, map.data.GetPopulations(region) / 2);
+        }
         info.EventResult(settings.Localization.Events[0].Results[0].Info);
         return true;
     }
 
     private bool Migration() {
+        Debug.Log("Migration");
+        // Все переходят в соседний регион
         info.EventResult(settings.Localization.Events[0].Results[1].Info);
-        map.data.GetRandomCivilizationID(region, out float civID);
+        float civID = map.data.GetMaxPopulationIndex(Region);
         migration.CreateMigration(region, MigrateRegion, civID);
         return true;
     }
 
     private bool Intervene() {
         Debug.Log("Intervene");
+        // (Флора && Фауна) / 2
+        map.data.SetEcologyDetail(Region, 0, 2, map.data.GetEcologyDetail(Region, 0, 2) / 2);
+        map.data.SetEcologyDetail(Region, 0, 3, map.data.GetEcologyDetail(Region, 0, 3) / 2);
         info.EventResult(settings.Localization.Events[0].Results[2].Info);
         resources.intervention += COST_INTERVENTION;
         // Realise volcanoes action

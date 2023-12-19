@@ -84,7 +84,9 @@ public class GUIP_Migration : GUI_BasePanel, IGameConnecter {
             Percent = percent;
     }
 
-    public void Break() => OnBreak?.Invoke();
+    public void Amplify() => migration.AmplifyMigration(fromIndex);
+    public void Break() => migration.DestroyMigration(fromIndex);
+
     public void Init() {
         migration.OnOpenPanel += Open;
         migration.OnClosePanel += Close;

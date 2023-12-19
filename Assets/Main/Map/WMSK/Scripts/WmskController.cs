@@ -43,11 +43,12 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         return true;
     }
 
-    public IconMarker CreateMarker(Vector2 position, float liveTime, Sprite sprite, Action<IconMarker> OnClick) {
+    public IconMarker CreateMarker(Vector2 position, float liveTime, Sprite sprite, Action<IconMarker> OnClick, Action OnTimeDestroy) {
         IconMarker marker = Instantiate(iconMarker);
         marker.Sprite = sprite;
         marker.LiveTime = liveTime;
         marker.OnClick += OnClick;
+        marker.OnTimeDestroy += OnTimeDestroy;
         wmsk.AddMarker2DSprite(marker.gameObject, position, new Vector2(0.025f, 0.05f), true);
         return marker;
     }

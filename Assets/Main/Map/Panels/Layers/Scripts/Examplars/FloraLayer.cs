@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public struct FloraLayer : ILayer {
     public void Show(SettingsController settings, WmskController wmsk, MapController map, int layerIndex) {
         UnityEngine.Color color;

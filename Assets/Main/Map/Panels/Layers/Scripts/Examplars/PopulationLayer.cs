@@ -1,11 +1,14 @@
+using UnityEngine;
+
 public struct PopulationLayer : ILayer {
     public void Show(SettingsController settings, WmskController wmsk, MapController map, int layerIndex) {
-        UnityEngine.Color color;
+        Color color;
         layerIndex -= settings.Theme.CountEcologyParamiters;
         int count = settings.Theme.CountCivilizationDetails(layerIndex);
-        int max = map.data.GetPopulations();
-        for (int i = 0, detailIndex = 0, percent; i < map.data.CountRegions; ++i) {
-            if (map.data.GetRegion(i).GetCountCivilizations() == 0) return;
+        float max = map.data.GetPopulations();
+        float percent;
+        for (int i = 0, detailIndex = 0; i < map.data.CountRegions; ++i) {
+            if (map.data.GetRegion(i).GetCountCivilizations() == 0) continue;
             percent = map.data.GetRegion(i).GetAllPopulations() * 100 / max;
             if (percent < 25) {
                 detailIndex = 0;
@@ -14,8 +17,10 @@ public struct PopulationLayer : ILayer {
             } else if (75 < percent) {
                 detailIndex = 2;
             }
-            color = settings.Theme.GetEcologyColor(layerIndex, detailIndex);
+            Debug.Log($"Percent:{percent} | DetailIndex: {detailIndex}");
+            color = settings.Theme.GetCivilizationColor(0, detailIndex);
             color.a = percent / 100;
+            Debug.Log($"Color: {color}");
             map.data.GetRegion(i).SetColor(color);
             wmsk.RegionPainting(i, color);
         }

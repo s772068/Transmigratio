@@ -12,8 +12,9 @@ public class S_Map {
     #region Civilizations
     public int GetCountRegionsInCivilization(float civID) => civilizations[civID].CountRegions;
     public int CountCivilizations => civilizations.Count;
-    public float[] GetCivilizationKeys() => civilizations.Keys.ToArray();
+    public float[] GetArrayCivilizationsID() => civilizations.Keys.ToArray();
     public S_Civilization GetCivilization(int id) => civilizations[id];
+    public S_Civilization GetRandomCivilization() => civilizations.Values.ToArray()[civilizations.Count];
     public bool GetRandomRegion(float civID, out int region) => civilizations[civID].GetRandomRegion(out region);
     public int GetCivilizationMaxIndex(float civID, int paramiter) => civilizations[civID].GetMaxIndex(paramiter);
     public void AddCivilizationsRegion(float civID, int region) {
@@ -32,6 +33,7 @@ public class S_Map {
 
     #region Regions
     public int CountRegions => _regions.Count;
+    public float GetCivilizationID(int region, int index) => _regions[region].GetCivilizationID(index);
     public S_Region GetRegion(int index) => _regions[index];
     public Color GetColor(int region) => _regions[region].GetColor();
     public string GetName(int region) => _regions[region].GetName();
@@ -149,7 +151,7 @@ public class S_Map {
     public bool HasCivilization(int region, float civID) => _regions[region].HasCivilization(civID);
 
     public bool GetRandomCivilizationID(int region, out float civID) => _regions[region].GetRandomCivilizationID(out civID);
-    public int GetPopulation(int region, float civID) => _regions[region].GetPopulation(civID);
+    public float GetPopulation(int region, float civID) => _regions[region].GetPopulation(civID);
     public float GetTakenFood(int region) => _regions[region].GetTakenFood();
     public float GetTakenFood(float civID) {
         float res = 0f;
@@ -170,9 +172,6 @@ public class S_Map {
     public float GetGovernmentObstacle(float civID) => civilizations[civID].GetGovernmentObstacle();
 
     public void CopyCivilization(int from, int to, float civID) {
-        Debug.Log($"From: {from}");
-        Debug.Log($"To: {to}");
-        Debug.Log($"CivID: {civID}");
         if(civID < 1) {
             if(!civilizations.ContainsKey((to + 1) / 100f)) {
                 S_Civilization civ = new();
@@ -182,19 +181,20 @@ public class S_Map {
                 civ.CopyParamiters(civilizations[civID]);
                 
                 civilizations.Add((to + 1) / 100f, civ);
+                _regions[to].SetPopulation((to + 1) / 100f, 0);
             }
             // civilizations[(to + 1) / 100f] = civ;.Copy(civilizations[civID]);
-            _regions[to].SetPopulation((to + 1) / 100f, _regions[from].GetPopulation(civID));
         } else {
-            _regions[to].SetPopulation(civID, _regions[from].GetPopulation(civID));
+            if (!civilizations.ContainsKey(civID))
+                _regions[to].SetPopulation(civID, 0);
         }
     }
 
-    public void SetPopulation(int region, float civID, int population) { AddCivilizationsRegion(civID, region); _regions[region].SetPopulation(civID, population); }
+    public void SetPopulation(int region, float civID, float population) { AddCivilizationsRegion(civID, region); _regions[region].SetPopulation(civID, population); }
     public void SetTakenFood(int region, float value) => _regions[region].SetTakenFood(value);
     public void SetReserveFood(float civID, float value) => civilizations[civID].SetReserveFood(value);
     public void SetGovernmentObstacle(float civID, float value) => civilizations[civID].SetGovernmentObstacle(value);
-    public void SetPopulation(float civID, int _populationGrowth) {
+    public void SetPopulation(float civID, float _populationGrowth) {
         int countRegionsInCivilization = civilizations[civID].CountRegions;
         for (int j = 0; j < countRegionsInCivilization; ++j) {
             SetPopulation(GetRegionIndexFromCivilization(civID, j), civID, _populationGrowth / countRegionsInCivilization);
@@ -208,16 +208,16 @@ public class S_Map {
         civilizations[civID].AddParamiter(value);
     }
     
-    public int GetPopulations(int region) => _regions[region].GetAllPopulations();
-    public int GetPopulations(float civID) {
-        int res = 0;
+    public float GetPopulations(int region) => _regions[region].GetAllPopulations();
+    public float GetPopulations(float civID) {
+        float res = 0;
         for(int i = 0; i < civilizations[civID].CountRegions; ++i) {
             res += GetPopulation(civilizations[civID].GetRegion(i), civID);
         }
         return res;
     }
-    public int GetPopulations() {
-        int res = 0;
+    public float GetPopulations() {
+        float res = 0;
         for(int i = 0; i < _regions.Count; ++i) {
             res += _regions[i].GetAllPopulations();
         }
@@ -238,11 +238,11 @@ public class S_Map {
         return all;
     }
 
-    public int GetMaxPopulations(int region) => _regions[region].GetAllPopulations();
-    public int GetMaxPopulations() {
-        int max = -1;
+    public float GetMaxPopulations(int region) => _regions[region].GetAllPopulations();
+    public float GetMaxPopulations() {
+        float max = -1;
         for (int i = 0; i < _regions.Count; ++i) {
-            int value = _regions[i].GetAllPopulations();
+            float value = _regions[i].GetAllPopulations();
             if (max < value) {
                 max = value;
             }
@@ -251,12 +251,12 @@ public class S_Map {
     }
 
 
-    public float GetMaxPopulationsIndex(int region) => _regions[region].GetMaxPopulationsIndex();
+    public float GetMaxPopulationIndex(int region) => _regions[region].GetMaxPopulationsIndex();
     public int GetMaxPopulationsIndex() {
-        int max = -1;
+        float max = -1;
         int index = -1;
         for (int i = 0; i < _regions.Count; ++i) {
-            int value = _regions[i].GetAllPopulations();
+            float value = _regions[i].GetAllPopulations();
             if (max < value) {
                 max = value;
                 index = i;
