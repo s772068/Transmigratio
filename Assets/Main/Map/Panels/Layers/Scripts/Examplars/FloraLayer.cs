@@ -4,11 +4,11 @@ public struct FloraLayer : ILayer {
         int count = settings.Theme.CountEcologyDetails(layerIndex);
         for (int i = 0, detailIndex = 0; i < map.data.CountRegions; ++i) {
             float percent = map.data.GetRegion(i).GetEcologyParamiter(layerIndex).MaxDetail;
-            if(percent < 25) {
+            if (percent < 25) {
                 detailIndex = 0;
-            } else if(25 <= percent && percent <= 75) {
+            } else if (25 <= percent && percent <= 75) {
                 detailIndex = 1;
-            } else if(75 < percent) {
+            } else if (75 < percent) {
                 detailIndex = 2;
             }
             color = settings.Theme.GetEcologyColor(layerIndex, detailIndex);

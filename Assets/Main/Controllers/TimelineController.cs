@@ -11,7 +11,7 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     [SerializeField, Min(0)] private float updateDataInterval;
     [SerializeField, Min(0)] private float updateMigrationInterval;
     [SerializeField, Min(0)] private float updateYearInterval;
-    [SerializeField, Min(0)] private float intervalShowFactAboutEarth;
+    //[SerializeField, Min(0)] private float intervalShowFactAboutEarth;
     [SerializeField, Min(0)] private float endGame;
     [SerializeField, Min(0)] private int yearInterval;
     [SerializeField] private int startYear;
@@ -26,7 +26,7 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     private float timeToUpdateYear = 0;
     private float timeToUpdateData = 0;
     private float timeToUpdateMigration = 0;
-    private float timeToShowFactAboutEarth = 0;
+    //private float timeToShowFactAboutEarth = 0;
     private float timeToEndGame = 0;
 
     public Action<int> OnSelectRegion;
@@ -96,11 +96,11 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
             }
             timeToUpdateMigration += tick;
 
-            if (timeToShowFactAboutEarth > timeToShowFactAboutEarth % intervalShowFactAboutEarth) {
-                timeToShowFactAboutEarth %= intervalShowFactAboutEarth;
-                info.FactAboutEarth();
-            }
-            timeToShowFactAboutEarth += interval;
+            //if (timeToShowFactAboutEarth > timeToShowFactAboutEarth % intervalShowFactAboutEarth) {
+            //    timeToShowFactAboutEarth %= intervalShowFactAboutEarth;
+            //    info.FactAboutEarth();
+            //}
+            //timeToShowFactAboutEarth += interval;
 
             if (timeToEndGame > timeToEndGame % endGame) {
                 timeToEndGame %= endGame;

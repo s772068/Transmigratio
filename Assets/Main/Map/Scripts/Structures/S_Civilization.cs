@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -45,6 +44,7 @@ public class S_Civilization {
 
 
     public int GetCountParamiters() => _paramiters.Count;
+    private int GetCountRegions() => _regions.Count;
     public int GetCountDetails(int paramiter) => _paramiters[paramiter].GetCountDetails();
 
 
@@ -54,13 +54,24 @@ public class S_Civilization {
     public S_Paramiter GetParamiter(int index) => _paramiters[index];
     public float GetDetail(int paramiter, int detail) => _paramiters[paramiter].GetValue(detail);
 
-    //public void Copy(S_Civilization civilization) {
-    //    if (_paramiters == null) _paramiters = new();
-    //    for (int i = 0; i < civilization.GetCountParamiters(); ++i) {
-    //        if (i == _paramiters.Count) _paramiters.Add(new());
-    //        _paramiters[i].CopyTo(civilization.GetParamiter(i));
-    //    }
-    //}
+    public void Copy(S_Civilization civilization) {
+        _reserveFood = civilization._reserveFood;
+        _governmentObstacle = civilization.GetGovernmentObstacle();
+        if (_regions == null) _regions = new();
+        for (int i = 0; i < civilization.GetCountRegions(); ++i) {
+            if (i == _regions.Count) _regions.Add(new());
+            _regions[i] = civilization.GetRegion(i);
+        }
+        CopyParamiters(civilization);
+    }
+
+    public void CopyParamiters(S_Civilization civilization) {
+        if (_paramiters == null) _paramiters = new();
+        for (int i = 0; i < civilization.GetCountParamiters(); ++i) {
+            if (i == _paramiters.Count) _paramiters.Add(new());
+            _paramiters[i].CopyTo(civilization.GetParamiter(i));
+        }
+    }
 
     public void SetParamiter(int index, S_Paramiter value) => _paramiters[index] = value;
     public void SetDetail(int paramiter, int detail, float value) => _paramiters[paramiter].SetDetail(detail, value);

@@ -39,18 +39,20 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
         CreateMigration(from, to, civID);
     }
 
-    public void CreateMigration(int from, int to, float civID) {
-        if (!map.data.HasCivilization(to, civID)) {
-            map.data.CopyCivilization(to, from, civID);
-            map.data.SetPopulation(to, civID, 0);
+    public void CreateMigration(int from, int to, float fromCivID) {
+        if (!map.data.HasCivilization(to, fromCivID)) {
+            map.data.CopyCivilization(from, to, fromCivID);
+            //map.data.SetPopulation(to, civID, 0);
         }
 
-        int fromPop = map.data.GetPopulation(from, civID);
-        int toPop   = map.data.GetPopulation(to, civID);
+        float toCivID = fromCivID < 1 ? (to + 1) / 100f : fromCivID;
+        int fromPop = map.data.GetPopulation(from, fromCivID);
+        int toPop   = map.data.GetPopulation(to, toCivID);
         int step    = (int) GetParamStep(fromPop, toPop);
 
         MigrationData newMigration = new MigrationData {
-            CivID = civID,
+            FromCivID = fromCivID,
+            ToCivID = toCivID,
             Step = step,
             From = from,
             To = to
@@ -75,11 +77,11 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
             else migration.Percent += percentPerTick;
             OnUpdatePanel?.Invoke(migration.From, migration.Percent);
 
-            int populationFrom = map.data.GetPopulation(migration.From, migration.CivID);
-            int populationTo = map.data.GetPopulation(migration.To, migration.CivID);
+            int populationFrom = map.data.GetPopulation(migration.From, migration.FromCivID);
+            int populationTo = map.data.GetPopulation(migration.To, migration.ToCivID);
 
-            map.data.SetPopulation(migration.From, migration.CivID, populationFrom - migration.Step);
-            map.data.SetPopulation(migration.To,   migration.CivID, populationTo   + migration.Step);
+            map.data.SetPopulation(migration.From, migration.FromCivID, populationFrom - migration.Step);
+            map.data.SetPopulation(migration.To,   migration.ToCivID, populationTo   + migration.Step);
         }
     }
 
