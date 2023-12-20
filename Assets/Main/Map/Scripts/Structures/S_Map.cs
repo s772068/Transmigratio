@@ -1,20 +1,22 @@
+using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using AYellowpaper.SerializedCollections;
 using System.Linq;
+using System;
 
 [Serializable]
 public class S_Map {
     [SerializeField] private SerializedDictionary<float, S_Civilization> civilizations = new();
     [SerializeField] private List<S_Region> _regions = new();
 
+    public Action<float> OnUpgradeCivilization;
+
     #region Civilizations
     public int GetCountRegionsInCivilization(float civID) => civilizations[civID].CountRegions;
     public int CountCivilizations => civilizations.Count;
     public float[] GetArrayCivilizationsID() => civilizations.Keys.ToArray();
     public S_Civilization GetCivilization(int id) => civilizations[id];
-    public S_Civilization GetRandomCivilization() => civilizations.Values.ToArray()[civilizations.Count];
+    public S_Civilization GetRandomCivilization() => civilizations.Values.ToArray()[Randomizer.Random(civilizations.Count)];
     public bool GetRandomRegion(float civID, out int region) => civilizations[civID].GetRandomRegion(out region);
     public int GetCivilizationMaxIndex(float civID, int paramiter) => civilizations[civID].GetMaxIndex(paramiter);
     public void AddCivilizationsRegion(float civID, int region) {
@@ -171,6 +173,42 @@ public class S_Map {
     public float GetReserveFood(float civID) => civilizations[civID].GetReserveFood();
     public float GetGovernmentObstacle(float civID) => civilizations[civID].GetGovernmentObstacle();
 
+    public void UpgradeCivilization(float civID) {
+        if(civID < 1) {
+            if (!civilizations.ContainsKey(1)) {
+                S_Civilization civ = new();
+                civ.SetReserveFood(civilizations[civID].GetReserveFood());
+                civ.SetGovernmentObstacle(0.45f);
+                for(int i = 0; i < civilizations[civID].CountRegions; ++i) {
+                    civ.AddRegion(civilizations[civID].GetRegion(i));
+                }
+                civ.CopyParamiters(civilizations[civID]);
+                civ.SetDetail(1, 0, 0);
+                civ.SetDetail(1, 1, 100);
+
+                civ.SetDetail(2, 0, 0);
+                civ.SetDetail(2, 1, 100);
+
+                civilizations.Add(1f, civ);
+            } else {
+                civilizations[1].SetReserveFood(civilizations[civID].GetReserveFood());
+                civilizations[1].SetGovernmentObstacle(0.45f);
+                for (int i = 0; i < civilizations[civID].CountRegions; ++i) {
+                    civilizations[1].AddRegion(civilizations[civID].GetRegion(i));
+                }
+            }
+            civilizations.Remove(civID);
+            for (int i = 0; i < _regions.Count; ++i) {
+                if (_regions[i].HasCivilization(civID)) {
+                    _regions[i].SetCivilization(civID, 1);
+                }
+            }
+            OnUpgradeCivilization?.Invoke(civID);
+        } else {
+            // TODO: For CivId = 1 and more
+        }
+    }
+
     public void CopyCivilization(int from, int to, float civID) {
         if(civID < 1) {
             if(!civilizations.ContainsKey((to + 1) / 100f)) {
@@ -183,10 +221,8 @@ public class S_Map {
                 civilizations.Add((to + 1) / 100f, civ);
                 _regions[to].SetPopulation((to + 1) / 100f, 0);
             }
-            // civilizations[(to + 1) / 100f] = civ;.Copy(civilizations[civID]);
         } else {
-            if (!civilizations.ContainsKey(civID))
-                _regions[to].SetPopulation(civID, 0);
+            _regions[to].SetPopulation(civID, 0);
         }
     }
 

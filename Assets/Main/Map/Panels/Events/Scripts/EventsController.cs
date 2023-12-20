@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -7,14 +6,10 @@ public class EventsController : MonoBehaviour, IGameConnecter {
     [SerializeField] private GUIP_Event panel;
     [SerializeField, Min(0)] private float markerLiveTime;
 
-    private List<I_Event> events;
-    private Dictionary<int, List<int>> logs = new();
-
     private SettingsController settings;
     private TimelineController timeline;
     private GameController game;
     private WmskController wmsk;
-    private MapController map;
 
     public Action<I_Event> OnOpenPanel;
 
@@ -24,30 +19,23 @@ public class EventsController : MonoBehaviour, IGameConnecter {
             value.Get(out settings);
             value.Get(out timeline);
             value.Get(out wmsk);
-            value.Get(out map);
         }
     }
 
-    public void CreateHungryEvent() {
+    public void CheckHungry() {
         HungerEvent e = new HungerEvent();
         e.Game = game;
         if (!e.TryActivate()) return;
-        if (!e.Init()) return;
         if (!CreateMarker(e)) return;
-        if (!logs.ContainsKey(e.Region)) logs.Add(e.Region, new());
         notifications.AddEvent(e);
-        logs[e.Region].Add(e.Index);
     }
 
-    public void CreateVolcanoEvent() {
+    public void CreateVolcano() {
         VolcanoEvent e = new VolcanoEvent();
         e.Game = game;
         if (!e.TryActivate()) return;
-        if (!e.Init()) return;
         if (!CreateMarker(e)) return;
-        if (!logs.ContainsKey(e.Region)) logs.Add(e.Region, new());
         notifications.AddEvent(e);
-        logs[e.Region].Add(e.Index);
     }
 
     private bool CreateMarker(I_Event e) {
@@ -62,13 +50,13 @@ public class EventsController : MonoBehaviour, IGameConnecter {
     }
 
     public void Init() {
-        //timeline.OnUpdateData += CreateHungryEvent;
-        //timeline.OnCreateVolcano += CreateVolcanoEvent;
+        timeline.OnCheckHungry += CheckHungry;
+        timeline.OnCreateVolcano += CreateVolcano;
     }
 
     private void OnDestroy() {
-        //timeline.OnUpdateData -= CreateHungryEvent;
-        //timeline.OnCreateVolcano -= CreateVolcanoEvent;
+        timeline.OnCheckHungry -= CheckHungry;
+        timeline.OnCreateVolcano -= CreateVolcano;
     }
 }
 
@@ -77,7 +65,6 @@ public interface I_Event {
     GameController Game { set; }
     int CountResults{ get; }
     int Region { get; }
-    bool Init();
     bool CheckBuild(int i);
     bool TryActivate();
     bool Use(int result);

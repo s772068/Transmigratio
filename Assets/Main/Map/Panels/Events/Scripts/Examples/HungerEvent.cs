@@ -1,6 +1,9 @@
+using Unity.VisualScripting;
+using UnityEngine;
+
 public struct HungerEvent : I_Event {
     private const float MIGRATE_PERCENT = 10f;
-    private const int COST_INTERVENTION = 3;
+    private const int COST_INTERVENTION = 25;
 
     private MigrationController migration;
     private ResourcesController resources;
@@ -8,16 +11,24 @@ public struct HungerEvent : I_Event {
     private InfoController info;
     private MapController map;
 
-    private int region;
-    private float civID;
-    private int migrateRegion;
-    private int migratePopulation;
+    private int _region;
+    private float _civID;
+
+    private int _migrateRegion;
+    private int _migratePopulation;
+
+    private float _reserveFood;
+    private float _population;
+    private float _governmentObstacle;
+    private float _requestFood;
+    private float _givenFood;
+    private float _populationGrowth;
 
     public int Index => 1;
-    public int Region => region;
-    public float CivID => civID;
-    public int MigrateRegion => migrateRegion;
-    public int MigratePopulation => migratePopulation;
+    public int Region => _region;
+    public float CivID => _civID;
+    public int MigrateRegion => _migrateRegion;
+    public int MigratePopulation => _migratePopulation;
     public int CountResults => 3;
 
     public GameController Game {
@@ -30,23 +41,25 @@ public struct HungerEvent : I_Event {
         }
     }
 
-    public bool Init() {
-        return true;
-    }
-
     public bool TryActivate() {
         // Population > 0
         // RequestFood = _population / 150
         // RequestFood < ReserveFood
-        bool isBreak = false;
         for(int i = 0; i < map.data.CountRegions; ++i) {
             for(int j = 0; j < map.data.GetCountCivilizations(i); ++j) {
-                region = i;
-                civID = map.data.GetCivilizationID(region, j);
-                if(map.data.GetPopulation(region, civID) > 0 &&
-                    map.data.GetPopulation(region, civID) / 150 < map.data.GetReserveFood(civID)) { isBreak = true; break; }
+                _region = i;
+                _civID = map.data.GetCivilizationID(_region, j);
+                _reserveFood = map.data.GetReserveFood(_civID);
+                _population = map.data.GetPopulations(_civID);
+                _governmentObstacle = map.data.GetGovernmentObstacle(_civID);
+                _requestFood = _population / 150;
+                _givenFood = _reserveFood > _requestFood ? _requestFood : _reserveFood;
+                _populationGrowth = (int) (((_requestFood - _givenFood) == 0f ? _population : -_population) / 100 * _givenFood * _governmentObstacle);
+
+                if (_population > 0 && _populationGrowth < 0) {
+                    return true;
+                }
             }
-            if (isBreak) break;
         }
         return false;
     }
@@ -60,8 +73,8 @@ public struct HungerEvent : I_Event {
         };
 
     private bool CheckMigration() {
-        if (!map.data.GetRandomNeighbour(Region, out migrateRegion)) return false;
-        migratePopulation = (int) (map.data.GetRegion(migrateRegion).GetAllPopulations() * MIGRATE_PERCENT / 100f);
+        if (!map.data.GetRandomNeighbour(Region, out _migrateRegion)) return false;
+        _migratePopulation = (int) (map.data.GetRegion(_migrateRegion).GetAllPopulations() * MIGRATE_PERCENT / 100f);
         return true;
     }
 
@@ -75,21 +88,26 @@ public struct HungerEvent : I_Event {
 
     public bool Nothing() {
         // Ничего не делать
-        info.EventResult(settings.Localization.Events[0].Results[0].Info);
+        info.EventResult(settings.Localization.Events[Index].Results[0].Info);
         return true;
     }
 
     public bool Migration() {
         // Миграция в регион с большей фауной
-        info.EventResult(settings.Localization.Events[0].Results[1].Info);
-        float civID = map.data.GetMaxPopulationIndex(Region);
-        migration.CreateMigration(region, MigrateRegion, civID);
+        if (migration.HasMigration(Region)) {
+            migration.AmplifyMigration(Region);
+            info.EventResult(settings.Localization.Events[Index].Results[1].Info);
+        } else {
+            migration.CreateMigration();
+            info.EventResult(settings.Localization.Events[Index].Results[1].Info);
+        }
         return true;
     }
 
     public bool Intervene() {
         // +100 к ReserveFood
-        info.EventResult(settings.Localization.Events[0].Results[0].Info);
+        map.data.SetReserveFood(_civID, map.data.GetReserveFood(_civID) + 100);
+        info.EventResult(settings.Localization.Events[Index].Results[2].Info);
         resources.intervention += COST_INTERVENTION;
         // Realise volcanoes action
         return true;

@@ -5,6 +5,7 @@
 // 3: Fauna
 
 using AYellowpaper.SerializedCollections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -90,15 +91,7 @@ public class S_Region {
     #region Civilizations
     public int GetCountCivilizations() => _civilizations.Count;
     public float GetCivilizationID(int index) => _civilizations.Keys.ToArray()[index];
-    
-
-    public float[] GetArrayPopulations() {
-        float[] arr = new float[_civilizations.Count];
-        for (int i = 0; i < arr.Length; ++i) {
-            arr[i] = GetPopulation(i);
-        }
-        return arr;
-    }
+    public float[] GetArrayPopulations() => _civilizations.Values.ToArray();
 
 
     public bool HasCivilization(float civID) => _civilizations.ContainsKey(civID);
@@ -123,6 +116,11 @@ public class S_Region {
     }
 
 
+
+    public void SetCivilization(float oldCivID, float  newCivID) {
+        _civilizations.Add(newCivID, _civilizations[oldCivID]);
+        _civilizations.Remove(oldCivID);
+    }
     public void SetPopulation(float civID, float value) {
         if (_civilizations == null) _civilizations = new();
         if (!_civilizations.ContainsKey(civID))

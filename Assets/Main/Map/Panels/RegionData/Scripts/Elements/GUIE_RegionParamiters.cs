@@ -88,8 +88,7 @@ public class GUIE_RegionParamiters : MonoBehaviour {
 
     private void UpdateCivilization(int _paramiterIndex) {
         float currentCivID = civID < 0 ?
-            Map.data.GetCivilizationMaxIndex(regionIndex, _paramiterIndex) :
-            civID;
+            Map.data.GetCivilizationMaxIndex(regionIndex, _paramiterIndex) : civID;
         if (_paramiterIndex < Map.data.GetCountCivilizationParamiters(currentCivID)) {
             int maxValueIndex = Map.data.GetCivilizationMaxIndex(currentCivID, _paramiterIndex);
             civilizationGroup.SetParamiterValue(_paramiterIndex + 1,

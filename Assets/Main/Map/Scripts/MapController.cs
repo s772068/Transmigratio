@@ -7,10 +7,12 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
     private TimelineController timeline;
 
     public Action OnUpdate;
+    public Action<float> OnUpgradeCivilization;
 
     private IUpdater[] updaters = {
         new MU_FoodAppropriated(),
-        new MU_PopulationGrowth()
+        new MU_PopulationGrowth(),
+        new MU_UpgradeCivilization()
     };
 
     public GameController GameController {
@@ -86,6 +88,7 @@ public class MapController : MonoBehaviour, ISave, IGameConnecter {
         //InitEcology();
         timeline.OnUpdateData += UpdateParams;
         timeline.OnSelectRegion += EmergenceFirstCivilization;
+        data.OnUpgradeCivilization += (float civID) => OnUpgradeCivilization?.Invoke(civID);
     }
 
     private void OnDestroy() {

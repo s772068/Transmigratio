@@ -41,7 +41,7 @@ public class GUI_ShortRegionInfo : MonoBehaviour, IGameConnecter {
             settings.Localization.Map.Civilization.Population + "\n" +
             (map.data.GetRegion(_regionIndex).GetAllPopulations() == 0 ?
             settings.Localization.Map.Civilization.EmptyPopulation :
-            map.data.GetRegion(_regionIndex).GetAllPopulations());
+            (int) map.data.GetRegion(_regionIndex).GetAllPopulations());
 
         //eventName.text = _regionIndex == -1 ?
         //    "" : map.data.Regions[_regionIndex].Events.Count > 0 ?

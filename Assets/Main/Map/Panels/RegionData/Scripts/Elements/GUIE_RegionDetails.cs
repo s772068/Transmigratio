@@ -26,13 +26,18 @@ public class GUIE_RegionDetails : MonoBehaviour {
 
     public SettingsController Settings { private get; set; }
     public MapController Map { private get; set; }
-    
-    private float[] CivilizationValues =>
-        civID < 0 ?
-            paramiterIndex == Settings.Localization.Map.Civilization.Paramiters.Length - 1 ?
-                Map.data.GetArrayPopulations(regionIndex) :
-                Map.data.GetCivilizationDetailsByRegion(regionIndex, paramiterIndex) :
-            Map.data.GetCivilizationDetails(regionIndex, civID, paramiterIndex);
+
+    private float[] CivilizationValues() {
+        if (civID < 0) {
+            if (paramiterIndex == Settings.Localization.Map.Civilization.Paramiters.Length - 1) {
+                return Map.data.GetArrayPopulations(regionIndex);
+            } else {
+                return Map.data.GetCivilizationDetailsByRegion(regionIndex, paramiterIndex);
+            }
+        } else {
+            return Map.data.GetCivilizationDetails(regionIndex, civID, paramiterIndex);
+        }
+    }
 
     public void Initialization() {
         Clear();
@@ -72,7 +77,7 @@ public class GUIE_RegionDetails : MonoBehaviour {
     private void InitCivilization() {
         SL_Paramiter<SL_Detail[]> paramitersStrings = Settings.Localization.Map.Civilization.Paramiters[paramiterIndex];
         paramiterLabel.text = paramitersStrings.Name;
-        values = CivilizationValues;
+        values = CivilizationValues();
         for (int i = 0; i < values.Length; ++i) {
             AddLegend(Settings.Theme.GetCivilizationColor(paramiterIndex + 1, i),
                       Settings.Localization.Map.Civilization.Paramiters[paramiterIndex].Value[i].Name,
@@ -95,7 +100,7 @@ public class GUIE_RegionDetails : MonoBehaviour {
     }
 
     public void UpdateDetails() {
-        values = groupIndex == 1 ? CivilizationValues :
+        values = groupIndex == 1 ? CivilizationValues() :
             Map.data.GetRegion(regionIndex).GetEcologyDetails(paramiterIndex);
         allValues = 0;
         for (int i = 0; i < values.Length; ++i) {

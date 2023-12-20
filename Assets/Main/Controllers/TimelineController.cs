@@ -8,6 +8,7 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     [SerializeField, Min(1)] private float accelerator;
     [SerializeField, Min(0)] private float tick;
     [SerializeField, Min(0)] private float volcanoInterval;
+    [SerializeField, Min(0)] private float checkHungryInterval;
     [SerializeField, Min(0)] private float updateDataInterval;
     [SerializeField, Min(0)] private float updateMigrationInterval;
     [SerializeField, Min(0)] private float updateYearInterval;
@@ -23,6 +24,7 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     private float interval;
     private bool isTick;
     private float timeToVolcano = 0;
+    private float timeToCheckHungry = 0;
     private float timeToUpdateYear = 0;
     private float timeToUpdateData = 0;
     private float timeToUpdateMigration = 0;
@@ -32,6 +34,7 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     public Action<int> OnSelectRegion;
     public Action OnUpdateData;
     public Action OnCreateVolcano;
+    public Action OnCheckHungry;
     public Action OnCreateEvent;
     public Action OnUpdateYear;
 
@@ -69,6 +72,18 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
             
             yield return new WaitForSeconds(interval);
 
+            if (timeToUpdateData > timeToUpdateData % updateDataInterval) {
+                timeToUpdateData %= updateDataInterval;
+                OnUpdateData?.Invoke();
+            }
+            timeToUpdateData += tick;
+
+            if (timeToCheckHungry > timeToCheckHungry % checkHungryInterval) {
+                timeToCheckHungry %= checkHungryInterval;
+                OnCheckHungry?.Invoke();
+            }
+            timeToCheckHungry += tick;
+
             if (timeToVolcano > timeToVolcano % volcanoInterval) {
                 timeToVolcano %= volcanoInterval;
                 OnCreateVolcano?.Invoke();
@@ -80,12 +95,6 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
                 timeToUpdateYear %= updateYearInterval;
                 UpdateYear();
             }
-
-            if (timeToUpdateData > timeToUpdateData % updateDataInterval) {
-                timeToUpdateData %= updateDataInterval;
-                OnUpdateData?.Invoke();
-            }
-            timeToUpdateData += tick;
 
             //if (timeToShowFactAboutEarth > timeToShowFactAboutEarth % intervalShowFactAboutEarth) {
             //    timeToShowFactAboutEarth %= intervalShowFactAboutEarth;

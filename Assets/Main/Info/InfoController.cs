@@ -5,22 +5,27 @@ public class InfoController : MonoBehaviour, IGameConnecter {
 
     private TimelineController timeline;
     private SettingsController settings;
+    private MapController map;
     private GUIP_Region region;
 
     private bool isShowFactAboutEarth;
+    private bool isUpgradeCivilization;
     
     public GameController GameController {
         set {
             value.Get(out timeline);
             value.Get(out settings);
             value.Get(out region);
+            value.Get(out map);
         }
     }
 
     public void Init() {
         timeline.OnSelectRegion += SelectRegion;
         panel.OnOpen += timeline.Pouse;
+        map.OnUpgradeCivilization += UpgradeCivilization;
         isShowFactAboutEarth = true;
+        isUpgradeCivilization = true;
         StartGame();
     }
 
@@ -69,8 +74,18 @@ public class InfoController : MonoBehaviour, IGameConnecter {
         timeline.Pouse();
     }
 
+    public void UpgradeCivilization(float civID) {
+        if (!isUpgradeCivilization) return;
+        string format = settings.Localization.Info.Value[5].Value;
+        panel.Info = string.Format(format, settings.Localization.Map.Countries.Value[(int)(civID * 100)]);
+        panel.Open();
+        panel.OnClose = timeline.TurnPlay;
+        timeline.Pouse();
+        isUpgradeCivilization = false;
+    }
+
     public void EndGame() {
-        panel.Info = settings.Localization.Info.Value[5].Value;
+        panel.Info = settings.Localization.Info.Value[6].Value;
         panel.Open();
         panel.OnClose = timeline.Pouse;
         panel.OnClose += settings.Exit;

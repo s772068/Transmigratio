@@ -30,7 +30,7 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
         }
     }
 
-    private void CreateMigration() {
+    public void CreateMigration() {
         float[] civArr = map.data.GetArrayCivilizationsID();
         
         int from = 0;
@@ -100,7 +100,9 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
         for (int i = 0; migrations.Count > 0 && i < migrations.Count; ++i) {
             MigrationData migration = migrations.Values.ToArray()[i];
 
-            if (migration.Percent + percentPerTick > 100) {
+            if (migration.Percent + percentPerTick > 100 ||
+                !map.data.HasCivilization(migration.From, migration.FromCivID) ||
+                !map.data.HasCivilization(migration.To, migration.ToCivID)) {
                 DestroyMigration(migration.From);
                 continue;
             }
@@ -114,6 +116,8 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
             map.data.SetPopulation(migration.To,   migration.ToCivID, populationTo   + migration.Step);
         }
     }
+
+    public bool HasMigration(int regionIndex) => migrations.ContainsKey(regionIndex);
 
     public void DestroyMigration(int from) {
         OnClosePanel?.Invoke(from);

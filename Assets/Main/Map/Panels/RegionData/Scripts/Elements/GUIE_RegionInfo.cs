@@ -20,13 +20,13 @@ public class GUIE_RegionInfo : MonoBehaviour {
         if (!infoTxt.gameObject.activeSelf) infoTxt.gameObject.SetActive(true);
         switch (groupIndex) {
             case 0:
-                infoImg.sprite = Settings.Theme.GetEcologySprite(paramiterIndex, detailIndex);
+                // infoImg.sprite = Settings.Theme.GetEcologySprite(paramiterIndex, detailIndex);
                 infoTxt.text = detailIndex < 0 ?
                     Settings.Localization.Map.Ecology.Value[paramiterIndex].Description :
                     Settings.Localization.Map.Ecology.Value[paramiterIndex].Value[detailIndex].Description;
                 break;
             case 1:
-                infoImg.sprite = Settings.Theme.GetCivilizationSprite(paramiterIndex, detailIndex);
+                // infoImg.sprite = Settings.Theme.GetCivilizationSprite(paramiterIndex, detailIndex);
                 infoTxt.text = detailIndex < 0 ?
                     Settings.Localization.Map.Civilization.Paramiters[paramiterIndex].Description :
                     infoTxt.text = Settings.Localization.Map.Civilization.Paramiters[paramiterIndex].Value[detailIndex].Description;
