@@ -15,6 +15,7 @@ public class WmskController : MonoBehaviour, IGameConnecter {
     private WMSK wmsk;
 
     private int selectedIndex = -1;
+    private bool isDraging;
     //private List<S_LineMigration> lineMigrations = new();
 
     public Action<int> OnClick;
@@ -84,6 +85,7 @@ public class WmskController : MonoBehaviour, IGameConnecter {
     }
 
     private void ClickMap(float x, float y, int buttonIndex) {
+        if (isDraging) return;
         int index = wmsk.GetCountryIndex(new Vector2(x, y));
         if (index < 0 || index > wmsk.countries.Length - 1) return;
 
@@ -134,8 +136,10 @@ public class WmskController : MonoBehaviour, IGameConnecter {
 
     public void Init() {
         wmsk = WMSK.instance;
-        wmsk.OnClick += ClickMap;
+        wmsk.OnMouseRelease += ClickMap;
         wmsk.OnMarkerMouseDown += ClickMarker;
+        wmsk.OnDragStart += () => isDraging = true;
+        wmsk.OnDragEnd += () => isDraging = false;
         
         // For havn't friezes at first change colors
         for (int i = 0; i < wmsk.countries.Length; ++i) {
