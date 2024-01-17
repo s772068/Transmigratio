@@ -10,7 +10,7 @@ public struct MU_PopulationGrowth : IUpdater {
     private float _givenFood;
     private float _governmentObstacle;
 
-    public void Update(S_Map map) {
+    public void Update(Map map) {
         for (int i = 0; i < map.CountCivilizations; ++i) {
             _civID = map.GetArrayCivilizationsID()[i];
             _governmentObstacle = map.GetGovernmentObstacle(_civID);

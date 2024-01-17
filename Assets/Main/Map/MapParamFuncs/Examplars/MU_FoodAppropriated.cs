@@ -23,17 +23,17 @@ public struct MU_FoodAppropriated : IUpdater {
     private float _farmersProportion;
     private float _huntersProportion;
 
-    public void Update(S_Map map) {
+    public void Update(Map map) {
         _PCProdModeK = 0.6f; //константа 
         _slaveryProdModeK = 0.7f; //константа
         for (_regionIndex = 0; _regionIndex < map.CountRegions; ++_regionIndex) {
             _population = map.GetPopulations(_regionIndex);
             if (_population == 0) continue;
 
-            _pc      = map.GetCivilizationAllParamtier(_regionIndex, 0, 0);
-            _slavery = map.GetCivilizationAllParamtier(_regionIndex, 0, 1);
-            _hunters = map.GetCivilizationAllParamtier(_regionIndex, 1, 0);
-            _farmers = map.GetCivilizationAllParamtier(_regionIndex, 1, 1);
+            //_pc      = map.GetCivilizationAllParamtier(_regionIndex, 0, 0);
+            //_slavery = map.GetCivilizationAllParamtier(_regionIndex, 0, 1);
+            //_hunters = map.GetCivilizationAllParamtier(_regionIndex, 1, 0);
+            //_farmers = map.GetCivilizationAllParamtier(_regionIndex, 1, 1);
 
             _PCProportion      = _pc.Proportion(_slavery);
             _slaveryPropotion  = _slavery.Proportion(_pc);
@@ -44,20 +44,20 @@ public struct MU_FoodAppropriated : IUpdater {
 
             map.SetTakenFood(_regionIndex, _takenFood);
 
-            map.SetEcologyDetail(_regionIndex, 2, 0,
-                _flora -
-                _takenFood * _farmersProportion / 10);
-            map.SetEcologyDetail(_regionIndex, 3, 0,
-                _fauna -
-                _takenFood * _huntersProportion / 10);
+            //map.SetEcologyDetail(_regionIndex, 2, 0,
+            //    _flora -
+            //    _takenFood * _farmersProportion / 10);
+            //map.SetEcologyDetail(_regionIndex, 3, 0,
+            //    _fauna -
+            //    _takenFood * _huntersProportion / 10);
 
             // Update(map.GetRegion(_regionIndex));
         }
     }
 
-    public float GetTakenFood(S_Region region) {
-        _flora = region.GetEcologyDetail(2, 0);
-        _fauna = region.GetEcologyDetail(3, 0);
+    public float GetTakenFood(Region region) {
+        //_flora = region.GetEcologyDetail(2, 0);
+        //_fauna = region.GetEcologyDetail(3, 0);
 
         // if (_regionIndex == 0) Debug.Log("Fauna: " + _fauna);
 

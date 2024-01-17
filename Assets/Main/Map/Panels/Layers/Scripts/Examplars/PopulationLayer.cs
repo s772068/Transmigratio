@@ -21,7 +21,7 @@ public struct PopulationLayer : ILayer {
             color = settings.Theme.GetCivilizationColor(0, detailIndex);
             color.a = percent / 100;
             Debug.Log($"Color: {color}");
-            map.data.GetRegion(i).SetColor(color);
+            map.data.GetRegion(i).Color = color;
             wmsk.RegionPainting(i, color);
         }
     }

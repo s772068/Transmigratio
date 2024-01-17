@@ -1,3 +1,3 @@
 public interface IUpdater {
-    public void Update(S_Map map);
+    public void Update(Map map);
 }

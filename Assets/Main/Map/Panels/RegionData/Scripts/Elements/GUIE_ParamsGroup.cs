@@ -1,38 +1,36 @@
+using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GUIE_ParamsGroup : MonoBehaviour {
-    [SerializeField] private GUIE_Paramiter[] paramiters;
+    [SerializeField] private GUIE_NumParamiter numParamiterPrefab;
+    [SerializeField] private GUIE_StringParamiter stringParamiterPrefab;
+    
+    private List<GUIE_BaseParamiter> paramiters = new();
+    private string _name;
 
-    public int CountParamiters => paramiters.Length;
+    public Action<string, string> OnClick;
+    public string Name { private get; set; }
 
-    public void SetParamiterPictogram(int index, Sprite sprite) {
-        Show(index, true);
-        paramiters[index].Pictogram = sprite;
+    public void Click(string paramiterName) => OnClick?.Invoke(Name, paramiterName);
+    
+    public void AddNumParamiter(Paramiter paramiter, bool isShowLabel, bool useProgressBar) {
+        GUIE_NumParamiter element = Instantiate(numParamiterPrefab, transform);
+        element.Build(paramiter, isShowLabel, useProgressBar);
+        element.OnClick += Click;
+        paramiters.Add(element);
     }
-    public void SetParamiterMetric(int index, string value) {
-        Show(index, true);
-        paramiters[index].Metric = value;
+
+    public void AddStringParamiter(Paramiter paramiter, bool isShowLabel) {
+        GUIE_StringParamiter element = Instantiate(stringParamiterPrefab, transform);
+        element.Build(paramiter, isShowLabel);
+        element.OnClick += Click;
+        paramiters.Add(element);
     }
-    public void SetParamiterMinValue(int index, float value) {
-        Show(index, true);
-        paramiters[index].MinValue = value;
+
+    public void ClearParamiters() {
+        for (int i = 0; i < paramiters.Count; ++i)
+            paramiters[i].DestroyGO();
+        paramiters.Clear();
     }
-    public void SetParamiterMaxValue(int index, float value) {
-        Show(index, true);
-        paramiters[index].MaxValue = value;
-    }
-    public void SetParamiterColor(int index, Color value) {
-        Show(index, true);
-        paramiters[index].Color = value;
-    }
-    public void SetParamiterValue(int index, string value) {
-        Show(index, true);
-        paramiters[index].SetValue(value);
-    }
-    public void SetParamiterValue(int index, int value) {
-        Show(index, true);
-        paramiters[index].SetValue(value);
-    }
-    public void Show(bool isShow) => gameObject.SetActive(isShow);
-    public void Show(int index, bool isShow) => paramiters[index].gameObject.SetActive(isShow);
 }

@@ -63,8 +63,8 @@ public struct VolcanoEvent : I_Event {
     private bool Activate() {
         // (Населиние && Флора && Фауна) / 2
         Debug.Log("Activate");
-        map.data.SetEcologyDetail(Region, 2, 0, map.data.GetEcologyDetail(Region, 2, 0) / 2);
-        map.data.SetEcologyDetail(Region, 3, 0, map.data.GetEcologyDetail(Region, 3, 0) / 2);
+        //map.data.SetEcologyDetail(Region, 2, 0, map.data.GetEcologyDetail(Region, 2, 0) / 2);
+        //map.data.SetEcologyDetail(Region, 3, 0, map.data.GetEcologyDetail(Region, 3, 0) / 2);
         for(int i = 0; i < map.data.GetCountCivilizations(Region); ++i) {
             float civID = map.data.GetCivilizationID(Region, 0);
             map.data.SetPopulation(Region, civID, map.data.GetPopulations(region) / 2);
@@ -90,8 +90,8 @@ public struct VolcanoEvent : I_Event {
     private bool Intervene() {
         Debug.Log("Intervene");
         // (Флора && Фауна) / 2
-        map.data.SetEcologyDetail(Region, 2, 0, map.data.GetEcologyDetail(Region, 2, 0) / 2);
-        map.data.SetEcologyDetail(Region, 3, 0, map.data.GetEcologyDetail(Region, 3, 0) / 2);
+        //map.data.SetEcologyDetail(Region, 2, 0, map.data.GetEcologyDetail(Region, 2, 0) / 2);
+        //map.data.SetEcologyDetail(Region, 3, 0, map.data.GetEcologyDetail(Region, 3, 0) / 2);
         info.EventResult(settings.Localization.Events[Index].Results[2].Info);
         resources.intervention += COST_INTERVENTION;
         // Realise volcanoes action

@@ -41,147 +41,148 @@ public class GUIP_Region : MonoBehaviour, IGameConnecter {
     }
 
     public void Open() {
-        if (!gameObject.activeSelf) {
-            gameObject.SetActive(true);
-            if (isShowLearnInfo) {
-                isShowLearnInfo = false;
-                learnInfo.RegionInfo();
-            }
-            state = 0;
-        }
-        else state = 1;
-        Initialization();
+        //if (!gameObject.activeSelf) {
+        //    gameObject.SetActive(true);
+        //    if (isShowLearnInfo) {
+        //        isShowLearnInfo = false;
+        //        learnInfo.RegionInfo();
+        //    }
+        //    state = 0;
+        //}
+        //else state = 1;
+        //Initialization();
+        //paramiters.ShowEcology();
     }
 
     public void Close() {
-        details.Clear();
-        info.Clear();
+        //details.Clear();
+        //info.Clear();
 
-        map.OnUpdate -= paramiters.UpdateEcology;
-        map.OnUpdate -= paramiters.UpdateCivilization;
-        map.OnUpdate -= details.UpdateDetails;
-        paramiters.OnClickParamiter -= InitDetails;
-        paramiters.OnClickParamiter -= UpdateParamiterInfo;
-        details.OnClickDetail -= UpdateDetailInfo;
-        info.OnClickButton -= Open;
+        //map.OnUpdate -= paramiters.UpdateEcology;
+        //map.OnUpdate -= paramiters.UpdateCivilization;
+        //map.OnUpdate -= details.UpdateDetails;
+        //paramiters.OnClickParamiter -= InitDetails;
+        //paramiters.OnClickParamiter -= UpdateParamiterInfo;
+        //details.OnClickDetail -= UpdateDetailInfo;
+        //info.OnClickButton -= Open;
 
-        --state;
-        if (state >= 0) Initialization();
-        else {
-            viewGroupIndex = -1;
-            gameObject.SetActive(false);
-        }
+        //--state;
+        //if (state >= 0) Initialization();
+        //else {
+        //    viewGroupIndex = -1;
+        //    gameObject.SetActive(false);
+        //}
     }
 
     public void ShowEcology() {
-        if (viewGroupIndex != 0) {
-            viewGroupIndex = 0;
-            UpdateEcology();
-        }
+        //if (viewGroupIndex != 0) {
+        //    viewGroupIndex = 0;
+        //    UpdateEcology();
+        //}
     }
 
     public void ShowCivilization() {
-        if (viewGroupIndex != 1) {
-            viewGroupIndex = 1;
-            UpdateCivilization();
-        }
+        //if (viewGroupIndex != 1) {
+        //    viewGroupIndex = 1;
+        //    UpdateCivilization();
+        //}
     }
 
     private void Clear() {
-        details.Clear();
-        info.Clear();
+        //details.Clear();
+        //info.Clear();
 
-        map.OnUpdate -= paramiters.UpdateEcology;
-        map.OnUpdate -= paramiters.UpdateCivilization;
-        map.OnUpdate -= details.UpdateDetails;
-        paramiters.OnClickParamiter -= InitDetails;
-        paramiters.OnClickParamiter -= UpdateParamiterInfo;
-        details.OnClickDetail -= UpdateDetailInfo;
-        info.OnClickButton -= Open;
+        //map.OnUpdate -= paramiters.UpdateEcology;
+        //map.OnUpdate -= paramiters.UpdateCivilization;
+        //map.OnUpdate -= details.UpdateDetails;
+        //paramiters.OnClickParamiter -= InitDetails;
+        //paramiters.OnClickParamiter -= UpdateParamiterInfo;
+        //details.OnClickDetail -= UpdateDetailInfo;
+        //info.OnClickButton -= Open;
     }
 
     private void Initialization() {
-        Clear();
+        //Clear();
 
-        paramiters.regionIndex = wmsk.SelectedIndex;
-        paramiters.State = state;
+        //paramiters.regionIndex = wmsk.SelectedIndex;
+        //paramiters.State = state;
 
-        paramiters.OnClickParamiter += InitDetails;
-        paramiters.OnClickParamiter += UpdateParamiterInfo;
-        details.OnClickDetail += UpdateDetailInfo;
+        //paramiters.OnClickParamiter += InitDetails;
+        //paramiters.OnClickParamiter += UpdateParamiterInfo;
+        //details.OnClickDetail += UpdateDetailInfo;
 
-        Localization();
+        //Localization();
 
-        switch (state) {
-            case 0: InitializationRegionState(); break;
-            case 1: InitializationCivilizationState(); break;
-        }
+        //switch (state) {
+        //    case 0: InitializationRegionState(); break;
+        //    case 1: InitializationCivilizationState(); break;
+        //}
     }
 
     private void InitializationRegionState() {
-        paramiters.civID = -1;
-        details.civID = -1;
+        //paramiters.civID = -1;
+        //details.civID = -1;
 
-        groupButtons.SetActiveFlexalon(true);
-        paramiters.ShowPortrait(false);
+        //groupButtons.SetActiveFlexalon(true);
+        //paramiters.ShowPortrait(false);
 
-        info.OnClickButton += Open;
+        //info.OnClickButton += Open;
 
-        ShowEcology();
+        //ShowEcology();
     }
 
     private void InitializationCivilizationState() {
-        float civID = info.detailIndex > -1 ?
-            info.detailIndex : map.data.GetMaxPopulationIndex(paramiters.regionIndex);
-        paramiters.civID = civID;
-        details.civID = civID;
+        //float civID = info.detailIndex > -1 ?
+        //    info.detailIndex : map.data.GetMaxPopulationIndex(paramiters.regionIndex);
+        //paramiters.civID = civID;
+        //details.civID = civID;
 
-        groupButtons.SetActiveFlexalon(false);
-        paramiters.ShowPortrait(true);
+        //groupButtons.SetActiveFlexalon(false);
+        //paramiters.ShowPortrait(true);
 
-        UpdateCivilization();
+        //UpdateCivilization();
     }
 
     private void Localization() {
-        paramiters.LocalizationName();
-        EcologyBtnTxt.text = settings.Localization.Map.Ecology.Name;
-        CivilizationBtnTxt.text = settings.Localization.Map.Civilization.Name;
+        //paramiters.LocalizationName();
+        //EcologyBtnTxt.text = settings.Localization.Map.Ecology.Name;
+        //CivilizationBtnTxt.text = settings.Localization.Map.Civilization.Name;
     }
 
     private void InitDetails() {
-        map.OnUpdate -= details.UpdateDetails;
-        map.OnUpdate += details.UpdateDetails;
-        details.regionIndex = paramiters.regionIndex;
-        details.groupIndex = paramiters.groupIndex;
-        details.paramiterIndex = paramiters.paramiterIndex;
-        details.Initialization();
+        //map.OnUpdate -= details.UpdateDetails;
+        //map.OnUpdate += details.UpdateDetails;
+        //details.regionIndex = paramiters.regionIndex;
+        //details.groupIndex = paramiters.groupIndex;
+        //details.paramiterIndex = paramiters.paramiterIndex;
+        //details.Initialization();
     }
 
-    private void UpdateParamiterInfo() {
-        info.groupIndex = paramiters.groupIndex;
-        info.paramiterIndex = paramiters.paramiterIndex;
-        info.detailIndex = -1;
-        info.UpdateInfo();
-    }
+    //private void UpdateParamiterInfo() {
+    //    //info.groupIndex = paramiters.groupIndex;
+    //    //info.paramiterIndex = paramiters.paramiterIndex;
+    //    //info.detailIndex = -1;
+    //    //info.UpdateInfo();
+    //}
 
-    private void UpdateDetailInfo() {
-        info.detailIndex = details.detailIndex;
-        info.UpdateInfo();
-    }
+    //private void UpdateDetailInfo() {
+    //    //info.detailIndex = details.detailIndex;
+    //    //info.UpdateInfo();
+    //}
 
-    private void UpdateCivilization() {
-        map.OnUpdate -= paramiters.UpdateEcology;
-        map.OnUpdate += paramiters.UpdateCivilization;
-        paramiters.ShowCivilization();
-    }
+    //private void UpdateCivilization() {
+    //    //map.OnUpdate -= paramiters.UpdateEcology;
+    //    //map.OnUpdate += paramiters.UpdateCivilization;
+    //    //paramiters.ShowCivilization();
+    //}
 
-    private void UpdateEcology() {
-        map.OnUpdate -= paramiters.UpdateCivilization;
-        map.OnUpdate += paramiters.UpdateEcology;
-        paramiters.ShowEcology();
-    }
+    //private void UpdateEcology() {
+    //    //map.OnUpdate -= paramiters.UpdateCivilization;
+    //    //map.OnUpdate += paramiters.UpdateEcology;
+    //    //paramiters.ShowEcology();
+    //}
 
     public void Init() {
-        isShowLearnInfo = true;
+        //isShowLearnInfo = true;
     }
 }

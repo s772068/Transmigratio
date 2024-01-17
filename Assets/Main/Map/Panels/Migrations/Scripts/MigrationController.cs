@@ -47,14 +47,14 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
                 if (migrations.ContainsKey(from)) continue;
                 for(int k = 0; k < map.data.GetCountNeighbours(from); ++k) {
                     to = map.data.GetNeighbour(from, k);
-                    if(map.data.GetEcologyDetail(from, 3, 0) < map.data.GetEcologyDetail(to, 3, 0) &&
-                        map.data.GetPopulations(from) >= minPopulationToMigration &&
-                        map.data.GetPopulations(to) <= minPopulationToMigration &&
-                        !migrations.ContainsKey(to)) {
-                        if(!civs      .ContainsKey(from)) civs.Add(from, civID);
-                        if (!neighbours.ContainsKey(from)) neighbours.Add(from, new());
-                        neighbours[from].Add(to);
-                    }
+                    //if(map.data.GetEcologyDetail(from, 3, 0) < map.data.GetEcologyDetail(to, 3, 0) &&
+                    //    map.data.GetPopulations(from) >= minPopulationToMigration &&
+                    //    map.data.GetPopulations(to) <= minPopulationToMigration &&
+                    //    !migrations.ContainsKey(to)) {
+                    //    if(!civs      .ContainsKey(from)) civs.Add(from, civID);
+                    //    if (!neighbours.ContainsKey(from)) neighbours.Add(from, new());
+                    //    neighbours[from].Add(to);
+                    //}
                 }
             }
         }
@@ -70,7 +70,7 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
 
     public void CreateMigration(int from, int to, float fromCivID) {
         if (!map.data.HasCivilization(to, fromCivID)) {
-            map.data.CopyCivilization(from, to, fromCivID);
+            //map.data.CopyCivilization(from, to, fromCivID);
             //map.data.SetPopulation(to, civID, 0);
         }
 
