@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using WorldMapStrategyKit;
 
 public class MigrationController : MonoBehaviour, IGameConnecter {
     [SerializeField] GameObject startLine;
@@ -15,7 +16,7 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
     private Dictionary<int, MigrationData> migrations = new();
 
     private TimelineController timeline;
-    private WmskController wmsk;
+    private WmskController wmskController;
     private MapController map;
 
     public Action<int, int, int> OnOpenPanel;
@@ -25,7 +26,7 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
     public GameController GameController {
         set {
             value.Get(out timeline);
-            value.Get(out wmsk);
+            value.Get(out wmskController);
             value.Get(out map);
         }
     }
@@ -93,7 +94,7 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
 
         migrations.Add(from, newMigration);
 
-        CreateLine(newMigration);
+        MigrationLine(newMigration);
     }
 
     private void UpdateMigration() {
@@ -143,13 +144,32 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
             (migrations[from].Step / percentPerTick * (100 - migrations[from].Percent)));
         DestroyMigration(from);
     }
+    public void MigrationLine(MigrationData data) //создаём линию миграции и иконку над ней на карте
+    {
+        wmskController.GetRegionPosition(data.From, out Vector2 start); //получаем начало и конец для линии
+        wmskController.GetRegionPosition(data.To, out Vector2 end);
+        data.Line = wmskController.CreateLine(start, end);
 
+        Vector2 markerPosition = (start + end) / 2;
+
+        //markerPosition.y += markerSprite.rect.height / 2;
+        markerPosition.y += 0.05f;
+        Debug.Log("markerPosition= " + markerPosition);
+        data.Marker = wmskController.CreateMarker(markerPosition, -1, markerSprite, (IconMarker owner) => { //создаём маркер над линией
+            OnOpenPanel?.Invoke(data.From, data.To, data.Percent);
+        },
+        () => { });
+        
+    }
+    /*
     private bool CreateMarker(MigrationData data) {
-        if (!wmsk.GetRegionPosition(data.From, out Vector2 position)) return false;
-        wmsk.GetRegionPosition(data.From, out Vector2 startPosition);
-        wmsk.GetRegionPosition(data.To, out Vector2 endPosition);
+        if (!wmskController.GetRegionPosition(data.From, out Vector2 position)) return false;
+        wmskController.GetRegionPosition(data.From, out Vector2 startPosition);
+        wmskController.GetRegionPosition(data.To, out Vector2 endPosition);
         Vector2 center = (startPosition + endPosition) / 2;
-        data.Marker = wmsk.CreateMarker(center, -1, markerSprite, (IconMarker owner) => {
+
+
+        data.Marker = wmskController.CreateMarker(center, -1, markerSprite, (IconMarker owner) => {
             OnOpenPanel?.Invoke(data.From, data.To, data.Percent);
         },
         () => { });
@@ -157,17 +177,13 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
     }
 
     public void CreateLine(MigrationData data) {
-        wmsk.GetRegionPosition(data.From, out Vector2 start);
-        wmsk.GetRegionPosition(data.To, out Vector2 end);
+        wmskController.GetRegionPosition(data.From, out Vector2 start);
+        wmskController.GetRegionPosition(data.To, out Vector2 end);
 
-        Color color = Color.red;
-        Vector3 startCapScale = new Vector3(0.5f, 0.5f, 1f);
-        Vector3 endCapScale = new Vector3(0.5f, 0.5f, 1f);
-        
         CreateMarker(data);
-        
-        data.Line = wmsk.CreateLine(start, end, color, lineMaterial, startLine, endLine.gameObject, startCapScale, endCapScale, lineWidth: 3);
+        data.Line = wmskController.CreateLine(start, end);
     }
+    */
 
     private float GetParamStep(float from, float to) {
         float different = to - from;

@@ -9,6 +9,7 @@ public class WmskController : MonoBehaviour, IGameConnecter {
     [SerializeField] private Color selectColor;
     [SerializeField] private int eventMarkerLiveTime;
     [SerializeField] private Sprite[] markerSprites;
+    [SerializeField] private Material migrationMat;
 
     private MapController map;
     
@@ -43,14 +44,14 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         position = wmsk.countries[region].center;
         return true;
     }
-
     public IconMarker CreateMarker(Vector2 position, float liveTime, Sprite sprite, Action<IconMarker> OnClick, Action OnTimeDestroy) {
         IconMarker marker = Instantiate(iconMarker);
         marker.Sprite = sprite;
         marker.LiveTime = liveTime;
         marker.OnClick += OnClick;
         marker.OnTimeDestroy += OnTimeDestroy;
-        wmsk.AddMarker2DSprite(marker.gameObject, position, new Vector2(0.025f, 0.05f), true);
+        //wmsk.AddMarker2DSprite(marker.gameObject, position, new Vector2(0.025f, 0.05f), true);
+        wmsk.AddMarker2DSprite(marker.gameObject, position, 0.025f, true);
         return marker;
     }
 
@@ -58,6 +59,17 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         wmsk.ToggleCountrySurface(region, true, color);
     }
 
+    public LineMarkerAnimator CreateLine(Vector2 start, Vector2 end)
+    {
+        LineMarkerAnimator lma = wmsk.AddLine(start, end, Color.red, 0f, 4f);
+        lma.lineMaterial = migrationMat;
+        lma.lineWidth = 2f;
+        lma.drawingDuration = 1.5f;
+        lma.dashInterval = 0.005f;
+        lma.dashAnimationDuration = 0.8f;
+        return lma;
+    }
+    /*
     public LineMarkerAnimator CreateLine(Vector2 start, Vector2 end, Color color,
         Material lineMaterial, GameObject startCap, GameObject endCap,
         Vector3 startCapScale, Vector3 endCapScale,
@@ -83,6 +95,7 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         lma.endCapScale = endCapScale;
         return lma;
     }
+    */
 
     private void ClickMap(float x, float y, int buttonIndex) {
         if (isDraging) return;
