@@ -22,7 +22,10 @@ public class SO_Theme : ScriptableObject {
         detailIndex < 0 ?
         Sprites[Ecology[paramiterIndex].DescriptionSprite] :
         Sprites[Ecology[paramiterIndex].Value[detailIndex].DescriptionSprite];
-
+    public Sprite GetSprite(int paramiterIndex)
+    {
+        return Sprites[paramiterIndex];
+    }
     public Sprite GetCivilizationSprite(int paramiterIndex, int detailIndex) =>
         detailIndex < 0 ?
         Sprites[Civilization[paramiterIndex].DescriptionSprite] :
