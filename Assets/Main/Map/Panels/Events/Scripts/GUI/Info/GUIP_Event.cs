@@ -43,7 +43,7 @@ public class GUIP_Event : MonoBehaviour, IGameConnecter {
                 _isShowInfo = false;
                 info.EventInfo();
             }
-            timeline.Pouse();
+            timeline.Pause();
         }
         
         Clear();

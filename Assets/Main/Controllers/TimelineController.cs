@@ -18,6 +18,11 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     [SerializeField] private int startYear;
     [SerializeField, Range(0, 100)] private int eventOrMigration;
 
+    public Button pauseBtn;
+    public Button playBtn;
+    public Button forwardBtn;
+
+
     private InfoController info;
 
     private int year;
@@ -58,9 +63,40 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
         }
     }
 
-    public void Pouse() => Interval = 0;
-    public void Play() { isForward = false; Interval = tick; }
-    public void Forward() { isForward = true; Interval = tick / accelerator; }
+    public void Pause()
+    {
+        Interval = 0;
+        pauseBtn.interactable = false;
+        playBtn.interactable = true;
+        forwardBtn.interactable = true;
+        Debug.Log("Pause()");
+    }
+        public void Play() 
+    {
+        isForward = false; 
+        Interval = tick;
+        pauseBtn.interactable = true;
+        playBtn.interactable = false;
+        forwardBtn.interactable = true; ;
+        Debug.Log("Play()");
+    }
+    public void Forward() 
+    { 
+        isForward = true;
+        Interval = tick / accelerator;
+        pauseBtn.interactable = true;
+        playBtn.interactable = true;
+        forwardBtn.interactable = false;
+        Debug.Log("Forward()");
+    }
+    public void PauseAndDisableTimeButtons()
+    {
+        Interval = 0;
+        pauseBtn.interactable = false;
+        playBtn.interactable = false;
+        forwardBtn.interactable = false;
+        Debug.Log("PauseAndDisableTimeButtons()");
+    }
     public void TurnPlay() { if (isForward) Forward(); else Play(); }
 
     private IEnumerator UpdateActive() {
