@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 using AYellowpaper.SerializedCollections;
+using static UnityEngine.EventSystems.EventTrigger;
 [System.Serializable]
 public class TM_Region
 {
@@ -43,7 +44,7 @@ public class EcologyParam
     public string currentMax;                              //текущее максимальное значение
     public float richness;                              //суммарное богатство (дл€ почвы, фауны)
     public bool isRichnessApplicable = true;
-    public SerializedDictionary<string, float> quantities;        //значени€ дл€ разных наименований. “ипа forest:15, steppe:40. “огда current="steppe" (устанавливаетс€ каждый ход через SetCurrent())
+    public S_Dictionary<string, float> quantities;        //значени€ дл€ разных наименований. “ипа forest:15, steppe:40. “огда current="steppe" (устанавливаетс€ каждый ход через SetCurrent())
     //public Dictionary<string, float> quantities;
     public void Init()
     {
@@ -59,10 +60,10 @@ public class EcologyParam
     }
     public void QuantitiesToProcents()
     {
-        float sum = quantities.Sum(x => x.Value);
-        foreach (KeyValuePair<string, float> entry in quantities)
-        {
-            quantities[entry.Key] = (float)Math.Round(entry.Value / sum * 100, 1);
+        float sum = quantities.Values.Sum();
+        for(int i = 0; i < quantities.sources.Count; ++i) {
+            var pair = quantities.sources[i];
+            quantities[pair.Key] = (float) Math.Round(pair.Value / sum * 100, 1);
         }
     }
     public void RefreshParam()

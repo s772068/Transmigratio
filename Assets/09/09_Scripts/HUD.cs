@@ -93,14 +93,14 @@ public class HUD : MonoBehaviour
         }
         else
         {
-            foreach (KeyValuePair<string, float> entry in param.quantities)
-            {
+            for (int i = 0; i < param.quantities.sources.Count; ++i) {
+                var pair = param.quantities.sources[i];
                 GameObject go = Instantiate(sliderWrapPrefab, v2, q, slidersPanel);
                 //GameObject go = Instantiate(sliderWrapPrefab, slidersPanel);
                 //go.GetComponentInChildren<TMP_Text>().text = entry.Key;             
-                go.GetComponentInChildren<TMP_Text>().text = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", entry.Key); // текст над слайдером
-                go.GetComponentInChildren<Slider>().value = entry.Value;            // значение слайдера
-                go.GetComponentInChildren<Text>().text = entry.Value.ToString();    // значение текстом
+                go.GetComponentInChildren<TMP_Text>().text = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", pair.Key); // текст над слайдером
+                go.GetComponentInChildren<Slider>().value = pair.Value;            // значение слайдера
+                go.GetComponentInChildren<Text>().text = pair.Value.ToString();    // значение текстом
                 v2.y -= 45;
             }
         }

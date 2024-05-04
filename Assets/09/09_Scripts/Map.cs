@@ -7,6 +7,7 @@ using System.Net;
 using Newtonsoft.Json;
  
 using WorldMapStrategyKit;
+using AYellowpaper.SerializedCollections;
 /// <summary>
 /// Класс для работы с картой. Через него же взаимодействие с wmsk
 /// </summary>
@@ -43,9 +44,9 @@ public class Map
 
         string s = json.Substring(0, 50);
         Transmigratio.AddingDebugText.Invoke("json: " + s + "\n");
-        
-        allRegions = JsonConvert.DeserializeObject<List<TM_Region>>(json);
-        
+
+        // allRegions = JsonConvert.DeserializeObject<List<TM_Region>>(json);
+
         //allRegions = (List<TM_Region>) 
 
         //allRegions = JsonUtility.FromJson<List<TM_Region>>(json);
