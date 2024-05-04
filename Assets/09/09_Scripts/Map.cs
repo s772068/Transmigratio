@@ -45,7 +45,7 @@ public class Map
         string s = json.Substring(0, 50);
         Transmigratio.AddingDebugText.Invoke("json: " + s + "\n");
 
-        // allRegions = JsonConvert.DeserializeObject<List<TM_Region>>(json);
+        allRegions = JsonConvert.DeserializeObject<List<TM_Region>>(json);
 
         //allRegions = (List<TM_Region>) 
 
