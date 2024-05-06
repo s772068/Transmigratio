@@ -54,13 +54,13 @@ public class EcologyParam
     }
     public void SetCurrent() //определяем максимум в quantities и задаём current=max
     {
-        if (quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Value >= 0)
-            currentMax = quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Key;
-        else currentMax = "none";
+        // if (quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Value >= 0)
+        //     currentMax = quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Key;
+        // else currentMax = "none";
     }
     public void QuantitiesToProcents()
     {
-        float sum = quantities.Values.Sum();
+        float sum = quantities.GetValues().Sum();
         for(int i = 0; i < quantities.sources.Count; ++i) {
             var pair = quantities.sources[i];
             quantities[pair.Key] = (float) Math.Round(pair.Value / sum * 100, 1);

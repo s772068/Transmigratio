@@ -5,23 +5,19 @@ using System;
 public class S_Dictionary<K, V> {
     public List<Source> sources = new List<Source>();
 
-    public List<K> Keys {
-        get {
-            List<K> res = new();
-            for(int i = 0; i < sources.Count; ++i) {
-                res.Add(sources[i].Key);
-            }
-            return res;
+    public List<K> GetKeys() {
+        List<K> res = new();
+        for (int i = 0; i < sources.Count; ++i) {
+            res.Add(sources[i].Key);
         }
+        return res;
     }
-    public List<V> Values {
-        get {
-            List<V> res = new();
-            for (int i = 0; i < sources.Count; ++i) {
-                res.Add(sources[i].Value);
-            }
-            return res;
+    public List<V> GetValues() {
+        List<V> res = new();
+        for (int i = 0; i < sources.Count; ++i) {
+            res.Add(sources[i].Value);
         }
+        return res;
     }
 
     public V this[K key] {
