@@ -58,6 +58,7 @@ public class EcologyParam
         //     currentMax = quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Key;
         // else currentMax = "none";
     }
+    /*
     public void QuantitiesToProcents()
     {
         float sum = quantities.GetValues().Sum();
@@ -66,6 +67,7 @@ public class EcologyParam
             quantities[pair.Key] = (float) Math.Round(pair.Value / sum * 100, 1);
         }
     }
+    */
     public void RefreshParam()
     {
         //QuantitiesToProcents();

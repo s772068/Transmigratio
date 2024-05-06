@@ -29,7 +29,10 @@ public class Map
 
         string path;        //путь до json
         string json;        //сюда будет записываться json
-         
+
+        TextAsset textAsset = Resources.Load<TextAsset>("RegionStartParams");
+        json = textAsset.text;
+/*
 #if UNITY_EDITOR || UNITY_IOS
         path = Application.streamingAssetsPath + "/Config/RegionStartParams.json";
         Transmigratio.AddingDebugText.Invoke("Unity editor or iOS\n");
@@ -41,13 +44,12 @@ public class Map
         json = reader.text;
         Transmigratio.AddingDebugText.Invoke("Android\n");
 #endif
+*/
 
         string s = json.Substring(0, 50);
         Transmigratio.AddingDebugText.Invoke("json: " + s + "\n");
 
         allRegions = JsonConvert.DeserializeObject<List<TM_Region>>(json);
-
-        //allRegions = (List<TM_Region>) 
 
         //allRegions = JsonUtility.FromJson<List<TM_Region>>(json);
 
