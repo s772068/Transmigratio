@@ -93,8 +93,7 @@ public class HUD : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < param.quantities.sources.Count; ++i) {
-                var pair = param.quantities.sources[i];
+            foreach (KeyValuePair<string, float> pair in param.quantities) {
                 GameObject go = Instantiate(sliderWrapPrefab, v2, q, slidersPanel);
                 //GameObject go = Instantiate(sliderWrapPrefab, slidersPanel);
                 //go.GetComponentInChildren<TMP_Text>().text = entry.Key;             

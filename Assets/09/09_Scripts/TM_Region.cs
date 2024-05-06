@@ -44,8 +44,8 @@ public class EcologyParam
     public string currentMax;                              //текущее максимальное значение
     public float richness;                              //суммарное богатство (дл€ почвы, фауны)
     public bool isRichnessApplicable = true;
-    public S_Dictionary<string, float> quantities;        //значени€ дл€ разных наименований. “ипа forest:15, steppe:40. “огда current="steppe" (устанавливаетс€ каждый ход через SetCurrent())
-    //public Dictionary<string, float> quantities;
+    // public S_Dictionary<string, float> quantities;        //значени€ дл€ разных наименований. “ипа forest:15, steppe:40. “огда current="steppe" (устанавливаетс€ каждый ход через SetCurrent())
+    public SerializedDictionary<string, float> quantities;
     public void Init()
     {
         if (richness == -1) { isRichnessApplicable = false; }

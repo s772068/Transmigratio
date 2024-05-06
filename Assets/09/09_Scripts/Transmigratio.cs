@@ -20,7 +20,7 @@ public class Transmigratio : MonoBehaviour
 
     public Text debugText;
     public static Action<string> AddingDebugText;
-     
+
     public void Start()
     {
         if (Instance == null)

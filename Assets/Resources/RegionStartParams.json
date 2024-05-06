@@ -11,25 +11,1641 @@
 		"climate": {
 			"richness": -1,
 			"quantities": {
-				"sources":[			
-				{"Key":"ecuatorial", "Value":0 },
-				{"Key":"tropical", "Value":55},
-				{"Key":"moderate", "Value":45},
-				{"Key":"polar", "Value":0}
-				]
+				"ecuatorial": 0,
+				"tropical": 55,
+				"moderate": 45,
+				"polar": 0
 			}
 		},
 		"terrain": {
 			"richness": -1,
 			"quantities": {
-				"sources":[
-				{"Key":"plain", "Value":20 },
-				{"Key":"forest", "Value":15 },
-				{"Key":"desert", "Value":20 },
-				{"Key":"mountain", "Value":45 },
-				{"Key":"steppe", "Value":0 },
-				{"Key":"tundra", "Value":0 }
-				]
+				"plain": 20,
+				"forest": 15,
+				"desert": 20,
+				"mountain": 45,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 1,
+		"name": "Патагония",
+		"flora": {
+			"richness": 30
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 20,
+				"moderate": 75,
+				"polar": 5
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 15,
+				"forest": 10,
+				"desert": 5,
+				"mountain": 15,
+				"steppe": 10,
+				"tundra": 45
+			}
+		}
+	},
+	{
+		"id": 2,
+		"name": "Кавказ",
+		"flora": {
+			"richness": 30
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 45,
+				"moderate": 55,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 5,
+				"forest": 5,
+				"desert": 0,
+				"mountain": 90,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 3,
+		"name": "Новая Зеландия",
+		"flora": {
+			"richness": 20
+		},
+		"fauna": {
+			"richness": 15
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 5,
+				"tropical": 25,
+				"moderate": 70,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 50,
+				"forest": 30,
+				"desert": 0,
+				"mountain": 20,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 4,
+		"name": "Антарктика",
+		"flora": {
+			"richness": 0
+		},
+		"fauna": {
+			"richness": 0
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 0,
+				"polar": 100
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 0,
+				"forest": 0,
+				"desert": 30,
+				"mountain": 10,
+				"steppe": 0,
+				"tundra": 60
+			}
+		}
+	},
+	{
+		"id": 5,
+		"name": "Австралия",
+		"flora": {
+			"richness": 15
+		},
+		"fauna": {
+			"richness": 30
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 20,
+				"tropical": 60,
+				"moderate": 20,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 10,
+				"forest": 5,
+				"desert": 55,
+				"mountain": 10,
+				"steppe": 20,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 6,
+		"name": "Индостан",
+		"flora": {
+			"richness": 90
+		},
+		"fauna": {
+			"richness": 70
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 65,
+				"tropical": 30,
+				"moderate": 5,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 55,
+				"forest": 35,
+				"desert": 0,
+				"mountain": 10,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 7,
+		"name": "Малайзия",
+		"flora": {
+			"richness": 65
+		},
+		"fauna": {
+			"richness": 60
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 85,
+				"tropical": 15,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 20,
+				"forest": 70,
+				"desert": 0,
+				"mountain": 10,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 8,
+		"name": "Центральная Америка",
+		"flora": {
+			"richness": 55
+		},
+		"fauna": {
+			"richness": 35
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 25,
+				"tropical": 70,
+				"moderate": 5,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 25,
+				"forest": 55,
+				"desert": 5,
+				"mountain": 15,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 9,
+		"name": "Анды",
+		"flora": {
+			"richness": 10
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 35,
+				"tropical": 60,
+				"moderate": 5,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 5,
+				"forest": 10,
+				"desert": 0,
+				"mountain": 75,
+				"steppe": 0,
+				"tundra": 10
+			}
+		}
+	},
+	{
+		"id": 10,
+		"name": "Гималаи",
+		"flora": {
+			"richness": 10
+		},
+		"fauna": {
+			"richness": 20
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 10,
+				"moderate": 90,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 5,
+				"forest": 0,
+				"desert": 5,
+				"mountain": 90,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 11,
+		"name": "Южная Африка",
+		"flora": {
+			"richness": 30
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 90,
+				"moderate": 10,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 45,
+				"forest": 20,
+				"desert": 5,
+				"mountain": 25,
+				"steppe": 5,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 12,
+		"name": "Северо-Западные Территории",
+		"flora": {
+			"richness": 5
+		},
+		"fauna": {
+			"richness": 35
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 30,
+				"polar": 70
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 0,
+				"forest": 10,
+				"desert": 0,
+				"mountain": 20,
+				"steppe": 0,
+				"tundra": 70
+			}
+		}
+	},
+	{
+		"id": 13,
+		"name": "Альпы",
+		"flora": {
+			"richness": 20
+		},
+		"fauna": {
+			"richness": 30
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 95,
+				"polar": 5
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 5,
+				"forest": 15,
+				"desert": 0,
+				"mountain": 80,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 14,
+		"name": "Китай",
+		"flora": {
+			"richness": 90
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 55,
+				"moderate": 45,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 75,
+				"forest": 15,
+				"desert": 0,
+				"mountain": 10,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 15,
+		"name": "Центральная Африка",
+		"flora": {
+			"richness": 40
+		},
+		"fauna": {
+			"richness": 60
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 90,
+				"tropical": 10,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 30,
+				"forest": 60,
+				"desert": 5,
+				"mountain": 5,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 16,
+		"name": "Центральная Европа",
+		"flora": {
+			"richness": 60
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 100,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 45,
+				"forest": 45,
+				"desert": 0,
+				"mountain": 10,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 17,
+		"name": "Восточная Африка",
+		"flora": {
+			"richness": 30
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 80,
+				"tropical": 20,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 15,
+				"forest": 30,
+				"desert": 10,
+				"mountain": 45,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 18,
+		"name": "Северная Европа",
+		"flora": {
+			"richness": 5
+		},
+		"fauna": {
+			"richness": 35
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 60,
+				"polar": 40
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 5,
+				"forest": 15,
+				"desert": 0,
+				"mountain": 60,
+				"steppe": 0,
+				"tundra": 20
+			}
+		}
+	},
+	{
+		"id": 19,
+		"name": "Северная Африка",
+		"flora": {
+			"richness": 60
+		},
+		"fauna": {
+			"richness": 30
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 20,
+				"tropical": 80,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 50,
+				"forest": 15,
+				"desert": 30,
+				"mountain": 5,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 20,
+		"name": "Нил",
+		"flora": {
+			"richness": 80
+		},
+		"fauna": {
+			"richness": 30
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 30,
+				"tropical": 70,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 70,
+				"forest": 5,
+				"desert": 25,
+				"mountain": 0,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 21,
+		"name": "Иберия",
+		"flora": {
+			"richness": 30
+		},
+		"fauna": {
+			"richness": 35
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 60,
+				"moderate": 40,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 30,
+				"forest": 10,
+				"desert": 0,
+				"mountain": 60,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 22,
+		"name": "Прибалтика",
+		"flora": {
+			"richness": 30
+		},
+		"fauna": {
+			"richness": 10
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 95,
+				"polar": 5
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 60,
+				"forest": 40,
+				"desert": 0,
+				"mountain": 0,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 23,
+		"name": "Карелия",
+		"flora": {
+			"richness": 5
+		},
+		"fauna": {
+			"richness": 35
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 40,
+				"polar": 60
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 25,
+				"forest": 25,
+				"desert": 0,
+				"mountain": 15,
+				"steppe": 0,
+				"tundra": 35
+			}
+		}
+	},
+	{
+		"id": 24,
+		"name": "Западная Африка",
+		"flora": {
+			"richness": 50
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 85,
+				"tropical": 15,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 10,
+				"forest": 85,
+				"desert": 5,
+				"mountain": 0,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 25,
+		"name": "Западная Европа",
+		"flora": {
+			"richness": 60
+		},
+		"fauna": {
+			"richness": 70
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 100,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 60,
+				"forest": 30,
+				"desert": 0,
+				"mountain": 5,
+				"steppe": 0,
+				"tundra": 5
+			}
+		}
+	},
+	{
+		"id": 26,
+		"name": "Япония",
+		"flora": {
+			"richness": 30
+		},
+		"fauna": {
+			"richness": 20
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 20,
+				"moderate": 80,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 30,
+				"forest": 25,
+				"desert": 0,
+				"mountain": 45,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 27,
+		"name": "Центральная Великая Степь",
+		"flora": {
+			"richness": 10
+		},
+		"fauna": {
+			"richness": 70
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 95,
+				"polar": 5
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 10,
+				"forest": 0,
+				"desert": 15,
+				"mountain": 10,
+				"steppe": 65,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 28,
+		"name": "Юго-Восточная Азия",
+		"flora": {
+			"richness": 70
+		},
+		"fauna": {
+			"richness": 50
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 75,
+				"tropical": 25,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 20,
+				"forest": 65,
+				"desert": 0,
+				"mountain": 15,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 29,
+		"name": "Мадагаскар",
+		"flora": {
+			"richness": 50
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 55,
+				"tropical": 45,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 15,
+				"forest": 75,
+				"desert": 0,
+				"mountain": 10,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 30,
+		"name": "Сахара",
+		"flora": {
+			"richness": 5
+		},
+		"fauna": {
+			"richness": 3
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 70,
+				"tropical": 30,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 0,
+				"forest": 5,
+				"desert": 75,
+				"mountain": 10,
+				"steppe": 10,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 31,
+		"name": "Восточная Великая Степь",
+		"flora": {
+			"richness": 5
+		},
+		"fauna": {
+			"richness": 75
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 95,
+				"polar": 5
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 5,
+				"forest": 0,
+				"desert": 10,
+				"mountain": 10,
+				"steppe": 75,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 32,
+		"name": "Аравия",
+		"flora": {
+			"richness": 20
+		},
+		"fauna": {
+			"richness": 10
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 5,
+				"tropical": 80,
+				"moderate": 15,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 10,
+				"forest": 10,
+				"desert": 80,
+				"mountain": 0,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 33,
+		"name": "Дальний Восток",
+		"flora": {
+			"richness": 40
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 65,
+				"polar": 35
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 20,
+				"forest": 50,
+				"desert": 0,
+				"mountain": 20,
+				"steppe": 0,
+				"tundra": 10
+			}
+		}
+	},
+	{
+		"id": 34,
+		"name": "Западная Великая Степь",
+		"flora": {
+			"richness": 30
+		},
+		"fauna": {
+			"richness": 70
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 100,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 30,
+				"forest": 10,
+				"desert": 0,
+				"mountain": 10,
+				"steppe": 50,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 35,
+		"name": "Северные Анды",
+		"flora": {
+			"richness": 20
+		},
+		"fauna": {
+			"richness": 30
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 90,
+				"tropical": 10,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 15,
+				"forest": 15,
+				"desert": 0,
+				"mountain": 70,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 36,
+		"name": "Ближний Восток",
+		"flora": {
+			"richness": 100
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 70,
+				"moderate": 30,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 65,
+				"forest": 20,
+				"desert": 10,
+				"mountain": 5,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 37,
+		"name": "Северный Урал",
+		"flora": {
+			"richness": 10
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 45,
+				"polar": 55
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 15,
+				"forest": 10,
+				"desert": 0,
+				"mountain": 35,
+				"steppe": 0,
+				"tundra": 40
+			}
+		}
+	},
+	{
+		"id": 38,
+		"name": "Урал",
+		"flora": {
+			"richness": 20
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 80,
+				"polar": 20
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 25,
+				"forest": 20,
+				"desert": 0,
+				"mountain": 40,
+				"steppe": 10,
+				"tundra": 5
+			}
+		}
+	},
+	{
+		"id": 39,
+		"name": "Сибирь",
+		"flora": {
+			"richness": 10
+		},
+		"fauna": {
+			"richness": 50
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 45,
+				"polar": 55
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 15,
+				"forest": 40,
+				"desert": 0,
+				"mountain": 5,
+				"steppe": 5,
+				"tundra": 35
+			}
+		}
+	},
+	{
+		"id": 40,
+		"name": "Алтай",
+		"flora": {
+			"richness": 20
+		},
+		"fauna": {
+			"richness": 20
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 40,
+				"polar": 60
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 20,
+				"forest": 5,
+				"desert": 0,
+				"mountain": 55,
+				"steppe": 5,
+				"tundra": 15
+			}
+		}
+	},
+	{
+		"id": 41,
+		"name": "Северная Атлантика",
+		"flora": {
+			"richness": 5
+		},
+		"fauna": {
+			"richness": 10
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 45,
+				"polar": 55
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 10,
+				"forest": 15,
+				"desert": 0,
+				"mountain": 15,
+				"steppe": 0,
+				"tundra": 60
+			}
+		}
+	},
+	{
+		"id": 42,
+		"name": "Антильские острова",
+		"flora": {
+			"richness": 45
+		},
+		"fauna": {
+			"richness": 10
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 20,
+				"tropical": 80,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 65,
+				"forest": 20,
+				"desert": 0,
+				"mountain": 15,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 43,
+		"name": "Амазония",
+		"flora": {
+			"richness": 40
+		},
+		"fauna": {
+			"richness": 70
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 75,
+				"tropical": 25,
+				"moderate": 0,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 5,
+				"forest": 80,
+				"desert": 0,
+				"mountain": 15,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 44,
+		"name": "Апенинский Полуостров",
+		"flora": {
+			"richness": 75
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 15,
+				"moderate": 85,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 55,
+				"forest": 30,
+				"desert": 0,
+				"mountain": 15,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 45,
+		"name": "Аляска",
+		"flora": {
+			"richness": 5
+		},
+		"fauna": {
+			"richness": 20
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 25,
+				"polar": 75
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 0,
+				"forest": 10,
+				"desert": 0,
+				"mountain": 0,
+				"steppe": 40,
+				"tundra": 50
+			}
+		}
+	},
+	{
+		"id": 46,
+		"name": "Североамериканское Западное Побережье",
+		"flora": {
+			"richness": 40
+		},
+		"fauna": {
+			"richness": 25
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 40,
+				"moderate": 60,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 15,
+				"forest": 45,
+				"desert": 5,
+				"mountain": 35,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 47,
+		"name": "Кордильеры",
+		"flora": {
+			"richness": 10
+		},
+		"fauna": {
+			"richness": 35
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 20,
+				"moderate": 75,
+				"polar": 5
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 15,
+				"forest": 15,
+				"desert": 5,
+				"mountain": 55,
+				"steppe": 10,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 48,
+		"name": "Великие Озёра",
+		"flora": {
+			"richness": 45
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 90,
+				"polar": 10
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 50,
+				"forest": 30,
+				"desert": 0,
+				"mountain": 5,
+				"steppe": 10,
+				"tundra": 5
+			}
+		}
+	},
+	{
+		"id": 49,
+		"name": "Великие Равнины",
+		"flora": {
+			"richness": 10
+		},
+		"fauna": {
+			"richness": 70
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 100,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 30,
+				"forest": 10,
+				"desert": 5,
+				"mountain": 5,
+				"steppe": 50,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 50,
+		"name": "Флорида",
+		"flora": {
+			"richness": 60
+		},
+		"fauna": {
+			"richness": 35
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 15,
+				"tropical": 45,
+				"moderate": 40,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 55,
+				"forest": 40,
+				"desert": 0,
+				"mountain": 5,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 51,
+		"name": "Балканы",
+		"flora": {
+			"richness": 35
+		},
+		"fauna": {
+			"richness": 40
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 100,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 15,
+				"forest": 15,
+				"desert": 0,
+				"mountain": 70,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 52,
+		"name": "Малая Азия",
+		"flora": {
+			"richness": 70
+		},
+		"fauna": {
+			"richness": 50
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 60,
+				"moderate": 40,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 40,
+				"forest": 10,
+				"desert": 0,
+				"mountain": 50,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 53,
+		"name": "Североамериканское Восточное Поберкжье",
+		"flora": {
+			"richness": 60
+		},
+		"fauna": {
+			"richness": 35
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 35,
+				"moderate": 65,
+				"polar": 0
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 50,
+				"forest": 40,
+				"desert": 0,
+				"mountain": 10,
+				"steppe": 0,
+				"tundra": 0
+			}
+		}
+	},
+	{
+		"id": 54,
+		"name": "Восточно-Европейская Равнина",
+		"flora": {
+			"richness": 50
+		},
+		"fauna": {
+			"richness": 25
+		},
+		"climate": {
+			"richness": -1,
+			"quantities": {
+				"ecuatorial": 0,
+				"tropical": 0,
+				"moderate": 90,
+				"polar": 10
+			}
+		},
+		"terrain": {
+			"richness": -1,
+			"quantities": {
+				"plain": 55,
+				"forest": 40,
+				"desert": 0,
+				"mountain": 0,
+				"steppe": 5,
+				"tundra": 0
 			}
 		}
 	}
