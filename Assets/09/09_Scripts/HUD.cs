@@ -37,6 +37,9 @@ public class HUD : MonoBehaviour
     public Button floraBtn;
     public Button faunaBtn;
 
+    public Image rightSideImg;
+    public TMP_Text rightSideText;
+
     [Header("TopPanel")]
     public TMP_Text topPop;
     public TMP_Text topYear;
@@ -100,9 +103,14 @@ public class HUD : MonoBehaviour
                 go.GetComponentInChildren<TMP_Text>().text = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", pair.Key); // текст над слайдером
                 go.GetComponentInChildren<Slider>().value = pair.Value;            // значение слайдера
                 go.GetComponentInChildren<Text>().text = pair.Value.ToString();    // значение текстом
+                go.GetComponentInChildren<Button>().onClick.AddListener(delegate () { ShowRightSideOfRD(pair.Key); }); //  чтобы при нажатии на шкалу подпараметра, в правом окошке открывался текст и картинка с описанием
                 v2.y -= 45;
             }
         }
+    }
+    public void ShowRightSideOfRD(string ecoParamName) // принимает подпараметр (типа равнины, горы)
+    {
+        rightSideText.text = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", ecoParamName + "RightSide");
     }
     public void RefreshPanels(Population pop, int tick)
     {

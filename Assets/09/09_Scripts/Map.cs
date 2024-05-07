@@ -20,14 +20,12 @@ public class Map
 
     public void Init()
     {
-        Transmigratio.AddingDebugText.Invoke("Map init begin \n");
         wmsk = new WMSK();
         wmsk = WMSK.instance;
 
         allRegions = new List<TM_Region>();
         allRegions.Clear();
 
-        string path;        //путь до json
         string json;        //сюда будет записываться json
 
         TextAsset textAsset = Resources.Load<TextAsset>("RegionStartParams");
@@ -46,21 +44,11 @@ public class Map
 #endif
 */
 
-        string s = json.Substring(0, 50);
-        Transmigratio.AddingDebugText.Invoke("json: " + s + "\n");
-
         allRegions = JsonConvert.DeserializeObject<List<TM_Region>>(json);
 
         //allRegions = JsonUtility.FromJson<List<TM_Region>>(json);
 
-        Transmigratio.AddingDebugText.Invoke("Deserialisation complete \n");
-
         foreach (TM_Region region in allRegions ) { region.Init(); }
-
-        Transmigratio.AddingDebugText.Invoke("region init complete \n");
-
-        Debug.Log("Map init");
-        Transmigratio.AddingDebugText.Invoke("Map init end \n");
     }
     public TM_Region GetRegionBywmskId(int WMSKId)
     {
