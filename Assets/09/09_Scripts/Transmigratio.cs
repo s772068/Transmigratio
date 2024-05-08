@@ -38,9 +38,9 @@ public class Transmigratio : MonoBehaviour
         hud.StartTutorial();
 
         tmdb.map.wmsk.OnCountryClick += OnClickFromMain;
+        tmdb.map.wmsk.OnCountryLongClick += OnLongClickFromMain;
 
-        
-         
+
         //AddingDebugText.Invoke(s);
     }
     public void writeToDebugText(string str)
@@ -50,6 +50,12 @@ public class Transmigratio : MonoBehaviour
     private void OnClickFromMain(int countryIndex, int regionIndex, int buttonIndex)
     {
         hud.ShowRegionDetails(tmdb.map.allRegions[countryIndex]);
+    }
+    private void OnLongClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
+        string mouseKey = buttonIndex == 0 ? "LeftMouseButton" : "RightMouseButton";
+        Debug.Log($"LongClick: {mouseKey}");
+        Debug.Log($"Country: {tmdb.map.allRegions[countryIndex].name}");
+        Debug.Log($"RegionIndex: {regionIndex}");
     }
     public void Play()
     {

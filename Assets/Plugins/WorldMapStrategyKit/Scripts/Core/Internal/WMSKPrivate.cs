@@ -26,6 +26,7 @@ namespace WorldMapStrategyKit {
         public const string SURFACE_LAYER = "Surfaces";
 
         const float TAP_THRESHOLD = 0.25f;
+        const float LONG_TAP_THRESHOLD = 1f;
         const string OVERLAY_BASE = "OverlayLayer";
         const string SKW_BUMPMAP_ENABLED = "WMSK_BUMPMAP_ENABLED";
         readonly char[] SPLIT_SEP_SEMICOLON = { ';' };
@@ -904,6 +905,15 @@ namespace WorldMapStrategyKit {
                                     }
                                     if (OnClick != null) {
                                         OnClick(_cursorLocation.x, _cursorLocation.y, buttonIndex);
+                                    }
+                                }
+                            } else if(elapsedTimeSincePress < LONG_TAP_THRESHOLD && dragDampingStart == 0) {
+                                _countryLastClicked = _countryHighlightedIndex;
+                                if (VGOLastHighlighted == null || !VGOLastHighlighted.blocksRayCast) {
+                                    if (_countryLastClicked >= 0) {
+                                        if (OnCountryLongClick != null) {
+                                            OnCountryLongClick(_countryLastClicked, _countryRegionHighlightedIndex, buttonIndex);
+                                        }
                                     }
                                 }
                             }
