@@ -12,6 +12,8 @@ using static UnityEngine.EventSystems.EventTrigger;
 /// </summary>
 public class HUD : MonoBehaviour
 {
+    [SerializeField] private Messanger messanger;
+
     [Header("Tutorial")]
     public Transform tutorialWhole;     //объект-родитель всех обучающих объектов
     public Transform welcomePopup;      //привествие с портретом бога
@@ -43,6 +45,15 @@ public class HUD : MonoBehaviour
     [Header("TopPanel")]
     public TMP_Text topPop;
     public TMP_Text topYear;
+
+    private void Awake() {
+        GameEvents.onShowMessage = OnShowMessage;
+    }
+
+    private void OnShowMessage(string message) {
+        messanger.gameObject.SetActive(true);
+        messanger.Message = message;
+    }
 
     public void StartTutorial()
     {
