@@ -14,9 +14,9 @@ using AYellowpaper.SerializedCollections;
 [System.Serializable]
 public class Map
 {
-    public WMSK wmsk;
     public List<TM_Region> allRegions;
 
+    [HideInInspector] public WMSK wmsk;
 
     public void Init()
     {

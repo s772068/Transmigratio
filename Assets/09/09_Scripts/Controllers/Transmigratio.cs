@@ -21,6 +21,12 @@ public class Transmigratio : MonoBehaviour
     public Text debugText;
     public static Action<string> AddingDebugText;
 
+    private bool isPlayGame;
+
+    private void Awake() {
+        GameEvents.onTick += OnTick;
+    }
+
     public void Start()
     {
         if (Instance == null)
@@ -57,26 +63,32 @@ public class Transmigratio : MonoBehaviour
         Debug.Log($"Country: {tmdb.map.allRegions[countryIndex].name}");
         Debug.Log($"RegionIndex: {regionIndex}");
     }
-    public void Play()
-    {
-        StartCoroutine(Time_NormalSpeed());
-        Debug.Log("Play pressed");
-    }
-    public void Pause()
-    {
-        StopAllCoroutines();
-        Debug.Log("Pause pressed");
+
+    private void OnTick() {
+        tmdb.NextTick();
+        hud.RefreshPanels(tmdb.humanity.totalEarthPop, tmdb.tick);
     }
 
-    IEnumerator Time_NormalSpeed()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            tmdb.NextTick();
-            hud.RefreshPanels(tmdb.humanity.totalEarthPop, tmdb.tick);
-        }
-    }
+    //public void Play()
+    //{
+    //    StartCoroutine(Time_NormalSpeed());
+    //    Debug.Log("Play pressed");
+    //}
+    //public void Pause()
+    //{
+    //    StopAllCoroutines();
+    //    Debug.Log("Pause pressed");
+    //}
+
+    //IEnumerator Time_NormalSpeed()
+    //{
+    //    while (true)
+    //    {
+    //        yield return new WaitForSeconds(1f);
+    //        tmdb.NextTick();
+    //        hud.RefreshPanels(tmdb.humanity.totalEarthPop, tmdb.tick);
+    //    }
+    //}
 }
 
 
