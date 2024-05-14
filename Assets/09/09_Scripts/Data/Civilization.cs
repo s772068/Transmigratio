@@ -1,6 +1,8 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
@@ -10,8 +12,7 @@ using UnityEngine.Localization.Settings;
 [System.Serializable]
 public class Civilization
 {
-    public Population population;
-    public int civId;
+    public int civIndex;
     public string name;
 
     public List<CivPiece> civPiecesList;      //суммируем население цивилизации - собираем с "кусочков"
@@ -20,33 +21,44 @@ public class Civilization
     public CivParam prodMode;
     public CivParam government;
 
+    //их нужно засунуть в CivParam
+    public float prodModeK = 0.6f;                 // коэффициент способа производства
+    public float governmentCorruption = 0.4f;      // коррупци€ 
+
+    public Population population;
+
     public Civilization ancestor;
 
-    public void Init(int wmsk_id)        //верси€ дл€ старта игры. ƒл€ других цивилизаций нужна перегрузка
+    public void Init(TM_Region region)        //верси€ дл€ старта игры. ƒл€ других цивилизаций нужна перегрузка
     {
-        civId = 0;
+        civPiecesList = new List<CivPiece>();
+        civPiecesList.Clear();
+        population = new Population();
+        civIndex = 0;
         name = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", "uncivTitle");
-        AddPiece(wmsk_id, 1000);
+        AddPiece(region, 1000, 100);
 
         TotalCivilizationPopCalculation();
-        Debug.Log("Civilization init. \rid:" + civId + "\rpopulation:" + population.Value + "\rregionID:" + wmsk_id);
+        Debug.Log("Civilization init. \rid:" + civIndex + "\rpopulation:" + population.Value + "\rregionID:" + region.name);
     }
 
-    public int TotalCivilizationPopCalculation()
+    public void TotalCivilizationPopCalculation()
     {
-        return civPiecesList.Sum(x => x.population.Value);
+        population.value = civPiecesList.Sum(x => x.population.Value);
     }
-    public void AddPiece(int wmsk_id, int pop)    //когда цивилизаци€ по€вл€етс€ на новой территории, создаем новый экземпл€р CivPiece. ѕередаЄм туда стартовое население и id региона
+    public void AddPiece(TM_Region region, int pop, float reserve)    //когда цивилизаци€ по€вл€етс€ на новой территории, создаем новый экземпл€р CivPiece. ѕередаЄм туда стартовое население, id региона
     {
         CivPiece newPieceOfCiv = new CivPiece();
-        newPieceOfCiv.Init(wmsk_id, pop, this);
+        newPieceOfCiv.Init(region, pop, this.civIndex, reserve);
         civPiecesList.Add(newPieceOfCiv);
+        //region.AddCivPiece(newPieceOfCiv);
     }
-    public void RemovePiece(int wmsk_id)
+    public void RemovePiece(TM_Region region)      // убирает цивилизацию из этого региона
     {
         foreach (var piece in civPiecesList)
         {
-            if (piece.regionId == wmsk_id) { civPiecesList[piece.regionId] = null; }
+            if (piece.regionResidence == region) { civPiecesList.Remove(piece); }
         }
     }
+
 }

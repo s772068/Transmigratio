@@ -18,7 +18,7 @@ public class TMDB : ScriptableObject
         tick = 0;
     }
 
-
+    /*
     public void MakeSaveFile(int tick)      // пока что записывает только данные по карте, нужно добавить данные по человечеству
     {
         string path;   
@@ -34,6 +34,7 @@ public class TMDB : ScriptableObject
         if (File.Exists(path)) { File.Delete(path); }
         File.WriteAllText(path, mapJson);
     }
+    */
     public void NextTick()
     {
         map.RefreshMap();

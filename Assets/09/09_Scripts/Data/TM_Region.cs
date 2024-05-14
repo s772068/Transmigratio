@@ -18,9 +18,8 @@ public class TM_Region
     public EcologyParam climate;
     public EcologyParam terrain;
     List<EcologyParam> ecologyParams = new List<EcologyParam>();
+    //public List<CivPiece> civPieces = new List<CivPiece>();
 
-
-    public List<CivPiece> civPieces;
     public void Init()
     {
         ecologyParams.Clear();
@@ -54,9 +53,9 @@ public class EcologyParam
     }
     public void SetCurrent() //определяем максимум в quantities и задаём current=max
     {
-        // if (quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Value >= 0)
-        //     currentMax = quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Key;
-        // else currentMax = "none";
+        if (quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Value >= 0)
+             currentMax = quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Key;
+         else currentMax = "none";
     }
     /*
     public void QuantitiesToProcents()

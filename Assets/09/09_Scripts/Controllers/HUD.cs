@@ -26,11 +26,13 @@ public class HUD : MonoBehaviour
     public Button okBtn;                //кнопка "ок" в otherPopup
     public bool tutorCanceled = false;  //флаг, указывающий на то, отменён ли тутор
 
-
     [Header("Region Details")]
     public Transform regionDetailsPanel;        //окно с информацией о выбранном регионе
     public bool firstlyOpen = true;             // флаг для обучения
     public TMP_Text title;                      // название региона в окошке RegionDetails
+    public Button previous;                     //кнопки перелистывания регионов
+    public Button next;                         //
+
     public GameObject sliderWrapPrefab;         // слайдер, отображающий значение параметра (типа флора, фауна и тд)
     public Transform slidersPanel;              // родитель для слайдеров
 
@@ -39,6 +41,8 @@ public class HUD : MonoBehaviour
     public Button floraBtn;
     public Button faunaBtn;
 
+    public Transform tabs;
+    public Transform rightSide;
     public Image rightSideImg;
     public TMP_Text rightSideText;
 
@@ -77,16 +81,25 @@ public class HUD : MonoBehaviour
         otherPopup.gameObject.SetActive(true);
         welcomePopup.gameObject.SetActive(false);
     }
-    public void ShowRegionDetails(TM_Region region)
+    public void ShowRegionDetails(TM_Region region, bool gameStarted)
     {
         if (firstlyOpen) { ShowTutorPopup("TutorRegionDetails"); firstlyOpen = false; }         //при первом открытии показываем сообщение-обучалку
+        if (!gameStarted)
+        {
+            rightSide.gameObject.SetActive(false);
+            tabs.gameObject.SetActive(false);
+        }
+        else
+        {
+            rightSide.gameObject.SetActive(true);
+            tabs.gameObject.SetActive(true);
+        }
         regionDetailsPanel.gameObject.SetActive(true);
         title.text = region.name;
         climateBtn.onClick.AddListener(delegate { ShowParamValues(region.climate, "climate"); });
         terrainBtn.onClick.AddListener(delegate { ShowParamValues(region.terrain, "terrain"); });
         floraBtn.onClick.AddListener(delegate { ShowParamValues(region.flora, "flora"); });
         faunaBtn.onClick.AddListener(delegate { ShowParamValues(region.fauna, "fauna"); });
-
     }
     public void ShowParamValues(EcologyParam param, string paramname) //для параметров цивилизаций сделать перегрузку. paramname это костыль для отображения флоры и фауны
     {
