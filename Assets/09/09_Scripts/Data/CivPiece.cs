@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using AYellowpaper.SerializedCollections;
 using System;
 
 
@@ -13,7 +9,7 @@ using System;
 public class CivPiece
 {
     //public int regionId;                //wmsk_id того региона, где живёт этот объект
-    public TM_Region regionResidence;   //может лучше сам регион, а не айди?
+    public int regionResidenceIndex;   //может лучше сам регион, а не айди?
     
     //public Civilization civBelonging;      // если мы обращаемся к CivPiece только из списка civPiecesList, эта штука нам не нужна
     public int civIndex;
@@ -25,9 +21,12 @@ public class CivPiece
     public float reserveFood;
     public float takenFood;
 
-    public void Init(TM_Region to, int startPop, int index, float reserve)         // инициализация при появлении в области после миграции или при старте игры
+    public TM_Region GetRegion(int index) => Transmigratio.Instance.GetRegion(index);
+    public Civilization GetCiv(int index) => Transmigratio.Instance.GetCiv(index);
+
+    public void Init(int regionIndex, int startPop, int index, float reserve)         // инициализация при появлении в области после миграции или при старте игры
     {
-        regionResidence = to;
+        regionResidenceIndex = regionIndex;
         population = new Population();
         population.value = startPop;
         civIndex = index;
@@ -35,8 +34,8 @@ public class CivPiece
     }
     public int DeltaPop()        // изменение населения кусочка за тик
     {
-        Civilization civBelonging = Humanity.GetCivByIndex(civIndex);
-        float faunaKr = (float)(Math.Pow(regionResidence.fauna.richness, 0.58d) / 10);
+        Civilization civBelonging = GetCiv(civIndex);
+        float faunaKr = (float)(Math.Pow(GetRegion(regionResidenceIndex).fauna.richness, 0.58d) / 10);
         takenFood = population.value / 100 * faunaKr * civBelonging.prodModeK;
         requestFood = population.Value / 150f;
         if (reserveFood > requestFood) { givenFood = requestFood; }

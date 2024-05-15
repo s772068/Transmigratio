@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using System;
-using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
-using UnityEngine.UI;
+
 //using UnityEditor.Localization.Plugins.XLIFF.V12;
 /// <summary>
 /// "√лавный" синглтон
@@ -18,7 +14,7 @@ public class Transmigratio : MonoBehaviour
     public TMDB tmdb;                       // база данных ScriptableObjects
     public HUD hud;
 
-    public TM_Region activeRegion;
+    public int activeRegionIndex;
     public bool gameStarted = false;                    // произошЄл ли старт игры
 
     public Text debugText;                              //дл€ отображени€ сообщений в специальном окошке (дл€ андроида)
@@ -49,20 +45,21 @@ public class Transmigratio : MonoBehaviour
         tmdb.map.wmsk.OnCountryClick += OnClickFromMain;            //короткий и длинный тап по экрану
         tmdb.map.wmsk.OnCountryLongClick += OnLongClickFromMain;
     }
+
+    public TM_Region GetRegion(int index) => tmdb.map.allRegions[index];
+    public Civilization GetCiv(int index) => tmdb.humanity.civsList[index];
+
     public void writeToDebugText(string str)
     {
         debugText.text += str;
     }
-    private void OnClickFromMain(int countryIndex, int regionIndex, int buttonIndex)
-    {
-        activeRegion = tmdb.map.allRegions[countryIndex];
-        hud.ShowRegionDetails(activeRegion, gameStarted);
+    private void OnClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
+        activeRegionIndex = countryIndex;
+        hud.ShowRegionDetails(GetRegion(activeRegionIndex), gameStarted);
     }
     private void OnLongClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
-        string mouseKey = buttonIndex == 0 ? "LeftMouseButton" : "RightMouseButton";
-        Debug.Log($"LongClick: {mouseKey}");
-        Debug.Log($"Country: {tmdb.map.allRegions[countryIndex].name}");
-        Debug.Log($"RegionIndex: {regionIndex}");
+        activeRegionIndex = countryIndex;
+        hud.ShowRegionDetails(GetRegion(activeRegionIndex), gameStarted);
     }
 
     private void OnTick() {                                         // следующий тик, то есть следующий ход 
@@ -72,7 +69,7 @@ public class Transmigratio : MonoBehaviour
     public void StartGame()
     {
         gameStarted = true;
-        tmdb.humanity.AddCivilization(activeRegion);
+        tmdb.humanity.AddCivilization(activeRegionIndex);
     }
     //public void Play()                            // перенесено в Timeline.cs
     //{

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class Humanity
 {
-    public static List<Civilization> civsList;
+    public List<Civilization> civsList;
 
     public Population totalEarthPop;
 
@@ -24,14 +23,14 @@ public class Humanity
     {
         totalEarthPop.Value = civsList.Sum(x => x.population.Value);
     }
-    public void AddCivilization(TM_Region region)       //создание первоначальной цивилизации (старт игры)
+    public void AddCivilization(int regionIndex)       //создание первоначальной цивилизации (старт игры)
     {
         Civilization newCiv = new Civilization();
-        newCiv.Init(region);
+        newCiv.Init(regionIndex);
         civsList.Add(newCiv);
         newCiv.civIndex = civsList.Count - 1;
     }
-    public static Civilization GetCivByIndex(int index)
+    public Civilization GetCivByIndex(int index)
     {
         return civsList[index];
     }

@@ -1,10 +1,7 @@
-using System.Collections;
-using System;
+using UnityEngine.Localization.Settings;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 
 /// <summary>
 /// Ёкземпл€р Civilization - это одна цивилизаци€
@@ -29,35 +26,35 @@ public class Civilization
 
     public Civilization ancestor;
 
-    public void Init(TM_Region region)        //верси€ дл€ старта игры. ƒл€ других цивилизаций нужна перегрузка
+    public void Init(int regionIndex)        //верси€ дл€ старта игры. ƒл€ других цивилизаций нужна перегрузка
     {
         civPiecesList = new List<CivPiece>();
         civPiecesList.Clear();
         population = new Population();
         civIndex = 0;
         name = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", "uncivTitle");
-        AddPiece(region, 1000, 100);
+        AddPiece(regionIndex, 1000, 100);
 
         TotalCivilizationPopCalculation();
-        Debug.Log("Civilization init. \rid:" + civIndex + "\rpopulation:" + population.Value + "\rregionID:" + region.name);
+        Debug.Log("Civilization init. \rid:" + civIndex + "\rpopulation:" + population.Value + "\rregionID:" + regionIndex);
     }
 
     public void TotalCivilizationPopCalculation()
     {
         population.value = civPiecesList.Sum(x => x.population.Value);
     }
-    public void AddPiece(TM_Region region, int pop, float reserve)    //когда цивилизаци€ по€вл€етс€ на новой территории, создаем новый экземпл€р CivPiece. ѕередаЄм туда стартовое население, id региона
+    public void AddPiece(int regionIndex, int pop, float reserve)    //когда цивилизаци€ по€вл€етс€ на новой территории, создаем новый экземпл€р CivPiece. ѕередаЄм туда стартовое население, id региона
     {
         CivPiece newPieceOfCiv = new CivPiece();
-        newPieceOfCiv.Init(region, pop, this.civIndex, reserve);
+        newPieceOfCiv.Init(regionIndex, pop, this.civIndex, reserve);
         civPiecesList.Add(newPieceOfCiv);
         //region.AddCivPiece(newPieceOfCiv);
     }
-    public void RemovePiece(TM_Region region)      // убирает цивилизацию из этого региона
+    public void RemovePiece(int region)      // убирает цивилизацию из этого региона
     {
         foreach (var piece in civPiecesList)
         {
-            if (piece.regionResidence == region) { civPiecesList.Remove(piece); }
+            if (piece.regionResidenceIndex == region) { civPiecesList.Remove(piece); }
         }
     }
 
