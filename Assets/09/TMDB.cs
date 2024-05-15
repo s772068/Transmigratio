@@ -1,17 +1,21 @@
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 [CreateAssetMenu(fileName = "TMDB", menuName = "ScriptableObjects/TMDB", order = 1)]
-public class TMDB : ScriptableObject
-{
+public class TMDB : ScriptableObject {
     public Humanity humanity = new Humanity();
     public Map map = new Map();
     public int tick;
 
-    public void TMDBInit()
-    {
+    public void TMDBInit() {
         humanity.Init();
         map.Init();
         tick = 0;
+    }
+
+    public void StartGame(int regionIndex) {
+        int civIndex = humanity.AddCivilization(regionIndex);
+        map.StartGame(regionIndex, civIndex);
     }
 
     /*
@@ -31,8 +35,7 @@ public class TMDB : ScriptableObject
         File.WriteAllText(path, mapJson);
     }
     */
-    public void NextTick()
-    {
+    public void NextTick() {
         map.RefreshMap();
         Debug.Log("Tick: " + tick);
         tick++;

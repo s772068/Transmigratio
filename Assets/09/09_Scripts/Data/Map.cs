@@ -1,25 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
-using System;
-using System.Net;
 using Newtonsoft.Json;
+using UnityEngine;
  
 using WorldMapStrategyKit;
 using AYellowpaper.SerializedCollections;
+using UnityEngine.InputSystem.HID;
 /// <summary>
 /// Класс для работы с картой. Через него же взаимодействие с wmsk
 /// </summary>
 [System.Serializable]
-public class Map
-{
+public class Map {
     public List<TM_Region> allRegions;
 
     [HideInInspector] public WMSK wmsk;
 
-    public void Init()
-    {
+    public void Init() {
         wmsk = new WMSK();
         wmsk = WMSK.instance;
 
@@ -50,20 +45,23 @@ public class Map
 
         foreach (TM_Region region in allRegions ) { region.Init(); }
     }
-    public TM_Region GetRegionBywmskId(int WMSKId)
-    {
-        foreach (TM_Region region in allRegions)
-        {
+
+    public void StartGame(int regionIndex, int civIndex) {
+        allRegions[regionIndex].civsList.Add(civIndex);
+        allRegions[regionIndex].population.value = 1000; // ToDo: 1000 Сделать константой в отдельном классе игровых настроек
+    }
+
+    public TM_Region GetRegionBywmskId(int WMSKId) {
+        foreach (TM_Region region in allRegions) {
             if (region.id == WMSKId) return region;
         }
         return null;
     }
 
-    public void RefreshMap()
-    {
-        foreach(TM_Region region in allRegions) 
-        {
+    public void RefreshMap() {
+        foreach(TM_Region region in allRegions) {
             region.RefreshRegion();
+            region.RefreshCiv();
         }
     }
 }

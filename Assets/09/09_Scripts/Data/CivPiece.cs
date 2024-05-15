@@ -6,8 +6,7 @@ using System;
 /// Если цивилизация есть в трёх регионах, это значит, что она состоит из трёх объектов CivPiece
 /// </summary>
 [System.Serializable]
-public class CivPiece
-{
+public class CivPiece {
     //public int regionId;                //wmsk_id того региона, где живёт этот объект
     public int regionResidenceIndex;   //может лучше сам регион, а не айди?
     
@@ -24,16 +23,21 @@ public class CivPiece
     public TM_Region GetRegion(int index) => Transmigratio.Instance.GetRegion(index);
     public Civilization GetCiv(int index) => Transmigratio.Instance.GetCiv(index);
 
-    public void Init(int regionIndex, int startPop, int index, float reserve)         // инициализация при появлении в области после миграции или при старте игры
-    {
+    /// <summary>
+    /// Инициализация при появлении в области после миграции или при старте игры
+    /// </summary>
+    public void Init(int regionIndex, int startPop, int index, float reserve) {
         regionResidenceIndex = regionIndex;
         population = new Population();
         population.value = startPop;
         civIndex = index;
         reserveFood = reserve;  //изначальное количество еды у кусочка
     }
-    public int DeltaPop()        // изменение населения кусочка за тик
-    {
+
+    /// <summary>
+    /// Изменение населения кусочка за тик
+    /// </summary>
+    public int DeltaPop() {
         Civilization civBelonging = GetCiv(civIndex);
         float faunaKr = (float)(Math.Pow(GetRegion(regionResidenceIndex).fauna.richness, 0.58d) / 10);
         takenFood = population.value / 100 * faunaKr * civBelonging.prodModeK;

@@ -1,14 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System.IO;
-using Newtonsoft.Json;
-using AYellowpaper.SerializedCollections;
-using static UnityEngine.EventSystems.EventTrigger;
+
 [System.Serializable]
-public class TM_Region
-{
+public class TM_Region {
     public int id; //айдишник региона, соотвествует wmsk id
     public string name;
     public Population population;
@@ -18,10 +13,14 @@ public class TM_Region
     public EcologyParam climate;
     public EcologyParam terrain;
     List<EcologyParam> ecologyParams = new List<EcologyParam>();
-    //public List<CivPiece> civPieces = new List<CivPiece>();
 
-    public void Init()
-    {
+    public List<int> civsList = new();
+    
+    private int civMainIndex;
+    private Civilization GetCiv(int index) => Transmigratio.Instance.GetCiv(index);
+    public Civilization CivMain => Transmigratio.Instance.GetCiv(civMainIndex);
+
+    public void Init() {
         ecologyParams.Clear();
         ecologyParams.Add(flora);
         ecologyParams.Add(fauna);
@@ -30,49 +29,30 @@ public class TM_Region
 
         foreach (EcologyParam param in ecologyParams) { param.Init(); }
     }
-    public void RefreshRegion() //обновление и пересчет всех значений региона
-    {
+
+    /// <summary>
+    /// ќбновление и пересчет всех значений региона
+    /// </summary>
+    public void RefreshRegion() {
         foreach (EcologyParam param in ecologyParams) { param.RefreshParam(); }
     }
-}
 
-[System.Serializable]
-public class EcologyParam
-{
+    public void RefreshCiv() {
+        Dictionary<int, int> dic = new();
 
-    public string currentMax;                              //текущее максимальное значение
-    public float richness;                              //суммарное богатство (дл€ почвы, фауны)
-    public bool isRichnessApplicable = true;
-    // public S_Dictionary<string, float> quantities;        //значени€ дл€ разных наименований. “ипа forest:15, steppe:40. “огда current="steppe" (устанавливаетс€ каждый ход через SetCurrent())
-    public SerializedDictionary<string, float> quantities;
-    public void Init()
-    {
-        if (richness == -1) { isRichnessApplicable = false; }
-        
-        RefreshParam();
-    }
-    public void SetCurrent() //определ€ем максимум в quantities и задаЄм current=max
-    {
-        if (quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Value >= 0)
-             currentMax = quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Key;
-         else currentMax = "none";
-    }
-    /*
-    public void QuantitiesToProcents()
-    {
-        float sum = quantities.GetValues().Sum();
-        for(int i = 0; i < quantities.sources.Count; ++i) {
-            var pair = quantities.sources[i];
-            quantities[pair.Key] = (float) Math.Round(pair.Value / sum * 100, 1);
+        Civilization civ;
+        CivPiece piece;
+
+        for (int i = 0; i < civsList.Count; ++i) {
+            civ = GetCiv(civsList[i]);
+            for (int j = 0; j < civ.civPiecesList.Count; ++i) {
+                piece = civ.civPiecesList[j];
+                if (piece.regionResidenceIndex == id) {
+                    dic[civ.civIndex] = piece.population.Value;
+                }
+            }
         }
-    }
-    */
-    public void RefreshParam()
-    {
-        //QuantitiesToProcents();
-        if (quantities != null) 
-        {
-            SetCurrent();
-        }
+
+        civMainIndex = dic.FirstOrDefault(x => x.Value == dic.Values.Max()).Key;
     }
 }

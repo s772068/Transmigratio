@@ -44,6 +44,7 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         position = wmsk.countries[region].center;
         return true;
     }
+
     public IconMarker CreateMarker(Vector2 position, float liveTime, Sprite sprite, Action<IconMarker> OnClick, Action OnTimeDestroy) {
         IconMarker marker = Instantiate(iconMarker);
         marker.Sprite = sprite;

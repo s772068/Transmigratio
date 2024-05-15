@@ -10,11 +10,13 @@ public class LayersPanel : MonoBehaviour {
     public SerializedDictionary<float, Color> flora = new();
     public SerializedDictionary<float, Color> fauna = new();
     public SerializedDictionary<float, Color> population = new();
+    public SerializedDictionary<string, Color> ecoCulture = new();
+    public SerializedDictionary<string, Color> prodMode = new();
+    public SerializedDictionary<string, Color> government = new();
+    public SerializedDictionary<string, Color> civilization = new();
 
-    private TMDB TMDB => Transmigratio.Instance.tmdb;
-    private Humanity Humanity => TMDB.humanity;
+    private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Map.wmsk;
-    private Map Map => TMDB.map;
     private int CountRegions => Map.allRegions.Count;
     private TM_Region GetRegion(int index) => Map.allRegions[index];
 
@@ -24,7 +26,11 @@ public class LayersPanel : MonoBehaviour {
     public void ClickClimate() => PaintByName(climate, (int i) => GetRegion(i).climate.currentMax);
     public void ClickFlora() => PaintByPercent(flora, (int i) => GetRegion(i).flora.richness);
     public void ClickFauna() => PaintByPercent(fauna, (int i) => GetRegion(i).fauna.richness);
-    // public void ClickPopulation() => PaintByMax(population, MaxPopulation, (int i) => GetRegion(i).population.value);
+    public void ClickPopulation() { } // => PaintByMax(population, MaxPopulation, (int i) => GetRegion(i).population.value);
+    public void ClickEcoCulture() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ecoCulture.currentMax);
+    public void ClickProdMode() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.prodMode.currentMax);
+    public void ClickGovernment() => PaintByName(government, (int i) => GetRegion(i).CivMain.government.currentMax);
+    public void ClickCivilization() => PaintByName(government, (int i) => GetRegion(i).CivMain.name);
 
     private void PaintByName(SerializedDictionary<string, Color> dictionary, Func<int, string> GetName) {
         string _name;

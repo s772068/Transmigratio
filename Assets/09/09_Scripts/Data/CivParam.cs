@@ -16,34 +16,31 @@ public class CivParam
     public string currentMax;                              //текущее максимальное значение
 
 
-    public void Init()
-    {
-        
+    public void Init() {        
         RefreshParam();
     }
-    public void SetValues()
-    {
+    public void SetValues() {
 
     }
-    public void SetCurrent() //определяем максимум в quantities и задаём current=max
-    {
+
+    /// <summary>
+    /// Определяем максимум в quantities и задаём current=max
+    /// </summary>
+    public void SetCurrent() {
         if (quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Value >= 0)
             currentMax = quantities.FirstOrDefault(x => x.Value == quantities.Values.Max()).Key;
         else currentMax = "none";
     }
-    public void QuantitiesToProcents()
-    {
+    public void QuantitiesToProcents() {
         procentQuantities = new SerializedDictionary<string, int>();
         procentQuantities.Clear();
         float sum = quantities.Sum(x => x.Value);
-        foreach (var kvp in quantities)
-        {
+        foreach (var kvp in quantities) {
             int proc = (int)(kvp.Value / sum * 100);
             procentQuantities.Add(kvp.Key, proc);            
         }
     }
-    public void RefreshParam()
-    {
+    public void RefreshParam() {
         QuantitiesToProcents();
         if (quantities != null)
         {
