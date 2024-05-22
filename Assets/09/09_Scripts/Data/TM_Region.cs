@@ -1,43 +1,38 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 [System.Serializable]
 public class TM_Region {
     public int id; //айдишник региона, соотвествует wmsk id
     public string name;
-    public Population population;
+    public Population population = new();
 
-    public EcologyParam flora;
-    public EcologyParam fauna;
-    public EcologyParam climate;
-    public EcologyParam terrain;
-    List<EcologyParam> ecologyParams = new List<EcologyParam>();
+    private int mainCivIndex;
+
+    public Paramiter flora;
+    public Paramiter fauna;
+    public Paramiter climate;
+    public Paramiter terrain;
 
     public List<int> civsList = new();
-    
-    private int civMainIndex;
     private Civilization GetCiv(int index) => Transmigratio.Instance.GetCiv(index);
-    public Civilization CivMain => Transmigratio.Instance.GetCiv(civMainIndex);
+    public Civilization CivMain { get => Transmigratio.Instance.GetCiv(GetMainCiv()); }
 
-    public void Init() {
-        ecologyParams.Clear();
-        ecologyParams.Add(flora);
-        ecologyParams.Add(fauna);
-        ecologyParams.Add(climate);
-        ecologyParams.Add(terrain);
+    public Dictionary<string, int> GetCivParamiter() {
+        Dictionary<string, int> res = new();
+        Civilization civ;
 
-        foreach (EcologyParam param in ecologyParams) { param.Init(); }
+        for (int i = 0; i < civsList.Count; ++i) {
+            civ = GetCiv(civsList[i]);
+            res[civ.name] = civ.population.Value;
+        }
+
+        return res;
     }
 
-    /// <summary>
-    /// Обновление и пересчет всех значений региона
-    /// </summary>
-    public void RefreshRegion() {
-        foreach (EcologyParam param in ecologyParams) { param.RefreshParam(); }
-    }
+    public int GetMainCiv() {
+        if (civsList.Count == 0) return -1;
 
-    public void RefreshCiv() {
         Dictionary<int, int> dic = new();
 
         Civilization civ;
@@ -45,7 +40,7 @@ public class TM_Region {
 
         for (int i = 0; i < civsList.Count; ++i) {
             civ = GetCiv(civsList[i]);
-            for (int j = 0; j < civ.civPiecesList.Count; ++i) {
+            for (int j = 0; j < civ.civPiecesList.Count; ++j) {
                 piece = civ.civPiecesList[j];
                 if (piece.regionResidenceIndex == id) {
                     dic[civ.civIndex] = piece.population.Value;
@@ -53,6 +48,6 @@ public class TM_Region {
             }
         }
 
-        civMainIndex = dic.FirstOrDefault(x => x.Value == dic.Values.Max()).Key;
+        return dic.FirstOrDefault(x => x.Value == dic.Values.Max()).Key;
     }
 }

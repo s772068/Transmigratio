@@ -39,7 +39,7 @@ public class CivPiece {
     /// </summary>
     public int DeltaPop() {
         Civilization civBelonging = GetCiv(civIndex);
-        float faunaKr = (float)(Math.Pow(GetRegion(regionResidenceIndex).fauna.richness, 0.58d) / 10);
+        float faunaKr = (float)(Math.Pow(GetRegion(regionResidenceIndex).fauna.GetMax().Value, 0.58d) / 10);
         takenFood = population.value / 100 * faunaKr * civBelonging.prodModeK;
         requestFood = population.Value / 150f;
         if (reserveFood > requestFood) { givenFood = requestFood; }

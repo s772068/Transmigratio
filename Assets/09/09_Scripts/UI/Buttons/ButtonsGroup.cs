@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ButtonsGroup : MonoBehaviour {
     [SerializeField] private List<ButtonRadio> buttons;
 
-    private int activeIndex = -1;
+    private int activeElement = -1;
+    
+    public Action<int> onClick;
 
     private void Awake() {
         for(int i = 0; i < buttons.Count; ++i) {
@@ -13,8 +16,10 @@ public class ButtonsGroup : MonoBehaviour {
         }
     }
 
-    private void OnClick(int newActiveIndex) {
-        if(activeIndex != -1) buttons[activeIndex].Deactivate();
-        activeIndex = newActiveIndex;
+    public void OnClick(int newActiveIndex) {
+        if (activeElement != -1) buttons[activeElement].Deactivate();
+        activeElement = newActiveIndex;
+        buttons[activeElement].Activate();
+        onClick?.Invoke(activeElement);
     }
 }

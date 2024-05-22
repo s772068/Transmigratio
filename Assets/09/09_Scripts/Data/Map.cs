@@ -43,12 +43,12 @@ public class Map {
 
         //allRegions = JsonUtility.FromJson<List<TM_Region>>(json);
 
-        foreach (TM_Region region in allRegions ) { region.Init(); }
+        // foreach (TM_Region region in allRegions ) { region.Init(); }
     }
 
     public void StartGame(int regionIndex, int civIndex) {
         allRegions[regionIndex].civsList.Add(civIndex);
-        allRegions[regionIndex].population.value = 1000; // ToDo: 1000 Сделать константой в отдельном классе игровых настроек
+        allRegions[regionIndex].population.Value = GameSettings.startPopulation;
     }
 
     public TM_Region GetRegionBywmskId(int WMSKId) {
@@ -56,12 +56,5 @@ public class Map {
             if (region.id == WMSKId) return region;
         }
         return null;
-    }
-
-    public void RefreshMap() {
-        foreach(TM_Region region in allRegions) {
-            region.RefreshRegion();
-            region.RefreshCiv();
-        }
     }
 }

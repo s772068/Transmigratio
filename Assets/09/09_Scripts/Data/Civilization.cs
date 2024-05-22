@@ -14,13 +14,13 @@ public class Civilization
 
     public List<CivPiece> civPiecesList;      //суммируем население цивилизации - собираем с "кусочков"
 
-    public CivParam ecoCulture;
-    public CivParam prodMode;
-    public CivParam government;
+    public Paramiter ecoCulture = new(true);
+    public Paramiter prodMode = new(true);
+    public Paramiter government = new(true);
 
     //их нужно засунуть в CivParam
     public float prodModeK = 0.6f;                 // коэффициент способа производства
-    public float governmentCorruption = 0.4f;      // коррупция 
+    public float governmentCorruption = 0.4f;      // коррупция
 
     public Population population;
 
@@ -32,8 +32,12 @@ public class Civilization
         civPiecesList.Clear();
         population = new Population();
         civIndex = 0;
-        name = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", "uncivTitle");
-        AddPiece(regionIndex, 1000, 100);
+        name = "uncivTitle";
+        AddPiece(regionIndex, GameSettings.startPopulation, 100);
+
+        ecoCulture.Init("hunters", "farmers", "nomads", "mountain", "city");
+        prodMode.Init("primitive communism", "slavery", "feodalism", "capitalism", "socialism", "communism");
+        government.Init("leaderism", "monarchy", "city - state", "imperium", "federation", "national state", "anarchy");
 
         TotalCivilizationPopCalculation();
         Debug.Log("Civilization init. \rid:" + civIndex + "\rpopulation:" + population.Value + "\rregionID:" + regionIndex);

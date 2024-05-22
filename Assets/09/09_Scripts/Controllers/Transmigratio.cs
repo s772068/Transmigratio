@@ -43,7 +43,7 @@ public class Transmigratio : MonoBehaviour {
     }
 
     public TM_Region GetRegion(int index) => tmdb.map.allRegions[index];
-    public Civilization GetCiv(int index) => tmdb.humanity.civsList[index];
+    public Civilization GetCiv(int index) => index >= 0 ? tmdb.humanity.civsList[index] : null;
     public (string, float) GetEcoCulture(int regionIndex) {
         TM_Region region = GetRegion(regionIndex);
         float res = 0;

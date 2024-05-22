@@ -1,11 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 
 [CreateAssetMenu(fileName = "TMDB", menuName = "ScriptableObjects/TMDB", order = 1)]
 public class TMDB : ScriptableObject {
     public Humanity humanity = new Humanity();
     public Map map = new Map();
     public int tick;
+
+    public Dictionary<string, int> GetParam(int index, string name) => name switch {
+        "flora" => map.allRegions[index].flora.Quantities,
+        "fauna" => map.allRegions[index].fauna.Quantities,
+        "climate" => map.allRegions[index].climate.Quantities,
+        "terrain" => map.allRegions[index].terrain.Quantities,
+        "civilizations" => map.allRegions[index].GetCivParamiter(),
+        "ecoCulture" => map.allRegions[index].CivMain.ecoCulture.Quantities,
+        "prodMode" => map.allRegions[index].CivMain.prodMode.Quantities,
+        "government" => map.allRegions[index].CivMain.government.Quantities,
+    };
 
     public void TMDBInit() {
         humanity.Init();
@@ -36,7 +47,6 @@ public class TMDB : ScriptableObject {
     }
     */
     public void NextTick() {
-        map.RefreshMap();
         Debug.Log("Tick: " + tick);
         tick++;
     }

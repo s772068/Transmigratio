@@ -27,7 +27,7 @@ public class HUD : MonoBehaviour
     public bool tutorCanceled = false;  //флаг, указывающий на то, отменён ли тутор
 
     [Header("Region Details")]
-    public Transform regionDetailsPanel;        //окно с информацией о выбранном регионе
+    public RegionDetails regionDetails;        //окно с информацией о выбранном регионе
     public bool firstlyOpen = true;             // флаг для обучения
     public TMP_Text title;                      // название региона в окошке RegionDetails
     public Button previous;                     //кнопки перелистывания регионов
@@ -83,54 +83,56 @@ public class HUD : MonoBehaviour
     }
     public void ShowRegionDetails(TM_Region region, bool gameStarted)
     {
-        if (firstlyOpen) { ShowTutorPopup("TutorRegionDetails"); firstlyOpen = false; }         //при первом открытии показываем сообщение-обучалку
-        if (!gameStarted)
-        {
-            rightSide.gameObject.SetActive(false);
-            tabs.gameObject.SetActive(false);
-        }
-        else
-        {
-            rightSide.gameObject.SetActive(true);
-            tabs.gameObject.SetActive(true);
-        }
-        regionDetailsPanel.gameObject.SetActive(true);
+        // if (firstlyOpen) { ShowTutorPopup("TutorRegionDetails"); firstlyOpen = false; }         //при первом открытии показываем сообщение-обучалку
+        // if (!gameStarted)
+        // {
+        //     rightSide.gameObject.SetActive(false);
+        //     tabs.gameObject.SetActive(false);
+        // }
+        // else
+        // {
+        //     rightSide.gameObject.SetActive(true);
+        //     tabs.gameObject.SetActive(true);
+        // }
+        regionDetails.Region = region;
+        regionDetails.gameObject.SetActive(true);
         title.text = region.name;
-        climateBtn.onClick.AddListener(delegate { ShowParamValues(region.climate, "climate"); });
-        terrainBtn.onClick.AddListener(delegate { ShowParamValues(region.terrain, "terrain"); });
-        floraBtn.onClick.AddListener(delegate { ShowParamValues(region.flora, "flora"); });
-        faunaBtn.onClick.AddListener(delegate { ShowParamValues(region.fauna, "fauna"); });
+    //    climateBtn.onClick.AddListener(delegate { ShowParamValues(region.climate, "climate"); });
+    //    terrainBtn.onClick.AddListener(delegate { ShowParamValues(region.terrain, "terrain"); });
+    //    floraBtn.onClick.AddListener(delegate { ShowParamValues(region.flora, "flora"); });
+    //    faunaBtn.onClick.AddListener(delegate { ShowParamValues(region.fauna, "fauna"); });
     }
-    public void ShowParamValues(EcologyParam param, string paramname) //для параметров цивилизаций сделать перегрузку. paramname это костыль для отображения флоры и фауны
-    {
-        
-        foreach (Transform child in slidersPanel) { Destroy(child.gameObject); }        //очищаем место для слайдеров
-
-        Vector2 v2 = new Vector2();
-        v2 = slidersPanel.transform.position;
-        Quaternion q = new Quaternion();
-
-        if (param.isRichnessApplicable)
-        {
-            GameObject go = Instantiate(sliderWrapPrefab, v2, q, slidersPanel);
-            //go.GetComponentInChildren<TMP_Text>().text = param.name;
-            go.GetComponentInChildren<TMP_Text>().text = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", paramname); // текст над слайдером
-            go.GetComponentInChildren<Slider>().value = param.richness;
-            go.GetComponentInChildren<Text>().text = param.richness.ToString();
-        }
-        else
-        {
-            foreach (KeyValuePair<string, float> pair in param.quantities) {
-                GameObject go = Instantiate(sliderWrapPrefab, v2, q, slidersPanel);
-                //GameObject go = Instantiate(sliderWrapPrefab, slidersPanel);
-                //go.GetComponentInChildren<TMP_Text>().text = entry.Key;             
-                go.GetComponentInChildren<TMP_Text>().text = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", pair.Key); // текст над слайдером
-                go.GetComponentInChildren<Slider>().value = pair.Value;            // значение слайдера
-                go.GetComponentInChildren<Text>().text = pair.Value.ToString();    // значение текстом
-                go.GetComponentInChildren<Button>().onClick.AddListener(delegate () { ShowRightSideOfRD(pair.Key); }); //  чтобы при нажатии на шкалу подпараметра, в правом окошке открывался текст и картинка с описанием
-                v2.y -= 45;
-            }
-        }
+    /// <summary>
+    /// для параметров цивилизаций сделать перегрузку. paramname это костыль для отображения флоры и фауны
+    /// </summary>
+    public void ShowParamValues(Paramiter param, string paramname) {
+        // foreach (Transform child in slidersPanel) { Destroy(child.gameObject); }        //очищаем место для слайдеров
+        // 
+        // Vector2 v2 = new Vector2();
+        // v2 = slidersPanel.transform.position;
+        // Quaternion q = new Quaternion();
+        // 
+        // if (param.isRichnessApplicable)
+        // {
+        //     GameObject go = Instantiate(sliderWrapPrefab, v2, q, slidersPanel);
+        //     //go.GetComponentInChildren<TMP_Text>().text = param.name;
+        //     go.GetComponentInChildren<TMP_Text>().text = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", paramname); // текст над слайдером
+        //     go.GetComponentInChildren<Slider>().value = param.richness;
+        //     go.GetComponentInChildren<Text>().text = param.richness.ToString();
+        // }
+        // else
+        // {
+        //     foreach (KeyValuePair<string, float> pair in param.quantities) {
+        //         GameObject go = Instantiate(sliderWrapPrefab, v2, q, slidersPanel);
+        //         //GameObject go = Instantiate(sliderWrapPrefab, slidersPanel);
+        //         //go.GetComponentInChildren<TMP_Text>().text = entry.Key;             
+        //         go.GetComponentInChildren<TMP_Text>().text = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", pair.Key); // текст над слайдером
+        //         go.GetComponentInChildren<Slider>().value = pair.Value;            // значение слайдера
+        //         go.GetComponentInChildren<Text>().text = pair.Value.ToString();    // значение текстом
+        //         go.GetComponentInChildren<Button>().onClick.AddListener(delegate () { ShowRightSideOfRD(pair.Key); }); //  чтобы при нажатии на шкалу подпараметра, в правом окошке открывался текст и картинка с описанием
+        //         v2.y -= 45;
+        //     }
+        // }
     }
     public void ShowRightSideOfRD(string ecoParamName) // принимает подпараметр (типа равнины, горы)
     {
@@ -139,7 +141,7 @@ public class HUD : MonoBehaviour
     public void RefreshPanels(Population pop, int tick)
     {
         topPop.text = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", "population") + pop.value.ToString("### ### ###");
-        int year = 40000 - tick * 10;
+        int year = 40000 - tick * GameSettings.yearsByTick;
         topYear.text = year.ToString("### ###") + LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", "BCE");
     }
 }
