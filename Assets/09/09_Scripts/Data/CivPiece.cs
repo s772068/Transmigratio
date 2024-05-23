@@ -32,12 +32,13 @@ public class CivPiece {
         population.value = startPop;
         civIndex = index;
         reserveFood = reserve;  //изначальное количество еды у кусочка
+        GameEvents.onTick += DeltaPop;
     }
 
     /// <summary>
     /// Изменение населения кусочка за тик
     /// </summary>
-    public int DeltaPop() {
+    public void DeltaPop() {
         Civilization civBelonging = GetCiv(civIndex);
         float faunaKr = (float)(Math.Pow(GetRegion(regionResidenceIndex).fauna.GetMax().Value, 0.58d) / 10);
         takenFood = population.value / 100 * faunaKr * civBelonging.prodModeK;
@@ -47,6 +48,7 @@ public class CivPiece {
         reserveFood += takenFood - givenFood;
         populationGrow = population.Value * civBelonging.governmentCorruption * givenFood / requestFood - population.Value / 3;
 
-        return (int)(populationGrow);
+        //return (int)(populationGrow);
+        population.value += (int)populationGrow;
     }
 }
