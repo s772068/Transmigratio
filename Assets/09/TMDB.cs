@@ -5,7 +5,6 @@ using UnityEngine;
 public class TMDB : ScriptableObject {
     public Humanity humanity = new Humanity();
     public Map map = new Map();
-    public int tick;
 
     public Dictionary<string, int> GetParam(int index, string name) => name switch {
         "flora" => map.allRegions[index].flora.Quantities,
@@ -21,7 +20,6 @@ public class TMDB : ScriptableObject {
     public void TMDBInit() {
         humanity.Init();
         map.Init();
-        tick = 0;
     }
 
     public void StartGame(int regionIndex) {
@@ -46,8 +44,4 @@ public class TMDB : ScriptableObject {
         File.WriteAllText(path, mapJson);
     }
     */
-    public void NextTick() {
-        Debug.Log("Tick: " + tick);
-        tick++;
-    }
 }

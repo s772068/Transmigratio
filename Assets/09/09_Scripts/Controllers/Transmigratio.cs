@@ -8,8 +8,7 @@ using System;
 /// 
 /// ѕотом разнести вс€кие классы по разным файлам
 /// </summary>
-public class Transmigratio : MonoBehaviour {
-    public static Transmigratio Instance;   // синглтон
+public class Transmigratio : PersistentSingleton<Transmigratio> {
     public TMDB tmdb;                       // база данных ScriptableObjects
     public HUD hud;
 
@@ -19,20 +18,7 @@ public class Transmigratio : MonoBehaviour {
     public Text debugText;                              //дл€ отображени€ сообщений в специальном окошке (дл€ андроида)
     public static Action<string> AddingDebugText;
 
-    private bool isPlayGame;
-
-    private void Awake() {
-        GameEvents.onTick += OnTick;
-    }
-
     public void Start() {
-        if (Instance == null) {
-            DontDestroyOnLoad(gameObject);
-            Instance = this;
-        }
-        else if (Instance != this) {
-            Destroy(gameObject);
-        }
         AddingDebugText += WriteToDebugText;
 
         tmdb.TMDBInit();
@@ -58,47 +44,18 @@ public class Transmigratio : MonoBehaviour {
     }
     private void OnClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
         activeRegionIndex = countryIndex;
-        hud.ShowRegionDetails(GetRegion(activeRegionIndex), gameStarted);
+        hud.ShowRegionDetails(activeRegionIndex, gameStarted);
     }
     private void OnLongClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
         activeRegionIndex = countryIndex;
-        hud.ShowRegionDetails(GetRegion(activeRegionIndex), gameStarted);
-    }
-
-    /// <summary>
-    /// —ледующий ход
-    /// </summary>
-    private void OnTick() {
-        tmdb.NextTick();
-        hud.RefreshPanels(tmdb.humanity.totalEarthPop, tmdb.tick);
+        hud.ShowRegionDetails(activeRegionIndex, gameStarted);
     }
 
     public void StartGame() {
         gameStarted = true;
         tmdb.StartGame(activeRegionIndex);
-        hud.ShowRegionDetails(GetRegion(activeRegionIndex), gameStarted);
+        hud.ShowRegionDetails(activeRegionIndex, gameStarted);
     }
-
-    //public void Play()                            // перенесено в Timeline.cs
-    //{
-    //    StartCoroutine(Time_NormalSpeed());
-    //    Debug.Log("Play pressed");
-    //}
-    //public void Pause()
-    //{
-    //    StopAllCoroutines();
-    //    Debug.Log("Pause pressed");
-    //}
-
-    //IEnumerator Time_NormalSpeed()
-    //{
-    //    while (true)
-    //    {
-    //        yield return new WaitForSeconds(1f);
-    //        tmdb.NextTick();
-    //        hud.RefreshPanels(tmdb.humanity.totalEarthPop, tmdb.tick);
-    //    }
-    //}
 }
 
 

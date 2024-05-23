@@ -24,7 +24,7 @@ public class TM_Region {
 
         for (int i = 0; i < civsList.Count; ++i) {
             civ = GetCiv(civsList[i]);
-            res[civ.name] = civ.population.Value;
+            res[civ.name] = civ.Population;
         }
 
         return res;

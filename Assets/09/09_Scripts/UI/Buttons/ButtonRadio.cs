@@ -35,6 +35,7 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public void OnPointerEnter(PointerEventData eventData) {
         if(highlightedSprite == null) return;
+        image ??= GetComponent<Image>();
         if (!isActive) image.sprite = highlightedSprite;
     }
 

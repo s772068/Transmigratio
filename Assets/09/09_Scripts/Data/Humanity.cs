@@ -8,23 +8,14 @@ using UnityEngine;
 public class Humanity {
     public List<Civilization> civsList;
 
-    public Population totalEarthPop;
+    public int TotalEarthPop => civsList.Sum(x => x.Population);
 
     public Civilization GetCivByIndex(int index) => civsList[index];
 
     public void Init() {
-        totalEarthPop = new Population();
-        totalEarthPop.Value = 0;
         civsList = new List<Civilization>();
         civsList.Clear();
         Debug.Log("Humanity init");
-    }
-
-    /// <summary>
-    /// Суммируем всё население всех цивилизаций - это и есть население мира сейчас
-    /// </summary>
-    public void TotalEartPopCalculation() {
-        totalEarthPop.Value = civsList.Sum(x => x.population.Value);
     }
 
     /// <summary>

@@ -1,54 +1,67 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using WorldMapStrategyKit;
+using UnityEngine.InputSystem;
 
 public class RegionDetails : MonoBehaviour {
-    [SerializeField] private RegionElements elements;
-    [SerializeField] private RegionParams paramiters;
+    [SerializeField] private RegionElements leftSide;
+    [SerializeField] private RegionParams centerSide;
     [SerializeField] private RegionDetailsRightSide rightSide;
     [SerializeField] private ButtonsGroup tabs;
     [SerializeField] private Image civAvatar;
+    
+    private Dictionary<string, int> dic;
+    private string element;
 
     public Sprite Avatar { set => civAvatar.sprite = value; }
-
-    public TM_Region Region { private get; set; }
+    public int RegionIndex { private get; set; }
+    public TM_Region Region => Transmigratio.Instance.GetRegion(RegionIndex);
 
     private void Awake() {
         tabs.onClick = OnClickTabs;
-        elements.onClick = OnClickElement;
-        paramiters.onClick = OnClickParamiter;
+        leftSide.onClick = OnClickElement;
+        centerSide.onClick = OnClickParamiter;
     }
 
     private void OnEnable() {
         bool isHasCiv = Region.CivMain != null;
-        if (isHasCiv) elements.ClickCivTab();
-        else          elements.ClickRegionTab();
+        if (isHasCiv) leftSide.ClickCivTab();
+        else          leftSide.ClickRegionTab();
 
         tabs.gameObject.SetActive(isHasCiv);
+        centerSide.Title = Region.name;
+        GameEvents.onTickShow += UpdateParams;
     }
 
     private void OnDisable() {
-        elements.ClearElements();
-        paramiters.ClearParams();
+        leftSide.ClearElements();
+        centerSide.ClearParams();
+        GameEvents.onTickShow -= UpdateParams;
     }
 
     public void ClickStartGame() {
-        elements.ClickCivTab();
+        leftSide.ClickCivTab();
         tabs.gameObject.SetActive(true);
     }
 
     private void OnClickTabs(int i) {
-        paramiters.ClearParams();
+        centerSide.ClearParams();
         rightSide.gameObject.SetActive(false);
     }
 
     public void OnClickElement(string key) {
-        paramiters.ClearParams();
+        centerSide.ClearParams();
         rightSide.gameObject.SetActive(false);
-        Dictionary<string, int> dic = Transmigratio.Instance.tmdb.GetParam(Region.id, key);
-        foreach(var pair in dic) {
+        element = key;
+        UpdateParams();
+    }
+
+    private void UpdateParams() {
+        dic = Transmigratio.Instance.tmdb.GetParam(Region.id, element);
+        foreach (var pair in dic) {
             if (pair.Value == 0) continue;
-            paramiters.CreateParam(pair.Key, pair.Value);
+            centerSide.SetParamiter(pair.Key, pair.Value);
         }
     }
 

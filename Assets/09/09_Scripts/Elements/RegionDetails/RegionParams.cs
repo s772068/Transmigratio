@@ -1,27 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class RegionParams : MonoBehaviour {
+    [SerializeField] private TMP_Text title;
     [SerializeField] private Transform content;
 
-    private List<ParamWrap> list = new();
+    private Dictionary<string, ParamWrap> paramiters = new();
+
+    public string Title { set => title.text = value; }
 
     public Action<string> onClick;
 
-    public void CreateParam(string title, float value) {
-        ParamWrap newVal = PrefabsLoader.Load<ParamWrap>("ParamWrap", content);
-        newVal.onClick = OnClick;
-        newVal.Title = title;
-        newVal.Value = value;
-        list.Add(newVal);
+    public void SetParamiter(string title, float value) {
+        if (!paramiters.ContainsKey(title)) {
+            PrefabsLoader.Load(out ParamWrap newVal, "ParamWrap", content);
+            newVal.onClick = OnClick;
+            newVal.Title = title;
+            paramiters[title] = newVal;
+        }
+        paramiters[title].Value = value;
     }
 
     public void ClearParams() {
-        for (int i = 0; i < list.Count; ++i) {
-            list[i].Destroy();
+        foreach (var pair in paramiters) {
+            pair.Value.Destroy();
         }
-        list.Clear();
+        paramiters.Clear();
     }
 
     private void OnClick(string key) => onClick?.Invoke(key);

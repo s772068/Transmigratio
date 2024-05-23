@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class Timeline : MonoBehaviour {
+public class Timeline : PersistentSingleton<Timeline> {
     [SerializeField] private Vector2 timeDelayLimit;
     private float timeDelay;
     private float timer;
     private bool isPlay;
+    private int tick;
+
+    public int Tick => tick;
     
     public void Rewind() {
         timeDelay = timeDelayLimit.x;
@@ -31,7 +34,9 @@ public class Timeline : MonoBehaviour {
             timer += Time.fixedDeltaTime;
             if(timer >= timeDelay) {
                 timer = 0;
-                GameEvents.onTick();
+                ++tick;
+                GameEvents.onTickLogic();
+                GameEvents.onTickShow();
             }
         }
     }

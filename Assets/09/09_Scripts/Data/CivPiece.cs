@@ -20,8 +20,8 @@ public class CivPiece {
     public float reserveFood;
     public float takenFood;
 
-    public TM_Region GetRegion(int index) => Transmigratio.Instance.GetRegion(index);
-    public Civilization GetCiv(int index) => Transmigratio.Instance.GetCiv(index);
+    public TM_Region Region => Transmigratio.Instance.GetRegion(regionResidenceIndex);
+    public Civilization Civilization => Transmigratio.Instance.GetCiv(civIndex);
 
     /// <summary>
     /// Инициализация при появлении в области после миграции или при старте игры
@@ -32,21 +32,20 @@ public class CivPiece {
         population.value = startPop;
         civIndex = index;
         reserveFood = reserve;  //изначальное количество еды у кусочка
-        GameEvents.onTick += DeltaPop;
+        GameEvents.onTickLogic += DeltaPop;
     }
 
     /// <summary>
     /// Изменение населения кусочка за тик
     /// </summary>
     public void DeltaPop() {
-        Civilization civBelonging = GetCiv(civIndex);
-        float faunaKr = (float)(Math.Pow(GetRegion(regionResidenceIndex).fauna.GetMax().Value, 0.58d) / 10);
-        takenFood = population.value / 100 * faunaKr * civBelonging.prodModeK;
+        float faunaKr = (float)(Math.Pow(Region.fauna.GetMax().Value, 0.58d) / 10);
+        takenFood = population.value / 100 * faunaKr * Civilization.prodModeK;
         requestFood = population.Value / 150f;
         if (reserveFood > requestFood) { givenFood = requestFood; }
         else { givenFood = reserveFood; }
         reserveFood += takenFood - givenFood;
-        populationGrow = population.Value * civBelonging.governmentCorruption * givenFood / requestFood - population.Value / 3;
+        populationGrow = population.Value * Civilization.governmentCorruption * givenFood / requestFood - population.Value / 3;
 
         //return (int)(populationGrow);
         population.value += (int)populationGrow;

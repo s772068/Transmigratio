@@ -22,7 +22,7 @@ public class Civilization
     public float prodModeK = 0.6f;                 // коэффициент способа производства
     public float governmentCorruption = 0.4f;      // коррупция
 
-    public Population population;
+    public int Population => civPiecesList.Sum(x => x.population.Value);
 
     public Civilization ancestor;
 
@@ -30,7 +30,6 @@ public class Civilization
     {
         civPiecesList = new List<CivPiece>();
         civPiecesList.Clear();
-        population = new Population();
         civIndex = 0;
         name = "uncivTitle";
         AddPiece(regionIndex, GameSettings.startPopulation, 100);
@@ -39,14 +38,9 @@ public class Civilization
         prodMode.Init("primitive communism", "slavery", "feodalism", "capitalism", "socialism", "communism");
         government.Init("leaderism", "monarchy", "city - state", "imperium", "federation", "national state", "anarchy");
 
-        TotalCivilizationPopCalculation();
-        Debug.Log("Civilization init. \rid:" + civIndex + "\rpopulation:" + population.Value + "\rregionID:" + regionIndex);
+        Debug.Log("Civilization init. \rid:" + civIndex + "\rpopulation:" + Population + "\rregionID:" + regionIndex);
     }
 
-    public void TotalCivilizationPopCalculation()
-    {
-        population.value = civPiecesList.Sum(x => x.population.Value);
-    }
     public void AddPiece(int regionIndex, int pop, float reserve)    //когда цивилизация появляется на новой территории, создаем новый экземпляр CivPiece. Передаём туда стартовое население, id региона
     {
         CivPiece newPieceOfCiv = new CivPiece();
@@ -54,6 +48,7 @@ public class Civilization
         civPiecesList.Add(newPieceOfCiv);
         //region.AddCivPiece(newPieceOfCiv);
     }
+
     public void RemovePiece(int region)      // убирает цивилизацию из этого региона
     {
         foreach (var piece in civPiecesList)
