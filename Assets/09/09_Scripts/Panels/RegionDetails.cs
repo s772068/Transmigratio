@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class RegionDetails : MonoBehaviour {
     [SerializeField] private RegionElements elements;
@@ -47,6 +47,7 @@ public class RegionDetails : MonoBehaviour {
         rightSide.gameObject.SetActive(false);
         Dictionary<string, int> dic = Transmigratio.Instance.tmdb.GetParam(Region.id, key);
         foreach(var pair in dic) {
+            if (pair.Value == 0) continue;
             paramiters.CreateParam(pair.Key, pair.Value);
         }
     }
