@@ -26,7 +26,7 @@ public class RegionElements : MonoBehaviour {
     }
 
     public void CreateElement(string title) {
-        PrefabsLoader.Load(out RegionElement newVal, "RegionElement", content);
+        PrefabsLoader.Load(out RegionElement newVal, content);
         newVal.onClick = OnClick;
         newVal.Title = title;
         dic[title] = newVal;

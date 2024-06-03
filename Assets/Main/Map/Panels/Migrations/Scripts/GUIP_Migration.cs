@@ -18,7 +18,7 @@ public class GUIP_Migration : GUI_BasePanel, IGameConnecter {
     //[SerializeField] private Image icon;
     [SerializeField] private GUI_ProgressBar progress;
 
-    private MigrationController migration;
+    private OldMigrationController migration;
     private SettingsController settings;
 
     //private float maxPopulation;

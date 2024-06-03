@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using WorldMapStrategyKit;
 using System;
+using UnityEngine;
 
 
 /// <summary>
@@ -8,10 +11,10 @@ using System;
 [System.Serializable]
 public class CivPiece {
     //public int regionId;                //wmsk_id того региона, где живёт этот объект
-    public int regionResidenceIndex;   //может лучше сам регион, а не айди?
+    public TM_Region region;   //может лучше сам регион, а не айди?
     
     //public Civilization civBelonging;      // если мы обращаемся к CivPiece только из списка civPiecesList, эта штука нам не нужна
-    public int civIndex;
+    public Civilization civilization;
 
     public Population population;
     public float populationGrow;
@@ -20,34 +23,35 @@ public class CivPiece {
     public float reserveFood;
     public float takenFood;
 
-    public TM_Region Region => Transmigratio.Instance.GetRegion(regionResidenceIndex);
-    public Civilization Civilization => Transmigratio.Instance.GetCiv(civIndex);
+    private Map Map => Transmigratio.Instance.tmdb.map;
+    private WMSK WMSK => Map.wmsk;
 
     /// <summary>
     /// Инициализация при появлении в области после миграции или при старте игры
     /// </summary>
-    public void Init(int regionIndex, int startPop, int index, float reserve) {
-        regionResidenceIndex = regionIndex;
+    public void Init(TM_Region region, Civilization civilization, int startPopulation, float reserve) {
+        this.region = region;
         population = new Population();
-        population.value = startPop;
-        civIndex = index;
+        population.value = startPopulation;
+        this.civilization = civilization;
         reserveFood = reserve;  //изначальное количество еды у кусочка
-        GameEvents.onTickLogic += DeltaPop;
     }
 
     /// <summary>
     /// Изменение населения кусочка за тик
     /// </summary>
     public void DeltaPop() {
-        float faunaKr = (float)(Math.Pow(Region.fauna.GetMax().Value, 0.58d) / 10);
-        takenFood = population.value / 100 * faunaKr * Civilization.prodModeK;
+        float faunaKr = (float)(Math.Pow(region.fauna.GetMax().Value, 0.58d) / 10);
+        takenFood = population.value / 100 * faunaKr * civilization.prodModeK;
         requestFood = population.Value / 150f;
-        if (reserveFood > requestFood) { givenFood = requestFood; }
-        else { givenFood = reserveFood; }
+        if (reserveFood > requestFood) givenFood = requestFood;
+        else                           givenFood = reserveFood;
         reserveFood += takenFood - givenFood;
-        populationGrow = population.Value * Civilization.governmentCorruption * givenFood / requestFood - population.Value / 3;
+        populationGrow = population.Value * civilization.governmentCorruption * givenFood / requestFood - population.Value / 3;
 
         //return (int)(populationGrow);
         population.value += (int)populationGrow;
+        //reserveFood < requestFood -> миграция туда где больше фауна
+        GameEvents.onUpdateDeltaPopulation?.Invoke(this);
     }
 }

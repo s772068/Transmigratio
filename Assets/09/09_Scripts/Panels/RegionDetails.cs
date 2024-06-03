@@ -1,8 +1,7 @@
 using System.Collections.Generic;
+using WorldMapStrategyKit;
 using UnityEngine.UI;
 using UnityEngine;
-using WorldMapStrategyKit;
-using UnityEngine.InputSystem;
 
 public class RegionDetails : MonoBehaviour {
     [SerializeField] private RegionElements leftSide;
@@ -10,14 +9,14 @@ public class RegionDetails : MonoBehaviour {
     [SerializeField] private RegionDetailsRightSide rightSide;
     [SerializeField] private ButtonsGroup tabs;
     [SerializeField] private Image civAvatar;
-    
+
+    public TM_Region region;
+
     private Dictionary<string, int> dic;
     private string element;
 
     public Sprite Avatar { set => civAvatar.sprite = value; }
-    public int RegionIndex { private get; set; }
-    public TM_Region Region => Transmigratio.Instance.GetRegion(RegionIndex);
-
+    
     private void Awake() {
         tabs.onClick = OnClickTabs;
         leftSide.onClick = OnClickElement;
@@ -25,12 +24,12 @@ public class RegionDetails : MonoBehaviour {
     }
 
     private void OnEnable() {
-        bool isHasCiv = Region.CivMain != null;
+        bool isHasCiv = region.CivMain != null;
         if (isHasCiv) leftSide.ClickCivTab();
         else          leftSide.ClickRegionTab();
 
         tabs.gameObject.SetActive(isHasCiv);
-        centerSide.Title = Region.name;
+        centerSide.Title = region.name;
         GameEvents.onTickShow += UpdateParams;
     }
 
@@ -58,7 +57,8 @@ public class RegionDetails : MonoBehaviour {
     }
 
     private void UpdateParams() {
-        dic = Transmigratio.Instance.tmdb.GetParam(Region.id, element);
+        if (element == null) return;
+        dic = Transmigratio.Instance.tmdb.GetParam(region.id, element);
         foreach (var pair in dic) {
             if (pair.Value == 0) continue;
             centerSide.SetParamiter(pair.Key, pair.Value);

@@ -15,7 +15,7 @@ public class RegionParams : MonoBehaviour {
 
     public void SetParamiter(string title, float value) {
         if (!paramiters.ContainsKey(title)) {
-            PrefabsLoader.Load(out ParamWrap newVal, "ParamWrap", content);
+            PrefabsLoader.Load(out ParamWrap newVal, content);
             newVal.onClick = OnClick;
             newVal.Title = title;
             paramiters[title] = newVal;

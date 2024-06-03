@@ -1,31 +1,29 @@
-using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using System.Linq;
 using UnityEngine;
+
 /// <summary>
 /// Класс "человечество" - суммарная/усреднённая инфа по цивилизациям
 /// </summary>
 [System.Serializable]
 public class Humanity {
-    public List<Civilization> civsList;
+    public SerializedDictionary<string, Civilization> civilizations;
 
-    public int TotalEarthPop => civsList.Sum(x => x.Population);
-
-    public Civilization GetCivByIndex(int index) => civsList[index];
+    public int TotalEarthPop => civilizations.Sum(x => x.Value.Population);
 
     public void Init() {
-        civsList = new List<Civilization>();
-        civsList.Clear();
+        civilizations = new();
+        civilizations.Clear();
         Debug.Log("Humanity init");
     }
 
     /// <summary>
     /// Создание первоначальной цивилизации (старт игры)
     /// </summary>
-    public int AddCivilization(int regionIndex) {
+    public Civilization AddCivilization(TM_Region region, string civName) {
         Civilization newCiv = new Civilization();
-        newCiv.Init(regionIndex);
-        civsList.Add(newCiv);
-        newCiv.civIndex = civsList.Count - 1;
-        return civsList.Count - 1;
+        newCiv.Init(region, civName);
+        civilizations[civName] = newCiv;
+        return newCiv;
     }
 }

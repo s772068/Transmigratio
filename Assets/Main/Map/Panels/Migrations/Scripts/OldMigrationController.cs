@@ -4,7 +4,7 @@ using System.Linq;
 using System;
 using WorldMapStrategyKit;
 
-public class MigrationController : MonoBehaviour, IGameConnecter {
+public class OldMigrationController : MonoBehaviour, IGameConnecter {
     [SerializeField] GameObject startLine;
     [SerializeField] IconMarker endLine;
     [SerializeField] Material lineMaterial;
@@ -13,7 +13,7 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
     [SerializeField, Range(0, 100)] private int percentToMigration;
     [SerializeField, Range(0, 100)] private int percentPerTick;
 
-    private Dictionary<int, MigrationData> migrations = new();
+    private Dictionary<int, OldMigrationData> migrations = new();
 
     private TimelineController timeline;
     private WmskController wmskController;
@@ -84,7 +84,7 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
 
         // print($"Step: {step}");
 
-        MigrationData newMigration = new MigrationData {
+        OldMigrationData newMigration = new OldMigrationData {
             FromCivID = fromCivID,
             ToCivID = toCivID,
             Step = step,
@@ -99,7 +99,7 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
 
     private void UpdateMigration() {
         for (int i = 0; migrations.Count > 0 && i < migrations.Count; ++i) {
-            MigrationData migration = migrations.Values.ToArray()[i];
+            OldMigrationData migration = migrations.Values.ToArray()[i];
 
             if (migration.Percent + percentPerTick > 100 ||
                 !map.data.HasCivilization(migration.From, migration.FromCivID) ||
@@ -123,7 +123,7 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
     public void DestroyMigration(int from) {
         OnClosePanel?.Invoke(from);
         migrations[from].Line.FadeOut(0);
-        migrations[from].Marker.DestroyGO();
+        migrations[from].Marker.Destroy();
         migrations.Remove(from);
     }
 
@@ -144,7 +144,7 @@ public class MigrationController : MonoBehaviour, IGameConnecter {
             (migrations[from].Step / percentPerTick * (100 - migrations[from].Percent)));
         DestroyMigration(from);
     }
-    public void MigrationLine(MigrationData data) //создаём линию миграции и иконку над ней на карте
+    public void MigrationLine(OldMigrationData data) //создаём линию миграции и иконку над ней на карте
     {
         wmskController.GetRegionPosition(data.From, out Vector2 start); //получаем начало и конец для линии
         wmskController.GetRegionPosition(data.To, out Vector2 end);

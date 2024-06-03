@@ -1,10 +1,8 @@
 using System.Collections.Generic;
+using WorldMapStrategyKit;
 using Newtonsoft.Json;
 using UnityEngine;
- 
-using WorldMapStrategyKit;
-using AYellowpaper.SerializedCollections;
-using UnityEngine.InputSystem.HID;
+
 /// <summary>
 /// Класс для работы с картой. Через него же взаимодействие с wmsk
 /// </summary>
@@ -17,6 +15,10 @@ public class Map {
     public void Init() {
         wmsk = new WMSK();
         wmsk = WMSK.instance;
+
+        wmsk.OnMarkerMouseDown = GameEvents.onMarkerMouseDown.Invoke;
+        wmsk.OnMarkerMouseEnter = GameEvents.onMarkerEnter.Invoke;
+        wmsk.OnMarkerMouseExit = GameEvents.onMarkerExit.Invoke;
 
         allRegions = new List<TM_Region>();
         allRegions.Clear();
@@ -44,11 +46,6 @@ public class Map {
         //allRegions = JsonUtility.FromJson<List<TM_Region>>(json);
 
         // foreach (TM_Region region in allRegions ) { region.Init(); }
-    }
-
-    public void StartGame(int regionIndex, int civIndex) {
-        allRegions[regionIndex].civsList.Add(civIndex);
-        allRegions[regionIndex].population.Value = GameSettings.startPopulation;
     }
 
     public TM_Region GetRegionBywmskId(int WMSKId) {

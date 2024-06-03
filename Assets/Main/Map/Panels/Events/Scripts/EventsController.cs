@@ -43,7 +43,7 @@ public class EventsController : MonoBehaviour, IGameConnecter {
         Sprite sprite = settings.Theme.GetEventMarker(e.Index);
         wmsk.CreateMarker(position, markerLiveTime, sprite, (IconMarker owner) => {
             OnOpenPanel?.Invoke(e);
-            owner.DestroyGO();
+            owner.Destroy();
         },
         () => e.Use(0));
         return true;

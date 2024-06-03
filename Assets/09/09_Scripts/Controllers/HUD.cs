@@ -24,10 +24,14 @@ public class HUD : MonoBehaviour
     public Transform otherPopup;        //окошко для остальных обучающих сообщений
     public TMP_Text otherPopupText;     //текст в otherPopup
     public Button okBtn;                //кнопка "ок" в otherPopup
-    public bool tutorCanceled = false;  //флаг, указывающий на то, отменён ли тутор
+    public bool tutorCanceled;  //флаг, указывающий на то, отменён ли тутор
+    
+    public bool isShowMigration = true;
 
     [Header("Region Details")]
     public RegionDetails regionDetails;        //окно с информацией о выбранном регионе
+
+    public Migration migration;
 
     private void Awake() {
         GameEvents.onShowMessage = OnShowMessage;
@@ -60,8 +64,13 @@ public class HUD : MonoBehaviour
         welcomePopup.gameObject.SetActive(false);
     }
 
-    public void ShowRegionDetails(int regionIndex, bool gameStarted) {
-        regionDetails.RegionIndex = regionIndex;
+    public void ShowMigration() {
+        if (!isShowMigration) return;
+        //migration
+    }
+
+    public void ShowRegionDetails(TM_Region region) {
+        regionDetails.region = region;
         regionDetails.gameObject.SetActive(true);
     }
 }

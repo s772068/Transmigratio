@@ -11,6 +11,7 @@ public class WmskController : MonoBehaviour, IGameConnecter {
     [SerializeField] private Sprite[] markerSprites;
     [SerializeField] private Material migrationMat;
 
+    private bool canOpenPanel;
     private MapController map;
     
     private WMSK wmsk;
@@ -48,8 +49,8 @@ public class WmskController : MonoBehaviour, IGameConnecter {
     public IconMarker CreateMarker(Vector2 position, float liveTime, Sprite sprite, Action<IconMarker> OnClick, Action OnTimeDestroy) {
         IconMarker marker = Instantiate(iconMarker);
         marker.Sprite = sprite;
-        marker.LiveTime = liveTime;
-        marker.OnClick += OnClick;
+        //marker.LiveTime = liveTime;
+        //marker.OnClick += OnClick;
         marker.OnTimeDestroy += OnTimeDestroy;
         //wmsk.AddMarker2DSprite(marker.gameObject, position, new Vector2(0.025f, 0.05f), true);
         wmsk.AddMarker2DSprite(marker.gameObject, position, 0.025f, true);
@@ -60,8 +61,7 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         wmsk.ToggleCountrySurface(region, true, color);
     }
 
-    public LineMarkerAnimator CreateLine(Vector2 start, Vector2 end)
-    {
+    public LineMarkerAnimator CreateLine(Vector2 start, Vector2 end) {
         LineMarkerAnimator lma = wmsk.AddLine(start, end, Color.red, 0f, 4f);
         lma.lineMaterial = migrationMat;
         lma.lineWidth = 2f;
@@ -113,7 +113,7 @@ public class WmskController : MonoBehaviour, IGameConnecter {
         OnClick?.Invoke(selectedIndex);
     }
 
-    private void ClickMarker(MarkerClickHandler marker, int buttonIndex) => marker.GetComponent<IconMarker>()?.Click();
+    //private void ClickMarker(MarkerClickHandler marker, int buttonIndex) => marker.GetComponent<IconMarker>()?.Click();
     
     #region PutInMigration
     //public void StartMigration(MigrationData data, int index) {
@@ -151,7 +151,7 @@ public class WmskController : MonoBehaviour, IGameConnecter {
     public void Init() {
         wmsk = WMSK.instance;
         wmsk.OnMouseRelease += ClickMap;
-        wmsk.OnMarkerMouseDown += ClickMarker;
+        //wmsk.OnMarkerMouseDown += ClickMarker;
         wmsk.OnDragStart += () => isDraging = true;
         wmsk.OnDragEnd += () => isDraging = false;
         

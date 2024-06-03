@@ -4,7 +4,7 @@ public struct VolcanoEvent : I_Event {
     private const float MIGRATE_PERCENT = 10f;
     private const int COST_INTERVENTION = 25;
 
-    private MigrationController migration;
+    private OldMigrationController migration;
     private ResourcesController resources;
     private SettingsController settings;
     private InfoController info;

@@ -1,7 +1,7 @@
 using WorldMapStrategyKit;
 
 [System.Serializable]
-public class MigrationData {
+public class OldMigrationData {
     public float FromCivID;
     public float ToCivID;
     public int Percent;

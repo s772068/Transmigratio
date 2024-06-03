@@ -5,7 +5,7 @@ using System.Linq;
 public class TM_Region {
     public int id; //айдишник региона, соотвествует wmsk id
     public string name;
-    public Population population = new();
+    public float Population => civsList.Sum(x => x.pieces[id].population.value);
 
     private int mainCivIndex;
 
@@ -14,38 +14,26 @@ public class TM_Region {
     public Paramiter climate;
     public Paramiter terrain;
 
-    public List<int> civsList = new();
-    private Civilization GetCiv(int index) => Transmigratio.Instance.GetCiv(index);
+    public List<Civilization> civsList = new();
     public Civilization CivMain { get => Transmigratio.Instance.GetCiv(GetMainCiv()); }
 
     public Dictionary<string, int> GetCivParamiter() {
         Dictionary<string, int> res = new();
-        Civilization civ;
-
+        
         for (int i = 0; i < civsList.Count; ++i) {
-            civ = GetCiv(civsList[i]);
-            res[civ.name] = civ.Population;
+            res[civsList[i].name] = civsList[i].Population;
         }
 
         return res;
     }
 
-    public int GetMainCiv() {
-        if (civsList.Count == 0) return -1;
+    public string GetMainCiv() {
+        if (civsList.Count == 0) return "";
 
-        Dictionary<int, int> dic = new();
-
-        Civilization civ;
-        CivPiece piece;
+        Dictionary<string, int> dic = new();
 
         for (int i = 0; i < civsList.Count; ++i) {
-            civ = GetCiv(civsList[i]);
-            for (int j = 0; j < civ.civPiecesList.Count; ++j) {
-                piece = civ.civPiecesList[j];
-                if (piece.regionResidenceIndex == id) {
-                    dic[civ.civIndex] = piece.population.Value;
-                }
-            }
+            dic[civsList[i].name] = civsList[i].pieces[id].population.value;
         }
 
         return dic.FirstOrDefault(x => x.Value == dic.Values.Max()).Key;

@@ -1,0 +1,202 @@
+using System.Collections.Generic;
+using WorldMapStrategyKit;
+using UnityEngine;
+using System;
+using AYellowpaper.SerializedCollections;
+using System.Linq;
+
+public class MigrationController : PersistentSingleton<MigrationController> {
+    [SerializeField] private MigrationPanel panel;
+    [SerializeField] private IconMarker markerPrefab;
+    [SerializeField] private Sprite markerSprite;
+    [SerializeField] private Material lineMaterial;
+    [SerializeField] private GameObject startLine;
+    [SerializeField] private GameObject endLine;
+    
+    [Min(0)]
+    [SerializeField] private int startTime;
+    [Min(0)]
+    [SerializeField] private int interval;
+    
+    [Range(0, 100)]
+    [SerializeField] private int percentToMigration;
+    [Range(0, 100)]
+    [SerializeField] private int stepPercent;
+
+    [SerializeField] private SerializedDictionary<int, MigrationData> migrations = new();
+
+    private Map Map => Transmigratio.Instance.tmdb.map;
+    private WMSK WMSK => Transmigratio.Instance.tmdb.map.wmsk;
+
+    private void Start() {
+        GameEvents.onTickLogic += OnTickLogic;
+        //GameEvents.onTickShow += OnTickShow;
+        //GameEvents.onUpdateDeltaPopulation = TryMigration;
+
+        //panel.onBreak = Break;
+        //panel.onSpeedUp = SpeedUp;
+        GameEvents.onMarkerMouseDown += OnMarkerMouseDown;
+        GameEvents.onMarkerEnter += OnMarkerEnter;
+        GameEvents.onMarkerExit += OnMarkerExit;
+    }
+
+    public void Add() => Add(Transmigratio.Instance.GetRegion(0),
+                             Transmigratio.Instance.GetRegion(1),
+                             Transmigratio.Instance.GetCiv("unciv"));
+
+    private void OnMarkerMouseDown(MarkerClickHandler marker, int buttonIndex) {
+        marker.GetComponent<IconMarker>().Click();
+    }
+
+    private void OnMarkerEnter(MarkerClickHandler marker) {
+        Transmigratio.Instance.isClickableRegion = false;
+    }
+
+    private void OnMarkerExit(MarkerClickHandler marker) {
+        Transmigratio.Instance.isClickableRegion = true;
+    }
+
+    public void TryMigration(CivPiece civPice) {
+        if (migrations.ContainsKey(civPice.region.id)) return;
+        if (civPice.reserveFood >= civPice.requestFood) return;
+
+        TM_Region region = civPice.region;
+        List<Country> countries = WMSK.CountryNeighbours(region.id);
+        if (countries.Count == 0) return;
+
+        TM_Region targetRegion = null;
+        int nextFauna;
+
+        int fauna = Map.GetRegionBywmskId(region.id).fauna.quantities["fauna"];
+
+        for (int i = 0; i < countries.Count; ++i) {
+            region = Map.GetRegionBywmskId(WMSK.GetCountryIndex(countries[i].name));
+            nextFauna = region.fauna.quantities["fauna"];
+            if (fauna < nextFauna) {
+                fauna = nextFauna;
+                targetRegion = region;
+            }
+        }
+
+        if (targetRegion == null) return;
+
+        Add(civPice.region, targetRegion, civPice.civilization);
+    }
+
+    private void StartMigration() {
+        // Открывается панель
+        // Спустя заданное время запускается миграция
+    }
+
+    private void OnTickLogic() {
+        for(int i = 0; i < migrations.Count; ++i) {
+            // Этап перед началом миграции
+            MigrationData migration = migrations.Values.ElementAt(i);
+            if(migration.timerToStart < startTime) {
+                ++migration.timerToStart;
+            } else {
+                // Создание цивилизации в целевом регионе
+                if (!migration.to.civsList.Contains(migration.civilization)) {
+                    migration.curPopulations += migration.stepPopulations;
+                    migration.to.civsList.Add(migration.civilization);
+                    migration.civilization.AddPiece(migration.to, migration.stepPopulations, 10);
+                }
+                //Интервал
+                if(migration.timerInterval < interval) {
+                    ++migration.timerInterval;
+                    continue;
+                } else {
+                    migration.timerInterval = 0;
+                }
+                //Перенос людей
+                if (migration.fullPopulations > migration.curPopulations) {
+                    if (migration.fullPopulations - migration.curPopulations >= migration.stepPopulations) {
+                        migration.curPopulations += migration.stepPopulations;
+                        migration.civilization.pieces[migration.to.id].population.value += migration.stepPopulations;
+                    } else {
+                        migration.curPopulations = migration.fullPopulations;
+                        migration.civilization.pieces[migration.to.id].population.value += migration.fullPopulations - migration.curPopulations;
+                    }
+                }
+                // Удаление миграции
+                if (migration.curPopulations == migration.fullPopulations) {
+                    Remove(migration.from.id);
+                }
+            }
+        }
+    }
+
+    private void OnTickShow() {
+        //panel.Value = migrations[Transmigratio.Instance.activeRegionIndex].;
+    }
+
+    private void Add(TM_Region from, TM_Region to, Civilization civ) {
+        MigrationData newMigration = new();
+
+        Vector2 start = WMSK.countries[from.id].center;
+        Vector2 end = WMSK.countries[to.id].center;
+
+        newMigration.from = from;
+        newMigration.to = to;
+        newMigration.civilization = civ;
+        newMigration.line = CreateLine(start, end);
+        newMigration.marker = CreateMarker(from.id, start, end);
+        newMigration.fullPopulations = civ.Population / 100 * percentToMigration;
+        newMigration.stepPopulations = newMigration.fullPopulations / 100 * stepPercent;
+
+        civ.pieces[from.id].population.value -= civ.Population / 100 * percentToMigration;
+
+        migrations[from.id] = newMigration;
+    }
+
+    public void Remove(int index) {
+        migrations[index].line.Destroy();
+        migrations[index].marker.Destroy();
+        migrations.Remove(index);
+    }
+
+    private LineMarkerAnimator CreateLine(Vector2 start, Vector2 end) {
+        LineMarkerAnimator lma = WMSK.AddLine(start, end, Color.red, 0f, 4f);
+        lma.lineMaterial = lineMaterial;
+        lma.lineWidth = 2f;
+        lma.drawingDuration = 1.5f;
+        lma.dashInterval = 0.005f;
+        lma.dashAnimationDuration = 0.8f;
+        lma.startCap = startLine;
+        lma.endCap = endLine;
+        return lma;
+    }
+
+    public IconMarker CreateMarker(int from, Vector2 start, Vector2 end) {
+        Vector2 position = (start + end) / 2;
+        IconMarker marker = Instantiate(markerPrefab);
+        marker.Sprite = markerSprite;
+        marker.OnClick += OpenPanel;
+        marker.Index = from;
+
+        MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.025f, true);
+        handler.allowDrag = false;
+        
+        return marker;
+    }
+
+    private void OpenPanel(int region) {
+        Debug.Log($"Open migration panel: {region}");
+    }
+
+    private void CreateIcon() {
+
+    }
+
+    private void Finish(int from) {
+
+    }
+
+    private void Break() {
+
+    }
+
+    private void SpeedUp() {
+
+    }
+}

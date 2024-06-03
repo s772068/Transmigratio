@@ -15,6 +15,7 @@ public class TMDB : ScriptableObject {
         "ecoCulture" => map.allRegions[index].CivMain.ecoCulture.Quantities,
         "prodMode" => map.allRegions[index].CivMain.prodMode.Quantities,
         "government" => map.allRegions[index].CivMain.government.Quantities,
+        _ => default
     };
 
     public void TMDBInit() {
@@ -22,9 +23,9 @@ public class TMDB : ScriptableObject {
         map.Init();
     }
 
-    public void StartGame(int regionIndex) {
-        int civIndex = humanity.AddCivilization(regionIndex);
-        map.StartGame(regionIndex, civIndex);
+    public void StartGame(TM_Region region) {
+        Civilization civilization = humanity.AddCivilization(region, "unciv");
+        region.civsList.Add(civilization);
     }
 
     /*
