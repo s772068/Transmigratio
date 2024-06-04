@@ -13,6 +13,10 @@ public class MigrationPanel : MonoBehaviour {
 
     private MigrationData data;
 
+    public Action onNothing;
+    public Action<int> onBreak;
+    public Action<int> onSpeedUp;
+
     public bool IsOpenPanel => !isOpenPanel.isOn;
 
     public MigrationData Data { set {
@@ -23,10 +27,6 @@ public class MigrationPanel : MonoBehaviour {
             // fromTo.text = string.Format(StringLoader.Load(""), data.from.name, data.to.name);
         }
     }
-
-    public Action onNothing;
-    public Action<int> onBreak;
-    public Action<int> onSpeedUp;
 
     //ToDo: выставить ключ ОВ
     //public void Awake() {
