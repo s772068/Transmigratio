@@ -5,37 +5,57 @@ using TMPro;
 
 public class MigrationPanel : MonoBehaviour {
     [SerializeField] private Slider slider;
+    [SerializeField] private Toggle isOpenPanel;
     [SerializeField] private TMP_Text fromTo;
-    [SerializeField] private TMP_Text BreakPointTxt;
-    [SerializeField] private TMP_Text NothingPointTxt;
-    [SerializeField] private TMP_Text SpeedUpTxt;
+    [SerializeField] private TMP_Text breakPointTxt;
+    [SerializeField] private TMP_Text nothingPointTxt;
+    [SerializeField] private TMP_Text speedUpTxt;
 
-    public MigrationData Data { private get; set; }
+    private MigrationData data;
 
-    public Action<int> onBreak;
-    public Action<int> onSpeedUp;
+    public bool IsOpenPanel => !isOpenPanel.isOn;
 
-    public float Value { set {
+    public MigrationData Data { set {
+            data = value;
+            slider.value = value.curPopulations * 100 / value.fullPopulations;
 
+            // ToDo: вставить строку в виде "from: {0} | to: {1}"
+            // fromTo.text = string.Format(StringLoader.Load(""), data.from.name, data.to.name);
         }
     }
 
-    public void OpenPanel() {
+    public Action onNothing;
+    public Action<int> onBreak;
+    public Action<int> onSpeedUp;
+
+    //ToDo: выставить ключ ОВ
+    //public void Awake() {
+    //    breakPointTxt.text = $"{10} {StringLoader.Load("IP")}";
+    //    breakPointTxt.text = $"{0} {StringLoader.Load("IP")}";
+    //    breakPointTxt.text = $"{5} {StringLoader.Load("IP")}";
+    //}
+
+    public void Open() {
         Timeline.Instance.Pause();
         gameObject.SetActive(true);
     }
 
-    public void ClosePanel() {
-        Timeline.Instance.Play();
-        gameObject.SetActive(false);
+    public void Nothing() {
+        onNothing?.Invoke();
+        Close();
     }
 
     public void Break() {
-        onBreak.Invoke(Data.from.id);
-        ClosePanel();
+        onBreak.Invoke(data.from.id);
+        Close();
     }
     public void SpeedUp() {
-        onSpeedUp?.Invoke(Data.from.id);
-        ClosePanel();
+        onSpeedUp?.Invoke(data.from.id);
+        Close();
+    }
+
+    public void Close() {
+        Timeline.Instance.Play();
+        gameObject.SetActive(false);
     }
 }

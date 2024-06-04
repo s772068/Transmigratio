@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using WorldMapStrategyKit;
+using System.Linq;
 using UnityEngine;
 using System;
-using AYellowpaper.SerializedCollections;
-using System.Linq;
 
-public class MigrationController : PersistentSingleton<MigrationController> {
+public class MigrationController : MonoBehaviour {
     [SerializeField] private MigrationPanel panel;
     [SerializeField] private IconMarker markerPrefab;
     [SerializeField] private Sprite markerSprite;
@@ -23,25 +22,27 @@ public class MigrationController : PersistentSingleton<MigrationController> {
     [Range(0, 100)]
     [SerializeField] private int stepPercent;
 
-    private SerializedDictionary<int, MigrationData> migrations = new();
+    private int aiSolutionIndex = -1;
+    private List<Action<int>> ai = new();
+    private Dictionary<int, MigrationData> migrations = new();
 
     private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Transmigratio.Instance.tmdb.map.wmsk;
+
+    private void Awake() {
+        ai = new() { (int i) => { }, ClickBreak, ClickSpeedUp };
+    }
 
     private void Start() {
         GameEvents.onTickLogic += OnTickLogic;
         GameEvents.onUpdateDeltaPopulation = TryMigration;
 
-        panel.onBreak = Break;
-        panel.onSpeedUp = SpeedUp;
+        panel.onBreak = ClickBreak;
+        panel.onSpeedUp = ClickSpeedUp;
         GameEvents.onMarkerMouseDown += OnMarkerMouseDown;
         GameEvents.onMarkerEnter += OnMarkerEnter;
         GameEvents.onMarkerExit += OnMarkerExit;
     }
-
-    public void Add() => Add(Transmigratio.Instance.GetRegion(0),
-                             Transmigratio.Instance.GetRegion(1),
-                             Transmigratio.Instance.GetCiv("unciv"));
 
     private void OnMarkerMouseDown(MarkerClickHandler marker, int buttonIndex) {
         marker.GetComponent<IconMarker>().Click();
@@ -82,6 +83,52 @@ public class MigrationController : PersistentSingleton<MigrationController> {
         Add(civPice.region, targetRegion, civPice.civilization);
     }
 
+    private void Add(TM_Region from, TM_Region to, Civilization civ) {
+        MigrationData newMigration = new();
+
+        Vector2 start = WMSK.countries[from.id].center;
+        Vector2 end = WMSK.countries[to.id].center;
+
+        newMigration.from = from;
+        newMigration.to = to;
+        newMigration.civilization = civ;
+        newMigration.line = CreateLine(start, end);
+        newMigration.marker = CreateMarker(from.id, start, end);
+        newMigration.fullPopulations = civ.Population / 100 * percentToMigration;
+        newMigration.stepPopulations = newMigration.fullPopulations / 100 * stepPercent;
+
+        civ.pieces[from.id].population.value -= civ.Population / 100 * percentToMigration;
+        migrations[from.id] = newMigration;
+
+        if (aiSolutionIndex == -1) OpenPanel(from.id);
+        else                       ai[aiSolutionIndex]?.Invoke(newMigration.from.id);
+    }
+
+    private LineMarkerAnimator CreateLine(Vector2 start, Vector2 end) {
+        LineMarkerAnimator lma = WMSK.AddLine(start, end, Color.red, 0f, 4f);
+        lma.lineMaterial = lineMaterial;
+        lma.lineWidth = 2f;
+        lma.drawingDuration = 1.5f;
+        lma.dashInterval = 0.005f;
+        lma.dashAnimationDuration = 0.8f;
+        lma.startCap = startLine;
+        lma.endCap = endLine;
+        return lma;
+    }
+
+    public IconMarker CreateMarker(int from, Vector2 start, Vector2 end) {
+        Vector2 position = (start + end) / 2;
+        IconMarker marker = Instantiate(markerPrefab);
+        marker.Sprite = markerSprite;
+        marker.OnClick += OpenPanel;
+        marker.Index = from;
+
+        MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.025f, true);
+        handler.allowDrag = false;
+
+        return marker;
+    }
+
     private void OnTickLogic() {
         for(int i = 0; i < migrations.Count; ++i) {
             // Этап перед началом миграции
@@ -120,69 +167,30 @@ public class MigrationController : PersistentSingleton<MigrationController> {
         }
     }
 
-    private void Add(TM_Region from, TM_Region to, Civilization civ) {
-        MigrationData newMigration = new();
-
-        Vector2 start = WMSK.countries[from.id].center;
-        Vector2 end = WMSK.countries[to.id].center;
-
-        newMigration.from = from;
-        newMigration.to = to;
-        newMigration.civilization = civ;
-        newMigration.line = CreateLine(start, end);
-        newMigration.marker = CreateMarker(from.id, start, end);
-        newMigration.fullPopulations = civ.Population / 100 * percentToMigration;
-        newMigration.stepPopulations = newMigration.fullPopulations / 100 * stepPercent;
-
-        civ.pieces[from.id].population.value -= civ.Population / 100 * percentToMigration;
-        migrations[from.id] = newMigration;
-
-        OpenPanel(from.id);
-    }
-
     public void Remove(int index) {
         migrations[index].line.Destroy();
         migrations[index].marker.Destroy();
         migrations.Remove(index);
     }
 
-    private LineMarkerAnimator CreateLine(Vector2 start, Vector2 end) {
-        LineMarkerAnimator lma = WMSK.AddLine(start, end, Color.red, 0f, 4f);
-        lma.lineMaterial = lineMaterial;
-        lma.lineWidth = 2f;
-        lma.drawingDuration = 1.5f;
-        lma.dashInterval = 0.005f;
-        lma.dashAnimationDuration = 0.8f;
-        lma.startCap = startLine;
-        lma.endCap = endLine;
-        return lma;
+    private void OpenPanel(int fromID) {
+        panel.Data = migrations[fromID];
+        panel.Open();
     }
 
-    public IconMarker CreateMarker(int from, Vector2 start, Vector2 end) {
-        Vector2 position = (start + end) / 2;
-        IconMarker marker = Instantiate(markerPrefab);
-        marker.Sprite = markerSprite;
-        marker.OnClick += OpenPanel;
-        marker.Index = from;
-
-        MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.025f, true);
-        handler.allowDrag = false;
-        
-        return marker;
+    private void ClickNothing() {
+        aiSolutionIndex = panel.IsOpenPanel ? -1 : 0;
     }
 
-    private void OpenPanel(int region) {
-        panel.Data = migrations[region];
-        panel.OpenPanel();
-    }
-
-    private void Break(int fromID) {
+    private void ClickBreak(int fromID) {
+        aiSolutionIndex = panel.IsOpenPanel ? -1 : 1;
         MigrationData data = migrations[fromID];
         data.civilization.pieces[data.from.id].population.value += data.fullPopulations - data.curPopulations;
         Remove(fromID);
     }
 
-    private void SpeedUp(int fromID) {
+    private void ClickSpeedUp(int fromID) {
+        aiSolutionIndex = panel.IsOpenPanel ? -1 : 2;
         migrations[fromID].stepPopulations *= 2;
     }
 }
