@@ -3,6 +3,7 @@ using WorldMapStrategyKit;
 using System.Linq;
 using UnityEngine;
 using System;
+using AYellowpaper.SerializedCollections;
 
 public class MigrationController : MonoBehaviour {
     [SerializeField] private MigrationPanel panel;
@@ -24,7 +25,7 @@ public class MigrationController : MonoBehaviour {
 
     private int aiSolutionIndex = -1;
     private List<Action<int>> ai = new();
-    private Dictionary<int, MigrationData> migrations = new();
+    [SerializeField] private SerializedDictionary<int, MigrationData> migrations = new();
 
     private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Transmigratio.Instance.tmdb.map.wmsk;
@@ -38,6 +39,7 @@ public class MigrationController : MonoBehaviour {
         GameEvents.onUpdateDeltaPopulation = TryMigration;
 
         panel.onBreak = ClickBreak;
+        panel.onNothing = ClickNothing;
         panel.onSpeedUp = ClickSpeedUp;
         GameEvents.onMarkerMouseDown += OnMarkerMouseDown;
         GameEvents.onMarkerEnter += OnMarkerEnter;
@@ -69,12 +71,32 @@ public class MigrationController : MonoBehaviour {
 
         int fauna = Map.GetRegionBywmskId(region.id).fauna.quantities["fauna"];
 
+        List<TM_Region> list = new();
+        int res = 0;
+
         for (int i = 0; i < countries.Count; ++i) {
             region = Map.GetRegionBywmskId(WMSK.GetCountryIndex(countries[i].name));
+            if (Transmigratio.Instance.GetRegion(WMSK.GetCountryIndex(countries[i])).Population == 0) {
+                list.Add(region);
+            }
+        }
+
+        if (list.Count == 0) {
             nextFauna = region.fauna.quantities["fauna"];
             if (fauna < nextFauna) {
                 fauna = nextFauna;
                 targetRegion = region;
+            }
+        } else if(list.Count == 1) {
+            targetRegion = list[0];
+        } else if (list.Count > 1) {
+            for (int i = 0; i < list.Count; ++i) {
+                nextFauna = region.fauna.quantities["fauna"];
+                if (fauna < nextFauna) {
+                    fauna = nextFauna;
+                    targetRegion = list[i];
+                }
+
             }
         }
 
@@ -94,11 +116,13 @@ public class MigrationController : MonoBehaviour {
         newMigration.civilization = civ;
         newMigration.line = CreateLine(start, end);
         newMigration.marker = CreateMarker(from.id, start, end);
-        newMigration.fullPopulations = civ.Population / 100 * percentToMigration;
-        newMigration.stepPopulations = newMigration.fullPopulations / 100 * stepPercent;
+        newMigration.fullPopulations = (int) (civ.pieces[from.id].population.value / 100f * percentToMigration);
+        newMigration.stepPopulations = (int) (newMigration.fullPopulations / 100f * stepPercent);
 
-        civ.pieces[from.id].population.value -= civ.Population / 100 * percentToMigration;
+        civ.pieces[from.id].population.value -= newMigration.fullPopulations;
         migrations[from.id] = newMigration;
+
+        Debug.Log($"!!!!!!! From: {from.id} | To: {to.id} | Solution: {aiSolutionIndex} !!!!!!!");
 
         if (aiSolutionIndex == -1) OpenPanel(from.id);
         else                       ai[aiSolutionIndex]?.Invoke(newMigration.from.id);
@@ -168,6 +192,7 @@ public class MigrationController : MonoBehaviour {
     }
 
     public void Remove(int index) {
+        Debug.Log($"Remove migration {index}");
         migrations[index].line.Destroy();
         migrations[index].marker.Destroy();
         migrations.Remove(index);
@@ -179,10 +204,12 @@ public class MigrationController : MonoBehaviour {
     }
 
     private void ClickNothing() {
+        Debug.Log(panel.IsOpenPanel);
         aiSolutionIndex = panel.IsOpenPanel ? -1 : 0;
     }
 
     private void ClickBreak(int fromID) {
+        Debug.Log(panel.IsOpenPanel);
         aiSolutionIndex = panel.IsOpenPanel ? -1 : 1;
         MigrationData data = migrations[fromID];
         data.civilization.pieces[data.from.id].population.value += data.fullPopulations - data.curPopulations;
@@ -190,6 +217,7 @@ public class MigrationController : MonoBehaviour {
     }
 
     private void ClickSpeedUp(int fromID) {
+        Debug.Log(panel.IsOpenPanel);
         aiSolutionIndex = panel.IsOpenPanel ? -1 : 2;
         migrations[fromID].stepPopulations *= 2;
     }

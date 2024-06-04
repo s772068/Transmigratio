@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using WorldMapStrategyKit;
 using System;
-using UnityEngine;
 
 
 /// <summary>
@@ -51,7 +49,5 @@ public class CivPiece {
 
         //return (int)(populationGrow);
         population.value += (int)populationGrow;
-        //reserveFood < requestFood -> миграция туда где больше фауна
-        GameEvents.onUpdateDeltaPopulation?.Invoke(this);
     }
 }
