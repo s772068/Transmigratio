@@ -23,18 +23,17 @@ public class MigrationController : PersistentSingleton<MigrationController> {
     [Range(0, 100)]
     [SerializeField] private int stepPercent;
 
-    [SerializeField] private SerializedDictionary<int, MigrationData> migrations = new();
+    private SerializedDictionary<int, MigrationData> migrations = new();
 
     private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Transmigratio.Instance.tmdb.map.wmsk;
 
     private void Start() {
         GameEvents.onTickLogic += OnTickLogic;
-        //GameEvents.onTickShow += OnTickShow;
-        //GameEvents.onUpdateDeltaPopulation = TryMigration;
+        GameEvents.onUpdateDeltaPopulation = TryMigration;
 
-        //panel.onBreak = Break;
-        //panel.onSpeedUp = SpeedUp;
+        panel.onBreak = Break;
+        panel.onSpeedUp = SpeedUp;
         GameEvents.onMarkerMouseDown += OnMarkerMouseDown;
         GameEvents.onMarkerEnter += OnMarkerEnter;
         GameEvents.onMarkerExit += OnMarkerExit;
@@ -83,11 +82,6 @@ public class MigrationController : PersistentSingleton<MigrationController> {
         Add(civPice.region, targetRegion, civPice.civilization);
     }
 
-    private void StartMigration() {
-        // ќткрываетс€ панель
-        // —пуст€ заданное врем€ запускаетс€ миграци€
-    }
-
     private void OnTickLogic() {
         for(int i = 0; i < migrations.Count; ++i) {
             // Ётап перед началом миграции
@@ -126,10 +120,6 @@ public class MigrationController : PersistentSingleton<MigrationController> {
         }
     }
 
-    private void OnTickShow() {
-        //panel.Value = migrations[Transmigratio.Instance.activeRegionIndex].;
-    }
-
     private void Add(TM_Region from, TM_Region to, Civilization civ) {
         MigrationData newMigration = new();
 
@@ -145,8 +135,9 @@ public class MigrationController : PersistentSingleton<MigrationController> {
         newMigration.stepPopulations = newMigration.fullPopulations / 100 * stepPercent;
 
         civ.pieces[from.id].population.value -= civ.Population / 100 * percentToMigration;
-
         migrations[from.id] = newMigration;
+
+        OpenPanel(from.id);
     }
 
     public void Remove(int index) {
@@ -181,22 +172,17 @@ public class MigrationController : PersistentSingleton<MigrationController> {
     }
 
     private void OpenPanel(int region) {
-        Debug.Log($"Open migration panel: {region}");
+        panel.Data = migrations[region];
+        panel.OpenPanel();
     }
 
-    private void CreateIcon() {
-
+    private void Break(int fromID) {
+        MigrationData data = migrations[fromID];
+        data.civilization.pieces[data.from.id].population.value += data.fullPopulations - data.curPopulations;
+        Remove(fromID);
     }
 
-    private void Finish(int from) {
-
-    }
-
-    private void Break() {
-
-    }
-
-    private void SpeedUp() {
-
+    private void SpeedUp(int fromID) {
+        migrations[fromID].stepPopulations *= 2;
     }
 }

@@ -55,7 +55,7 @@ public class Civilization {
 
     public void UpdatePieces() {
         foreach (var pair in pieces) {
-            //pair.Value.DeltaPop();
+            pair.Value.DeltaPop();
             GameEvents.onUpdateDeltaPopulation?.Invoke(pair.Value);
         }
     }
