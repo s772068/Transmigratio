@@ -45,7 +45,7 @@ public class Map {
 
         //allRegions = JsonUtility.FromJson<List<TM_Region>>(json);
 
-        // foreach (TM_Region region in allRegions ) { region.Init(); }
+        foreach (TM_Region region in allRegions ) { region.Init(); }
     }
 
     public TM_Region GetRegionBywmskId(int WMSKId) {

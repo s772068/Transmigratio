@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using WorldMapStrategyKit;
 
 [System.Serializable]
 public class TM_Region {
@@ -15,7 +17,23 @@ public class TM_Region {
     public Paramiter terrain;
 
     public List<Civilization> civsList = new();
-    public Civilization CivMain { get => Transmigratio.Instance.GetCiv(GetMainCiv()); }
+    public List<CivPiece> civPiecesList = new();
+    
+    public Civilization CivMain => Transmigratio.Instance.GetCiv(GetMainCiv());
+
+    private float TakenFood { get {
+            float res = 0;
+            for(int i = 0; i < civPiecesList.Count; ++i) {
+                res += civPiecesList[i].takenFood;
+            }
+            return res;
+        }
+    }
+
+    public void AddCivilization(Civilization civilization) {
+        civsList.Add(civilization);
+        civPiecesList.Add(civilization.pieces[id]);
+    }
 
     public Dictionary<string, int> GetCivParamiter() {
         Dictionary<string, int> res = new();
@@ -37,5 +55,16 @@ public class TM_Region {
         }
 
         return dic.FirstOrDefault(x => x.Value == dic.Values.Max()).Key;
+    }
+
+    public void Init() {
+        GameEvents.onTickLogic += UpdateFlauna;
+    }
+
+    private void UpdateFlauna() {
+        fauna["fauna"].value = Mathf.Min(
+            (int) (fauna["fauna"].value - TakenFood / 10f + (fauna["fauna"].value == 0 ? 1 : (50 / fauna["fauna"].value))),
+            fauna["fauna"].max
+        );
     }
 }

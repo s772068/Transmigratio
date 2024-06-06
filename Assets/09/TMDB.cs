@@ -7,14 +7,14 @@ public class TMDB : ScriptableObject {
     public Map map = new Map();
 
     public Dictionary<string, int> GetParam(int index, string name) => name switch {
-        "flora" => map.allRegions[index].flora.Quantities,
-        "fauna" => map.allRegions[index].fauna.Quantities,
-        "climate" => map.allRegions[index].climate.Quantities,
-        "terrain" => map.allRegions[index].terrain.Quantities,
+        "flora" => map.allRegions[index].flora.GetQuantities(),
+        "fauna" => map.allRegions[index].fauna.GetQuantities(),
+        "climate" => map.allRegions[index].climate.GetQuantities(),
+        "terrain" => map.allRegions[index].terrain.GetQuantities(),
         "civilizations" => map.allRegions[index].GetCivParamiter(),
-        "ecoCulture" => map.allRegions[index].CivMain.ecoCulture.Quantities,
-        "prodMode" => map.allRegions[index].CivMain.prodMode.Quantities,
-        "government" => map.allRegions[index].CivMain.government.Quantities,
+        "ecoCulture" => map.allRegions[index].CivMain.ecoCulture.GetQuantities(),
+        "prodMode" => map.allRegions[index].CivMain.prodMode.GetQuantities(),
+        "government" => map.allRegions[index].CivMain.government.GetQuantities(),
         _ => default
     };
 
@@ -25,7 +25,7 @@ public class TMDB : ScriptableObject {
 
     public void StartGame(TM_Region region) {
         Civilization civilization = humanity.AddCivilization(region, "unciv");
-        region.civsList.Add(civilization);
+        region.AddCivilization(civilization);
     }
 
     /*

@@ -1,7 +1,4 @@
-using UnityEngine.UI;
 using UnityEngine;
-using System;
-using WorldMapStrategyKit;
 
 //using UnityEditor.Localization.Plugins.XLIFF.V12;
 /// <summary>

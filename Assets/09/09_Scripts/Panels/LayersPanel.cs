@@ -22,14 +22,14 @@ public class LayersPanel : MonoBehaviour {
 
     // private float MaxPopulation => ?;
 
-    public void ClickTerrain() => PaintByName(terrain, (int i) => GetRegion(i).terrain.GetMax().Key);
-    public void ClickClimate() => PaintByName(climate, (int i) => GetRegion(i).climate.GetMax().Key);
-    public void ClickFlora() => PaintByPercent(flora, (int i) => GetRegion(i).flora.GetMax().Value);
-    public void ClickFauna() => PaintByPercent(fauna, (int i) => GetRegion(i).fauna.GetMax().Value);
+    public void ClickTerrain() => PaintByName(terrain, (int i) => GetRegion(i).terrain.GetMaxQuantity().key);
+    public void ClickClimate() => PaintByName(climate, (int i) => GetRegion(i).climate.GetMaxQuantity().key);
+    public void ClickFlora() => PaintByPercent(flora, (int i) => GetRegion(i).flora.GetMaxQuantity().value);
+    public void ClickFauna() => PaintByPercent(fauna, (int i) => GetRegion(i).fauna.GetMaxQuantity().value);
     public void ClickPopulation() { } // => PaintByMax(population, MaxPopulation, (int i) => GetRegion(i).population.value);
-    public void ClickEcoCulture() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ecoCulture.GetMax().Key);
-    public void ClickProdMode() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.prodMode.GetMax().Key);
-    public void ClickGovernment() => PaintByName(government, (int i) => GetRegion(i).CivMain.government.GetMax().Key);
+    public void ClickEcoCulture() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ecoCulture.GetMaxQuantity().key);
+    public void ClickProdMode() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.prodMode.GetMaxQuantity().key);
+    public void ClickGovernment() => PaintByName(government, (int i) => GetRegion(i).CivMain.government.GetMaxQuantity().key);
     public void ClickCivilization() => PaintByName(government, (int i) => GetRegion(i).CivMain.name);
 
     private void PaintByName(SerializedDictionary<string, Color> dictionary, Func<int, string> GetName) {

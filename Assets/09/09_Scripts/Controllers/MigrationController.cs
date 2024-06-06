@@ -69,7 +69,7 @@ public class MigrationController : MonoBehaviour {
         TM_Region targetRegion = null;
         int nextFauna;
 
-        int fauna = Map.GetRegionBywmskId(region.id).fauna.quantities["fauna"];
+        int fauna = Map.GetRegionBywmskId(region.id).fauna["fauna"].value;
 
         List<TM_Region> list = new();
         int res = 0;
@@ -82,7 +82,7 @@ public class MigrationController : MonoBehaviour {
         }
 
         if (list.Count == 0) {
-            nextFauna = region.fauna.quantities["fauna"];
+            nextFauna = region.fauna["fauna"].value;
             if (fauna < nextFauna) {
                 fauna = nextFauna;
                 targetRegion = region;
@@ -91,7 +91,7 @@ public class MigrationController : MonoBehaviour {
             targetRegion = list[0];
         } else if (list.Count > 1) {
             for (int i = 0; i < list.Count; ++i) {
-                nextFauna = region.fauna.quantities["fauna"];
+                nextFauna = region.fauna["fauna"].value;
                 if (fauna < nextFauna) {
                     fauna = nextFauna;
                     targetRegion = list[i];
@@ -163,8 +163,8 @@ public class MigrationController : MonoBehaviour {
                 // Создание цивилизации в целевом регионе
                 if (!migration.to.civsList.Contains(migration.civilization)) {
                     migration.curPopulations += migration.stepPopulations;
-                    migration.to.civsList.Add(migration.civilization);
                     migration.civilization.AddPiece(migration.to, migration.stepPopulations, 10);
+                    migration.to.AddCivilization(migration.civilization);
                 }
                 //Интервал
                 if(migration.timerInterval < interval) {

@@ -39,13 +39,13 @@ public class CivPiece {
     /// Изменение населения кусочка за тик
     /// </summary>
     public void DeltaPop() {
-        float faunaKr = (float)(Math.Pow(region.fauna.GetMax().Value, 0.58d) / 10);
-        takenFood = population.value / 100 * faunaKr * civilization.prodModeK;
+        float faunaKr = (float)(Math.Pow(region.fauna.GetMaxQuantity().value, 0.58d) / 10f);
+        takenFood = population.value / 100f * faunaKr * civilization.prodModeK;
         requestFood = population.Value / 150f;
         if (reserveFood > requestFood) givenFood = requestFood;
         else                           givenFood = reserveFood;
         reserveFood += takenFood - givenFood;
-        populationGrow = population.Value * civilization.governmentCorruption * givenFood / requestFood - population.Value / 3;
+        populationGrow = population.Value * civilization.governmentCorruption * givenFood / requestFood - population.Value / 3f;
 
         //return (int)(populationGrow);
         population.value += (int)populationGrow;
