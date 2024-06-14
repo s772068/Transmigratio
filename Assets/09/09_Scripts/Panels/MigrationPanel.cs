@@ -30,9 +30,9 @@ public class MigrationPanel : MonoBehaviour {
 
     //ToDo: выставить ключ ОВ
     //public void Awake() {
-    //    breakPointTxt.text = $"{10} {StringLoader.Load("IP")}";
-    //    breakPointTxt.text = $"{0} {StringLoader.Load("IP")}";
-    //    breakPointTxt.text = $"{5} {StringLoader.Load("IP")}";
+    //    breakPointTxt.text = $"{10} {StringLoader.Load("Points")}";
+    //    breakPointTxt.text = $"{0} {StringLoader.Load("Points")}";
+    //    breakPointTxt.text = $"{5} {StringLoader.Load("Points")}";
     //}
 
     public void Open() {

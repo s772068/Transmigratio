@@ -16,10 +16,6 @@ public class Map {
         wmsk = new WMSK();
         wmsk = WMSK.instance;
 
-        wmsk.OnMarkerMouseDown = GameEvents.onMarkerMouseDown.Invoke;
-        wmsk.OnMarkerMouseEnter = GameEvents.onMarkerEnter.Invoke;
-        wmsk.OnMarkerMouseExit = GameEvents.onMarkerExit.Invoke;
-
         allRegions = new List<TM_Region>();
         allRegions.Clear();
 

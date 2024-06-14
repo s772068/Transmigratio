@@ -41,9 +41,10 @@ public class MigrationController : MonoBehaviour {
         panel.onBreak = ClickBreak;
         panel.onNothing = ClickNothing;
         panel.onSpeedUp = ClickSpeedUp;
-        GameEvents.onMarkerMouseDown += OnMarkerMouseDown;
-        GameEvents.onMarkerEnter += OnMarkerEnter;
-        GameEvents.onMarkerExit += OnMarkerExit;
+
+        WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
+        WMSK.OnMarkerMouseEnter += OnMarkerEnter;
+        WMSK.OnMarkerMouseExit += OnMarkerExit;
     }
 
     private void OnMarkerMouseDown(MarkerClickHandler marker, int buttonIndex) {
@@ -147,7 +148,7 @@ public class MigrationController : MonoBehaviour {
         marker.OnClick += OpenPanel;
         marker.Index = from;
 
-        MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.025f, true);
+        MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
         handler.allowDrag = false;
 
         return marker;

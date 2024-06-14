@@ -3,8 +3,8 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "TMDB", menuName = "ScriptableObjects/TMDB", order = 1)]
 public class TMDB : ScriptableObject {
-    public Humanity humanity = new Humanity();
-    public Map map = new Map();
+    public Humanity humanity = new();
+    public Map map = new();
 
     public Dictionary<string, int> GetParam(int index, string name) => name switch {
         "flora" => map.allRegions[index].flora.GetQuantities(),

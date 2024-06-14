@@ -10,16 +10,8 @@ public static class GameEvents {
     public static Action<string> onShowMessage;
     public static Action<CivPiece> onUpdateDeltaPopulation;
 
-    // WMSK
-    // Map
-    /// <summary>
-    /// countryIndex, regionIndex, buttonIndex
-    /// </summary>
-    public static Action<int, int, int> onCountryClick;
-    /// <summary>
-    /// countryIndex, regionIndex, buttonIndex
-    /// </summary>
-    public static Action<int, int, int> onCountryLongClick;
+    public static Action<int, string> onActivateHunger;
+    public static Action<int, string> onActivateVolcano;
 
     // Marker
     public static Action<MarkerClickHandler, int> onMarkerMouseDown;
