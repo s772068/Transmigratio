@@ -2,69 +2,9 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections;
 using WorldMapStrategyKit;
-using UnityEngine.Timeline;
 
-/* Переменные
- * Панель
- * Картинка маркера
- * Картинка панели
- * Время ожидания до старта собитий
- * Лимит для последующего создания события
- * Место активации вулкана
- * Место которое может быть 
- * Полноценный процент удаления населения
- * Полноценный процент удаления пищи
- * Процент от процента удаления населения
- * Процент от процента удаления пищи
- * Событие которое автоматически срабатывает
- * Открывается ли панель при создании события
- */
-
-/* Старт
- * Ждёт 1 минуту
- * Через следующие 0 - 60 секунд создаёт событие
-*/
-
-/* При появлении события
- * Если isOpenPanel => открывает панель
- * иначе            => вызывается activateEvent
-*/
-
-/* Панель
- * В панели выбирается вариант действий
-*/
-
-/* Успокоить вулкан (Стоимость: количество людей / 300)
- * Если isOpenPanel => activateEvent задаётся эта функция
- * Удаляет текущее событие
-*/
-
-/* Уменьшить потери (Стоимость: 5)
- * Если isOpenPanel => activateEvent задаётся эта функция
- * Погибает заданное количество процентов населения и запасов пищи от того процента который мог быть без вмешательства
- * Активируется миграцию
- * Включает таймер до следующего события
-*/
-
-/* Не вмешиваться
- * Если isOpenPanel => activateEvent задаётся эта функция
- * Выключает панель
-*/
-
-/* Удаление события
- * Удаляет событие
- * Активирует ожидание создания собития
- */
-
-/* Если таймер доходит до конца
- * Погибает заданное количество процентов населения и пищи
- * Активирует миграцию
- * Удаляет событие
-*/
-
-public class VolcanoController : MonoBehaviour {
+public class VolcanoController : Singleton<VolcanoController> {
     [SerializeField] private EventPanel panel;
     [SerializeField] private IconMarker markerPrefab;
     [SerializeField] private Sprite markerSprite;
@@ -78,10 +18,14 @@ public class VolcanoController : MonoBehaviour {
     [SerializeField, Range(0, 1)] private float fullPercentPopulation;
     [SerializeField, Range(0, 1)] private float partPercentFood;
     [SerializeField, Range(0, 1)] private float partPercentPopulation;
+    [Header("Points")]
+    [SerializeField, Min(1)] private float calmVolcanoPointsDivision;
+    [SerializeField, Min(0)] private int reduceLossesPoints;
 
     private int ticker;
     private int activateIndex;
     private int ticksToActivateVolcano;
+    private bool isShowAgain;
     private CivPiece piece;
     private IconMarker marker;
     private System.Random rand = new();
@@ -126,11 +70,10 @@ public class VolcanoController : MonoBehaviour {
     public void CreateMarker(Vector2 position) {
         marker = Instantiate(markerPrefab);
         marker.Sprite = markerSprite;
-        marker.OnClick += (int i) => OpenPanel();
+        marker.OnClick += (int i) => { OpenPanel(); panel.IsShowAgain = isShowAgain; };
 
         MarkerClickHandler handler = Transmigratio.Instance.tmdb.map.wmsk.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
         handler.allowDrag = false;
-
     }
 
     public void OpenPanel() {
@@ -142,12 +85,13 @@ public class VolcanoController : MonoBehaviour {
         panel.Territory = /*string.Format(StringLoader.Load(*/ "VolcanoTerritory"/*) */;
         //                                 StringLoader.Load($"{piece.region.name}"),
         //                                 StringLoader.Load($"{piece.civilization.name}"));
-        panel.AddDesidion(/*StringLoader.Load(*/"CalmVolcano"/*)*/, (int)(piece.population.value / 300f));
-        panel.AddDesidion(/*StringLoader.Load(*/"ReduceLosses"/*)*/, 5);
+        panel.AddDesidion(/*StringLoader.Load(*/"CalmVolcano"/*)*/, (int)(piece.population.value / calmVolcanoPointsDivision));
+        panel.AddDesidion(/*StringLoader.Load(*/"ReduceLosses"/*)*/, reduceLossesPoints);
         panel.AddDesidion(/*StringLoader.Load(*/"Nothing"/*)*/, 0);
     }
 
     public void ActivateDesidion(int index) {
+        isShowAgain = panel.IsShowAgain;
         if (index == 0) CalmVolcano();
         if (index == 1) ReduceLosses();
         if (index == 2) Nothing();
@@ -176,6 +120,7 @@ public class VolcanoController : MonoBehaviour {
         panel.Close();
         marker.Destroy();
         GameEvents.onTickLogic += RestartEvent;
+        MigrationController.Instance.TryMigration(piece);
     }
 
     private void Nothing() {
@@ -194,6 +139,7 @@ public class VolcanoController : MonoBehaviour {
         panel.Close();
         marker.Destroy();
         GameEvents.onTickLogic += RestartEvent;
+        MigrationController.Instance.TryMigration(piece);
     }
 
     private void WaitActivateVolcano() {

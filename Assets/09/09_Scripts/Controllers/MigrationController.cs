@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using AYellowpaper.SerializedCollections;
 
-public class MigrationController : MonoBehaviour {
+public class MigrationController : Singleton<MigrationController> {
     [SerializeField] private MigrationPanel panel;
     [SerializeField] private IconMarker markerPrefab;
     [SerializeField] private Sprite markerSprite;

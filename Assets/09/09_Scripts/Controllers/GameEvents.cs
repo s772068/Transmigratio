@@ -10,8 +10,7 @@ public static class GameEvents {
     public static Action<string> onShowMessage;
     public static Action<CivPiece> onUpdateDeltaPopulation;
 
-    public static Action<int, string> onActivateHunger;
-    public static Action<int, string> onActivateVolcano;
+    public static Action<CivPiece> onActivateHunger;
 
     // Marker
     public static Action<MarkerClickHandler, int> onMarkerMouseDown;

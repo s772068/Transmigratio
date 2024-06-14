@@ -1,42 +1,91 @@
 using System.Collections.Generic;
+using WorldMapStrategyKit;
 using UnityEngine;
 
-public class HungerController : MonoBehaviour {
+public class HungerController : Singleton<HungerController> {
     [SerializeField] private EventPanel panel;
-    [SerializeField] private Sprite markerIconSprite;
+    [SerializeField] private IconMarker markerPrefab;
+    [SerializeField] private Sprite markerSprite;
     [SerializeField] private Sprite panelSprite;
+    [Header("Desidion")]
+    [SerializeField, Min(0)] private float addFoodDivision;
+    [Header("Points")]
+    [SerializeField, Min(0)] private float addFoodDivisionPoints;
+    [SerializeField, Range(0, 1)] private float AddSomeFoodPointsPercent;
 
-    private List<EventData> events = new();
+    private bool isShowAgain;
+    private IconMarker marker;
+    private CivPiece selectedCivPiece;
+    private List<CivPiece> events = new();
 
-    public void OpenPanel(int index) {
+    private void Awake() {
+        GameEvents.onActivateHunger = AddEvent;
+        GameEvents.onDeactivateHunger = RemoveEvent;
+    }
+
+    public void AddEvent(CivPiece piece) {
+        CreateMarker(piece);
+        events.Add(piece);
+        if (isShowAgain) OpenPanel(piece);
+    }
+
+    public void CreateMarker(CivPiece piece) {
+        marker = Instantiate(markerPrefab);
+        marker.Sprite = markerSprite;
+        marker.Index = events.Count;
+        marker.OnClick += (int i) => { OpenPanel(events[i]); panel.IsShowAgain = isShowAgain; };
+
+        Vector2 position = Transmigratio.Instance.tmdb.map.wmsk.countries[piece.region.id].center;
+        MarkerClickHandler handler = Transmigratio.Instance.tmdb.map.wmsk.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
+        handler.allowDrag = false;
+    }
+
+    public void OpenPanel(CivPiece piece) {
         panel.Open();
+        panel.onClick = ActivateDesidion;
         panel.Image = panelSprite;
-        panel.Title = StringLoader.Load("HungerTitle");
-        panel.Description = StringLoader.Load("HungerDescription");
-        panel.Territory = string.Format(StringLoader.Load("HungerFrom"),
-                                  StringLoader.Load($"Region {events[index].piece.region.id}"),
-                                  StringLoader.Load(events[index].piece.civilization.name));
-        panel.AddDesidion(StringLoader.Load("AddFood"), 15);
-        panel.AddDesidion(StringLoader.Load("AddSomeFood"), 5);
-        panel.AddDesidion(StringLoader.Load("Nothing"), 0);
+        panel.Title = /*StringLoader.Load(*/"HungerTitle"/*)*/;
+        panel.Description = /*StringLoader.Load(*/"HungerDescription"/*)*/;
+        panel.Territory = /*string.Format(StringLoader.Load(*/"HungerFrom"/*),*/;
+                                        //StringLoader.Load($"Region {events[index].piece.region.id}"),
+                                        //StringLoader.Load(events[index].piece.civilization.name));
+        panel.AddDesidion(/*StringLoader.Load(*/"AddFood"/*)*/, (int)(piece.population.value / addFoodDivision / addFoodDivisionPoints));
+        panel.AddDesidion(/*StringLoader.Load(*/"AddSomeFood"/*)*/, 5);
+        panel.AddDesidion(/*StringLoader.Load(*/"Nothing"/*)*/, 0);
+
+        selectedCivPiece = piece;
     }
 
     public void ClosePanel() {
         panel.Close();
     }
 
-    public void AddEvent(EventData e) => events.Add(e);
-    public void RemoveEvent(EventData index) => events.Remove(index);
+    public void ActivateDesidion(int index) {
+        isShowAgain = panel.IsShowAgain;
+        if (index == 0) AddFood();
+        if (index == 1) AddSomeFood();
+        if (index == 2) Nothing();
+    }
 
-    private void AddFood(CivPiece piece) {
+    private void AddFood() {
         Debug.Log("AddFood");
+        selectedCivPiece.reserveFood += selectedCivPiece.population.value / addFoodDivision;
+        MigrationController.Instance.TryMigration(selectedCivPiece);
+        RemoveEvent(selectedCivPiece);
     }
 
-    private void AddSomeFood(CivPiece piece) {
+    private void AddSomeFood() {
         Debug.Log("AddSomeFood");
+        selectedCivPiece.reserveFood += selectedCivPiece.population.value / addFoodDivision / 2;
+        MigrationController.Instance.TryMigration(selectedCivPiece);
+        RemoveEvent(selectedCivPiece);
     }
 
-    private void Nothing(CivPiece piece) {
+    private void Nothing() {
         Debug.Log("Nothing");
+    }
+
+    public void RemoveEvent(CivPiece piece) {
+        events.Remove(piece);
     }
 }
