@@ -11,6 +11,7 @@ public static class GameEvents {
     public static Action<CivPiece> onUpdateDeltaPopulation;
 
     public static Action<CivPiece> onActivateHunger;
+    public static Action<CivPiece> onDeactivateHunger;
 
     // Marker
     public static Action<MarkerClickHandler, int> onMarkerMouseDown;
