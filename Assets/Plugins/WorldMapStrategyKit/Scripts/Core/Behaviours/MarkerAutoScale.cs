@@ -29,7 +29,6 @@ namespace WorldMapStrategyKit {
                 return;
             }
             float desiredScale = SCALE_MULTIPLIER / map.GetZoomLevel();
-            Debug.Log($"Zoom: {map.GetZoomLevel()}");
             if (desiredScale < minScale) {
                 desiredScale = minScale;
             } else if (desiredScale > maxScale) {
