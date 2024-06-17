@@ -18,25 +18,30 @@ public class HungerController : Singleton<HungerController> {
     private CivPiece selectedCivPiece;
     private List<CivPiece> events = new();
 
-    private void Awake() {
+    private Map Map => Transmigratio.Instance.tmdb.map;
+    private WMSK WMSK => Map.wmsk;
+
+    private void Start() {
         GameEvents.onActivateHunger = AddEvent;
         GameEvents.onDeactivateHunger = RemoveEvent;
     }
 
     public void AddEvent(CivPiece piece) {
+        if (events.Contains(piece)) return;
         CreateMarker(piece);
         events.Add(piece);
-        if (isShowAgain) OpenPanel(piece);
+        if (panel.IsShowAgain) OpenPanel(piece);
     }
 
     public void CreateMarker(CivPiece piece) {
+        Debug.Log("CreateMarker");
         marker = Instantiate(markerPrefab);
         marker.Sprite = markerSprite;
         marker.Index = events.Count;
-        marker.OnClick += (int i) => { OpenPanel(events[i]); panel.IsShowAgain = isShowAgain; };
+        marker.onClick += (int i) => { OpenPanel(events[i]); panel.IsShowAgain = isShowAgain; };
 
-        Vector2 position = Transmigratio.Instance.tmdb.map.wmsk.countries[piece.region.id].center;
-        MarkerClickHandler handler = Transmigratio.Instance.tmdb.map.wmsk.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
+        Vector2 position = WMSK.countries[piece.region.id].center;
+        MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
         handler.allowDrag = false;
     }
 
@@ -56,11 +61,10 @@ public class HungerController : Singleton<HungerController> {
         selectedCivPiece = piece;
     }
 
-    public void ClosePanel() {
-        panel.Close();
-    }
+    public void ClosePanel(bool isPlay) => panel.Close(isPlay);
 
     public void ActivateDesidion(int index) {
+        Debug.Log("ActivateDesidion");
         isShowAgain = panel.IsShowAgain;
         if (index == 0) AddFood();
         if (index == 1) AddSomeFood();
@@ -69,20 +73,20 @@ public class HungerController : Singleton<HungerController> {
 
     private void AddFood() {
         Debug.Log("AddFood");
+        ClosePanel(true);
         selectedCivPiece.reserveFood += selectedCivPiece.population.value / addFoodDivision;
-        MigrationController.Instance.TryMigration(selectedCivPiece);
-        RemoveEvent(selectedCivPiece);
     }
 
     private void AddSomeFood() {
         Debug.Log("AddSomeFood");
+        ClosePanel(false);
         selectedCivPiece.reserveFood += selectedCivPiece.population.value / addFoodDivision / 2;
         MigrationController.Instance.TryMigration(selectedCivPiece);
-        RemoveEvent(selectedCivPiece);
     }
 
     private void Nothing() {
         Debug.Log("Nothing");
+        ClosePanel(true);
     }
 
     public void RemoveEvent(CivPiece piece) {

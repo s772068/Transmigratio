@@ -8,7 +8,6 @@ public static class GameEvents {
     /// message
     /// </summary>
     public static Action<string> onShowMessage;
-    public static Action<CivPiece> onUpdateDeltaPopulation;
 
     public static Action<CivPiece> onActivateHunger;
     public static Action<CivPiece> onDeactivateHunger;

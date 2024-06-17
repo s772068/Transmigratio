@@ -27,11 +27,14 @@ public class EventPanel : MonoBehaviour {
     }
 
     public void Open() {
+        Transmigratio.Instance.IsClickableMarker = false;
+        ClearDesidions();
         Timeline.Instance.Pause();
         gameObject.SetActive(true);
     }
 
-    public void Close() {
+    public void Close(bool isPlay) {
+        Transmigratio.Instance.IsClickableMarker = isPlay;
         Timeline.Instance.Play();
         gameObject.SetActive(false);
     }

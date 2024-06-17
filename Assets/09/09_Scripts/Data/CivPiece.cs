@@ -49,5 +49,7 @@ public class CivPiece {
 
         //return (int)(populationGrow);
         population.value += (int)populationGrow;
+        if(populationGrow < 0) GameEvents.onActivateHunger?.Invoke(this);
+        else                   GameEvents.onDeactivateHunger?.Invoke(this);
     }
 }

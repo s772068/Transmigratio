@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using WorldMapStrategyKit;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -31,12 +30,14 @@ public class RegionDetails : MonoBehaviour {
         tabs.gameObject.SetActive(isHasCiv);
         centerSide.Title = region.name;
         GameEvents.onTickShow += UpdateParams;
+        Timeline.Instance.Pause();
     }
 
     private void OnDisable() {
         leftSide.ClearElements();
         centerSide.ClearParams();
         GameEvents.onTickShow -= UpdateParams;
+        Timeline.Instance.Play();
     }
 
     public void ClickStartGame() {

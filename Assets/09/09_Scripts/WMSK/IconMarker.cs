@@ -9,10 +9,10 @@ public class IconMarker : MonoBehaviour {
     private SpriteRenderer sr;
     public Sprite Sprite { set => sr.sprite = value; }
     
-    public Action<int> OnClick;
+    public Action<int> onClick;
     public Action OnTimeDestroy;
 
-    public void Click() => OnClick?.Invoke(Index);
+    public void Click() => onClick?.Invoke(Index);
     
     public void Destroy() => Destroy(gameObject);
 

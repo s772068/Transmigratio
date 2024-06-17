@@ -12,7 +12,7 @@ public class EventDesidion : MonoBehaviour {
     public string Title { set => title.text = value; }
     public int Points { set => points.text = $"{value} {/*StringLoader.Load(*/"Points"/*)*/}"; }
 
-    public void Click() => onClick?.Invoke(Index);
+    public void Click() { Debug.Log("ClickDesidion"); onClick?.Invoke(Index); }
 
     public void Destroy() {
         Destroy(gameObject);

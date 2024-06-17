@@ -1,4 +1,5 @@
 using UnityEngine;
+using WorldMapStrategyKit;
 
 //using UnityEditor.Localization.Plugins.XLIFF.V12;
 /// <summary>
@@ -11,7 +12,16 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     public HUD hud;
 
     [HideInInspector] public TM_Region activeRegion;
-    [HideInInspector] public bool isClickableRegion = true;
+
+    public bool IsClickableMarker {
+        set {
+            if (value) {
+                tmdb.map.wmsk.OnMarkerMouseDown += OnMarkerMouseDown;
+            } else {
+                tmdb.map.wmsk.OnMarkerMouseDown -= OnMarkerMouseDown;
+            }
+        }
+    }
 
     public TM_Region GetRegion(int index) {
         if (index < 0) return null;
@@ -36,23 +46,38 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
         hud.ShowRegionDetails(activeRegion);
     }
 
-    public void Start() {
+    public new void Awake() {
+        base.Awake();
         tmdb.TMDBInit();
         hud.StartTutorial();
 
         tmdb.map.wmsk.OnCountryClick += OnClickFromMain;
         tmdb.map.wmsk.OnCountryLongClick += OnLongClickFromMain;
+
+        tmdb.map.wmsk.OnMarkerMouseDown += OnMarkerMouseDown;
+        tmdb.map.wmsk.OnMarkerMouseEnter += OnMarkerEnter;
+        tmdb.map.wmsk.OnMarkerMouseExit += OnMarkerExit;
     }
 
     private void OnClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
-        if (!isClickableRegion) return;
         activeRegion = tmdb.map.allRegions[countryIndex];
         hud.ShowRegionDetails(activeRegion);
     }
     private void OnLongClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
-        if (!isClickableRegion) return;
         activeRegion = tmdb.map.allRegions[countryIndex];
         hud.ShowRegionDetails(activeRegion);
+    }
+
+    private void OnMarkerEnter(MarkerClickHandler marker) {
+        IsClickableMarker = true;
+    }
+
+    private void OnMarkerExit(MarkerClickHandler marker) {
+        IsClickableMarker = false;
+    }
+
+    private void OnMarkerMouseDown(MarkerClickHandler marker, int buttonIndex) {
+        marker.GetComponent<IconMarker>().Click();
     }
 }
 

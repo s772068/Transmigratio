@@ -1,8 +1,8 @@
-using UnityEngine;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using WorldMapStrategyKit;
+using UnityEngine;
+using System.Linq;
+using System;
 
 public class VolcanoController : Singleton<VolcanoController> {
     [SerializeField] private EventPanel panel;
@@ -13,6 +13,7 @@ public class VolcanoController : Singleton<VolcanoController> {
     [SerializeField, Min(0)] private int startTicksToActivate;
     [SerializeField, Min(0)] private int minTickToActivate;
     [SerializeField, Min(0)] private int maxTickToActivate;
+    [SerializeField, Min(0)] private int ticksToEruption;
     [Header("Percents")]
     [SerializeField, Range(0, 1)] private float fullPercentFood;
     [SerializeField, Range(0, 1)] private float fullPercentPopulation;
@@ -22,16 +23,19 @@ public class VolcanoController : Singleton<VolcanoController> {
     [SerializeField, Min(1)] private float calmVolcanoPointsDivision;
     [SerializeField, Min(0)] private int reduceLossesPoints;
 
-    private int ticker;
-    private int activateIndex;
-    private int ticksToActivateVolcano;
+    [Header("OnlyForView")]
+    [SerializeField] private int ticker;
+    [SerializeField] private int activateIndex;
+    [SerializeField] private int ticksToActivateVolcano;
     private bool isShowAgain;
     private CivPiece piece;
     private IconMarker marker;
     private System.Random rand = new();
     private List<Action> autoActions = new();
 
-    private void Awake() {
+    private WMSK WMSK => Transmigratio.Instance.tmdb.map.wmsk;
+
+    private void Start() {
         autoActions.Add(CalmVolcano);
         autoActions.Add(ReduceLosses);
         autoActions.Add(ActivateVolcano);
@@ -54,11 +58,12 @@ public class VolcanoController : Singleton<VolcanoController> {
         piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
         ticksToActivateVolcano = rand.Next(minTickToActivate, maxTickToActivate);
         GameEvents.onTickLogic += WaitActivateVolcano;
-        CreateMarker(Transmigratio.Instance.tmdb.map.wmsk.countries[piece.region.id].center);
+        CreateMarker(WMSK.countries[piece.region.id].center);
         if (panel.IsShowAgain) OpenPanel();
     }
 
     public void RestartEvent() {
+        Debug.Log("RestartEvent");
         ++ticker;
         if (ticker == ticksToActivateVolcano) {
             GameEvents.onTickLogic -= RestartEvent;
@@ -70,9 +75,9 @@ public class VolcanoController : Singleton<VolcanoController> {
     public void CreateMarker(Vector2 position) {
         marker = Instantiate(markerPrefab);
         marker.Sprite = markerSprite;
-        marker.OnClick += (int i) => { OpenPanel(); panel.IsShowAgain = isShowAgain; };
+        marker.onClick += (int i) => { OpenPanel(); panel.IsShowAgain = isShowAgain; };
 
-        MarkerClickHandler handler = Transmigratio.Instance.tmdb.map.wmsk.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
+        MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
         handler.allowDrag = false;
     }
 
@@ -90,6 +95,8 @@ public class VolcanoController : Singleton<VolcanoController> {
         panel.AddDesidion(/*StringLoader.Load(*/"Nothing"/*)*/, 0);
     }
 
+    public void ClosePanel(bool isPlay) => panel.Close(isPlay);
+
     public void ActivateDesidion(int index) {
         isShowAgain = panel.IsShowAgain;
         if (index == 0) CalmVolcano();
@@ -101,10 +108,10 @@ public class VolcanoController : Singleton<VolcanoController> {
         activateIndex = 0;
         Debug.Log("CalmVolcano");
 
-        GameEvents.onTickLogic -= WaitActivateVolcano;
         ticker = 0;
-        panel.Close();
+        ClosePanel(true);
         marker.Destroy();
+        GameEvents.onTickLogic -= WaitActivateVolcano;
         GameEvents.onTickLogic += RestartEvent;
     }
 
@@ -115,17 +122,17 @@ public class VolcanoController : Singleton<VolcanoController> {
 
         Debug.Log("ReduceLosses");
 
-        GameEvents.onTickLogic -= WaitActivateVolcano;
         ticker = 0;
-        panel.Close();
+        ClosePanel(false);
         marker.Destroy();
+        GameEvents.onTickLogic -= WaitActivateVolcano;
         GameEvents.onTickLogic += RestartEvent;
         MigrationController.Instance.TryMigration(piece);
     }
 
     private void Nothing() {
         activateIndex = 2;
-        panel.Close();
+        ClosePanel(true);
     }
 
     private void ActivateVolcano() {
@@ -134,20 +141,20 @@ public class VolcanoController : Singleton<VolcanoController> {
 
         Debug.Log("ActivateVolcano");
 
-        GameEvents.onTickLogic -= WaitActivateVolcano;
         ticker = 0;
-        panel.Close();
+        ClosePanel(true);
         marker.Destroy();
-        GameEvents.onTickLogic += RestartEvent;
         MigrationController.Instance.TryMigration(piece);
     }
 
     private void WaitActivateVolcano() {
+        Debug.Log("WaitActivateVolcano");
         ++ticker;
-        if (ticker == ticksToActivateVolcano) {
+        if (ticker == ticksToEruption) {
             ticker = 0;
             marker.Destroy();
             autoActions[activateIndex]?.Invoke();
+            GameEvents.onTickLogic -= WaitActivateVolcano;
             GameEvents.onTickLogic += RestartEvent;
         }
     }

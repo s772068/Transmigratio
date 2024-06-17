@@ -30,38 +30,18 @@ public class MigrationController : Singleton<MigrationController> {
     private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Transmigratio.Instance.tmdb.map.wmsk;
 
-    private void Awake() {
-        ai = new() { (int i) => { }, ClickBreak, ClickSpeedUp };
-    }
-
     private void Start() {
+        ai = new() { (int i) => { }, ClickBreak, ClickSpeedUp };
+
         GameEvents.onTickLogic += OnTickLogic;
-        GameEvents.onUpdateDeltaPopulation = TryMigration;
 
         panel.onBreak = ClickBreak;
         panel.onNothing = ClickNothing;
         panel.onSpeedUp = ClickSpeedUp;
-
-        WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
-        WMSK.OnMarkerMouseEnter += OnMarkerEnter;
-        WMSK.OnMarkerMouseExit += OnMarkerExit;
-    }
-
-    private void OnMarkerMouseDown(MarkerClickHandler marker, int buttonIndex) {
-        marker.GetComponent<IconMarker>().Click();
-    }
-
-    private void OnMarkerEnter(MarkerClickHandler marker) {
-        Transmigratio.Instance.isClickableRegion = false;
-    }
-
-    private void OnMarkerExit(MarkerClickHandler marker) {
-        Transmigratio.Instance.isClickableRegion = true;
     }
 
     public void TryMigration(CivPiece civPice) {
         if (migrations.ContainsKey(civPice.region.id)) return;
-        if (civPice.reserveFood >= civPice.requestFood) return;
 
         TM_Region region = civPice.region;
         List<Country> countries = WMSK.CountryNeighbours(region.id);
@@ -145,7 +125,7 @@ public class MigrationController : Singleton<MigrationController> {
         Vector2 position = (start + end) / 2;
         IconMarker marker = Instantiate(markerPrefab);
         marker.Sprite = markerSprite;
-        marker.OnClick += OpenPanel;
+        marker.onClick += OpenPanel;
         marker.Index = from;
 
         MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
