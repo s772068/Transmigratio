@@ -1,5 +1,6 @@
 using WorldMapStrategyKit;
 using System;
+using UnityEngine;
 
 
 /// <summary>
@@ -49,7 +50,12 @@ public class CivPiece {
 
         //return (int)(populationGrow);
         population.value += (int)populationGrow;
-        if(populationGrow < 0) GameEvents.onActivateHunger?.Invoke(this);
-        else                   GameEvents.onDeactivateHunger?.Invoke(this);
+        if (region.id == 0) Debug.Log($"In region 0 populationGrow: {populationGrow}");
+        if (populationGrow < 0) {
+            GameEvents.onActivateHunger?.Invoke(this);
+            MigrationController.Instance.TryMigration(this);
+        } else {
+            GameEvents.onDeactivateHunger?.Invoke(this);
+        }
     }
 }

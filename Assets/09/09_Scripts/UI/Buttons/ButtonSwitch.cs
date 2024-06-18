@@ -20,6 +20,8 @@ public class ButtonSwitch : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         image = GetComponent<Image>();
     }
 
+    private void Start() { }
+
     public void OnPointerClick(PointerEventData eventData) {
         if (isActive) {
             isActive = false;

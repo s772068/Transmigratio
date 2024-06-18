@@ -103,7 +103,7 @@ public class MigrationController : Singleton<MigrationController> {
         civ.pieces[from.id].population.value -= newMigration.fullPopulations;
         migrations[from.id] = newMigration;
 
-        Debug.Log($"!!!!!!! From: {from.id} | To: {to.id} | Solution: {aiSolutionIndex} !!!!!!!");
+        Debug.Log($"Migration: From: {from.id} | To: {to.id} | Solution: {aiSolutionIndex}");
 
         if (aiSolutionIndex == -1) OpenPanel(from.id);
         else                       ai[aiSolutionIndex]?.Invoke(newMigration.from.id);

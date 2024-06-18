@@ -58,6 +58,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
         ticksToActivateVolcano = rand.Next(minTickToActivate, maxTickToActivate);
         GameEvents.onTickLogic += WaitActivateVolcano;
+        Debug.Log($"Create event Volcano in region {piece.region.id}");
         CreateMarker(WMSK.countries[piece.region.id].center);
         if (panel.IsShowAgain) OpenPanel();
     }
@@ -95,7 +96,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         panel.AddDesidion(/*StringLoader.Load(*/"Nothing"/*)*/, 0);
     }
 
-    public void ClosePanel(bool isPlay) => panel.Close(isPlay);
+    public void ClosePanel() => panel.Close();
 
     public void ActivateDesidion(int index) {
         isShowAgain = panel.IsShowAgain;
@@ -109,7 +110,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         Debug.Log("CalmVolcano");
 
         ticker = 0;
-        ClosePanel(true);
+        ClosePanel();
         marker.Destroy();
         GameEvents.onTickLogic -= WaitActivateVolcano;
         GameEvents.onTickLogic += RestartEvent;
@@ -123,7 +124,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         Debug.Log("ReduceLosses");
 
         ticker = 0;
-        ClosePanel(false);
+        ClosePanel();
         marker.Destroy();
         GameEvents.onTickLogic -= WaitActivateVolcano;
         GameEvents.onTickLogic += RestartEvent;
@@ -132,7 +133,7 @@ public class VolcanoController : Singleton<VolcanoController> {
 
     private void Nothing() {
         activateIndex = 2;
-        ClosePanel(true);
+        ClosePanel();
     }
 
     private void ActivateVolcano() {
@@ -142,7 +143,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         Debug.Log("ActivateVolcano");
 
         ticker = 0;
-        ClosePanel(true);
+        ClosePanel();
         marker.Destroy();
         MigrationController.Instance.TryMigration(piece);
     }
@@ -158,4 +159,5 @@ public class VolcanoController : Singleton<VolcanoController> {
             GameEvents.onTickLogic += RestartEvent;
         }
     }
+    // 1 раз показ панельки голода
 }

@@ -28,6 +28,7 @@ public class HungerController : Singleton<HungerController> {
 
     public void AddEvent(CivPiece piece) {
         if (events.Contains(piece)) return;
+        Debug.Log($"Add event Hunger in region {piece.region.id}");
         CreateMarker(piece);
         events.Add(piece);
         if (panel.IsShowAgain) OpenPanel(piece);
@@ -61,7 +62,7 @@ public class HungerController : Singleton<HungerController> {
         selectedCivPiece = piece;
     }
 
-    public void ClosePanel(bool isPlay) => panel.Close(isPlay);
+    public void ClosePanel() => panel.Close();
 
     public void ActivateDesidion(int index) {
         Debug.Log("ActivateDesidion");
@@ -73,23 +74,23 @@ public class HungerController : Singleton<HungerController> {
 
     private void AddFood() {
         Debug.Log("AddFood");
-        ClosePanel(true);
+        ClosePanel();
         selectedCivPiece.reserveFood += selectedCivPiece.population.value / addFoodDivision;
     }
 
     private void AddSomeFood() {
         Debug.Log("AddSomeFood");
-        ClosePanel(false);
+        ClosePanel();
         selectedCivPiece.reserveFood += selectedCivPiece.population.value / addFoodDivision / 2;
-        MigrationController.Instance.TryMigration(selectedCivPiece);
     }
 
     private void Nothing() {
         Debug.Log("Nothing");
-        ClosePanel(true);
+        ClosePanel();
     }
 
     public void RemoveEvent(CivPiece piece) {
+        Debug.Log("RemoveEvent");
         events.Remove(piece);
     }
 }

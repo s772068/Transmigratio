@@ -33,9 +33,8 @@ public class EventPanel : MonoBehaviour {
         gameObject.SetActive(true);
     }
 
-    public void Close(bool isPlay) {
-        Transmigratio.Instance.IsClickableMarker = isPlay;
-        Timeline.Instance.Play();
+    public void Close() {
+        Transmigratio.Instance.IsClickableMarker = true;
         gameObject.SetActive(false);
     }
 

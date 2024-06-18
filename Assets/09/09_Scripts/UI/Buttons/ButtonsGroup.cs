@@ -12,11 +12,11 @@ public class ButtonsGroup : MonoBehaviour {
     private void Awake() {
         for(int i = 0; i < buttons.Count; ++i) {
             buttons[i].Index = i;
-            buttons[i].onClick.AddListener(OnClick);
+            buttons[i].onClick.AddListener(Click);
         }
     }
 
-    public void OnClick(int newActiveIndex) {
+    public void Click(int newActiveIndex) {
         if (activeElement != -1) buttons[activeElement].Deactivate();
         activeElement = newActiveIndex;
         buttons[activeElement].Activate();
