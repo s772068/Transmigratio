@@ -23,6 +23,7 @@ public class MigrationController : Singleton<MigrationController> {
     [Range(0, 100)]
     [SerializeField] private int stepPercent;
 
+    private int selectedID;
     private int aiSolutionIndex = -1;
     private List<Action<int>> ai = new();
     [SerializeField] private SerializedDictionary<int, MigrationData> migrations = new();
@@ -142,6 +143,7 @@ public class MigrationController : Singleton<MigrationController> {
         for(int i = 0; i < migrations.Count; ++i) {
             // Ётап перед началом миграции
             MigrationData migration = migrations.Values.ElementAt(i);
+            int curID = migrations.Keys.ElementAt(i);
             if(migration.timerToStart < startTime) {
                 ++migration.timerToStart;
             } else {
@@ -170,6 +172,7 @@ public class MigrationController : Singleton<MigrationController> {
                 }
                 // ”даление миграции
                 if (migration.curPopulations == migration.fullPopulations) {
+                    if(curID == selectedID) panel.Close();
                     Remove(migration.from.id);
                 }
             }
@@ -184,6 +187,7 @@ public class MigrationController : Singleton<MigrationController> {
     }
 
     private void OpenPanel(int fromID) {
+        selectedID = fromID;
         panel.Data = migrations[fromID];
         panel.Open();
     }
