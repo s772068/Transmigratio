@@ -44,6 +44,7 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     public void StartGame() {
         tmdb.StartGame(activeRegion);
         hud.ShowRegionDetails(activeRegion);
+        Timeline.Instance.Pause();
     }
 
     public new void Awake() {

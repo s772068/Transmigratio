@@ -60,7 +60,10 @@ public class VolcanoController : Singleton<VolcanoController> {
         GameEvents.onTickLogic += WaitActivateVolcano;
         Debug.Log($"Create event Volcano in region {piece.region.id}");
         CreateMarker(WMSK.countries[piece.region.id].center);
-        if (panel.IsShowAgain) OpenPanel();
+        if (panel.IsShowAgain) {
+            OpenPanel();
+            Timeline.Instance.Pause();
+        }
     }
 
     public void RestartEvent() {

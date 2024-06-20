@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using WorldMapStrategyKit;
 
 [System.Serializable]
 public class TM_Region {
@@ -18,6 +17,8 @@ public class TM_Region {
 
     public List<Civilization> civsList = new();
     public List<CivPiece> civPiecesList = new();
+
+    [HideInInspector] public IconMarker marker;
     
     public Civilization CivMain => Transmigratio.Instance.GetCiv(GetMainCiv());
 

@@ -19,9 +19,17 @@ public class MigrationPanel : MonoBehaviour {
 
     public bool IsOpenPanel => !isOpenPanel.isOn;
 
+    public void UpdatePercents() {
+        if (data != null) {
+            slider.value = data.curPopulations * 100 / data.fullPopulations;
+        } else {
+            data = null;
+            Close();
+        }
+    }
+
     public MigrationData Data { set {
             data = value;
-            slider.value = value.curPopulations * 100 / value.fullPopulations;
 
             // ToDo: вставить строку в виде "from: {0} | to: {1}"
             // fromTo.text = string.Format(StringLoader.Load(""), data.from.name, data.to.name);
@@ -36,7 +44,6 @@ public class MigrationPanel : MonoBehaviour {
     //}
 
     public void Open() {
-        Timeline.Instance.Pause();
         gameObject.SetActive(true);
     }
 
@@ -55,7 +62,6 @@ public class MigrationPanel : MonoBehaviour {
     }
 
     public void Close() {
-        Timeline.Instance.Play();
         gameObject.SetActive(false);
     }
 }

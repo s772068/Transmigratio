@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using WorldMapStrategyKit;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class HungerController : Singleton<HungerController> {
     [SerializeField] private EventPanel panel;
@@ -14,7 +15,6 @@ public class HungerController : Singleton<HungerController> {
     [SerializeField, Range(0, 1)] private float AddSomeFoodPointsPercent;
 
     private bool isShowAgain;
-    private IconMarker marker;
     private CivPiece selectedCivPiece;
     private List<CivPiece> events = new();
 
@@ -31,18 +31,21 @@ public class HungerController : Singleton<HungerController> {
         Debug.Log($"Add event Hunger in region {piece.region.id}");
         CreateMarker(piece);
         events.Add(piece);
-        if (panel.IsShowAgain) OpenPanel(piece);
+        if (panel.IsShowAgain) {
+            OpenPanel(piece);
+            Timeline.Instance.Pause();
+        }
     }
 
     public void CreateMarker(CivPiece piece) {
         Debug.Log("CreateMarker");
-        marker = Instantiate(markerPrefab);
-        marker.Sprite = markerSprite;
-        marker.Index = events.Count;
-        marker.onClick += (int i) => { OpenPanel(events[i]); panel.IsShowAgain = isShowAgain; };
+        piece.region.marker = Instantiate(markerPrefab);
+        piece.region.marker.Sprite = markerSprite;
+        piece.region.marker.Index = events.Count;
+        piece.region.marker.onClick += (int i) => { OpenPanel(events[i]); panel.IsShowAgain = isShowAgain; };
 
         Vector2 position = WMSK.countries[piece.region.id].center;
-        MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
+        MarkerClickHandler handler = WMSK.AddMarker2DSprite(piece.region.marker.gameObject, position, 0.03f, true, true);
         handler.allowDrag = false;
     }
 
@@ -91,6 +94,7 @@ public class HungerController : Singleton<HungerController> {
 
     public void RemoveEvent(CivPiece piece) {
         Debug.Log("RemoveEvent");
+        if(piece.region.marker != null) piece.region.marker.Destroy();
         events.Remove(piece);
     }
 }

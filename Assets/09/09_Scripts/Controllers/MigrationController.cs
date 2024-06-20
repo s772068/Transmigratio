@@ -35,6 +35,8 @@ public class MigrationController : Singleton<MigrationController> {
 
         GameEvents.onTickLogic += OnTickLogic;
 
+        GameEvents.onTickShow += UpdatePercent;
+
         panel.onBreak = ClickBreak;
         panel.onNothing = ClickNothing;
         panel.onSpeedUp = ClickSpeedUp;
@@ -105,8 +107,10 @@ public class MigrationController : Singleton<MigrationController> {
 
         Debug.Log($"Migration: From: {from.id} | To: {to.id} | Solution: {aiSolutionIndex}");
 
-        if (aiSolutionIndex == -1) OpenPanel(from.id);
-        else                       ai[aiSolutionIndex]?.Invoke(newMigration.from.id);
+        if (aiSolutionIndex == -1) {
+            OpenPanel(from.id);
+            Timeline.Instance.Pause();
+        } else ai[aiSolutionIndex]?.Invoke(newMigration.from.id);
     }
 
     private LineMarkerAnimator CreateLine(Vector2 start, Vector2 end) {
@@ -182,6 +186,10 @@ public class MigrationController : Singleton<MigrationController> {
     private void OpenPanel(int fromID) {
         panel.Data = migrations[fromID];
         panel.Open();
+    }
+
+    private void UpdatePercent() {
+        panel.UpdatePercents();
     }
 
     private void ClickNothing() {

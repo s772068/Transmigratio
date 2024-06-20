@@ -29,7 +29,6 @@ public class EventPanel : MonoBehaviour {
     public void Open() {
         Transmigratio.Instance.IsClickableMarker = false;
         ClearDesidions();
-        Timeline.Instance.Pause();
         gameObject.SetActive(true);
     }
 
