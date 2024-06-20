@@ -42,7 +42,7 @@ public class HungerController : Singleton<HungerController> {
         piece.region.marker = Instantiate(markerPrefab);
         piece.region.marker.Sprite = markerSprite;
         piece.region.marker.Index = events.Count;
-        piece.region.marker.onClick += (int i) => { OpenPanel(events[i]); panel.IsShowAgain = isShowAgain; };
+        piece.region.marker.onClick += (int i) => { OpenPanel(piece); panel.IsShowAgain = isShowAgain; };
 
         Vector2 position = WMSK.countries[piece.region.id].center;
         MarkerClickHandler handler = WMSK.AddMarker2DSprite(piece.region.marker.gameObject, position, 0.03f, true, true);
