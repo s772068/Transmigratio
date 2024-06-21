@@ -4095,6 +4095,43 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1054954731317029629, guid: bfe4b057887bdbc46ae9b74cb26d66e1, type: 3}
   m_PrefabInstance: {fileID: 1258922766}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &462728526
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 1920
+  m_Height: 960
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 8
+  m_MipMap: 1
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 2
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &483977014
 GameObject:
   m_ObjectHideFlags: 0
@@ -5780,50 +5817,7 @@ MonoBehaviour:
         _serializedList: []
     civsList: []
     civPiecesList: []
---- !u!1 &666395543
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 666395544}
-  - component: {fileID: 666395545}
-  m_Layer: 0
-  m_Name: Mount Points
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &666395544
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666395543}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 731413201}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &666395545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666395543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+    marker: {fileID: 0}
 --- !u!1 &667353204
 GameObject:
   m_ObjectHideFlags: 0
@@ -6551,7 +6545,7 @@ Transform:
   m_Children:
   - {fileID: 945009091}
   - {fileID: 400393531}
-  - {fileID: 666395544}
+  - {fileID: 1763569811}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11698,43 +11692,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215401940}
   m_CullTransparentMesh: 1
---- !u!84 &1240843498
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 1920
-  m_Height: 960
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 8
-  m_MipMap: 1
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 2
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &1241900603
 GameObject:
   m_ObjectHideFlags: 0
@@ -13873,27 +13830,27 @@ MonoBehaviour:
   terrain:
     _serializedList:
     - Key: plain
-      Value: {r: 0, g: 0, b: 0, a: 0.5019608}
+      Value: {r: 0.6745098, g: 0.46666667, b: 0.5254902, a: 0.7647059}
     - Key: forest
-      Value: {r: 0.16470589, g: 0.16470589, b: 0.16470589, a: 0.5019608}
+      Value: {r: 0.31764707, g: 0.6117647, b: 0.49411765, a: 0.64705884}
     - Key: desert
-      Value: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 0.5019608}
+      Value: {r: 0.84705883, g: 0.65882355, b: 0.3647059, a: 0.6666667}
     - Key: mountain
-      Value: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 0.5019608}
+      Value: {r: 0.5019608, g: 0.64705884, b: 0.6784314, a: 0.7647059}
     - Key: steppe
-      Value: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 0.5019608}
+      Value: {r: 0.61960787, g: 0.40392157, b: 0.2784314, a: 0.7647059}
     - Key: tundra
-      Value: {r: 1, g: 1, b: 1, a: 0.5019608}
+      Value: {r: 0.30980393, g: 0.44313726, b: 0.3372549, a: 0.7647059}
   climate:
     _serializedList:
     - Key: ecuatorial
-      Value: {r: 0, g: 0, b: 0, a: 0.5019608}
+      Value: {r: 0.57254905, g: 0.29411766, b: 0.25882354, a: 0.5019608}
     - Key: tropical
-      Value: {r: 0.2509804, g: 0.2509804, b: 0.2509804, a: 0.5019608}
+      Value: {r: 0.62352943, g: 0.49411765, b: 0.8117647, a: 0.5019608}
     - Key: moderate
-      Value: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0.5019608}
+      Value: {r: 0.5882353, g: 0.64705884, b: 0.43137255, a: 0.7058824}
     - Key: polar
-      Value: {r: 1, g: 1, b: 1, a: 0.5019608}
+      Value: {r: 0.3254902, g: 0.33333334, b: 0.53333336, a: 0.7254902}
   flora:
     _serializedList:
     - Key: 25
@@ -14686,6 +14643,7 @@ MonoBehaviour:
         _serializedList: []
     civsList: []
     civPiecesList: []
+    marker: {fileID: 0}
 --- !u!1 &1495308702
 GameObject:
   m_ObjectHideFlags: 0
@@ -15488,7 +15446,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 1240843498}
+        m_Texture: {fileID: 462728526}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -17687,6 +17645,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759571607}
   m_CullTransparentMesh: 1
+--- !u!1 &1763569810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1763569811}
+  - component: {fileID: 1763569812}
+  m_Layer: 0
+  m_Name: Mount Points
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1763569811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763569810}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 731413201}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1763569812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763569810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1765857077
 GameObject:
   m_ObjectHideFlags: 0
