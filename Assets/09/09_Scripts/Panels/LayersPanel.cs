@@ -26,7 +26,7 @@ public class LayersPanel : MonoBehaviour {
     public void ClickClimate() => PaintByName(climate, (int i) => GetRegion(i).climate.GetMaxQuantity().key);
     public void ClickFlora() => PaintByPercent(flora, (int i) => GetRegion(i).flora.GetMaxQuantity().value);
     public void ClickFauna() => PaintByPercent(fauna, (int i) => GetRegion(i).fauna.GetMaxQuantity().value);
-    public void ClickPopulation() { } // => PaintByMax(population, MaxPopulation, (int i) => GetRegion(i).population.value);
+    public void ClickPopulation() => PaintByMax(population, (int i) => GetRegion(i).Population);
     public void ClickEcoCulture() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ecoCulture.GetMaxQuantity().key);
     public void ClickProdMode() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.prodMode.GetMaxQuantity().key);
     public void ClickGovernment() => PaintByName(government, (int i) => GetRegion(i).CivMain.government.GetMaxQuantity().key);
@@ -54,11 +54,15 @@ public class LayersPanel : MonoBehaviour {
         }
     }
 
-    private void PaintByMax(SerializedDictionary<float, Color> dictionary, float max, Func<int, float> GetValue) {
+    private void PaintByMax(SerializedDictionary<float, Color> dictionary, Func<int, float> GetValue) {
         Color color = default;
         float percent;
+        float max = 0;
+        for(int i = 0; i < CountRegions; ++i) {
+            max = GetValue(i) > max ? GetValue(i) : max;
+        }
         for (int i = 0; i < CountRegions; ++i) {
-            percent = GetValue(i) / max * 100;
+            percent = max == 0 ? 0 : GetValue(i) / max * 100;
             color = GetColorByPercent(percent, dictionary);
             WMSK.ToggleCountrySurface(i, true, color);
         }
