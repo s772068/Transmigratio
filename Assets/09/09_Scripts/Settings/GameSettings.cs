@@ -5,16 +5,16 @@ public static class GameSettings {
     public static int yearsByTick = 10;
 
     public static List<string> civDetails = new() {
-        "government",
-        "ecoCulture",
-        "prodMode",
-        "civilizations"
+        "Government",
+        "EcoCulture",
+        "ProdMode",
+        "Civilizations"
     };
 
     public static List<string> regionDetails = new() {
-        "climate",
-        "terrain",
-        "flora",
-        "fauna"
+        "Climate",
+        "Terrain",
+        "Flora",
+        "Fauna"
     };
 }

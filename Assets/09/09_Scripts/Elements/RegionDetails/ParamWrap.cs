@@ -14,12 +14,11 @@ public class ParamWrap : MonoBehaviour, IPointerClickHandler {
 
     public Action<string> onClick;
 
-    public string Title {
-        set {
-            title.text = StringLoader.Load(value);
-            key = value;
-        }
+    public void SetTitle(string element, string _title) {
+        title.text = StringLoader.Load(element, _title);
+        key = _title;
     }
+
     public float Value { set {
             valTxt.text = value.ToString();
             slider.value = value;

@@ -28,9 +28,9 @@ public class Civilization {
         name = civName;
         AddPiece(region, GameSettings.startPopulation, 100);
 
-        ecoCulture.Init("hunters", "farmers", "nomads", "mountain", "city");
-        prodMode.Init("primitive communism", "slavery", "feodalism", "capitalism", "socialism", "communism");
-        government.Init("leaderism", "monarchy", "city - state", "imperium", "federation", "national state", "anarchy");
+        ecoCulture.Init("Hunters", "Farmers", "Nomads", "Mountain", "City");
+        prodMode.Init("PrimitiveCommunism", "Slavery", "Feodalism", "Capitalism", "Socialism", "Communism");
+        government.Init("Leaderism", "Monarchy", "CityState", "Imperium", "Federation", "NationalState", "Anarchy");
 
         Debug.Log("Civilization init. \rpopulation:" + Population + "\rregionID:" + region.id);
 

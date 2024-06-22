@@ -8,9 +8,9 @@ public class MigrationTrialsGroup : MonoBehaviour {
 
     private List<MigrationTrialElement> trials = new();
 
-    private void Awake() {
-        title.text = StringLoader.Load("Trials");
-    }
+    // private void Awake() {
+    //     title.text = StringLoader.Load("Trials");
+    // }
 
     public void AddTrial(Sprite sprite) {
         PrefabsLoader.Load(out MigrationTrialElement trial, content);

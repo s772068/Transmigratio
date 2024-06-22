@@ -1,9 +1,8 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
-using TMPro;
 using System;
-using UnityEngine.Localization.Settings;
+using TMPro;
 
 public class RegionElement : MonoBehaviour, IPointerClickHandler {
     [SerializeField] private Image background;
@@ -16,7 +15,8 @@ public class RegionElement : MonoBehaviour, IPointerClickHandler {
 
     public string Title {
         set {
-            title.text = GetLocalizationString(value);
+            Debug.Log($"RegionElement Title: {value}");
+            title.text = StringLoader.Load("Details", value);
             pictogram.sprite = SpritesLoader.LoadPictogram(value);
             key = value;
         }
@@ -38,10 +38,5 @@ public class RegionElement : MonoBehaviour, IPointerClickHandler {
         Color color = background.color;
         color.a = 0;
         background.color = color;
-
-    }
-
-    private string GetLocalizationString(string val) {
-        return LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", val);
     }
 }

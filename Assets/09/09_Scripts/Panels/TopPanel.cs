@@ -20,11 +20,11 @@ public class TopPanel : MonoBehaviour {
     }
 
     private void UpdatePopulation() {
-        populationTxt.text = StringLoader.Load("population") + Population.ToString("### ### ###");
+        populationTxt.text = $"{StringLoader.Load("Base", "Population")}: {Population.ToString("### ### ###")}";
     }
 
     private void UpdateYear() {
         int year = 40000 - Tick * GameSettings.yearsByTick;
-        yearTxt.text = year.ToString("### ###") + StringLoader.Load("BCE");
+        yearTxt.text = $"{year.ToString("### ###")} {StringLoader.Load("Base", "BCE")}";
     }
 }

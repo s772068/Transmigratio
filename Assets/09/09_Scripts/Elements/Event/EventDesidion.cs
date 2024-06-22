@@ -10,7 +10,7 @@ public class EventDesidion : MonoBehaviour {
 
     public int Index { private get; set; }
     public string Title { set => title.text = value; }
-    public int Points { set => points.text = $"{value} {/*StringLoader.Load(*/"Points"/*)*/}"; }
+    public int Points { set => points.text = $"{value} {StringLoader.Load("Events", "Points")}"; }
 
     public void Click() => onClick?.Invoke(Index);
 

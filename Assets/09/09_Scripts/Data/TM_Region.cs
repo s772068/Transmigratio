@@ -63,9 +63,9 @@ public class TM_Region {
     }
 
     private void UpdateFlauna() {
-        fauna["fauna"].value = Mathf.Min(
-            (int) (fauna["fauna"].value - TakenFood / 10f + (fauna["fauna"].value == 0 ? 1 : (50 / fauna["fauna"].value))),
-            fauna["fauna"].max
+        fauna["Fauna"].value = Mathf.Min(
+            (int) (fauna["Fauna"].value - TakenFood / 10f + (fauna["Fauna"].value == 0 ? 1 : (50 / fauna["Fauna"].value))),
+            fauna["Fauna"].max
         );
     }
 }

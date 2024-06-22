@@ -5,9 +5,8 @@ using System;
 public class RegionElements : MonoBehaviour {
     [SerializeField] private Transform content;
 
+    private string activeKey;
     private Dictionary<string, RegionElement> dic = new();
-
-    [HideInInspector] public string activeKey;
 
     public Action<string> onClick;
 

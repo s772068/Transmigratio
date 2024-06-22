@@ -5,11 +5,15 @@ using TMPro;
 
 public class MigrationPanel : MonoBehaviour {
     [SerializeField] private Slider slider;
-    [SerializeField] private Toggle isOpenPanel;
-    [SerializeField] private TMP_Text fromTo;
-    [SerializeField] private TMP_Text breakPointTxt;
-    [SerializeField] private TMP_Text nothingPointTxt;
-    [SerializeField] private TMP_Text speedUpTxt;
+    [SerializeField] private Toggle dontShowAgain;
+    [SerializeField] private TMP_Text title;
+    [SerializeField] private TMP_Text territory;
+    [SerializeField] private TMP_Text description;
+    [SerializeField] private TMP_Text dontShowAgainTxt;
+
+    [SerializeField] private TMP_Text breakPointsTxt;
+    [SerializeField] private TMP_Text nothingPointsTxt;
+    [SerializeField] private TMP_Text speedUpPointsTxt;
 
     private MigrationData data;
 
@@ -17,7 +21,14 @@ public class MigrationPanel : MonoBehaviour {
     public Action<int> onBreak;
     public Action<int> onSpeedUp;
 
-    public bool IsOpenPanel => !isOpenPanel.isOn;
+    public bool IsOpenPanel => !dontShowAgain.isOn;
+
+    private void Awake() {
+        description.text = StringLoader.Load("Migration", "Description");
+        breakPointsTxt.text = $"10 {StringLoader.Load("Events", "Points")}";
+        nothingPointsTxt.text = $"0 {StringLoader.Load("Events", "Points")}";
+        speedUpPointsTxt.text = $"5 {StringLoader.Load("Events", "Points")}";
+    }
 
     public void UpdatePercents() {
         if (data != null) {
@@ -30,18 +41,12 @@ public class MigrationPanel : MonoBehaviour {
 
     public MigrationData Data { set {
             data = value;
-
-            // ToDo: вставить строку в виде "from: {0} | to: {1}"
-            // fromTo.text = string.Format(StringLoader.Load(""), data.from.name, data.to.name);
+            territory.text = StringLoader.Load("Migration", "Territory1") + " " +
+                             value.from.name + " " +
+                             StringLoader.Load("Migration", "Territory2") + " " +
+                             value.to.name;
         }
     }
-
-    //ToDo: выставить ключ ОВ
-    //public void Awake() {
-    //    breakPointTxt.text = $"{10} {StringLoader.Load("Points")}";
-    //    breakPointTxt.text = $"{0} {StringLoader.Load("Points")}";
-    //    breakPointTxt.text = $"{5} {StringLoader.Load("Points")}";
-    //}
 
     public void Open() {
         gameObject.SetActive(true);

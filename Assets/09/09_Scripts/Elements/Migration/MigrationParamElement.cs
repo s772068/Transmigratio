@@ -10,7 +10,7 @@ public class MigrationParamElement : MonoBehaviour {
 
     public Action<string> onClickInfo;
 
-    public string Title { set => title.text = StringLoader.Load(value); }
+    // public string Title { set => title.text = StringLoader.Load(value); }
     public int Value {
         set {
             valueTxt.text = $"{value}";

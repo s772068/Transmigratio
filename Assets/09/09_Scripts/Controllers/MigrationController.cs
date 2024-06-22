@@ -27,6 +27,8 @@ public class MigrationController : Singleton<MigrationController> {
     private int aiSolutionIndex = -1;
     private List<Action<int>> ai = new();
     [SerializeField] private SerializedDictionary<int, MigrationData> migrations = new();
+    
+    public int Population => migrations.Sum(x => x.Value.fullPopulations - x.Value.curPopulations);
 
     private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Transmigratio.Instance.tmdb.map.wmsk;
@@ -53,7 +55,7 @@ public class MigrationController : Singleton<MigrationController> {
         TM_Region targetRegion = null;
         int nextFauna;
 
-        int fauna = Map.GetRegionBywmskId(region.id).fauna["fauna"].value;
+        int fauna = Map.GetRegionBywmskId(region.id).fauna["Fauna"].value;
 
         List<TM_Region> list = new();
         int res = 0;
@@ -66,7 +68,7 @@ public class MigrationController : Singleton<MigrationController> {
         }
 
         if (list.Count == 0) {
-            nextFauna = region.fauna["fauna"].value;
+            nextFauna = region.fauna["Fauna"].value;
             if (fauna < nextFauna) {
                 fauna = nextFauna;
                 targetRegion = region;
@@ -75,7 +77,7 @@ public class MigrationController : Singleton<MigrationController> {
             targetRegion = list[0];
         } else if (list.Count > 1) {
             for (int i = 0; i < list.Count; ++i) {
-                nextFauna = region.fauna["fauna"].value;
+                nextFauna = region.fauna["Fauna"].value;
                 if (fauna < nextFauna) {
                     fauna = nextFauna;
                     targetRegion = list[i];
@@ -126,7 +128,7 @@ public class MigrationController : Singleton<MigrationController> {
         return lma;
     }
 
-    public IconMarker CreateMarker(int from, Vector2 start, Vector2 end) {
+    private IconMarker CreateMarker(int from, Vector2 start, Vector2 end) {
         Vector2 position = (start + end) / 2;
         IconMarker marker = Instantiate(markerPrefab);
         marker.Sprite = markerSprite;
@@ -179,7 +181,7 @@ public class MigrationController : Singleton<MigrationController> {
         }
     }
 
-    public void Remove(int index) {
+    private void Remove(int index) {
         Debug.Log($"Remove migration {index}");
         migrations[index].line.Destroy();
         migrations[index].marker.Destroy();

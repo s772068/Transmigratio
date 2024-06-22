@@ -51,7 +51,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         }
     }
 
-    public void CreateEvent() {
+    private void CreateEvent() {
         System.Random rand = new();
         var civilizations = Transmigratio.Instance.tmdb.humanity.civilizations;
         if (civilizations.Count == 0) return;
@@ -66,7 +66,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         }
     }
 
-    public void RestartEvent() {
+    private void RestartEvent() {
         Debug.Log("RestartEvent");
         ++ticker;
         if (ticker == ticksToActivateVolcano) {
@@ -76,7 +76,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         }
     }
 
-    public void CreateMarker(Vector2 position) {
+    private void CreateMarker(Vector2 position) {
         marker = Instantiate(markerPrefab);
         marker.Sprite = markerSprite;
         marker.onClick += (int i) => { OpenPanel(); panel.IsShowAgain = isShowAgain; };
@@ -85,23 +85,25 @@ public class VolcanoController : Singleton<VolcanoController> {
         handler.allowDrag = false;
     }
 
-    public void OpenPanel() {
+    private void OpenPanel() {
         panel.Open();
         panel.onClick = ActivateDesidion;
         panel.Image = panelSprite;
-        panel.Title = /*StringLoader.Load(*/"VolcanoTitle"/*)*/;
-        panel.Description = /*StringLoader.Load(*/"VolcanoDescription"/*)*/;
-        panel.Territory = /*string.Format(StringLoader.Load(*/ "VolcanoTerritory"/*) */;
-        //                                 StringLoader.Load($"{piece.region.name}"),
-        //                                 StringLoader.Load($"{piece.civilization.name}"));
-        panel.AddDesidion(/*StringLoader.Load(*/"CalmVolcano"/*)*/, (int)(piece.population.value / calmVolcanoPointsDivision));
-        panel.AddDesidion(/*StringLoader.Load(*/"ReduceLosses"/*)*/, reduceLossesPoints);
-        panel.AddDesidion(/*StringLoader.Load(*/"Nothing"/*)*/, 0);
+        panel.Title = StringLoader.Load("Volcano", "Title");
+        panel.Description = StringLoader.Load("Volcano", "Description");
+        panel.Territory = StringLoader.Load("Volcano", "Territory1") + " " +
+                          piece.region.name + " " +
+                          StringLoader.Load("Volcano", "Territory2") + " " +
+                          piece.civilization.name + " " +
+                          StringLoader.Load("Volcano", "Territory3");
+        panel.AddDesidion(StringLoader.Load("Volcano", "CalmVolcano"), (int)(piece.population.value / calmVolcanoPointsDivision));
+        panel.AddDesidion(StringLoader.Load("Volcano", "ReduceLosses"), reduceLossesPoints);
+        panel.AddDesidion(StringLoader.Load("Volcano", "Nothing"), 0);
     }
 
-    public void ClosePanel() => panel.Close();
+    private void ClosePanel() => panel.Close();
 
-    public void ActivateDesidion(int index) {
+    private void ActivateDesidion(int index) {
         isShowAgain = panel.IsShowAgain;
         if (index == 0) CalmVolcano();
         if (index == 1) ReduceLosses();
@@ -162,5 +164,4 @@ public class VolcanoController : Singleton<VolcanoController> {
             GameEvents.onTickLogic += RestartEvent;
         }
     }
-    // 1 раз показ панельки голода
 }

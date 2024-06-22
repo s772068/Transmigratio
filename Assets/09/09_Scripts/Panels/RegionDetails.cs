@@ -60,12 +60,12 @@ public class RegionDetails : MonoBehaviour {
         dic = Transmigratio.Instance.tmdb.GetParam(region.id, element);
         foreach (var pair in dic) {
             if (pair.Value == 0) continue;
-            centerSide.SetParamiter(pair.Key, pair.Value);
+            centerSide.SetParamiter(element, pair.Key, pair.Value);
         }
     }
 
     private void OnClickParamiter(string key) {
         rightSide.gameObject.SetActive(true);
-        rightSide.UpdateData(key);
+        rightSide.UpdateData(element, key);
     }
 }

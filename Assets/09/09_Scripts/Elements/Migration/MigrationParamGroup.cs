@@ -11,7 +11,7 @@ public class MigrationParamGroup : MonoBehaviour {
     public void AddParamiter(string title, int value) {
         if (!paramiters.ContainsKey(title)) {
             PrefabsLoader.Load(out MigrationParamElement param, content);
-            param.Title = title;
+            // param.Title = title;
             paramiters[title] = param;
         }
         paramiters[title].Value = value;

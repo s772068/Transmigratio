@@ -13,11 +13,11 @@ public class RegionParams : MonoBehaviour {
 
     public Action<string> onClick;
 
-    public void SetParamiter(string title, float value) {
+    public void SetParamiter(string element, string title, float value) {
         if (!paramiters.ContainsKey(title)) {
             PrefabsLoader.Load(out ParamWrap newVal, content);
+            newVal.SetTitle(element, title);
             newVal.onClick = OnClick;
-            newVal.Title = title;
             paramiters[title] = newVal;
         }
         paramiters[title].Value = value;

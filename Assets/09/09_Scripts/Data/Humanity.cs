@@ -9,7 +9,7 @@ using UnityEngine;
 public class Humanity {
     public SerializedDictionary<string, Civilization> civilizations;
 
-    public int TotalEarthPop => civilizations.Sum(x => x.Value.Population);
+    public int TotalEarthPop => civilizations.Sum(x => x.Value.Population) + MigrationController.Instance.Population;
 
     public void Init() {
         civilizations = new();

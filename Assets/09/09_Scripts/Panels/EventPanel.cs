@@ -21,6 +21,7 @@ public class EventPanel : MonoBehaviour {
     public string Territory { set => territory.text = value; }
     public string Description { set => description.text = value; }
     public Sprite Image { set => image.sprite = value; }
+
     public bool IsShowAgain {
         get => !dontShowAgain.isOn;
         set => dontShowAgain.isOn = !value;
