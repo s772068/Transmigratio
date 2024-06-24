@@ -110,6 +110,12 @@ public class MigrationController : Singleton<MigrationController> {
 
         Debug.Log($"Migration: From: {from.id} | To: {to.id} | Solution: {aiSolutionIndex}");
 
+        if (!to.civsList.Contains(civ)) {
+            newMigration.curPopulations += newMigration.stepPopulations;
+            civ.AddPiece(to, newMigration.stepPopulations, 10);
+            to.AddCivilization(civ);
+        }
+
         if (aiSolutionIndex == -1) {
             OpenPanel(from.id);
             Timeline.Instance.Pause();
@@ -149,12 +155,6 @@ public class MigrationController : Singleton<MigrationController> {
             if(migration.timerToStart < startTime) {
                 ++migration.timerToStart;
             } else {
-                // Создание цивилизации в целевом регионе
-                if (!migration.to.civsList.Contains(migration.civilization)) {
-                    migration.curPopulations += migration.stepPopulations;
-                    migration.civilization.AddPiece(migration.to, migration.stepPopulations, 10);
-                    migration.to.AddCivilization(migration.civilization);
-                }
                 //Интервал
                 if(migration.timerInterval < interval) {
                     ++migration.timerInterval;

@@ -40,7 +40,7 @@ public class TM_Region {
         Dictionary<string, int> res = new();
         
         for (int i = 0; i < civsList.Count; ++i) {
-            res[civsList[i].name] = civsList[i].Population;
+            res[civsList[i].name] = civsList[i].pieces[id].population.value;
         }
 
         return res;

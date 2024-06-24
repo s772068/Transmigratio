@@ -54,8 +54,8 @@ public class Civilization {
     }
 
     public void UpdatePieces() {
-        foreach (var pair in pieces) {
-            pair.Value.DeltaPop();
+        for (int i = 0; i < pieces.Count; ++i) {
+            pieces.ElementAt(i).Value.DeltaPop();
         }
     }
 
