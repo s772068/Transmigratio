@@ -1,6 +1,7 @@
 using WorldMapStrategyKit;
 using System;
 using UnityEngine;
+using Unity.VisualScripting;
 
 
 /// <summary>
@@ -21,6 +22,8 @@ public class CivPiece {
     public float requestFood;
     public float reserveFood;
     public float takenFood;
+
+    public Action onDestroy;
 
     private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Map.wmsk;
@@ -48,9 +51,9 @@ public class CivPiece {
         reserveFood += takenFood - givenFood;
         populationGrow = population.Value * civilization.governmentCorruption * givenFood / requestFood - population.Value / 3f;
 
-        //return (int)(populationGrow);
         population.value += (int)populationGrow;
-        if (region.id == 0) Debug.Log($"In region 0 populationGrow: {populationGrow}");
+        if (population.value <= 50) { onDestroy?.Invoke(); return; }
+
         if (populationGrow < 0) {
             GameEvents.onActivateHunger?.Invoke(this);
             MigrationController.Instance.TryMigration(this);

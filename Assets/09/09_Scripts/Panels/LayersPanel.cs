@@ -15,6 +15,8 @@ public class LayersPanel : MonoBehaviour {
     public SerializedDictionary<string, Color> government = new();
     public SerializedDictionary<string, Color> civilization = new();
 
+    private int activeIndex = -1;
+
     private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Map.wmsk;
     private int CountRegions => Map.allRegions.Count;
@@ -22,15 +24,25 @@ public class LayersPanel : MonoBehaviour {
 
     // private float MaxPopulation => ?;
 
-    public void ClickTerrain() => PaintByName(terrain, (int i) => GetRegion(i).terrain.GetMaxQuantity().key);
-    public void ClickClimate() => PaintByName(climate, (int i) => GetRegion(i).climate.GetMaxQuantity().key);
-    public void ClickFlora() => PaintByPercent(flora, (int i) => GetRegion(i).flora.GetMaxQuantity().value);
-    public void ClickFauna() => PaintByPercent(fauna, (int i) => GetRegion(i).fauna.GetMaxQuantity().value);
-    public void ClickPopulation() => PaintByMax(population, (int i) => GetRegion(i).Population);
-    public void ClickEcoCulture() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ecoCulture.GetMaxQuantity().key);
-    public void ClickProdMode() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.prodMode.GetMaxQuantity().key);
-    public void ClickGovernment() => PaintByName(government, (int i) => GetRegion(i).CivMain.government.GetMaxQuantity().key);
-    public void ClickCivilization() => PaintByName(government, (int i) => GetRegion(i).CivMain.name);
+    public void ClickTerrain() => OnClick(0, () => PaintByName(terrain, (int i) => GetRegion(i).terrain.GetMaxQuantity().key));
+    public void ClickClimate() => OnClick(1, () => PaintByName(climate, (int i) => GetRegion(i).climate.GetMaxQuantity().key));
+    public void ClickFlora() => OnClick(2, () => PaintByPercent(flora, (int i) => GetRegion(i).flora.GetMaxQuantity().value));
+    public void ClickFauna() => OnClick(3, () => PaintByPercent(fauna, (int i) => GetRegion(i).fauna.GetMaxQuantity().value));
+    public void ClickPopulation() => OnClick(4, () => PaintByMax(population, (int i) => GetRegion(i).Population));
+    public void ClickEcoCulture() => OnClick(5, () => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ecoCulture.GetMaxQuantity().key));
+    public void ClickProdMode() => OnClick(6, () => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.prodMode.GetMaxQuantity().key));
+    public void ClickGovernment() => OnClick(7, () => PaintByName(government, (int i) => GetRegion(i).CivMain.government.GetMaxQuantity().key));
+    public void ClickCivilization() => OnClick(8, () => PaintByName(government, (int i) => GetRegion(i).CivMain.name));
+
+    private void OnClick(int index, Action PaintAction) {
+        if(activeIndex == index) {
+            activeIndex = -1;
+            Clear();
+        } else {
+            activeIndex = index;
+            PaintAction();
+        }
+    }
 
     private void PaintByName(SerializedDictionary<string, Color> dictionary, Func<int, string> GetName) {
         string _name;
@@ -65,6 +77,12 @@ public class LayersPanel : MonoBehaviour {
             percent = max == 0 ? 0 : GetValue(i) / max * 100;
             color = GetColorByPercent(percent, dictionary);
             WMSK.ToggleCountrySurface(i, true, color);
+        }
+    }
+
+    private void Clear() {
+        for (int i = 0; i < CountRegions; ++i) {
+            WMSK.ToggleCountrySurface(i, true, Color.clear);
         }
     }
 

@@ -1,5 +1,6 @@
 using AYellowpaper.SerializedCollections;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -43,6 +44,7 @@ public class Civilization {
     public void AddPiece(TM_Region region, int population, float reserve) {
         CivPiece newPieceOfCiv = new CivPiece();
         newPieceOfCiv.Init(region, this, population, reserve);
+        newPieceOfCiv.onDestroy = () => { pieces.Remove(region.id); };
         pieces[region.id] = newPieceOfCiv;
         //region.AddCivPiece(newPieceOfCiv);
     }

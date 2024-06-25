@@ -129,17 +129,17 @@ public class MigrationController : Singleton<MigrationController> {
         lma.drawingDuration = 1.5f;
         lma.dashInterval = 0.005f;
         lma.dashAnimationDuration = 0.8f;
-        lma.startCap = startLine;
         lma.endCap = endLine;
         return lma;
     }
 
     private IconMarker CreateMarker(int from, Vector2 start, Vector2 end) {
-        Vector2 position = (start + end) / 2;
+        Vector3 position = (start + end) / 2;
         IconMarker marker = Instantiate(markerPrefab);
         marker.Sprite = markerSprite;
         marker.onClick += OpenPanel;
         marker.Index = from;
+        position.z = -0.1f;
 
         MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
         handler.allowDrag = false;

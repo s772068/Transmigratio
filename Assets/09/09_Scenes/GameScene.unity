@@ -2214,6 +2214,50 @@ MonoBehaviour:
   isShowMigration: 1
   regionDetails: {fileID: 1489508625}
   migration: {fileID: 0}
+--- !u!1 &201071182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 201071183}
+  - component: {fileID: 201071184}
+  m_Layer: 0
+  m_Name: Mount Points
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &201071183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201071182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 731413201}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &201071184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201071182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &204948963
 GameObject:
   m_ObjectHideFlags: 0
@@ -5396,7 +5440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1636373163}
   markerPrefab: {fileID: 5296191554952630010, guid: 1bea2eb4b7054814c9055a48d6f2abeb, type: 3}
-  markerSprite: {fileID: 21300000, guid: 9e3cdafe91242fc4e8e340ee605dc79a, type: 3}
+  markerSprite: {fileID: 21300000, guid: a2a6e6af1255b40499d8427b7f91a1f6, type: 3}
   panelSprite: {fileID: 584355066, guid: 26f280930b07b4148843bdd261faab70, type: 3}
   addFoodDivision: 50
   addFoodDivisionPoints: 3
@@ -6200,7 +6244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4826812d57ee425dad93bf315e07090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastKnownZoomLevel: 0.9999998
+  lastKnownZoomLevel: 1
   isDirty: 0
   currentCityScale: {x: 0, y: 0, z: 0}
   _customCamera: {fileID: 0}
@@ -6514,7 +6558,7 @@ Transform:
   m_Children:
   - {fileID: 945009091}
   - {fileID: 400393531}
-  - {fileID: 1196676535}
+  - {fileID: 201071183}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8142,6 +8186,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845213386}
   m_CullTransparentMesh: 1
+--- !u!84 &850424484
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 1920
+  m_Height: 960
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 8
+  m_MipMap: 1
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 2
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!224 &851395981 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7323869048234836881, guid: cd4d465deeaa6db4c8aef206783b51e7, type: 3}
@@ -10007,7 +10088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1636373163}
   markerPrefab: {fileID: 5296191554952630010, guid: 1bea2eb4b7054814c9055a48d6f2abeb, type: 3}
-  markerSprite: {fileID: 21300000, guid: 9e3cdafe91242fc4e8e340ee605dc79a, type: 3}
+  markerSprite: {fileID: 21300000, guid: a2a6e6af1255b40499d8427b7f91a1f6, type: 3}
   panelSprite: {fileID: 966951630, guid: b7247bfca1704b445b8723d805a10d91, type: 3}
   startTicksToActivate: 20
   minTickToActivate: 10
@@ -11382,50 +11463,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194519722}
   m_CullTransparentMesh: 1
---- !u!1 &1196676534
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1196676535}
-  - component: {fileID: 1196676536}
-  m_Layer: 0
-  m_Name: Mount Points
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1196676535
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196676534}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 731413201}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1196676536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196676534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 462d8354b0cbf4bc6a3f969984dee6ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1197246472
 GameObject:
   m_ObjectHideFlags: 0
@@ -13858,27 +13895,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain:
     _serializedList:
-    - Key: plain
+    - Key: Plain
       Value: {r: 0.6745098, g: 0.46666667, b: 0.5254902, a: 0.7647059}
-    - Key: forest
+    - Key: Forest
       Value: {r: 0.31764707, g: 0.6117647, b: 0.49411765, a: 0.64705884}
-    - Key: desert
+    - Key: Desert
       Value: {r: 0.84705883, g: 0.65882355, b: 0.3647059, a: 0.6666667}
-    - Key: mountain
+    - Key: Mountain
       Value: {r: 0.5019608, g: 0.64705884, b: 0.6784314, a: 0.7647059}
-    - Key: steppe
+    - Key: Steppe
       Value: {r: 0.61960787, g: 0.40392157, b: 0.2784314, a: 0.7647059}
-    - Key: tundra
+    - Key: Tundra
       Value: {r: 0.30980393, g: 0.44313726, b: 0.3372549, a: 0.7647059}
   climate:
     _serializedList:
-    - Key: ecuatorial
+    - Key: Ecuatorial
       Value: {r: 0.57254905, g: 0.29411766, b: 0.25882354, a: 0.5019608}
-    - Key: tropical
+    - Key: Tropical
       Value: {r: 0.62352943, g: 0.49411765, b: 0.8117647, a: 0.5019608}
-    - Key: moderate
+    - Key: Moderate
       Value: {r: 0.5882353, g: 0.64705884, b: 0.43137255, a: 0.7058824}
-    - Key: polar
+    - Key: Polar
       Value: {r: 0.3254902, g: 0.33333334, b: 0.53333336, a: 0.7254902}
   flora:
     _serializedList:
@@ -13900,10 +13937,16 @@ MonoBehaviour:
       Value: {r: 0, g: 1, b: 0, a: 0.5019608}
   population:
     _serializedList:
-    - Key: 24
+    - Key: 0
+      Value: {r: 0, g: 0, b: 0, a: 0}
+    - Key: 20
       Value: {r: 1, g: 0, b: 0, a: 0.5019608}
-    - Key: 75
+    - Key: 40
+      Value: {r: 1, g: 0.5019608, b: 0, a: 0.5019608}
+    - Key: 60
       Value: {r: 1, g: 1, b: 0, a: 0.5019608}
+    - Key: 80
+      Value: {r: 0.5019608, g: 1, b: 0, a: 0.5019608}
     - Key: 100
       Value: {r: 0, g: 1, b: 0, a: 0.5019608}
   ecoCulture:
@@ -15475,7 +15518,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 1686703721}
+        m_Texture: {fileID: 850424484}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -16901,43 +16944,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1679190557}
   m_CullTransparentMesh: 1
---- !u!84 &1686703721
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 1030
-  m_Height: 515
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 8
-  m_MipMap: 1
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 2
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &1691725007
 GameObject:
   m_ObjectHideFlags: 0

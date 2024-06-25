@@ -43,7 +43,8 @@ public class HungerController : Singleton<HungerController> {
         piece.region.marker.Index = events.Count;
         piece.region.marker.onClick += (int i) => { OpenPanel(piece); panel.IsShowAgain = isShowAgain; };
 
-        Vector2 position = WMSK.countries[piece.region.id].center;
+        Vector3 position = WMSK.countries[piece.region.id].center;
+        position.z = -0.1f;
         MarkerClickHandler handler = WMSK.AddMarker2DSprite(piece.region.marker.gameObject, position, 0.03f, true, true);
         handler.allowDrag = false;
     }

@@ -76,10 +76,11 @@ public class VolcanoController : Singleton<VolcanoController> {
         }
     }
 
-    private void CreateMarker(Vector2 position) {
+    private void CreateMarker(Vector3 position) {
         marker = Instantiate(markerPrefab);
         marker.Sprite = markerSprite;
         marker.onClick += (int i) => { OpenPanel(); panel.IsShowAgain = isShowAgain; };
+        position.z = -0.1f;
 
         MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
         handler.allowDrag = false;
