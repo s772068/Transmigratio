@@ -3,6 +3,7 @@ using WorldMapStrategyKit;
 using UnityEngine;
 using System.Linq;
 using System;
+using Unity.VisualScripting;
 
 public class VolcanoController : Singleton<VolcanoController> {
     [SerializeField] private EventPanel panel;
@@ -22,6 +23,9 @@ public class VolcanoController : Singleton<VolcanoController> {
     [Header("Points")]
     [SerializeField, Min(1)] private float calmVolcanoPointsDivision;
     [SerializeField, Min(0)] private int reduceLossesPoints;
+    [Header("Colors")]
+    [SerializeField] private Color regionColor;
+    [SerializeField] private Color civColor;
 
     [Header("OnlyForView")]
     [SerializeField] private int ticker;
@@ -98,9 +102,11 @@ public class VolcanoController : Singleton<VolcanoController> {
         panel.Title = StringLoader.Load("Volcano", "Title");
         panel.Description = StringLoader.Load("Volcano", "Description");
         panel.Territory = StringLoader.Load("Volcano", "Territory1") + " " +
-                          piece.region.name + " " +
+                          $"<color=#{regionColor.ToHexString()}>" +
+                          piece.region.name + "</color> " +
                           StringLoader.Load("Volcano", "Territory2") + " " +
-                          StringLoader.Load("Civilizations", piece.civilization.name) + " " +
+                          $"<color=#{civColor.ToHexString()}>" +
+                          StringLoader.Load("Civilizations", piece.civilization.name) + "</color> " +
                           StringLoader.Load("Volcano", "Territory3");
         panel.AddDesidion(StringLoader.Load("Volcano", "CalmVolcano"), (int)(piece.population.value / calmVolcanoPointsDivision));
         panel.AddDesidion(StringLoader.Load("Volcano", "ReduceLosses"), reduceLossesPoints);

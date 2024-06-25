@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEngine;
 using System;
@@ -14,6 +15,10 @@ public class MigrationPanel : MonoBehaviour {
     [SerializeField] private TMP_Text breakPointsTxt;
     [SerializeField] private TMP_Text nothingPointsTxt;
     [SerializeField] private TMP_Text speedUpPointsTxt;
+
+    [Header("Colors")]
+    [SerializeField] private Color regionColor;
+    [SerializeField] private Color civColor;
 
     private MigrationData data;
 
@@ -42,9 +47,11 @@ public class MigrationPanel : MonoBehaviour {
     public MigrationData Data { set {
             data = value;
             territory.text = StringLoader.Load("Migration", "Territory1") + " " +
-                             value.from.name + " " +
+                             $"<color=#{regionColor.ToHexString()}>" +
+                             value.from.name + "</color> " +
                              StringLoader.Load("Migration", "Territory2") + " " +
-                             value.to.name;
+                             $"<color=#{regionColor.ToHexString()}>" +
+                             value.to.name + "</color>";
         }
     }
 

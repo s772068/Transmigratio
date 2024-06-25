@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using WorldMapStrategyKit;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ public class HungerController : Singleton<HungerController> {
     [Header("Points")]
     [SerializeField, Min(0)] private float addFoodDivisionPoints;
     [SerializeField, Range(0, 100)] private int AddSomeFoodPointsPercents;
+    [Header("Colors")]
+    [SerializeField] private Color regionColor;
+    [SerializeField] private Color civColor;
 
     private bool isShowAgain;
     private CivPiece selectedCivPiece;
@@ -57,9 +61,11 @@ public class HungerController : Singleton<HungerController> {
         panel.Title = StringLoader.Load("Hunger", "Title");
         panel.Description = StringLoader.Load("Hunger", "Description");
         panel.Territory = StringLoader.Load("Hunger", "Territory 1") + " " +
-                          piece.region.name + " " +
+                          $"<color=#{regionColor.ToHexString()}>" +
+                          piece.region.name + "</color> " +
                           StringLoader.Load("Hunger", "Territory 2") + " " +
-                          StringLoader.Load("Civilizations", piece.civilization.name) + " " +
+                          $"<color=#{civColor.ToHexString()}>" +
+                          StringLoader.Load("Civilizations", piece.civilization.name) + "</color> " +
                           StringLoader.Load("Hunger", "Territory 3");
         panel.AddDesidion(StringLoader.Load("Hunger", "AddFood"), (int)(piece.population.value / addFoodDivision / addFoodDivisionPoints));
         panel.AddDesidion(StringLoader.Load("Hunger", "AddSomeFood"), AddSomeFoodPointsPercents);

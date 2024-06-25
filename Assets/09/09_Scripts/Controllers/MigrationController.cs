@@ -1,27 +1,27 @@
 using System.Collections.Generic;
 using WorldMapStrategyKit;
 using System.Linq;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 using System;
-using AYellowpaper.SerializedCollections;
 
 public class MigrationController : Singleton<MigrationController> {
     [SerializeField] private MigrationPanel panel;
+    [Header("Marker")]
     [SerializeField] private IconMarker markerPrefab;
     [SerializeField] private Sprite markerSprite;
+    [Header("Line")]
     [SerializeField] private Material lineMaterial;
-    [SerializeField] private GameObject startLine;
     [SerializeField] private GameObject endLine;
-    
-    [Min(0)]
-    [SerializeField] private int startTime;
-    [Min(0)]
-    [SerializeField] private int interval;
-    
-    [Range(0, 100)]
-    [SerializeField] private int percentToMigration;
-    [Range(0, 100)]
-    [SerializeField] private int stepPercent;
+    [Header("Timers")]
+    [SerializeField, Min(0)] private int startTime;
+    [SerializeField, Min(0)] private int interval;
+    [Header("Percents")]
+    [SerializeField, Range(0, 100)] private int percentToMigration;
+    [SerializeField, Range(0, 100)] private int stepPercent;
+    [Header("Colors")]
+    [SerializeField] private Color regionColor;
+    [SerializeField] private Color civColor;
 
     private int selectedID;
     private int aiSolutionIndex = -1;
