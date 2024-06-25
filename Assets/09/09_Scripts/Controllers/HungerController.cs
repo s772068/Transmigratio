@@ -23,6 +23,7 @@ public class HungerController : Singleton<HungerController> {
     private void Start() {
         GameEvents.onActivateHunger = AddEvent;
         GameEvents.onDeactivateHunger = RemoveEvent;
+        GameEvents.onRemoveCivPiece += RemoveEvent;
     }
 
     private void AddEvent(CivPiece piece) {
@@ -58,7 +59,7 @@ public class HungerController : Singleton<HungerController> {
         panel.Territory = StringLoader.Load("Hunger", "Territory 1") + " " +
                           piece.region.name + " " +
                           StringLoader.Load("Hunger", "Territory 2") + " " +
-                          piece.civilization.name + " " +
+                          StringLoader.Load("Civilizations", piece.civilization.name) + " " +
                           StringLoader.Load("Hunger", "Territory 3");
         panel.AddDesidion(StringLoader.Load("Hunger", "AddFood"), (int)(piece.population.value / addFoodDivision / addFoodDivisionPoints));
         panel.AddDesidion(StringLoader.Load("Hunger", "AddSomeFood"), AddSomeFoodPointsPercents);

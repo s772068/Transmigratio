@@ -16,6 +16,7 @@ public class Map {
         wmsk = new WMSK();
         wmsk = WMSK.instance;
 
+
         allRegions = new List<TM_Region>();
         allRegions.Clear();
 
@@ -41,7 +42,10 @@ public class Map {
 
         //allRegions = JsonUtility.FromJson<List<TM_Region>>(json);
 
-        foreach (TM_Region region in allRegions ) { region.Init(); }
+        foreach (TM_Region region in allRegions ) {
+            wmsk.ToggleCountrySurface(region.id, true, Color.clear);
+            region.Init();
+        }
     }
 
     public TM_Region GetRegionBywmskId(int WMSKId) {

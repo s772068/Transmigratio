@@ -40,6 +40,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         autoActions.Add(ReduceLosses);
         autoActions.Add(ActivateVolcano);
         GameEvents.onTickLogic += StartCreateEvent;
+        GameEvents.onRemoveCivPiece += RestartEvent;
     }
 
     private void StartCreateEvent() {
@@ -64,6 +65,10 @@ public class VolcanoController : Singleton<VolcanoController> {
             OpenPanel();
             Timeline.Instance.Pause();
         }
+    }
+
+    private void RestartEvent(CivPiece _piece) {
+        if (piece == _piece) RestartEvent();
     }
 
     private void RestartEvent() {
@@ -95,7 +100,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         panel.Territory = StringLoader.Load("Volcano", "Territory1") + " " +
                           piece.region.name + " " +
                           StringLoader.Load("Volcano", "Territory2") + " " +
-                          piece.civilization.name + " " +
+                          StringLoader.Load("Civilizations", piece.civilization.name) + " " +
                           StringLoader.Load("Volcano", "Territory3");
         panel.AddDesidion(StringLoader.Load("Volcano", "CalmVolcano"), (int)(piece.population.value / calmVolcanoPointsDivision));
         panel.AddDesidion(StringLoader.Load("Volcano", "ReduceLosses"), reduceLossesPoints);

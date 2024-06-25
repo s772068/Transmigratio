@@ -37,8 +37,8 @@ public class MigrationController : Singleton<MigrationController> {
         ai = new() { (int i) => { }, ClickBreak, ClickSpeedUp };
 
         GameEvents.onTickLogic += OnTickLogic;
-
         GameEvents.onTickShow += UpdatePercent;
+        GameEvents.onRemoveCivPiece += Remove;
 
         panel.onBreak = ClickBreak;
         panel.onNothing = ClickNothing;
@@ -177,6 +177,19 @@ public class MigrationController : Singleton<MigrationController> {
                     if(curID == selectedID) panel.Close();
                     Remove(migration.from.id);
                 }
+            }
+        }
+    }
+
+    private void Remove(CivPiece civPiece) {
+        if (migrations.ContainsKey(civPiece.region.id)) {
+            Remove(civPiece.region.id);
+            return;
+        }
+        foreach(var pair in migrations) {
+            if (pair.Value.to.id == civPiece.region.id) {
+                Remove(pair.Value.from.id);
+                break;
             }
         }
     }

@@ -44,7 +44,7 @@ public class Civilization {
     public void AddPiece(TM_Region region, int population, float reserve) {
         CivPiece newPieceOfCiv = new CivPiece();
         newPieceOfCiv.Init(region, this, population, reserve);
-        newPieceOfCiv.onDestroy = () => { pieces.Remove(region.id); };
+        newPieceOfCiv.onDestroy = () => RemovePiece(region.id);
         pieces[region.id] = newPieceOfCiv;
         //region.AddCivPiece(newPieceOfCiv);
     }
@@ -52,6 +52,9 @@ public class Civilization {
     /// уберает цивилизацию из этого региона
     /// </summary>
     public void RemovePiece(int region) {
+        GameEvents.onRemoveCivPiece(pieces[region]);
+        pieces[region].region.civsList.Remove(pieces[region].civilization);
+        pieces[region].region.civPiecesList.Remove(pieces[region]);
         pieces.Remove(region);
     }
 

@@ -11,9 +11,11 @@ public static class GameEvents {
 
     public static Action<CivPiece> onActivateHunger;
     public static Action<CivPiece> onDeactivateHunger;
+    public static Action<CivPiece> onRemoveCivPiece;
 
     // Marker
     public static Action<MarkerClickHandler, int> onMarkerMouseDown;
     public static Action<MarkerClickHandler> onMarkerEnter;
     public static Action<MarkerClickHandler> onMarkerExit;
+
 }
