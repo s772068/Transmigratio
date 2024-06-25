@@ -6,7 +6,7 @@ public class RegionDetails : MonoBehaviour {
     [SerializeField] private RegionElements leftSide;
     [SerializeField] private RegionParams centerSide;
     [SerializeField] private RegionDetailsRightSide rightSide;
-    [SerializeField] private ButtonsGroup tabs;
+    [SerializeField] private ButtonsRadioGroup tabs;
     [SerializeField] private Image civAvatar;
 
     public TM_Region region;

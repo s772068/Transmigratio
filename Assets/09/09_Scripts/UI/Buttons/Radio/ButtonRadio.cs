@@ -16,16 +16,17 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     private Image image;
 
     public int Index { private get; set; }
+    private void Awake() {
+        image = GetComponent<Image>();
+    }
 
     public void Activate() {
         isActive = true;
-        image ??= GetComponent<Image>();
         image.sprite = activeSprite;
     }
 
     public void Deactivate() {
         isActive = false;
-        image ??= GetComponent<Image>();
         image.sprite = deactiveSprite;
     }
 
@@ -35,7 +36,6 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public void OnPointerEnter(PointerEventData eventData) {
         if(highlightedSprite == null) return;
-        image ??= GetComponent<Image>();
         if (!isActive) image.sprite = highlightedSprite;
     }
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class ButtonsGroup : MonoBehaviour {
+public class ButtonsRadioGroup : MonoBehaviour {
     [SerializeField] private List<ButtonRadio> buttons;
 
     private int activeElement = -1;

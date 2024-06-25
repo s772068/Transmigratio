@@ -33,15 +33,9 @@ public class LayersPanel : MonoBehaviour {
     public void ClickCivilization() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.name));
 
     private void OnClick(Action PaintAction) {
-        Clear();
-        if(onPaint == PaintAction) {
-            GameEvents.onTickShow -= onPaint;
-            onPaint = default;
-        } else {
-            onPaint = PaintAction;
-            GameEvents.onTickShow += onPaint;
-        }
-        onPaint?.Invoke();
+        GameEvents.onTickShow += onPaint;
+        onPaint = PaintAction;
+        PaintAction?.Invoke();
     }
 
     private void PaintByName(SerializedDictionary<string, Color> dictionary, Func<int, string> GetName) {
@@ -84,7 +78,8 @@ public class LayersPanel : MonoBehaviour {
         }
     }
 
-    private void Clear() {
+    public void Clear() {
+        GameEvents.onTickShow -= onPaint;
         for (int i = 0; i < CountRegions; ++i) {
             WMSK.ToggleCountrySurface(i, true, Color.clear);
         }

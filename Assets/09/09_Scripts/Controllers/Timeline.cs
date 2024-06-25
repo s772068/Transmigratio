@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 public class Timeline : PersistentSingleton<Timeline> {
-    [SerializeField] private ButtonsGroup buttonsGroup;
+    [SerializeField] private ButtonsRadioGroup buttonsGroup;
     [SerializeField] private Vector2 timeDelayLimit;
     private float timeDelay;
     private float timer;
