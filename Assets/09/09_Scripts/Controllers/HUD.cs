@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
+using UnityEngine;
+using TMPro;
+
 /// <summary>
 /// Интерфейс, всплывающие окна и тд
 /// </summary>
@@ -43,6 +39,7 @@ public class HUD : MonoBehaviour
     }
 
     public void StartTutorial() {
+        tutorialWhole.gameObject.SetActive(true);
         welcomePopup.gameObject.SetActive(true);
         welcomePopupText.text = LocalizationSettings.StringDatabase.GetLocalizedString("TransmigratioLocalizationTable", "Tutorial0");
         welcomeContinueBtn.onClick.AddListener(() => ShowTutorPopup("Tutorial1"));

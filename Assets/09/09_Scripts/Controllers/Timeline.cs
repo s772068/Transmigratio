@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Timeline : PersistentSingleton<Timeline> {
@@ -9,12 +8,6 @@ public class Timeline : PersistentSingleton<Timeline> {
     private float timer;
     private bool isPlay;
     private int tick;
-
-    [SerializeField] private Color color;
-
-    private void Start() {
-        Debug.Log(color.ToHexString());
-    }
 
     public int Tick => tick;
 
