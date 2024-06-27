@@ -1,7 +1,7 @@
+using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
 using WorldMapStrategyKit;
 using System.Linq;
-using AYellowpaper.SerializedCollections;
 using UnityEngine;
 using System;
 
@@ -48,47 +48,33 @@ public class MigrationController : Singleton<MigrationController> {
     public void TryMigration(CivPiece civPice) {
         if (migrations.ContainsKey(civPice.region.id)) return;
 
-        TM_Region region = civPice.region;
-        List<Country> countries = WMSK.CountryNeighbours(region.id);
-        if (countries.Count == 0) return;
+        TM_Region curRegion = civPice.region;
+        List<Country> neighbourRegions = WMSK.CountryNeighbours(curRegion.id);
+        if (neighbourRegions.Count == 0) return;
 
         TM_Region targetRegion = null;
-        int nextFauna;
+        List<TM_Region> targetList = new();
+        List<TM_Region> allNeighbourRegionsList = new();
 
-        int fauna = Map.GetRegionBywmskId(region.id).fauna["Fauna"].value;
-
-        List<TM_Region> list = new();
-        int res = 0;
-
-        for (int i = 0; i < countries.Count; ++i) {
-            region = Map.GetRegionBywmskId(WMSK.GetCountryIndex(countries[i].name));
-            if (Transmigratio.Instance.GetRegion(WMSK.GetCountryIndex(countries[i])).Population == 0) {
-                list.Add(region);
-            }
-        }
-
-        if (list.Count == 0) {
-            nextFauna = region.fauna["Fauna"].value;
-            if (fauna < nextFauna) {
-                fauna = nextFauna;
-                targetRegion = region;
-            }
-        } else if(list.Count == 1) {
-            targetRegion = list[0];
-        } else if (list.Count > 1) {
-            for (int i = 0; i < list.Count; ++i) {
-                nextFauna = region.fauna["Fauna"].value;
-                if (fauna < nextFauna) {
-                    fauna = nextFauna;
-                    targetRegion = list[i];
+        for(int i = 0; i < neighbourRegions.Count; ++i) {
+            TM_Region neighbourRegion = Map.GetRegionBywmskId(WMSK.GetCountryIndex(neighbourRegions[i].name));
+            if (neighbourRegion.fauna["Fauna"].value > 0) {
+                allNeighbourRegionsList.Add(neighbourRegion);
+                if (neighbourRegion.fauna["Fauna"].value > curRegion.fauna["Fauna"].value) {
+                    targetList.Add(neighbourRegion);
                 }
-
             }
         }
 
-        if (targetRegion == null) return;
+        if (targetList.Count > 0) {
+            targetRegion = GetMax(targetList, (TM_Region region) => region.fauna["Fauna"].value);
+        } else if(allNeighbourRegionsList.Count > 0) {
+            System.Random r = new System.Random();
+            targetRegion = allNeighbourRegionsList[r.Next(0, allNeighbourRegionsList.Count)];
+        }
 
-        Add(civPice.region, targetRegion, civPice.civilization);
+        if (targetRegion != null)
+            Add(civPice.region, targetRegion, civPice.civilization);
     }
 
     private void Add(TM_Region from, TM_Region to, Civilization civ) {
@@ -228,5 +214,16 @@ public class MigrationController : Singleton<MigrationController> {
         Debug.Log(panel.IsOpenPanel);
         aiSolutionIndex = panel.IsOpenPanel ? -1 : 2;
         migrations[fromID].stepPopulations *= 2;
+    }
+
+    private T GetMax<T>(List<T> list, Func<T, int> GetValue) {
+        int res = 0;
+        int maxVal = GetValue(list[res]);
+        for (int i = 1; i < list.Count; ++i) {
+            if (GetValue(list[res]) > GetValue(list[i])) {
+                res = i;
+            }
+        }
+        return list[res];
     }
 }
