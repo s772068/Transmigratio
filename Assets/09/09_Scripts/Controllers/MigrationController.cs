@@ -65,16 +65,15 @@ public class MigrationController : Singleton<MigrationController> {
                 }
             }
         }
-
+        
         if (targetList.Count > 0) {
             targetRegion = GetMax(targetList, (TM_Region region) => region.fauna["Fauna"].value);
-        } else if(allNeighbourRegionsList.Count > 0) {
+        } else if (allNeighbourRegionsList.Count > 0) {
             System.Random r = new System.Random();
             targetRegion = allNeighbourRegionsList[r.Next(0, allNeighbourRegionsList.Count)];
-        }
-
-        if (targetRegion != null)
-            Add(civPice.region, targetRegion, civPice.civilization);
+        } else return;
+        
+        Add(civPice.region, targetRegion, civPice.civilization);
     }
 
     private void Add(TM_Region from, TM_Region to, Civilization civ) {
@@ -137,6 +136,7 @@ public class MigrationController : Singleton<MigrationController> {
         for(int i = 0; i < migrations.Count; ++i) {
             // Этап перед началом миграции
             MigrationData migration = migrations.Values.ElementAt(i);
+            if (!migration.civilization.pieces.ContainsKey(migration.to.id)) continue;
             int curID = migrations.Keys.ElementAt(i);
             if(migration.timerToStart < startTime) {
                 ++migration.timerToStart;
@@ -218,9 +218,8 @@ public class MigrationController : Singleton<MigrationController> {
 
     private T GetMax<T>(List<T> list, Func<T, int> GetValue) {
         int res = 0;
-        int maxVal = GetValue(list[res]);
         for (int i = 1; i < list.Count; ++i) {
-            if (GetValue(list[res]) > GetValue(list[i])) {
+            if (GetValue(list[res]) < GetValue(list[i])) {
                 res = i;
             }
         }

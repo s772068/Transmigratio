@@ -23,18 +23,11 @@ public class RegionDetails : MonoBehaviour {
     }
 
     private void OnEnable() {
-        bool isHasCiv = region.CivMain != null;
-        if (isHasCiv) leftSide.ClickCivTab();
-        else          leftSide.ClickRegionTab();
-
-        tabs.gameObject.SetActive(isHasCiv);
-        centerSide.Title = region.name;
+        SetRegion(region.id);
         GameEvents.onTickShow += UpdateParams;
     }
 
     private void OnDisable() {
-        leftSide.ClearElements();
-        centerSide.ClearParams();
         GameEvents.onTickShow -= UpdateParams;
     }
 
@@ -67,5 +60,23 @@ public class RegionDetails : MonoBehaviour {
     private void OnClickParamiter(string key) {
         rightSide.gameObject.SetActive(true);
         rightSide.UpdateData(element, key);
+    }
+
+    public void NextRegion() => SetRegion((region.id + 1) % Transmigratio.Instance.tmdb.map.allRegions.Count);
+    public void PrevRegion() => SetRegion(region.id == 0 ? (Transmigratio.Instance.tmdb.map.allRegions.Count - 1) : (region.id - 1));
+
+    private void SetRegion(int index) {
+        region = Transmigratio.Instance.tmdb.map.allRegions[index];
+        leftSide.ClearElements();
+        centerSide.ClearParams();
+
+        bool isHasCiv = region.CivMain != null;
+        if (isHasCiv) leftSide.ClickCivTab();
+        else leftSide.ClickRegionTab();
+
+        tabs.gameObject.SetActive(isHasCiv);
+        centerSide.Title = region.name;
+        leftSide.ClickRegionTab();
+        leftSide.SelectElement("Climate");
     }
 }

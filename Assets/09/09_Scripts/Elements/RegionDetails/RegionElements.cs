@@ -26,7 +26,7 @@ public class RegionElements : MonoBehaviour {
 
     public void CreateElement(string title) {
         PrefabsLoader.Load(out RegionElement newVal, content);
-        newVal.onClick = OnClick;
+        newVal.onClick = SelectElement;
         newVal.Title = title;
         dic[title] = newVal;
     }
@@ -39,10 +39,11 @@ public class RegionElements : MonoBehaviour {
         dic.Clear();
     }
 
-    private void OnClick(string key) {
+    public void SelectElement(string key) {
         if (activeKey != "") dic[activeKey].Deactivate();
         activeKey = key;
         dic[key].Activate();
         onClick?.Invoke(key);
+
     }
 }
