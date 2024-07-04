@@ -46,9 +46,9 @@ public class MigrationController : Singleton<MigrationController> {
     }
 
     public void TryMigration(CivPiece civPice) {
-        if (migrations.ContainsKey(civPice.region.id)) return;
+        if (migrations.ContainsKey(civPice.Region.id)) return;
 
-        TM_Region curRegion = civPice.region;
+        TM_Region curRegion = civPice.Region;
         List<Country> neighbourRegions = WMSK.CountryNeighbours(curRegion.id);
         if (neighbourRegions.Count == 0) return;
 
@@ -73,7 +73,7 @@ public class MigrationController : Singleton<MigrationController> {
             targetRegion = allNeighbourRegionsList[r.Next(0, allNeighbourRegionsList.Count)];
         } else return;
         
-        Add(civPice.region, targetRegion, civPice.civilization);
+        Add(civPice.Region, targetRegion, civPice.Civilization);
     }
 
     private void Add(TM_Region from, TM_Region to, Civilization civ) {
@@ -95,10 +95,10 @@ public class MigrationController : Singleton<MigrationController> {
 
         Debug.Log($"Migration: From: {from.id} | To: {to.id} | Solution: {aiSolutionIndex}");
 
-        if (!to.civsList.Contains(civ)) {
+        if (!to.civsList.Contains(civ.name)) {
             newMigration.curPopulations += newMigration.stepPopulations;
-            civ.AddPiece(to, newMigration.stepPopulations, 10);
-            to.AddCivilization(civ);
+            civ.AddPiece(to.id, newMigration.stepPopulations, 10);
+            to.AddCivilization(civ.name);
         }
 
         if (aiSolutionIndex == -1) {
@@ -168,12 +168,12 @@ public class MigrationController : Singleton<MigrationController> {
     }
 
     private void Remove(CivPiece civPiece) {
-        if (migrations.ContainsKey(civPiece.region.id)) {
-            Remove(civPiece.region.id);
+        if (migrations.ContainsKey(civPiece.Region.id)) {
+            Remove(civPiece.Region.id);
             return;
         }
         foreach(var pair in migrations) {
-            if (pair.Value.to.id == civPiece.region.id) {
+            if (pair.Value.to.id == civPiece.Region.id) {
                 Remove(pair.Value.from.id);
                 break;
             }

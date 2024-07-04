@@ -63,8 +63,8 @@ public class VolcanoController : Singleton<VolcanoController> {
         piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
         ticksToActivateVolcano = rand.Next(minTickToActivate, maxTickToActivate);
         GameEvents.onTickLogic += WaitActivateVolcano;
-        Debug.Log($"Create event Volcano in region {piece.region.id}");
-        CreateMarker(WMSK.countries[piece.region.id].center);
+        Debug.Log($"Create event Volcano in region {piece.Region.id}");
+        CreateMarker(WMSK.countries[piece.Region.id].center);
         if (panel.IsShowAgain) {
             OpenPanel();
             Timeline.Instance.Pause();
@@ -103,10 +103,10 @@ public class VolcanoController : Singleton<VolcanoController> {
         panel.Description = StringLoader.Load("Volcano", "Description");
         panel.Territory = StringLoader.Load("Volcano", "Territory1") + " " +
                           $"<color=#{regionColor.ToHexString()}>" +
-                          piece.region.name + "</color> " +
+                          piece.Region.name + "</color> " +
                           StringLoader.Load("Volcano", "Territory2") + " " +
                           $"<color=#{civColor.ToHexString()}>" +
-                          StringLoader.Load("Civilizations", piece.civilization.name) + "</color> " +
+                          StringLoader.Load("Civilizations", piece.Civilization.name) + "</color> " +
                           StringLoader.Load("Volcano", "Territory3");
         panel.AddDesidion(StringLoader.Load("Volcano", "CalmVolcano"), (int)(piece.population.value / calmVolcanoPointsDivision));
         panel.AddDesidion(StringLoader.Load("Volcano", "ReduceLosses"), reduceLossesPoints);

@@ -20,7 +20,7 @@ public class Humanity {
     /// <summary>
     /// —оздание первоначальной цивилизации (старт игры)
     /// </summary>
-    public Civilization AddCivilization(TM_Region region, string civName) {
+    public Civilization AddCivilization(int region, string civName) {
         Civilization newCiv = new Civilization();
         newCiv.Init(region, civName);
         civilizations[civName] = newCiv;

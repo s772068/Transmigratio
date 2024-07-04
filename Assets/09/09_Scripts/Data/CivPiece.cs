@@ -10,32 +10,30 @@ using Unity.VisualScripting;
 /// </summary>
 [System.Serializable]
 public class CivPiece {
-    //public int regionId;                //wmsk_id того региона, где живёт этот объект
-    public TM_Region region;   //может лучше сам регион, а не айди?
-    
-    //public Civilization civBelonging;      // если мы обращаемся к CivPiece только из списка civPiecesList, эта штука нам не нужна
-    public Civilization civilization;
-
     public Population population;
     public float populationGrow;
     public float givenFood;
     public float requestFood;
     public float reserveFood;
     public float takenFood;
+    
+    public int regionID;
+    public string civName;
 
     public Action onDestroy;
 
-    private Map Map => Transmigratio.Instance.tmdb.map;
-    private WMSK WMSK => Map.wmsk;
+    public TM_Region Region => TMDB.map.allRegions[regionID];
+    public Civilization Civilization => TMDB.humanity.civilizations[civName];
+    private TMDB TMDB => Transmigratio.Instance.tmdb;
 
     /// <summary>
     /// Инициализация при появлении в области после миграции или при старте игры
     /// </summary>
-    public void Init(TM_Region region, Civilization civilization, int startPopulation, float reserve) {
-        this.region = region;
+    public void Init(int region, string civilization, int startPopulation, float reserve) {
+        regionID = region;
         population = new Population();
         population.value = startPopulation;
-        this.civilization = civilization;
+        civName = civilization;
         reserveFood = reserve;  //изначальное количество еды у кусочка
     }
 
@@ -43,13 +41,13 @@ public class CivPiece {
     /// Изменение населения кусочка за тик
     /// </summary>
     public void DeltaPop() {
-        float faunaKr = (float)(Math.Pow(region.fauna.GetMaxQuantity().value, 0.58d) / 10f);
-        takenFood = population.value / 100f * faunaKr * civilization.prodModeK;
+        float faunaKr = (float)(Math.Pow(Region.fauna.GetMaxQuantity().value, 0.58d) / 10f);
+        takenFood = population.value / 100f * faunaKr * Civilization.prodModeK;
         requestFood = population.Value / 150f;
         if (reserveFood > requestFood) givenFood = requestFood;
         else                           givenFood = reserveFood;
         reserveFood += takenFood - givenFood;
-        populationGrow = population.Value * civilization.governmentCorruption * givenFood / requestFood - population.Value / 3f;
+        populationGrow = population.Value * Civilization.governmentCorruption * givenFood / requestFood - population.Value / 3f;
 
         population.value += (int)populationGrow;
         if (population.value <= 50) { onDestroy?.Invoke(); return; }

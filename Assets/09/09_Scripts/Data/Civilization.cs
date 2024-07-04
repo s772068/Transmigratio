@@ -22,7 +22,7 @@ public class Civilization {
 
     public int Population => pieces.Sum(x => x.Value.population.Value);
 
-    public void Init(TM_Region region, string civName)        //версия для старта игры. Для других цивилизаций нужна перегрузка
+    public void Init(int region, string civName)        //версия для старта игры. Для других цивилизаций нужна перегрузка
     {
         pieces = new();
         pieces.Clear();
@@ -33,7 +33,7 @@ public class Civilization {
         prodMode.Init("PrimitiveCommunism", "Slavery", "Feodalism", "Capitalism", "Socialism", "Communism");
         government.Init("Leaderism", "Monarchy", "CityState", "Imperium", "Federation", "NationalState", "Anarchy");
 
-        Debug.Log("Civilization init. \rpopulation:" + Population + "\rregionID:" + region.id);
+        Debug.Log("Civilization init. \rpopulation:" + Population + "\rregionID:" + region);
 
         GameEvents.onTickLogic += UpdatePieces;
     }
@@ -41,11 +41,11 @@ public class Civilization {
     /// <summary>
     /// Когда цивилизация появляется на новой территории, создаем новый экземпляр CivPiece. Передаём туда стартовое население, id региона
     /// </summary>
-    public void AddPiece(TM_Region region, int population, float reserve) {
+    public void AddPiece(int region, int population, float reserve) {
         CivPiece newPieceOfCiv = new CivPiece();
-        newPieceOfCiv.Init(region, this, population, reserve);
-        newPieceOfCiv.onDestroy = () => RemovePiece(region.id);
-        pieces[region.id] = newPieceOfCiv;
+        newPieceOfCiv.Init(region, name, population, reserve);
+        newPieceOfCiv.onDestroy = () => RemovePiece(region);
+        pieces[region] = newPieceOfCiv;
         //region.AddCivPiece(newPieceOfCiv);
     }
     /// <summary>
@@ -53,8 +53,7 @@ public class Civilization {
     /// </summary>
     public void RemovePiece(int region) {
         GameEvents.onRemoveCivPiece(pieces[region]);
-        pieces[region].region.civsList.Remove(pieces[region].civilization);
-        pieces[region].region.civPiecesList.Remove(pieces[region]);
+        pieces[region].Region.civsList.Remove(name);
         pieces.Remove(region);
     }
 

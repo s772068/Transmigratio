@@ -32,7 +32,7 @@ public class HungerController : Singleton<HungerController> {
 
     private void AddEvent(CivPiece piece) {
         if (events.Contains(piece)) return;
-        Debug.Log($"Add event Hunger in region {piece.region.id}");
+        Debug.Log($"Add event Hunger in region {piece.Region.id}");
         CreateMarker(piece);
         events.Add(piece);
         if (panel.IsShowAgain) {
@@ -43,14 +43,14 @@ public class HungerController : Singleton<HungerController> {
 
     private void CreateMarker(CivPiece piece) {
         Debug.Log("CreateMarker");
-        piece.region.marker = Instantiate(markerPrefab);
-        piece.region.marker.Sprite = markerSprite;
-        piece.region.marker.Index = events.Count;
-        piece.region.marker.onClick += (int i) => { OpenPanel(piece); panel.IsShowAgain = isShowAgain; };
+        piece.Region.marker = Instantiate(markerPrefab);
+        piece.Region.marker.Sprite = markerSprite;
+        piece.Region.marker.Index = events.Count;
+        piece.Region.marker.onClick += (int i) => { OpenPanel(piece); panel.IsShowAgain = isShowAgain; };
 
-        Vector3 position = WMSK.countries[piece.region.id].center;
+        Vector3 position = WMSK.countries[piece.Region.id].center;
         position.z = -0.1f;
-        MarkerClickHandler handler = WMSK.AddMarker2DSprite(piece.region.marker.gameObject, position, 0.03f, true, true);
+        MarkerClickHandler handler = WMSK.AddMarker2DSprite(piece.Region.marker.gameObject, position, 0.03f, true, true);
         handler.allowDrag = false;
     }
 
@@ -62,10 +62,10 @@ public class HungerController : Singleton<HungerController> {
         panel.Description = StringLoader.Load("Hunger", "Description");
         panel.Territory = StringLoader.Load("Hunger", "Territory 1") + " " +
                           $"<color=#{regionColor.ToHexString()}>" +
-                          piece.region.name + "</color> " +
+                          piece.Region.name + "</color> " +
                           StringLoader.Load("Hunger", "Territory 2") + " " +
                           $"<color=#{civColor.ToHexString()}>" +
-                          StringLoader.Load("Civilizations", piece.civilization.name) + "</color> " +
+                          StringLoader.Load("Civilizations", piece.Civilization.name) + "</color> " +
                           StringLoader.Load("Hunger", "Territory 3");
         panel.AddDesidion(StringLoader.Load("Hunger", "AddFood"), (int)(piece.population.value / addFoodDivision / addFoodDivisionPoints));
         panel.AddDesidion(StringLoader.Load("Hunger", "AddSomeFood"), AddSomeFoodPointsPercents);
@@ -103,7 +103,7 @@ public class HungerController : Singleton<HungerController> {
 
     private void RemoveEvent(CivPiece piece) {
         Debug.Log("RemoveEvent");
-        if(piece.region.marker != null) piece.region.marker.Destroy();
+        if(piece.Region.marker != null) piece.Region.marker.Destroy();
         events.Remove(piece);
     }
 }

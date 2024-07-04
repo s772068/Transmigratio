@@ -6,7 +6,15 @@ using UnityEngine;
 public class TM_Region {
     public int id; //айдишник региона, соотвествует wmsk id
     public string name;
-    public float Population => civsList.Sum(x => x.pieces[id].population.value);
+    public float Population {
+        get {
+            float res = 0;
+            for(int i = 0; i < civsList.Count; ++i) {
+                res += Transmigratio.Instance.GetCivPice(id, civsList[i]).population.value;
+            }
+            return res;
+        }
+    }
 
     private int mainCivIndex;
 
@@ -15,32 +23,31 @@ public class TM_Region {
     public Paramiter climate;
     public Paramiter terrain;
 
-    public List<Civilization> civsList = new();
-    public List<CivPiece> civPiecesList = new();
+    public List<string> civsList = new();
 
     [HideInInspector] public IconMarker marker;
     
     public Civilization CivMain => Transmigratio.Instance.GetCiv(GetMainCiv());
+    private CivPiece GetPiece(string civName) => Transmigratio.Instance.GetCivPice(id, civName);
 
     private float TakenFood { get {
             float res = 0;
-            for(int i = 0; i < civPiecesList.Count; ++i) {
-                res += civPiecesList[i].takenFood;
+            for(int i = 0; i < civsList.Count; ++i) {
+                res += GetPiece(civsList[i]).takenFood;
             }
             return res;
         }
     }
 
-    public void AddCivilization(Civilization civilization) {
-        civsList.Add(civilization);
-        civPiecesList.Add(civilization.pieces[id]);
+    public void AddCivilization(string civName) {
+        civsList.Add(civName);
     }
 
     public Dictionary<string, int> GetCivParamiter() {
         Dictionary<string, int> res = new();
         
         for (int i = 0; i < civsList.Count; ++i) {
-            res[civsList[i].name] = civsList[i].pieces[id].population.value;
+            res[civsList[i]] = GetPiece(civsList[i]).population.value;
         }
 
         return res;
@@ -52,7 +59,7 @@ public class TM_Region {
         Dictionary<string, int> dic = new();
 
         for (int i = 0; i < civsList.Count; ++i) {
-            dic[civsList[i].name] = civsList[i].pieces[id].population.value;
+            dic[civsList[i]] = GetPiece(civsList[i]).population.value;
         }
 
         return dic.FirstOrDefault(x => x.Value == dic.Values.Max()).Key;

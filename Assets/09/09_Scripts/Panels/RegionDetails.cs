@@ -9,11 +9,12 @@ public class RegionDetails : MonoBehaviour {
     [SerializeField] private ButtonsRadioGroup tabs;
     [SerializeField] private Image civAvatar;
 
-    public TM_Region region;
+    public int regionID;
 
     private Dictionary<string, int> dic;
     private string element;
 
+    private TM_Region Region => Transmigratio.Instance.tmdb.map.allRegions[regionID];
     public Sprite Avatar { set => civAvatar.sprite = value; }
     
     private void Awake() {
@@ -23,7 +24,7 @@ public class RegionDetails : MonoBehaviour {
     }
 
     private void OnEnable() {
-        SetRegion(region.id);
+        SetRegion(regionID);
         GameEvents.onTickShow += UpdateParams;
     }
 
@@ -50,7 +51,7 @@ public class RegionDetails : MonoBehaviour {
 
     private void UpdateParams() {
         if (element == null) return;
-        dic = Transmigratio.Instance.tmdb.GetParam(region.id, element);
+        dic = Transmigratio.Instance.tmdb.GetParam(regionID, element);
         foreach (var pair in dic) {
             if (pair.Value == 0) continue;
             centerSide.SetParamiter(element, pair.Key, pair.Value);
@@ -62,20 +63,20 @@ public class RegionDetails : MonoBehaviour {
         rightSide.UpdateData(element, key);
     }
 
-    public void NextRegion() => SetRegion((region.id + 1) % Transmigratio.Instance.tmdb.map.allRegions.Count);
-    public void PrevRegion() => SetRegion(region.id == 0 ? (Transmigratio.Instance.tmdb.map.allRegions.Count - 1) : (region.id - 1));
+    public void NextRegion() => SetRegion((regionID + 1) % Transmigratio.Instance.tmdb.map.allRegions.Count);
+    public void PrevRegion() => SetRegion(regionID == 0 ? (Transmigratio.Instance.tmdb.map.allRegions.Count - 1) : (regionID - 1));
 
     private void SetRegion(int index) {
-        region = Transmigratio.Instance.tmdb.map.allRegions[index];
+        regionID = index;
         leftSide.ClearElements();
         centerSide.ClearParams();
 
-        bool isHasCiv = region.CivMain != null;
+        bool isHasCiv = Region.CivMain != null;
         if (isHasCiv) leftSide.ClickCivTab();
         else leftSide.ClickRegionTab();
 
         tabs.gameObject.SetActive(isHasCiv);
-        centerSide.Title = region.name;
+        centerSide.Title = Region.name;
         leftSide.ClickRegionTab();
         leftSide.SelectElement("Climate");
     }

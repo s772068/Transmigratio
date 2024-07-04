@@ -23,9 +23,9 @@ public class TMDB : ScriptableObject {
         map.Init();
     }
 
-    public void StartGame(TM_Region region) {
+    public void StartGame(int region) {
         Civilization civilization = humanity.AddCivilization(region, "Uncivilized");
-        region.AddCivilization(civilization);
+        map.allRegions[region].AddCivilization(civilization.name);
     }
 
     /*

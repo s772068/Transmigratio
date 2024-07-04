@@ -66,8 +66,8 @@ public class HUD : MonoBehaviour
         //migration
     }
 
-    public void ShowRegionDetails(TM_Region region) {
-        regionDetails.region = region;
+    public void ShowRegionDetails(int region) {
+        regionDetails.regionID = region;
         regionDetails.gameObject.SetActive(true);
     }
 }
