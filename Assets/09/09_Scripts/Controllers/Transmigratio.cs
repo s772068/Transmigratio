@@ -24,7 +24,10 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     }
 
     public TM_Region GetRegion(int index) => tmdb.map.allRegions[index];
-    public Civilization GetCiv(string civName) => tmdb.humanity.civilizations[civName];
+    public Civilization GetCiv(string civName) {
+        if (civName == "") return null;
+        return tmdb.humanity.civilizations[civName];
+    }
     public CivPiece GetCivPice(int regionIndex, string civName) => GetCiv(civName).pieces[regionIndex];
 
     public void StartGame() {
