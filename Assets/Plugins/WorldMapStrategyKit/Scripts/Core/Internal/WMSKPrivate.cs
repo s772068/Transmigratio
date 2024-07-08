@@ -760,12 +760,15 @@ namespace WorldMapStrategyKit {
                     float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
                     // Pass the delta to the wheel accel
-                    if (deltaMagnitudeDiff != 0) {
+                    pinching = Mathf.Abs(deltaMagnitudeDiff) > 3;
+                    if (pinching) {
                         zoomDampingStart = Time.time;
                         wheelAccel += deltaMagnitudeDiff;
+                    } else {
+                        zoomDampingStart = 0;
+                        wheelAccel = 0;
                     }
 
-                    pinching = true;
                     dragDampingStart = 0;
                 } else if (wheelAccel == 0) {
                     zoomCenter = input.mousePosition;
@@ -784,7 +787,11 @@ namespace WorldMapStrategyKit {
                         if (_currentCamera.orthographic) {
                             _currentCamera.orthographicSize += _currentCamera.orthographicSize * wheelAccel * _mouseWheelSensitivity * deltaTime;
                         } else {
+#if UNITY_EDITOR
                             _currentCamera.transform.Translate((_currentCamera.transform.position - dest) * wheelAccel * _mouseWheelSensitivity * deltaTime, Space.World);
+#else
+                            if (pinching) _currentCamera.transform.Translate((_currentCamera.transform.position - dest) * wheelAccel * _mouseWheelSensitivity * deltaTime, Space.World);
+#endif
                         }
                         if (zoomDampingStart > 0) {
                             float t = (Time.time - zoomDampingStart) / (_zoomDampingDuration + 0.001f);
@@ -996,7 +1003,7 @@ namespace WorldMapStrategyKit {
                     }
                 }
 
-                if (dragging) {
+                if (dragging && input.touchCount == 1) {
                     if (buttonLeftPressed) {
                         if (canUserDrag) {
                             if (_dragConstantSpeed) {
@@ -1191,7 +1198,7 @@ namespace WorldMapStrategyKit {
             HideCountryRegionHighlight();
         }
 
-        #endregion
+#endregion
 
         #region System initialization
 
