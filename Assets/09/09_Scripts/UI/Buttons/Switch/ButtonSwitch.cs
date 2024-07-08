@@ -46,17 +46,17 @@ public class ButtonSwitch : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     public void OnPointerExit(PointerEventData eventData) {
         if (highlightedSprite == null) return;
-        if (isActive && activeSprite != null) image.sprite = activeSprite;
-        else if(deactiveSprite != null) image.sprite = deactiveSprite;
+        if (isActive) image.sprite = activeSprite;
+        else image.sprite = deactiveSprite;
     }
 
     public void Activate() {
         onActivate.Invoke();
-        if (activeSprite != null) image.sprite = activeSprite;
+        image.sprite = activeSprite;
     }
 
     public void Deactivate() {
         onDeactivate.Invoke();
-        if (deactiveSprite != null) image.sprite = deactiveSprite;
+        image.sprite = deactiveSprite;
     }
 }
