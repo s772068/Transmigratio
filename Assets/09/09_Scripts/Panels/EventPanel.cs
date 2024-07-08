@@ -5,6 +5,9 @@ using System;
 using TMPro;
 
 public class EventPanel : MonoBehaviour {
+    public static event Action<bool> EventPanelOpen;
+    public static event Action<bool> EventPanelClose;
+    
     [SerializeField] private TMP_Text title;
     [SerializeField] private TMP_Text territory;
     [SerializeField] private TMP_Text description;
@@ -31,11 +34,13 @@ public class EventPanel : MonoBehaviour {
         Transmigratio.Instance.IsClickableMarker = false;
         ClearDesidions();
         gameObject.SetActive(true);
+        EventPanelOpen?.Invoke(true);
     }
 
     public void Close() {
         Transmigratio.Instance.IsClickableMarker = true;
         gameObject.SetActive(false);
+        EventPanelClose?.Invoke(true);
     }
 
     public void AddDesidion(string title, int points) {

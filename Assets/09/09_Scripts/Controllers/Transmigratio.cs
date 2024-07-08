@@ -39,7 +39,6 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     public new void Awake() {
         base.Awake();
         tmdb.TMDBInit();
-        hud.StartTutorial();
 
         tmdb.map.wmsk.OnCountryClick += OnClickFromMain;
         tmdb.map.wmsk.OnCountryLongClick += OnLongClickFromMain;
