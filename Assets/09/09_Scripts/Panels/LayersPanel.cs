@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using WorldMapStrategyKit;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class LayersPanel : MonoBehaviour {
-    public SerializedDictionary<string, Color> terrain = new();
-    public SerializedDictionary<string, Color> climate = new();
-    public SerializedDictionary<float, Color> flora = new();
-    public SerializedDictionary<float, Color> fauna = new();
-    public SerializedDictionary<float, Color> population = new();
-    public SerializedDictionary<string, Color> ecoCulture = new();
-    public SerializedDictionary<string, Color> prodMode = new();
-    public SerializedDictionary<string, Color> government = new();
-    public SerializedDictionary<string, Color> civilization = new();
+    [SerializeField] private Color selectColor;
+    [SerializeField] private Color unselectColor;
+    [SerializeField] private SerializedDictionary<string, Color> terrain = new();
+    [SerializeField] private SerializedDictionary<string, Color> climate = new();
+    [SerializeField] private SerializedDictionary<float, Color> flora = new();
+    [SerializeField] private SerializedDictionary<float, Color> fauna = new();
+    [SerializeField] private SerializedDictionary<float, Color> population = new();
+    [SerializeField] private SerializedDictionary<string, Color> ecoCulture = new();
+    [SerializeField] private SerializedDictionary<string, Color> prodMode = new();
+    [SerializeField] private SerializedDictionary<string, Color> government = new();
+    [SerializeField] private SerializedDictionary<string, Color> civilization = new();
 
     private Action onPaint;
 
@@ -33,8 +36,9 @@ public class LayersPanel : MonoBehaviour {
     public void ClickCivilization() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.name));
 
     private void OnClick(Action PaintAction) {
-        GameEvents.onTickShow += onPaint;
+        GameEvents.onTickShow -= onPaint;
         onPaint = PaintAction;
+        GameEvents.onTickShow += onPaint;
         PaintAction?.Invoke();
     }
 
@@ -93,4 +97,7 @@ public class LayersPanel : MonoBehaviour {
         }
         return default;
     }
+
+    public void Select(Image img) => img.color = selectColor;
+    public void Unselect(Image img) => img.color = unselectColor;
 }
