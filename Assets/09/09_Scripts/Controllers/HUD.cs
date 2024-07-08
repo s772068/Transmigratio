@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -5,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public class HUD : MonoBehaviour
 {
+    public static event Action<bool> EventRegionPanelOpen;
+
     [SerializeField] private Messanger messanger;
 
     public bool isShowMigration = true;
@@ -31,5 +34,6 @@ public class HUD : MonoBehaviour
     public void ShowRegionDetails(int region) {
         regionDetails.regionID = region;
         regionDetails.gameObject.SetActive(true);
+        EventRegionPanelOpen?.Invoke(true);
     }
 }
