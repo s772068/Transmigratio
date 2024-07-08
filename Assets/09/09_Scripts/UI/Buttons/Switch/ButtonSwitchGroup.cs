@@ -4,7 +4,8 @@ using UnityEngine;
 public class ButtonSwitchGroup : MonoBehaviour {
     [SerializeField] private int maxSelected;
     [SerializeField] private List<ButtonSwitch> buttons;
-    [SerializeField] private List<ButtonSwitch> selected;
+    
+    private List<ButtonSwitch> selected = new();
 
     private void Awake() {
         for(int i = 0; i < buttons.Count; ++i) {

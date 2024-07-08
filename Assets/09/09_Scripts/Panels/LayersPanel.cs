@@ -1,19 +1,22 @@
 using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
 using WorldMapStrategyKit;
+using UnityEngine.UI;
 using UnityEngine;
 using System;
 
 public class LayersPanel : MonoBehaviour {
-    public SerializedDictionary<string, Color> terrain = new();
-    public SerializedDictionary<string, Color> climate = new();
-    public SerializedDictionary<float, Color> flora = new();
-    public SerializedDictionary<float, Color> fauna = new();
-    public SerializedDictionary<float, Color> population = new();
-    public SerializedDictionary<string, Color> ecoCulture = new();
-    public SerializedDictionary<string, Color> prodMode = new();
-    public SerializedDictionary<string, Color> government = new();
-    public SerializedDictionary<string, Color> civilization = new();
+    [SerializeField] private Color selectColor;
+    [SerializeField] private Color unselectColor;
+    [SerializeField] private SerializedDictionary<string, Color> terrain = new();
+    [SerializeField] private SerializedDictionary<string, Color> climate = new();
+    [SerializeField] private SerializedDictionary<float, Color> flora = new();
+    [SerializeField] private SerializedDictionary<float, Color> fauna = new();
+    [SerializeField] private SerializedDictionary<float, Color> population = new();
+    [SerializeField] private SerializedDictionary<string, Color> ecoCulture = new();
+    [SerializeField] private SerializedDictionary<string, Color> prodMode = new();
+    [SerializeField] private SerializedDictionary<string, Color> government = new();
+    [SerializeField] private SerializedDictionary<string, Color> civilization = new();
 
     private Action onPaint;
 
@@ -33,12 +36,14 @@ public class LayersPanel : MonoBehaviour {
     public void ClickCivilization() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.name));
 
     private void OnClick(Action PaintAction) {
-        GameEvents.onTickShow += onPaint;
+        GameEvents.onTickShow -= onPaint;
         onPaint = PaintAction;
+        GameEvents.onTickShow += onPaint;
         PaintAction?.Invoke();
     }
 
     private void PaintByName(SerializedDictionary<string, Color> dictionary, Func<int, string> GetName) {
+        if(dictionary.Count == 0) return;
         string _name;
         for (int i = 0; i < CountRegions; ++i) {
             _name = GetName(i);
@@ -51,8 +56,10 @@ public class LayersPanel : MonoBehaviour {
     }
 
     private void PaintByPercent(SerializedDictionary<float, Color> dictionary, Func<int, float> GetPercent) {
+        if (dictionary.Count == 0) return;
         Color color = default;
         float percent;
+
         for (int i = 0; i < CountRegions; ++i) {
             percent = GetPercent(i);
             color = GetColorByPercent(percent, dictionary);
@@ -61,10 +68,10 @@ public class LayersPanel : MonoBehaviour {
     }
 
     private void PaintByMax(SerializedDictionary<float, Color> dictionary, Func<int, float> GetValue) {
+        if (dictionary.Count == 0) return;
         Color color = default;
         float percent;
         float max = 0;
-        Debug.Log("PaintByMax");
         for(int i = 0; i < CountRegions; ++i) {
             max = GetValue(i) > max ? GetValue(i) : max;
         }
@@ -93,4 +100,7 @@ public class LayersPanel : MonoBehaviour {
         }
         return default;
     }
+
+    public void Select(Image img) => img.color = selectColor;
+    public void Unselect(Image img) => img.color = unselectColor;
 }
