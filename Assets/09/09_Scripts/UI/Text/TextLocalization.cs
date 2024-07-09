@@ -8,6 +8,6 @@ public class TextLocalization : MonoBehaviour {
     private void Awake() {
         if (!isUse) return;
         TMP_Text text = GetComponent<TMP_Text>();
-        text.text = StringLoader.Load(table, text.text);
+        text.text = Localization.Load(table, text.text);
     }
 }
