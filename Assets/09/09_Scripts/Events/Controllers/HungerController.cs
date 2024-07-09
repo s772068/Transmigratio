@@ -17,7 +17,7 @@ public class HungerController : Singleton<HungerController> {
     [SerializeField] private Color regionColor;
     [SerializeField] private Color civColor;
 
-    private bool isShowAgain;
+    private bool isShowAgain = true;
     private CivPiece selectedCivPiece;
     private List<CivPiece> events = new();
 
@@ -35,7 +35,7 @@ public class HungerController : Singleton<HungerController> {
         Debug.Log($"Add event Hunger in region {piece.Region.id}");
         CreateMarker(piece);
         events.Add(piece);
-        if (panel.IsShowAgain) {
+        if (isShowAgain) {
             OpenPanel(piece);
             Timeline.Instance.Pause();
         }
@@ -57,6 +57,7 @@ public class HungerController : Singleton<HungerController> {
     private void OpenPanel(CivPiece piece) {
         panel.Open();
         panel.onClick = ActivateDesidion;
+        panel.IsShowAgain = isShowAgain;
         panel.Image = panelSprite;
         panel.Title = Localization.Load("Hunger", "Title");
         panel.Description = Localization.Load("Hunger", "Description");

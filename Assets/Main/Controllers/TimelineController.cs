@@ -32,8 +32,8 @@ public class TimelineController : MonoBehaviour, IGameConnecter {
     private float timeToCheckHungry = 0;
     private float timeToUpdateYear = 0;
     private float timeToUpdateData = 0;
-    private float timeToUpdateMigration = 0;
-    //private float timeToShowFactAboutEarth = 0;
+    // private float timeToUpdateMigration = 0;
+    // private float timeToShowFactAboutEarth = 0;
     private float timeToEndGame = 0;
 
     public Action<int> OnSelectRegion;

@@ -31,7 +31,8 @@ public class VolcanoController : Singleton<VolcanoController> {
     [SerializeField] private int ticker;
     [SerializeField] private int activateIndex;
     [SerializeField] private int ticksToActivateVolcano;
-    private bool isShowAgain;
+
+    private bool isShowAgain = true;
     private CivPiece piece;
     private IconMarker marker;
     private System.Random rand = new();
@@ -65,7 +66,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         GameEvents.onTickLogic += WaitActivateVolcano;
         Debug.Log($"Create event Volcano in region {piece.Region.id}");
         CreateMarker(WMSK.countries[piece.Region.id].center);
-        if (panel.IsShowAgain) {
+        if (isShowAgain) {
             OpenPanel();
             Timeline.Instance.Pause();
         }
@@ -98,6 +99,7 @@ public class VolcanoController : Singleton<VolcanoController> {
     private void OpenPanel() {
         panel.Open();
         panel.onClick = ActivateDesidion;
+        panel.IsShowAgain = isShowAgain;
         panel.Image = panelSprite;
         panel.Title = Localization.Load("Volcano", "Title");
         panel.Description = Localization.Load("Volcano", "Description");
