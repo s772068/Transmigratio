@@ -38,24 +38,34 @@ public class VolcanoController : Singleton<VolcanoController> {
     private System.Random rand = new();
     private List<Action> autoActions = new();
 
+    private Action onTickLogic;
+
     private WMSK WMSK => Transmigratio.Instance.tmdb.map.wmsk;
 
     private string Local(string key) => Localization.Load("Volcano", key);
     private int GetCalmVolcanoPoints(CivPiece piece) => (int) (piece.population.value / calmVolcanoPointsDivision);
 
-    private void Start() {
+    private void OnEnable() {
+        GameEvents.onTickLogic += onTickLogic;
+        GameEvents.onRemoveCivPiece += RestartEvent;
+
         autoActions.Add(CalmVolcano);
         autoActions.Add(ReduceLosses);
         autoActions.Add(ActivateVolcano);
-        GameEvents.onTickLogic += StartCreateEvent;
-        GameEvents.onRemoveCivPiece += RestartEvent;
+    }
+
+    private void OnDisable() {
+        GameEvents.onTickLogic -= onTickLogic;
+        GameEvents.onRemoveCivPiece -= RestartEvent;
+
+        autoActions.Clear();
     }
 
     private void StartCreateEvent() {
         ++ticker;
         if (ticker == startTicksToActivate) {
             ticker = 0;
-            GameEvents.onTickLogic -= StartCreateEvent;
+            onTickLogic -= StartCreateEvent;
             CreateEvent();
         }
     }
@@ -66,7 +76,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         if (civilizations.Count == 0) return;
         piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
         ticksToActivateVolcano = rand.Next(minTickToActivate, maxTickToActivate);
-        GameEvents.onTickLogic += WaitActivateVolcano;
+        onTickLogic += WaitActivateVolcano;
         Debug.Log($"Create event Volcano in region {piece.Region.id}");
         CreateMarker(WMSK.countries[piece.Region.id].center);
         if (isShowAgain) {
@@ -83,7 +93,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         Debug.Log("RestartEvent");
         ++ticker;
         if (ticker == ticksToActivateVolcano) {
-            GameEvents.onTickLogic -= RestartEvent;
+            onTickLogic -= RestartEvent;
             ticker = 0;
             CreateEvent();
         }
@@ -129,8 +139,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         ticker = 0;
         ClosePanel();
         marker.Destroy();
-        GameEvents.onTickLogic -= WaitActivateVolcano;
-        GameEvents.onTickLogic += RestartEvent;
+        onTickLogic = RestartEvent;
     }
 
     private void ReduceLosses() {
@@ -143,8 +152,7 @@ public class VolcanoController : Singleton<VolcanoController> {
         ticker = 0;
         ClosePanel();
         marker.Destroy();
-        GameEvents.onTickLogic -= WaitActivateVolcano;
-        GameEvents.onTickLogic += RestartEvent;
+        onTickLogic = RestartEvent;
         MigrationController.Instance.TryMigration(piece);
     }
 
@@ -172,8 +180,7 @@ public class VolcanoController : Singleton<VolcanoController> {
             ticker = 0;
             marker.Destroy();
             autoActions[activateIndex]?.Invoke();
-            GameEvents.onTickLogic -= WaitActivateVolcano;
-            GameEvents.onTickLogic += RestartEvent;
+            onTickLogic = RestartEvent;
         }
     }
 }
