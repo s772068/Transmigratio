@@ -57,7 +57,10 @@ public class MigrationController : Singleton<MigrationController> {
         List<TM_Region> allNeighbourRegionsList = new();
 
         for(int i = 0; i < neighbourRegions.Count; ++i) {
-            TM_Region neighbourRegion = Map.GetRegionBywmskId(WMSK.GetCountryIndex(neighbourRegions[i].name));
+            int regionID = WMSK.GetCountryIndex(neighbourRegions[i].name);
+            if (migrations.ContainsKey(regionID)) continue;
+            
+            TM_Region neighbourRegion = Map.GetRegionBywmskId(regionID);
             if (neighbourRegion.fauna["Fauna"].value > 0) {
                 allNeighbourRegionsList.Add(neighbourRegion);
                 if (neighbourRegion.fauna["Fauna"].value > curRegion.fauna["Fauna"].value) {

@@ -40,6 +40,9 @@ public class VolcanoController : Singleton<VolcanoController> {
 
     private WMSK WMSK => Transmigratio.Instance.tmdb.map.wmsk;
 
+    private string Local(string key) => Localization.Load("Volcano", key);
+    private int GetCalmVolcanoPoints(CivPiece piece) => (int) (piece.population.value / calmVolcanoPointsDivision);
+
     private void Start() {
         autoActions.Add(CalmVolcano);
         autoActions.Add(ReduceLosses);
@@ -100,18 +103,18 @@ public class VolcanoController : Singleton<VolcanoController> {
         panel.Open();
         panel.IsShowAgain = isShowAgain;
         panel.Image = panelSprite;
-        panel.Title = Localization.Load("Volcano", "Title");
-        panel.Description = Localization.Load("Volcano", "Description");
-        panel.Territory = Localization.Load("Volcano", "Territory1") + " " +
+        panel.Title = Local("Title");
+        panel.Description = Local("Description");
+        panel.Territory = Local("Territory1") + " " +
                           $"<color=#{regionColor.ToHexString()}>" +
                           piece.Region.name + "</color> " +
-                          Localization.Load("Volcano", "Territory2") + " " +
+                          Local("Territory2") + " " +
                           $"<color=#{civColor.ToHexString()}>" +
                           Localization.Load("Civilizations", piece.Civilization.name) + "</color> " +
-                          Localization.Load("Volcano", "Territory3");
-        panel.AddDesidion(CalmVolcano, Localization.Load("Volcano", "CalmVolcano"), (int)(piece.population.value / calmVolcanoPointsDivision));
-        panel.AddDesidion(ReduceLosses, Localization.Load("Volcano", "ReduceLosses"), reduceLossesPoints);
-        panel.AddDesidion(Nothing, Localization.Load("Volcano", "Nothing"), 0);
+                          Local("Territory3");
+        panel.AddDesidion(CalmVolcano, Local("CalmVolcano"), GetCalmVolcanoPoints(piece));
+        panel.AddDesidion(ReduceLosses, Local("ReduceLosses"), reduceLossesPoints);
+        panel.AddDesidion(Nothing, Local("Nothing"), 0);
     }
 
     private void ClosePanel() {

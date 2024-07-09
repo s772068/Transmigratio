@@ -24,6 +24,10 @@ public class HungerController : Singleton<HungerController> {
     private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Map.wmsk;
 
+    private string Local(string key) => Localization.Load("Hunger", key);
+    private int GetAddFoodPoints(CivPiece piece) => (int)(piece.population.value / addFoodDivision / addFoodDivisionPoints);
+    private int GetAddSomeFoodPoints(CivPiece piece) => GetAddFoodPoints(piece) / 100 * AddSomeFoodPointsPercents;
+
     private void Start() {
         GameEvents.onActivateHunger = AddEvent;
         GameEvents.onDeactivateHunger = RemoveEvent;
@@ -58,18 +62,18 @@ public class HungerController : Singleton<HungerController> {
         panel.Open();
         panel.IsShowAgain = isShowAgain;
         panel.Image = panelSprite;
-        panel.Title = Localization.Load("Hunger", "Title");
-        panel.Description = Localization.Load("Hunger", "Description");
-        panel.Territory = Localization.Load("Hunger", "Territory 1") + " " +
+        panel.Title = Local("Title");
+        panel.Description = Local("Description");
+        panel.Territory = Local("Territory 1") + " " +
                           $"<color=#{regionColor.ToHexString()}>" +
                           piece.Region.name + "</color> " +
-                          Localization.Load("Hunger", "Territory 2") + " " +
+                          Local("Territory 2") + " " +
                           $"<color=#{civColor.ToHexString()}>" +
                           Localization.Load("Civilizations", piece.Civilization.name) + "</color> " +
-                          Localization.Load("Hunger", "Territory 3");
-        panel.AddDesidion(AddFood, Localization.Load("Hunger", "AddFood"), (int)(piece.population.value / addFoodDivision / addFoodDivisionPoints));
-        panel.AddDesidion(AddSomeFood, Localization.Load("Hunger", "AddSomeFood"), AddSomeFoodPointsPercents);
-        panel.AddDesidion(Nothing, Localization.Load("Hunger", "Nothing"), 0);
+                          Local("Territory 3");
+        panel.AddDesidion(AddFood, Local("AddFood"), GetAddFoodPoints(piece));
+        panel.AddDesidion(AddSomeFood, Local("AddSomeFood"), GetAddSomeFoodPoints(piece));
+        panel.AddDesidion(Nothing, Local("Nothing"), 0);
 
         selectedCivPiece = piece;
     }
