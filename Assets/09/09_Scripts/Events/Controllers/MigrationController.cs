@@ -33,7 +33,7 @@ public class MigrationController : Singleton<MigrationController> {
     private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Transmigratio.Instance.tmdb.map.wmsk;
 
-    private void Start() {
+    private void OnEnable() {
         ai = new() { (int i) => { }, ClickBreak, ClickSpeedUp };
 
         GameEvents.onTickLogic += OnTickLogic;
@@ -43,6 +43,13 @@ public class MigrationController : Singleton<MigrationController> {
         panel.onBreak = ClickBreak;
         panel.onNothing = ClickNothing;
         panel.onSpeedUp = ClickSpeedUp;
+    }
+
+    private void OnDisable() {
+        ai.Clear();
+        GameEvents.onTickLogic -= OnTickLogic;
+        GameEvents.onTickShow -= UpdatePercent;
+        GameEvents.onRemoveCivPiece -= Remove;
     }
 
     public void TryMigration(CivPiece civPice) {

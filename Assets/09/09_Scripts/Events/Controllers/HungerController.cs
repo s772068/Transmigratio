@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using WorldMapStrategyKit;
 using UnityEngine;
+using System;
 
 public class HungerController : Singleton<HungerController> {
     [SerializeField] private EventPanel panel;
@@ -18,8 +19,10 @@ public class HungerController : Singleton<HungerController> {
     [SerializeField] private Color civColor;
 
     private bool isShowAgain = true;
+    private int activateIndex;
     private CivPiece selectedCivPiece;
     private List<CivPiece> events = new();
+    private List<Action> autoActions = new();
 
     private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Map.wmsk;
@@ -28,10 +31,22 @@ public class HungerController : Singleton<HungerController> {
     private int GetAddFoodPoints(CivPiece piece) => (int)(piece.population.value / addFoodDivision / addFoodDivisionPoints);
     private int GetAddSomeFoodPoints(CivPiece piece) => GetAddFoodPoints(piece) / 100 * AddSomeFoodPointsPercents;
 
-    private void Start() {
+    private void OnEnable() {
         GameEvents.onActivateHunger = AddEvent;
         GameEvents.onDeactivateHunger = RemoveEvent;
         GameEvents.onRemoveCivPiece += RemoveEvent;
+
+        autoActions.Add(AddFood);
+        autoActions.Add(AddSomeFood);
+        autoActions.Add(Nothing);
+    }
+
+    private void OnDisable() {
+        GameEvents.onActivateHunger = default;
+        GameEvents.onDeactivateHunger = default;
+        GameEvents.onRemoveCivPiece -= RemoveEvent;
+
+        autoActions.Clear();
     }
 
     private void AddEvent(CivPiece piece) {
@@ -42,6 +57,8 @@ public class HungerController : Singleton<HungerController> {
         if (isShowAgain) {
             OpenPanel(piece);
             Timeline.Instance.Pause();
+        } else {
+            autoActions[activateIndex]?.Invoke();
         }
     }
 
@@ -87,17 +104,20 @@ public class HungerController : Singleton<HungerController> {
         Debug.Log("AddFood");
         ClosePanel();
         selectedCivPiece.reserveFood += selectedCivPiece.population.value / addFoodDivision;
+        activateIndex = 0;
     }
 
     private void AddSomeFood() {
         Debug.Log("AddSomeFood");
         ClosePanel();
         selectedCivPiece.reserveFood += selectedCivPiece.population.value / addFoodDivision / 2;
+        activateIndex = 1;
     }
 
     private void Nothing() {
         Debug.Log("Nothing");
         ClosePanel();
+        activateIndex = 2;
     }
 
     private void RemoveEvent(CivPiece piece) {
