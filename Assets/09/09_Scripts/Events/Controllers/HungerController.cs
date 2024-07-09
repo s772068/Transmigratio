@@ -56,7 +56,6 @@ public class HungerController : Singleton<HungerController> {
 
     private void OpenPanel(CivPiece piece) {
         panel.Open();
-        panel.onClick = ActivateDesidion;
         panel.IsShowAgain = isShowAgain;
         panel.Image = panelSprite;
         panel.Title = Localization.Load("Hunger", "Title");
@@ -68,21 +67,16 @@ public class HungerController : Singleton<HungerController> {
                           $"<color=#{civColor.ToHexString()}>" +
                           Localization.Load("Civilizations", piece.Civilization.name) + "</color> " +
                           Localization.Load("Hunger", "Territory 3");
-        panel.AddDesidion(Localization.Load("Hunger", "AddFood"), (int)(piece.population.value / addFoodDivision / addFoodDivisionPoints));
-        panel.AddDesidion(Localization.Load("Hunger", "AddSomeFood"), AddSomeFoodPointsPercents);
-        panel.AddDesidion(Localization.Load("Hunger", "Nothing"), 0);
+        panel.AddDesidion(AddFood, Localization.Load("Hunger", "AddFood"), (int)(piece.population.value / addFoodDivision / addFoodDivisionPoints));
+        panel.AddDesidion(AddSomeFood, Localization.Load("Hunger", "AddSomeFood"), AddSomeFoodPointsPercents);
+        panel.AddDesidion(Nothing, Localization.Load("Hunger", "Nothing"), 0);
 
         selectedCivPiece = piece;
     }
 
-    private void ClosePanel() => panel.Close();
-
-    private void ActivateDesidion(int index) {
-        Debug.Log("ActivateDesidion");
+    private void ClosePanel() {
         isShowAgain = panel.IsShowAgain;
-        if (index == 0) AddFood();
-        if (index == 1) AddSomeFood();
-        if (index == 2) Nothing();
+        panel.Close();
     }
 
     private void AddFood() {

@@ -98,7 +98,6 @@ public class VolcanoController : Singleton<VolcanoController> {
 
     private void OpenPanel() {
         panel.Open();
-        panel.onClick = ActivateDesidion;
         panel.IsShowAgain = isShowAgain;
         panel.Image = panelSprite;
         panel.Title = Localization.Load("Volcano", "Title");
@@ -110,18 +109,14 @@ public class VolcanoController : Singleton<VolcanoController> {
                           $"<color=#{civColor.ToHexString()}>" +
                           Localization.Load("Civilizations", piece.Civilization.name) + "</color> " +
                           Localization.Load("Volcano", "Territory3");
-        panel.AddDesidion(Localization.Load("Volcano", "CalmVolcano"), (int)(piece.population.value / calmVolcanoPointsDivision));
-        panel.AddDesidion(Localization.Load("Volcano", "ReduceLosses"), reduceLossesPoints);
-        panel.AddDesidion(Localization.Load("Volcano", "Nothing"), 0);
+        panel.AddDesidion(CalmVolcano, Localization.Load("Volcano", "CalmVolcano"), (int)(piece.population.value / calmVolcanoPointsDivision));
+        panel.AddDesidion(ReduceLosses, Localization.Load("Volcano", "ReduceLosses"), reduceLossesPoints);
+        panel.AddDesidion(Nothing, Localization.Load("Volcano", "Nothing"), 0);
     }
 
-    private void ClosePanel() => panel.Close();
-
-    private void ActivateDesidion(int index) {
+    private void ClosePanel() {
         isShowAgain = panel.IsShowAgain;
-        if (index == 0) CalmVolcano();
-        if (index == 1) ReduceLosses();
-        if (index == 2) Nothing();
+        panel.Close();
     }
 
     private void CalmVolcano() {

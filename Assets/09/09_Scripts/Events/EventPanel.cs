@@ -18,8 +18,6 @@ public class EventPanel : MonoBehaviour {
 
     private List<EventDesidion> desidions = new();
 
-    public Action<int> onClick;
-
     public CivPiece Piece { private get; set; }
     public string Title { set => title.text = value; }
     public string Territory { set => territory.text = value; }
@@ -44,12 +42,11 @@ public class EventPanel : MonoBehaviour {
         EventPanelClose?.Invoke(true);
     }
 
-    public void AddDesidion(string title, int points) {
+    public void AddDesidion(Action onClick, string title, int points) {
         var _desidion = Instantiate(desidion, desidionsContent);
+        _desidion.onClick = onClick;
         _desidion.Title = title;
         _desidion.Points = points;
-        _desidion.onClick = onClick;
-        _desidion.Index = desidions.Count;
         desidions.Add(_desidion);
     }
 
