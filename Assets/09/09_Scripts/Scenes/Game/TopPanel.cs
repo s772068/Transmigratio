@@ -10,13 +10,13 @@ public class TopPanel : MonoBehaviour {
     private int Tick => Timeline.Instance.Tick;
 
     private void Awake() {
-        GameEvents.onTickShow += UpdatePopulation;
-        GameEvents.onTickShow += UpdateYear;
+        GameEvents.TickShow += UpdatePopulation;
+        GameEvents.TickShow += UpdateYear;
     }
 
     private void OnDestroy() {
-        GameEvents.onTickShow -= UpdatePopulation;
-        GameEvents.onTickShow -= UpdateYear;
+        GameEvents.TickShow -= UpdatePopulation;
+        GameEvents.TickShow -= UpdateYear;
     }
 
     private void UpdatePopulation() {

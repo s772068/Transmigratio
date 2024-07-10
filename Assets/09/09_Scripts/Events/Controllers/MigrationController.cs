@@ -36,9 +36,9 @@ public class MigrationController : Singleton<MigrationController> {
     private void OnEnable() {
         ai = new() { (int i) => { }, ClickBreak, ClickSpeedUp };
 
-        GameEvents.onTickLogic += OnTickLogic;
-        GameEvents.onTickShow += UpdatePercent;
-        GameEvents.onRemoveCivPiece += Remove;
+        GameEvents.TickLogic += OnTickLogic;
+        GameEvents.TickShow += UpdatePercent;
+        GameEvents.RemoveCivPiece += Remove;
 
         panel.onBreak = ClickBreak;
         panel.onNothing = ClickNothing;
@@ -47,9 +47,9 @@ public class MigrationController : Singleton<MigrationController> {
 
     private void OnDisable() {
         ai.Clear();
-        GameEvents.onTickLogic -= OnTickLogic;
-        GameEvents.onTickShow -= UpdatePercent;
-        GameEvents.onRemoveCivPiece -= Remove;
+        GameEvents.TickLogic -= OnTickLogic;
+        GameEvents.TickShow -= UpdatePercent;
+        GameEvents.RemoveCivPiece -= Remove;
     }
 
     public void TryMigration(CivPiece civPice) {

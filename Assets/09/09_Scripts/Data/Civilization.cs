@@ -34,7 +34,7 @@ public class Civilization {
 
         Debug.Log("Civilization init. \rpopulation:" + Population + "\rregionID:" + region);
 
-        GameEvents.onTickLogic += UpdatePieces;
+        GameEvents.TickLogic += UpdatePieces;
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ public class Civilization {
     /// уберает цивилизацию из этого региона
     /// </summary>
     public void RemovePiece(int region) {
-        GameEvents.onRemoveCivPiece(Pieces[region]);
+        GameEvents.RemoveCivPiece(Pieces[region]);
         Pieces[region].Region.CivsList.Remove(Name);
         Pieces.Remove(region);
     }

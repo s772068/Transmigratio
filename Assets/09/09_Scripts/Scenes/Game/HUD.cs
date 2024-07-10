@@ -18,7 +18,7 @@ public class HUD : MonoBehaviour
     public Migration migration;
 
     private void Awake() {
-        GameEvents.onShowMessage = OnShowMessage;
+        GameEvents.ShowMessage = OnShowMessage;
     }
 
     private void OnShowMessage(string message) {

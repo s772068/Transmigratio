@@ -6,6 +6,7 @@ using UnityEngine;
 using System;
 
 public class LayersPanel : MonoBehaviour {
+    //Не рефакторить данные
     [SerializeField] private Color selectColor;
     [SerializeField] private Color unselectColor;
     [SerializeField] private SerializedDictionary<string, Color> terrain = new();
@@ -18,7 +19,7 @@ public class LayersPanel : MonoBehaviour {
     [SerializeField] private SerializedDictionary<string, Color> government = new();
     [SerializeField] private SerializedDictionary<string, Color> civilization = new();
 
-    private Action onPaint;
+    private Action Paint;
 
     private Map Map => Transmigratio.Instance.tmdb.map;
     private WMSK WMSK => Map.WMSK;
@@ -36,9 +37,9 @@ public class LayersPanel : MonoBehaviour {
     public void ClickCivilization() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.Name));
 
     private void OnClick(Action PaintAction) {
-        GameEvents.onTickShow -= onPaint;
-        onPaint = PaintAction;
-        GameEvents.onTickShow += onPaint;
+        GameEvents.TickShow -= Paint;
+        Paint = PaintAction;
+        GameEvents.TickShow += Paint;
         PaintAction?.Invoke();
     }
 
@@ -86,7 +87,7 @@ public class LayersPanel : MonoBehaviour {
     }
 
     public void Clear() {
-        GameEvents.onTickShow -= onPaint;
+        GameEvents.TickShow -= Paint;
         for (int i = 0; i < CountRegions; ++i) {
             WMSK.ToggleCountrySurface(i, true, Color.clear);
         }

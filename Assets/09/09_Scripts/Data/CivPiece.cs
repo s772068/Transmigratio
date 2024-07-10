@@ -50,10 +50,10 @@ public class CivPiece {
         if (Population.value <= 50) { Destroy?.Invoke(); return; }
 
         if (PopulationGrow < 0) {
-            GameEvents.onActivateHunger?.Invoke(this);
+            GameEvents.ActivateHunger?.Invoke(this);
             MigrationController.Instance.TryMigration(this);
         } else {
-            GameEvents.onDeactivateHunger?.Invoke(this);
+            GameEvents.DeactivateHunger?.Invoke(this);
         }
     }
 }

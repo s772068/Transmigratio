@@ -40,6 +40,7 @@ public class EventPanel : MonoBehaviour {
         Transmigratio.Instance.IsClickableMarker = true;
         gameObject.SetActive(false);
         EventPanelClose?.Invoke(true);
+        Timeline.Instance.Play();
     }
 
     public void AddDesidion(Action onClick, string title, int points) {

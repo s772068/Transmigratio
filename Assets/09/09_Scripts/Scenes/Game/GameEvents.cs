@@ -2,20 +2,20 @@ using System;
 using WorldMapStrategyKit;
 
 public static class GameEvents {
-    public static Action onTickLogic;
-    public static Action onTickShow;
+    public static Action TickLogic;
+    public static Action TickShow;
     /// <summary>
     /// message
     /// </summary>
-    public static Action<string> onShowMessage;
+    public static Action<string> ShowMessage;
 
-    public static Action<CivPiece> onActivateHunger;
-    public static Action<CivPiece> onDeactivateHunger;
-    public static Action<CivPiece> onRemoveCivPiece;
+    public static Action<CivPiece> ActivateHunger;
+    public static Action<CivPiece> DeactivateHunger;
+    public static Action<CivPiece> RemoveCivPiece;
 
     // Marker
-    public static Action<MarkerClickHandler, int> onMarkerMouseDown;
-    public static Action<MarkerClickHandler> onMarkerEnter;
-    public static Action<MarkerClickHandler> onMarkerExit;
+    public static Action<MarkerClickHandler, int> MarkerMouseDown;
+    public static Action<MarkerClickHandler> MarkerEnter;
+    public static Action<MarkerClickHandler> MarkerExit;
 
 }

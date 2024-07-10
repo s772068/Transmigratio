@@ -32,9 +32,9 @@ public class HungerController : Singleton<HungerController> {
     private int GetAddSomeFoodPoints(CivPiece piece) => GetAddFoodPoints(piece) / 100 * AddSomeFoodPointsPercents;
 
     private void OnEnable() {
-        GameEvents.onActivateHunger = AddEvent;
-        GameEvents.onDeactivateHunger = RemoveEvent;
-        GameEvents.onRemoveCivPiece += RemoveEvent;
+        GameEvents.ActivateHunger = AddEvent;
+        GameEvents.DeactivateHunger = RemoveEvent;
+        GameEvents.RemoveCivPiece += RemoveEvent;
 
         autoActions.Add(AddFood);
         autoActions.Add(AddSomeFood);
@@ -42,9 +42,9 @@ public class HungerController : Singleton<HungerController> {
     }
 
     private void OnDisable() {
-        GameEvents.onActivateHunger = default;
-        GameEvents.onDeactivateHunger = default;
-        GameEvents.onRemoveCivPiece -= RemoveEvent;
+        GameEvents.ActivateHunger = default;
+        GameEvents.DeactivateHunger = default;
+        GameEvents.RemoveCivPiece -= RemoveEvent;
 
         autoActions.Clear();
     }

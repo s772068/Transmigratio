@@ -39,8 +39,8 @@ public class Timeline : PersistentSingleton<Timeline> {
             if(timer >= timeDelay) {
                 timer = 0;
                 ++tick;
-                GameEvents.onTickLogic();
-                GameEvents.onTickShow();
+                GameEvents.TickLogic();
+                GameEvents.TickShow();
             }
         }
     }
