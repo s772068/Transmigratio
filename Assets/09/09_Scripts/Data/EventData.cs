@@ -1,3 +1,3 @@
 public class EventData {
-    public CivPiece piece;
+    public CivPiece Piece;
 }

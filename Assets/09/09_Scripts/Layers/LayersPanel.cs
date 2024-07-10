@@ -21,19 +21,19 @@ public class LayersPanel : MonoBehaviour {
     private Action onPaint;
 
     private Map Map => Transmigratio.Instance.tmdb.map;
-    private WMSK WMSK => Map.wmsk;
-    private int CountRegions => Map.allRegions.Count;
-    private TM_Region GetRegion(int index) => Map.allRegions[index];
+    private WMSK WMSK => Map.WMSK;
+    private int CountRegions => Map.AllRegions.Count;
+    private TM_Region GetRegion(int index) => Map.AllRegions[index];
 
-    public void ClickTerrain() => OnClick(() => PaintByName(terrain, (int i) => GetRegion(i).terrain.GetMaxQuantity().key));
-    public void ClickClimate() => OnClick(() => PaintByName(climate, (int i) => GetRegion(i).climate.GetMaxQuantity().key));
-    public void ClickFlora() => OnClick(() => PaintByPercent(flora, (int i) => GetRegion(i).flora.GetMaxQuantity().value));
-    public void ClickFauna() => OnClick(() => PaintByPercent(fauna, (int i) => GetRegion(i).fauna.GetMaxQuantity().value));
+    public void ClickTerrain() => OnClick(() => PaintByName(terrain, (int i) => GetRegion(i).Terrain.GetMaxQuantity().key));
+    public void ClickClimate() => OnClick(() => PaintByName(climate, (int i) => GetRegion(i).Climate.GetMaxQuantity().key));
+    public void ClickFlora() => OnClick(() => PaintByPercent(flora, (int i) => GetRegion(i).Flora.GetMaxQuantity().value));
+    public void ClickFauna() => OnClick(() => PaintByPercent(fauna, (int i) => GetRegion(i).Fauna.GetMaxQuantity().value));
     public void ClickPopulation() => OnClick(() => PaintByMax(population, (int i) => GetRegion(i).Population));
-    public void ClickEcoCulture() => OnClick(() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ecoCulture.GetMaxQuantity().key));
-    public void ClickProdMode() => OnClick(() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.prodMode.GetMaxQuantity().key));
-    public void ClickGovernment() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.government.GetMaxQuantity().key));
-    public void ClickCivilization() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.name));
+    public void ClickEcoCulture() => OnClick(() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.EcoCulture.GetMaxQuantity().key));
+    public void ClickProdMode() => OnClick(() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ProdMode.GetMaxQuantity().key));
+    public void ClickGovernment() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.Government.GetMaxQuantity().key));
+    public void ClickCivilization() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.Name));
 
     private void OnClick(Action PaintAction) {
         GameEvents.onTickShow -= onPaint;

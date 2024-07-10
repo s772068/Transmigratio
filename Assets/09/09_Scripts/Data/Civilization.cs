@@ -1,6 +1,5 @@
 using AYellowpaper.SerializedCollections;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -8,30 +7,30 @@ using UnityEngine;
 /// </summary>
 [System.Serializable]
 public class Civilization {
-    public string name;
+    public string Name;
 
-    public SerializedDictionary<int, CivPiece> pieces;      //суммируем население цивилизации - собираем с "кусочков"
+    public SerializedDictionary<int, CivPiece> Pieces;      //суммируем население цивилизации - собираем с "кусочков"
 
-    public Paramiter ecoCulture = new(true);
-    public Paramiter prodMode = new(true);
-    public Paramiter government = new(true);
+    public Paramiter EcoCulture = new(true);
+    public Paramiter ProdMode = new(true);
+    public Paramiter Government = new(true);
 
     //их нужно засунуть в CivParam
-    public float prodModeK = 0.6f;                 // коэффициент способа производства
-    public float governmentCorruption = 0.4f;      // коррупция
+    public float ProdModeK = 0.6f;                 // коэффициент способа производства
+    public float GovernmentCorruption = 0.4f;      // коррупция
 
-    public int Population => pieces.Sum(x => x.Value.population.Value);
+    public int Population => Pieces.Sum(x => x.Value.Population.Value);
 
     public void Init(int region, string civName)        //версия для старта игры. Для других цивилизаций нужна перегрузка
     {
-        pieces = new();
-        pieces.Clear();
-        name = civName;
+        Pieces = new();
+        Pieces.Clear();
+        Name = civName;
         AddPiece(region, GameSettings.startPopulation, 100);
 
-        ecoCulture.Init("Hunters", "Farmers", "Nomads", "Mountain", "City");
-        prodMode.Init("PrimitiveCommunism", "Slavery", "Feodalism", "Capitalism", "Socialism", "Communism");
-        government.Init("Leaderism", "Monarchy", "CityState", "Imperium", "Federation", "NationalState", "Anarchy");
+        EcoCulture.Init("Hunters", "Farmers", "Nomads", "Mountain", "City");
+        ProdMode.Init("PrimitiveCommunism", "Slavery", "Feodalism", "Capitalism", "Socialism", "Communism");
+        Government.Init("Leaderism", "Monarchy", "CityState", "Imperium", "Federation", "NationalState", "Anarchy");
 
         Debug.Log("Civilization init. \rpopulation:" + Population + "\rregionID:" + region);
 
@@ -43,23 +42,23 @@ public class Civilization {
     /// </summary>
     public void AddPiece(int region, int population, float reserve) {
         CivPiece newPieceOfCiv = new CivPiece();
-        newPieceOfCiv.Init(region, name, population, reserve);
-        newPieceOfCiv.onDestroy = () => RemovePiece(region);
-        pieces[region] = newPieceOfCiv;
+        newPieceOfCiv.Init(region, Name, population, reserve);
+        newPieceOfCiv.Destroy = () => RemovePiece(region);
+        Pieces[region] = newPieceOfCiv;
         //region.AddCivPiece(newPieceOfCiv);
     }
     /// <summary>
     /// уберает цивилизацию из этого региона
     /// </summary>
     public void RemovePiece(int region) {
-        GameEvents.onRemoveCivPiece(pieces[region]);
-        pieces[region].Region.civsList.Remove(name);
-        pieces.Remove(region);
+        GameEvents.onRemoveCivPiece(Pieces[region]);
+        Pieces[region].Region.CivsList.Remove(Name);
+        Pieces.Remove(region);
     }
 
     public void UpdatePieces() {
-        for (int i = 0; i < pieces.Count; ++i) {
-            pieces.ElementAt(i).Value.DeltaPop();
+        for (int i = 0; i < Pieces.Count; ++i) {
+            Pieces.ElementAt(i).Value.DeltaPop();
         }
     }
 

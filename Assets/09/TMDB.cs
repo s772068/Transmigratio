@@ -1,20 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Не рефакторить
 [CreateAssetMenu(fileName = "TMDB", menuName = "ScriptableObjects/TMDB", order = 1)]
 public class TMDB : ScriptableObject {
     public Humanity humanity = new();
     public Map map = new();
 
     public Dictionary<string, int> GetParam(int index, string name) => name switch {
-        "Flora" => map.allRegions[index].flora.GetQuantities(),
-        "Fauna" => map.allRegions[index].fauna.GetQuantities(),
-        "Climate" => map.allRegions[index].climate.GetQuantities(),
-        "Terrain" => map.allRegions[index].terrain.GetQuantities(),
-        "Civilizations" => map.allRegions[index].GetCivParamiter(),
-        "EcoCulture" => map.allRegions[index].CivMain.ecoCulture.GetQuantities(),
-        "ProdMode" => map.allRegions[index].CivMain.prodMode.GetQuantities(),
-        "Government" => map.allRegions[index].CivMain.government.GetQuantities(),
+        "Flora" => map.AllRegions[index].Flora.GetQuantities(),
+        "Fauna" => map.AllRegions[index].Fauna.GetQuantities(),
+        "Climate" => map.AllRegions[index].Climate.GetQuantities(),
+        "Terrain" => map.AllRegions[index].Terrain.GetQuantities(),
+        "Civilizations" => map.AllRegions[index].GetCivParamiter(),
+        "EcoCulture" => map.AllRegions[index].CivMain.EcoCulture.GetQuantities(),
+        "ProdMode" => map.AllRegions[index].CivMain.ProdMode.GetQuantities(),
+        "Government" => map.AllRegions[index].CivMain.Government.GetQuantities(),
         _ => default
     };
 
@@ -25,7 +26,7 @@ public class TMDB : ScriptableObject {
 
     public void StartGame(int region) {
         Civilization civilization = humanity.AddCivilization(region, "Uncivilized");
-        map.allRegions[region].AddCivilization(civilization.name);
+        map.AllRegions[region].AddCivilization(civilization.Name);
     }
 
     /*

@@ -8,17 +8,15 @@ using UnityEngine;
 /// </summary>
 [System.Serializable]
 public class Map {
-    public List<TM_Region> allRegions;
+    public List<TM_Region> AllRegions;
 
-    [HideInInspector] public WMSK wmsk;
+    [HideInInspector] public WMSK WMSK;
 
     public void Init() {
-        wmsk = new WMSK();
-        wmsk = WMSK.instance;
+        WMSK = WMSK.instance;
 
-
-        allRegions = new List<TM_Region>();
-        allRegions.Clear();
+        AllRegions = new List<TM_Region>();
+        AllRegions.Clear();
 
         string json;        //сюда будет записываться json
 
@@ -38,19 +36,19 @@ public class Map {
 #endif
 */
 
-        allRegions = JsonConvert.DeserializeObject<List<TM_Region>>(json);
+        AllRegions = JsonConvert.DeserializeObject<List<TM_Region>>(json);
 
         //allRegions = JsonUtility.FromJson<List<TM_Region>>(json);
 
-        foreach (TM_Region region in allRegions ) {
-            wmsk.ToggleCountrySurface(region.id, true, Color.clear);
+        foreach (TM_Region region in AllRegions ) {
+            WMSK.ToggleCountrySurface(region.Id, true, Color.clear);
             region.Init();
         }
     }
 
     public TM_Region GetRegionBywmskId(int WMSKId) {
-        foreach (TM_Region region in allRegions) {
-            if (region.id == WMSKId) return region;
+        foreach (TM_Region region in AllRegions) {
+            if (region.Id == WMSKId) return region;
         }
         return null;
     }

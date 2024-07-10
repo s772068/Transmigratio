@@ -25,10 +25,10 @@ public class HungerController : Singleton<HungerController> {
     private List<Action> autoActions = new();
 
     private Map Map => Transmigratio.Instance.tmdb.map;
-    private WMSK WMSK => Map.wmsk;
+    private WMSK WMSK => Map.WMSK;
 
     private string Local(string key) => Localization.Load("Hunger", key);
-    private int GetAddFoodPoints(CivPiece piece) => (int)(piece.population.value / addFoodDivision / addFoodDivisionPoints);
+    private int GetAddFoodPoints(CivPiece piece) => (int)(piece.Population.value / addFoodDivision / addFoodDivisionPoints);
     private int GetAddSomeFoodPoints(CivPiece piece) => GetAddFoodPoints(piece) / 100 * AddSomeFoodPointsPercents;
 
     private void OnEnable() {
@@ -51,7 +51,7 @@ public class HungerController : Singleton<HungerController> {
 
     private void AddEvent(CivPiece piece) {
         if (events.Contains(piece)) return;
-        Debug.Log($"Add event Hunger in region {piece.Region.id}");
+        Debug.Log($"Add event Hunger in region {piece.Region.Id}");
         CreateMarker(piece);
         events.Add(piece);
         if (isShowAgain) {
@@ -64,14 +64,14 @@ public class HungerController : Singleton<HungerController> {
 
     private void CreateMarker(CivPiece piece) {
         Debug.Log("CreateMarker");
-        piece.Region.marker = Instantiate(markerPrefab);
-        piece.Region.marker.Sprite = markerSprite;
-        piece.Region.marker.Index = events.Count;
-        piece.Region.marker.onClick += (int i) => { OpenPanel(piece); panel.IsShowAgain = isShowAgain; };
+        piece.Region.Marker = Instantiate(markerPrefab);
+        piece.Region.Marker.Sprite = markerSprite;
+        piece.Region.Marker.Index = events.Count;
+        piece.Region.Marker.onClick += (int i) => { OpenPanel(piece); panel.IsShowAgain = isShowAgain; };
 
-        Vector3 position = WMSK.countries[piece.Region.id].center;
+        Vector3 position = WMSK.countries[piece.Region.Id].center;
         position.z = -0.1f;
-        MarkerClickHandler handler = WMSK.AddMarker2DSprite(piece.Region.marker.gameObject, position, 0.03f, true, true);
+        MarkerClickHandler handler = WMSK.AddMarker2DSprite(piece.Region.Marker.gameObject, position, 0.03f, true, true);
         handler.allowDrag = false;
     }
 
@@ -83,10 +83,10 @@ public class HungerController : Singleton<HungerController> {
         panel.Description = Local("Description");
         panel.Territory = Local("Territory 1") + " " +
                           $"<color=#{regionColor.ToHexString()}>" +
-                          piece.Region.name + "</color> " +
+                          piece.Region.Name + "</color> " +
                           Local("Territory 2") + " " +
                           $"<color=#{civColor.ToHexString()}>" +
-                          Localization.Load("Civilizations", piece.Civilization.name) + "</color> " +
+                          Localization.Load("Civilizations", piece.Civilization.Name) + "</color> " +
                           Local("Territory 3");
         panel.AddDesidion(AddFood, Local("AddFood"), GetAddFoodPoints(piece));
         panel.AddDesidion(AddSomeFood, Local("AddSomeFood"), GetAddSomeFoodPoints(piece));
@@ -103,14 +103,14 @@ public class HungerController : Singleton<HungerController> {
     private void AddFood() {
         Debug.Log("AddFood");
         ClosePanel();
-        selectedCivPiece.reserveFood += selectedCivPiece.population.value / addFoodDivision;
+        selectedCivPiece.ReserveFood += selectedCivPiece.Population.value / addFoodDivision;
         activateIndex = 0;
     }
 
     private void AddSomeFood() {
         Debug.Log("AddSomeFood");
         ClosePanel();
-        selectedCivPiece.reserveFood += selectedCivPiece.population.value / addFoodDivision / 2;
+        selectedCivPiece.ReserveFood += selectedCivPiece.Population.value / addFoodDivision / 2;
         activateIndex = 1;
     }
 
@@ -122,7 +122,7 @@ public class HungerController : Singleton<HungerController> {
 
     private void RemoveEvent(CivPiece piece) {
         Debug.Log("RemoveEvent");
-        if(piece.Region.marker != null) piece.Region.marker.Destroy();
+        if(piece.Region.Marker != null) piece.Region.Marker.Destroy();
         events.Remove(piece);
     }
 }

@@ -37,7 +37,7 @@ public class MigrationPanel : MonoBehaviour {
 
     public void UpdatePercents() {
         if (data != null) {
-            slider.value = data.curPopulations * 100 / data.fullPopulations;
+            slider.value = data.CurPopulations * 100 / data.FullPopulations;
         } else {
             data = null;
             Close();
@@ -48,10 +48,10 @@ public class MigrationPanel : MonoBehaviour {
             data = value;
             territory.text = Localization.Load("Migration", "Territory1") + " " +
                              $"<color=#{regionColor.ToHexString()}>" +
-                             value.from.name + "</color> " +
+                             value.From.Name + "</color> " +
                              Localization.Load("Migration", "Territory2") + " " +
                              $"<color=#{regionColor.ToHexString()}>" +
-                             value.to.name + "</color>";
+                             value.To.Name + "</color>";
         }
     }
 
@@ -65,11 +65,11 @@ public class MigrationPanel : MonoBehaviour {
     }
 
     public void Break() {
-        onBreak.Invoke(data.from.id);
+        onBreak.Invoke(data.From.Id);
         Close();
     }
     public void SpeedUp() {
-        onSpeedUp?.Invoke(data.from.id);
+        onSpeedUp?.Invoke(data.From.Id);
         Close();
     }
 

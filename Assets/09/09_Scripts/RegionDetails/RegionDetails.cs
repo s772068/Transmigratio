@@ -14,7 +14,7 @@ public class RegionDetails : MonoBehaviour {
     private Dictionary<string, int> dic;
     private string element;
 
-    private TM_Region Region => Transmigratio.Instance.tmdb.map.allRegions[regionID];
+    private TM_Region Region => Transmigratio.Instance.tmdb.map.AllRegions[regionID];
     public Sprite Avatar { set => civAvatar.sprite = value; }
     
     private void Awake() {
@@ -63,8 +63,8 @@ public class RegionDetails : MonoBehaviour {
         rightSide.UpdateData(element, key);
     }
 
-    public void NextRegion() => SetRegion((regionID + 1) % Transmigratio.Instance.tmdb.map.allRegions.Count);
-    public void PrevRegion() => SetRegion(regionID == 0 ? (Transmigratio.Instance.tmdb.map.allRegions.Count - 1) : (regionID - 1));
+    public void NextRegion() => SetRegion((regionID + 1) % Transmigratio.Instance.tmdb.map.AllRegions.Count);
+    public void PrevRegion() => SetRegion(regionID == 0 ? (Transmigratio.Instance.tmdb.map.AllRegions.Count - 1) : (regionID - 1));
 
     private void SetRegion(int index) {
         regionID = index;
@@ -76,7 +76,7 @@ public class RegionDetails : MonoBehaviour {
         else leftSide.ClickRegionTab();
 
         tabs.gameObject.SetActive(isHasCiv);
-        centerSide.Title = Region.name;
+        centerSide.Title = Region.Name;
         leftSide.ClickRegionTab();
         leftSide.SelectElement("Climate");
     }

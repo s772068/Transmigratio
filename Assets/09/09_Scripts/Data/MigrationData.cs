@@ -2,14 +2,14 @@ using WorldMapStrategyKit;
 
 [System.Serializable]
 public class MigrationData {
-    public LineMarkerAnimator line;
-    public IconMarker marker;
-    public Civilization civilization;
-    public TM_Region from;
-    public TM_Region to;
-    public int stepPopulations;
-    public int curPopulations;
-    public int fullPopulations;
-    public int timerToStart;
-    public int timerInterval;
+    public LineMarkerAnimator Line;
+    public IconMarker Marker;
+    public Civilization Civilization;
+    public TM_Region From;
+    public TM_Region To;
+    public int StepPopulations;
+    public int CurPopulations;
+    public int FullPopulations;
+    public int TimerToStart;
+    public int TimerInterval;
 }

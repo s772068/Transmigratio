@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 /// <summary>
 /// Класс для расчётов населения. 
 /// Население области, цивилизации или всего мира - переменные типа Population

@@ -4,75 +4,75 @@ using UnityEngine;
 
 [System.Serializable]
 public class TM_Region {
-    public int id; //айдишник региона, соотвествует wmsk id
-    public string name;
+    public int Id; //айдишник региона, соотвествует wmsk id
+    public string Name;
     public float Population {
         get {
             float res = 0;
-            for(int i = 0; i < civsList.Count; ++i) {
-                res += Transmigratio.Instance.GetCivPice(id, civsList[i]).population.value;
+            for(int i = 0; i < CivsList.Count; ++i) {
+                res += Transmigratio.Instance.GetCivPice(Id, CivsList[i]).Population.value;
             }
             return res;
         }
     }
 
-    private int mainCivIndex;
+    private int _mainCivIndex;
 
-    public Paramiter flora;
-    public Paramiter fauna;
-    public Paramiter climate;
-    public Paramiter terrain;
+    public Paramiter Flora;
+    public Paramiter Fauna;
+    public Paramiter Climate;
+    public Paramiter Terrain;
 
-    public List<string> civsList = new();
+    public List<string> CivsList = new();
 
-    [HideInInspector] public IconMarker marker;
+    [HideInInspector] public IconMarker Marker;
     
     public Civilization CivMain => Transmigratio.Instance.GetCiv(GetMainCiv());
-    private CivPiece GetPiece(string civName) => Transmigratio.Instance.GetCivPice(id, civName);
+    private CivPiece GetPiece(string civName) => Transmigratio.Instance.GetCivPice(Id, civName);
 
     private float TakenFood { get {
             float res = 0;
-            for(int i = 0; i < civsList.Count; ++i) {
-                res += GetPiece(civsList[i]).takenFood;
+            for(int i = 0; i < CivsList.Count; ++i) {
+                res += GetPiece(CivsList[i]).TakenFood;
             }
             return res;
         }
     }
 
     public void AddCivilization(string civName) {
-        civsList.Add(civName);
+        CivsList.Add(civName);
     }
 
     public Dictionary<string, int> GetCivParamiter() {
         Dictionary<string, int> res = new();
         
-        for (int i = 0; i < civsList.Count; ++i) {
-            res[civsList[i]] = GetPiece(civsList[i]).population.value;
+        for (int i = 0; i < CivsList.Count; ++i) {
+            res[CivsList[i]] = GetPiece(CivsList[i]).Population.value;
         }
 
         return res;
     }
 
     public string GetMainCiv() {
-        if (civsList.Count == 0) return "";
+        if (CivsList.Count == 0) return "";
 
         Dictionary<string, int> dic = new();
 
-        for (int i = 0; i < civsList.Count; ++i) {
-            dic[civsList[i]] = GetPiece(civsList[i]).population.value;
+        for (int i = 0; i < CivsList.Count; ++i) {
+            dic[CivsList[i]] = GetPiece(CivsList[i]).Population.value;
         }
 
         return dic.FirstOrDefault(x => x.Value == dic.Values.Max()).Key;
     }
 
     public void Init() {
-        GameEvents.onTickLogic += UpdateFlauna;
+        GameEvents.onTickLogic += UpdateFauna;
     }
 
-    private void UpdateFlauna() {
-        fauna["Fauna"].value = Mathf.Min(
-            (int) (fauna["Fauna"].value - TakenFood / 10f + (fauna["Fauna"].value == 0 ? 1 : (50 / fauna["Fauna"].value))),
-            fauna["Fauna"].max
+    private void UpdateFauna() {
+        Fauna["Fauna"].Value = Mathf.Min(
+            (int) (Fauna["Fauna"].Value - TakenFood / 10f + (Fauna["Fauna"].Value == 0 ? 1 : (50 / Fauna["Fauna"].Value))),
+            Fauna["Fauna"].Max
         );
     }
 }

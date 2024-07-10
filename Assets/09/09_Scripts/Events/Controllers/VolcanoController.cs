@@ -40,10 +40,10 @@ public class VolcanoController : Singleton<VolcanoController> {
 
     private Action onTickLogic;
 
-    private WMSK WMSK => Transmigratio.Instance.tmdb.map.wmsk;
+    private WMSK WMSK => Transmigratio.Instance.tmdb.map.WMSK;
 
     private string Local(string key) => Localization.Load("Volcano", key);
-    private int GetCalmVolcanoPoints(CivPiece piece) => (int) (piece.population.value / calmVolcanoPointsDivision);
+    private int GetCalmVolcanoPoints(CivPiece piece) => (int) (piece.Population.value / calmVolcanoPointsDivision);
 
     private void OnEnable() {
         GameEvents.onTickLogic += onTickLogic;
@@ -72,13 +72,13 @@ public class VolcanoController : Singleton<VolcanoController> {
 
     private void CreateEvent() {
         System.Random rand = new();
-        var civilizations = Transmigratio.Instance.tmdb.humanity.civilizations;
+        var civilizations = Transmigratio.Instance.tmdb.humanity.Civilizations;
         if (civilizations.Count == 0) return;
-        piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
+        piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
         ticksToActivateVolcano = rand.Next(minTickToActivate, maxTickToActivate);
         onTickLogic += WaitActivateVolcano;
-        Debug.Log($"Create event Volcano in region {piece.Region.id}");
-        CreateMarker(WMSK.countries[piece.Region.id].center);
+        Debug.Log($"Create event Volcano in region {piece.Region.Id}");
+        CreateMarker(WMSK.countries[piece.Region.Id].center);
         if (isShowAgain) {
             OpenPanel();
             Timeline.Instance.Pause();
@@ -117,10 +117,10 @@ public class VolcanoController : Singleton<VolcanoController> {
         panel.Description = Local("Description");
         panel.Territory = Local("Territory1") + " " +
                           $"<color=#{regionColor.ToHexString()}>" +
-                          piece.Region.name + "</color> " +
+                          piece.Region.Name + "</color> " +
                           Local("Territory2") + " " +
                           $"<color=#{civColor.ToHexString()}>" +
-                          Localization.Load("Civilizations", piece.Civilization.name) + "</color> " +
+                          Localization.Load("Civilizations", piece.Civilization.Name) + "</color> " +
                           Local("Territory3");
         panel.AddDesidion(CalmVolcano, Local("CalmVolcano"), GetCalmVolcanoPoints(piece));
         panel.AddDesidion(ReduceLosses, Local("ReduceLosses"), reduceLossesPoints);
@@ -144,8 +144,8 @@ public class VolcanoController : Singleton<VolcanoController> {
 
     private void ReduceLosses() {
         activateIndex = 1;
-        piece.population.value -= (int)(piece.population.value * fullPercentFood * partPercentPopulation);
-        piece.reserveFood -= piece.reserveFood * fullPercentFood * partPercentFood;
+        piece.Population.value -= (int)(piece.Population.value * fullPercentFood * partPercentPopulation);
+        piece.ReserveFood -= piece.ReserveFood * fullPercentFood * partPercentFood;
 
         Debug.Log("ReduceLosses");
 
@@ -162,8 +162,8 @@ public class VolcanoController : Singleton<VolcanoController> {
     }
 
     private void ActivateVolcano() {
-        piece.population.value -= (int)(piece.population.value * fullPercentFood);
-        piece.reserveFood -= piece.reserveFood * fullPercentFood;
+        piece.Population.value -= (int)(piece.Population.value * fullPercentFood);
+        piece.ReserveFood -= piece.ReserveFood * fullPercentFood;
 
         Debug.Log("ActivateVolcano");
 

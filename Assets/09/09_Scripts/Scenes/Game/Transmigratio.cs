@@ -16,19 +16,19 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     public bool IsClickableMarker {
         set {
             if (value) {
-                tmdb.map.wmsk.OnMarkerMouseDown += OnMarkerMouseDown;
+                tmdb.map.WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
             } else {
-                tmdb.map.wmsk.OnMarkerMouseDown -= OnMarkerMouseDown;
+                tmdb.map.WMSK.OnMarkerMouseDown -= OnMarkerMouseDown;
             }
         }
     }
 
-    public TM_Region GetRegion(int index) => tmdb.map.allRegions[index];
+    public TM_Region GetRegion(int index) => tmdb.map.AllRegions[index];
     public Civilization GetCiv(string civName) {
         if (civName == "") return null;
-        return tmdb.humanity.civilizations[civName];
+        return tmdb.humanity.Civilizations[civName];
     }
-    public CivPiece GetCivPice(int regionIndex, string civName) => GetCiv(civName).pieces[regionIndex];
+    public CivPiece GetCivPice(int regionIndex, string civName) => GetCiv(civName).Pieces[regionIndex];
 
     public void StartGame() {
         tmdb.StartGame(activeRegion);
@@ -40,12 +40,12 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
         base.Awake();
         tmdb.TMDBInit();
 
-        tmdb.map.wmsk.OnCountryClick += OnClickFromMain;
-        tmdb.map.wmsk.OnCountryLongClick += OnLongClickFromMain;
+        tmdb.map.WMSK.OnCountryClick += OnClickFromMain;
+        tmdb.map.WMSK.OnCountryLongClick += OnLongClickFromMain;
 
-        tmdb.map.wmsk.OnMarkerMouseDown += OnMarkerMouseDown;
-        tmdb.map.wmsk.OnMarkerMouseEnter += OnMarkerEnter;
-        tmdb.map.wmsk.OnMarkerMouseExit += OnMarkerExit;
+        tmdb.map.WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
+        tmdb.map.WMSK.OnMarkerMouseEnter += OnMarkerEnter;
+        tmdb.map.WMSK.OnMarkerMouseExit += OnMarkerExit;
     }
 
     private void OnClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
