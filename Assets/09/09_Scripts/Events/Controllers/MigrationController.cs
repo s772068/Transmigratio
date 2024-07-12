@@ -30,8 +30,8 @@ public class MigrationController : Singleton<MigrationController> {
     
     public int Population => migrations.Sum(x => x.Value.FullPopulations - x.Value.CurPopulations);
 
-    private Map Map => Transmigratio.Instance.tmdb.map;
-    private WMSK WMSK => Transmigratio.Instance.tmdb.map.WMSK;
+    private Map Map => Transmigratio.Instance.TMDB.map;
+    private WMSK WMSK => Transmigratio.Instance.TMDB.map.WMSK;
 
     private void OnEnable() {
         ai = new() { (int i) => { }, ClickBreak, ClickSpeedUp };

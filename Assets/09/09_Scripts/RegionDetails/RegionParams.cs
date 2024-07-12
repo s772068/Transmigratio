@@ -17,7 +17,7 @@ public class RegionParams : MonoBehaviour {
         if (!paramiters.ContainsKey(title)) {
             var _paramiter = Instantiate(paramiter, content);
             _paramiter.SetTitle(element, title);
-            _paramiter.onClick = OnClick;
+            _paramiter.Click = OnClick;
             paramiters[title] = _paramiter;
         }
         paramiters[title].Value = value;

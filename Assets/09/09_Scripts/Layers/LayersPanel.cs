@@ -21,7 +21,7 @@ public class LayersPanel : MonoBehaviour {
 
     private Action Paint;
 
-    private Map Map => Transmigratio.Instance.tmdb.map;
+    private Map Map => Transmigratio.Instance.TMDB.map;
     private WMSK WMSK => Map.WMSK;
     private int CountRegions => Map.AllRegions.Count;
     private TM_Region GetRegion(int index) => Map.AllRegions[index];

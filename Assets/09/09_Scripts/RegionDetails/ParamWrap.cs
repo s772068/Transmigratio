@@ -1,4 +1,3 @@
-using UnityEngine.Localization.Settings;
 using UnityEngine.EventSystems; 
 using UnityEngine.UI;
 using UnityEngine;
@@ -6,27 +5,27 @@ using System;
 using TMPro;
 
 public class ParamWrap : MonoBehaviour, IPointerClickHandler {
-    [SerializeField] private TMP_Text title;
-    [SerializeField] private TMP_Text valTxt;
-    [SerializeField] private Slider slider;
+    [SerializeField] private TMP_Text _title;
+    [SerializeField] private TMP_Text _valTxt;
+    [SerializeField] private Slider _slider;
 
-    private string key;
+    private string _key;
 
-    public Action<string> onClick;
+    public Action<string> Click;
 
     public void SetTitle(string element, string _title) {
-        title.text = Localization.Load(element, _title);
-        key = _title;
+        this._title.text = Localization.Load(element, _title);
+        _key = _title;
     }
 
     public float Value { set {
-            valTxt.text = value.ToString();
-            slider.value = value;
+            _valTxt.text = value.ToString();
+            _slider.value = value;
         }
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        onClick?.Invoke(key);
+        Click?.Invoke(_key);
     }
 
     public void Destroy() => Destroy(gameObject);

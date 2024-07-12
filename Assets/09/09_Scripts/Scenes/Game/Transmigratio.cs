@@ -8,53 +8,56 @@ using WorldMapStrategyKit;
 /// Потом разнести всякие классы по разным файлам
 /// </summary>
 public class Transmigratio : PersistentSingleton<Transmigratio> {
-    public TMDB tmdb;                       // база данных ScriptableObjects
-    public HUD hud;
 
-    [HideInInspector] public int activeRegion;
+    [SerializeField] private TMDB _tmdb;            // база данных ScriptableObjects
+    [SerializeField] private HUD _hud;
+
+    public TMDB TMDB => _tmdb;
+    
+    private int activeRegion;
 
     public bool IsClickableMarker {
         set {
             if (value) {
-                tmdb.map.WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
+                TMDB.map.WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
             } else {
-                tmdb.map.WMSK.OnMarkerMouseDown -= OnMarkerMouseDown;
+                TMDB.map.WMSK.OnMarkerMouseDown -= OnMarkerMouseDown;
             }
         }
     }
 
-    public TM_Region GetRegion(int index) => tmdb.map.AllRegions[index];
+    public TM_Region GetRegion(int index) => TMDB.map.AllRegions[index];
     public Civilization GetCiv(string civName) {
         if (civName == "") return null;
-        return tmdb.humanity.Civilizations[civName];
+        return TMDB.humanity.Civilizations[civName];
     }
     public CivPiece GetCivPice(int regionIndex, string civName) => GetCiv(civName).Pieces[regionIndex];
 
     public void StartGame() {
-        tmdb.StartGame(activeRegion);
-        hud.ShowRegionDetails(activeRegion);
+        TMDB.StartGame(activeRegion);
+        _hud.ShowRegionDetails(activeRegion);
         Timeline.Instance.Pause();
     }
 
     public new void Awake() {
         base.Awake();
-        tmdb.TMDBInit();
+        TMDB.TMDBInit();
 
-        tmdb.map.WMSK.OnCountryClick += OnClickFromMain;
-        tmdb.map.WMSK.OnCountryLongClick += OnLongClickFromMain;
+        TMDB.map.WMSK.OnCountryClick += OnClickFromMain;
+        TMDB.map.WMSK.OnCountryLongClick += OnLongClickFromMain;
 
-        tmdb.map.WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
-        tmdb.map.WMSK.OnMarkerMouseEnter += OnMarkerEnter;
-        tmdb.map.WMSK.OnMarkerMouseExit += OnMarkerExit;
+        TMDB.map.WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
+        TMDB.map.WMSK.OnMarkerMouseEnter += OnMarkerEnter;
+        TMDB.map.WMSK.OnMarkerMouseExit += OnMarkerExit;
     }
 
     private void OnClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
         activeRegion = countryIndex;
-        hud.ShowRegionDetails(activeRegion);
+        _hud.ShowRegionDetails(activeRegion);
     }
     private void OnLongClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
         activeRegion = countryIndex;
-        hud.ShowRegionDetails(activeRegion);
+        _hud.ShowRegionDetails(activeRegion);
     }
 
     private void OnMarkerEnter(MarkerClickHandler marker) {

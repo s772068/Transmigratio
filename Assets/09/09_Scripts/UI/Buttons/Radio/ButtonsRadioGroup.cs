@@ -5,7 +5,7 @@ using System;
 public class ButtonsRadioGroup : MonoBehaviour {
     [SerializeField] private List<ButtonRadio> buttons;
 
-    private int activeElement = -1;
+    private int _activeElement = -1;
     
     public Action<int> onClick;
 
@@ -17,9 +17,9 @@ public class ButtonsRadioGroup : MonoBehaviour {
     }
 
     public void Click(int newActiveIndex) {
-        if (activeElement != -1) buttons[activeElement].Deactivate();
-        activeElement = newActiveIndex;
-        buttons[activeElement].Activate();
-        onClick?.Invoke(activeElement);
+        if (_activeElement != -1) buttons[_activeElement].Deactivate();
+        _activeElement = newActiveIndex;
+        buttons[_activeElement].Activate();
+        onClick?.Invoke(_activeElement);
     }
 }

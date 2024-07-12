@@ -8,32 +8,32 @@ public class HUD : MonoBehaviour
 {
     public static event Action<bool> EventRegionPanelOpen;
 
-    [SerializeField] private Messanger messanger;
+    [SerializeField] private Messanger _messanger;
 
-    public bool isShowMigration = true;
+    public bool IsShowMigration = true;
 
     [Header("Region Details")]
-    public RegionDetails regionDetails;        //окно с информацией о выбранном регионе
+    [SerializeField] private RegionDetails _regionDetails;        //окно с информацией о выбранном регионе
 
-    public Migration migration;
+    [SerializeField] private Migration _migration;
 
     private void Awake() {
         GameEvents.ShowMessage = OnShowMessage;
     }
 
     private void OnShowMessage(string message) {
-        messanger.gameObject.SetActive(true);
-        messanger.Message = message;
+        _messanger.gameObject.SetActive(true);
+        _messanger.Message = message;
     }
 
     public void ShowMigration() {
-        if (!isShowMigration) return;
+        if (!IsShowMigration) return;
         //migration
     }
 
     public void ShowRegionDetails(int region) {
-        regionDetails.regionID = region;
-        regionDetails.gameObject.SetActive(true);
+        _regionDetails.RegionID = region;
+        _regionDetails.gameObject.SetActive(true);
         EventRegionPanelOpen?.Invoke(true);
     }
 }

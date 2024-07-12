@@ -26,7 +26,7 @@ public class Civilization {
         Pieces = new();
         Pieces.Clear();
         Name = civName;
-        AddPiece(region, GameSettings.startPopulation, 100);
+        AddPiece(region, GameSettings.StartPopulation, 100);
 
         EcoCulture.Init("Hunters", "Farmers", "Nomads", "Mountain", "City");
         ProdMode.Init("PrimitiveCommunism", "Slavery", "Feodalism", "Capitalism", "Socialism", "Communism");

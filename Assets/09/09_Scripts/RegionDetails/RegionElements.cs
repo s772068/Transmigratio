@@ -15,21 +15,21 @@ public class RegionElements : MonoBehaviour {
 
     public void ClickCivTab() {
         ClearElements();
-        foreach (var element in GameSettings.civDetails) {
+        foreach (var element in GameSettings.CivDetails) {
             CreateElement(element);
         }
     }
 
     public void ClickRegionTab() {
         ClearElements();
-        foreach (var element in GameSettings.regionDetails) {
+        foreach (var element in GameSettings.RegionDetails) {
             CreateElement(element);
         }
     }
 
     public void CreateElement(string title) {
         var region = Instantiate(element, content);
-        region.onClick = SelectElement;
+        region.Click = SelectElement;
         region.Pictogram = pictograms[title];
         region.Title = title;
         dic[title] = region;

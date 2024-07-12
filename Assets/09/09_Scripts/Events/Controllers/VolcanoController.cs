@@ -40,7 +40,7 @@ public class VolcanoController : Singleton<VolcanoController> {
 
     private Action onTickLogic;
 
-    private WMSK WMSK => Transmigratio.Instance.tmdb.map.WMSK;
+    private WMSK WMSK => Transmigratio.Instance.TMDB.map.WMSK;
 
     private string Local(string key) => Localization.Load("Volcano", key);
     private int GetCalmVolcanoPoints(CivPiece piece) => (int) (piece.Population.value / calmVolcanoPointsDivision);
@@ -72,7 +72,7 @@ public class VolcanoController : Singleton<VolcanoController> {
 
     private void CreateEvent() {
         System.Random rand = new();
-        var civilizations = Transmigratio.Instance.tmdb.humanity.Civilizations;
+        var civilizations = Transmigratio.Instance.TMDB.humanity.Civilizations;
         if (civilizations.Count == 0) return;
         piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
         ticksToActivateVolcano = rand.Next(minTickToActivate, maxTickToActivate);

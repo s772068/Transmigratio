@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7791466950627871961}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -108,7 +107,6 @@ RectTransform:
   m_Children:
   - {fileID: 7791466951635855860}
   m_Father: {fileID: 7791466951790533980}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -184,7 +182,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7791466951716100052}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -319,7 +316,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7791466951843575644}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -454,7 +450,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7791466950847432664}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -533,7 +528,6 @@ RectTransform:
   - {fileID: 7791466952164793147}
   - {fileID: 7791466951444751687}
   m_Father: {fileID: 7791466952032954487}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -590,8 +584,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd50a02e39fc3c4680a1946fa16aedf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  element: {fileID: 0}
   content: {fileID: 7791466951444751687}
-  activeKey: 
+  pictograms:
+    _serializedList: []
 --- !u!1 &7791466950627871941
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +621,6 @@ RectTransform:
   m_Children:
   - {fileID: 7791466950141473835}
   m_Father: {fileID: 7791466952164793147}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -731,7 +726,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7791466951073424297}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -870,7 +864,6 @@ RectTransform:
   - {fileID: 7791466951800867811}
   - {fileID: 7791466951223467888}
   m_Father: {fileID: 7791466952032954487}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -927,6 +920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3592d419de0c5448f8bc2fa78ca7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: {fileID: 0}
+  paramiter: {fileID: 0}
   content: {fileID: 7791466951800867811}
 --- !u!1 &7791466950847432647
 GameObject:
@@ -961,7 +956,6 @@ RectTransform:
   m_Children:
   - {fileID: 7791466950461555472}
   m_Father: {fileID: 7791466952164793147}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1070,7 +1064,6 @@ RectTransform:
   - {fileID: 7791466952135470579}
   - {fileID: 7791466951683778791}
   m_Father: {fileID: 7791466950820069320}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1147,7 +1140,6 @@ RectTransform:
   m_Children:
   - {fileID: 7791466951716100052}
   m_Father: {fileID: 7791466950820069320}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -1224,7 +1216,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7791466950536304038}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1326,7 +1317,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7791466950260597981}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1403,7 +1393,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7791466951073424297}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1525,7 +1514,6 @@ RectTransform:
   m_Children:
   - {fileID: 7791466950398163435}
   m_Father: {fileID: 7791466951223467888}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1696,7 +1684,6 @@ RectTransform:
   - {fileID: 7791466950260597981}
   - {fileID: 7791466951843575644}
   m_Father: {fileID: 7791466952032954487}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1755,6 +1742,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: {fileID: 7791466950405409458}
   avatar: {fileID: 7791466951635855861}
+  avatars:
+    _serializedList: []
 --- !u!1 &7791466951800867810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,7 +1775,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7791466950820069320}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1863,7 +1851,6 @@ RectTransform:
   m_Children:
   - {fileID: 7791466950405409457}
   m_Father: {fileID: 7791466951790533980}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1942,7 +1929,6 @@ RectTransform:
   - {fileID: 7791466952153870835}
   - {fileID: 7791466952032954487}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1999,11 +1985,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51cf0afe18d04394181ee24f3e7e49c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elements: {fileID: 7791466950536304057}
-  paramiters: {fileID: 7791466950820069323}
-  rightSide: {fileID: 7791466951790533983}
-  tabs: {fileID: 7791466952164793146}
-  civAvatar: {fileID: 7791466951635855861}
+  _leftSide: {fileID: 7791466950536304057}
+  _centerSide: {fileID: 7791466950820069323}
+  _rightSide: {fileID: 7791466951790533983}
+  _tabs: {fileID: 7791466952164793150}
+  _civAvatar: {fileID: 7791466951635855861}
+  RegionID: 0
 --- !u!1 &7791466952032954486
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,7 +2025,6 @@ RectTransform:
   - {fileID: 7791466950820069320}
   - {fileID: 7791466951790533980}
   m_Father: {fileID: 7791466952030300390}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2115,7 +2101,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7791466951073424297}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2236,7 +2221,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7791466952030300390}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2371,7 +2355,6 @@ RectTransform:
   - {fileID: 7791466950627871961}
   - {fileID: 7791466950847432664}
   m_Father: {fileID: 7791466950536304038}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -2425,9 +2408,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7791466952164793146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948a851c0deb9e54bada1482e3f3958b, type: 3}
+  m_Script: {fileID: 11500000, guid: a5a19b017fc0d554aa3f5c902310481d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 7791466950627871962}
-  - {fileID: 7791466950847432668}
+  buttons: []

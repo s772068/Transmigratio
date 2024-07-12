@@ -12,22 +12,22 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     [Space]
     public UnityEvent<int> onClick = new UnityEvent<int>();
 
-    private bool isActive;
-    private Image image;
+    private bool _isActive;
+    private Image _image;
 
     public int Index { private get; set; }
     private void Awake() {
-        image = GetComponent<Image>();
+        _image = GetComponent<Image>();
     }
 
     public void Activate() {
-        isActive = true;
-        image.sprite = activeSprite;
+        _isActive = true;
+        _image.sprite = activeSprite;
     }
 
     public void Deactivate() {
-        isActive = false;
-        image.sprite = deactiveSprite;
+        _isActive = false;
+        _image.sprite = deactiveSprite;
     }
 
     public void OnPointerClick(PointerEventData eventData) {
@@ -36,12 +36,12 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public void OnPointerEnter(PointerEventData eventData) {
         if(highlightedSprite == null) return;
-        if (!isActive) image.sprite = highlightedSprite;
+        if (!_isActive) _image.sprite = highlightedSprite;
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         if (highlightedSprite == null) return;
-        if (isActive) Activate();
+        if (_isActive) Activate();
         else Deactivate();
     }
 }

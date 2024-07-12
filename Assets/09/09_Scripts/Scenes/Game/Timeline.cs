@@ -2,43 +2,43 @@ using System.Collections;
 using UnityEngine;
 
 public class Timeline : PersistentSingleton<Timeline> {
-    [SerializeField] private ButtonsRadioGroup buttonsGroup;
-    [SerializeField] private Vector2 timeDelayLimit;
-    private float timeDelay;
-    private float timer;
-    private bool isPlay;
-    private int tick;
+    [SerializeField] private ButtonsRadioGroup _buttonsGroup;
+    [SerializeField] private Vector2 _timeDelayLimit;
+    private float _timeDelay;
+    private float _timer;
+    private bool _isPlay;
+    private int _tick;
 
-    public int Tick => tick;
+    public int Tick => _tick;
 
     public void Pause() {
         Debug.Log("Pause");
-        isPlay = false;
-        buttonsGroup.Click(0);
+        _isPlay = false;
+        _buttonsGroup.Click(0);
     }
 
     public void Play() {
         Debug.Log("Play");
-        timeDelay = timeDelayLimit.y;
-        if (!isPlay) StartCoroutine(TickPlay());
-        buttonsGroup.Click(1);
+        _timeDelay = _timeDelayLimit.y;
+        if (!_isPlay) StartCoroutine(TickPlay());
+        _buttonsGroup.Click(1);
     }
 
     public void Rewind() {
-        timeDelay = timeDelayLimit.x;
-        if (!isPlay) StartCoroutine(TickPlay());
+        _timeDelay = _timeDelayLimit.x;
+        if (!_isPlay) StartCoroutine(TickPlay());
         Debug.Log("Rewind");
-        buttonsGroup.Click(2);
+        _buttonsGroup.Click(2);
     }
 
     private IEnumerator TickPlay() {
-        isPlay = true;
-        while (isPlay) {
+        _isPlay = true;
+        while (_isPlay) {
             yield return new WaitForFixedUpdate();
-            timer += Time.fixedDeltaTime;
-            if(timer >= timeDelay) {
-                timer = 0;
-                ++tick;
+            _timer += Time.fixedDeltaTime;
+            if(_timer >= _timeDelay) {
+                _timer = 0;
+                ++_tick;
                 GameEvents.TickLogic();
                 GameEvents.TickShow();
             }

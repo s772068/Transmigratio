@@ -1,12 +1,11 @@
-using UnityEngine.Localization.Settings;
 using UnityEngine;
 using TMPro;
 
 public class TopPanel : MonoBehaviour {
-    [SerializeField] private TMP_Text populationTxt;
-    [SerializeField] private TMP_Text yearTxt;
+    [SerializeField] private TMP_Text _populationTxt;
+    [SerializeField] private TMP_Text _yearTxt;
 
-    private int Population => Transmigratio.Instance.tmdb.humanity.TotalEarthPop;
+    private int Population => Transmigratio.Instance.TMDB.humanity.TotalEarthPop;
     private int Tick => Timeline.Instance.Tick;
 
     private void Awake() {
@@ -20,11 +19,11 @@ public class TopPanel : MonoBehaviour {
     }
 
     private void UpdatePopulation() {
-        populationTxt.text = $"{Localization.Load("Base", "Population")}: {Population.ToString("### ### ###")}";
+        _populationTxt.text = $"{Localization.Load("Base", "Population")}: {Population.ToString("### ### ###")}";
     }
 
     private void UpdateYear() {
-        int year = 40000 - Tick * GameSettings.yearsByTick;
-        yearTxt.text = $"{year.ToString("### ###")} {Localization.Load("Base", "BCE")}";
+        int year = 40000 - Tick * GameSettings.YearsByTick;
+        _yearTxt.text = $"{year.ToString("### ###")} {Localization.Load("Base", "BCE")}";
     }
 }

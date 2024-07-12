@@ -24,7 +24,7 @@ public class HungerController : Singleton<HungerController> {
     private List<CivPiece> events = new();
     private List<Action> autoActions = new();
 
-    private Map Map => Transmigratio.Instance.tmdb.map;
+    private Map Map => Transmigratio.Instance.TMDB.map;
     private WMSK WMSK => Map.WMSK;
 
     private string Local(string key) => Localization.Load("Hunger", key);

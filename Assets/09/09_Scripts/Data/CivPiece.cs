@@ -21,7 +21,7 @@ public class CivPiece {
 
     public TM_Region Region => TMDB.map.AllRegions[RegionID];
     public Civilization Civilization => TMDB.humanity.Civilizations[CivName];
-    private TMDB TMDB => Transmigratio.Instance.tmdb;
+    private TMDB TMDB => Transmigratio.Instance.TMDB;
 
     /// <summary>
     /// Инициализация при появлении в области после миграции или при старте игры

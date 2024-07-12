@@ -5,7 +5,7 @@ public class ButtonSwitchGroup : MonoBehaviour {
     [SerializeField] private int maxSelected;
     [SerializeField] private List<ButtonSwitch> buttons;
     
-    private List<ButtonSwitch> selected = new();
+    private List<ButtonSwitch> _selected = new();
 
     private void Awake() {
         for(int i = 0; i < buttons.Count; ++i) {
@@ -14,16 +14,16 @@ public class ButtonSwitchGroup : MonoBehaviour {
     }
 
     private void OnClick(ButtonSwitch button) {
-        if (selected.Contains(button)) {
+        if (_selected.Contains(button)) {
             button.Deactivate();
-            selected.Remove(button);
+            _selected.Remove(button);
         } else {
-            if (selected.Count == maxSelected) {
-                selected[selected.Count - 1].Deactivate();
-                selected.RemoveAt(selected.Count - 1);
+            if (_selected.Count == maxSelected) {
+                _selected[_selected.Count - 1].Deactivate();
+                _selected.RemoveAt(_selected.Count - 1);
             }
             button.Activate();
-            selected.Insert(0, button);
+            _selected.Insert(0, button);
         }
     }
 }
