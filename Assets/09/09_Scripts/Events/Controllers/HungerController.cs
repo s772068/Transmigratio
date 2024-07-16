@@ -5,11 +5,12 @@ using UnityEngine;
 using System;
 
 public class HungerController : Singleton<HungerController> {
-    [SerializeField] private EventPanel panel;
+    [SerializeField] private EventPanel _panelPrefab;
     [SerializeField] private IconMarker markerPrefab;
     [SerializeField] private Sprite markerSprite;
     [SerializeField] private Sprite panelSprite;
     [Header("Desidion")]
+    [SerializeField] private EventDesidion _desidionPrefab;
     [SerializeField, Min(0)] private float addFoodDivision;
     [Header("Points")]
     [SerializeField, Min(0)] private float addFoodDivisionPoints;
@@ -18,11 +19,11 @@ public class HungerController : Singleton<HungerController> {
     [SerializeField] private Color regionColor;
     [SerializeField] private Color civColor;
 
-    private bool isShowAgain = true;
-    private int activateIndex;
-    private CivPiece selectedCivPiece;
-    private List<CivPiece> events = new();
-    private List<Action> autoActions = new();
+    public bool IsShowAgain = true;
+    private int _activateIndex;
+    private CivPiece _selectedCivPiece;
+    private List<CivPiece> _events = new();
+    private List<Action> _autoActions = new();
 
     private Map Map => Transmigratio.Instance.TMDB.map;
     private WMSK WMSK => Map.WMSK;
@@ -36,9 +37,9 @@ public class HungerController : Singleton<HungerController> {
         GameEvents.DeactivateHunger = RemoveEvent;
         GameEvents.RemoveCivPiece += RemoveEvent;
 
-        autoActions.Add(AddFood);
-        autoActions.Add(AddSomeFood);
-        autoActions.Add(Nothing);
+        _autoActions.Add(AddFood);
+        _autoActions.Add(AddSomeFood);
+        _autoActions.Add(Nothing);
     }
 
     private void OnDisable() {
@@ -46,19 +47,19 @@ public class HungerController : Singleton<HungerController> {
         GameEvents.DeactivateHunger = default;
         GameEvents.RemoveCivPiece -= RemoveEvent;
 
-        autoActions.Clear();
+        _autoActions.Clear();
     }
 
     private void AddEvent(CivPiece piece) {
-        if (events.Contains(piece)) return;
+        if (_events.Contains(piece)) return;
         Debug.Log($"Add event Hunger in region {piece.Region.Id}");
         CreateMarker(piece);
-        events.Add(piece);
-        if (isShowAgain) {
+        _events.Add(piece);
+        if (IsShowAgain) {
             OpenPanel(piece);
             Timeline.Instance.Pause();
         } else {
-            autoActions[activateIndex]?.Invoke();
+            _autoActions[_activateIndex]?.Invoke();
         }
     }
 
@@ -66,8 +67,8 @@ public class HungerController : Singleton<HungerController> {
         Debug.Log("CreateMarker");
         piece.Region.Marker = Instantiate(markerPrefab);
         piece.Region.Marker.Sprite = markerSprite;
-        piece.Region.Marker.Index = events.Count;
-        piece.Region.Marker.onClick += (int i) => { OpenPanel(piece); panel.IsShowAgain = isShowAgain; };
+        piece.Region.Marker.Index = _events.Count;
+        piece.Region.Marker.onClick += (int i) => OpenPanel(piece);
 
         Vector3 position = WMSK.countries[piece.Region.Id].center;
         position.z = -0.1f;
@@ -75,54 +76,49 @@ public class HungerController : Singleton<HungerController> {
         handler.allowDrag = false;
     }
 
-    private void OpenPanel(CivPiece piece) {
-        panel.Open();
-        panel.IsShowAgain = isShowAgain;
-        panel.Image = panelSprite;
-        panel.Title = Local("Title");
-        panel.Description = Local("Description");
-        panel.Territory = Local("Territory 1") + " " +
+    private void OpenPanel(CivPiece piece) 
+    {
+        string territory = Local("Territory 1") + " " +
                           $"<color=#{regionColor.ToHexString()}>" +
                           piece.Region.Name + "</color> " +
                           Local("Territory 2") + " " +
                           $"<color=#{civColor.ToHexString()}>" +
                           Localization.Load("Civilizations", piece.Civilization.Name) + "</color> " +
                           Local("Territory 3");
-        panel.AddDesidion(AddFood, Local("AddFood"), GetAddFoodPoints(piece));
-        panel.AddDesidion(AddSomeFood, Local("AddSomeFood"), GetAddSomeFoodPoints(piece));
-        panel.AddDesidion(Nothing, Local("Nothing"), 0);
 
-        selectedCivPiece = piece;
-    }
+        Desidion[] desidions = 
+        { 
+            new Desidion(AddFood, Local("AddFood"), GetAddFoodPoints(piece)),
+            new Desidion(AddSomeFood, Local("AddSomeFood"), GetAddSomeFoodPoints(piece)),
+            new Desidion(Nothing, Local("Nothing"), 0)
+        };
 
-    private void ClosePanel() {
-        isShowAgain = panel.IsShowAgain;
-        panel.Close();
+        PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, _panelPrefab, IsShowAgain, panelSprite, Local("Title"),
+                                territory, Local("Description"), desidions);
+
+        _selectedCivPiece = piece;
     }
 
     private void AddFood() {
         Debug.Log("AddFood");
-        ClosePanel();
-        selectedCivPiece.ReserveFood += selectedCivPiece.Population.value / addFoodDivision;
-        activateIndex = 0;
+        _selectedCivPiece.ReserveFood += _selectedCivPiece.Population.value / addFoodDivision;
+        _activateIndex = 0;
     }
 
     private void AddSomeFood() {
         Debug.Log("AddSomeFood");
-        ClosePanel();
-        selectedCivPiece.ReserveFood += selectedCivPiece.Population.value / addFoodDivision / 2;
-        activateIndex = 1;
+        _selectedCivPiece.ReserveFood += _selectedCivPiece.Population.value / addFoodDivision / 2;
+        _activateIndex = 1;
     }
 
     private void Nothing() {
         Debug.Log("Nothing");
-        ClosePanel();
-        activateIndex = 2;
+        _activateIndex = 2;
     }
 
     private void RemoveEvent(CivPiece piece) {
         Debug.Log("RemoveEvent");
         if(piece.Region.Marker != null) piece.Region.Marker.Destroy();
-        events.Remove(piece);
+        _events.Remove(piece);
     }
 }

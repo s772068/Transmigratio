@@ -8,8 +8,38 @@ public class Timeline : PersistentSingleton<Timeline> {
     private float _timer;
     private bool _isPlay;
     private int _tick;
+    private int _windowsCount = 0;
+
+    public int WindowsCount
+    {
+        get => _windowsCount;
+        private set
+        {
+            _windowsCount = value;
+            if (_windowsCount <= 0)
+            {
+                if (_windowsCount < 0)
+                    _windowsCount = 0;
+                Resume();
+            }
+            else
+                Pause();
+        }
+    }
 
     public int Tick => _tick;
+
+    private void OnEnable()
+    {
+        EventPanel.EventPanelOpen += _ => WindowsCount += 1;
+        EventPanel.EventPanelClose += _ => WindowsCount -= 1;
+    }
+
+    private void OnDisable()
+    {
+        EventPanel.EventPanelOpen -= _ => WindowsCount += 1;
+        EventPanel.EventPanelClose -= _ => WindowsCount -= 1;
+    }
 
     public void Pause() {
         Debug.Log("Pause");
@@ -17,7 +47,23 @@ public class Timeline : PersistentSingleton<Timeline> {
         _buttonsGroup.Click(0);
     }
 
+    public void Resume()
+    {
+        if (_timeDelay == _timeDelayLimit.y)
+            Play();
+        else if (_timeDelay == _timeDelayLimit.x)
+            Rewind();
+        else
+            Pause();
+    }
+
     public void Play() {
+        if (_windowsCount > 0)
+        {
+            Pause();
+            return;
+        }
+
         Debug.Log("Play");
         _timeDelay = _timeDelayLimit.y;
         if (!_isPlay) StartCoroutine(TickPlay());
@@ -25,6 +71,12 @@ public class Timeline : PersistentSingleton<Timeline> {
     }
 
     public void Rewind() {
+        if (_windowsCount > 0)
+        {
+            Pause();
+            return;
+        }
+
         _timeDelay = _timeDelayLimit.x;
         if (!_isPlay) StartCoroutine(TickPlay());
         Debug.Log("Rewind");
