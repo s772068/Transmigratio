@@ -57,8 +57,8 @@ public class HungerController : Singleton<HungerController> {
         _events.Add(piece);
         if (IsShowAgain) {
             OpenPanel(piece);
-            Timeline.Instance.Pause();
-        } else {
+        } 
+        else {
             _autoActions[_activateIndex]?.Invoke();
         }
     }

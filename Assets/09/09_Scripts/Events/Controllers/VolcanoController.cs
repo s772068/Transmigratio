@@ -6,7 +6,8 @@ using System;
 using Unity.VisualScripting;
 
 public class VolcanoController : Singleton<VolcanoController> {
-    [SerializeField] private EventPanel panel;
+    [SerializeField] private EventDesidion _desidionPrefab;
+    [SerializeField] private EventPanel _panelPrefab;
     [SerializeField] private IconMarker markerPrefab;
     [SerializeField] private Sprite markerSprite;
     [SerializeField] private Sprite panelSprite;
@@ -32,7 +33,7 @@ public class VolcanoController : Singleton<VolcanoController> {
     [SerializeField] private int activateIndex;
     [SerializeField] private int ticksToActivateVolcano;
 
-    private bool isShowAgain = true;
+    public bool IsShowAgain = true;
     private CivPiece piece;
     private IconMarker marker;
     private System.Random rand = new();
@@ -79,10 +80,8 @@ public class VolcanoController : Singleton<VolcanoController> {
         GameEvents.TickLogic += WaitActivateVolcano;
         Debug.Log($"Create event Volcano in region {piece.Region.Id}");
         CreateMarker(WMSK.countries[piece.Region.Id].center);
-        if (isShowAgain) {
+        if (IsShowAgain)
             OpenPanel();
-            Timeline.Instance.Pause();
-        }
     }
 
     private void RestartEvent(CivPiece _piece) {
@@ -102,7 +101,7 @@ public class VolcanoController : Singleton<VolcanoController> {
     private void CreateMarker(Vector3 position) {
         marker = Instantiate(markerPrefab);
         marker.Sprite = markerSprite;
-        marker.onClick += (int i) => { OpenPanel(); panel.IsShowAgain = isShowAgain; };
+        marker.onClick += (int i) => { OpenPanel(); _panelPrefab.IsShowAgain = IsShowAgain; };
         position.z = -0.1f;
 
         MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
@@ -110,26 +109,22 @@ public class VolcanoController : Singleton<VolcanoController> {
     }
 
     private void OpenPanel() {
-        panel.Open();
-        panel.IsShowAgain = isShowAgain;
-        panel.Image = panelSprite;
-        panel.Title = Local("Title");
-        panel.Description = Local("Description");
-        panel.Territory = Local("Territory1") + " " +
+        string territory = Local("Territory1") + " " +
                           $"<color=#{regionColor.ToHexString()}>" +
                           piece.Region.Name + "</color> " +
                           Local("Territory2") + " " +
                           $"<color=#{civColor.ToHexString()}>" +
                           Localization.Load("Civilizations", piece.Civilization.Name) + "</color> " +
                           Local("Territory3");
-        panel.AddDesidion(CalmVolcano, Local("CalmVolcano"), GetCalmVolcanoPoints(piece));
-        panel.AddDesidion(ReduceLosses, Local("ReduceLosses"), reduceLossesPoints);
-        panel.AddDesidion(Nothing, Local("Nothing"), 0);
-    }
+        Desidion[] desidions =
+        {
+            new Desidion(CalmVolcano, Local("CalmVolcano"), GetCalmVolcanoPoints(piece)),
+            new Desidion(ReduceLosses, Local("ReduceLosses"), reduceLossesPoints),
+            new Desidion(Nothing, Local("Nothing"), 0)
+        };
 
-    private void ClosePanel() {
-        isShowAgain = panel.IsShowAgain;
-        panel.Close();
+        PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, _panelPrefab, IsShowAgain, panelSprite, Local("Title"),
+                                territory, Local("Description"), desidions);
     }
 
     private void CalmVolcano() {
@@ -137,7 +132,6 @@ public class VolcanoController : Singleton<VolcanoController> {
         Debug.Log("CalmVolcano");
 
         ticker = 0;
-        ClosePanel();
         marker.Destroy();
         GameEvents.TickLogic += RestartEvent;
         GameEvents.TickLogic -= WaitActivateVolcano;
@@ -151,7 +145,6 @@ public class VolcanoController : Singleton<VolcanoController> {
         Debug.Log("ReduceLosses");
 
         ticker = 0;
-        ClosePanel();
         marker.Destroy();
         GameEvents.TickLogic += RestartEvent;
         GameEvents.TickLogic -= WaitActivateVolcano;
@@ -160,7 +153,6 @@ public class VolcanoController : Singleton<VolcanoController> {
 
     private void Nothing() {
         activateIndex = 2;
-        ClosePanel();
     }
 
     private void ActivateVolcano() {
@@ -170,7 +162,6 @@ public class VolcanoController : Singleton<VolcanoController> {
         Debug.Log("ActivateVolcano");
 
         ticker = 0;
-        ClosePanel();
         marker.Destroy();
         GameEvents.TickLogic -= WaitActivateVolcano;
         MigrationController.Instance.TryMigration(piece);
