@@ -6,7 +6,6 @@ using TMPro;
 
 namespace Events.Prefabs {
     public class Panel : MonoBehaviour {
-        [SerializeField] private Slider slider;
         [SerializeField] private TMP_Text title;
         [SerializeField] private TMP_Text territory;
         [SerializeField] private TMP_Text description;
@@ -21,8 +20,6 @@ namespace Events.Prefabs {
         public static event Action<bool> EventPanelClose;
         public Action<int> OnClickDesidion;
 
-        public bool ActivateSlider { set => slider.gameObject.SetActive(value); }
-        public float Percents { set => slider.value = value; }
         public string Title { set => title.text = value; }
         public string Territory { set => territory.text = value; }
         public string Description { set => description.text = value; }

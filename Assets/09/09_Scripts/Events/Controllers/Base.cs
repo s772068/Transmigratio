@@ -22,7 +22,6 @@ namespace Events.Controllers {
 
         private protected bool isShowAgain = true;
 
-        private protected abstract bool ActiveSlider { get; }
         private protected abstract string Name { get; }
         private protected abstract string Territory { get; }
 
@@ -50,7 +49,6 @@ namespace Events.Controllers {
             Timeline.Instance.Pause();
             panel.Open();
             panel.IsShowAgain = isShowAgain;
-            panel.ActivateSlider = ActiveSlider;
             panel.Image = panelSprite;
             panel.Title = Local("Title");
             panel.Description = Local("Description");

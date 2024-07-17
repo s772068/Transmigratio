@@ -4,19 +4,18 @@ using System;
 namespace Events.Controllers.Local {
     public sealed class Hunger : Base {
         [Header("Desidion")]
-        [SerializeField, Min(0)] private float foodPerPerson;
+        [SerializeField, Min(0)] private int foodPerPerson;
         [Header("Points")]
-        [SerializeField, Range(0, 100)] private float percentPointsForAddFood;
+        [SerializeField, Range(0, 100)] private int percentPointsForAddFood;
         [SerializeField, Range(0, 100)] private int percentPointsForAddSomeFood;
 
         public static Action<CivPiece> onActivate;
         public static Action<CivPiece> onDeactivate;
 
-        private protected override bool ActiveSlider => false;
         private protected override string Name => "Hunger";
 
-        private int AddFoodPoints => (int)(selectedPiece.Population.value / foodPerPerson / 100 * percentPointsForAddFood);
-        private int AddSomeFoodPoints => (int)(selectedPiece.Population.value / foodPerPerson / 100 * percentPointsForAddSomeFood);
+        private int AddFoodPoints => (int)(selectedPiece.Population.value / foodPerPerson / 100f * percentPointsForAddFood);
+        private int AddSomeFoodPoints => (int)(selectedPiece.Population.value / foodPerPerson / 100f * percentPointsForAddSomeFood);
 
         private protected override void ActivateEvents() {
             onActivate = AddEvent;

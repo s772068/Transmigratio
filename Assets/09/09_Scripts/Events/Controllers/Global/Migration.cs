@@ -20,37 +20,34 @@ namespace Events.Controllers.Global {
         [SerializeField, Min(0)] private int breakPoints;
         [SerializeField, Min(0)] private int speedUpPoints;
 
-        private CivPiece fromPiece;
-        private CivPiece toPiece;
-        private Dictionary<int, MigrationData> migrations = new();
+        private CivPiece _fromPiece;
+        private CivPiece _toPiece;
+        private Dictionary<int, MigrationData> _migrations = new();
 
-        public static Action<CivPiece> onMigration;
+        public static Action<CivPiece> OnMigration;
         public static Func<int> GetPopulation;
 
-        private protected override bool ActiveSlider => true;
         private protected override string Name => "Migration";
         private protected override string Territory => Local("Territory1") + " " +
                               $"<color=#{regionColor.ToHexString()}>" +
-                              fromPiece.Region.Name + "</color> " +
+                              _fromPiece.Region.Name + "</color> " +
                               Local("Territory2") + " " +
-                              $"<color=#{civColor.ToHexString()}>" +
-                              Localization.Load("Civilizations", toPiece.Region.Name) + "</color> ";
+                              $"<color=#{regionColor.ToHexString()}>" +
+                              Localization.Load("Civilizations", _toPiece.Region.Name) + "</color> ";
 
         private protected override void ActivateEvents() {
             Timeline.TickLogic += OnTickLogic;
-            Timeline.TickShow += UpdatePercent;
             Civilization.RemoveCivPiece += RemoveMigration;
 
-            onMigration = TryMigration;
-            GetPopulation = () => migrations.Sum(x => x.Value.FullPopulations - x.Value.CurPopulations);
+            OnMigration = TryMigration;
+            GetPopulation = () => _migrations.Sum(x => x.Value.FullPopulations - x.Value.CurPopulations);
         }
 
         private protected override void DeactivateEvents() {
             Timeline.TickLogic -= OnTickLogic;
-            Timeline.TickShow -= UpdatePercent;
             Civilization.RemoveCivPiece -= RemoveMigration;
 
-            onMigration = default;
+            OnMigration = default;
             GetPopulation = default;
         }
 
@@ -61,7 +58,7 @@ namespace Events.Controllers.Global {
         }
 
         public void TryMigration(CivPiece civPiece) {
-            if (migrations.ContainsKey(civPiece.Region.Id)) return;
+            if (_migrations.ContainsKey(civPiece.Region.Id)) return;
 
             TM_Region curRegion = civPiece.Region;
             List<Country> neighbourRegions = WMSK.CountryNeighbours(curRegion.Id);
@@ -73,7 +70,7 @@ namespace Events.Controllers.Global {
 
             for (int i = 0; i < neighbourRegions.Count; ++i) {
                 int regionID = WMSK.GetCountryIndex(neighbourRegions[i].name);
-                if (migrations.ContainsKey(regionID)) continue;
+                if (_migrations.ContainsKey(regionID)) continue;
 
                 TM_Region neighbourRegion = Map.GetRegionBywmskId(regionID);
                 if (neighbourRegion.Fauna["Fauna"].Value > 0) {
@@ -109,7 +106,7 @@ namespace Events.Controllers.Global {
             newMigration.StepPopulations = (int) (newMigration.FullPopulations / 100f * stepPercent);
 
             civ.Pieces[from.Id].Population.value -= newMigration.FullPopulations;
-            migrations[from.Id] = newMigration;
+            _migrations[from.Id] = newMigration;
 
             if (!to.CivsList.Contains(civ.Name)) {
                 newMigration.CurPopulations += newMigration.StepPopulations;
@@ -117,13 +114,13 @@ namespace Events.Controllers.Global {
                 to.AddCivilization(civ.Name);
             }
             
-            fromPiece = civ.Pieces[from.Id];
-            toPiece = civ.Pieces[to.Id];
+            _fromPiece = civ.Pieces[from.Id];
+            _toPiece = civ.Pieces[to.Id];
 
             if (isShowAgain) {
                 OpenPanel();
-                fromPiece.AddEvent(this);
-                toPiece.AddEvent(this);
+                _fromPiece.AddEvent(this);
+                _toPiece.AddEvent(this);
             } else activeDesidion.OnClick?.Invoke();
         }
 
@@ -153,11 +150,11 @@ namespace Events.Controllers.Global {
         }
 
         private void OnTickLogic() {
-            for (int i = 0; i < migrations.Count; ++i) {
+            for (int i = 0; i < _migrations.Count; ++i) {
                 // Ётап перед началом миграции
-                MigrationData migration = migrations.Values.ElementAt(i);
+                MigrationData migration = _migrations.Values.ElementAt(i);
                 if (!migration.Civilization.Pieces.ContainsKey(migration.To.Id)) continue;
-                int curID = migrations.Keys.ElementAt(i);
+                int curID = _migrations.Keys.ElementAt(i);
                 if (migration.TimerToStart < startTime) {
                     ++migration.TimerToStart;
                 } else {
@@ -180,7 +177,7 @@ namespace Events.Controllers.Global {
                     }
                     // ”даление миграции
                     if (migration.CurPopulations == migration.FullPopulations) {
-                        if (curID == fromPiece.RegionID) panel.Close();
+                        if (curID == _fromPiece.RegionID) panel.Close();
                         RemoveMigration(curID);
                     }
                 }
@@ -188,11 +185,11 @@ namespace Events.Controllers.Global {
         }
 
         private void RemoveMigration(CivPiece civPiece) {
-            if (migrations.ContainsKey(civPiece.Region.Id)) {
+            if (_migrations.ContainsKey(civPiece.Region.Id)) {
                 RemoveMigration(civPiece.Region.Id);
                 return;
             }
-            foreach (var pair in migrations) {
+            foreach (var pair in _migrations) {
                 if (pair.Value.To.Id == civPiece.Region.Id) {
                     RemoveMigration(pair.Value.From.Id);
                     break;
@@ -202,34 +199,29 @@ namespace Events.Controllers.Global {
         }
 
         private void RemoveMigration(int index) {
-            migrations[index].Line.Destroy();
-            migrations[index].Marker.Destroy();
-            fromPiece.RemoveEvent(this);
-            toPiece.RemoveEvent(this);
-            migrations.Remove(index);
-        }
-
-        private void UpdatePercent() {
-            MigrationData migration = migrations[fromPiece.RegionID];
-            panel.Percents = migration.CurPopulations / migration.FullPopulations;
+            _migrations[index].Line.Destroy();
+            _migrations[index].Marker.Destroy();
+            _fromPiece.RemoveEvent(this);
+            _toPiece.RemoveEvent(this);
+            _migrations.Remove(index);
         }
 
         public override void CreateMarker() {
-            Vector2 start = WMSK.countries[fromPiece.RegionID].center;
-            Vector2 end = WMSK.countries[toPiece.RegionID].center;
+            Vector2 start = WMSK.countries[_fromPiece.RegionID].center;
+            Vector2 end = WMSK.countries[_toPiece.RegionID].center;
             CreateMarker(start, end);
         }
 
         private void Break() {
-            int fromID = fromPiece.Region.Id;
-            MigrationData data = migrations[fromPiece.Region.Id];
-            fromPiece.Population.value += data.FullPopulations - data.CurPopulations;
+            int fromID = _fromPiece.Region.Id;
+            MigrationData data = _migrations[_fromPiece.Region.Id];
+            _fromPiece.Population.value += data.FullPopulations - data.CurPopulations;
             RemoveMigration(fromID);
         }
 
         private void SpeedUp() {
-            int fromID = fromPiece.Region.Id;
-            migrations[fromID].StepPopulations *= 2;
+            int fromID = _fromPiece.Region.Id;
+            _migrations[fromID].StepPopulations *= 2;
         }
 
         private T GetMax<T>(List<T> list, Func<T, int> GetValue) {

@@ -17,12 +17,10 @@ namespace Events.Controllers.StateMachines {
 
         private State state = State.Start;
 
-        private protected override bool ActiveSlider => false;
         private protected override string Name => "Volcano";
         private int CalmVolcanoPoints => (int) (piece.Population.value / calmVolcanoPointsDivision);
 
-        private void Awake()
-        {
+        private void Awake() {
             curState = states[State.Start];
             curState.Start();
         }
@@ -42,7 +40,7 @@ namespace Events.Controllers.StateMachines {
             activateIndex = 1;
             piece.Population.value -= (int) (piece.Population.value * fullPercentFood * partPercentPopulation);
             piece.ReserveFood -= piece.ReserveFood * fullPercentFood * partPercentFood;
-            Global.Migration.onMigration(piece);
+            Global.Migration.OnMigration(piece);
             EndEvent();
         }
 
@@ -50,7 +48,7 @@ namespace Events.Controllers.StateMachines {
             activateIndex = 2;
             piece.Population.value -= (int) (piece.Population.value * fullPercentFood);
             piece.ReserveFood -= piece.ReserveFood * fullPercentFood;
-            Global.Migration.onMigration(piece);
+            Global.Migration.OnMigration(piece);
             EndEvent();
         }
 

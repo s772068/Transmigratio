@@ -23,7 +23,8 @@ public class CivPiece {
 
     public Action Destroy;
 
-    private List<Events.Controllers.Base> events;
+    private List<Events.Controllers.Base> events = new();
+    private float _prevPopulationGrow;
 
     public TM_Region Region => TMDB.map.AllRegions[RegionID];
     public Civilization Civilization => TMDB.humanity.Civilizations[CivName];
@@ -60,15 +61,16 @@ public class CivPiece {
         if (ReserveFood > RequestFood) GivenFood = RequestFood;
         else                           GivenFood = ReserveFood;
         ReserveFood += TakenFood - GivenFood;
+        _prevPopulationGrow = PopulationGrow;
         PopulationGrow = Population.Value * Civilization.GovernmentCorruption * GivenFood / RequestFood - Population.Value / 3f;
 
         Population.value += (int)PopulationGrow;
         if (Population.value <= 50) { Destroy?.Invoke(); return; }
 
-        if (PopulationGrow < 0) {
+        if (_prevPopulationGrow >= 0 && PopulationGrow < 0) {
             Hunger.onActivate?.Invoke(this);
-            GlobalEvents.Migration.onMigration(this);
-        } else {
+            GlobalEvents.Migration.OnMigration(this);
+        } else if(_prevPopulationGrow < 0 && PopulationGrow >= 0) {
             Hunger.onDeactivate?.Invoke(this);
         }
     }

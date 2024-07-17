@@ -16,13 +16,11 @@ public class Timeline : PersistentSingleton<Timeline> {
     public int Tick => _tick;
 
     public void Pause() {
-        Debug.Log("Pause");
         _isPlay = false;
         _buttonsGroup.Click(0);
     }
 
     public void Play() {
-        Debug.Log("Play");
         _timeDelay = _timeDelayLimit.y;
         if (!_isPlay) StartCoroutine(TickPlay());
         _buttonsGroup.Click(1);
@@ -31,7 +29,6 @@ public class Timeline : PersistentSingleton<Timeline> {
     public void Rewind() {
         _timeDelay = _timeDelayLimit.x;
         if (!_isPlay) StartCoroutine(TickPlay());
-        Debug.Log("Rewind");
         _buttonsGroup.Click(2);
     }
 
