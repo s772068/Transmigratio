@@ -13,7 +13,8 @@ public class EventDesidion : MonoBehaviour {
 
     public void Click() => ActionClick?.Invoke();
 
-    public void Destroy() {
-        Destroy(gameObject);
+        public void Destroy() {
+            Destroy(gameObject);
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class Timeline : PersistentSingleton<Timeline> {
     [SerializeField] private ButtonsRadioGroup _buttonsGroup;
@@ -27,6 +28,9 @@ public class Timeline : PersistentSingleton<Timeline> {
         }
     }
 
+    public static Action TickLogic;
+    public static Action TickShow;
+
     public int Tick => _tick;
 
     private void OnEnable()
@@ -42,7 +46,6 @@ public class Timeline : PersistentSingleton<Timeline> {
     }
 
     public void Pause() {
-        Debug.Log("Pause");
         _isPlay = false;
         _buttonsGroup.Click(0);
     }
@@ -79,7 +82,6 @@ public class Timeline : PersistentSingleton<Timeline> {
 
         _timeDelay = _timeDelayLimit.x;
         if (!_isPlay) StartCoroutine(TickPlay());
-        Debug.Log("Rewind");
         _buttonsGroup.Click(2);
     }
 
@@ -91,8 +93,8 @@ public class Timeline : PersistentSingleton<Timeline> {
             if(_timer >= _timeDelay) {
                 _timer = 0;
                 ++_tick;
-                GameEvents.TickLogic();
-                GameEvents.TickShow();
+                TickLogic?.Invoke();
+                TickShow?.Invoke();
             }
         }
     }

@@ -2,6 +2,8 @@ using AYellowpaper.SerializedCollections;
 using System.Linq;
 using UnityEngine;
 
+using GlobalEvents = Events.Controllers.Global;
+
 /// <summary>
 /// Класс "человечество" - суммарная/усреднённая инфа по цивилизациям
 /// </summary>
@@ -9,7 +11,7 @@ using UnityEngine;
 public class Humanity {
     public SerializedDictionary<string, Civilization> Civilizations;
 
-    public int TotalEarthPop => Civilizations.Sum(x => x.Value.Population) + MigrationController.Instance.Population;
+    public int TotalEarthPop => Civilizations.Sum(x => x.Value.Population) + GlobalEvents.Migration.GetPopulation();
 
     public void Init() {
         Civilizations = new();

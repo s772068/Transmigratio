@@ -25,11 +25,11 @@ public class RegionDetails : MonoBehaviour {
 
     private void OnEnable() {
         SetRegion(RegionID);
-        GameEvents.TickShow += UpdateParams;
+        Timeline.TickShow += UpdateParams;
     }
 
     private void OnDisable() {
-        GameEvents.TickShow -= UpdateParams;
+        Timeline.TickShow -= UpdateParams;
     }
 
     public void ClickStartGame() {

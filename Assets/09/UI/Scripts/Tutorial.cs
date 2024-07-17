@@ -1,4 +1,5 @@
 using AYellowpaper.SerializedCollections;
+using Events.Prefabs;
 using UnityEngine;
 
 public class Tutorial : MonoBehaviour
@@ -48,15 +49,15 @@ public class Tutorial : MonoBehaviour
     private void OnEnable()
     {
         HUD.EventRegionPanelOpen += InfoPanel;
-        EventPanel.EventPanelOpen += GameEvent;
-        EventPanel.EventPanelClose += GameMarker;
+        Panel.EventPanelOpen += GameEvent;
+        Panel.EventPanelClose += GameMarker;
     }
 
     private void OnDisable()
     {
         HUD.EventRegionPanelOpen -= InfoPanel;
-        EventPanel.EventPanelOpen -= GameEvent;
-        EventPanel.EventPanelClose -= GameMarker;
+        Panel.EventPanelOpen -= GameEvent;
+        Panel.EventPanelClose -= GameMarker;
     }
 
     private void Start()
