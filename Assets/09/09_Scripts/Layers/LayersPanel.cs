@@ -37,9 +37,9 @@ public class LayersPanel : MonoBehaviour {
     public void ClickCivilization() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.Name));
 
     private void OnClick(Action PaintAction) {
-        GameEvents.TickShow -= Paint;
+        Timeline.TickShow -= Paint;
         Paint = PaintAction;
-        GameEvents.TickShow += Paint;
+        Timeline.TickShow += Paint;
         PaintAction?.Invoke();
     }
 
@@ -87,7 +87,7 @@ public class LayersPanel : MonoBehaviour {
     }
 
     public void Clear() {
-        GameEvents.TickShow -= Paint;
+        Timeline.TickShow -= Paint;
         for (int i = 0; i < CountRegions; ++i) {
             WMSK.ToggleCountrySurface(i, true, Color.clear);
         }

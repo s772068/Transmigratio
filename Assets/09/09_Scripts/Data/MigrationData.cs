@@ -1,6 +1,5 @@
 using WorldMapStrategyKit;
 
-[System.Serializable]
 public class MigrationData {
     public LineMarkerAnimator Line;
     public IconMarker Marker;

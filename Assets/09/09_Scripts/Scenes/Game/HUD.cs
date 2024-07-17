@@ -17,8 +17,10 @@ public class HUD : MonoBehaviour
 
     [SerializeField] private Migration _migration;
 
+    public static Action<string> ShowMessage;
+
     private void Awake() {
-        GameEvents.ShowMessage = OnShowMessage;
+        ShowMessage = OnShowMessage;
     }
 
     private void OnShowMessage(string message) {

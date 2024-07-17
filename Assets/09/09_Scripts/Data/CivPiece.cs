@@ -1,11 +1,15 @@
+using System.Collections.Generic;
+using Events.Controllers.Local;
+using UnityEngine;
 using System;
 
+using GlobalEvents = Events.Controllers.Global;
 
 /// <summary>
 /// Ёкземпл€р CivPiece - это один "кусочек" цивилизации в конкретном регионе. 
 /// ≈сли цивилизаци€ есть в трЄх регионах, это значит, что она состоит из трЄх объектов CivPiece
 /// </summary>
-[System.Serializable]
+[Serializable]
 public class CivPiece {
     public Population Population;
     public float PopulationGrow;
@@ -19,10 +23,12 @@ public class CivPiece {
 
     public Action Destroy;
 
+    private List<Events.Controllers.Base> events;
+
     public TM_Region Region => TMDB.map.AllRegions[RegionID];
     public Civilization Civilization => TMDB.humanity.Civilizations[CivName];
     private TMDB TMDB => Transmigratio.Instance.TMDB;
-
+    
     /// <summary>
     /// »нициализаци€ при по€влении в области после миграции или при старте игры
     /// </summary>
@@ -32,6 +38,16 @@ public class CivPiece {
         Population.value = startPopulation;
         CivName = civilization;
         ReserveFood = reserve;  //изначальное количество еды у кусочка
+    }
+
+    public void AddEvent(Events.Controllers.Base e) {
+        events.Add(e);
+        if (events.Count == 1) e.CreateMarker();
+    }
+
+    public void RemoveEvent(Events.Controllers.Base e) {
+        events.Remove(e);
+        if (events.Count == 0) Region.Marker.Destroy();
     }
 
     /// <summary>
@@ -50,10 +66,10 @@ public class CivPiece {
         if (Population.value <= 50) { Destroy?.Invoke(); return; }
 
         if (PopulationGrow < 0) {
-            GameEvents.ActivateHunger?.Invoke(this);
-            MigrationController.Instance.TryMigration(this);
+            Hunger.onActivate?.Invoke(this);
+            GlobalEvents.Migration.onMigration(this);
         } else {
-            GameEvents.DeactivateHunger?.Invoke(this);
+            Hunger.onDeactivate?.Invoke(this);
         }
     }
 }

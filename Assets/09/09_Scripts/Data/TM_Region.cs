@@ -66,7 +66,7 @@ public class TM_Region {
     }
 
     public void Init() {
-        GameEvents.TickLogic += UpdateFauna;
+        Timeline.TickLogic += UpdateFauna;
     }
 
     private void UpdateFauna() {
