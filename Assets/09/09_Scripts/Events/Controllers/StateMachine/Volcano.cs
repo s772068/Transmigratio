@@ -20,7 +20,13 @@ namespace Events.Controllers.StateMachines {
         private protected override bool ActiveSlider => false;
         private protected override string Name => "Volcano";
         private int CalmVolcanoPoints => (int) (piece.Population.value / calmVolcanoPointsDivision);
-        
+
+        private void Awake()
+        {
+            curState = states[State.Start];
+            curState.Start();
+        }
+
         private protected override void InitDesidions() {
             AddDesidion(CalmVolcano, Local("CalmVolcano"), () => CalmVolcanoPoints);
             AddDesidion(ReduceLosses, Local("ReduceLosses"), () => reduceLossesPoints);
@@ -58,12 +64,12 @@ namespace Events.Controllers.StateMachines {
             state = state switch {
                 State.Start => State.ActivateVolcano,
                 State.ActivateVolcano => State.Restart,
-                State.Restart => State.ActivateVolcano
+                State.Restart => State.ActivateVolcano,
             };
             curState = states[state];
             curState.Start();
         }
 
-        public enum State { Start, ActivateVolcano, Restart }
+        private enum State { Start, ActivateVolcano, Restart }
     }
 }
