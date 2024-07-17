@@ -199,6 +199,7 @@ namespace Events.Controllers.Global {
         }
 
         private void RemoveMigration(int index) {
+            Debug.Log("RemoveMigration");
             _migrations[index].Line.Destroy();
             _migrations[index].Marker.Destroy();
             _fromPiece.RemoveEvent(this);
@@ -207,6 +208,7 @@ namespace Events.Controllers.Global {
         }
 
         public override void CreateMarker() {
+            if (!_migrations.ContainsKey(_fromPiece.RegionID)) return;
             Vector2 start = WMSK.countries[_fromPiece.RegionID].center;
             Vector2 end = WMSK.countries[_toPiece.RegionID].center;
             CreateMarker(start, end);

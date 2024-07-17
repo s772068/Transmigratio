@@ -22,6 +22,7 @@ namespace Events.Controllers.Local {
             if (isShowAgain) {
                 OpenPanel();
                 piece.AddEvent(this);
+                CreateMarker();
             } else {
                 activeDesidion.OnClick?.Invoke();
                 pieces.Remove(selectedPiece);
@@ -29,11 +30,13 @@ namespace Events.Controllers.Local {
         }
 
         private protected void RemoveEvent(CivPiece piece) {
-            piece.RemoveEvent(this);
             pieces.Remove(piece);
+            piece.RemoveEvent(this);
+            if (piece.EventsCount == 0 && piece.Region.Marker != null) piece.Region.Marker.Destroy();
         }
 
         public override void CreateMarker() {
+            if (selectedPiece.EventsCount == 1) return;
             selectedPiece.Region.Marker ??= CreateMarker(WMSK.countries[selectedPiece.Region.Id].center);
             selectedPiece.Region.Marker.onClick += () => OnClickMarker(selectedPiece);
         }

@@ -46,6 +46,7 @@ namespace Events.Prefabs {
 
         public void AddDesidion(Data.Desidion val) {
             var _desidion = Instantiate(desidion, desidionsContent);
+            _desidion.Index = desidions.Count;
             _desidion.Title = val.Title;
             _desidion.Points = val.OnGetPoints();
             _desidion.onClick = OnClickDesidion;

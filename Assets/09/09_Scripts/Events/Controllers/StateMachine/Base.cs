@@ -21,6 +21,7 @@ namespace Events.Controllers.StateMachines {
         private protected abstract void NextState();
 
         public override void CreateMarker() {
+            if (piece.EventsCount == 1) return;
             piece.Region.Marker = CreateMarker(WMSK.countries[piece.Region.Id].center);
             piece.Region.Marker.onClick += () => OnClickMarker();
         }
@@ -46,12 +47,14 @@ namespace Events.Controllers.StateMachines {
             if (isShowAgain) {
                 OpenPanel();
                 CreateMarker();
+                piece.AddEvent(this);
             } else {
                 activeDesidion.OnClick?.Invoke();
             }
         }
 
         private protected void RemoveEvent(CivPiece piece) {
+            if(piece.EventsCount == 0 && piece.Region.Marker != null) piece.Region.Marker.Destroy();
             piece.RemoveEvent(this);
         }
 

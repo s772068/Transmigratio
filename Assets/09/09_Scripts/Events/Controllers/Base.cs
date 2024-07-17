@@ -1,7 +1,7 @@
+using System.Collections.Generic;
 using WorldMapStrategyKit;
 using UnityEngine;
 using Events.Data;
-using System.Collections.Generic;
 using System;
 
 namespace Events.Controllers {

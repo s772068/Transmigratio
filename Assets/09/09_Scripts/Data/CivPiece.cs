@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Events.Controllers.Local;
-using UnityEngine;
 using System;
 
 using GlobalEvents = Events.Controllers.Global;
@@ -17,7 +16,8 @@ public class CivPiece {
     public float RequestFood;
     public float ReserveFood;
     public float TakenFood;
-    
+
+    public int EventsCount => events.Count;
     public int RegionID;
     public string CivName;
 
@@ -41,15 +41,8 @@ public class CivPiece {
         ReserveFood = reserve;  //изначальное количество еды у кусочка
     }
 
-    public void AddEvent(Events.Controllers.Base e) {
-        events.Add(e);
-        if (events.Count == 1) e.CreateMarker();
-    }
-
-    public void RemoveEvent(Events.Controllers.Base e) {
-        events.Remove(e);
-        if (events.Count == 0) Region.Marker.Destroy();
-    }
+    public void AddEvent(Events.Controllers.Base e) => events.Add(e);
+    public void RemoveEvent(Events.Controllers.Base e) => events.Remove(e);
 
     /// <summary>
     /// Изменение населения кусочка за тик

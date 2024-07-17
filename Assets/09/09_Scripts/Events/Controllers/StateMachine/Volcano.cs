@@ -54,7 +54,8 @@ namespace Events.Controllers.StateMachines {
 
         private void EndEvent() {
             ClosePanel();
-            piece.Region.Marker.Destroy();
+            piece.RemoveEvent(this);
+            if (piece.EventsCount == 0 && piece.Region.Marker != null) piece.Region.Marker.Destroy();
             NextState();
         }
 
