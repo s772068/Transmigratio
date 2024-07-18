@@ -51,6 +51,12 @@ namespace Events.Controllers.Global {
             GetPopulation = default;
         }
 
+        private protected override void OpenPanel()
+        {
+            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, _isShowAgain, panelSprite, Local("Title"),
+                                    Territory, Local("Description"), _desidions);
+        }
+
         private protected override void InitDesidions() {
             AddDesidion(Break, Local("Break"), () => breakPoints);
             AddDesidion(default, Local("Nothing"), () => 0);
@@ -117,11 +123,11 @@ namespace Events.Controllers.Global {
             _fromPiece = civ.Pieces[from.Id];
             _toPiece = civ.Pieces[to.Id];
 
-            if (isShowAgain) {
+            if (_isShowAgain) {
                 OpenPanel();
                 _fromPiece.AddEvent(this);
                 _toPiece.AddEvent(this);
-            } else activeDesidion.OnClick?.Invoke();
+            } else _activeDesidion.ActionClick?.Invoke();
         }
 
         private LineMarkerAnimator CreateLine(Vector2 start, Vector2 end) {

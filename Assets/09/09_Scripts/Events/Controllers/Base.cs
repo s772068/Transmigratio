@@ -7,7 +7,8 @@ using System;
 namespace Events.Controllers {
     public abstract class Base : MonoBehaviour {
         [Header("Panel")]
-        [SerializeField] private protected Prefabs.Panel panel;
+        [SerializeField] private protected EventPanel panel;
+        [SerializeField] private protected EventDesidion _desidionPrefab;
         [SerializeField] private protected Sprite panelSprite;
         [Header("Marker")]
         [SerializeField] private protected IconMarker markerPrefab;
@@ -16,11 +17,11 @@ namespace Events.Controllers {
         [SerializeField] private protected Color regionColor;
         [SerializeField] private protected Color civColor;
 
-        private protected Desidion activeDesidion => desidions[activateIndex];
-        private protected List<Desidion> desidions = new();
-        private protected int activateIndex;
+        private protected Desidion _activeDesidion => _desidions[_activateIndex];
+        private protected List<Desidion> _desidions = new();
+        private protected int _activateIndex;
 
-        private protected bool isShowAgain = true;
+        private protected bool _isShowAgain = true;
 
         private protected abstract string Name { get; }
         private protected abstract string Territory { get; }
@@ -31,6 +32,7 @@ namespace Events.Controllers {
         private protected abstract void ActivateEvents();
         private protected abstract void DeactivateEvents();
         private protected abstract void InitDesidions();
+        private protected abstract void OpenPanel();
         public abstract void CreateMarker();
 
         private protected string Local(string key) => Localization.Load(Name, key);
@@ -42,38 +44,12 @@ namespace Events.Controllers {
 
         private protected void OnDisable() {
             DeactivateEvents();
-            desidions.Clear();
+            _desidions.Clear();
         }
 
-        private protected void OpenPanel() {
-            Timeline.Instance.Pause();
-            panel.Open();
-            panel.IsShowAgain = isShowAgain;
-            panel.Image = panelSprite;
-            panel.Title = Local("Title");
-            panel.Description = Local("Description");
-            panel.Territory = Territory;
-            panel.OnClickDesidion = OnClickDesidion;
-            for (int i = 0; i < desidions.Count; ++i) {
-                panel.AddDesidion(desidions[i]);
-            }
-        }
-
-        private protected void ClosePanel() {
-            isShowAgain = panel.IsShowAgain;
-            panel.Close();
-        }
-
-        private protected void AddDesidion(Action onClick, string title, Func<int> points) {
-            desidions.Add(new() { OnClick = onClick, Title = title, OnGetPoints = points });
-        }
-
-        private protected void OnClickDesidion(int desidionIndex) {
-            activateIndex = desidionIndex;
-            isShowAgain = panel.IsShowAgain;
-            desidions[desidionIndex].OnClick?.Invoke();
-            CreateMarker();
-            ClosePanel();
+        private protected void AddDesidion(Action click, string title, Func<int> points)
+        {
+            _desidions.Add(new(click, title, points));
         }
 
         private protected virtual IconMarker CreateMarker(Vector3 position) {

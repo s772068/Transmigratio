@@ -21,7 +21,6 @@ public class HUD : StaticInstance<HUD>
 
     protected override void Awake() {
         base.Awake();
-        GameEvents.ShowMessage = OnShowMessage;
     }
 
     private void OnShowMessage(string message) {

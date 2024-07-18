@@ -50,6 +50,13 @@ public class Timeline : PersistentSingleton<Timeline> {
         _buttonsGroup.Click(0);
     }
 
+    public void Stop()
+    {
+        _isPlay = false;
+        _timeDelay = 0;
+        _buttonsGroup.Click(0);
+    }
+
     public void Resume()
     {
         if (_timeDelay == _timeDelayLimit.y)

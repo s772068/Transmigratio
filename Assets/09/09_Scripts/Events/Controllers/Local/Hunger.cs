@@ -17,6 +17,12 @@ namespace Events.Controllers.Local {
         private int AddFoodPoints => (int)(selectedPiece.Population.value / foodPerPerson / 100f * percentPointsForAddFood);
         private int AddSomeFoodPoints => (int)(selectedPiece.Population.value / foodPerPerson / 100f * percentPointsForAddSomeFood);
 
+        private protected override void OpenPanel()
+        {
+            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, _isShowAgain, panelSprite, Local("Title"),
+                                    Territory, Local("Description"), _desidions);
+        }
+
         private protected override void ActivateEvents() {
             onActivate = AddEvent;
             onDeactivate = RemoveEvent;
@@ -37,5 +43,6 @@ namespace Events.Controllers.Local {
 
         private void AddFood() => selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson;
         private void AddSomeFood() => selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson / 2;
+
     }
 }

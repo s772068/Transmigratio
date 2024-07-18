@@ -41,12 +41,6 @@ public class EventPanel : MonoBehaviour {
         EventPanelClose?.Invoke(true);
     }
 
-    public void Open() {
-        Transmigratio.Instance.IsClickableMarker = false;
-        ClearDesidions();
-        gameObject.SetActive(true);
-    }
-
     public void Close() {
         Transmigratio.Instance.IsClickableMarker = true;
         gameObject.SetActive(false);
@@ -58,20 +52,5 @@ public class EventPanel : MonoBehaviour {
     {
         Transmigratio.Instance.IsClickableMarker = true;
         Destroy(gameObject);
-    }
-
-    public void AddDesidion(Action onClick, string title, int points) {
-        var _desidion = Instantiate(this._desidion, _desidionsContent);
-        _desidion.ActionClick = onClick;
-        _desidion.Title = title;
-        _desidion.Points = points;
-        _desidions.Add(_desidion);
-    }
-
-    public void ClearDesidions() {
-        for (int i = 0; i < _desidions.Count; ++i) {
-            _desidions[i].Destroy();
-        }
-        _desidions.Clear();
     }
 }

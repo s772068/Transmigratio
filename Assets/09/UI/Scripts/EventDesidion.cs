@@ -12,9 +12,4 @@ public class EventDesidion : MonoBehaviour {
     public int Points { set => _points.text = $"{value} {Localization.Load("Events", "Points")}"; }
 
     public void Click() => ActionClick?.Invoke();
-
-        public void Destroy() {
-            Destroy(gameObject);
-        }
-    }
 }

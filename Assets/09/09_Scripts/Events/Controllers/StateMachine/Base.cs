@@ -44,12 +44,12 @@ namespace Events.Controllers.StateMachines {
             var civilizations = Transmigratio.Instance.TMDB.humanity.Civilizations;
             if (civilizations.Count == 0) return;
             piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
-            if (isShowAgain) {
+            if (_isShowAgain) {
                 OpenPanel();
                 CreateMarker();
                 piece.AddEvent(this);
             } else {
-                activeDesidion.OnClick?.Invoke();
+                _activeDesidion.ActionClick?.Invoke();
             }
         }
 
@@ -60,7 +60,7 @@ namespace Events.Controllers.StateMachines {
 
         private void OnClickMarker() {
             OpenPanel();
-            panel.IsShowAgain = isShowAgain;
+            panel.IsShowAgain = _isShowAgain;
             piece.Region.Marker.Destroy();
         }
     }

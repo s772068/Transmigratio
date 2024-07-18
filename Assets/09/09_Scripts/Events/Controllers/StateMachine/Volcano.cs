@@ -32,12 +32,12 @@ namespace Events.Controllers.StateMachines {
         }
 
         private void CalmVolcano() {
-            activateIndex = 0;
+            _activateIndex = 0;
             EndEvent();
         }
 
         private void ReduceLosses() {
-            activateIndex = 1;
+            _activateIndex = 1;
             piece.Population.value -= (int) (piece.Population.value * fullPercentFood * partPercentPopulation);
             piece.ReserveFood -= piece.ReserveFood * fullPercentFood * partPercentFood;
             Global.Migration.OnMigration(piece);
@@ -45,7 +45,7 @@ namespace Events.Controllers.StateMachines {
         }
 
         public void ActivateVolcano() {
-            activateIndex = 2;
+            _activateIndex = 2;
             piece.Population.value -= (int) (piece.Population.value * fullPercentFood);
             piece.ReserveFood -= piece.ReserveFood * fullPercentFood;
             Global.Migration.OnMigration(piece);
@@ -53,10 +53,15 @@ namespace Events.Controllers.StateMachines {
         }
 
         private void EndEvent() {
-            ClosePanel();
             piece.RemoveEvent(this);
             if (piece.EventsCount == 0 && piece.Region.Marker != null) piece.Region.Marker.Destroy();
             NextState();
+        }
+
+        private protected override void OpenPanel()
+        {
+            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, _isShowAgain, panelSprite, Local("Title"),
+                                    Territory, Local("Description"), _desidions);
         }
 
         private protected override void NextState() {

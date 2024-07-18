@@ -19,12 +19,12 @@ namespace Events.Controllers.Local {
             if (pieces.Contains(piece)) return;
             selectedPiece = piece;
             pieces.Add(piece);
-            if (isShowAgain) {
+            if (_isShowAgain) {
                 OpenPanel();
                 piece.AddEvent(this);
                 CreateMarker();
             } else {
-                activeDesidion.OnClick?.Invoke();
+                _activeDesidion.ActionClick?.Invoke();
                 pieces.Remove(selectedPiece);
             }
         }
@@ -44,7 +44,7 @@ namespace Events.Controllers.Local {
         private void OnClickMarker(CivPiece piece) {
             selectedPiece = piece;
             OpenPanel();
-            panel.IsShowAgain = isShowAgain;
+            panel.IsShowAgain = _isShowAgain;
             selectedPiece.Region.Marker.Destroy();
         }
     }

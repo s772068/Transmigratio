@@ -1,10 +1,11 @@
-using System;
 using UnityEngine;
+using Events.Data;
+using System.Collections.Generic;
 
 public static class PanelFabric
 {
     public static void CreateEvent(Transform parent, EventDesidion desidionPrefab, EventPanel eventPrefab, bool showAgain,
-                        Sprite sprite, string title, string territory, string description, Desidion[] desidions)
+                        Sprite sprite, string title, string territory, string description, List<Desidion> desidions)
     {
         EventPanel panel = EventPanel.Instantiate(eventPrefab, parent);
         panel.IsShowAgain = showAgain;
@@ -22,6 +23,6 @@ public static class PanelFabric
         desidionObject.ActionClick = desidion.ActionClick;
         desidionObject.ActionClick += panel.CloseWindow;
         desidionObject.Title = desidion.Title;
-        desidionObject.Points = desidion.Cost;
+        desidionObject.Points = desidion.Cost();
     }
 }
