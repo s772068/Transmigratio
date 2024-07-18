@@ -1,4 +1,5 @@
 using AYellowpaper.SerializedCollections;
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -19,6 +20,9 @@ public class Civilization {
     public float ProdModeK = 0.6f;                 // коэффициент способа производства
     public float GovernmentCorruption = 0.4f;      // коррупция
 
+
+    public static Action<CivPiece> RemoveCivPiece;
+
     public int Population => Pieces.Sum(x => x.Value.Population.Value);
 
     public void Init(int region, string civName)        //версия для старта игры. Для других цивилизаций нужна перегрузка
@@ -34,7 +38,7 @@ public class Civilization {
 
         Debug.Log("Civilization init. \rpopulation:" + Population + "\rregionID:" + region);
 
-        GameEvents.TickLogic += UpdatePieces;
+        Timeline.TickLogic += UpdatePieces;
     }
 
     /// <summary>
@@ -51,7 +55,7 @@ public class Civilization {
     /// уберает цивилизацию из этого региона
     /// </summary>
     public void RemovePiece(int region) {
-        GameEvents.RemoveCivPiece(Pieces[region]);
+        RemoveCivPiece?.Invoke(Pieces[region]);
         Pieces[region].Region.CivsList.Remove(Name);
         Pieces.Remove(region);
     }

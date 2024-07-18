@@ -1,11 +1,14 @@
+using System.Collections.Generic;
+using Events.Controllers.Local;
 using System;
 
+using GlobalEvents = Events.Controllers.Global;
 
 /// <summary>
 /// Ёкземпл€р CivPiece - это один "кусочек" цивилизации в конкретном регионе. 
 /// ≈сли цивилизаци€ есть в трЄх регионах, это значит, что она состоит из трЄх объектов CivPiece
 /// </summary>
-[System.Serializable]
+[Serializable]
 public class CivPiece {
     public Population Population;
     public float PopulationGrow;
@@ -13,16 +16,20 @@ public class CivPiece {
     public float RequestFood;
     public float ReserveFood;
     public float TakenFood;
-    
+
+    public int EventsCount => events.Count;
     public int RegionID;
     public string CivName;
 
     public Action Destroy;
 
+    private List<Events.Controllers.Base> events = new();
+    private float _prevPopulationGrow;
+
     public TM_Region Region => TMDB.map.AllRegions[RegionID];
     public Civilization Civilization => TMDB.humanity.Civilizations[CivName];
     private TMDB TMDB => Transmigratio.Instance.TMDB;
-
+    
     /// <summary>
     /// »нициализаци€ при по€влении в области после миграции или при старте игры
     /// </summary>
@@ -34,6 +41,9 @@ public class CivPiece {
         ReserveFood = reserve;  //изначальное количество еды у кусочка
     }
 
+    public void AddEvent(Events.Controllers.Base e) => events.Add(e);
+    public void RemoveEvent(Events.Controllers.Base e) => events.Remove(e);
+
     /// <summary>
     /// »зменение населени€ кусочка за тик
     /// </summary>
@@ -44,16 +54,17 @@ public class CivPiece {
         if (ReserveFood > RequestFood) GivenFood = RequestFood;
         else                           GivenFood = ReserveFood;
         ReserveFood += TakenFood - GivenFood;
+        _prevPopulationGrow = PopulationGrow;
         PopulationGrow = Population.Value * Civilization.GovernmentCorruption * GivenFood / RequestFood - Population.Value / 3f;
 
         Population.value += (int)PopulationGrow;
         if (Population.value <= 50) { Destroy?.Invoke(); return; }
 
-        if (PopulationGrow < 0) {
-            GameEvents.ActivateHunger?.Invoke(this);
-            MigrationController.Instance.TryMigration(this);
-        } else {
-            GameEvents.DeactivateHunger?.Invoke(this);
+        if (_prevPopulationGrow >= 0 && PopulationGrow < 0) {
+            Hunger.onActivate?.Invoke(this);
+            GlobalEvents.Migration.OnMigration(this);
+        } else if(_prevPopulationGrow < 0 && PopulationGrow >= 0) {
+            Hunger.onDeactivate?.Invoke(this);
         }
     }
 }

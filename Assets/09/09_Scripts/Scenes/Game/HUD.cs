@@ -4,21 +4,23 @@ using UnityEngine;
 /// <summary>
 /// Интерфейс, всплывающие окна и тд
 /// </summary>
-public class HUD : MonoBehaviour
+public class HUD : StaticInstance<HUD>
 {
     public static event Action<bool> EventRegionPanelOpen;
+    
 
     [SerializeField] private Messanger _messanger;
-
-    public bool IsShowMigration = true;
+    [SerializeField] private Transform _events;
 
     [Header("Region Details")]
     [SerializeField] private RegionDetails _regionDetails;        //окно с информацией о выбранном регионе
-
     [SerializeField] private Migration _migration;
 
-    private void Awake() {
-        GameEvents.ShowMessage = OnShowMessage;
+    public bool IsShowMigration = true;
+    public Transform Events => _events;
+
+    protected override void Awake() {
+        base.Awake();
     }
 
     private void OnShowMessage(string message) {

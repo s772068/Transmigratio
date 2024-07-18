@@ -12,7 +12,6 @@ public class ButtonsRadioGroup : MonoBehaviour {
     private void Awake() {
         for(int i = 0; i < buttons.Count; ++i) {
             buttons[i].Index = i;
-            buttons[i].onClick.AddListener(Click);
         }
     }
 
