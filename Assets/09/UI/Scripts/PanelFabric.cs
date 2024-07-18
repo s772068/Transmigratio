@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 public static class PanelFabric
 {
-    public static void CreateEvent(Transform parent, EventDesidion desidionPrefab, EventPanel eventPrefab, bool showAgain,
+    public static void CreateEvent(Transform parent, EventDesidion desidionPrefab, EventPanel eventPrefab, Events.Controllers.Base baseEvent,
                         Sprite sprite, string title, string territory, string description, List<Desidion> desidions)
     {
         EventPanel panel = EventPanel.Instantiate(eventPrefab, parent);
-        panel.IsShowAgain = showAgain;
+        panel.Event = baseEvent;
         panel.Image = sprite;
         panel.Title = title;
         panel.Territory = territory;

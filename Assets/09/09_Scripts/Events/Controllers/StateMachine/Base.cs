@@ -44,7 +44,7 @@ namespace Events.Controllers.StateMachines {
             var civilizations = Transmigratio.Instance.TMDB.humanity.Civilizations;
             if (civilizations.Count == 0) return;
             piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
-            if (_isShowAgain) {
+            if (IsShowAgain) {
                 OpenPanel();
                 CreateMarker();
                 piece.AddEvent(this);
@@ -60,7 +60,6 @@ namespace Events.Controllers.StateMachines {
 
         private void OnClickMarker() {
             OpenPanel();
-            panel.IsShowAgain = _isShowAgain;
             piece.Region.Marker.Destroy();
         }
     }

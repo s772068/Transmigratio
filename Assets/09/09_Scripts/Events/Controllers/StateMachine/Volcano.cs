@@ -60,7 +60,7 @@ namespace Events.Controllers.StateMachines {
 
         private protected override void OpenPanel()
         {
-            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, _isShowAgain, panelSprite, Local("Title"),
+            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, panelSprite, Local("Title"),
                                     Territory, Local("Description"), _desidions);
         }
 

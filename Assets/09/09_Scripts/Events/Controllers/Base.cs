@@ -21,7 +21,7 @@ namespace Events.Controllers {
         private protected List<Desidion> _desidions = new();
         private protected int _activateIndex;
 
-        private protected bool _isShowAgain = true;
+        public bool IsShowAgain = true;
 
         private protected abstract string Name { get; }
         private protected abstract string Territory { get; }

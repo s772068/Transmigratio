@@ -33,7 +33,7 @@ namespace Events.Controllers.Global {
                               _fromPiece.Region.Name + "</color> " +
                               Local("Territory2") + " " +
                               $"<color=#{regionColor.ToHexString()}>" +
-                              Localization.Load("Civilizations", _toPiece.Region.Name) + "</color> ";
+                              _toPiece.Region.Name + "</color> ";
 
         private protected override void ActivateEvents() {
             Timeline.TickLogic += OnTickLogic;
@@ -53,7 +53,7 @@ namespace Events.Controllers.Global {
 
         private protected override void OpenPanel()
         {
-            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, _isShowAgain, panelSprite, Local("Title"),
+            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, panelSprite, Local("Title"),
                                     Territory, Local("Description"), _desidions);
         }
 
@@ -123,7 +123,7 @@ namespace Events.Controllers.Global {
             _fromPiece = civ.Pieces[from.Id];
             _toPiece = civ.Pieces[to.Id];
 
-            if (_isShowAgain) {
+            if (IsShowAgain) {
                 OpenPanel();
                 _fromPiece.AddEvent(this);
                 _toPiece.AddEvent(this);
@@ -183,7 +183,7 @@ namespace Events.Controllers.Global {
                     }
                     // Удаление миграции
                     if (migration.CurPopulations == migration.FullPopulations) {
-                        if (curID == _fromPiece.RegionID) panel.Close();
+                        if (curID == _fromPiece.RegionID) panel.CloseWindow();
                         RemoveMigration(curID);
                     }
                 }
