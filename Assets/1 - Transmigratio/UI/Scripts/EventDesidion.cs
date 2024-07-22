@@ -9,7 +9,7 @@ public class EventDesidion : MonoBehaviour {
     public Action ActionClick;
 
     public string Title { set => _title.text = value; }
-    public int Points { set => _points.text = $"{value} {Localization.Load("Events", "Points")}"; }
+    public int Points { set => _points.text = $"{value} {Utilits.Localization.Load("Events", "Points")}"; }
 
     public void Click() => ActionClick?.Invoke();
 }

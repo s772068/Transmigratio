@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using WorldMapStrategyKit;
+using Database.Data;
 using UnityEngine;
 using Events.Data;
+using Scenes.Game;
 using System;
 
 namespace Events.Controllers {
@@ -26,7 +28,7 @@ namespace Events.Controllers {
         private protected abstract string Name { get; }
         private protected abstract string Territory { get; }
 
-        private protected Map Map => Transmigratio.Instance.TMDB.map;
+        private protected Map Map => Transmigratio.Instance.Database.map;
         private protected WMSK WMSK => Map.WMSK;
 
         private protected abstract void ActivateEvents();
@@ -35,7 +37,7 @@ namespace Events.Controllers {
         private protected abstract void OpenPanel();
         public abstract void CreateMarker();
 
-        private protected string Local(string key) => Localization.Load(Name, key);
+        private protected string Local(string key) => Utilits.Localization.Load(Name, key);
         
         private protected void OnEnable() {
             ActivateEvents();

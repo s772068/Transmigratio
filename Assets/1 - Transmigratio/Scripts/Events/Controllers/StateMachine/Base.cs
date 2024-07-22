@@ -1,6 +1,8 @@
 using Unity.VisualScripting;
 using WorldMapStrategyKit;
+using Database.Data;
 using System.Linq;
+using Scenes.Game;
 using System;
 
 namespace Events.Controllers.StateMachines {
@@ -15,7 +17,7 @@ namespace Events.Controllers.StateMachines {
                               piece.Region.Name + "</color> " +
                               Local("Territory2") + " " +
                               $"<color=#{civColor.ToHexString()}>" +
-                              Localization.Load("Civilizations", piece.Civilization.Name) + "</color> " +
+                              Utilits.Localization.Load("Civilizations", piece.Civilization.Name) + "</color> " +
                               Local("Territory3");
 
         private protected abstract void NextState();
@@ -41,7 +43,7 @@ namespace Events.Controllers.StateMachines {
 
         public void CreateEvent() {
             Random rand = new();
-            var civilizations = Transmigratio.Instance.TMDB.humanity.Civilizations;
+            var civilizations = Transmigratio.Instance.Database.humanity.Civilizations;
             if (civilizations.Count == 0) return;
             piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
             if (IsShowAgain) {

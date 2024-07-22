@@ -1,5 +1,6 @@
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
+using Scenes.Game;
 
 public class Tutorial : MonoBehaviour
 {

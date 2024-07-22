@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using WorldMapStrategyKit;
+using Database.Data;
 using System.Linq;
 using UnityEngine;
+using Scenes.Game;
 using System;
-using Unity.VisualScripting;
 
 namespace Events.Controllers.Global {
     public sealed class Migration : Base {
@@ -22,7 +24,7 @@ namespace Events.Controllers.Global {
 
         private CivPiece _fromPiece;
         private CivPiece _toPiece;
-        private Dictionary<int, MigrationData> _migrations = new();
+        private Dictionary<int, Database.Data.Migration> _migrations = new();
 
         public static Action<CivPiece> OnMigration;
         public static Func<int> GetPopulation;
@@ -66,19 +68,19 @@ namespace Events.Controllers.Global {
         public void TryMigration(CivPiece civPiece) {
             if (_migrations.ContainsKey(civPiece.Region.Id)) return;
 
-            TM_Region curRegion = civPiece.Region;
+            Database.Data.Region curRegion = civPiece.Region;
             List<Country> neighbourRegions = WMSK.CountryNeighbours(curRegion.Id);
             if (neighbourRegions.Count == 0) return;
 
-            TM_Region targetRegion = null;
-            List<TM_Region> targetList = new();
-            List<TM_Region> allNeighbourRegionsList = new();
+            Database.Data.Region targetRegion = null;
+            List<Database.Data.Region> targetList = new();
+            List<Database.Data.Region> allNeighbourRegionsList = new();
 
             for (int i = 0; i < neighbourRegions.Count; ++i) {
                 int regionID = WMSK.GetCountryIndex(neighbourRegions[i].name);
                 if (_migrations.ContainsKey(regionID)) continue;
 
-                TM_Region neighbourRegion = Map.GetRegionBywmskId(regionID);
+                Database.Data.Region neighbourRegion = Map.GetRegionBywmskId(regionID);
                 if (neighbourRegion.Fauna["Fauna"].Value > 0) {
                     allNeighbourRegionsList.Add(neighbourRegion);
                     if (neighbourRegion.Fauna["Fauna"].Value > curRegion.Fauna["Fauna"].Value) {
@@ -88,7 +90,7 @@ namespace Events.Controllers.Global {
             }
 
             if (targetList.Count > 0) {
-                targetRegion = GetMax(targetList, (TM_Region region) => region.Fauna["Fauna"].Value);
+                targetRegion = GetMax(targetList, (Database.Data.Region region) => region.Fauna["Fauna"].Value);
             } else if (allNeighbourRegionsList.Count > 0) {
                 System.Random r = new System.Random();
                 targetRegion = allNeighbourRegionsList[r.Next(0, allNeighbourRegionsList.Count)];
@@ -97,8 +99,8 @@ namespace Events.Controllers.Global {
             AddMigration(civPiece.Region, targetRegion, civPiece.Civilization);
         }
 
-        private void AddMigration(TM_Region from, TM_Region to, Civilization civ) {
-            MigrationData newMigration = new();
+        private void AddMigration(Database.Data.Region from, Database.Data.Region to, Civilization civ) {
+            Database.Data.Migration newMigration = new();
 
             Vector2 start = WMSK.countries[from.Id].center;
             Vector2 end = WMSK.countries[to.Id].center;
@@ -158,7 +160,7 @@ namespace Events.Controllers.Global {
         private void OnTickLogic() {
             for (int i = 0; i < _migrations.Count; ++i) {
                 // Этап перед началом миграции
-                MigrationData migration = _migrations.Values.ElementAt(i);
+                Database.Data.Migration migration = _migrations.Values.ElementAt(i);
                 if (!migration.Civilization.Pieces.ContainsKey(migration.To.Id)) continue;
                 int curID = _migrations.Keys.ElementAt(i);
                 if (migration.TimerToStart < startTime) {
@@ -222,7 +224,7 @@ namespace Events.Controllers.Global {
 
         private void Break() {
             int fromID = _fromPiece.Region.Id;
-            MigrationData data = _migrations[_fromPiece.Region.Id];
+            Database.Data.Migration data = _migrations[_fromPiece.Region.Id];
             _fromPiece.Population.value += data.FullPopulations - data.CurPopulations;
             RemoveMigration(fromID);
         }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using WorldMapStrategyKit;
+using Database.Data;
 
 namespace Events.Controllers.Local {
     public abstract class Base : Controllers.Base {
@@ -12,7 +13,7 @@ namespace Events.Controllers.Local {
                               selectedPiece.Region.Name + "</color> " +
                               Local("Territory 2") + " " +
                               $"<color=#{civColor.ToHexString()}>" +
-                              Localization.Load("Civilizations", selectedPiece.Civilization.Name) + "</color> " +
+                              Utilits.Localization.Load("Civilizations", selectedPiece.Civilization.Name) + "</color> " +
                               Local("Territory 3");
 
         private protected void AddEvent(CivPiece piece) {

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Scenes.Game;
 using UnityEngine;
 using System;
 using TMPro;
-using Events.Controllers;
 
 public class EventPanel : MonoBehaviour {
     public static event Action<bool> EventPanelOpen;
@@ -17,7 +17,7 @@ public class EventPanel : MonoBehaviour {
     [SerializeField] private Toggle _dontShowAgain;
     [SerializeField] private EventDesidion _desidion;
     [SerializeField] private Transform _desidionsContent;
-    private Base _event;
+    private Events.Controllers.Base _event;
 
     private List<EventDesidion> _desidions = new();
 
@@ -28,7 +28,7 @@ public class EventPanel : MonoBehaviour {
     public Sprite Image { set => _image.sprite = value; }
     public Transform Desidions => _desidionsContent;
     public Button CloseBtn => _close;
-    public Base Event { set => _event = value; }
+    public Events.Controllers.Base Event { set => _event = value; }
 
     public bool IsShowAgain {
         get => !_dontShowAgain.isOn;

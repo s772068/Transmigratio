@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEngine;
+using Utilits;
 using System;
 using TMPro;
 
@@ -20,7 +21,7 @@ public class MigrationPanel : MonoBehaviour {
     [SerializeField] private Color regionColor;
     [SerializeField] private Color civColor;
 
-    private MigrationData data;
+    private Database.Data.Migration data;
 
     public Action onNothing;
     public Action<int> onBreak;
@@ -44,7 +45,7 @@ public class MigrationPanel : MonoBehaviour {
         }
     }
 
-    public MigrationData Data { set {
+    public Database.Data.Migration Data { set {
             data = value;
             territory.text = Localization.Load("Migration", "Territory1") + " " +
                              $"<color=#{regionColor.ToHexString()}>" +

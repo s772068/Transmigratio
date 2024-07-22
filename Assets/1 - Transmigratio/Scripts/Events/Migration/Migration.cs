@@ -1,4 +1,5 @@
 using UnityEngine.UI;
+using Database.Data;
 using UnityEngine;
 using TMPro;
 
@@ -10,9 +11,9 @@ public class Migration : MonoBehaviour {
     [SerializeField] private MigrationParamGroup paramiters;
     [SerializeField] private MigrationTrialsGroup trials;
 
-    private TM_Region region;
+    private Region region;
 
-    public TM_Region Region { set {
+    public Region Region { set {
             region = value;
         }
     }
