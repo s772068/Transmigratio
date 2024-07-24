@@ -402,6 +402,7 @@ namespace WorldMapStrategyKit {
 
         }
 
+        public void Destroy() => Destroy(gameObject);
 
         #region Continuous line
 

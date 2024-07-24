@@ -1,20 +1,17 @@
 using UnityEngine;
 using System;
 
-
 namespace WorldMapStrategyKit {
-
     /// <summary>
     /// Changes scale automatically based on zoom distance
     /// </summary>
     public class MarkerAutoScale : MonoBehaviour {
+        private const float SCALE_MULTIPLIER = 1f;
+        private float minScale;
+        private float maxScale;
 
-        public float scaleMultiplier = 1f;
-        public float maxScale = 100f;
-        public float minScale = 0.01f;
-
-        WMSK map;
-        Vector3 originalScale;
+        private WMSK map;
+        private Vector3 originalScale;
 
         void Start() {
             // Get a reference to the World Map API:
@@ -22,15 +19,16 @@ namespace WorldMapStrategyKit {
                 map = WMSK.instance;
             }
             originalScale = transform.localScale;
+            minScale = map.zoomMinDistance;
+            maxScale = map.zoomMaxDistance;
         }
-
 
         void LateUpdate() {
             if (map == null) {
                 Destroy(this);
                 return;
             }
-            float desiredScale = scaleMultiplier / map.renderViewportScaleFactor;
+            float desiredScale = SCALE_MULTIPLIER / map.GetZoomLevel();
             if (desiredScale < minScale) {
                 desiredScale = minScale;
             } else if (desiredScale > maxScale) {
@@ -38,9 +36,6 @@ namespace WorldMapStrategyKit {
             }
             transform.localScale = new Vector3(originalScale.x * desiredScale, originalScale.y * desiredScale, 1f);
         }
-       
-      
     }
-
 }
 

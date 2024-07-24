@@ -122,6 +122,7 @@ namespace WorldMapStrategyKit {
         public event OnCountryEvent OnCountryEnter;
         public event OnCountryEvent OnCountryExit;
         public event OnCountryClickEvent OnCountryClick;
+        public event OnCountryClickEvent OnCountryLongClick;
         public event OnCountryHighlightEvent OnCountryHighlight;
 
         /// <summary>

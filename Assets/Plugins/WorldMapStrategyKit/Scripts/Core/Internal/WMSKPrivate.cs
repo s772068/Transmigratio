@@ -26,6 +26,7 @@ namespace WorldMapStrategyKit {
         public const string SURFACE_LAYER = "Surfaces";
 
         const float TAP_THRESHOLD = 0.25f;
+        const float LONG_TAP_THRESHOLD = 1f;
         const string OVERLAY_BASE = "OverlayLayer";
         const string SKW_BUMPMAP_ENABLED = "WMSK_BUMPMAP_ENABLED";
         readonly char[] SPLIT_SEP_SEMICOLON = { ';' };
@@ -759,12 +760,15 @@ namespace WorldMapStrategyKit {
                     float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
                     // Pass the delta to the wheel accel
-                    if (deltaMagnitudeDiff != 0) {
+                    pinching = Mathf.Abs(deltaMagnitudeDiff) > 3;
+                    if (pinching) {
                         zoomDampingStart = Time.time;
                         wheelAccel += deltaMagnitudeDiff;
+                    } else {
+                        zoomDampingStart = 0;
+                        wheelAccel = 0;
                     }
 
-                    pinching = true;
                     dragDampingStart = 0;
                 } else if (wheelAccel == 0) {
                     zoomCenter = input.mousePosition;
@@ -783,7 +787,11 @@ namespace WorldMapStrategyKit {
                         if (_currentCamera.orthographic) {
                             _currentCamera.orthographicSize += _currentCamera.orthographicSize * wheelAccel * _mouseWheelSensitivity * deltaTime;
                         } else {
+#if UNITY_EDITOR
                             _currentCamera.transform.Translate((_currentCamera.transform.position - dest) * wheelAccel * _mouseWheelSensitivity * deltaTime, Space.World);
+#else
+                            if (pinching) _currentCamera.transform.Translate((_currentCamera.transform.position - dest) * wheelAccel * _mouseWheelSensitivity * deltaTime, Space.World);
+#endif
                         }
                         if (zoomDampingStart > 0) {
                             float t = (Time.time - zoomDampingStart) / (_zoomDampingDuration + 0.001f);
@@ -906,6 +914,15 @@ namespace WorldMapStrategyKit {
                                         OnClick(_cursorLocation.x, _cursorLocation.y, buttonIndex);
                                     }
                                 }
+                            } else if (elapsedTimeSincePress < LONG_TAP_THRESHOLD && dragDampingStart == 0) {
+                                _countryLastClicked = _countryHighlightedIndex;
+                                if (VGOLastHighlighted == null || !VGOLastHighlighted.blocksRayCast) {
+                                    if (_countryLastClicked >= 0) {
+                                        if (OnCountryLongClick != null) {
+                                            OnCountryLongClick(_countryLastClicked, _countryRegionHighlightedIndex, buttonIndex);
+                                        }
+                                    }
+                                }
                             }
                         } else {
                             if (OnMouseDown != null)
@@ -986,7 +1003,7 @@ namespace WorldMapStrategyKit {
                     }
                 }
 
-                if (dragging) {
+                if (dragging && input.touchCount == 1) {
                     if (buttonLeftPressed) {
                         if (canUserDrag) {
                             if (_dragConstantSpeed) {
@@ -1279,7 +1296,7 @@ namespace WorldMapStrategyKit {
                 disposalManager.MarkForDisposal(outlineMatSimple); //.hideFlags = HideFlags.DontSave;
             outlineMatTextured = Instantiate(Resources.Load<Material>("WMSK/Materials/OutlineTex"));
             if (_outlineTexture == null)
-                _outlineTexture = (Texture2D)outlineMatTextured.mainTexture;
+                _outlineTexture = (Texture2D) outlineMatTextured.mainTexture;
             outlineMatTextured.mainTexture = _outlineTexture;
             outlineMatTextured.mainTextureScale = new Vector2(_outlineTilingScale, 1f);
             if (disposalManager != null)
@@ -1875,7 +1892,7 @@ namespace WorldMapStrategyKit {
 
         void EarthPrepareBlurredTexture() {
 
-            Texture2D earthTex = (Texture2D)earthMat.GetTexture("_MainTex");
+            Texture2D earthTex = (Texture2D) earthMat.GetTexture("_MainTex");
             if (earthTex == null)
                 return;
 
