@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a07b5cd0b1b829245bc8c4b6978793e8, type: 3}
-  m_Name: Localization Settings
+  m_Name: LocalSettings
   m_EditorClassIdentifier: 
   m_StartupSelectors:
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
   - rid: 5749128722184405413
   - rid: 5749128722184405414
   - rid: 5749128722184405415
@@ -22,14 +23,26 @@ MonoBehaviour:
     rid: 5749128722184405417
   m_StringDatabase:
     rid: 5749128722184405418
+========
+  - rid: 5156595549535993856
+  - rid: 5156595549535993857
+  - rid: 5156595549535993858
+  m_AvailableLocales:
+    rid: 5156595549535993859
+  m_AssetDatabase:
+    rid: 5156595549535993860
+  m_StringDatabase:
+    rid: 5156595549535993861
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
   m_Metadata:
     m_Items: []
   m_ProjectLocaleIdentifier:
-    m_Code: en
+    m_Code: ru
   m_InitializeSynchronously: 0
   references:
     version: 2
     RefIds:
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
     - rid: 5749128722184405413
       type: {class: CommandLineLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
       data:
@@ -44,12 +57,32 @@ MonoBehaviour:
     - rid: 5749128722184405416
       type: {class: LocalesProvider, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
     - rid: 5749128722184405417
+========
+    - rid: 5156595549535993856
+      type: {class: CommandLineLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
+      data:
+        m_CommandLineArgument: -language =
+    - rid: 5156595549535993857
+      type: {class: SystemLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
+    - rid: 5156595549535993858
+      type: {class: SpecificLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
+      data:
+        m_LocaleId:
+          m_Code: ru
+    - rid: 5156595549535993859
+      type: {class: LocalesProvider, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
+    - rid: 5156595549535993860
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: LocalizedAssetDatabase, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
       data:
         m_DefaultTableReference:
           m_TableCollectionName: 
         m_UseFallback: 0
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
     - rid: 5749128722184405418
+========
+    - rid: 5156595549535993861
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: LocalizedStringDatabase, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
       data:
         m_DefaultTableReference:
@@ -58,6 +91,7 @@ MonoBehaviour:
         m_MissingTranslationState: 1
         m_NoTranslationFoundMessage: No translation found for '{key}' in {table.TableCollectionName}
         m_SmartFormat:
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
           rid: 5749128722184405419
     - rid: 5749128722184405419
       type: {class: SmartFormatter, ns: UnityEngine.Localization.SmartFormat, asm: Unity.Localization}
@@ -85,25 +119,66 @@ MonoBehaviour:
         - rid: 5749128722184405435
         - rid: 5749128722184405436
     - rid: 5749128722184405420
+========
+          rid: 5156595549535993862
+    - rid: 5156595549535993862
+      type: {class: SmartFormatter, ns: UnityEngine.Localization.SmartFormat, asm: Unity.Localization}
+      data:
+        m_Settings:
+          rid: 5156595549535993863
+        m_Parser:
+          rid: 5156595549535993864
+        m_Sources:
+        - rid: 5156595549535993865
+        - rid: 5156595549535993866
+        - rid: 5156595549535993867
+        - rid: 5156595549535993868
+        - rid: 5156595549535993869
+        - rid: 5156595549535993870
+        - rid: 5156595549535993871
+        m_Formatters:
+        - rid: 5156595549535993865
+        - rid: 5156595549535993872
+        - rid: 5156595549535993873
+        - rid: 5156595549535993874
+        - rid: 5156595549535993875
+        - rid: 5156595549535993876
+        - rid: 5156595549535993877
+        - rid: 5156595549535993878
+        - rid: 5156595549535993879
+    - rid: 5156595549535993863
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: SmartSettings, ns: UnityEngine.Localization.SmartFormat.Core.Settings, asm: Unity.Localization}
       data:
         m_FormatErrorAction: 0
         m_ParseErrorAction: 0
         m_CaseSensitivity: 0
         m_ConvertCharacterStringLiterals: 1
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
     - rid: 5749128722184405421
+========
+    - rid: 5156595549535993864
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: Parser, ns: UnityEngine.Localization.SmartFormat.Core.Parsing, asm: Unity.Localization}
       data:
         m_OpeningBrace: 123
         m_ClosingBrace: 125
         m_Settings:
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
           rid: 5749128722184405420
+========
+          rid: 5156595549535993863
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
         m_AlphanumericSelectors: 1
         m_AllowedSelectorChars: _-
         m_Operators: '[]().,'
         m_AlternativeEscaping: 0
         m_AlternativeEscapeChar: 92
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
     - rid: 5749128722184405422
+========
+    - rid: 5156595549535993865
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: ListFormatter, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data:
         m_Names:
@@ -111,6 +186,7 @@ MonoBehaviour:
         - l
         - 
         m_SmartSettings:
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
           rid: 5749128722184405420
     - rid: 5749128722184405423
       type: {class: PersistentVariablesSource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
@@ -127,6 +203,24 @@ MonoBehaviour:
     - rid: 5749128722184405428
       type: {class: DefaultSource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
     - rid: 5749128722184405429
+========
+          rid: 5156595549535993863
+    - rid: 5156595549535993866
+      type: {class: PersistentVariablesSource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
+      data:
+        m_Groups: []
+    - rid: 5156595549535993867
+      type: {class: DictionarySource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
+    - rid: 5156595549535993868
+      type: {class: ValueTupleSource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
+    - rid: 5156595549535993869
+      type: {class: XmlSource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
+    - rid: 5156595549535993870
+      type: {class: ReflectionSource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
+    - rid: 5156595549535993871
+      type: {class: DefaultSource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
+    - rid: 5156595549535993872
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: PluralLocalizationFormatter, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data:
         m_Names:
@@ -134,14 +228,22 @@ MonoBehaviour:
         - p
         - 
         m_DefaultTwoLetterISOLanguageName: en
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
     - rid: 5749128722184405430
+========
+    - rid: 5156595549535993873
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: ConditionalFormatter, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data:
         m_Names:
         - conditional
         - cond
         - 
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
     - rid: 5749128722184405431
+========
+    - rid: 5156595549535993874
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: TimeFormatter, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data:
         m_Names:
@@ -150,7 +252,11 @@ MonoBehaviour:
         - t
         - 
         m_DefaultFormatOptions: 4646
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
     - rid: 5749128722184405432
+========
+    - rid: 5156595549535993875
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: XElementFormatter, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data:
         m_Names:
@@ -158,14 +264,22 @@ MonoBehaviour:
         - xml
         - x
         - 
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
     - rid: 5749128722184405433
+========
+    - rid: 5156595549535993876
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: ChooseFormatter, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data:
         m_Names:
         - choose
         - c
         m_SplitChar: 124
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
     - rid: 5749128722184405434
+========
+    - rid: 5156595549535993877
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: SubStringFormatter, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data:
         m_Names:
@@ -173,12 +287,20 @@ MonoBehaviour:
         m_ParameterDelimiter: 44
         m_NullDisplayString: (null)
         m_OutOfRangeBehavior: 0
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
     - rid: 5749128722184405435
+========
+    - rid: 5156595549535993878
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: IsMatchFormatter, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data:
         m_Names:
         - ismatch
+<<<<<<<< HEAD:Assets/1 - Transmigratio/Localization/Localization Settings.asset
     - rid: 5749128722184405436
+========
+    - rid: 5156595549535993879
+>>>>>>>> origin/main:Assets/Global/LocalSettings/LocalSettings.asset
       type: {class: DefaultFormatter, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data:
         m_Names:
