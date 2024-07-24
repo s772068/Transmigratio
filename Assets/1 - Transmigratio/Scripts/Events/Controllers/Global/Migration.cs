@@ -94,6 +94,9 @@ namespace Events.Controllers.Global {
                 targetRegion = allNeighbourRegionsList[r.Next(0, allNeighbourRegionsList.Count)];
             } else return;
 
+            if (!civPiece.Civilization.Pieces.ContainsKey(civPiece.Region.Id))
+                return;
+
             AddMigration(civPiece.Region, targetRegion, civPiece.Civilization);
         }
 
@@ -124,9 +127,9 @@ namespace Events.Controllers.Global {
             _toPiece = civ.Pieces[to.Id];
 
             if (IsShowAgain) {
-                OpenPanel();
                 _fromPiece.AddEvent(this);
                 _toPiece.AddEvent(this);
+                OpenPanel();
             } else _activeDesidion.ActionClick?.Invoke();
         }
 
@@ -183,7 +186,6 @@ namespace Events.Controllers.Global {
                     }
                     // Удаление миграции
                     if (migration.CurPopulations == migration.FullPopulations) {
-                        if (curID == _fromPiece.RegionID) panel.CloseWindow();
                         RemoveMigration(curID);
                     }
                 }
@@ -213,7 +215,7 @@ namespace Events.Controllers.Global {
             _migrations.Remove(index);
         }
 
-        public override void CreateMarker() {
+        private protected override void CreateMarker(CivPiece piece = null) {
             if (!_migrations.ContainsKey(_fromPiece.RegionID)) return;
             Vector2 start = WMSK.countries[_fromPiece.RegionID].center;
             Vector2 end = WMSK.countries[_toPiece.RegionID].center;

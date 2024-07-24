@@ -21,10 +21,14 @@ public class Timeline : PersistentSingleton<Timeline> {
             {
                 if (_windowsCount < 0)
                     _windowsCount = 0;
+                Transmigratio.Instance.IsClickableMarker = true;
                 Resume();
             }
             else
+            {
+                Transmigratio.Instance.IsClickableMarker = false;
                 Pause();
+            }
         }
     }
 

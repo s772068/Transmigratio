@@ -33,7 +33,7 @@ namespace Events.Controllers {
         private protected abstract void DeactivateEvents();
         private protected abstract void InitDesidions();
         private protected abstract void OpenPanel();
-        public abstract void CreateMarker();
+        private protected abstract void CreateMarker(CivPiece piece = null);
 
         private protected string Local(string key) => Localization.Load(Name, key);
         

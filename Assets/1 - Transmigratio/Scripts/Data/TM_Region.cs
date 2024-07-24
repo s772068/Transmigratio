@@ -25,7 +25,7 @@ public class TM_Region {
 
     public List<string> CivsList = new();
 
-    [HideInInspector] public IconMarker Marker;
+    public IconMarker Marker;
     
     public Civilization CivMain => Transmigratio.Instance.GetCiv(GetMainCiv());
     private CivPiece GetPiece(string civName) => Transmigratio.Instance.GetCivPice(Id, civName);

@@ -4,7 +4,6 @@ using System;
 [RequireComponent(typeof(SpriteRenderer))]
 public class IconMarker : MonoBehaviour {
     private SpriteRenderer _sr;
-    private bool _isEnable = true;
 
     public Sprite Sprite { set => _sr.sprite = value; }
     
@@ -12,9 +11,6 @@ public class IconMarker : MonoBehaviour {
     public Action OnTimeDestroy;
 
     public void Click() {
-        if (!_isEnable) return;
-        _isEnable = false;
-        _sr.enabled = false;
         onClick?.Invoke();
     }
 

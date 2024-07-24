@@ -38,11 +38,21 @@ namespace Events.Controllers.Local {
         private protected override void InitDesidions() {
             AddDesidion(AddFood, Local("AddFood"), () => AddFoodPoints);
             AddDesidion(AddSomeFood, Local("AddSomeFood"), () => AddSomeFoodPoints);
-            AddDesidion(default, Local("Nothing"), () => 0);
+            AddDesidion(Nothing, Local("Nothing"), () => 0);
         }
 
-        private void AddFood() => selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson;
-        private void AddSomeFood() => selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson / 2;
+        private void AddFood()
+        {
+            selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson;
+            RemoveEvent(selectedPiece);
+        }
+        private void AddSomeFood()
+        {
+            selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson / 2;
+            RemoveEvent(selectedPiece);
+        }
+
+        private void Nothing() => RemoveEvent(selectedPiece);
 
     }
 }

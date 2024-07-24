@@ -5,25 +5,25 @@ using System;
 
 namespace Events.Controllers.StateMachines {
     public abstract class Base : Controllers.Base {
-        private protected CivPiece piece;
+        private protected CivPiece _piece;
 
-        private protected Data.State curState;
-        private Random rand = new();
+        private protected Data.State _curState;
+        private Random _rand = new();
 
         private protected override string Territory => Local("Territory1") + " " +
                               $"<color=#{regionColor.ToHexString()}>" +
-                              piece.Region.Name + "</color> " +
+                              _piece.Region.Name + "</color> " +
                               Local("Territory2") + " " +
                               $"<color=#{civColor.ToHexString()}>" +
-                              Localization.Load("Civilizations", piece.Civilization.Name) + "</color> " +
+                              Localization.Load("Civilizations", _piece.Civilization.Name) + "</color> " +
                               Local("Territory3");
 
         private protected abstract void NextState();
 
-        public override void CreateMarker() {
-            if (piece.EventsCount == 1) return;
-            piece.Region.Marker = CreateMarker(WMSK.countries[piece.Region.Id].center);
-            piece.Region.Marker.onClick += () => OnClickMarker();
+        private protected override void CreateMarker(CivPiece piece = null) {
+            if (_piece.Region.Marker == null)
+                _piece.Region.Marker = CreateMarker(WMSK.countries[_piece.Region.Id].center);
+            _piece.Region.Marker.onClick += () => OnClickMarker();
         }
 
         private protected override void ActivateEvents() {
@@ -35,7 +35,7 @@ namespace Events.Controllers.StateMachines {
         }
 
         private void OnTickLogic() {
-            bool isActivate = curState.Update();
+            bool isActivate = _curState.Update();
             if (isActivate) NextState();
         }
 
@@ -43,24 +43,29 @@ namespace Events.Controllers.StateMachines {
             Random rand = new();
             var civilizations = Transmigratio.Instance.TMDB.humanity.Civilizations;
             if (civilizations.Count == 0) return;
-            piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
+            _piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
             if (IsShowAgain) {
-                OpenPanel();
                 CreateMarker();
-                piece.AddEvent(this);
+                _piece.AddEvent(this);
+                OpenPanel();
             } else {
                 _activeDesidion.ActionClick?.Invoke();
             }
         }
 
-        private protected void RemoveEvent(CivPiece piece) {
-            if(piece.EventsCount == 0 && piece.Region.Marker != null) piece.Region.Marker.Destroy();
-            piece.RemoveEvent(this);
-        }
-
         private void OnClickMarker() {
             OpenPanel();
-            piece.Region.Marker.Destroy();
+        }
+
+        private protected void CheckMarker()
+        {
+            if (_piece.EventsCount == _piece.MigrationCount && _piece.Region.Marker != null)
+            {
+                _piece.Region.Marker.Destroy();
+                _piece.Region.Marker = null;
+            }
+            else if (_piece.Region.Marker != null)
+                _piece.Region.Marker.onClick -= () => OnClickMarker();
         }
     }
 }

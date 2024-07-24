@@ -10,6 +10,7 @@ using GlobalEvents = Events.Controllers.Global;
 /// </summary>
 [Serializable]
 public class CivPiece {
+    public static readonly int MinPiecePopulation = 50;
     public Population Population;
     public float PopulationGrow;
     public float GivenFood;
@@ -18,6 +19,17 @@ public class CivPiece {
     public float TakenFood;
 
     public int EventsCount => events.Count;
+    public int MigrationCount
+    {
+        get
+        {
+            int value = 0;
+            foreach (Events.Controllers.Base e in events)
+                if (e.GetType() == typeof(Events.Controllers.Global.Migration))
+                    value++;
+            return value;
+        }
+    }
     public int RegionID;
     public string CivName;
 
@@ -58,7 +70,7 @@ public class CivPiece {
         PopulationGrow = Population.Value * Civilization.GovernmentCorruption * GivenFood / RequestFood - Population.Value / 3f;
 
         Population.value += (int)PopulationGrow;
-        if (Population.value <= 50) { Destroy?.Invoke(); return; }
+        if (Population.value <= MinPiecePopulation) { Destroy?.Invoke(); return; }
 
         if (_prevPopulationGrow >= 0 && PopulationGrow < 0) {
             Hunger.onActivate?.Invoke(this);

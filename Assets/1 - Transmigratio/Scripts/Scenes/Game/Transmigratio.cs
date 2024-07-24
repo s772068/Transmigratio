@@ -16,11 +16,16 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     
     private int activeRegion;
 
+    private bool _isClickableMarker = true;
+
     public bool IsClickableMarker {
+        get => _isClickableMarker;
         set {
-            if (value) {
+            if (value && !_isClickableMarker) {
+                _isClickableMarker = value;
                 TMDB.map.WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
-            } else {
+            } else if (!value && _isClickableMarker) {
+                _isClickableMarker = value;
                 TMDB.map.WMSK.OnMarkerMouseDown -= OnMarkerMouseDown;
             }
         }

@@ -48,7 +48,6 @@ public class EventPanel : MonoBehaviour {
 
     public void CloseWindow()
     {
-        Transmigratio.Instance.IsClickableMarker = true;
         Destroy(gameObject);
     }
 }

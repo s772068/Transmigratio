@@ -20,9 +20,9 @@ namespace Events.Controllers.Local {
             selectedPiece = piece;
             pieces.Add(piece);
             if (IsShowAgain) {
-                OpenPanel();
                 piece.AddEvent(this);
-                CreateMarker();
+                CreateMarker(piece);
+                OpenPanel();
             } 
             else {
                 _activeDesidion.ActionClick?.Invoke();
@@ -33,19 +33,29 @@ namespace Events.Controllers.Local {
         private protected void RemoveEvent(CivPiece piece) {
             pieces.Remove(piece);
             piece.RemoveEvent(this);
-            if (piece.EventsCount == 0 && piece.Region.Marker != null) piece.Region.Marker.Destroy();
+            CheckMarker(piece);
         }
 
-        public override void CreateMarker() {
-            if (selectedPiece.EventsCount == 1) return;
-            selectedPiece.Region.Marker ??= CreateMarker(WMSK.countries[selectedPiece.Region.Id].center);
-            selectedPiece.Region.Marker.onClick += () => OnClickMarker(selectedPiece);
+        private protected override void CreateMarker(CivPiece piece) {
+            if (selectedPiece.Region.Marker == null)
+                selectedPiece.Region.Marker = CreateMarker(WMSK.countries[selectedPiece.Region.Id].center);
+            selectedPiece.Region.Marker.onClick += () => OnClickMarker(piece);
         }
 
         private void OnClickMarker(CivPiece piece) {
             selectedPiece = piece;
             OpenPanel();
-            selectedPiece.Region.Marker.Destroy();
+        }
+
+        private protected void CheckMarker(CivPiece piece)
+        {
+            if (piece.EventsCount == piece.MigrationCount && piece.Region.Marker != null)
+            {
+                piece.Region.Marker.Destroy();
+                piece.Region.Marker = null;
+            }    
+            else if (piece.Region.Marker != null)
+                piece.Region.Marker.onClick -= () => OnClickMarker(piece);
         }
     }
 }

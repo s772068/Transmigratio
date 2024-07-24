@@ -15,14 +15,14 @@ namespace Events.Controllers.StateMachines {
         [SerializeField, Min(1)] private float calmVolcanoPointsDivision;
         [SerializeField, Min(0)] private int reduceLossesPoints;
 
-        private State state = State.Start;
+        private State _state = State.Start;
 
         private protected override string Name => "Volcano";
-        private int CalmVolcanoPoints => (int) (piece.Population.value / calmVolcanoPointsDivision);
+        private int CalmVolcanoPoints => (int) (_piece.Population.value / calmVolcanoPointsDivision);
 
         private void Awake() {
-            curState = states[State.Start];
-            curState.Start();
+            _curState = states[State.Start];
+            _curState.Start();
         }
 
         private protected override void InitDesidions() {
@@ -38,23 +38,23 @@ namespace Events.Controllers.StateMachines {
 
         private void ReduceLosses() {
             _activateIndex = 1;
-            piece.Population.value -= (int) (piece.Population.value * fullPercentFood * partPercentPopulation);
-            piece.ReserveFood -= piece.ReserveFood * fullPercentFood * partPercentFood;
-            Global.Migration.OnMigration(piece);
+            _piece.Population.value -= (int) (_piece.Population.value * fullPercentFood * partPercentPopulation);
+            _piece.ReserveFood -= _piece.ReserveFood * fullPercentFood * partPercentFood;
+            Global.Migration.OnMigration(_piece);
             EndEvent();
         }
 
         public void ActivateVolcano() {
             _activateIndex = 2;
-            piece.Population.value -= (int) (piece.Population.value * fullPercentFood);
-            piece.ReserveFood -= piece.ReserveFood * fullPercentFood;
-            Global.Migration.OnMigration(piece);
+            _piece.Population.value -= (int) (_piece.Population.value * fullPercentFood);
+            _piece.ReserveFood -= _piece.ReserveFood * fullPercentFood;
+            Global.Migration.OnMigration(_piece);
             EndEvent();
         }
 
         private void EndEvent() {
-            piece.RemoveEvent(this);
-            if (piece.EventsCount == 0 && piece.Region.Marker != null) piece.Region.Marker.Destroy();
+            _piece.RemoveEvent(this);
+            CheckMarker();
             NextState();
         }
 
@@ -65,13 +65,13 @@ namespace Events.Controllers.StateMachines {
         }
 
         private protected override void NextState() {
-            state = state switch {
+            _state = _state switch {
                 State.Start => State.ActivateVolcano,
                 State.ActivateVolcano => State.Restart,
                 State.Restart => State.ActivateVolcano,
             };
-            curState = states[state];
-            curState.Start();
+            _curState = states[_state];
+            _curState.Start();
         }
 
         private enum State { Start, ActivateVolcano, Restart }
