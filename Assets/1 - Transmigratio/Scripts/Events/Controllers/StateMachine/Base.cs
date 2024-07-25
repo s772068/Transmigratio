@@ -49,7 +49,7 @@ namespace Events.Controllers.StateMachines {
                 _piece.AddEvent(this);
                 OpenPanel();
             } else {
-                _activeDesidion.ActionClick?.Invoke();
+                AutoChoice.Events[this][0].ActionClick?.Invoke();
             }
         }
 

@@ -25,8 +25,7 @@ namespace Events.Controllers.Local {
                 OpenPanel();
             } 
             else {
-                _activeDesidion.ActionClick?.Invoke();
-                pieces.Remove(selectedPiece);
+                AutoChoice.Events[this][0].ActionClick?.Invoke();
             }
         }
 

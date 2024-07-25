@@ -25,6 +25,18 @@ namespace Events.Controllers.StateMachines {
             _curState.Start();
         }
 
+        private protected override void ActivateEvents()
+        {
+            AutoChoice.NewEvent(this, _desidions);
+            base.ActivateEvents();
+        }
+
+        private protected override void DeactivateEvents()
+        {
+            AutoChoice.RemoveEvent(this);
+            base.DeactivateEvents();
+        }
+
         private protected override void InitDesidions() {
             AddDesidion(CalmVolcano, Local("CalmVolcano"), () => CalmVolcanoPoints);
             AddDesidion(ReduceLosses, Local("ReduceLosses"), () => reduceLossesPoints);
@@ -32,12 +44,10 @@ namespace Events.Controllers.StateMachines {
         }
 
         private void CalmVolcano() {
-            _activateIndex = 0;
             EndEvent();
         }
 
         private void ReduceLosses() {
-            _activateIndex = 1;
             _piece.Population.value -= (int) (_piece.Population.value * fullPercentFood * partPercentPopulation);
             _piece.ReserveFood -= _piece.ReserveFood * fullPercentFood * partPercentFood;
             Global.Migration.OnMigration(_piece);
@@ -45,7 +55,6 @@ namespace Events.Controllers.StateMachines {
         }
 
         public void ActivateVolcano() {
-            _activateIndex = 2;
             _piece.Population.value -= (int) (_piece.Population.value * fullPercentFood);
             _piece.ReserveFood -= _piece.ReserveFood * fullPercentFood;
             Global.Migration.OnMigration(_piece);

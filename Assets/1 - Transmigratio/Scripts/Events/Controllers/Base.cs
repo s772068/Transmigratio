@@ -38,8 +38,8 @@ namespace Events.Controllers {
         private protected string Local(string key) => Localization.Load(Name, key);
         
         private protected void OnEnable() {
-            ActivateEvents();
             InitDesidions();
+            ActivateEvents();
         }
 
         private protected void OnDisable() {
