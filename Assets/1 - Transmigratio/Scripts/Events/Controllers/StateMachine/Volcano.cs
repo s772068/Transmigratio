@@ -27,13 +27,13 @@ namespace Events.Controllers.StateMachines {
 
         private protected override void ActivateEvents()
         {
-            AutoChoice.NewEvent(this, _desidions);
+            Events.AutoChoice.NewEvent(this, _desidions);
             base.ActivateEvents();
         }
 
         private protected override void DeactivateEvents()
         {
-            AutoChoice.RemoveEvent(this);
+            Events.AutoChoice.RemoveEvent(this);
             base.DeactivateEvents();
         }
 

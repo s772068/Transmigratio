@@ -21,7 +21,9 @@ namespace Events.Controllers {
         private protected List<Desidion> _desidions = new();
         private protected int _activateIndex;
 
-        public bool IsShowAgain = true;
+        public Sprite PanelSprite => panelSprite;
+        public List<Desidion> Desidions => _desidions;
+        public bool AutoChoice = false;
 
         private protected abstract string Name { get; }
         private protected abstract string Territory { get; }
@@ -35,7 +37,7 @@ namespace Events.Controllers {
         private protected abstract void OpenPanel();
         private protected abstract void CreateMarker(CivPiece piece = null);
 
-        private protected string Local(string key) => Localization.Load(Name, key);
+        public string Local(string key) => Localization.Load(Name, key);
         
         private protected void OnEnable() {
             InitDesidions();

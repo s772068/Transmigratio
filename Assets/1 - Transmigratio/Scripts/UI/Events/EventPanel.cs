@@ -43,7 +43,7 @@ public class EventPanel : MonoBehaviour {
     private void OnDisable()
     {
         EventPanelClose?.Invoke(true);
-        _event.IsShowAgain = IsShowAgain;
+        _event.AutoChoice = IsShowAgain;
     }
 
     public void CloseWindow()

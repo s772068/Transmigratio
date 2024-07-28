@@ -126,7 +126,7 @@ namespace Events.Controllers.Global {
             _fromPiece = civ.Pieces[from.Id];
             _toPiece = civ.Pieces[to.Id];
 
-            if (IsShowAgain) {
+            if (!AutoChoice) {
                 _fromPiece.AddEvent(this);
                 _toPiece.AddEvent(this);
                 OpenPanel();

@@ -19,13 +19,13 @@ namespace Events.Controllers.Local {
             if (pieces.Contains(piece)) return;
             selectedPiece = piece;
             pieces.Add(piece);
-            if (IsShowAgain) {
+            if (!AutoChoice) {
                 piece.AddEvent(this);
                 CreateMarker(piece);
                 OpenPanel();
             } 
             else {
-                AutoChoice.Events[this][0].ActionClick?.Invoke();
+                Events.AutoChoice.Events[this][0].ActionClick?.Invoke();
             }
         }
 

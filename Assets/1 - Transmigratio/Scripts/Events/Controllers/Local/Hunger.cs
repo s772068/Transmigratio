@@ -27,14 +27,14 @@ namespace Events.Controllers.Local {
             onActivate = AddEvent;
             onDeactivate = RemoveEvent;
             Civilization.RemoveCivPiece += RemoveEvent;
-            AutoChoice.NewEvent(this, _desidions);
+            Events.AutoChoice.NewEvent(this, _desidions);
         }
 
         private protected override void DeactivateEvents() {
             onActivate = default;
             onDeactivate = default;
             Civilization.RemoveCivPiece -= RemoveEvent;
-            AutoChoice.RemoveEvent(this);
+            Events.AutoChoice.RemoveEvent(this);
         }
 
         private protected override void InitDesidions() {
