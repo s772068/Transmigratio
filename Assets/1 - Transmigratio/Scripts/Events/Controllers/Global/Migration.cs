@@ -41,6 +41,7 @@ namespace Events.Controllers.Global {
 
             OnMigration = TryMigration;
             GetPopulation = () => _migrations.Sum(x => x.Value.FullPopulations - x.Value.CurPopulations);
+            Events.AutoChoice.NewEvent(this, _desidions);
         }
 
         private protected override void DeactivateEvents() {
@@ -49,6 +50,7 @@ namespace Events.Controllers.Global {
 
             OnMigration = default;
             GetPopulation = default;
+            Events.AutoChoice.RemoveEvent(this);
         }
 
         private protected override void OpenPanel()

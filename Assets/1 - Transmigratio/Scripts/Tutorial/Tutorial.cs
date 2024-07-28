@@ -48,15 +48,15 @@ public class Tutorial : MonoBehaviour
     private void OnEnable()
     {
         HUD.EventRegionPanelOpen += InfoPanel;
-        EventPanel.EventPanelOpen += GameEvent;
-        EventPanel.EventPanelClose += GameMarker;
+        EventPanel.PanelOpen += GameEvent;
+        EventPanel.PanelClose += GameMarker;
     }
 
     private void OnDisable()
     {
         HUD.EventRegionPanelOpen -= InfoPanel;
-        EventPanel.EventPanelOpen -= GameEvent;
-        EventPanel.EventPanelClose -= GameMarker;
+        EventPanel.PanelOpen -= GameEvent;
+        EventPanel.PanelClose -= GameMarker;
     }
 
     private void Start()

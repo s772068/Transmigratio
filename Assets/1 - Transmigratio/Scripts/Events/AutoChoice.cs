@@ -13,6 +13,7 @@ namespace Events
         static AutoChoice()
         {
             AutoChoicePanel.AutoChoiceUpdate += OnAutoChoiceUpdate;
+            AutoChoicePanel.AutoChoiceModeUpdate += OnAutoModeChange;
         }
 
         public static void NewEvent(Controllers.Base newEvent, List<Desidion> desidions)
@@ -25,9 +26,12 @@ namespace Events
             _events.Remove(removeEvent);
         }
 
-        private static void OnAutoChoiceUpdate(Controllers.Base eventUpdate, List<Desidion> newPriority)
+        private static void OnAutoChoiceUpdate(Controllers.Base eventUpdate, List<Desidion> newPriority, bool autoChoice)
         {
             _events[eventUpdate] = newPriority;
+            eventUpdate.AutoChoice = autoChoice;
         }
+
+        private static void OnAutoModeChange(Controllers.Base gameEvent, bool enable) => gameEvent.AutoChoice = enable;
     }
 }

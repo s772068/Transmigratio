@@ -39,14 +39,14 @@ public class Timeline : PersistentSingleton<Timeline> {
 
     private void OnEnable()
     {
-        EventPanel.EventPanelOpen += _ => WindowsCount += 1;
-        EventPanel.EventPanelClose += _ => WindowsCount -= 1;
+        Panel.PanelOpen += _ => WindowsCount += 1;
+        Panel.PanelClose += _ => WindowsCount -= 1;
     }
 
     private void OnDisable()
     {
-        EventPanel.EventPanelOpen -= _ => WindowsCount += 1;
-        EventPanel.EventPanelClose -= _ => WindowsCount -= 1;
+        EventPanel.PanelOpen -= _ => WindowsCount += 1;
+        EventPanel.PanelClose -= _ => WindowsCount -= 1;
     }
 
     public void Pause() {

@@ -50,6 +50,7 @@ namespace Events.Controllers.Local {
         }
         private void AddSomeFood()
         {
+            print("add some food");
             selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson / 2;
             RemoveEvent(selectedPiece);
         }

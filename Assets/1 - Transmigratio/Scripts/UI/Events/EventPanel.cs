@@ -1,20 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-using System;
 using TMPro;
 using Events.Controllers;
 
-public class EventPanel : MonoBehaviour {
-    public static event Action<bool> EventPanelOpen;
-    public static event Action<bool> EventPanelClose;
+public class EventPanel : Panel {
 
     [SerializeField] private Button _close;
     [SerializeField] private TMP_Text _title;
     [SerializeField] private TMP_Text _territory;
     [SerializeField] private TMP_Text _description;
     [SerializeField] private Image _image;
-    [SerializeField] private Toggle _dontShowAgain;
+    [SerializeField] private Toggle _autoChoice;
     [SerializeField] private EventDesidion _desidion;
     [SerializeField] private Transform _desidionsContent;
     private Base _event;
@@ -30,20 +27,17 @@ public class EventPanel : MonoBehaviour {
     public Button CloseBtn => _close;
     public Base Event { set => _event = value; }
 
-    public bool IsShowAgain {
-        get => !_dontShowAgain.isOn;
-        set => _dontShowAgain.isOn = !value;
-    }
+    public bool AutoChoice => _autoChoice.isOn;
 
     private void OnEnable()
     {
-        EventPanelOpen?.Invoke(true);
+        PanelOpen?.Invoke(true);
     }
 
     private void OnDisable()
     {
-        EventPanelClose?.Invoke(true);
-        _event.AutoChoice = IsShowAgain;
+        PanelClose?.Invoke(true);
+        _event.AutoChoice = AutoChoice;
     }
 
     public void CloseWindow()

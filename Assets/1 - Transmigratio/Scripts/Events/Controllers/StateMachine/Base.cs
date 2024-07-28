@@ -44,7 +44,7 @@ namespace Events.Controllers.StateMachines {
             var civilizations = Transmigratio.Instance.TMDB.humanity.Civilizations;
             if (civilizations.Count == 0) return;
             _piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
-            if (AutoChoice) {
+            if (!AutoChoice) {
                 CreateMarker();
                 _piece.AddEvent(this);
                 OpenPanel();

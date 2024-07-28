@@ -986,6 +986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefabAutoChoiceElement: {fileID: 7515818239729251996, guid: 20f87a682cd31f04ea55670eacfea505, type: 3}
   _contentElements: {fileID: 4957788042531185811}
+  _dragPanel: {fileID: 9092272559782558331}
   _title: {fileID: 2449883749381310486}
   _description: {fileID: 92668727582501485}
   _autoEnable: {fileID: 6150294403008508704}
@@ -1075,7 +1076,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5721314665348131018}
+        m_TargetAssemblyTypeName: AutoChoicePanel, Assembly-CSharp
+        m_MethodName: AutoChoiceEnable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &5833939630446575549
 GameObject:
@@ -1248,7 +1261,7 @@ MonoBehaviour:
   _draggingObj: {fileID: 0}
   _dragSpeed: 15
   _swap_gap: 10
-  Elements: []
+  _elements: []
   ElementsOriginPos: []
 --- !u!114 &8863207243261198501
 MonoBehaviour:

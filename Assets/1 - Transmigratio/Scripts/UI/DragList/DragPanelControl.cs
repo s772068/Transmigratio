@@ -16,28 +16,30 @@ public class DragPanelControl : MonoBehaviour
     private Vector2 _maxYPoints;
 
     [SerializeField]
-    List<DragElement> Elements = new List<DragElement>();
+    List<DragElement> _elements = new List<DragElement>();
     [SerializeField]
     List<Vector2> ElementsOriginPos = new List<Vector2>();
+
+    public List<DragElement> Elements => _elements;
 
     private void Start()
     {
         int i = 0;
         foreach (Transform child in transform)
         {
-            Elements.Add(child.GetComponent<DragElement>());
+            _elements.Add(child.GetComponent<DragElement>());
             ElementsOriginPos.Add(child.transform.position);
 
-            if (Elements.Count > i)
+            if (_elements.Count > i)
             {
-                DragElement element = Elements[i].GetComponent<DragElement>();
+                DragElement element = _elements[i].GetComponent<DragElement>();
 
                 element.SortOrder = i;
             }
             else
             {
-                Elements[i].gameObject.SetActive(false);
-                Elements[i].GetComponent<DragElement>().SortOrder = 999 + i;
+                _elements[i].gameObject.SetActive(false);
+                _elements[i].GetComponent<DragElement>().SortOrder = 999 + i;
                 i++;
                 continue;
             }
@@ -110,7 +112,7 @@ public class DragPanelControl : MonoBehaviour
 
     public void SortWhenDragging()
     {
-        foreach (DragElement element in Elements)
+        foreach (DragElement element in _elements)
         {
             if (element == _draggingObj || _draggingObj == null) { continue; }
 
@@ -144,12 +146,12 @@ public class DragPanelControl : MonoBehaviour
     void OnEndDrag()
     {
         _draggingObj.transform.position = ElementsOriginPos[_draggingObj.SortOrder];
-        List<DragElement> oldElements = new(Elements);
-        Elements.Sort((x, y) => x.SortOrder.CompareTo(y.SortOrder));
+        List<DragElement> oldElements = new(_elements);
+        _elements.Sort((x, y) => x.SortOrder.CompareTo(y.SortOrder));
 
         for (int i = 0; i < oldElements.Count; i++)
         {
-            if (oldElements[i] != Elements[i])
+            if (oldElements[i] != _elements[i])
             {
                 DragElementsSorted?.Invoke();
                 break;
@@ -158,7 +160,7 @@ public class DragPanelControl : MonoBehaviour
 
         _draggingObj = null;
 
-        EndDrag?.Invoke(Elements);
+        EndDrag?.Invoke(_elements);
     }
 
 

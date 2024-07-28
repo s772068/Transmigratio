@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6135094583338504055}
   - component: {fileID: 4762973549778327770}
   - component: {fileID: 4120381761114243588}
-  - component: {fileID: 288090344054636681}
+  - component: {fileID: 1105179506090933616}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DontShowAgain
+  m_text: AutoChoice
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &288090344054636681
+--- !u!114 &1105179506090933616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,11 +144,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1031164293008083743}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2640a4b580e1ef844af2173343dbae95, type: 3}
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  table: Events
-  isUse: 1
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:195805281eed76144a079354d9fb6c16
+    m_TableEntryReference:
+      m_KeyId: 160487743488
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4120381761114243588}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1361173462423729778
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,7 +759,7 @@ MonoBehaviour:
   _territory: {fileID: 2358110713147336367}
   _description: {fileID: 8891817493342972667}
   _image: {fileID: 6629049813962920418}
-  _dontShowAgain: {fileID: 5392765158384860171}
+  _autoChoice: {fileID: 5392765158384860171}
   _desidion: {fileID: 403973372752421938, guid: 0054cba83f08b6b4296867997956dd96, type: 3}
   _desidionsContent: {fileID: 3507735229673240719}
 --- !u!222 &4229496555510215229
@@ -785,7 +811,7 @@ GameObject:
   - component: {fileID: 6261211125015589999}
   - component: {fileID: 5392765158384860171}
   m_Layer: 5
-  m_Name: DontShowAgain
+  m_Name: AutoChoice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
