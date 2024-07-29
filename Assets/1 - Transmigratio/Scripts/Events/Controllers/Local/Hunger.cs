@@ -17,8 +17,7 @@ namespace Events.Controllers.Local {
         private int AddFoodPoints => (int)(selectedPiece.Population.value / foodPerPerson / 100f * percentPointsForAddFood);
         private int AddSomeFoodPoints => (int)(selectedPiece.Population.value / foodPerPerson / 100f * percentPointsForAddSomeFood);
 
-        private protected override void OpenPanel()
-        {
+        private protected override void OpenPanel() {
             PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, panelSprite, Local("Title"),
                                     Territory, Local("Description"), _desidions);
         }
@@ -49,18 +48,23 @@ namespace Events.Controllers.Local {
                 return;
 
             selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson;
+            ChroniclesController.Deactivate(Name, selectedPiece.RegionID, panelSprite, "AddFood");
             RemoveEvent(selectedPiece);
         }
+		
         private void AddSomeFood(Func<int> interventionPoints)
         {
             if (_intervention.InterventionPoints < interventionPoints())
                 return;
 
             selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson / 2;
+            ChroniclesController.Deactivate(Name, selectedPiece.RegionID, panelSprite, "AddSomeFood");
             RemoveEvent(selectedPiece);
         }
 
-        private void Nothing(Func<int> interventionPoints) => RemoveEvent(selectedPiece);
-
+        private void Nothing(Func<int> interventionPoints) {
+            ChroniclesController.AddPassive(Name, selectedPiece.RegionID, panelSprite, "Nothing");
+            RemoveEvent(selectedPiece);
+        }
     }
 }
