@@ -25,14 +25,12 @@ namespace Events.Controllers.StateMachines {
             _curState.Start();
         }
 
-        private protected override void ActivateEvents()
-        {
+        private protected override void ActivateEvents() {
             Events.AutoChoice.NewEvent(this, _desidions);
             base.ActivateEvents();
         }
 
-        private protected override void DeactivateEvents()
-        {
+        private protected override void DeactivateEvents() {
             Events.AutoChoice.RemoveEvent(this);
             base.DeactivateEvents();
         }
@@ -40,10 +38,11 @@ namespace Events.Controllers.StateMachines {
         private protected override void InitDesidions() {
             AddDesidion(CalmVolcano, Local("CalmVolcano"), () => CalmVolcanoPoints);
             AddDesidion(ReduceLosses, Local("ReduceLosses"), () => reduceLossesPoints);
-            AddDesidion(default, Local("Nothing"), () => 0);
+            AddDesidion(Nothing, Local("Nothing"), () => 0);
         }
 
         private void CalmVolcano() {
+            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "CalmVolcano");
             EndEvent();
         }
 
@@ -51,6 +50,7 @@ namespace Events.Controllers.StateMachines {
             _piece.Population.value -= (int) (_piece.Population.value * fullPercentFood * partPercentPopulation);
             _piece.ReserveFood -= _piece.ReserveFood * fullPercentFood * partPercentFood;
             Global.Migration.OnMigration(_piece);
+            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "ReduceLosses");
             EndEvent();
         }
 
@@ -58,7 +58,12 @@ namespace Events.Controllers.StateMachines {
             _piece.Population.value -= (int) (_piece.Population.value * fullPercentFood);
             _piece.ReserveFood -= _piece.ReserveFood * fullPercentFood;
             Global.Migration.OnMigration(_piece);
+            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "ActivateVolcano");
             EndEvent();
+        }
+
+        private void Nothing() {
+            ChroniclesController.AddPassive(Name, _piece.RegionID, panelSprite, "Nothing");
         }
 
         private void EndEvent() {
@@ -67,8 +72,7 @@ namespace Events.Controllers.StateMachines {
             NextState();
         }
 
-        private protected override void OpenPanel()
-        {
+        private protected override void OpenPanel() {
             PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, panelSprite, Local("Title"),
                                     Territory, Local("Description"), _desidions);
         }

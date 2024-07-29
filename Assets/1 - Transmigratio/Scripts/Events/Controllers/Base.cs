@@ -28,6 +28,7 @@ namespace Events.Controllers {
         private protected abstract string Name { get; }
         private protected abstract string Territory { get; }
 
+        private protected Chronicles.Controller ChroniclesController => Chronicles.Controller.Instance;
         private protected Map Map => Transmigratio.Instance.TMDB.map;
         private protected WMSK WMSK => Map.WMSK;
 

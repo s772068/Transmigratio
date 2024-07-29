@@ -8,16 +8,14 @@ using WorldMapStrategyKit;
 /// Потом разнести всякие классы по разным файлам
 /// </summary>
 public class Transmigratio : PersistentSingleton<Transmigratio> {
-
     [SerializeField] private TMDB _tmdb;            // база данных ScriptableObjects
     [SerializeField] private HUD _hud;
 
-    public TMDB TMDB => _tmdb;
-    
-    private int activeRegion;
-
+    private int _activeRegion;
     private bool _isClickableMarker = true;
 
+    public TMDB TMDB => _tmdb;
+    
     public bool IsClickableMarker {
         get => _isClickableMarker;
         set {
@@ -39,8 +37,8 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     public CivPiece GetCivPice(int regionIndex, string civName) => GetCiv(civName).Pieces[regionIndex];
 
     public void StartGame() {
-        TMDB.StartGame(activeRegion);
-        _hud.ShowRegionDetails(activeRegion);
+        TMDB.StartGame(_activeRegion);
+        _hud.ShowRegionDetails(_activeRegion);
         Timeline.Instance.Pause();
     }
 
@@ -57,12 +55,12 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     }
 
     private void OnClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
-        activeRegion = countryIndex;
-        _hud.ShowRegionDetails(activeRegion);
+        _activeRegion = countryIndex;
+        _hud.ShowRegionDetails(_activeRegion);
     }
     private void OnLongClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
-        activeRegion = countryIndex;
-        _hud.ShowRegionDetails(activeRegion);
+        _activeRegion = countryIndex;
+        _hud.ShowRegionDetails(_activeRegion);
     }
 
     private void OnMarkerEnter(MarkerClickHandler marker) {
