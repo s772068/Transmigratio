@@ -21,7 +21,7 @@ public static class PanelFabric
     {
         EventDesidion desidionObject = EventDesidion.Instantiate(prefab, parent);
         desidionObject.ActionClick = desidion.ActionClick;
-        desidionObject.ActionClick += panel.CloseWindow;
+        //desidionObject.ActionClick += panel.CloseWindow;
         desidionObject.Title = desidion.Title;
         desidionObject.Points = desidion.Cost();
     }

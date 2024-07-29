@@ -49,7 +49,7 @@ namespace Events.Controllers.StateMachines {
                 _piece.AddEvent(this);
                 OpenPanel();
             } else {
-                Events.AutoChoice.Events[this][0].ActionClick?.Invoke();
+                Events.AutoChoice.Events[this][0].ActionClick?.Invoke(Events.AutoChoice.Events[this][0].Cost);
             }
         }
 

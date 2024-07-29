@@ -30,6 +30,7 @@ namespace Events.Controllers {
 
         private protected Map Map => Transmigratio.Instance.TMDB.map;
         private protected WMSK WMSK => Map.WMSK;
+        private protected Intervention _intervention => Intervention.Instance;
 
         private protected abstract void ActivateEvents();
         private protected abstract void DeactivateEvents();
@@ -49,7 +50,7 @@ namespace Events.Controllers {
             _desidions.Clear();
         }
 
-        private protected void AddDesidion(Action click, string title, Func<int> points)
+        private protected void AddDesidion(Action<Func<int>> click, string title, Func<int> points)
         {
             _desidions.Add(new(click, title, points));
         }

@@ -25,7 +25,7 @@ namespace Events.Controllers.Local {
                 OpenPanel();
             } 
             else {
-                Events.AutoChoice.Events[this][0].ActionClick?.Invoke();
+                Events.AutoChoice.Events[this][0].ActionClick?.Invoke(Events.AutoChoice.Events[this][0].Cost);
             }
         }
 

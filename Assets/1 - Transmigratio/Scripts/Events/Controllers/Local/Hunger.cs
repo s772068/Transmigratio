@@ -43,19 +43,24 @@ namespace Events.Controllers.Local {
             AddDesidion(Nothing, Local("Nothing"), () => 0);
         }
 
-        private void AddFood()
+        private void AddFood(Func<int> interventionPoints)
         {
+            if (_intervention.InterventionPoints < interventionPoints())
+                return;
+
             selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson;
             RemoveEvent(selectedPiece);
         }
-        private void AddSomeFood()
+        private void AddSomeFood(Func<int> interventionPoints)
         {
-            print("add some food");
+            if (_intervention.InterventionPoints < interventionPoints())
+                return;
+
             selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson / 2;
             RemoveEvent(selectedPiece);
         }
 
-        private void Nothing() => RemoveEvent(selectedPiece);
+        private void Nothing(Func<int> interventionPoints) => RemoveEvent(selectedPiece);
 
     }
 }
