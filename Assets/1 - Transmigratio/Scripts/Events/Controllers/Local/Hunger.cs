@@ -38,11 +38,21 @@ namespace Events.Controllers.Local {
         private protected override void InitDesidions() {
             AddDesidion(AddFood, Local("AddFood"), () => AddFoodPoints);
             AddDesidion(AddSomeFood, Local("AddSomeFood"), () => AddSomeFoodPoints);
-            AddDesidion(default, Local("Nothing"), () => 0);
+            AddDesidion(Nothing, Local("Nothing"), () => 0);
         }
 
-        private void AddFood() => selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson;
-        private void AddSomeFood() => selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson / 2;
+        private void AddFood() {
+            selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson;
+            ChroniclesController.Deactivate(Name, selectedPiece.RegionID, panelSprite, "AddFood");
+        }
 
+        private void AddSomeFood() {
+            selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson / 2;
+            ChroniclesController.Deactivate(Name, selectedPiece.RegionID, panelSprite, "AddSomeFood");
+        }
+
+        private void Nothing() {
+            ChroniclesController.Deactivate(Name, selectedPiece.RegionID, panelSprite, "Nothing");
+        }
     }
 }

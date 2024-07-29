@@ -19,12 +19,14 @@ namespace Events.Controllers.Local {
             if (pieces.Contains(piece)) return;
             selectedPiece = piece;
             pieces.Add(piece);
+
+            ChroniclesController.AddActive(Name, piece.RegionID, () => OnClickMarker(piece));
+
             if (IsShowAgain) {
                 OpenPanel();
                 piece.AddEvent(this);
                 CreateMarker();
-            } 
-            else {
+            } else {
                 _activeDesidion.ActionClick?.Invoke();
                 pieces.Remove(selectedPiece);
             }

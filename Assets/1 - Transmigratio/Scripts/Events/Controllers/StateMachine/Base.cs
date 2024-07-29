@@ -44,6 +44,9 @@ namespace Events.Controllers.StateMachines {
             var civilizations = Transmigratio.Instance.TMDB.humanity.Civilizations;
             if (civilizations.Count == 0) return;
             piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
+
+            ChroniclesController.AddActive(Name, piece.RegionID, OnClickMarker);
+
             if (IsShowAgain) {
                 OpenPanel();
                 CreateMarker();

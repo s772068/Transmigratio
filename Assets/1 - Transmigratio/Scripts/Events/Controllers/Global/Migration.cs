@@ -59,7 +59,7 @@ namespace Events.Controllers.Global {
 
         private protected override void InitDesidions() {
             AddDesidion(Break, Local("Break"), () => breakPoints);
-            AddDesidion(default, Local("Nothing"), () => 0);
+            AddDesidion(Nothing, Local("Nothing"), () => 0);
             AddDesidion(SpeedUp, Local("SpeedUp"), () => speedUpPoints);
         }
 
@@ -122,6 +122,8 @@ namespace Events.Controllers.Global {
             
             _fromPiece = civ.Pieces[from.Id];
             _toPiece = civ.Pieces[to.Id];
+
+            ChroniclesController.AddActive(Name, from.Id, OpenPanel);
 
             if (IsShowAgain) {
                 OpenPanel();
@@ -221,15 +223,21 @@ namespace Events.Controllers.Global {
         }
 
         private void Break() {
-            int fromID = _fromPiece.Region.Id;
+            int fromID = _fromPiece.RegionID;
             MigrationData data = _migrations[_fromPiece.Region.Id];
             _fromPiece.Population.value += data.FullPopulations - data.CurPopulations;
+            ChroniclesController.Deactivate(Name, _fromPiece.RegionID, panelSprite, "Break");
             RemoveMigration(fromID);
+        }
+
+        private void Nothing() {
+            ChroniclesController.Deactivate(Name, _fromPiece.RegionID, panelSprite, "Nothing");
         }
 
         private void SpeedUp() {
             int fromID = _fromPiece.Region.Id;
             _migrations[fromID].StepPopulations *= 2;
+            ChroniclesController.Deactivate(Name, _fromPiece.RegionID, panelSprite, "SpeedUp");
         }
 
         private T GetMax<T>(List<T> list, Func<T, int> GetValue) {

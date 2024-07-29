@@ -12,4252 +12,4328 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7eadc2394f468d48ae84a3d95543b65, type: 3}
   m_Name: TMDB
   m_EditorClassIdentifier: 
+  startAge: 40000
   humanity:
-    civilizations:
-      _serializedList: []
+    Civilizations:
+      _serializedList:
+      - Key: Uncivilized
+        Value:
+          Name: Uncivilized
+          Pieces:
+            _serializedList:
+            - Key: 0
+              Value:
+                Population:
+                  value: 1613
+                PopulationGrow: -1.8536869
+                GivenFood: 8.935772
+                RequestFood: 10.76
+                ReserveFood: 6.4082484
+                TakenFood: 6.4082484
+                RegionID: 0
+                CivName: Uncivilized
+            - Key: 31
+              Value:
+                Population:
+                  value: 457
+                PopulationGrow: 28.600002
+                GivenFood: 2.86
+                RequestFood: 2.86
+                ReserveFood: 10.742628
+                TakenFood: 3.0998154
+                RegionID: 31
+                CivName: Uncivilized
+          EcoCulture:
+            quantities:
+              _serializedList:
+              - Key: Hunters
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Farmers
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Nomads
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Mountain
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: City
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+          ProdMode:
+            quantities:
+              _serializedList:
+              - Key: PrimitiveCommunism
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Slavery
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Feodalism
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Capitalism
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Socialism
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Communism
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+          Government:
+            quantities:
+              _serializedList:
+              - Key: Leaderism
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Monarchy
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: CityState
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Imperium
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Federation
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: NationalState
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+              - Key: Anarchy
+                Value:
+                  Max: 0
+                  Value: 0
+                  Percent: 0
+          ProdModeK: 0.6
+          GovernmentCorruption: 0.4
   map:
-    allRegions:
-    - id: 0
-      name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0410\u0437\u0438\u044F"
-      flora:
+    AllRegions:
+    - Id: 0
+      Name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0410\u0437\u0438\u044F"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 50
-              value: 50
-              percent: 100
-      fauna:
+              Max: 50
+              Value: 50
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      climate:
+              Max: 30
+              Value: 26
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Moderate
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Forest
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Desert
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Mountain
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 1
-      name: "\u041F\u0430\u0442\u0430\u0433\u043E\u043D\u0438\u044F"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList:
+      - Uncivilized
+      Marker: {fileID: 0}
+    - Id: 1
+      Name: "\u041F\u0430\u0442\u0430\u0433\u043E\u043D\u0438\u044F"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      fauna:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Moderate
             Value:
-              max: 75
-              value: 75
-              percent: 75
+              Max: 75
+              Value: 75
+              Percent: 75
           - Key: Polar
             Value:
-              max: 5
-              value: 5
-              percent: 5
-      terrain:
+              Max: 5
+              Value: 5
+              Percent: 5
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Forest
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Desert
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Mountain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Steppe
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Tundra
             Value:
-              max: 45
-              value: 45
-              percent: 45
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 2
-      name: "\u041A\u0430\u0432\u043A\u0430\u0437"
-      flora:
+              Max: 45
+              Value: 45
+              Percent: 45
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 2
+      Name: "\u041A\u0430\u0432\u043A\u0430\u0437"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      fauna:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Moderate
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Forest
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 90
-              value: 90
-              percent: 90
+              Max: 90
+              Value: 90
+              Percent: 90
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 3
-      name: "\u041D\u043E\u0432\u0430\u044F \u0417\u0435\u043B\u0430\u043D\u0434\u0438\u044F"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 3
+      Name: "\u041D\u043E\u0432\u0430\u044F \u0417\u0435\u043B\u0430\u043D\u0434\u0438\u044F"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 20
-              value: 20
-              percent: 100
-      fauna:
+              Max: 20
+              Value: 20
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 15
-              value: 15
-              percent: 100
-      climate:
+              Max: 15
+              Value: 15
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Tropical
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Moderate
             Value:
-              max: 70
-              value: 70
-              percent: 70
+              Max: 70
+              Value: 70
+              Percent: 70
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 50
-              value: 50
-              percent: 50
+              Max: 50
+              Value: 50
+              Percent: 50
           - Key: Forest
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 4
-      name: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 4
+      Name: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 0
-              value: 0
-              percent: -2147483648
-      fauna:
+              Max: 0
+              Value: 0
+              Percent: -2147483648
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 0
-              value: 0
-              percent: -2147483648
-      climate:
+              Max: 0
+              Value: 0
+              Percent: -2147483648
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 100
-              value: 100
-              percent: 100
-      terrain:
+              Max: 100
+              Value: 100
+              Percent: 100
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Forest
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Desert
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 60
-              value: 60
-              percent: 60
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 5
-      name: "\u0410\u0432\u0441\u0442\u0440\u0430\u043B\u0438\u044F"
-      flora:
+              Max: 60
+              Value: 60
+              Percent: 60
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 5
+      Name: "\u0410\u0432\u0441\u0442\u0440\u0430\u043B\u0438\u044F"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 15
-              value: 15
-              percent: 100
-      fauna:
+              Max: 15
+              Value: 15
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      climate:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Tropical
             Value:
-              max: 60
-              value: 60
-              percent: 60
+              Max: 60
+              Value: 60
+              Percent: 60
           - Key: Moderate
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Forest
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Desert
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 6
-      name: "\u0418\u043D\u0434\u043E\u0441\u0442\u0430\u043D"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 6
+      Name: "\u0418\u043D\u0434\u043E\u0441\u0442\u0430\u043D"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 90
-              value: 90
-              percent: 100
-      fauna:
+              Max: 90
+              Value: 90
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 70
-              value: 70
-              percent: 100
-      climate:
+              Max: 70
+              Value: 70
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 65
-              value: 65
-              percent: 65
+              Max: 65
+              Value: 65
+              Percent: 65
           - Key: Tropical
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Moderate
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Forest
             Value:
-              max: 35
-              value: 35
-              percent: 35
+              Max: 35
+              Value: 35
+              Percent: 35
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 7
-      name: "\u041C\u0430\u043B\u0430\u0439\u0437\u0438\u044F"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 7
+      Name: "\u041C\u0430\u043B\u0430\u0439\u0437\u0438\u044F"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 65
-              value: 65
-              percent: 100
-      fauna:
+              Max: 65
+              Value: 65
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 60
-              value: 60
-              percent: 100
-      climate:
+              Max: 60
+              Value: 60
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 85
-              value: 85
-              percent: 85
+              Max: 85
+              Value: 85
+              Percent: 85
           - Key: Tropical
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Forest
             Value:
-              max: 70
-              value: 70
-              percent: 70
+              Max: 70
+              Value: 70
+              Percent: 70
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 8
-      name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0410\u043C\u0435\u0440\u0438\u043A\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 8
+      Name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0410\u043C\u0435\u0440\u0438\u043A\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 55
-              value: 55
-              percent: 100
-      fauna:
+              Max: 55
+              Value: 55
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 35
-              value: 35
-              percent: 100
-      climate:
+              Max: 35
+              Value: 35
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Tropical
             Value:
-              max: 70
-              value: 70
-              percent: 70
+              Max: 70
+              Value: 70
+              Percent: 70
           - Key: Moderate
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Forest
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Desert
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Mountain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 9
-      name: "\u0410\u043D\u0434\u044B"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 9
+      Name: "\u0410\u043D\u0434\u044B"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 10
-              value: 10
-              percent: 100
-      fauna:
+              Max: 10
+              Value: 10
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 35
-              value: 35
-              percent: 35
+              Max: 35
+              Value: 35
+              Percent: 35
           - Key: Tropical
             Value:
-              max: 60
-              value: 60
-              percent: 60
+              Max: 60
+              Value: 60
+              Percent: 60
           - Key: Moderate
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Forest
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 75
-              value: 75
-              percent: 75
+              Max: 75
+              Value: 75
+              Percent: 75
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 10
-              value: 10
-              percent: 10
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 10
-      name: "\u0413\u0438\u043C\u0430\u043B\u0430\u0438"
-      flora:
+              Max: 10
+              Value: 10
+              Percent: 10
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 10
+      Name: "\u0413\u0438\u043C\u0430\u043B\u0430\u0438"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 10
-              value: 10
-              percent: 100
-      fauna:
+              Max: 10
+              Value: 10
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 20
-              value: 20
-              percent: 100
-      climate:
+              Max: 20
+              Value: 20
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Moderate
             Value:
-              max: 90
-              value: 90
-              percent: 90
+              Max: 90
+              Value: 90
+              Percent: 90
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Forest
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Desert
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Mountain
             Value:
-              max: 90
-              value: 90
-              percent: 90
+              Max: 90
+              Value: 90
+              Percent: 90
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 11
-      name: "\u042E\u0436\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 11
+      Name: "\u042E\u0436\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      fauna:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 90
-              value: 90
-              percent: 90
+              Max: 90
+              Value: 90
+              Percent: 90
           - Key: Moderate
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Forest
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Desert
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Mountain
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Steppe
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 12
-      name: "\u0421\u0435\u0432\u0435\u0440\u043E-\u0417\u0430\u043F\u0430\u0434\u043D\u044B\u0435
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 12
+      Name: "\u0421\u0435\u0432\u0435\u0440\u043E-\u0417\u0430\u043F\u0430\u0434\u043D\u044B\u0435
         \u0422\u0435\u0440\u0440\u0438\u0442\u043E\u0440\u0438\u0438"
-      flora:
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 5
-              value: 5
-              percent: 100
-      fauna:
+              Max: 5
+              Value: 5
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 35
-              value: 35
-              percent: 100
-      climate:
+              Max: 35
+              Value: 35
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Polar
             Value:
-              max: 70
-              value: 70
-              percent: 70
-      terrain:
+              Max: 70
+              Value: 70
+              Percent: 70
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Forest
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 70
-              value: 70
-              percent: 70
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 13
-      name: "\u0410\u043B\u044C\u043F\u044B"
-      flora:
+              Max: 70
+              Value: 70
+              Percent: 70
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 13
+      Name: "\u0410\u043B\u044C\u043F\u044B"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 20
-              value: 20
-              percent: 100
-      fauna:
+              Max: 20
+              Value: 20
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      climate:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 95
-              value: 95
-              percent: 95
+              Max: 95
+              Value: 95
+              Percent: 95
           - Key: Polar
             Value:
-              max: 5
-              value: 5
-              percent: 5
-      terrain:
+              Max: 5
+              Value: 5
+              Percent: 5
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Forest
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 80
-              value: 80
-              percent: 80
+              Max: 80
+              Value: 80
+              Percent: 80
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 14
-      name: "\u041A\u0438\u0442\u0430\u0439"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 14
+      Name: "\u041A\u0438\u0442\u0430\u0439"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 90
-              value: 90
-              percent: 100
-      fauna:
+              Max: 90
+              Value: 90
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Moderate
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 75
-              value: 75
-              percent: 75
+              Max: 75
+              Value: 75
+              Percent: 75
           - Key: Forest
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 15
-      name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 15
+      Name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      fauna:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 60
-              value: 60
-              percent: 100
-      climate:
+              Max: 60
+              Value: 60
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 90
-              value: 90
-              percent: 90
+              Max: 90
+              Value: 90
+              Percent: 90
           - Key: Tropical
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Forest
             Value:
-              max: 60
-              value: 60
-              percent: 60
+              Max: 60
+              Value: 60
+              Percent: 60
           - Key: Desert
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Mountain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 16
-      name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0415\u0432\u0440\u043E\u043F\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 16
+      Name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0415\u0432\u0440\u043E\u043F\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 60
-              value: 60
-              percent: 100
-      fauna:
+              Max: 60
+              Value: 60
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 100
-              value: 100
-              percent: 100
+              Max: 100
+              Value: 100
+              Percent: 100
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Forest
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 17
-      name: "\u0412\u043E\u0441\u0442\u043E\u0447\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 17
+      Name: "\u0412\u043E\u0441\u0442\u043E\u0447\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      fauna:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 80
-              value: 80
-              percent: 80
+              Max: 80
+              Value: 80
+              Percent: 80
           - Key: Tropical
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Forest
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Desert
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Mountain
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 18
-      name: "\u0421\u0435\u0432\u0435\u0440\u043D\u0430\u044F \u0415\u0432\u0440\u043E\u043F\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 18
+      Name: "\u0421\u0435\u0432\u0435\u0440\u043D\u0430\u044F \u0415\u0432\u0440\u043E\u043F\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 5
-              value: 5
-              percent: 100
-      fauna:
+              Max: 5
+              Value: 5
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 35
-              value: 35
-              percent: 100
-      climate:
+              Max: 35
+              Value: 35
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 60
-              value: 60
-              percent: 60
+              Max: 60
+              Value: 60
+              Percent: 60
           - Key: Polar
             Value:
-              max: 40
-              value: 40
-              percent: 40
-      terrain:
+              Max: 40
+              Value: 40
+              Percent: 40
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Forest
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 60
-              value: 60
-              percent: 60
+              Max: 60
+              Value: 60
+              Percent: 60
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 20
-              value: 20
-              percent: 20
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 19
-      name: "\u0421\u0435\u0432\u0435\u0440\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
-      flora:
+              Max: 20
+              Value: 20
+              Percent: 20
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 19
+      Name: "\u0421\u0435\u0432\u0435\u0440\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 60
-              value: 60
-              percent: 100
-      fauna:
+              Max: 60
+              Value: 60
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      climate:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Tropical
             Value:
-              max: 80
-              value: 80
-              percent: 80
+              Max: 80
+              Value: 80
+              Percent: 80
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 50
-              value: 50
-              percent: 50
+              Max: 50
+              Value: 50
+              Percent: 50
           - Key: Forest
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Desert
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Mountain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 20
-      name: "\u041D\u0438\u043B"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 20
+      Name: "\u041D\u0438\u043B"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 80
-              value: 80
-              percent: 100
-      fauna:
+              Max: 80
+              Value: 80
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      climate:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Tropical
             Value:
-              max: 70
-              value: 70
-              percent: 70
+              Max: 70
+              Value: 70
+              Percent: 70
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 70
-              value: 70
-              percent: 70
+              Max: 70
+              Value: 70
+              Percent: 70
           - Key: Forest
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Desert
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Mountain
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 21
-      name: "\u0418\u0431\u0435\u0440\u0438\u044F"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 21
+      Name: "\u0418\u0431\u0435\u0440\u0438\u044F"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      fauna:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 35
-              value: 35
-              percent: 100
-      climate:
+              Max: 35
+              Value: 35
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 60
-              value: 60
-              percent: 60
+              Max: 60
+              Value: 60
+              Percent: 60
           - Key: Moderate
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Forest
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 60
-              value: 60
-              percent: 60
+              Max: 60
+              Value: 60
+              Percent: 60
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 22
-      name: "\u041F\u0440\u0438\u0431\u0430\u043B\u0442\u0438\u043A\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 22
+      Name: "\u041F\u0440\u0438\u0431\u0430\u043B\u0442\u0438\u043A\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      fauna:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 10
-              value: 10
-              percent: 100
-      climate:
+              Max: 10
+              Value: 10
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 95
-              value: 95
-              percent: 95
+              Max: 95
+              Value: 95
+              Percent: 95
           - Key: Polar
             Value:
-              max: 5
-              value: 5
-              percent: 5
-      terrain:
+              Max: 5
+              Value: 5
+              Percent: 5
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 60
-              value: 60
-              percent: 60
+              Max: 60
+              Value: 60
+              Percent: 60
           - Key: Forest
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 23
-      name: "\u041A\u0430\u0440\u0435\u043B\u0438\u044F"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 23
+      Name: "\u041A\u0430\u0440\u0435\u043B\u0438\u044F"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 5
-              value: 5
-              percent: 100
-      fauna:
+              Max: 5
+              Value: 5
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 35
-              value: 35
-              percent: 100
-      climate:
+              Max: 35
+              Value: 35
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Polar
             Value:
-              max: 60
-              value: 60
-              percent: 60
-      terrain:
+              Max: 60
+              Value: 60
+              Percent: 60
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Forest
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 35
-              value: 35
-              percent: 35
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 24
-      name: "\u0417\u0430\u043F\u0430\u0434\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
-      flora:
+              Max: 35
+              Value: 35
+              Percent: 35
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 24
+      Name: "\u0417\u0430\u043F\u0430\u0434\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 50
-              value: 50
-              percent: 100
-      fauna:
+              Max: 50
+              Value: 50
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 85
-              value: 85
-              percent: 85
+              Max: 85
+              Value: 85
+              Percent: 85
           - Key: Tropical
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Forest
             Value:
-              max: 85
-              value: 85
-              percent: 85
+              Max: 85
+              Value: 85
+              Percent: 85
           - Key: Desert
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Mountain
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 25
-      name: "\u0417\u0430\u043F\u0430\u0434\u043D\u0430\u044F \u0415\u0432\u0440\u043E\u043F\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 25
+      Name: "\u0417\u0430\u043F\u0430\u0434\u043D\u0430\u044F \u0415\u0432\u0440\u043E\u043F\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 60
-              value: 60
-              percent: 100
-      fauna:
+              Max: 60
+              Value: 60
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 70
-              value: 70
-              percent: 100
-      climate:
+              Max: 70
+              Value: 70
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 100
-              value: 100
-              percent: 100
+              Max: 100
+              Value: 100
+              Percent: 100
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 60
-              value: 60
-              percent: 60
+              Max: 60
+              Value: 60
+              Percent: 60
           - Key: Forest
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 5
-              value: 5
-              percent: 5
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 26
-      name: "\u042F\u043F\u043E\u043D\u0438\u044F"
-      flora:
+              Max: 5
+              Value: 5
+              Percent: 5
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 26
+      Name: "\u042F\u043F\u043E\u043D\u0438\u044F"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      fauna:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 20
-              value: 20
-              percent: 100
-      climate:
+              Max: 20
+              Value: 20
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Moderate
             Value:
-              max: 80
-              value: 80
-              percent: 80
+              Max: 80
+              Value: 80
+              Percent: 80
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Forest
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 27
-      name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0412\u0435\u043B\u0438\u043A\u0430\u044F
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 27
+      Name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0412\u0435\u043B\u0438\u043A\u0430\u044F
         \u0421\u0442\u0435\u043F\u044C"
-      flora:
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 10
-              value: 10
-              percent: 100
-      fauna:
+              Max: 10
+              Value: 10
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 70
-              value: 70
-              percent: 100
-      climate:
+              Max: 70
+              Value: 70
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 95
-              value: 95
-              percent: 95
+              Max: 95
+              Value: 95
+              Percent: 95
           - Key: Polar
             Value:
-              max: 5
-              value: 5
-              percent: 5
-      terrain:
+              Max: 5
+              Value: 5
+              Percent: 5
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Forest
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Desert
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 65
-              value: 65
-              percent: 65
+              Max: 65
+              Value: 65
+              Percent: 65
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 28
-      name: "\u042E\u0433\u043E-\u0412\u043E\u0441\u0442\u043E\u0447\u043D\u0430\u044F
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 28
+      Name: "\u042E\u0433\u043E-\u0412\u043E\u0441\u0442\u043E\u0447\u043D\u0430\u044F
         \u0410\u0437\u0438\u044F"
-      flora:
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 70
-              value: 70
-              percent: 100
-      fauna:
+              Max: 70
+              Value: 70
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 50
-              value: 50
-              percent: 100
-      climate:
+              Max: 50
+              Value: 50
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 75
-              value: 75
-              percent: 75
+              Max: 75
+              Value: 75
+              Percent: 75
           - Key: Tropical
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Forest
             Value:
-              max: 65
-              value: 65
-              percent: 65
+              Max: 65
+              Value: 65
+              Percent: 65
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 29
-      name: "\u041C\u0430\u0434\u0430\u0433\u0430\u0441\u043A\u0430\u0440"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 29
+      Name: "\u041C\u0430\u0434\u0430\u0433\u0430\u0441\u043A\u0430\u0440"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 50
-              value: 50
-              percent: 100
-      fauna:
+              Max: 50
+              Value: 50
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Tropical
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Forest
             Value:
-              max: 75
-              value: 75
-              percent: 75
+              Max: 75
+              Value: 75
+              Percent: 75
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 30
-      name: "\u0421\u0430\u0445\u0430\u0440\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 30
+      Name: "\u0421\u0430\u0445\u0430\u0440\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 5
-              value: 5
-              percent: 100
-      fauna:
+              Max: 5
+              Value: 5
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 3
-              value: 3
-              percent: 100
-      climate:
+              Max: 3
+              Value: 3
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 70
-              value: 70
-              percent: 70
+              Max: 70
+              Value: 70
+              Percent: 70
           - Key: Tropical
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Forest
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Desert
             Value:
-              max: 75
-              value: 75
-              percent: 75
+              Max: 75
+              Value: 75
+              Percent: 75
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 31
-      name: "\u0412\u043E\u0441\u0442\u043E\u0447\u043D\u0430\u044F \u0412\u0435\u043B\u0438\u043A\u0430\u044F
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 31
+      Name: "\u0412\u043E\u0441\u0442\u043E\u0447\u043D\u0430\u044F \u0412\u0435\u043B\u0438\u043A\u0430\u044F
         \u0421\u0442\u0435\u043F\u044C"
-      flora:
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 5
-              value: 5
-              percent: 100
-      fauna:
+              Max: 5
+              Value: 5
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 75
-              value: 75
-              percent: 100
-      climate:
+              Max: 75
+              Value: 73
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 95
-              value: 95
-              percent: 95
+              Max: 95
+              Value: 95
+              Percent: 95
           - Key: Polar
             Value:
-              max: 5
-              value: 5
-              percent: 5
-      terrain:
+              Max: 5
+              Value: 5
+              Percent: 5
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Forest
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Desert
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 75
-              value: 75
-              percent: 75
+              Max: 75
+              Value: 75
+              Percent: 75
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 32
-      name: "\u0410\u0440\u0430\u0432\u0438\u044F"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList:
+      - Uncivilized
+      Marker: {fileID: 0}
+    - Id: 32
+      Name: "\u0410\u0440\u0430\u0432\u0438\u044F"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 20
-              value: 20
-              percent: 100
-      fauna:
+              Max: 20
+              Value: 20
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 10
-              value: 10
-              percent: 100
-      climate:
+              Max: 10
+              Value: 10
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Tropical
             Value:
-              max: 80
-              value: 80
-              percent: 80
+              Max: 80
+              Value: 80
+              Percent: 80
           - Key: Moderate
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Forest
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Desert
             Value:
-              max: 80
-              value: 80
-              percent: 80
+              Max: 80
+              Value: 80
+              Percent: 80
           - Key: Mountain
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 33
-      name: "\u0414\u0430\u043B\u044C\u043D\u0438\u0439 \u0412\u043E\u0441\u0442\u043E\u043A"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 33
+      Name: "\u0414\u0430\u043B\u044C\u043D\u0438\u0439 \u0412\u043E\u0441\u0442\u043E\u043A"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      fauna:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 65
-              value: 65
-              percent: 65
+              Max: 65
+              Value: 65
+              Percent: 65
           - Key: Polar
             Value:
-              max: 35
-              value: 35
-              percent: 35
-      terrain:
+              Max: 35
+              Value: 35
+              Percent: 35
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Forest
             Value:
-              max: 50
-              value: 50
-              percent: 50
+              Max: 50
+              Value: 50
+              Percent: 50
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 10
-              value: 10
-              percent: 10
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 34
-      name: "\u0417\u0430\u043F\u0430\u0434\u043D\u0430\u044F \u0412\u0435\u043B\u0438\u043A\u0430\u044F
+              Max: 10
+              Value: 10
+              Percent: 10
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 34
+      Name: "\u0417\u0430\u043F\u0430\u0434\u043D\u0430\u044F \u0412\u0435\u043B\u0438\u043A\u0430\u044F
         \u0421\u0442\u0435\u043F\u044C"
-      flora:
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      fauna:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 70
-              value: 70
-              percent: 100
-      climate:
+              Max: 70
+              Value: 70
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 100
-              value: 100
-              percent: 100
+              Max: 100
+              Value: 100
+              Percent: 100
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Forest
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 50
-              value: 50
-              percent: 50
+              Max: 50
+              Value: 50
+              Percent: 50
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 35
-      name: "\u0421\u0435\u0432\u0435\u0440\u043D\u044B\u0435 \u0410\u043D\u0434\u044B"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 35
+      Name: "\u0421\u0435\u0432\u0435\u0440\u043D\u044B\u0435 \u0410\u043D\u0434\u044B"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 20
-              value: 20
-              percent: 100
-      fauna:
+              Max: 20
+              Value: 20
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 30
-              value: 30
-              percent: 100
-      climate:
+              Max: 30
+              Value: 30
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 90
-              value: 90
-              percent: 90
+              Max: 90
+              Value: 90
+              Percent: 90
           - Key: Tropical
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Forest
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 70
-              value: 70
-              percent: 70
+              Max: 70
+              Value: 70
+              Percent: 70
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 36
-      name: "\u0411\u043B\u0438\u0436\u043D\u0438\u0439 \u0412\u043E\u0441\u0442\u043E\u043A"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 36
+      Name: "\u0411\u043B\u0438\u0436\u043D\u0438\u0439 \u0412\u043E\u0441\u0442\u043E\u043A"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 100
-              value: 100
-              percent: 100
-      fauna:
+              Max: 100
+              Value: 100
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 70
-              value: 70
-              percent: 70
+              Max: 70
+              Value: 70
+              Percent: 70
           - Key: Moderate
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 65
-              value: 65
-              percent: 65
+              Max: 65
+              Value: 65
+              Percent: 65
           - Key: Forest
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Desert
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Mountain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 37
-      name: "\u0421\u0435\u0432\u0435\u0440\u043D\u044B\u0439 \u0423\u0440\u0430\u043B"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 37
+      Name: "\u0421\u0435\u0432\u0435\u0440\u043D\u044B\u0439 \u0423\u0440\u0430\u043B"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 10
-              value: 10
-              percent: 100
-      fauna:
+              Max: 10
+              Value: 10
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Polar
             Value:
-              max: 55
-              value: 55
-              percent: 55
-      terrain:
+              Max: 55
+              Value: 55
+              Percent: 55
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Forest
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 35
-              value: 35
-              percent: 35
+              Max: 35
+              Value: 35
+              Percent: 35
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 40
-              value: 40
-              percent: 40
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 38
-      name: "\u0423\u0440\u0430\u043B"
-      flora:
+              Max: 40
+              Value: 40
+              Percent: 40
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 38
+      Name: "\u0423\u0440\u0430\u043B"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 20
-              value: 20
-              percent: 100
-      fauna:
+              Max: 20
+              Value: 20
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 80
-              value: 80
-              percent: 80
+              Max: 80
+              Value: 80
+              Percent: 80
           - Key: Polar
             Value:
-              max: 20
-              value: 20
-              percent: 20
-      terrain:
+              Max: 20
+              Value: 20
+              Percent: 20
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Forest
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Steppe
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Tundra
             Value:
-              max: 5
-              value: 5
-              percent: 5
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 39
-      name: "\u0421\u0438\u0431\u0438\u0440\u044C"
-      flora:
+              Max: 5
+              Value: 5
+              Percent: 5
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 39
+      Name: "\u0421\u0438\u0431\u0438\u0440\u044C"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 10
-              value: 10
-              percent: 100
-      fauna:
+              Max: 10
+              Value: 10
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 50
-              value: 50
-              percent: 100
-      climate:
+              Max: 50
+              Value: 50
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Polar
             Value:
-              max: 55
-              value: 55
-              percent: 55
-      terrain:
+              Max: 55
+              Value: 55
+              Percent: 55
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Forest
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Steppe
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Tundra
             Value:
-              max: 35
-              value: 35
-              percent: 35
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 40
-      name: "\u0410\u043B\u0442\u0430\u0439"
-      flora:
+              Max: 35
+              Value: 35
+              Percent: 35
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 40
+      Name: "\u0410\u043B\u0442\u0430\u0439"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 20
-              value: 20
-              percent: 100
-      fauna:
+              Max: 20
+              Value: 20
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 20
-              value: 20
-              percent: 100
-      climate:
+              Max: 20
+              Value: 20
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Polar
             Value:
-              max: 60
-              value: 60
-              percent: 60
-      terrain:
+              Max: 60
+              Value: 60
+              Percent: 60
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Forest
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Steppe
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Tundra
             Value:
-              max: 15
-              value: 15
-              percent: 15
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 41
-      name: "\u0421\u0435\u0432\u0435\u0440\u043D\u0430\u044F \u0410\u0442\u043B\u0430\u043D\u0442\u0438\u043A\u0430"
-      flora:
+              Max: 15
+              Value: 15
+              Percent: 15
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 41
+      Name: "\u0421\u0435\u0432\u0435\u0440\u043D\u0430\u044F \u0410\u0442\u043B\u0430\u043D\u0442\u0438\u043A\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 5
-              value: 5
-              percent: 100
-      fauna:
+              Max: 5
+              Value: 5
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 10
-              value: 10
-              percent: 100
-      climate:
+              Max: 10
+              Value: 10
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Polar
             Value:
-              max: 55
-              value: 55
-              percent: 55
-      terrain:
+              Max: 55
+              Value: 55
+              Percent: 55
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Forest
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 60
-              value: 60
-              percent: 60
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 42
-      name: "\u0410\u043D\u0442\u0438\u043B\u044C\u0441\u043A\u0438\u0435 \u043E\u0441\u0442\u0440\u043E\u0432\u0430"
-      flora:
+              Max: 60
+              Value: 60
+              Percent: 60
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 42
+      Name: "\u0410\u043D\u0442\u0438\u043B\u044C\u0441\u043A\u0438\u0435 \u043E\u0441\u0442\u0440\u043E\u0432\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 45
-              value: 45
-              percent: 100
-      fauna:
+              Max: 45
+              Value: 45
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 10
-              value: 10
-              percent: 100
-      climate:
+              Max: 10
+              Value: 10
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Tropical
             Value:
-              max: 80
-              value: 80
-              percent: 80
+              Max: 80
+              Value: 80
+              Percent: 80
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 65
-              value: 65
-              percent: 65
+              Max: 65
+              Value: 65
+              Percent: 65
           - Key: Forest
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 43
-      name: "\u0410\u043C\u0430\u0437\u043E\u043D\u0438\u044F"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 43
+      Name: "\u0410\u043C\u0430\u0437\u043E\u043D\u0438\u044F"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      fauna:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 70
-              value: 70
-              percent: 100
-      climate:
+              Max: 70
+              Value: 70
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 75
-              value: 75
-              percent: 75
+              Max: 75
+              Value: 75
+              Percent: 75
           - Key: Tropical
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Moderate
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Forest
             Value:
-              max: 80
-              value: 80
-              percent: 80
+              Max: 80
+              Value: 80
+              Percent: 80
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 44
-      name: "\u0410\u043F\u0435\u043D\u0438\u043D\u0441\u043A\u0438\u0439 \u041F\u043E\u043B\u0443\u043E\u0441\u0442\u0440\u043E\u0432"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 44
+      Name: "\u0410\u043F\u0435\u043D\u0438\u043D\u0441\u043A\u0438\u0439 \u041F\u043E\u043B\u0443\u043E\u0441\u0442\u0440\u043E\u0432"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 75
-              value: 75
-              percent: 100
-      fauna:
+              Max: 75
+              Value: 75
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Moderate
             Value:
-              max: 85
-              value: 85
-              percent: 85
+              Max: 85
+              Value: 85
+              Percent: 85
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Forest
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 45
-      name: "\u0410\u043B\u044F\u0441\u043A\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 45
+      Name: "\u0410\u043B\u044F\u0441\u043A\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 5
-              value: 5
-              percent: 100
-      fauna:
+              Max: 5
+              Value: 5
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 20
-              value: 20
-              percent: 100
-      climate:
+              Max: 20
+              Value: 20
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 25
-              value: 25
-              percent: 25
+              Max: 25
+              Value: 25
+              Percent: 25
           - Key: Polar
             Value:
-              max: 75
-              value: 75
-              percent: 75
-      terrain:
+              Max: 75
+              Value: 75
+              Percent: 75
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Forest
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Steppe
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Tundra
             Value:
-              max: 50
-              value: 50
-              percent: 50
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 46
-      name: "\u0421\u0435\u0432\u0435\u0440\u043E\u0430\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u043E\u0435
+              Max: 50
+              Value: 50
+              Percent: 50
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 46
+      Name: "\u0421\u0435\u0432\u0435\u0440\u043E\u0430\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u043E\u0435
         \u0417\u0430\u043F\u0430\u0434\u043D\u043E\u0435 \u041F\u043E\u0431\u0435\u0440\u0435\u0436\u044C\u0435"
-      flora:
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      fauna:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 25
-              value: 25
-              percent: 100
-      climate:
+              Max: 25
+              Value: 25
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Moderate
             Value:
-              max: 60
-              value: 60
-              percent: 60
+              Max: 60
+              Value: 60
+              Percent: 60
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Forest
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Desert
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Mountain
             Value:
-              max: 35
-              value: 35
-              percent: 35
+              Max: 35
+              Value: 35
+              Percent: 35
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 47
-      name: "\u041A\u043E\u0440\u0434\u0438\u043B\u044C\u0435\u0440\u044B"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 47
+      Name: "\u041A\u043E\u0440\u0434\u0438\u043B\u044C\u0435\u0440\u044B"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 10
-              value: 10
-              percent: 100
-      fauna:
+              Max: 10
+              Value: 10
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 35
-              value: 35
-              percent: 100
-      climate:
+              Max: 35
+              Value: 35
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 20
-              value: 20
-              percent: 20
+              Max: 20
+              Value: 20
+              Percent: 20
           - Key: Moderate
             Value:
-              max: 75
-              value: 75
-              percent: 75
+              Max: 75
+              Value: 75
+              Percent: 75
           - Key: Polar
             Value:
-              max: 5
-              value: 5
-              percent: 5
-      terrain:
+              Max: 5
+              Value: 5
+              Percent: 5
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Forest
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Desert
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Mountain
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Steppe
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 48
-      name: "\u0412\u0435\u043B\u0438\u043A\u0438\u0435 \u041E\u0437\u0451\u0440\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 48
+      Name: "\u0412\u0435\u043B\u0438\u043A\u0438\u0435 \u041E\u0437\u0451\u0440\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 45
-              value: 45
-              percent: 100
-      fauna:
+              Max: 45
+              Value: 45
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 90
-              value: 90
-              percent: 90
+              Max: 90
+              Value: 90
+              Percent: 90
           - Key: Polar
             Value:
-              max: 10
-              value: 10
-              percent: 10
-      terrain:
+              Max: 10
+              Value: 10
+              Percent: 10
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 50
-              value: 50
-              percent: 50
+              Max: 50
+              Value: 50
+              Percent: 50
           - Key: Forest
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Steppe
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Tundra
             Value:
-              max: 5
-              value: 5
-              percent: 5
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 49
-      name: "\u0412\u0435\u043B\u0438\u043A\u0438\u0435 \u0420\u0430\u0432\u043D\u0438\u043D\u044B"
-      flora:
+              Max: 5
+              Value: 5
+              Percent: 5
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 49
+      Name: "\u0412\u0435\u043B\u0438\u043A\u0438\u0435 \u0420\u0430\u0432\u043D\u0438\u043D\u044B"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 10
-              value: 10
-              percent: 100
-      fauna:
+              Max: 10
+              Value: 10
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 70
-              value: 70
-              percent: 100
-      climate:
+              Max: 70
+              Value: 70
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 100
-              value: 100
-              percent: 100
+              Max: 100
+              Value: 100
+              Percent: 100
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 30
-              value: 30
-              percent: 30
+              Max: 30
+              Value: 30
+              Percent: 30
           - Key: Forest
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Desert
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Mountain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Steppe
             Value:
-              max: 50
-              value: 50
-              percent: 50
+              Max: 50
+              Value: 50
+              Percent: 50
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 50
-      name: "\u0424\u043B\u043E\u0440\u0438\u0434\u0430"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 50
+      Name: "\u0424\u043B\u043E\u0440\u0438\u0434\u0430"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 60
-              value: 60
-              percent: 100
-      fauna:
+              Max: 60
+              Value: 60
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 35
-              value: 35
-              percent: 100
-      climate:
+              Max: 35
+              Value: 35
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Tropical
             Value:
-              max: 45
-              value: 45
-              percent: 45
+              Max: 45
+              Value: 45
+              Percent: 45
           - Key: Moderate
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Forest
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 51
-      name: "\u0411\u0430\u043B\u043A\u0430\u043D\u044B"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 51
+      Name: "\u0411\u0430\u043B\u043A\u0430\u043D\u044B"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 35
-              value: 35
-              percent: 100
-      fauna:
+              Max: 35
+              Value: 35
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 40
-              value: 40
-              percent: 100
-      climate:
+              Max: 40
+              Value: 40
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 100
-              value: 100
-              percent: 100
+              Max: 100
+              Value: 100
+              Percent: 100
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Forest
             Value:
-              max: 15
-              value: 15
-              percent: 15
+              Max: 15
+              Value: 15
+              Percent: 15
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 70
-              value: 70
-              percent: 70
+              Max: 70
+              Value: 70
+              Percent: 70
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 52
-      name: "\u041C\u0430\u043B\u0430\u044F \u0410\u0437\u0438\u044F"
-      flora:
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 52
+      Name: "\u041C\u0430\u043B\u0430\u044F \u0410\u0437\u0438\u044F"
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 70
-              value: 70
-              percent: 100
-      fauna:
+              Max: 70
+              Value: 70
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 50
-              value: 50
-              percent: 100
-      climate:
+              Max: 50
+              Value: 50
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 60
-              value: 60
-              percent: 60
+              Max: 60
+              Value: 60
+              Percent: 60
           - Key: Moderate
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Forest
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 50
-              value: 50
-              percent: 50
+              Max: 50
+              Value: 50
+              Percent: 50
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 53
-      name: "\u0421\u0435\u0432\u0435\u0440\u043E\u0430\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u043E\u0435
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 53
+      Name: "\u0421\u0435\u0432\u0435\u0440\u043E\u0430\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u043E\u0435
         \u0412\u043E\u0441\u0442\u043E\u0447\u043D\u043E\u0435 \u041F\u043E\u0431\u0435\u0440\u043A\u0436\u044C\u0435"
-      flora:
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 60
-              value: 60
-              percent: 100
-      fauna:
+              Max: 60
+              Value: 60
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 35
-              value: 35
-              percent: 100
-      climate:
+              Max: 35
+              Value: 35
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 35
-              value: 35
-              percent: 35
+              Max: 35
+              Value: 35
+              Percent: 35
           - Key: Moderate
             Value:
-              max: 65
-              value: 65
-              percent: 65
+              Max: 65
+              Value: 65
+              Percent: 65
           - Key: Polar
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      terrain:
+              Max: 0
+              Value: 0
+              Percent: 0
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 50
-              value: 50
-              percent: 50
+              Max: 50
+              Value: 50
+              Percent: 50
           - Key: Forest
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 10
-              value: 10
-              percent: 10
+              Max: 10
+              Value: 10
+              Percent: 10
           - Key: Steppe
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    - id: 54
-      name: "\u0412\u043E\u0441\u0442\u043E\u0447\u043D\u043E-\u0415\u0432\u0440\u043E\u043F\u0435\u0439\u0441\u043A\u0430\u044F
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    - Id: 54
+      Name: "\u0412\u043E\u0441\u0442\u043E\u0447\u043D\u043E-\u0415\u0432\u0440\u043E\u043F\u0435\u0439\u0441\u043A\u0430\u044F
         \u0420\u0430\u0432\u043D\u0438\u043D\u0430"
-      flora:
+      Flora:
         quantities:
           _serializedList:
           - Key: Flora
             Value:
-              max: 50
-              value: 50
-              percent: 100
-      fauna:
+              Max: 50
+              Value: 50
+              Percent: 100
+      Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              max: 25
-              value: 25
-              percent: 100
-      climate:
+              Max: 25
+              Value: 25
+              Percent: 100
+      Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Tropical
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Moderate
             Value:
-              max: 90
-              value: 90
-              percent: 90
+              Max: 90
+              Value: 90
+              Percent: 90
           - Key: Polar
             Value:
-              max: 10
-              value: 10
-              percent: 10
-      terrain:
+              Max: 10
+              Value: 10
+              Percent: 10
+      Terrain:
         quantities:
           _serializedList:
           - Key: Plain
             Value:
-              max: 55
-              value: 55
-              percent: 55
+              Max: 55
+              Value: 55
+              Percent: 55
           - Key: Forest
             Value:
-              max: 40
-              value: 40
-              percent: 40
+              Max: 40
+              Value: 40
+              Percent: 40
           - Key: Desert
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Mountain
             Value:
-              max: 0
-              value: 0
-              percent: 0
+              Max: 0
+              Value: 0
+              Percent: 0
           - Key: Steppe
             Value:
-              max: 5
-              value: 5
-              percent: 5
+              Max: 5
+              Value: 5
+              Percent: 5
           - Key: Tundra
             Value:
-              max: 0
-              value: 0
-              percent: 0
-      civsList: []
-      civPiecesList: []
-      marker: {fileID: 0}
-    wmsk: {fileID: 0}
+              Max: 0
+              Value: 0
+              Percent: 0
+      CivsList: []
+      Marker: {fileID: 0}
+    WMSK: {fileID: 0}

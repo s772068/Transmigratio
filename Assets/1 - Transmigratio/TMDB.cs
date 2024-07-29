@@ -4,8 +4,11 @@ using UnityEngine;
 //Не рефакторить
 [CreateAssetMenu(fileName = "TMDB", menuName = "ScriptableObjects/TMDB", order = 1)]
 public class TMDB : ScriptableObject {
+    public int startAge;
     public Humanity humanity = new();
     public Map map = new();
+
+    public int Year => startAge - Timeline.Instance.Tick * GameSettings.YearsByTick;
 
     public Dictionary<string, int> GetParam(int index, string name) => name switch {
         "Flora" => map.AllRegions[index].Flora.GetQuantities(),
