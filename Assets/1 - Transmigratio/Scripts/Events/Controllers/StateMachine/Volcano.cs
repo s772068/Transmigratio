@@ -41,17 +41,25 @@ namespace Events.Controllers.StateMachines {
             AddDesidion(Nothing, Local("Nothing"), () => 0);
         }
 
-        private void CalmVolcano() {
+        private bool CalmVolcano(Func<int> interventionPoints) {
+            if (!_useIntervention(interventionPoints()))
+                return false;
+
             ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "CalmVolcano");
             EndEvent();
+            return true;
         }
 
-        private void ReduceLosses() {
+        private bool ReduceLosses(Func<int> interventionPoints) {
+            if (!_useIntervention(interventionPoints()))
+                return false;
+
             _piece.Population.value -= (int) (_piece.Population.value * fullPercentFood * partPercentPopulation);
             _piece.ReserveFood -= _piece.ReserveFood * fullPercentFood * partPercentFood;
             Global.Migration.OnMigration(_piece);
             ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "ReduceLosses");
             EndEvent();
+            return true;
         }
 
         public void ActivateVolcano() {
@@ -62,8 +70,12 @@ namespace Events.Controllers.StateMachines {
             EndEvent();
         }
 
-        private void Nothing() {
+        private bool Nothing(Func<int> interventionPoints) {
+            if (!_useIntervention(interventionPoints()))
+                return false;
+
             ChroniclesController.AddPassive(Name, _piece.RegionID, panelSprite, "Nothing");
+            return true;
         }
 
         private void EndEvent() {

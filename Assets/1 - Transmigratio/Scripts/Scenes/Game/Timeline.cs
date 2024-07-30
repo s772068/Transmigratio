@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using UI;
 
 public class Timeline : PersistentSingleton<Timeline> {
     [SerializeField] private ButtonsRadioGroup _buttonsGroup;
@@ -45,8 +46,8 @@ public class Timeline : PersistentSingleton<Timeline> {
 
     private void OnDisable()
     {
-        EventPanel.PanelOpen -= _ => WindowsCount += 1;
-        EventPanel.PanelClose -= _ => WindowsCount -= 1;
+        Panel.PanelOpen -= _ => WindowsCount += 1;
+        Panel.PanelClose -= _ => WindowsCount -= 1;
     }
 
     public void Pause() {

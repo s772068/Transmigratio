@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using Events.Controllers;
+using UI;
 
 public class EventPanel : Panel {
 

@@ -31,6 +31,7 @@ namespace Events.Controllers {
         private protected Chronicles.Controller ChroniclesController => Chronicles.Controller.Instance;
         private protected Map Map => Transmigratio.Instance.TMDB.map;
         private protected WMSK WMSK => Map.WMSK;
+        private protected Func<int, bool> _useIntervention => Gameplay.Intervention.UseIntervention;
 
         private protected abstract void ActivateEvents();
         private protected abstract void DeactivateEvents();
@@ -50,7 +51,7 @@ namespace Events.Controllers {
             _desidions.Clear();
         }
 
-        private protected void AddDesidion(Action click, string title, Func<int> points)
+        private protected void AddDesidion(Func<Func<int>, bool> click, string title, Func<int> points)
         {
             _desidions.Add(new(click, title, points));
         }
