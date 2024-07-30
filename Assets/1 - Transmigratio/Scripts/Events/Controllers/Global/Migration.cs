@@ -134,7 +134,8 @@ namespace Events.Controllers.Global {
                 _fromPiece.AddEvent(this);
                 _toPiece.AddEvent(this);
                 OpenPanel();
-            } else _activeDesidion.ActionClick?.Invoke();
+            } 
+            else Events.AutoChoice.Events[this][0].ActionClick?.Invoke(Events.AutoChoice.Events[this][0].Cost);
         }
 
         private LineMarkerAnimator CreateLine(Vector2 start, Vector2 end) {
@@ -226,22 +227,34 @@ namespace Events.Controllers.Global {
             CreateMarker(start, end);
         }
 
-        private void Break() {
+        private bool Break(Func<int> interventionPoints) {
+            if (!_useIntervention(interventionPoints()))
+                return false;
+
             int fromID = _fromPiece.Region.Id;
             MigrationData data = _migrations[_fromPiece.Region.Id];
             _fromPiece.Population.value += data.FullPopulations - data.CurPopulations;
             ChroniclesController.Deactivate(Name, _fromPiece.RegionID, panelSprite, "Break");
             RemoveMigration(fromID);
+            return true;
         }
 
-        private void Nothing() {
+        private bool Nothing(Func<int> interventionPoints) {
+            if (!_useIntervention(interventionPoints()))
+                return false;
+
             ChroniclesController.AddPassive(Name, _fromPiece.RegionID, panelSprite, "Nothing");
+            return true;
         }
 
-        private void SpeedUp() {
+        private bool SpeedUp(Func<int> interventionPoints) {
+            if (!_useIntervention(interventionPoints()))
+                return false;
+
             int fromID = _fromPiece.Region.Id;
             _migrations[fromID].StepPopulations *= 2;
             ChroniclesController.Deactivate(Name, _fromPiece.RegionID, panelSprite, "SpeedUp");
+            return true;
         }
 
         private T GetMax<T>(List<T> list, Func<T, int> GetValue) {

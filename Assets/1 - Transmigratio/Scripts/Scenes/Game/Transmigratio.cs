@@ -1,3 +1,4 @@
+using Gameplay;
 using UnityEngine;
 using WorldMapStrategyKit;
 
@@ -10,12 +11,15 @@ using WorldMapStrategyKit;
 public class Transmigratio : PersistentSingleton<Transmigratio> {
     [SerializeField] private TMDB _tmdb;            // база данных ScriptableObjects
     [SerializeField] private HUD _hud;
+    [SerializeField] private int _intervetionPoints = 100;
 
+    private Intervention _intervention;
     private int _activeRegion;
     private bool _isClickableMarker = true;
 
     public TMDB TMDB => _tmdb;
-    
+    public Intervention Intervention => _intervention;
+
     public bool IsClickableMarker {
         get => _isClickableMarker;
         set {
@@ -52,6 +56,8 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
         TMDB.map.WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
         TMDB.map.WMSK.OnMarkerMouseEnter += OnMarkerEnter;
         TMDB.map.WMSK.OnMarkerMouseExit += OnMarkerExit;
+
+        _intervention = new Intervention(_intervetionPoints);
     }
 
     private void OnClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {

@@ -42,29 +42,35 @@ namespace Events.Controllers.Local {
             AddDesidion(Nothing, Local("Nothing"), () => 0);
         }
 
-        private void AddFood(Func<int> interventionPoints)
+        private bool AddFood(Func<int> interventionPoints)
         {
-            if (_intervention.InterventionPoints < interventionPoints())
-                return;
+            if (!_useIntervention(interventionPoints()))
+                return false;
 
             selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson;
             ChroniclesController.Deactivate(Name, selectedPiece.RegionID, panelSprite, "AddFood");
             RemoveEvent(selectedPiece);
+            return true;
         }
 		
-        private void AddSomeFood(Func<int> interventionPoints)
+        private bool AddSomeFood(Func<int> interventionPoints)
         {
-            if (_intervention.InterventionPoints < interventionPoints())
-                return;
+            if (!_useIntervention(interventionPoints()))
+                return false;
 
             selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson / 2;
             ChroniclesController.Deactivate(Name, selectedPiece.RegionID, panelSprite, "AddSomeFood");
             RemoveEvent(selectedPiece);
+            return true;
         }
 
-        private void Nothing(Func<int> interventionPoints) {
+        private bool Nothing(Func<int> interventionPoints) {
+            if (!_useIntervention(interventionPoints()))
+                return false;
+
             ChroniclesController.AddPassive(Name, selectedPiece.RegionID, panelSprite, "Nothing");
             RemoveEvent(selectedPiece);
+            return true;
         }
     }
 }
