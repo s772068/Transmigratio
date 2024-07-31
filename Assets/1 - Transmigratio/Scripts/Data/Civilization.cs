@@ -37,8 +37,6 @@ public class Civilization {
         Government.Init("Leaderism", "Monarchy", "CityState", "Imperium", "Federation", "NationalState", "Anarchy");
 
         Debug.Log("Civilization init. \rpopulation:" + Population + "\rregionID:" + region);
-
-        Timeline.TickLogic += UpdatePieces;
     }
 
     /// <summary>
@@ -60,10 +58,9 @@ public class Civilization {
         Pieces.Remove(region);
     }
 
-    public void UpdatePieces() {
+    public void Play() {
         for (int i = 0; i < Pieces.Count; ++i) {
-            Pieces.ElementAt(i).Value.DeltaPop();
+            Pieces.ElementAt(i).Value.Play();
         }
     }
-
 }

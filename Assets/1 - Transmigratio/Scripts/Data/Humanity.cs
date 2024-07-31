@@ -1,4 +1,5 @@
 using AYellowpaper.SerializedCollections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ using GlobalEvents = Events.Controllers.Global;
 [System.Serializable]
 public class Humanity {
     public SerializedDictionary<string, Civilization> Civilizations;
+    public List<Gameplay.Scenarios.Base> scenarios;
 
     public int TotalEarthPop => Civilizations.Sum(x => x.Value.Population) + GlobalEvents.Migration.GetPopulation();
 
@@ -17,6 +19,8 @@ public class Humanity {
         Civilizations = new();
         Civilizations.Clear();
         Debug.Log("Humanity init");
+
+        Timeline.TickLogic += Play;
     }
 
     /// <summary>
@@ -27,5 +31,17 @@ public class Humanity {
         newCiv.Init(region, civName);
         Civilizations[civName] = newCiv;
         return newCiv;
+    }
+
+    public void GamePlay(CivPiece piece) {
+        for (int i = 0; i < scenarios.Count; ++i) {
+            scenarios[i].Play(piece);
+        }
+    }
+
+    public void Play() {
+        for (int i = 0; i < Civilizations.Count; ++i) {
+            Civilizations.ElementAt(i).Value.Play();
+        }
     }
 }
