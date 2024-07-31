@@ -55,5 +55,5 @@ public class CivPiece {
 
     public void AddEvent(Events.Controllers.Base e) => events.Add(e);
     public void RemoveEvent(Events.Controllers.Base e) => events.Remove(e);
-    public void Play() => TMDB.humanity.GamePlay(this);
+    public void Play() => Gameplay.Controller.GamePlay(this);
 }

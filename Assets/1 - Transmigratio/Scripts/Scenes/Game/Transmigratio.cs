@@ -1,6 +1,6 @@
-using Gameplay;
-using UnityEngine;
 using WorldMapStrategyKit;
+using UnityEngine;
+using Gameplay;
 
 //using UnityEditor.Localization.Plugins.XLIFF.V12;
 /// <summary>
@@ -56,6 +56,8 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
         TMDB.map.WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
         TMDB.map.WMSK.OnMarkerMouseEnter += OnMarkerEnter;
         TMDB.map.WMSK.OnMarkerMouseExit += OnMarkerExit;
+
+        Gameplay.Controller.Init();
 
         _intervention = new Intervention(_intervetionPoints);
     }

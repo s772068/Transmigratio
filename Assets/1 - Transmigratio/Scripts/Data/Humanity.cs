@@ -33,12 +33,6 @@ public class Humanity {
         return newCiv;
     }
 
-    public void GamePlay(CivPiece piece) {
-        for (int i = 0; i < scenarios.Count; ++i) {
-            scenarios[i].Play(piece);
-        }
-    }
-
     public void Play() {
         for (int i = 0; i < Civilizations.Count; ++i) {
             Civilizations.ElementAt(i).Value.Play();
