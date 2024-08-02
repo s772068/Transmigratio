@@ -27,12 +27,12 @@ public class AutoChoicePanel : Panel
     public static event Action<Events.Controllers.Base, List<Desidion>, bool> AutoChoiceUpdate;
     public static event Action<Events.Controllers.Base, bool> AutoChoiceModeUpdate;
 
-    private void OnEnable()
+    private protected override void OnEnable()
     {
+        base.OnEnable();
         AddChoiceElement();
         DragPanelControl.DragElementsSorted += OnPriorityUpdate;
         AutoChoiceElement.SelectElement += OnSelectEvent;
-        PanelOpen?.Invoke(true);
     }
 
     private void Start()
@@ -47,11 +47,11 @@ public class AutoChoicePanel : Panel
             OnSelectEvent(selectEvent);
     }
 
-    private void OnDisable()
+    private protected override void OnDisable()
     {
+        base.OnDisable();
         DragPanelControl.DragElementsSorted -= OnPriorityUpdate;
         AutoChoiceElement.SelectElement -= OnSelectEvent;
-        PanelClose?.Invoke(true);
     }
 
     private void AddChoiceElement()

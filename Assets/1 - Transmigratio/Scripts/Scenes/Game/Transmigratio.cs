@@ -1,6 +1,7 @@
 using WorldMapStrategyKit;
 using UnityEngine;
 using Gameplay;
+using System;
 
 //using UnityEditor.Localization.Plugins.XLIFF.V12;
 /// <summary>
@@ -19,7 +20,8 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
 
     public TMDB TMDB => _tmdb;
     public Intervention Intervention => _intervention;
-    
+    public static event Action GameStarted;
+
     public bool IsClickableMarker {
         get => _isClickableMarker;
         set {
@@ -44,6 +46,7 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
         TMDB.StartGame(_activeRegion);
         _hud.ShowRegionDetails(_activeRegion);
         Timeline.Instance.Pause();
+        GameStarted?.Invoke();
     }
 
     public new void Awake() {

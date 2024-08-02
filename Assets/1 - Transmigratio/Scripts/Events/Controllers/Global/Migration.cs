@@ -28,9 +28,9 @@ namespace Events.Controllers.Global {
         public static Func<int> GetPopulation;
 
         private protected override string Name => "Migration";
-        private protected override string Territory => Local("Territory1") + " " +
+        private protected override string Territory(CivPiece piece) => Local("Territory1") + " " +
                               $"<color=#{regionColor.ToHexString()}>" +
-                              _fromPiece.Region.Name + "</color> " +
+                              piece.Region.Name + "</color> " +
                               Local("Territory2") + " " +
                               $"<color=#{regionColor.ToHexString()}>" +
                               _toPiece.Region.Name + "</color> ";
@@ -53,16 +53,16 @@ namespace Events.Controllers.Global {
             Events.AutoChoice.RemoveEvent(this);
         }
 
-        private protected override void OpenPanel()
+        private protected override void OpenPanel(CivPiece piece)
         {
-            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, panelSprite, Local("Title"),
-                                    Territory, Local("Description"), _desidions);
+            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, piece, panelSprite, Local("Title"),
+                                    Territory(piece), Local("Description"), _desidions);
         }
 
         private protected override void InitDesidions() {
-            AddDesidion(Break, Local("Break"), () => breakPoints);
-            AddDesidion(Nothing, Local("Nothing"), () => 0);
-            AddDesidion(SpeedUp, Local("SpeedUp"), () => speedUpPoints);
+            AddDesidion(Break, Local("Break"), (piece) => breakPoints);
+            AddDesidion(Nothing, Local("Nothing"), (piece) => 0);
+            AddDesidion(SpeedUp, Local("SpeedUp"), (piece) => speedUpPoints);
         }
 
         public void TryMigration(CivPiece civPiece) {
@@ -133,9 +133,9 @@ namespace Events.Controllers.Global {
             if (!AutoChoice) {
                 _fromPiece.AddEvent(this);
                 _toPiece.AddEvent(this);
-                OpenPanel();
+                OpenPanel(_fromPiece);
             } 
-            else Events.AutoChoice.Events[this][0].ActionClick?.Invoke(Events.AutoChoice.Events[this][0].Cost);
+            else Events.AutoChoice.Events[this][0].ActionClick?.Invoke(_fromPiece, Events.AutoChoice.Events[this][0].CostFunc);
         }
 
         private LineMarkerAnimator CreateLine(Vector2 start, Vector2 end) {
@@ -214,47 +214,55 @@ namespace Events.Controllers.Global {
         private void RemoveMigration(int index) {
             Debug.Log("RemoveMigration");
             _migrations[index].Line.Destroy();
-            _migrations[index].Marker.Destroy();
+            DestroyMarker(index);
             _fromPiece.RemoveEvent(this);
             _toPiece.RemoveEvent(this);
             _migrations.Remove(index);
         }
 
         private protected override void CreateMarker(CivPiece piece = null) {
-            if (!_migrations.ContainsKey(_fromPiece.RegionID)) return;
-            Vector2 start = WMSK.countries[_fromPiece.RegionID].center;
+            if (!_migrations.ContainsKey(piece.RegionID)) return;
+            Vector2 start = WMSK.countries[piece.RegionID].center;
             Vector2 end = WMSK.countries[_toPiece.RegionID].center;
             CreateMarker(start, end);
         }
 
-        private bool Break(Func<int> interventionPoints) {
-            if (!_useIntervention(interventionPoints()))
+        private bool Break(CivPiece piece, Func<CivPiece, int> interventionPoints) {
+            if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            int fromID = _fromPiece.Region.Id;
-            MigrationData data = _migrations[_fromPiece.Region.Id];
-            _fromPiece.Population.value += data.FullPopulations - data.CurPopulations;
-            ChroniclesController.Deactivate(Name, _fromPiece.RegionID, panelSprite, "Break");
+            int fromID = piece.Region.Id;
+            MigrationData data = _migrations[piece.Region.Id];
+            piece.Population.value += data.FullPopulations - data.CurPopulations;
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "Break");
             RemoveMigration(fromID);
             return true;
         }
 
-        private bool Nothing(Func<int> interventionPoints) {
-            if (!_useIntervention(interventionPoints()))
+        private bool Nothing(CivPiece piece, Func<CivPiece, int> interventionPoints) {
+            if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            ChroniclesController.AddPassive(Name, _fromPiece.RegionID, panelSprite, "Nothing");
+            ChroniclesController.AddPassive(Name, piece.RegionID, panelSprite, "Nothing");
+            DestroyMarker(piece.Region.Id);
             return true;
         }
 
-        private bool SpeedUp(Func<int> interventionPoints) {
-            if (!_useIntervention(interventionPoints()))
+        private bool SpeedUp(CivPiece piece, Func<CivPiece, int> interventionPoints) {
+            if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            int fromID = _fromPiece.Region.Id;
+            int fromID = piece.Region.Id;
             _migrations[fromID].StepPopulations *= 2;
-            ChroniclesController.Deactivate(Name, _fromPiece.RegionID, panelSprite, "SpeedUp");
+            DestroyMarker(fromID);
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "SpeedUp");
             return true;
+        }
+
+        private void DestroyMarker(int index)
+        {
+            if (_migrations[index].Marker != null)
+                _migrations[index].Marker.Destroy();
         }
 
         private T GetMax<T>(List<T> list, Func<T, int> GetValue) {

@@ -26,7 +26,7 @@ namespace Events.Controllers {
         public bool AutoChoice = false;
 
         private protected abstract string Name { get; }
-        private protected abstract string Territory { get; }
+        private protected abstract string Territory(CivPiece piece);
 
         private protected Chronicles.Controller ChroniclesController => Chronicles.Controller.Instance;
         private protected Map Map => Transmigratio.Instance.TMDB.map;
@@ -36,7 +36,7 @@ namespace Events.Controllers {
         private protected abstract void ActivateEvents();
         private protected abstract void DeactivateEvents();
         private protected abstract void InitDesidions();
-        private protected abstract void OpenPanel();
+        private protected abstract void OpenPanel(CivPiece piece);
         private protected abstract void CreateMarker(CivPiece piece = null);
 
         public string Local(string key) => Localization.Load(Name, key);
@@ -51,13 +51,14 @@ namespace Events.Controllers {
             _desidions.Clear();
         }
 
-        private protected void AddDesidion(Func<Func<int>, bool> click, string title, Func<int> points)
+        private protected void AddDesidion(Func<CivPiece, Func<CivPiece, int>, bool> click, string title, Func<CivPiece, int> points)
         {
             _desidions.Add(new(click, title, points));
         }
 
-        private protected virtual IconMarker CreateMarker(Vector3 position) {
+        private protected virtual IconMarker CreateMarker(Vector3 position, CivPiece piece) {
             IconMarker marker = Instantiate(markerPrefab);
+            marker.Piece = piece;
             marker.Sprite = markerSprite;
             position.z = -0.1f;
 

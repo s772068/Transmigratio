@@ -36,13 +36,13 @@ namespace Events.Controllers.StateMachines {
         }
 
         private protected override void InitDesidions() {
-            AddDesidion(CalmVolcano, Local("CalmVolcano"), () => CalmVolcanoPoints);
-            AddDesidion(ReduceLosses, Local("ReduceLosses"), () => reduceLossesPoints);
-            AddDesidion(Nothing, Local("Nothing"), () => 0);
+            AddDesidion(CalmVolcano, Local("CalmVolcano"), (piece) => CalmVolcanoPoints);
+            AddDesidion(ReduceLosses, Local("ReduceLosses"), (piece) => reduceLossesPoints);
+            AddDesidion(Nothing, Local("Nothing"), (piece) => 0);
         }
 
-        private bool CalmVolcano(Func<int> interventionPoints) {
-            if (!_useIntervention(interventionPoints()))
+        private bool CalmVolcano(CivPiece piece, Func<CivPiece, int> interventionPoints) {
+            if (!_useIntervention(interventionPoints(_piece)))
                 return false;
 
             ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "CalmVolcano");
@@ -50,8 +50,8 @@ namespace Events.Controllers.StateMachines {
             return true;
         }
 
-        private bool ReduceLosses(Func<int> interventionPoints) {
-            if (!_useIntervention(interventionPoints()))
+        private bool ReduceLosses(CivPiece piece, Func<CivPiece, int> interventionPoints) {
+            if (!_useIntervention(interventionPoints(_piece)))
                 return false;
 
             _piece.Population.value -= (int) (_piece.Population.value * fullPercentFood * partPercentPopulation);
@@ -70,8 +70,8 @@ namespace Events.Controllers.StateMachines {
             EndEvent();
         }
 
-        private bool Nothing(Func<int> interventionPoints) {
-            if (!_useIntervention(interventionPoints()))
+        private bool Nothing(CivPiece piece, Func<CivPiece, int> interventionPoints) {
+            if (!_useIntervention(interventionPoints(_piece)))
                 return false;
 
             ChroniclesController.AddPassive(Name, _piece.RegionID, panelSprite, "Nothing");
@@ -84,9 +84,9 @@ namespace Events.Controllers.StateMachines {
             NextState();
         }
 
-        private protected override void OpenPanel() {
-            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, panelSprite, Local("Title"),
-                                    Territory, Local("Description"), _desidions);
+        private protected override void OpenPanel(CivPiece piece = null) {
+            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, _piece, panelSprite, Local("Title"),
+                                    Territory(), Local("Description"), _desidions);
         }
 
         private protected override void NextState() {

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Events.Controllers;
 using UI;
+using System;
 
 public class EventPanel : Panel {
 
@@ -30,14 +31,19 @@ public class EventPanel : Panel {
 
     public bool AutoChoice => _autoChoice.isOn;
 
-    private void OnEnable()
+    public static event Action<bool> EventPanelOpen;
+    public static event Action<bool> EventPanelClose;
+
+    private protected override void OnEnable()
     {
-        PanelOpen?.Invoke(true);
+        base.OnEnable();
+        EventPanelOpen?.Invoke(true);
     }
 
-    private void OnDisable()
+    private protected override void OnDisable()
     {
-        PanelClose?.Invoke(true);
+        base.OnDisable();
+        EventPanelClose?.Invoke(true);
         _event.AutoChoice = AutoChoice;
     }
 

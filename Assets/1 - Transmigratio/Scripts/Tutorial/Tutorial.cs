@@ -12,9 +12,12 @@ public class Tutorial : MonoBehaviour
     private const int EVENT_SHIFT = 1 << 5;
     private const int MARKERS_SHIFT = 1 << 6;
     private const int LAYERS_SHIFT = 1 << 7;
+    private const int CHRONICLES_SHIFT = 1 << 8;
+    private const int AUTOCHOICE_SHIFT = 1 << 9;
 
     private const TutorialSteps _allSteps = TutorialSteps.Welcome | TutorialSteps.Goal | TutorialSteps.Info | 
-                    TutorialSteps.Start | TutorialSteps.Event | TutorialSteps.Markers | TutorialSteps.Layers;
+                    TutorialSteps.Start | TutorialSteps.Event | TutorialSteps.Markers | TutorialSteps.Layers |
+                    TutorialSteps.Chronicles | TutorialSteps.AutoChoice;
     #endregion
 
     [SerializeField] private bool _suggestTutorial = true;
@@ -32,7 +35,9 @@ public class Tutorial : MonoBehaviour
         Start = START_SHIFT,
         Event = EVENT_SHIFT,
         Markers = MARKERS_SHIFT,
-        Layers = LAYERS_SHIFT
+        Layers = LAYERS_SHIFT,
+        Chronicles = CHRONICLES_SHIFT,
+        AutoChoice = AUTOCHOICE_SHIFT,
     }
 
     [Header("Tutorial Steps")]
@@ -43,20 +48,22 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject _gameEvent;
     [SerializeField] private GameObject _markers;
     [SerializeField] private GameObject _layers;
+    [SerializeField] private GameObject _chrono;
+    [SerializeField] private GameObject _autoChoice;
     
 
     private void OnEnable()
     {
         HUD.EventRegionPanelOpen += InfoPanel;
-        EventPanel.PanelOpen += GameEvent;
-        EventPanel.PanelClose += GameMarker;
+        EventPanel.EventPanelOpen += GameEvent;
+        EventPanel.EventPanelClose += GameMarker;
     }
 
     private void OnDisable()
     {
         HUD.EventRegionPanelOpen -= InfoPanel;
-        EventPanel.PanelOpen -= GameEvent;
-        EventPanel.PanelClose -= GameMarker;
+        EventPanel.EventPanelOpen -= GameEvent;
+        EventPanel.EventPanelClose -= GameMarker;
     }
 
     private void Start()
@@ -150,13 +157,17 @@ public class Tutorial : MonoBehaviour
 
     public void GameMarker(bool open)
     {
-        if (open && _steps.HasFlag(TutorialSteps.Markers))
-            return;
-        else if (!open && !_steps.HasFlag(TutorialSteps.Markers))
+        if (!open && !_steps.HasFlag(TutorialSteps.Markers))
+        {
+            _markers.SetActive(open);
+            ActivateZone(open);
             _steps += (int)TutorialSteps.Markers;
-        
-        _markers.SetActive(open);
-        ActivateZone(open);
+        }
+        else if (open && !_steps.HasFlag(TutorialSteps.Markers))
+        {
+            _markers.SetActive(open);
+            ActivateZone(open);
+        }
     }
 
     public void GameLayers(bool open)
@@ -174,6 +185,44 @@ public class Tutorial : MonoBehaviour
 
             _layers.SetActive(false);
             _uiZones["Layers"].SetActive(false);
+            ActivateZone(false);
+        }
+    }
+
+    public void Chronicles(bool open)
+    {
+        if (open && !_steps.HasFlag(TutorialSteps.Chronicles))
+        {
+            _chrono.SetActive(true);
+            _uiZones["Chronicles"].SetActive(true);
+            ActivateZone(true);
+        }
+        else
+        {
+            if (!_steps.HasFlag(TutorialSteps.Chronicles))
+                _steps += (int)TutorialSteps.Chronicles;
+
+            _chrono.SetActive(false);
+            _uiZones["Chronicles"].SetActive(false);
+            ActivateZone(false);
+        }
+    }
+
+    public void AutoChoice(bool open)
+    {
+        if (open && !_steps.HasFlag(TutorialSteps.AutoChoice))
+        {
+            _autoChoice.SetActive(true);
+            _uiZones["AutoChoice"].SetActive(true);
+            ActivateZone(true);
+        }
+        else
+        {
+            if (!_steps.HasFlag(TutorialSteps.AutoChoice))
+                _steps += (int)TutorialSteps.AutoChoice;
+
+            _autoChoice.SetActive(false);
+            _uiZones["AutoChoice"].SetActive(false);
             ActivateZone(false);
         }
     }

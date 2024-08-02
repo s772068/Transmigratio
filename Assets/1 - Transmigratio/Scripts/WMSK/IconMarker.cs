@@ -6,12 +6,13 @@ public class IconMarker : MonoBehaviour {
     private SpriteRenderer _sr;
 
     public Sprite Sprite { set => _sr.sprite = value; }
-    
-    public Action onClick;
+    public CivPiece Piece;
+
+    public Action<CivPiece> onClick;
     public Action OnTimeDestroy;
 
     public void Click() {
-        onClick?.Invoke();
+        onClick?.Invoke(Piece);
     }
 
     public void Destroy() => Destroy(gameObject);

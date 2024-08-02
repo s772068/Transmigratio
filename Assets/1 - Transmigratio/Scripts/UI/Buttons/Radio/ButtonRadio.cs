@@ -8,6 +8,7 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     [SerializeField] private Sprite activeSprite;
     [SerializeField] private Sprite deactiveSprite;
     [SerializeField] private Sprite highlightedSprite;
+    public bool IsInterectable = true;
 
     [Space]
     public UnityEvent<int> onClick = new UnityEvent<int>();
@@ -16,6 +17,7 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     private Image _image;
 
     public int Index { private get; set; }
+    
     private void Awake() {
         _image = GetComponent<Image>();
     }
@@ -31,7 +33,8 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        onClick.Invoke(Index);
+        if (IsInterectable)
+            onClick.Invoke(Index);
     }
 
     public void OnPointerEnter(PointerEventData eventData) {

@@ -3,29 +3,29 @@ using Unity.VisualScripting;
 using WorldMapStrategyKit;
 
 namespace Events.Controllers.Local {
-    public abstract class Base : Controllers.Base {
-        private protected CivPiece selectedPiece;
+    public abstract class Base : Controllers.Base 
+    {
         private protected List<CivPiece> pieces = new();
 
-        private protected override string Territory => Local("Territory 1") + " " +
+        private protected override string Territory(CivPiece piece) => Local("Territory 1") + " " +
                               $"<color=#{regionColor.ToHexString()}>" +
-                              selectedPiece.Region.Name + "</color> " +
+                              piece.Region.Name + "</color> " +
                               Local("Territory 2") + " " +
                               $"<color=#{civColor.ToHexString()}>" +
-                              Localization.Load("Civilizations", selectedPiece.Civilization.Name) + "</color> " +
+                              Localization.Load("Civilizations", piece.Civilization.Name) + "</color> " +
                               Local("Territory 3");
 
         private protected void AddEvent(CivPiece piece) {
             if (pieces.Contains(piece)) return;
-            selectedPiece = piece;
+
             pieces.Add(piece);
             if (!AutoChoice) {
                 piece.AddEvent(this);
                 CreateMarker(piece);
-                OpenPanel();
+                OpenPanel(piece);
             } 
             else {
-                Events.AutoChoice.Events[this][0].ActionClick?.Invoke(Events.AutoChoice.Events[this][0].Cost);
+                Events.AutoChoice.Events[this][0].ActionClick?.Invoke(piece, Events.AutoChoice.Events[this][0].CostFunc);
             }
         }
 
@@ -36,16 +36,13 @@ namespace Events.Controllers.Local {
         }
 
         private protected override void CreateMarker(CivPiece piece) {
-            if (selectedPiece.Region.Marker == null)
-                selectedPiece.Region.Marker = CreateMarker(WMSK.countries[selectedPiece.Region.Id].center);
-            selectedPiece.Region.Marker.onClick += () => OnClickMarker(piece);
+            if (piece.Region.Marker == null)
+                piece.Region.Marker = CreateMarker(WMSK.countries[piece.Region.Id].center, piece);
+            piece.Region.Marker.onClick += (piece) => OnClickMarker(piece);
         }
 
-        private void OnClickMarker(CivPiece piece) {
-            selectedPiece = piece;
-            OpenPanel();
-        }
-
+        private void OnClickMarker(CivPiece piece) => OpenPanel(piece);
+        
         private protected void CheckMarker(CivPiece piece)
         {
             if (piece.EventsCount == piece.MigrationCount && piece.Region.Marker != null)
@@ -54,7 +51,7 @@ namespace Events.Controllers.Local {
                 piece.Region.Marker = null;
             }    
             else if (piece.Region.Marker != null)
-                piece.Region.Marker.onClick -= () => OnClickMarker(piece);
+                piece.Region.Marker.onClick -= (piece) => OnClickMarker(piece);
         }
     }
 }

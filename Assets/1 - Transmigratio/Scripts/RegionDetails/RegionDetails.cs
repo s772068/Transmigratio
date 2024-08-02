@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UI;
 
 public class RegionDetails : MonoBehaviour {
     [SerializeField] private RegionElements _leftSide;

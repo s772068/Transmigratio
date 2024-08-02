@@ -10,7 +10,7 @@ namespace Events.Controllers.StateMachines {
         private protected Data.State _curState;
         private Random _rand = new();
 
-        private protected override string Territory => Local("Territory1") + " " +
+        private protected override string Territory(CivPiece piece = null) => Local("Territory1") + " " +
                               $"<color=#{regionColor.ToHexString()}>" +
                               _piece.Region.Name + "</color> " +
                               Local("Territory2") + " " +
@@ -22,8 +22,8 @@ namespace Events.Controllers.StateMachines {
 
         private protected override void CreateMarker(CivPiece piece = null) {
             if (_piece.Region.Marker == null)
-                _piece.Region.Marker = CreateMarker(WMSK.countries[_piece.Region.Id].center);
-            _piece.Region.Marker.onClick += () => OnClickMarker();
+                _piece.Region.Marker = CreateMarker(WMSK.countries[_piece.Region.Id].center, piece);
+            _piece.Region.Marker.onClick += (_piece) => OnClickMarker();
         }
 
         private protected override void ActivateEvents() {
@@ -50,14 +50,14 @@ namespace Events.Controllers.StateMachines {
             if (!AutoChoice) {
                 CreateMarker();
                 _piece.AddEvent(this);
-                OpenPanel();
+                OpenPanel(_piece);
             } else {
-                Events.AutoChoice.Events[this][0].ActionClick?.Invoke(Events.AutoChoice.Events[this][0].Cost);
+                Events.AutoChoice.Events[this][0].ActionClick?.Invoke(_piece, Events.AutoChoice.Events[this][0].CostFunc);
             }
         }
 
-        private void OnClickMarker() {
-            OpenPanel();
+        private void OnClickMarker(CivPiece piece = null) {
+            OpenPanel(_piece);
         }
 
         private protected void CheckMarker()
@@ -68,7 +68,7 @@ namespace Events.Controllers.StateMachines {
                 _piece.Region.Marker = null;
             }
             else if (_piece.Region.Marker != null)
-                _piece.Region.Marker.onClick -= () => OnClickMarker();
+                _piece.Region.Marker.onClick -= (_piece) => OnClickMarker();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Chronicles.Prefabs.Panel {
 
         public void Click() {
             if (_data.isActive) {
-                _data.onClick?.Invoke();
+                _data.onClick?.Invoke(_data.piece);
             } else {
                 onClick?.Invoke(_data);
             }

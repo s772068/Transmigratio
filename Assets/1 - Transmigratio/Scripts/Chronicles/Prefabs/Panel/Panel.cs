@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 
 namespace Chronicles.Prefabs.Panel {
-    public class Panel : MonoBehaviour {
+    public class Panel : UI.Panel {
         [SerializeField] private Element elementPrefab;
         [SerializeField] private RectTransform elementContent;
         [SerializeField, Min(0)] private int countElements;

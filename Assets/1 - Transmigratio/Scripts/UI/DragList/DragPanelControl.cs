@@ -22,7 +22,7 @@ public class DragPanelControl : MonoBehaviour
 
     public List<DragElement> Elements => _elements;
 
-    private void Start()
+    private void Awake()
     {
         int i = 0;
         foreach (Transform child in transform)

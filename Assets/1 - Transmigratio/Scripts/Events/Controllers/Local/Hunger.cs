@@ -14,12 +14,12 @@ namespace Events.Controllers.Local {
 
         private protected override string Name => "Hunger";
 
-        private int AddFoodPoints => (int)(selectedPiece.Population.value / foodPerPerson / 100f * percentPointsForAddFood);
-        private int AddSomeFoodPoints => (int)(selectedPiece.Population.value / foodPerPerson / 100f * percentPointsForAddSomeFood);
+        private int AddFoodPoints(CivPiece piece) => (int)(piece.Population.value / foodPerPerson / 100f * percentPointsForAddFood);
+        private int AddSomeFoodPoints(CivPiece piece) => (int)(piece.Population.value / foodPerPerson / 100f * percentPointsForAddSomeFood);
 
-        private protected override void OpenPanel() {
-            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, panelSprite, Local("Title"),
-                                    Territory, Local("Description"), _desidions);
+        private protected override void OpenPanel(CivPiece piece) {
+            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, piece, panelSprite, Local("Title"),
+                                    Territory(piece), Local("Description"), _desidions);
         }
 
         private protected override void ActivateEvents() {
@@ -37,39 +37,39 @@ namespace Events.Controllers.Local {
         }
 
         private protected override void InitDesidions() {
-            AddDesidion(AddFood, Local("AddFood"), () => AddFoodPoints);
-            AddDesidion(AddSomeFood, Local("AddSomeFood"), () => AddSomeFoodPoints);
-            AddDesidion(Nothing, Local("Nothing"), () => 0);
+            AddDesidion(AddFood, Local("AddFood"), (piece) => AddFoodPoints(piece));
+            AddDesidion(AddSomeFood, Local("AddSomeFood"), (piece) => AddSomeFoodPoints(piece));
+            AddDesidion(Nothing, Local("Nothing"), (piece) => 0);
         }
 
-        private bool AddFood(Func<int> interventionPoints)
+        private bool AddFood(CivPiece piece, Func<CivPiece, int> interventionPoints)
         {
-            if (!_useIntervention(interventionPoints()))
+            if (!_useIntervention(interventionPoints(piece)))
                 return false;
-			
-            selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson;
-            ChroniclesController.Deactivate(Name, selectedPiece.RegionID, panelSprite, "AddFood");
-            RemoveEvent(selectedPiece);
+
+            piece.ReserveFood += piece.Population.value / foodPerPerson;
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "AddFood");
+            RemoveEvent(piece);
             return true;
         }
 		
-        private bool AddSomeFood(Func<int> interventionPoints)
+        private bool AddSomeFood(CivPiece piece, Func<CivPiece, int> interventionPoints)
         {
-            if (!_useIntervention(interventionPoints()))
+            if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            selectedPiece.ReserveFood += selectedPiece.Population.value / foodPerPerson / 2;
-            ChroniclesController.Deactivate(Name, selectedPiece.RegionID, panelSprite, "AddSomeFood");
-            RemoveEvent(selectedPiece);
+            piece.ReserveFood += piece.Population.value / foodPerPerson / 2;
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "AddSomeFood");
+            RemoveEvent(piece);
             return true;
         }
 
-        private bool Nothing(Func<int> interventionPoints) {
-            if (!_useIntervention(interventionPoints()))
+        private bool Nothing(CivPiece piece, Func<CivPiece, int> interventionPoints) {
+            if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            ChroniclesController.AddPassive(Name, selectedPiece.RegionID, panelSprite, "Nothing");
-            RemoveEvent(selectedPiece);
+            ChroniclesController.AddPassive(Name, piece.RegionID, panelSprite, "Nothing");
+            RemoveEvent(piece);
             return true;
         }
     }

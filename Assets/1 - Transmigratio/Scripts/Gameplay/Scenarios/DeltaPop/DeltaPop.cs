@@ -54,7 +54,6 @@ namespace Gameplay.Scenarios {
             PrevPopulationGrow = PopulationGrow;
             PopulationGrow = Population * GovernmentCorruption * GivenFood / RequestFood - Population / val5;
 
-            Debug.Log($"PopulationGrow: {PopulationGrow}");
             Population += (int) PopulationGrow;
             if (Population <= MinPiecePopulation) _piece.Destroy?.Invoke();
         }

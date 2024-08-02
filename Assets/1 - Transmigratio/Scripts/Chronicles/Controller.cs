@@ -12,7 +12,7 @@ namespace Chronicles {
         private List<Element> _activeEvents = new();
         private List<Element> _passiveEvents = new();
 
-        public void AddActive(string eventName, int regionID, Action onClick) {
+        public void AddActive(string eventName, int regionID, Action<CivPiece> onClick) {
             _activeEvents.Add(new() {
                 isActive = true,
                 eventName = eventName,
