@@ -20,6 +20,10 @@ public class Humanity {
         Civilizations.Clear();
         Debug.Log("Humanity init");
 
+        for(int i = 0; i < scenarios.Count; ++i) {
+            scenarios[i].Init();
+        }
+
         Timeline.TickLogic += Play;
     }
 

@@ -1,6 +1,11 @@
 [System.Serializable]
 public class ParamiterValue {
-    public int Max;
-    public int Value;
-    public int Percent;
+    public float StartValue;
+    public float Value;
+    public float Percent;
+
+    public ParamiterValue(float val) {
+        StartValue = val;
+        Value = val;
+    }
 }

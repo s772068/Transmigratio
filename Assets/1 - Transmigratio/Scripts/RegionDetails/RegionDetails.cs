@@ -12,7 +12,7 @@ public class RegionDetails : MonoBehaviour {
 
     public int RegionID;
 
-    private Dictionary<string, int> _dic;
+    private Dictionary<string, float> _dic;
     private string _element;
 
     private TM_Region Region => Transmigratio.Instance.TMDB.map.AllRegions[RegionID];

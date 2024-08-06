@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using Events.Controllers.Local;
+using Gameplay.Scenarios;
 using System;
-
-using GlobalEvents = Events.Controllers.Global;
 
 /// <summary>
 /// Экземпляр CivPiece - это один "кусочек" цивилизации в конкретном регионе. 
@@ -20,10 +18,8 @@ public class CivPiece {
     public float PrevPopulationGrow;
 
     public int EventsCount => events.Count;
-    public int MigrationCount
-    {
-        get
-        {
+    public int MigrationCount {
+        get {
             int value = 0;
             foreach (Events.Controllers.Base e in events)
                 if (e.GetType() == typeof(Events.Controllers.Global.Migration))
@@ -45,12 +41,20 @@ public class CivPiece {
     /// <summary>
     /// Инициализация при появлении в области после миграции или при старте игры
     /// </summary>
-    public void Init(int region, string civilization, int startPopulation, float reserve) {
+    public void Init(int region, string civilization, int startPopulation, float _prodModeK, bool isFarmers) {
         RegionID = region;
         Population = new Population();
         Population.value = startPopulation;
         CivName = civilization;
-        ReserveFood = reserve;  //изначальное количество еды у кусочка
+        // ReserveFood = reserve;  //изначальное количество еды у кусочка
+        RequestFood = Population.Value / Demography.data.val4;
+        GivenFood = ReserveFood > RequestFood ? RequestFood : ReserveFood;
+        float _floraKr = (float) (Math.Pow(Region.Flora["Flora"].Value, Demography.data.val9) / Demography.data.val10);
+        float _faunaKr = (float) (Math.Pow(Region.Fauna["Fauna"].Value, Demography.data.val11) / Demography.data.val12);
+
+        TakenFood = isFarmers ?
+            Population.Value / Demography.data.val13 * _prodModeK * _floraKr :
+            Population.Value / Demography.data.val14 * _prodModeK * _faunaKr;
     }
 
     public void AddEvent(Events.Controllers.Base e) => events.Add(e);

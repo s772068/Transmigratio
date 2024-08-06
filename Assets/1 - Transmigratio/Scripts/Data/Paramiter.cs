@@ -11,12 +11,10 @@ public class Paramiter {
     private bool _isPercent;
 
     // For JSON
-    public SerializedDictionary<string, int> Quantities {
+    public SerializedDictionary<string, float> Quantities {
         set {
             foreach(var pair in value) {
-                quantities.Add(pair.Key, new());
-                quantities[pair.Key].Max = pair.Value;
-                quantities[pair.Key].Value = pair.Value;
+                quantities.Add(pair.Key, new(pair.Value));
             }
             foreach (var pair in quantities) {
                 quantities[pair.Key].Percent = UpdateQuantityProcent(pair.Key);
@@ -24,8 +22,8 @@ public class Paramiter {
         }
     }
 
-    public Dictionary<string, int> GetQuantities() {
-        Dictionary<string, int> res = new();
+    public Dictionary<string, float> GetQuantities() {
+        Dictionary<string, float> res = new();
         foreach (var pair in quantities) {
             res[pair.Key] = _isPercent ? pair.Value.Percent : pair.Value.Value;
         }
@@ -40,7 +38,7 @@ public class Paramiter {
         get => quantities[key];
         set {
             if (!quantities.ContainsKey(key)) {
-                quantities.Add(key, new() { Max = value.Value });
+                quantities.Add(key, new(value.Value));
             }
             quantities[key].Value = value.Value;
             foreach (var pair in quantities) {
@@ -49,14 +47,22 @@ public class Paramiter {
         }
     }
 
-    public void Init(params string[] quantityNames) {
-        for(int i = 0; i < quantityNames.Length; ++i) {
-            quantities[quantityNames[i]] = new();
+    public void Init(params (string, float)[] quantity) {
+        for (int i = 0; i < quantity.Length; ++i) {
+            ParamiterValue val = new(quantity[i].Item2);
+            quantities[quantity[i].Item1] = val;
         }
     }
 
-    public (string key, int value) GetMaxQuantity() {
-        (string key, int value) res = default;
+    public void Init(params string[] quantity) {
+        for (int i = 0; i < quantity.Length; ++i) {
+            ParamiterValue val = new(0);
+            quantities[quantity[i]] = val;
+        }
+    }
+
+    public (string key, float value) GetMaxQuantity() {
+        (string key, float value) res = default;
         foreach (var pair in quantities) {
             if(pair.Value.Value > res.value) {
                 res.key = pair.Key;

@@ -10,7 +10,7 @@ public class TMDB : ScriptableObject {
 
     public int Year => startAge - Timeline.Instance.Tick * GameSettings.YearsByTick;
 
-    public Dictionary<string, int> GetParam(int index, string name) => name switch {
+    public Dictionary<string, float> GetParam(int index, string name) => name switch {
         "Flora" => map.AllRegions[index].Flora.GetQuantities(),
         "Fauna" => map.AllRegions[index].Fauna.GetQuantities(),
         "Climate" => map.AllRegions[index].Climate.GetQuantities(),

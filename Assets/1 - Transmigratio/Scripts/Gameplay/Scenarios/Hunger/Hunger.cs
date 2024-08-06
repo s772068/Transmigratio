@@ -6,6 +6,7 @@ namespace Gameplay.Scenarios {
     public class Hunger : Base {
         private float PrevPopulationGrow => _piece.PrevPopulationGrow;
         private float PopulationGrow => _piece.PopulationGrow;
+
         private protected override void Play() {
             if (PrevPopulationGrow >= 0 && PopulationGrow < 0) {
                 HungerEvent.onActivate?.Invoke(_piece);

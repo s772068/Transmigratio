@@ -121,7 +121,7 @@ namespace Events.Controllers.Global {
 
             if (!to.CivsList.Contains(civ.Name)) {
                 newMigration.CurPopulations += newMigration.StepPopulations;
-                civ.AddPiece(to.Id, newMigration.StepPopulations, 10);
+                civ.AddPiece(to.Id, newMigration.StepPopulations);
                 to.AddCivilization(civ.Name);
             }
             
@@ -265,7 +265,7 @@ namespace Events.Controllers.Global {
                 _migrations[index].Marker.Destroy();
         }
 
-        private T GetMax<T>(List<T> list, Func<T, int> GetValue) {
+        private T GetMax<T>(List<T> list, Func<T, float> GetValue) {
             int res = 0;
             for (int i = 1; i < list.Count; ++i) {
                 if (GetValue(list[res]) < GetValue(list[i])) {

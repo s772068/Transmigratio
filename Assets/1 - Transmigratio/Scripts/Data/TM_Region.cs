@@ -43,8 +43,8 @@ public class TM_Region {
         CivsList.Add(civName);
     }
 
-    public Dictionary<string, int> GetCivParamiter() {
-        Dictionary<string, int> res = new();
+    public Dictionary<string, float> GetCivParamiter() {
+        Dictionary<string, float> res = new();
         
         for (int i = 0; i < CivsList.Count; ++i) {
             res[CivsList[i]] = GetPiece(CivsList[i]).Population.value;
@@ -65,14 +65,14 @@ public class TM_Region {
         return dic.FirstOrDefault(x => x.Value == dic.Values.Max()).Key;
     }
 
-    public void Init() {
-        Timeline.TickLogic += UpdateFauna;
-    }
+    //public void Init() {
+    //    Timeline.TickLogic += UpdateFauna;
+    //}
 
-    private void UpdateFauna() {
-        Fauna["Fauna"].Value = Mathf.Min(
-            (int) (Fauna["Fauna"].Value - TakenFood / 10f + (Fauna["Fauna"].Value == 0 ? 1 : (50 / Fauna["Fauna"].Value))),
-            Fauna["Fauna"].Max
-        );
-    }
+    //private void UpdateFauna() {
+    //    Fauna["Fauna"].Value = Mathf.Min(
+    //        (int) (Fauna["Fauna"].Value - TakenFood / 10f + (Fauna["Fauna"].Value == 0 ? 1 : (50 / Fauna["Fauna"].Value))),
+    //        Fauna["Fauna"].StartValue
+    //    );
+    //}
 }
