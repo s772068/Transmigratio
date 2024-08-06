@@ -18,7 +18,7 @@ namespace Events.Controllers.Local {
         private int AddSomeFoodPoints(CivPiece piece) => (int)(piece.Population.value / foodPerPerson / 100f * percentPointsForAddSomeFood);
 
         private protected override void OpenPanel(CivPiece piece) {
-            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, piece, panelSprite, Local("Title"),
+            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, piece, panelSprite, Local("Title"),
                                     Territory(piece), Local("Description"), _desidions);
         }
 

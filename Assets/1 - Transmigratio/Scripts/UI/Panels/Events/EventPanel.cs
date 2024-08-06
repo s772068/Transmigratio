@@ -47,8 +47,4 @@ public class EventPanel : Panel {
         _event.AutoChoice = AutoChoice;
     }
 
-    public void CloseWindow()
-    {
-        Destroy(gameObject);
-    }
 }

@@ -23,7 +23,7 @@ public class TopPanel : MonoBehaviour {
     }
 
     private void UpdateYear() {
-        int year = 40000 - Tick * GameSettings.YearsByTick;
+        int year = Transmigratio.Instance.TMDB.Year;
         _yearTxt.text = $"{year.ToString("### ###")} {Localization.Load("Base", "BCE")}";
     }
 }

@@ -10,14 +10,14 @@ public class HUD : StaticInstance<HUD>
     
 
     [SerializeField] private Messanger _messanger;
-    [SerializeField] private Transform _events;
+    [SerializeField] private Transform _panelsParent;
 
     [Header("Region Details")]
     [SerializeField] private RegionDetails _regionDetails;        //окно с информацией о выбранном регионе
     [SerializeField] private Migration _migration;
 
     public bool IsShowMigration = true;
-    public Transform Events => _events;
+    public Transform PanelsParent => _panelsParent;
 
     protected override void Awake() {
         base.Awake();

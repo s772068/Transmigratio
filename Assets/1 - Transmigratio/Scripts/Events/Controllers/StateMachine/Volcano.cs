@@ -85,7 +85,7 @@ namespace Events.Controllers.StateMachines {
         }
 
         private protected override void OpenPanel(CivPiece piece = null) {
-            PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, _piece, panelSprite, Local("Title"),
+            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, _piece, panelSprite, Local("Title"),
                                     Territory(), Local("Description"), _desidions);
         }
 

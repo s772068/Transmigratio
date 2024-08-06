@@ -1,6 +1,8 @@
 using UnityEngine;
 using Events.Data;
 using System.Collections.Generic;
+using UI;
+using Gameplay;
 
 public static class PanelFabric
 {
@@ -25,5 +27,11 @@ public static class PanelFabric
         desidionObject.Close += panel.CloseWindow;
         desidionObject.Title = desidion.Title;
         desidionObject.Points = desidion.CostFunc(piece);
+    }
+
+    public static void CreateNews(Transform parent, NewsPanel newsPrefab, NewsSO news)
+    {
+        NewsPanel panel = NewsPanel.Instantiate(newsPrefab, parent);
+        panel.Init(news);
     }
 }

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: TMDB
   m_EditorClassIdentifier: 
   startAge: 40000
+  _news:
+  - {fileID: 11400000, guid: 49e1717d32a258d4585a30522d64706e, type: 2}
   humanity:
     Civilizations:
       _serializedList:
@@ -21,29 +23,17 @@ MonoBehaviour:
           Name: Uncivilized
           Pieces:
             _serializedList:
-            - Key: 0
+            - Key: 15
               Value:
                 Population:
-                  value: 1514
-                PopulationGrow: -362.51685
-                GivenFood: 12.7858305
-                RequestFood: 22.593334
-                ReserveFood: 13.153098
-                TakenFood: 13.153098
-                PrevPopulationGrow: 0
-                RegionID: 0
-                CivName: Uncivilized
-            - Key: 31
-              Value:
-                Population:
-                  value: 403
-                PopulationGrow: 25.200003
-                GivenFood: 2.52
-                RequestFood: 2.52
-                ReserveFood: 10.254461
-                TakenFood: 2.774461
-                PrevPopulationGrow: 0
-                RegionID: 31
+                  value: 2980
+                PopulationGrow: 186.26668
+                GivenFood: 18.626667
+                RequestFood: 18.626667
+                ReserveFood: 73.85818
+                TakenFood: 14.852152
+                PrevPopulationGrow: 174.66669
+                RegionID: 15
                 CivName: Uncivilized
           EcoCulture:
             quantities:
@@ -167,7 +157,7 @@ MonoBehaviour:
           - Key: Fauna
             Value:
               Max: 30
-              Value: 25
+              Value: 30
               Percent: 100
       Climate:
         quantities:
@@ -225,8 +215,7 @@ MonoBehaviour:
               Max: 0
               Value: 0
               Percent: 0
-      CivsList:
-      - Uncivilized
+      CivsList: []
       Marker: {fileID: 0}
     - Id: 1
       Name: "\u041F\u0430\u0442\u0430\u0433\u043E\u043D\u0438\u044F"
@@ -1309,7 +1298,7 @@ MonoBehaviour:
           - Key: Fauna
             Value:
               Max: 60
-              Value: 60
+              Value: 42
               Percent: 100
       Climate:
         quantities:
@@ -1367,7 +1356,8 @@ MonoBehaviour:
               Max: 0
               Value: 0
               Percent: 0
-      CivsList: []
+      CivsList:
+      - Uncivilized
       Marker: {fileID: 0}
     - Id: 16
       Name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0415\u0432\u0440\u043E\u043F\u0430"
@@ -2586,8 +2576,7 @@ MonoBehaviour:
               Max: 0
               Value: 0
               Percent: 0
-      CivsList:
-      - Uncivilized
+      CivsList: []
       Marker: {fileID: 0}
     - Id: 32
       Name: "\u0410\u0440\u0430\u0432\u0438\u044F"
