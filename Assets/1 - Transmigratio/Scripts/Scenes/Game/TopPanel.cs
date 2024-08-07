@@ -19,7 +19,7 @@ public class TopPanel : MonoBehaviour {
     }
 
     private void UpdatePopulation() {
-        _populationTxt.text = $"{Localization.Load("Base", "Population")}: {Population.ToString("### ### ###")}";
+        _populationTxt.text = $"{Population.ToString("### ### ###")}";
     }
 
     private void UpdateYear() {

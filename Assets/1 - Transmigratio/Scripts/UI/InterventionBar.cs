@@ -7,7 +7,7 @@ namespace UI
 {
     public class InterventionBar : MonoBehaviour
     {
-        [SerializeField] private Image _progressBar;
+        [SerializeField] private SlicedFilledImage _progressBar;
         [SerializeField] private TMP_Text _tmpPoints;
         private float _maxPoints;
 
