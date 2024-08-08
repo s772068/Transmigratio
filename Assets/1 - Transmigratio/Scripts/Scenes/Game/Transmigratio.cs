@@ -2,6 +2,7 @@ using WorldMapStrategyKit;
 using UnityEngine;
 using Gameplay;
 using System;
+using UI;
 
 //using UnityEditor.Localization.Plugins.XLIFF.V12;
 /// <summary>
@@ -13,8 +14,10 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     [SerializeField] private TMDB _tmdb;            // база данных ScriptableObjects
     [SerializeField] private HUD _hud;
     [SerializeField] private int _intervetionPoints = 100;
+    [SerializeField] private NewsPanel _newsPrefab;
 
     private Intervention _intervention;
+    private News _news;
     private int _activeRegion;
     private bool _isClickableMarker = true;
 
@@ -63,6 +66,7 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
         Gameplay.Controller.Init();
 
         _intervention = new Intervention(_intervetionPoints);
+        _news = new News(HUD.Instance.PanelsParent, _newsPrefab, TMDB.News);
     }
 
     private void OnClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {

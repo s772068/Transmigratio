@@ -1,3 +1,4 @@
+using Gameplay;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,8 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TMDB", menuName = "ScriptableObjects/TMDB", order = 1)]
 public class TMDB : ScriptableObject {
     public int startAge;
+    [SerializeField] private List<NewsSO> _news;
     public Humanity humanity = new();
     public Map map = new();
+
+    public List<NewsSO> News => _news;
 
     public int Year => startAge - Timeline.Instance.Tick * GameSettings.YearsByTick;
 

@@ -17,5 +17,10 @@ namespace UI
         {
             PanelClose?.Invoke(true);
         }
+
+        public void CloseWindow()
+        {
+            Destroy(gameObject);
+        }
     }
 }
