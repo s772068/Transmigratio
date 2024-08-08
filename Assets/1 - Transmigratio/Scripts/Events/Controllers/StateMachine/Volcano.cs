@@ -18,7 +18,7 @@ namespace Events.Controllers.StateMachines {
         private State _state = State.Start;
 
         private protected override string Name => "Volcano";
-        private int CalmVolcanoPoints => (int) (_piece.Population.value / calmVolcanoPointsDivision);
+        private int CalmVolcanoPoints => (int) (_piece.Population.Value / calmVolcanoPointsDivision);
 
         private void Awake() {
             _curState = states[State.Start];
@@ -54,8 +54,8 @@ namespace Events.Controllers.StateMachines {
             if (!_useIntervention(interventionPoints(_piece)))
                 return false;
 
-            _piece.Population.value -= (int) (_piece.Population.value * fullPercentFood * partPercentPopulation);
-            _piece.ReserveFood -= _piece.ReserveFood * fullPercentFood * partPercentFood;
+            _piece.Population.Value -= (int) (_piece.Population.Value * fullPercentFood * partPercentPopulation);
+            _piece.ReserveFood.Value -= _piece.ReserveFood.Value * fullPercentFood * partPercentFood;
             Global.Migration.OnMigration(_piece);
             ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "ReduceLosses");
             EndEvent();
@@ -63,8 +63,8 @@ namespace Events.Controllers.StateMachines {
         }
 
         public void ActivateVolcano() {
-            _piece.Population.value -= (int) (_piece.Population.value * fullPercentFood);
-            _piece.ReserveFood -= _piece.ReserveFood * fullPercentFood;
+            _piece.Population.Value -= (int) (_piece.Population.Value * fullPercentFood);
+            _piece.ReserveFood.Value -= _piece.ReserveFood.Value * fullPercentFood;
             Global.Migration.OnMigration(_piece);
             ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "ActivateVolcano");
             EndEvent();

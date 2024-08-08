@@ -1,6 +1,4 @@
 using AYellowpaper.SerializedCollections;
-using System.Collections.Generic;
-using Gameplay.Scenarios;
 using System.Linq;
 using UnityEngine;
 using System;
@@ -14,62 +12,52 @@ public class Civilization {
 
     public SerializedDictionary<int, CivPiece> Pieces;      //суммируем население цивилизации - собираем с "кусочков"
 
-    public Paramiter EcoCulture = new(true);
-    public Paramiter ProdMode = new(true);
-    public Paramiter Government = new(true);
+    public Paramiter EcoCulture { get {
+            Paramiter res = new(true);
+            foreach (var piece in Pieces) {
+                res += piece.Value.EcoCulture;
+            }
+            return res;
+        }
+    }
+    public Paramiter ProdMode { get {
+            Paramiter res = new(true);
+            foreach (var piece in Pieces) {
+                res += piece.Value.ProdMode;
+            }
+            return res;
+        }
+    }
+    public Paramiter Government { get {
+            Paramiter res = new(true);
+            foreach (var piece in Pieces) {
+                res += piece.Value.Government;
+            }
+            return res;
+        }
+    }
 
     //их нужно засунуть в CivParam
     /// <summary>
     /// Коэффициент способа производства
     /// </summary>
-    public float ProdModeK {
-        get {
-            List<float> prodModeList = new() {
-                ProdMode["PrimitiveCommunism"].Value,
-                ProdMode["Slavery"].Value,
-                ProdMode["Feodalism"].Value
-            };
-            return prodModeList.IndexOf(prodModeList.Max()) switch {
-                0 => Demography.data.prodModeK_PC,
-                1 => Demography.data.prodModeK_S,
-                _ => 1
-            };
-        }
-    }
-    public bool IsFarmers {
-        get {
-            List<float> list = new() {
-                EcoCulture["Farmers"].Value,
-                EcoCulture["Hunters"].Value,
-                EcoCulture["Nomads"].Value
-            };
-            return list.IndexOf(list.Max()) == 0;
-        }
-    }
     public float GovernmentCorruption = 0.4f;      // коррупция
 
-
-    public static Action<CivPiece> RemoveCivPiece;
+    public static Action<CivPiece> onAddPiece;
+    public static Action<CivPiece> onRemovePiece;
 
     public int Population => Pieces.Sum(x => x.Value.Population.Value);
 
-    public void Init(int region, string civName)        //версия для старта игры. Для других цивилизаций нужна перегрузка
-    {
+    public Civilization(string civName) {
         Pieces = new();
-        Pieces.Clear();
         Name = civName;
+    }
 
-        EcoCulture.Init(("Hunters", GameSettings.StartHunters));
-        EcoCulture.Init("Farmers", "Nomads", "Mountain", "City");
-
-        ProdMode.Init(("PrimitiveCommunism", GameSettings.StartPrimitiveCommunism));
-        ProdMode.Init("Slavery", "Feodalism", "Capitalism", "Socialism", "Communism");
-
-        Government.Init(("Leaderism", GameSettings.StartLeaderism));
-        Government.Init("Monarchy", "CityState", "Imperium", "Federation", "NationalState", "Anarchy");
-        
+    /// <summary>
+    /// версия для старта игры. Для других цивилизаций нужна перегрузка
+    /// </summary>
+    public void StartGame(int region) {
         AddPiece(region, GameSettings.StartPopulation);
-
         Debug.Log("Civilization init. \rpopulation:" + Population + "\rregionID:" + region);
     }
 
@@ -78,16 +66,22 @@ public class Civilization {
     /// </summary>
     public void AddPiece(int region, int population) {
         CivPiece newPieceOfCiv = new CivPiece();
-        newPieceOfCiv.Init(region, Name, population, ProdModeK, IsFarmers);
+        newPieceOfCiv.Init(region, Name, population);
         newPieceOfCiv.Destroy = () => RemovePiece(region);
         Pieces[region] = newPieceOfCiv;
+        onAddPiece?.Invoke(newPieceOfCiv);
         //region.AddCivPiece(newPieceOfCiv);
     }
+
+    public void AddPiece(CivPiece piece) {
+        Pieces[piece.RegionID] = piece;
+    }
+
     /// <summary>
     /// уберает цивилизацию из этого региона
     /// </summary>
     public void RemovePiece(int region) {
-        RemoveCivPiece?.Invoke(Pieces[region]);
+        onRemovePiece?.Invoke(Pieces[region]);
         Pieces[region].Region.CivsList.Remove(Name);
         Pieces.Remove(region);
     }

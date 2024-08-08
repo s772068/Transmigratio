@@ -26,14 +26,14 @@ public class LayersPanel : MonoBehaviour {
     private int CountRegions => Map.AllRegions.Count;
     private TM_Region GetRegion(int index) => Map.AllRegions[index];
 
-    public void ClickTerrain() => OnClick(() => PaintByName(terrain, (int i) => GetRegion(i).Terrain.GetMaxQuantity().key));
-    public void ClickClimate() => OnClick(() => PaintByName(climate, (int i) => GetRegion(i).Climate.GetMaxQuantity().key));
-    public void ClickFlora() => OnClick(() => PaintByPercent(flora, (int i) => GetRegion(i).Flora.GetMaxQuantity().value));
-    public void ClickFauna() => OnClick(() => PaintByPercent(fauna, (int i) => GetRegion(i).Fauna.GetMaxQuantity().value));
+    public void ClickTerrain() => OnClick(() => PaintByName(terrain, (int i) => GetRegion(i).Terrain.GetMax().key));
+    public void ClickClimate() => OnClick(() => PaintByName(climate, (int i) => GetRegion(i).Climate.GetMax().key));
+    public void ClickFlora() => OnClick(() => PaintByPercent(flora, (int i) => GetRegion(i).Flora.GetMax().value));
+    public void ClickFauna() => OnClick(() => PaintByPercent(fauna, (int i) => GetRegion(i).Fauna.GetMax().value));
     public void ClickPopulation() => OnClick(() => PaintByMax(population, (int i) => GetRegion(i).Population));
-    public void ClickEcoCulture() => OnClick(() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.EcoCulture.GetMaxQuantity().key));
-    public void ClickProdMode() => OnClick(() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ProdMode.GetMaxQuantity().key));
-    public void ClickGovernment() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.Government.GetMaxQuantity().key));
+    public void ClickEcoCulture() => OnClick(() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.EcoCulture.GetMax().key));
+    public void ClickProdMode() => OnClick(() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ProdMode.GetMax().key));
+    public void ClickGovernment() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.Government.GetMax().key));
     public void ClickCivilization() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.Name));
 
     private void OnClick(Action PaintAction) {

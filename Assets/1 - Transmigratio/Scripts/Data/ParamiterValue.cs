@@ -1,11 +1,26 @@
-[System.Serializable]
+using System;
+using UnityEngine;
+
+[Serializable]
 public class ParamiterValue {
-    public float StartValue;
-    public float Value;
-    public float Percent;
+    [SerializeField] private float _startValue;
+    [SerializeField] private float _value;
+    
+    public Action<float, float> onUpdate;
+
+    public float StartValue => _startValue;
+    public float Value {
+        get => _value;
+        set {
+            onUpdate?.Invoke(_value, value);
+            _value = value;
+        }
+    }
+
+    public ParamiterValue() { }
 
     public ParamiterValue(float val) {
-        StartValue = val;
-        Value = val;
+        _startValue = val;
+        _value = val;
     }
 }

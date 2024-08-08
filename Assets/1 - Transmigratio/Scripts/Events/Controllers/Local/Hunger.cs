@@ -14,8 +14,8 @@ namespace Events.Controllers.Local {
 
         private protected override string Name => "Hunger";
 
-        private int AddFoodPoints(CivPiece piece) => (int)(piece.Population.value / foodPerPerson / 100f * percentPointsForAddFood);
-        private int AddSomeFoodPoints(CivPiece piece) => (int)(piece.Population.value / foodPerPerson / 100f * percentPointsForAddSomeFood);
+        private int AddFoodPoints(CivPiece piece) => (int)(piece.Population.Value / foodPerPerson / 100f * percentPointsForAddFood);
+        private int AddSomeFoodPoints(CivPiece piece) => (int)(piece.Population.Value / foodPerPerson / 100f * percentPointsForAddSomeFood);
 
         private protected override void OpenPanel(CivPiece piece) {
             PanelFabric.CreateEvent(HUD.Instance.Events, _desidionPrefab, panel, this, piece, panelSprite, Local("Title"),
@@ -25,14 +25,14 @@ namespace Events.Controllers.Local {
         private protected override void ActivateEvents() {
             onActivate = AddEvent;
             onDeactivate = RemoveEvent;
-            Civilization.RemoveCivPiece += RemoveEvent;
+            Civilization.onRemovePiece += RemoveEvent;
             Events.AutoChoice.NewEvent(this, _desidions);
         }
 
         private protected override void DeactivateEvents() {
             onActivate = default;
             onDeactivate = default;
-            Civilization.RemoveCivPiece -= RemoveEvent;
+            Civilization.onRemovePiece -= RemoveEvent;
             Events.AutoChoice.RemoveEvent(this);
         }
 
@@ -47,7 +47,7 @@ namespace Events.Controllers.Local {
             if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            piece.ReserveFood += piece.Population.value / foodPerPerson;
+            piece.ReserveFood.Value += piece.Population.Value / foodPerPerson;
             ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "AddFood");
             RemoveEvent(piece);
             return true;
@@ -58,7 +58,7 @@ namespace Events.Controllers.Local {
             if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            piece.ReserveFood += piece.Population.value / foodPerPerson / 2;
+            piece.ReserveFood.Value += piece.Population.Value / foodPerPerson / 2;
             ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "AddSomeFood");
             RemoveEvent(piece);
             return true;

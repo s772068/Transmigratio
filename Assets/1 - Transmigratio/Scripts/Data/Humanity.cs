@@ -17,7 +17,6 @@ public class Humanity {
 
     public void Init() {
         Civilizations = new();
-        Civilizations.Clear();
         Debug.Log("Humanity init");
 
         for(int i = 0; i < scenarios.Count; ++i) {
@@ -30,9 +29,9 @@ public class Humanity {
     /// <summary>
     /// —оздание первоначальной цивилизации (старт игры)
     /// </summary>
-    public Civilization AddCivilization(int region, string civName) {
-        Civilization newCiv = new Civilization();
-        newCiv.Init(region, civName);
+    public Civilization StartGame(int region, string civName) {
+        Civilization newCiv = new Civilization(civName);
+        newCiv.StartGame(region);
         Civilizations[civName] = newCiv;
         return newCiv;
     }
@@ -41,5 +40,11 @@ public class Humanity {
         for (int i = 0; i < Civilizations.Count; ++i) {
             Civilizations.ElementAt(i).Value.Play();
         }
+    }
+
+    public void RemovePiece(string civName, int region) {
+        Civilizations[civName].RemovePiece(region);
+        if(Civilizations[civName].Pieces.Count == 0)
+            Civilizations.Remove(civName);
     }
 }

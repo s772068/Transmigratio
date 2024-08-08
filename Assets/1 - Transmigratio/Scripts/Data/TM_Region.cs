@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 [System.Serializable]
 public class TM_Region {
@@ -10,7 +9,7 @@ public class TM_Region {
         get {
             float res = 0;
             for(int i = 0; i < CivsList.Count; ++i) {
-                res += Transmigratio.Instance.GetCivPice(Id, CivsList[i]).Population.value;
+                res += Transmigratio.Instance.GetCivPice(Id, CivsList[i]).Population.Value;
             }
             return res;
         }
@@ -33,7 +32,7 @@ public class TM_Region {
     private float TakenFood { get {
             float res = 0;
             for(int i = 0; i < CivsList.Count; ++i) {
-                res += GetPiece(CivsList[i]).TakenFood;
+                res += GetPiece(CivsList[i]).TakenFood.Value;
             }
             return res;
         }
@@ -47,7 +46,7 @@ public class TM_Region {
         Dictionary<string, float> res = new();
         
         for (int i = 0; i < CivsList.Count; ++i) {
-            res[CivsList[i]] = GetPiece(CivsList[i]).Population.value;
+            res[CivsList[i]] = GetPiece(CivsList[i]).Population.Value;
         }
 
         return res;
@@ -59,7 +58,7 @@ public class TM_Region {
         Dictionary<string, int> dic = new();
 
         for (int i = 0; i < CivsList.Count; ++i) {
-            dic[CivsList[i]] = GetPiece(CivsList[i]).Population.value;
+            dic[CivsList[i]] = GetPiece(CivsList[i]).Population.Value;
         }
 
         return dic.FirstOrDefault(x => x.Value == dic.Values.Max()).Key;

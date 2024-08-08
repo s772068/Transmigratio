@@ -2,13 +2,12 @@ using System;
 
 namespace Gameplay.Scenarios {
     public static class Demography {
-
         public static Data data;
 
         private static CivPiece _piece;
         private static Population _population;
-        private static ParamiterValue _flora;
-        private static ParamiterValue _fauna;
+        private static Paramiter _flora;
+        private static Paramiter _fauna;
         private static float _floraKr;
         private static float _faunaKr;
         private static float _floraGrow;
@@ -17,60 +16,55 @@ namespace Gameplay.Scenarios {
         private static float _populationGrowPercent;
         private static float _governmentCorruption;
 
-        public static Action<CivPiece> onPlay;
-
         private static int Population {
-            get => _population.value;
-            set => _population.value = value;
+            get => _population.Value;
+            set => _population.Value = value;
         }
         private static float PopulationGrow {
-            get => _piece.PopulationGrow;
-            set => _piece.PopulationGrow = value;
+            get => _piece.PopulationGrow.Value;
+            set => _piece.PopulationGrow.Value = value;
         }
         private static float ReserveFood {
-            get => _piece.ReserveFood;
-            set => _piece.ReserveFood = value;
+            get => _piece.ReserveFood.Value;
+            set => _piece.ReserveFood.Value = value;
         }
         private static float RequestFood {
-            get => _piece.RequestFood;
-            set => _piece.RequestFood = value;
+            get => _piece.RequestFood.Value;
+            set => _piece.RequestFood.Value = value;
         }
         private static float TakenFood {
-            get => _piece.TakenFood;
-            set => _piece.TakenFood = value;
+            get => _piece.TakenFood.Value;
+            set => _piece.TakenFood.Value = value;
         }
         private static float GivenFood {
-            get => _piece.GivenFood;
-            set => _piece.GivenFood = value;
+            get => _piece.GivenFood.Value;
+            set => _piece.GivenFood.Value = value;
         }
         private static float Flora {
-            get => _flora.Value;
-            set => _flora.Value = value;
+            get => _flora["Flora"];
+            set => _flora["Flora"] = value;
         }
         private static float Fauna {
-            get => _fauna.Value;
-            set => _fauna.Value = value;
+            get => _fauna["Fauna"];
+            set => _fauna["Fauna"] = value;
         }
-
-        private static float PrevPopulationGrow { set => _piece.PrevPopulationGrow = value; }
 
         public static void Play(CivPiece piece) {
             Init(piece);
             Update();
-            onPlay.Invoke(piece);
         }
 
         private static void Init(CivPiece piece) {
             _piece = piece;
             _population = _piece.Population;
-            _flora = _piece.Region.Flora["Flora"];
-            _fauna = _piece.Region.Fauna["Fauna"];
+            _flora = _piece.Region.Flora;
+            _fauna = _piece.Region.Fauna;
         }
 
         private static void Update() {
-            string ecoCulture = _piece.Civilization.EcoCulture.GetMaxQuantity().key;
-            string prodMode = _piece.Civilization.ProdMode.GetMaxQuantity().key;
-            string government = _piece.Civilization.Government.GetMaxQuantity().key;
+            string ecoCulture = _piece.EcoCulture.GetMax().key;
+            string prodMode = _piece.ProdMode.GetMax().key;
+            string government = _piece.Government.GetMax().key;
 
             _prodModeK = prodMode switch {
                 "PrimitiveCommunism" => data.prodModeK_PC,
@@ -91,11 +85,10 @@ namespace Gameplay.Scenarios {
             ReserveFood += TakenFood - GivenFood;
             RequestFood = Population / data.val4;
             GivenFood = ReserveFood > RequestFood ? RequestFood : ReserveFood;
-            PrevPopulationGrow = PopulationGrow;
             PopulationGrow = Population * _governmentCorruption * GivenFood / RequestFood - Population / data.val5;
             _populationGrowPercent = PopulationGrow / Population * data.val6;
-            Flora = Math.Min(Flora - TakenFood/ data.val7 + _floraGrow, _flora.StartValue);
-            Fauna = Math.Min(Fauna - TakenFood/ data.val8 + _faunaGrow, _fauna.StartValue);
+            Flora = Math.Min(Flora - TakenFood/ data.val7 + _floraGrow, _flora.GetStartValue("Flora"));
+            Fauna = Math.Min(Fauna - TakenFood/ data.val8 + _faunaGrow, _fauna.GetStartValue("Fauna"));
             _floraKr = (float) (Math.Pow(Flora, data.val9) / data.val10);
             _faunaKr = (float) (Math.Pow(Fauna, data.val11) / data.val12);
             TakenFood = ecoCulture == "Farmers" ?

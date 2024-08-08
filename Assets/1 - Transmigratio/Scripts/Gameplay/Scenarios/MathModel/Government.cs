@@ -12,32 +12,29 @@ namespace Gameplay.Scenarios {
 
         private static Paramiter _government;
 
-        public static Action<CivPiece> onPlay;
-
         private static float Leaderism {
-            get => _government["Leaderism"].Value;
-            set => _government["Leaderism"].Value = value;
+            get => _government["Leaderism"];
+            set => _government["Leaderism"] = value;
         }
 
         private static float Monarchy {
-            get => _government["Monarchy"].Value;
-            set => _government["Monarchy"].Value = value;
+            get => _government["Monarchy"];
+            set => _government["Monarchy"] = value;
         }
 
         public static void Play(CivPiece piece) {
             Init(piece);
             Update();
-            onPlay.Invoke(piece);
         }
 
         private static void Init(CivPiece piece) {
             _piece = piece;
-            _government = piece.Civilization.Government;
+            _government = piece.Government;
         }
 
         private static void Update() {
-            string ecoCulture = _piece.Civilization.EcoCulture.GetMaxQuantity().key;
-            string prodMode = _piece.Civilization.ProdMode.GetMaxQuantity().key;
+            string ecoCulture = _piece.EcoCulture.GetMax().key;
+            string prodMode = _piece.ProdMode.GetMax().key;
 
             if (ecoCulture == "Hunters") Leaderism += add_L_H;
             if (prodMode == "PrimitiveCommunism") Leaderism += add_L_PC;

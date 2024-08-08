@@ -7,36 +7,33 @@ namespace Gameplay.Scenarios {
         private static CivPiece _piece;
         private static Paramiter _prodMode;
 
-        public static Action<CivPiece> onPlay;
-
         private static float PrimitiveCommunism {
-            get => _prodMode["PrimitiveCommunism"].Value;
-            set => _prodMode["PrimitiveCommunism"].Value = value;
+            get => _prodMode["PrimitiveCommunism"];
+            set => _prodMode["PrimitiveCommunism"] = value;
         }
 
         private static float Slavery {
-            get => _prodMode["Slavery"].Value;
-            set => _prodMode["Slavery"].Value = value;
+            get => _prodMode["Slavery"];
+            set => _prodMode["Slavery"] = value;
         }
 
         private static float Feodalism {
-            get => _prodMode["Feodalism"].Value;
-            set => _prodMode["Feodalism"].Value = value;
+            get => _prodMode["Feodalism"];
+            set => _prodMode["Feodalism"] = value;
         }
 
         public static void Play(CivPiece piece) {
             Init(piece);
             Update();
-            onPlay.Invoke(piece);
         }
 
         private static void Init(CivPiece piece) {
             _piece = piece;
-            _prodMode = _piece.Civilization.ProdMode;
+            _prodMode = _piece.ProdMode;
         }
 
         private static void Update() {
-            string ecoCulture = _piece.Civilization.EcoCulture.GetMaxQuantity().key;
+            string ecoCulture = _piece.EcoCulture.GetMax().key;
             if (ecoCulture == "Hunters") PrimitiveCommunism += data.add_PC;
             if (ecoCulture == "Farmers" || ecoCulture == "Nomads") {
                 Slavery += data.add_Slavery;
