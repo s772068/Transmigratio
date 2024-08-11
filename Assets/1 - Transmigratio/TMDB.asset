@@ -13,155 +13,11 @@ MonoBehaviour:
   m_Name: TMDB
   m_EditorClassIdentifier: 
   startAge: 40000
-  _news: []
   humanity:
     Civilizations:
-      _serializedList:
-      - Key: Uncivilized
-        Value:
-          Name: Uncivilized
-          Pieces:
-            _serializedList:
-            - Key: 15
-              Value:
-                Population:
-                  value: 2412
-                PopulationGrow: 150.80002
-                GivenFood: 15.08
-                RequestFood: 15.08
-                ReserveFood: 20.60622
-                TakenFood: 8.981076
-                PrevPopulationGrow: 141.40001
-                RegionID: 15
-                CivName: Uncivilized
-            - Key: 11
-              Value:
-                Population:
-                  value: 394
-                PopulationGrow: -30.745544
-                GivenFood: 4.0320187
-                RequestFood: 5.4533334
-                ReserveFood: 4.1696477
-                TakenFood: 4.1696477
-                PrevPopulationGrow: 27.589754
-                RegionID: 11
-                CivName: Uncivilized
-            - Key: 17
-              Value:
-                Population:
-                  value: 104
-                PopulationGrow: 6.533334
-                GivenFood: 0.6533333
-                RequestFood: 0.6533333
-                ReserveFood: 9.846209
-                TakenFood: 0.49954215
-                PrevPopulationGrow: 0
-                RegionID: 17
-                CivName: Uncivilized
-          EcoCulture:
-            quantities:
-              _serializedList:
-              - Key: Hunters
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Farmers
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Nomads
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Mountain
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: City
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-          ProdMode:
-            quantities:
-              _serializedList:
-              - Key: PrimitiveCommunism
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Slavery
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Feodalism
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Capitalism
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Socialism
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Communism
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-          Government:
-            quantities:
-              _serializedList:
-              - Key: Leaderism
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Monarchy
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: CityState
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Imperium
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Federation
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: NationalState
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-              - Key: Anarchy
-                Value:
-                  Max: 0
-                  Value: 0
-                  Percent: 0
-          ProdModeK: 0.6
-          GovernmentCorruption: 0.4
+      _serializedList: []
     scenarios:
-    - {fileID: 11400000, guid: bcad26c30568c7249842b7697b0f076e, type: 2}
-    - {fileID: 11400000, guid: 629d1e043b04bdf498fc1dbbe0a9cc28, type: 2}
+    - {fileID: 11400000, guid: efaf3952c1a721949a35cea9971d186c, type: 2}
   map:
     AllRegions:
     - Id: 0
@@ -171,7 +27,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 100
       Fauna:
@@ -179,7 +35,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Climate:
@@ -187,22 +43,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Moderate
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -210,32 +66,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Forest
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Desert
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Mountain
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -247,7 +103,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Fauna:
@@ -255,7 +111,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -263,22 +119,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Moderate
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 75
           - Key: Polar
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
       Terrain:
@@ -286,32 +142,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Forest
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Desert
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Mountain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Steppe
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Tundra
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
       CivsList: []
@@ -323,7 +179,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Fauna:
@@ -331,7 +187,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -339,22 +195,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Moderate
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -362,32 +218,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Forest
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 90
+              StartValue: 90
               Value: 90
               Percent: 90
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -399,7 +255,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 100
       Fauna:
@@ -407,7 +263,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 100
       Climate:
@@ -415,22 +271,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Tropical
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Moderate
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 70
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -438,32 +294,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 50
           - Key: Forest
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -475,38 +331,38 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
-              Percent: -2147483648
+              Percent: -2.1474836e+9
       Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
-              Percent: -2147483648
+              Percent: -2.1474836e+9
       Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 100
+              StartValue: 100
               Value: 100
               Percent: 100
       Terrain:
@@ -514,32 +370,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Forest
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Desert
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
       CivsList: []
@@ -551,7 +407,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 100
       Fauna:
@@ -559,7 +415,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Climate:
@@ -567,22 +423,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Tropical
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
           - Key: Moderate
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -590,32 +446,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Forest
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Desert
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -627,7 +483,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 90
+              StartValue: 90
               Value: 90
               Percent: 100
       Fauna:
@@ -635,7 +491,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 100
       Climate:
@@ -643,22 +499,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 65
+              StartValue: 65
               Value: 65
               Percent: 65
           - Key: Tropical
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Moderate
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -666,32 +522,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Forest
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 35
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -703,7 +559,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 65
+              StartValue: 65
               Value: 65
               Percent: 100
       Fauna:
@@ -711,7 +567,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 100
       Climate:
@@ -719,22 +575,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 85
+              StartValue: 85
               Value: 85
               Percent: 85
           - Key: Tropical
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -742,32 +598,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Forest
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 70
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -779,7 +635,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 100
       Fauna:
@@ -787,7 +643,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 100
       Climate:
@@ -795,22 +651,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Tropical
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 70
           - Key: Moderate
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -818,32 +674,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Forest
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Desert
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Mountain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -855,7 +711,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 100
       Fauna:
@@ -863,7 +719,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -871,22 +727,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 35
           - Key: Tropical
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
           - Key: Moderate
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -894,32 +750,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Forest
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 75
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
       CivsList: []
@@ -931,7 +787,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 100
       Fauna:
@@ -939,7 +795,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 100
       Climate:
@@ -947,22 +803,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Moderate
             Value:
-              Max: 90
+              StartValue: 90
               Value: 90
               Percent: 90
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -970,32 +826,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Forest
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Desert
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Mountain
             Value:
-              Max: 90
+              StartValue: 90
               Value: 90
               Percent: 90
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -1007,7 +863,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Fauna:
@@ -1015,7 +871,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -1023,22 +879,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 90
+              StartValue: 90
               Value: 90
               Percent: 90
           - Key: Moderate
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -1046,36 +902,35 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Forest
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Desert
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Mountain
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Steppe
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
-      CivsList:
-      - Uncivilized
+      CivsList: []
       Marker: {fileID: 0}
     - Id: 12
       Name: "\u0421\u0435\u0432\u0435\u0440\u043E-\u0417\u0430\u043F\u0430\u0434\u043D\u044B\u0435
@@ -1085,7 +940,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 100
       Fauna:
@@ -1093,7 +948,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 100
       Climate:
@@ -1101,22 +956,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Polar
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 70
       Terrain:
@@ -1124,32 +979,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Forest
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 70
       CivsList: []
@@ -1161,7 +1016,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 100
       Fauna:
@@ -1169,7 +1024,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Climate:
@@ -1177,22 +1032,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 95
+              StartValue: 95
               Value: 95
               Percent: 95
           - Key: Polar
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
       Terrain:
@@ -1200,32 +1055,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Forest
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 80
+              StartValue: 80
               Value: 80
               Percent: 80
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -1237,7 +1092,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 90
+              StartValue: 90
               Value: 90
               Percent: 100
       Fauna:
@@ -1245,7 +1100,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -1253,22 +1108,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Moderate
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -1276,32 +1131,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 75
           - Key: Forest
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -1313,7 +1168,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Fauna:
@@ -1321,30 +1176,30 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 60
-              Value: 26
+              StartValue: 60
+              Value: 60
               Percent: 100
       Climate:
         quantities:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 90
+              StartValue: 90
               Value: 90
               Percent: 90
           - Key: Tropical
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -1352,36 +1207,35 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Forest
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
           - Key: Desert
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Mountain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
-      CivsList:
-      - Uncivilized
+      CivsList: []
       Marker: {fileID: 0}
     - Id: 16
       Name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0415\u0432\u0440\u043E\u043F\u0430"
@@ -1390,7 +1244,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 100
       Fauna:
@@ -1398,7 +1252,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -1406,22 +1260,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 100
+              StartValue: 100
               Value: 100
               Percent: 100
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -1429,32 +1283,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Forest
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -1466,7 +1320,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Fauna:
@@ -1474,7 +1328,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -1482,22 +1336,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 80
+              StartValue: 80
               Value: 80
               Percent: 80
           - Key: Tropical
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -1505,36 +1359,35 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Forest
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Desert
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Mountain
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
-      CivsList:
-      - Uncivilized
+      CivsList: []
       Marker: {fileID: 0}
     - Id: 18
       Name: "\u0421\u0435\u0432\u0435\u0440\u043D\u0430\u044F \u0415\u0432\u0440\u043E\u043F\u0430"
@@ -1543,7 +1396,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 100
       Fauna:
@@ -1551,7 +1404,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 100
       Climate:
@@ -1559,22 +1412,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
           - Key: Polar
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
       Terrain:
@@ -1582,32 +1435,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Forest
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
       CivsList: []
@@ -1619,7 +1472,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 100
       Fauna:
@@ -1627,7 +1480,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Climate:
@@ -1635,22 +1488,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Tropical
             Value:
-              Max: 80
+              StartValue: 80
               Value: 80
               Percent: 80
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -1658,32 +1511,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 50
           - Key: Forest
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Desert
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Mountain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -1695,7 +1548,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 80
+              StartValue: 80
               Value: 80
               Percent: 100
       Fauna:
@@ -1703,7 +1556,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Climate:
@@ -1711,22 +1564,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Tropical
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 70
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -1734,32 +1587,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 70
           - Key: Forest
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Desert
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Mountain
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -1771,7 +1624,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Fauna:
@@ -1779,7 +1632,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 100
       Climate:
@@ -1787,22 +1640,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
           - Key: Moderate
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -1810,32 +1663,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Forest
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -1847,7 +1700,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Fauna:
@@ -1855,7 +1708,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 100
       Climate:
@@ -1863,22 +1716,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 95
+              StartValue: 95
               Value: 95
               Percent: 95
           - Key: Polar
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
       Terrain:
@@ -1886,32 +1739,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
           - Key: Forest
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -1923,7 +1776,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 100
       Fauna:
@@ -1931,7 +1784,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 100
       Climate:
@@ -1939,22 +1792,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Polar
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
       Terrain:
@@ -1962,32 +1815,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Forest
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 35
       CivsList: []
@@ -1999,7 +1852,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 100
       Fauna:
@@ -2007,7 +1860,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -2015,22 +1868,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 85
+              StartValue: 85
               Value: 85
               Percent: 85
           - Key: Tropical
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -2038,32 +1891,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Forest
             Value:
-              Max: 85
+              StartValue: 85
               Value: 85
               Percent: 85
           - Key: Desert
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Mountain
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -2075,7 +1928,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 100
       Fauna:
@@ -2083,7 +1936,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 100
       Climate:
@@ -2091,22 +1944,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 100
+              StartValue: 100
               Value: 100
               Percent: 100
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -2114,32 +1967,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
           - Key: Forest
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
       CivsList: []
@@ -2151,7 +2004,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Fauna:
@@ -2159,7 +2012,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 100
       Climate:
@@ -2167,22 +2020,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Moderate
             Value:
-              Max: 80
+              StartValue: 80
               Value: 80
               Percent: 80
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -2190,32 +2043,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Forest
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -2228,7 +2081,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 100
       Fauna:
@@ -2236,7 +2089,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 100
       Climate:
@@ -2244,22 +2097,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 95
+              StartValue: 95
               Value: 95
               Percent: 95
           - Key: Polar
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
       Terrain:
@@ -2267,32 +2120,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Forest
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Desert
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 65
+              StartValue: 65
               Value: 65
               Percent: 65
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -2305,7 +2158,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 100
       Fauna:
@@ -2313,7 +2166,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 100
       Climate:
@@ -2321,22 +2174,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 75
           - Key: Tropical
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -2344,32 +2197,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Forest
             Value:
-              Max: 65
+              StartValue: 65
               Value: 65
               Percent: 65
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -2381,7 +2234,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 100
       Fauna:
@@ -2389,7 +2242,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -2397,22 +2250,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Tropical
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -2420,32 +2273,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Forest
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 75
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -2457,7 +2310,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 100
       Fauna:
@@ -2465,7 +2318,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 3
+              StartValue: 3
               Value: 3
               Percent: 100
       Climate:
@@ -2473,22 +2326,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 70
           - Key: Tropical
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -2496,32 +2349,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Forest
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Desert
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 75
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -2534,7 +2387,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 100
       Fauna:
@@ -2542,7 +2395,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 100
       Climate:
@@ -2550,22 +2403,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 95
+              StartValue: 95
               Value: 95
               Percent: 95
           - Key: Polar
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
       Terrain:
@@ -2573,32 +2426,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Forest
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Desert
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 75
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -2610,7 +2463,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 100
       Fauna:
@@ -2618,7 +2471,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 100
       Climate:
@@ -2626,22 +2479,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Tropical
             Value:
-              Max: 80
+              StartValue: 80
               Value: 80
               Percent: 80
           - Key: Moderate
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -2649,32 +2502,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Forest
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Desert
             Value:
-              Max: 80
+              StartValue: 80
               Value: 80
               Percent: 80
           - Key: Mountain
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -2686,7 +2539,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Fauna:
@@ -2694,7 +2547,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -2702,22 +2555,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 65
+              StartValue: 65
               Value: 65
               Percent: 65
           - Key: Polar
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 35
       Terrain:
@@ -2725,32 +2578,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Forest
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 50
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
       CivsList: []
@@ -2763,7 +2616,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Fauna:
@@ -2771,7 +2624,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 100
       Climate:
@@ -2779,22 +2632,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 100
+              StartValue: 100
               Value: 100
               Percent: 100
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -2802,32 +2655,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Forest
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 50
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -2839,7 +2692,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 100
       Fauna:
@@ -2847,7 +2700,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 100
       Climate:
@@ -2855,22 +2708,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 90
+              StartValue: 90
               Value: 90
               Percent: 90
           - Key: Tropical
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -2878,32 +2731,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Forest
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 70
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -2915,7 +2768,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 100
+              StartValue: 100
               Value: 100
               Percent: 100
       Fauna:
@@ -2923,7 +2776,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -2931,22 +2784,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 70
           - Key: Moderate
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -2954,32 +2807,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 65
+              StartValue: 65
               Value: 65
               Percent: 65
           - Key: Forest
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Desert
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Mountain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -2991,7 +2844,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 100
       Fauna:
@@ -2999,7 +2852,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -3007,22 +2860,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Polar
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
       Terrain:
@@ -3030,32 +2883,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Forest
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 35
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
       CivsList: []
@@ -3067,7 +2920,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 100
       Fauna:
@@ -3075,7 +2928,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -3083,22 +2936,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 80
+              StartValue: 80
               Value: 80
               Percent: 80
           - Key: Polar
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
       Terrain:
@@ -3106,32 +2959,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Forest
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Steppe
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Tundra
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
       CivsList: []
@@ -3143,7 +2996,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 100
       Fauna:
@@ -3151,7 +3004,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 100
       Climate:
@@ -3159,22 +3012,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Polar
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
       Terrain:
@@ -3182,32 +3035,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Forest
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Steppe
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Tundra
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 35
       CivsList: []
@@ -3219,7 +3072,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 100
       Fauna:
@@ -3227,7 +3080,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 100
       Climate:
@@ -3235,22 +3088,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Polar
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
       Terrain:
@@ -3258,32 +3111,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Forest
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Steppe
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Tundra
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
       CivsList: []
@@ -3295,7 +3148,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 100
       Fauna:
@@ -3303,7 +3156,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 100
       Climate:
@@ -3311,22 +3164,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Polar
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
       Terrain:
@@ -3334,32 +3187,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Forest
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
       CivsList: []
@@ -3371,7 +3224,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 100
       Fauna:
@@ -3379,7 +3232,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 100
       Climate:
@@ -3387,22 +3240,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Tropical
             Value:
-              Max: 80
+              StartValue: 80
               Value: 80
               Percent: 80
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -3410,32 +3263,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 65
+              StartValue: 65
               Value: 65
               Percent: 65
           - Key: Forest
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -3447,7 +3300,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Fauna:
@@ -3455,7 +3308,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 100
       Climate:
@@ -3463,22 +3316,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 75
           - Key: Tropical
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Moderate
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -3486,32 +3339,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Forest
             Value:
-              Max: 80
+              StartValue: 80
               Value: 80
               Percent: 80
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -3523,7 +3376,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 100
       Fauna:
@@ -3531,7 +3384,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -3539,22 +3392,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Moderate
             Value:
-              Max: 85
+              StartValue: 85
               Value: 85
               Percent: 85
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -3562,32 +3415,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Forest
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -3599,7 +3452,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 100
       Fauna:
@@ -3607,7 +3460,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 100
       Climate:
@@ -3615,22 +3468,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 25
           - Key: Polar
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 75
       Terrain:
@@ -3638,32 +3491,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Forest
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Steppe
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Tundra
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 50
       CivsList: []
@@ -3676,7 +3529,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Fauna:
@@ -3684,7 +3537,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 100
       Climate:
@@ -3692,22 +3545,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Moderate
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -3715,32 +3568,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Forest
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Desert
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Mountain
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 35
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -3752,7 +3605,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 100
       Fauna:
@@ -3760,7 +3613,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 100
       Climate:
@@ -3768,22 +3621,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 20
+              StartValue: 20
               Value: 20
               Percent: 20
           - Key: Moderate
             Value:
-              Max: 75
+              StartValue: 75
               Value: 75
               Percent: 75
           - Key: Polar
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
       Terrain:
@@ -3791,32 +3644,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Forest
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Desert
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Mountain
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Steppe
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -3828,7 +3681,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 100
       Fauna:
@@ -3836,7 +3689,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -3844,22 +3697,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 90
+              StartValue: 90
               Value: 90
               Percent: 90
           - Key: Polar
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
       Terrain:
@@ -3867,32 +3720,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 50
           - Key: Forest
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Steppe
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Tundra
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
       CivsList: []
@@ -3904,7 +3757,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 100
       Fauna:
@@ -3912,7 +3765,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 100
       Climate:
@@ -3920,22 +3773,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 100
+              StartValue: 100
               Value: 100
               Percent: 100
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -3943,32 +3796,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 30
+              StartValue: 30
               Value: 30
               Percent: 30
           - Key: Forest
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Desert
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Mountain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Steppe
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 50
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -3980,7 +3833,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 100
       Fauna:
@@ -3988,7 +3841,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 100
       Climate:
@@ -3996,22 +3849,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Tropical
             Value:
-              Max: 45
+              StartValue: 45
               Value: 45
               Percent: 45
           - Key: Moderate
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -4019,32 +3872,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Forest
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -4056,7 +3909,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 100
       Fauna:
@@ -4064,7 +3917,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 100
       Climate:
@@ -4072,22 +3925,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 100
+              StartValue: 100
               Value: 100
               Percent: 100
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -4095,32 +3948,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Forest
             Value:
-              Max: 15
+              StartValue: 15
               Value: 15
               Percent: 15
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 70
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -4132,7 +3985,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 70
+              StartValue: 70
               Value: 70
               Percent: 100
       Fauna:
@@ -4140,7 +3993,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 100
       Climate:
@@ -4148,22 +4001,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 60
           - Key: Moderate
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -4171,32 +4024,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Forest
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 50
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -4209,7 +4062,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 60
+              StartValue: 60
               Value: 60
               Percent: 100
       Fauna:
@@ -4217,7 +4070,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 100
       Climate:
@@ -4225,22 +4078,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 35
+              StartValue: 35
               Value: 35
               Percent: 35
           - Key: Moderate
             Value:
-              Max: 65
+              StartValue: 65
               Value: 65
               Percent: 65
           - Key: Polar
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       Terrain:
@@ -4248,32 +4101,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 50
           - Key: Forest
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
           - Key: Steppe
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []
@@ -4286,7 +4139,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Flora
             Value:
-              Max: 50
+              StartValue: 50
               Value: 50
               Percent: 100
       Fauna:
@@ -4294,7 +4147,7 @@ MonoBehaviour:
           _serializedList:
           - Key: Fauna
             Value:
-              Max: 25
+              StartValue: 25
               Value: 25
               Percent: 100
       Climate:
@@ -4302,22 +4155,22 @@ MonoBehaviour:
           _serializedList:
           - Key: Ecuatorial
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Tropical
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Moderate
             Value:
-              Max: 90
+              StartValue: 90
               Value: 90
               Percent: 90
           - Key: Polar
             Value:
-              Max: 10
+              StartValue: 10
               Value: 10
               Percent: 10
       Terrain:
@@ -4325,32 +4178,32 @@ MonoBehaviour:
           _serializedList:
           - Key: Plain
             Value:
-              Max: 55
+              StartValue: 55
               Value: 55
               Percent: 55
           - Key: Forest
             Value:
-              Max: 40
+              StartValue: 40
               Value: 40
               Percent: 40
           - Key: Desert
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Mountain
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
           - Key: Steppe
             Value:
-              Max: 5
+              StartValue: 5
               Value: 5
               Percent: 5
           - Key: Tundra
             Value:
-              Max: 0
+              StartValue: 0
               Value: 0
               Percent: 0
       CivsList: []

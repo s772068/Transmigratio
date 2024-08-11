@@ -42,7 +42,7 @@ public class Map {
 
         foreach (TM_Region region in AllRegions ) {
             WMSK.ToggleCountrySurface(region.Id, true, Color.clear);
-            region.Init();
+            //region.Init();
         }
     }
 

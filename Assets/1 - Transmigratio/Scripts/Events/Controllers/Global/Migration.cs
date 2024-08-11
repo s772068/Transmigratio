@@ -37,7 +37,7 @@ namespace Events.Controllers.Global {
 
         private protected override void ActivateEvents() {
             Timeline.TickLogic += OnTickLogic;
-            Civilization.RemoveCivPiece += RemoveMigration;
+            Civilization.onRemovePiece += RemoveMigration;
 
             OnMigration = TryMigration;
             GetPopulation = () => _migrations.Sum(x => x.Value.FullPopulations - x.Value.CurPopulations);
@@ -46,7 +46,7 @@ namespace Events.Controllers.Global {
 
         private protected override void DeactivateEvents() {
             Timeline.TickLogic -= OnTickLogic;
-            Civilization.RemoveCivPiece -= RemoveMigration;
+            Civilization.onRemovePiece -= RemoveMigration;
 
             OnMigration = default;
             GetPopulation = default;
@@ -81,16 +81,16 @@ namespace Events.Controllers.Global {
                 if (_migrations.ContainsKey(regionID)) continue;
 
                 TM_Region neighbourRegion = Map.GetRegionBywmskId(regionID);
-                if (neighbourRegion.Fauna["Fauna"].Value > 0) {
+                if (neighbourRegion.Fauna["Fauna"] > 0) {
                     allNeighbourRegionsList.Add(neighbourRegion);
-                    if (neighbourRegion.Fauna["Fauna"].Value > curRegion.Fauna["Fauna"].Value) {
+                    if (neighbourRegion.Fauna["Fauna"] > curRegion.Fauna["Fauna"]) {
                         targetList.Add(neighbourRegion);
                     }
                 }
             }
 
             if (targetList.Count > 0) {
-                targetRegion = GetMax(targetList, (TM_Region region) => region.Fauna["Fauna"].Value);
+                targetRegion = GetMax(targetList, (TM_Region region) => region.Fauna["Fauna"]);
             } else if (allNeighbourRegionsList.Count > 0) {
                 System.Random r = new System.Random();
                 targetRegion = allNeighbourRegionsList[r.Next(0, allNeighbourRegionsList.Count)];
@@ -113,15 +113,15 @@ namespace Events.Controllers.Global {
             newMigration.Civilization = civ;
             newMigration.Line = CreateLine(start, end);
             newMigration.Marker = CreateMarker(start, end);
-            newMigration.FullPopulations = (int) (civ.Pieces[from.Id].Population.value / 100f * percentToMigration);
+            newMigration.FullPopulations = (int) (civ.Pieces[from.Id].Population.Value / 100f * percentToMigration);
             newMigration.StepPopulations = (int) (newMigration.FullPopulations / 100f * stepPercent);
 
-            civ.Pieces[from.Id].Population.value -= newMigration.FullPopulations;
+            civ.Pieces[from.Id].Population.Value -= newMigration.FullPopulations;
             _migrations[from.Id] = newMigration;
 
             if (!to.CivsList.Contains(civ.Name)) {
                 newMigration.CurPopulations += newMigration.StepPopulations;
-                civ.AddPiece(to.Id, newMigration.StepPopulations, 10);
+                civ.AddPiece(to.Id, newMigration.StepPopulations);
                 to.AddCivilization(civ.Name);
             }
             
@@ -183,10 +183,10 @@ namespace Events.Controllers.Global {
                     if (migration.FullPopulations > migration.CurPopulations) {
                         if (migration.FullPopulations - migration.CurPopulations >= migration.StepPopulations) {
                             migration.CurPopulations += migration.StepPopulations;
-                            migration.Civilization.Pieces[migration.To.Id].Population.value += migration.StepPopulations;
+                            migration.Civilization.Pieces[migration.To.Id].Population.Value += migration.StepPopulations;
                         } else {
                             migration.CurPopulations = migration.FullPopulations;
-                            migration.Civilization.Pieces[migration.To.Id].Population.value += migration.FullPopulations - migration.CurPopulations;
+                            migration.Civilization.Pieces[migration.To.Id].Population.Value += migration.FullPopulations - migration.CurPopulations;
                         }
                     }
                     // Удаление миграции
@@ -233,7 +233,7 @@ namespace Events.Controllers.Global {
 
             int fromID = piece.Region.Id;
             MigrationData data = _migrations[piece.Region.Id];
-            piece.Population.value += data.FullPopulations - data.CurPopulations;
+            piece.Population.Value += data.FullPopulations - data.CurPopulations;
             ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "Break");
             RemoveMigration(fromID);
             return true;
@@ -265,7 +265,7 @@ namespace Events.Controllers.Global {
                 _migrations[index].Marker.Destroy();
         }
 
-        private T GetMax<T>(List<T> list, Func<T, int> GetValue) {
+        private T GetMax<T>(List<T> list, Func<T, float> GetValue) {
             int res = 0;
             for (int i = 1; i < list.Count; ++i) {
                 if (GetValue(list[res]) < GetValue(list[i])) {
