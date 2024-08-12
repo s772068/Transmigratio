@@ -15,7 +15,7 @@ namespace Gameplay.Scenarios {
             Demography.data = demography;
         }
 
-        private protected override void Play() {
+        public override void Play() {
             EcoCulture.Play(_piece);
             ProdMode.Play(_piece);
             Government.Play(_piece);

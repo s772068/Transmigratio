@@ -3,11 +3,8 @@ using UnityEngine;
 namespace Gameplay.Scenarios {
     public class Base : ScriptableObject {
         private protected CivPiece _piece;
+        public CivPiece Piece { set { _piece = value; } }
         public virtual void Init() {}
-        private protected virtual void Play() {}
-        public void Play(CivPiece piece) {
-            _piece = piece;
-            Play();
-        }
+        public virtual void Play() {}
     }
 }

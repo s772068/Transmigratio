@@ -83,8 +83,8 @@ public class CivPiece {
         Government.Init("Monarchy", "CityState", "Imperium", "Federation", "NationalState", "Anarchy");
 
         RegionID = region;
-        Population = new(startPopulation);
         CivName = civilization;
+        Population = new(startPopulation);
         RequestFood = new(Population.Value / Demography.data.val4);
         GivenFood = new(ReserveFood.Value > RequestFood.Value ? RequestFood.Value : ReserveFood.Value);
         float _floraKr = (float) (Math.Pow(Region.Flora["Flora"], Demography.data.val9) / Demography.data.val10);
