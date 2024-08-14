@@ -17,7 +17,7 @@ namespace Gameplay.Scenarios.Events {
                     humanity.Civilizations["Aztec"] = civ;
                 }
                 humanity.Civilizations["Aztec"].AddPiece(_piece);
-                humanity.RemovePiece(_piece.CivName, _piece.RegionID);
+                //humanity.RemovePiece(_piece.CivName, _piece.RegionID);
             }
         }
     }

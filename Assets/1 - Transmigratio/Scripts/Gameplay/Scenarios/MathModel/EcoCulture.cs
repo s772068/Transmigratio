@@ -45,6 +45,9 @@ namespace Gameplay.Scenarios {
             Hunters += (Forest + Mountain + Steppe + Tundra) /data.huntersDivision;
             Farmers += Plain / data.farmersDivision;
             Nomads += (Desert + Mountain + Steppe) / data.nomadsDivision;
+
+            if (_piece.EcoCulture.GetMax().key == "Farmers")
+                News.NewsTrigger?.Invoke("GreenRevolution");
         }
 
         [Serializable]

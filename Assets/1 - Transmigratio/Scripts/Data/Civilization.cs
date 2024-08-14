@@ -87,7 +87,8 @@ public class Civilization {
     }
 
     public void Play() {
-        for (int i = 0; i < Pieces.Count; ++i) {
+        int count = Pieces.Count;
+        for (int i = 0; i < count; ++i) {
             Pieces.ElementAt(i).Value.Play();
         }
     }

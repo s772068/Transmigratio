@@ -37,7 +37,8 @@ public class Humanity {
     }
 
     public void Play() {
-        for (int i = 0; i < Civilizations.Count; ++i) {
+        int count = Civilizations.Count;
+        for (int i = 0; i < count; ++i) {
             Civilizations.ElementAt(i).Value.Play();
         }
     }
