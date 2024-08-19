@@ -21,7 +21,64 @@ MonoBehaviour:
   civColor: {r: 0, g: 0.49803922, b: 1, a: 1}
   AutoChoice: 0
   states:
-    _serializedList: []
+    _serializedList:
+    - Key: 0
+      Value:
+        ticks: 28000000
+        onEndTime:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 0}
+              m_TargetAssemblyTypeName: Events.Controllers.StateMachines.Base`1[[Events.Controllers.StateMachines.Volcano,
+                Assembly-CSharp
+              m_MethodName: CreateEvent
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+    - Key: 1
+      Value:
+        ticks: 03000000
+        onEndTime:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 0}
+              m_TargetAssemblyTypeName: Events.Controllers.StateMachines.Volcano,
+                Assembly-CSharp
+              m_MethodName: ActivateVolcano
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+    - Key: 2
+      Value:
+        ticks: 0a00000014000000
+        onEndTime:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 0}
+              m_TargetAssemblyTypeName: Events.Controllers.StateMachines.Base`1[[Events.Controllers.StateMachines.Volcano,
+                Assembly-CSharp
+              m_MethodName: CreateEvent
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
   fullPercentFood: 0.4
   fullPercentPopulation: 0.1
   partPercentFood: 0.5

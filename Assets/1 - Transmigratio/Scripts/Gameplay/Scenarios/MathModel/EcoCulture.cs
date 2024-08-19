@@ -11,7 +11,7 @@ namespace Gameplay.Scenarios {
         private static float Hunters {
             get => _ecoCulture["Hunters"];
             set {
-                _ecoCulture.GetValue("Hunters").onUpdate(Hunters, value, _piece);
+                _ecoCulture.GetValue("Hunters").onUpdate?.Invoke(Hunters, value, _piece);
                 _ecoCulture["Hunters"] = value;
             }
         }
@@ -19,7 +19,7 @@ namespace Gameplay.Scenarios {
         private static float Farmers {
             get => _ecoCulture["Farmers"];
             set {
-                _ecoCulture.GetValue("Farmers").onUpdate(Farmers, value, _piece);
+                _ecoCulture.GetValue("Farmers").onUpdate?.Invoke(Farmers, value, _piece);
                 _ecoCulture["Farmers"] = value;
             }
         }
@@ -27,7 +27,7 @@ namespace Gameplay.Scenarios {
         private static float Nomads {
             get => _ecoCulture["Nomads"];
             set {
-                _ecoCulture.GetValue("Nomads").onUpdate(Nomads, value, _piece);
+                _ecoCulture.GetValue("Nomads").onUpdate?.Invoke(Nomads, value, _piece);
                 _ecoCulture["Nomads"] = value;
             }
         }

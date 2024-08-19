@@ -15,7 +15,7 @@ namespace Gameplay.Scenarios {
         private static float Leaderism {
             get => _government["Leaderism"];
             set {
-                _government.GetValue("Leaderism").onUpdate(Leaderism, value, _piece);
+                _government.GetValue("Leaderism").onUpdate?.Invoke(Leaderism, value, _piece);
                 _government["Leaderism"] = value;
             }
         }
@@ -23,7 +23,7 @@ namespace Gameplay.Scenarios {
         private static float Monarchy {
             get => _government["Monarchy"];
             set {
-                _government.GetValue("Monarchy").onUpdate(Monarchy, value, _piece);
+                _government.GetValue("Monarchy").onUpdate?.Invoke(Monarchy, value, _piece);
                 _government["Monarchy"] = value;
             }
         }

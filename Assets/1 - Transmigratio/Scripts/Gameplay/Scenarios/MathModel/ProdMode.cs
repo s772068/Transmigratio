@@ -11,7 +11,7 @@ namespace Gameplay.Scenarios {
         private static float PrimitiveCommunism {
             get => _prodMode["PrimitiveCommunism"];
             set {
-                _prodMode.GetValue("PrimitiveCommunism").onUpdate(PrimitiveCommunism, value, _piece);
+                _prodMode.GetValue("PrimitiveCommunism").onUpdate?.Invoke(PrimitiveCommunism, value, _piece);
                 _prodMode["PrimitiveCommunism"] = value;
             }
         }
@@ -19,7 +19,7 @@ namespace Gameplay.Scenarios {
         private static float Slavery {
             get => _prodMode["Slavery"];
             set {
-                _prodMode.GetValue("Slavery").onUpdate(Slavery, value, _piece);
+                _prodMode.GetValue("Slavery").onUpdate?.Invoke(Slavery, value, _piece);
                 _prodMode["Slavery"] = value;
             }
         }
@@ -27,7 +27,7 @@ namespace Gameplay.Scenarios {
         private static float Feodalism {
             get => _prodMode["Feodalism"];
             set {
-                _prodMode.GetValue("Feodalism").onUpdate(Feodalism, value, _piece);
+                _prodMode.GetValue("Feodalism").onUpdate?.Invoke(Feodalism, value, _piece);
                 _prodMode["Feodalism"] = value;
             }
         }
