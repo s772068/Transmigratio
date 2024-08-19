@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 
-namespace Events.Data {
+namespace Gameplay.Scenarios.Events.Data {
     [System.Serializable]
     public class State {        
         [SerializeField] private List<int> ticks = new();

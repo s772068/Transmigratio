@@ -1,12 +1,14 @@
-using UnityEngine;
-using Events.Data;
+using Gameplay.Scenarios.Events.Data;
 using System.Collections.Generic;
-using UI;
+using UnityEngine;
 using Gameplay;
+using UI;
+
+using Events = Gameplay.Scenarios.Events;
 
 public static class PanelFabric
 {
-    public static void CreateEvent(Transform parent, EventDesidion desidionPrefab, EventPanel eventPrefab, Events.Controllers.Base baseEvent,
+    public static void CreateEvent(Transform parent, EventDesidion desidionPrefab, EventPanel eventPrefab, Events.Base baseEvent,
                         CivPiece piece, Sprite sprite, string title, string territory, string description, List<Desidion> desidions)
     {
         EventPanel panel = EventPanel.Instantiate(eventPrefab, parent);

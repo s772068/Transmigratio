@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-using GlobalEvents = Events.Controllers.Global;
+using GlobalEvents = Gameplay.Scenarios.Events.Global;
 
 /// <summary>
 /// Класс "человечество" - суммарная/усреднённая инфа по цивилизациям

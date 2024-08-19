@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-using Events.Controllers;
+using Gameplay.Scenarios.Events;
 using UI;
 using System;
 

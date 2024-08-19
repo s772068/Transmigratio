@@ -2,21 +2,21 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class AutoChoiceElement : MonoBehaviour
-{
-    [SerializeField] private TMP_Text _title;
-    private Events.Controllers.Base _event;
+namespace Gameplay.Scenarios.Events {
+    public class AutoChoiceElement : MonoBehaviour {
+        [SerializeField] private TMP_Text _title;
+        private Base _event;
 
-    public static event Action<Events.Controllers.Base> SelectElement;
+        public static event Action<Base> SelectElement;
 
-    public void Init(Events.Controllers.Base newEvent)
-    {
-        if (_event != null)
-            return;
+        public void Init(Base newEvent) {
+            if (_event != null)
+                return;
 
-        _event = newEvent;
-        _title.text = _event.Local("Title");
+            _event = newEvent;
+            _title.text = _event.Local("Title");
+        }
+
+        public void Select() => SelectElement?.Invoke(_event);
     }
-
-    public void Select() => SelectElement?.Invoke(_event);
 }
