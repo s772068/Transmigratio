@@ -9,16 +9,12 @@ using UnityEngine;
 public class Population {
     [SerializeField] private int _value;
 
-    public Action<int, int> onUpdate;
+    // prev, cur, piece
+    public Action<int, int, CivPiece> onUpdate;
 
     public int Value {
         get => _value;
-        set {
-            if (value >= 0) {
-                onUpdate?.Invoke(_value, value);
-                _value = value;
-            }
-        }
+        set { if (value >= 0) _value = value; }
     }
 
     public Population(int val) {

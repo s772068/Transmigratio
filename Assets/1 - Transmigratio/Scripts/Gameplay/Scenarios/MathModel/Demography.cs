@@ -18,35 +18,66 @@ namespace Gameplay.Scenarios {
 
         private static int Population {
             get => _population.Value;
-            set => _population.Value = value;
+            set {
+                _population.onUpdate?.Invoke(Population, value, _piece);
+                _population.Value = value;
+            }
         }
+
         private static float PopulationGrow {
-            get => _piece.PopulationGrow.Value;
-            set => _piece.PopulationGrow.Value = value;
+            get => _piece.PopulationGrow.value;
+            set {
+                _piece.PopulationGrow.onUpdate?.Invoke(PopulationGrow, value, _piece);
+                _piece.PopulationGrow.value = value;
+            }
         }
+
         private static float ReserveFood {
-            get => _piece.ReserveFood.Value;
-            set => _piece.ReserveFood.Value = value;
+            get => _piece.ReserveFood.value;
+            set {
+                _piece.ReserveFood.onUpdate?.Invoke(ReserveFood, value, _piece);
+                _piece.ReserveFood.value = value;
+            }
         }
+
         private static float RequestFood {
-            get => _piece.RequestFood.Value;
-            set => _piece.RequestFood.Value = value;
+            get => _piece.RequestFood.value;
+            set {
+                _piece.RequestFood.onUpdate?.Invoke(RequestFood, value, _piece);
+                _piece.RequestFood.value = value;
+            }
         }
+
         private static float TakenFood {
-            get => _piece.TakenFood.Value;
-            set => _piece.TakenFood.Value = value;
+            get => _piece.TakenFood.value;
+            set {
+                _piece.TakenFood.onUpdate?.Invoke(TakenFood, value, _piece);
+                _piece.TakenFood.value = value;
+            }
         }
+
         private static float GivenFood {
-            get => _piece.GivenFood.Value;
-            set => _piece.GivenFood.Value = value;
+            get => _piece.GivenFood.value;
+            set {
+                _piece.GivenFood.onUpdate?.Invoke(GivenFood, value, _piece);
+                _piece.GivenFood.value = value;
+            }
         }
+
         private static float Flora {
             get => _flora["Flora"];
-            set => _flora["Flora"] = value;
+            set {
+                _flora.GetValue("Flora").onUpdate?.Invoke(Flora, value, _piece);
+                _flora["Flora"] = value;
+            }
         }
+
         private static float Fauna {
             get => _fauna["Fauna"];
-            set => _fauna["Fauna"] = value;
+            set {
+                _fauna.GetValue("Fauna").onUpdate?.Invoke(Fauna, value, _piece);
+                _fauna["Fauna"] = value;
+            }
         }
 
         public static void Play(CivPiece piece) {

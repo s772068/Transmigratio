@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using Gameplay.Scenarios;
-using System;
-using UnityEngine;
 using System.Linq;
+using System;
+
+using Events = Gameplay.Scenarios.Events;
 
 /// <summary>
 /// Экземпляр CivPiece - это один "кусочек" цивилизации в конкретном регионе. 
@@ -11,6 +12,10 @@ using System.Linq;
 [Serializable]
 public class CivPiece {
     public static readonly int MinPiecePopulation = 50;
+
+    public string CivName;
+    public int RegionID;
+    public int Category;
 
     public Population Population;
     public ParamiterValue PopulationGrow = new();
@@ -27,18 +32,16 @@ public class CivPiece {
     public int MigrationCount {
         get {
             int value = 0;
-            foreach (Events.Controllers.Base e in events)
-                if (e.GetType() == typeof(Events.Controllers.Global.Migration))
+            foreach (Events.Base e in events)
+                if (e.GetType() == typeof(Events.Global.Migration))
                     value++;
             return value;
         }
     }
-    public int RegionID;
-    public string CivName;
 
     public Action Destroy;
 
-    private List<Events.Controllers.Base> events = new();
+    private List<Events.Base> events = new();
 
     public TM_Region Region => TMDB.map.AllRegions[RegionID];
     public Civilization Civilization => TMDB.humanity.Civilizations[CivName];
@@ -82,11 +85,12 @@ public class CivPiece {
         Government.Init(("Leaderism", GameSettings.StartLeaderism));
         Government.Init("Monarchy", "CityState", "Imperium", "Federation", "NationalState", "Anarchy");
 
+        Category = 3;
         RegionID = region;
         CivName = civilization;
         Population = new(startPopulation);
         RequestFood = new(Population.Value / Demography.data.val4);
-        GivenFood = new(ReserveFood.Value > RequestFood.Value ? RequestFood.Value : ReserveFood.Value);
+        GivenFood = new(ReserveFood.value > RequestFood.value ? RequestFood.value : ReserveFood.value);
         float _floraKr = (float) (Math.Pow(Region.Flora["Flora"], Demography.data.val9) / Demography.data.val10);
         float _faunaKr = (float) (Math.Pow(Region.Fauna["Fauna"], Demography.data.val11) / Demography.data.val12);
 
@@ -95,7 +99,7 @@ public class CivPiece {
             Population.Value / Demography.data.val14 * ProdModeK * _faunaKr);
     }
 
-    public void AddEvent(Events.Controllers.Base e) => events.Add(e);
-    public void RemoveEvent(Events.Controllers.Base e) => events.Remove(e);
+    public void AddEvent(Events.Base e) => events.Add(e);
+    public void RemoveEvent(Events.Base e) => events.Remove(e);
     public void Play() => Gameplay.Controller.GamePlay(this);
 }

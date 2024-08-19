@@ -14,12 +14,18 @@ namespace Gameplay.Scenarios {
 
         private static float Leaderism {
             get => _government["Leaderism"];
-            set => _government["Leaderism"] = value;
+            set {
+                _government.GetValue("Leaderism").onUpdate(Leaderism, value, _piece);
+                _government["Leaderism"] = value;
+            }
         }
 
         private static float Monarchy {
             get => _government["Monarchy"];
-            set => _government["Monarchy"] = value;
+            set {
+                _government.GetValue("Monarchy").onUpdate(Monarchy, value, _piece);
+                _government["Monarchy"] = value;
+            }
         }
 
         public static void Play(CivPiece piece) {

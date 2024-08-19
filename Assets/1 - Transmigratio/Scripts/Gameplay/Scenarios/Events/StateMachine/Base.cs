@@ -3,10 +3,8 @@ using WorldMapStrategyKit;
 using System.Linq;
 using System;
 
-namespace Events.Controllers.StateMachines {
-    public abstract class Base : Controllers.Base {
-        private protected CivPiece _piece;
-
+namespace Gameplay.Scenarios.Events.StateMachines {
+    public abstract class Base : Events.Base {
         private protected Data.State _curState;
         private Random _rand = new();
 
@@ -28,10 +26,6 @@ namespace Events.Controllers.StateMachines {
 
         private protected override void ActivateEvents() {
             Timeline.TickLogic += OnTickLogic;
-        }
-
-        private protected override void DeactivateEvents() {
-            Timeline.TickLogic -= OnTickLogic;
         }
 
         private void OnTickLogic() {

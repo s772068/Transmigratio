@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using WorldMapStrategyKit;
 
-namespace Events.Controllers.Local {
-    public abstract class Base : Controllers.Base 
-    {
+namespace Gameplay.Scenarios.Events.Local {
+    public abstract class Base : Events.Base {
         private protected List<CivPiece> pieces = new();
 
         private protected override string Territory(CivPiece piece) => Local("Territory 1") + " " +

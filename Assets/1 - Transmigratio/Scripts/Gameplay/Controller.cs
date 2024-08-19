@@ -10,10 +10,7 @@ namespace Gameplay {
 
         public static void GamePlay(CivPiece piece) {
             for (int i = 0; i < _scenarios.Count; ++i) {
-                _scenarios[i].Piece = piece;
-            }
-            for (int i = 0; i < _scenarios.Count; ++i) {
-                _scenarios[i].Play();
+                _scenarios[i].Play(piece);
             }
         }
     }

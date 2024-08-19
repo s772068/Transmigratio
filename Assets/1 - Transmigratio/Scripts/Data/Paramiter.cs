@@ -24,12 +24,12 @@ public class Paramiter {
     }
 
     public float this[string key] {
-        get => quantities[key].Value;
+        get => quantities[key].value;
         set {
             if (!quantities.ContainsKey(key)) {
                 quantities.Add(key, new(value));
             }
-            quantities[key].Value = value;
+            quantities[key].value = value;
         }
     }
 
@@ -38,9 +38,9 @@ public class Paramiter {
 
     public Dictionary<string, float> GetValues() {
         Dictionary<string, float> res = new();
-        float full = quantities.Values.Sum(v => v.Value);
+        float full = quantities.Values.Sum(v => v.value);
         foreach (var pair in quantities) {
-            res[pair.Key] = _isPercent ? pair.Value.Value / full * 100 : pair.Value.Value;
+            res[pair.Key] = _isPercent ? pair.Value.value / full * 100 : pair.Value.value;
         }
         return res;
     }
@@ -62,9 +62,9 @@ public class Paramiter {
     public (string key, float value) GetMax() {
         (string key, float value) res = default;
         foreach (var pair in quantities) {
-            if(pair.Value.Value > res.value) {
+            if(pair.Value.value > res.value) {
                 res.key = pair.Key;
-                res.value = pair.Value.Value;
+                res.value = pair.Value.value;
             }
         }
         return res;
@@ -73,10 +73,10 @@ public class Paramiter {
     public static Paramiter operator +(Paramiter p1, Paramiter p2) {
         Paramiter paramiter = new(p1._isPercent || p1._isPercent);
         foreach(var quantity in p1.quantities) {
-            paramiter[quantity.Key] = quantity.Value.Value;
+            paramiter[quantity.Key] = quantity.Value.value;
         }
         foreach(var quantity in p2.quantities) {
-            paramiter[quantity.Key] = quantity.Value.Value;
+            paramiter[quantity.Key] = quantity.Value.value;
         }
         return paramiter;
     }

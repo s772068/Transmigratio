@@ -32,7 +32,7 @@ public class TM_Region {
     private float TakenFood { get {
             float res = 0;
             for(int i = 0; i < CivsList.Count; ++i) {
-                res += GetPiece(CivsList[i]).TakenFood.Value;
+                res += GetPiece(CivsList[i]).TakenFood.value;
             }
             return res;
         }

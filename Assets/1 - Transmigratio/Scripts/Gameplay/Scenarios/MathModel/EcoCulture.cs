@@ -10,17 +10,26 @@ namespace Gameplay.Scenarios {
 
         private static float Hunters {
             get => _ecoCulture["Hunters"];
-            set => _ecoCulture["Hunters"] = value;
+            set {
+                _ecoCulture.GetValue("Hunters").onUpdate(Hunters, value, _piece);
+                _ecoCulture["Hunters"] = value;
+            }
         }
 
         private static float Farmers {
             get => _ecoCulture["Farmers"];
-            set => _ecoCulture["Farmers"] = value;
+            set {
+                _ecoCulture.GetValue("Farmers").onUpdate(Farmers, value, _piece);
+                _ecoCulture["Farmers"] = value;
+            }
         }
 
         private static float Nomads {
             get => _ecoCulture["Nomads"];
-            set => _ecoCulture["Nomads"] = value;
+            set {
+                _ecoCulture.GetValue("Nomads").onUpdate(Nomads, value, _piece);
+                _ecoCulture["Nomads"] = value;
+            }
         }
 
         private static float Plain => _terrain["Plain"];
@@ -37,8 +46,8 @@ namespace Gameplay.Scenarios {
 
         private static void Init(CivPiece piece) {
             _piece = piece;
-            _ecoCulture = _piece.EcoCulture;
-            _terrain = _piece.Region.Terrain;
+            _ecoCulture = piece.EcoCulture;
+            _terrain = piece.Region.Terrain;
         }
 
         private static void Update() {
@@ -46,7 +55,7 @@ namespace Gameplay.Scenarios {
             Farmers += Plain / data.farmersDivision;
             Nomads += (Desert + Mountain + Steppe) / data.nomadsDivision;
 
-            if (_piece.EcoCulture.GetMax().key == "Farmers")
+            if (_ecoCulture.GetMax().key == "Farmers")
                 News.NewsTrigger?.Invoke("GreenRevolution");
         }
 
