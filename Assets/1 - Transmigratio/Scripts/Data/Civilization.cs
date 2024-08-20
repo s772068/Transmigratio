@@ -2,6 +2,7 @@ using AYellowpaper.SerializedCollections;
 using System.Linq;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Ёкземпл€р Civilization - это одна цивилизаци€
@@ -77,6 +78,7 @@ public class Civilization {
         Pieces[piece.RegionID] = piece;
         Pieces[piece.RegionID].CivName = newCivName;
         Pieces[piece.RegionID].Category = newCategory;
+        onAddPiece?.Invoke(piece);
     }
 
     /// <summary>
@@ -88,10 +90,11 @@ public class Civilization {
         Pieces.Remove(region);
     }
 
+    //UNDONE:  аждый тик происходит аллокаци€ пам€ти
     public void Play() {
-        int count = Pieces.Count;
-        for (int i = 0; i < count; ++i) {
-            Pieces.ElementAt(i).Value.Play();
+        Dictionary<int, CivPiece> tickPieces = new(Pieces);
+        foreach (var piece in tickPieces) {
+            piece.Value.Play();
         }
     }
 }

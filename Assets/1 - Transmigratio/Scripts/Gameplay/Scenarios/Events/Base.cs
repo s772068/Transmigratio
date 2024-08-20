@@ -42,6 +42,8 @@ namespace Gameplay.Scenarios.Events {
         public override void Init() {
             InitDesidions();
             ActivateEvents();
+            Civilization.onAddPiece += OnAddPiece;
+            Civilization.onRemovePiece += OnRemovePiece;
         }
 
         private protected void AddDesidion(Func<CivPiece, Func<CivPiece, int>, bool> click, string title, Func<CivPiece, int> points) {
