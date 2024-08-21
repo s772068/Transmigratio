@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Gameplay.Scenarios {
     public static class Government {
@@ -12,6 +13,7 @@ namespace Gameplay.Scenarios {
 
         private static Paramiter _government;
 
+        public static Action<string> OnUpdateMaxGovernment;
         public static Action<CivPiece> OnUpdateGovernment;
 
         private static float Leaderism {
@@ -44,11 +46,17 @@ namespace Gameplay.Scenarios {
             string ecoCulture = _piece.EcoCulture.GetMax().key;
             string prodMode = _piece.ProdMode.GetMax().key;
 
+            string prevMax = _government.GetMax().key;
+
             if (ecoCulture == "Hunters") Leaderism += add_L_H;
             if (prodMode == "PrimitiveCommunism") Leaderism += add_L_PC;
 
             if(ecoCulture == "Farmers") Monarchy += add_M_F;
             if (prodMode == "Slavery") Monarchy += add_M_S;
+
+            string curMax = _government.GetMax().key;
+            if (curMax != prevMax)
+                OnUpdateMaxGovernment?.Invoke(curMax);
 
             OnUpdateGovernment?.Invoke(_piece);
         }

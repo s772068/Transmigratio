@@ -24,29 +24,38 @@ namespace Gameplay.Scenarios.Events {
         }
 
         private protected override void OnAddPiece(CivPiece civPiece) {
-            civPiece.Government.GetValue("Monarchy").onUpdate += OnUpgradeToMonarchy;
-            civPiece.Government.GetValue("CityState").onUpdate += OnUpgradeToCityState;
+            Government.OnUpdateMaxGovernment += OnUpdateMaxGovernment;
+            // civPiece.Government.GetValue("Monarchy").onUpdate += OnUpgradeToMonarchy;
+            // civPiece.Government.GetValue("CityState").onUpdate += OnUpgradeToCityState;
         }
 
         private protected override void OnRemovePiece(CivPiece civPiece) {
-            civPiece.Government.GetValue("Monarchy").onUpdate -= OnUpgradeToMonarchy;
-            civPiece.Government.GetValue("CityState").onUpdate -= OnUpgradeToCityState;
+            Government.OnUpdateMaxGovernment -= OnUpdateMaxGovernment;
+            // civPiece.Government.GetValue("Monarchy").onUpdate -= OnUpgradeToMonarchy;
+            // civPiece.Government.GetValue("CityState").onUpdate -= OnUpgradeToCityState;
         }
 
-        private void OnUpgradeToMonarchy(float prev, float cur, CivPiece piece) {
-            if (prev == 0 && cur > 0 && _piece.Category == 3) {
-                UpgradeCiv(2);
-                News.NewsTrigger?.Invoke("CivilizationSecondCategory");
+        private void OnUpdateMaxGovernment(string maxGovernment) {
+            switch (maxGovernment) {
+                case "Monarchy":
+                    OnUpgradeToMonarchy();
+                    break;
+                case "CityState": {
+                        OnUpgradeToCityState();
+                        break;
+                    }
             }
         }
 
-        private void OnUpgradeToCityState(float prev, float cur, CivPiece piece) {
-            if (prev == 0 && cur > 0 && _piece.Category == 2) {
-                // prev == 0 && cur > 0 происходит только один раз
-                if (_random.Next(1, 100) <= 60) {
-                    UpgradeCiv(1);
-                    News.NewsTrigger?.Invoke("CivilizationFirstCategory");
-                }
+        private void OnUpgradeToMonarchy() {
+            UpgradeCiv(2);
+            News.NewsTrigger?.Invoke("CivilizationSecondCategory");
+        }
+
+        private void OnUpgradeToCityState() {
+            if (_random.Next(1, 100) <= 60) {
+                UpgradeCiv(1);
+                News.NewsTrigger?.Invoke("CivilizationFirstCategory");
             }
         }
 
