@@ -16,6 +16,8 @@ namespace Gameplay.Scenarios {
         private static float _populationGrowPercent;
         private static float _governmentCorruption;
 
+        public static Action<CivPiece> OnUpdateDemography;
+
         private static int Population {
             get => _population.Value;
             set {
@@ -125,6 +127,8 @@ namespace Gameplay.Scenarios {
             TakenFood = ecoCulture == "Farmers" ?
                 Population / data.val13 * _prodModeK * _floraKr :
                 Population / data.val14 * _prodModeK * _faunaKr;
+
+            OnUpdateDemography?.Invoke(_piece);
         }
 
         [Serializable]

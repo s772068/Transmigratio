@@ -1,4 +1,5 @@
 using AYellowpaper.SerializedCollections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Gameplay.Scenarios.Events {
         private System.Random _random;
         SerializedDictionary<string, Civilization> _civilizations;
 
+        public static Action<CivPiece> OnUpgradeCivPiece;
+
         public override void Init() {
             _random = new();
             _civilizations = Transmigratio.Instance.TMDB.humanity.Civilizations;
@@ -22,15 +25,24 @@ namespace Gameplay.Scenarios.Events {
 
         private protected override void OnAddPiece(CivPiece civPiece) {
             civPiece.Government.GetValue("Monarchy").onUpdate += OnUpgradeToMonarchy;
+            civPiece.Government.GetValue("CityState").onUpdate += OnUpgradeToCityState;
         }
 
         private protected override void OnRemovePiece(CivPiece civPiece) {
             civPiece.Government.GetValue("Monarchy").onUpdate -= OnUpgradeToMonarchy;
+            civPiece.Government.GetValue("CityState").onUpdate -= OnUpgradeToCityState;
         }
 
         private void OnUpgradeToMonarchy(float prev, float cur, CivPiece piece) {
             if (prev == 0 && cur > 0) {
-                int newCategory = _piece.Category - (_random.Next(1, 100) <= 60 || _piece.Category == 3 ? 1 : 0);
+                int newCategory = _random.Next(1, 100) <= 60 || _piece.Category == 3 ? 2 : 3;
+                UpgradeCiv(newCategory);
+            }
+        }
+
+        private void OnUpgradeToCityState(float prev, float cur, CivPiece piece) {
+            if (prev == 0 && cur > 0) {
+                int newCategory = _random.Next(1, 100) <= 60 || _piece.Category == 3 ? 1 : 2;
                 UpgradeCiv(newCategory);
             }
         }
@@ -40,8 +52,7 @@ namespace Gameplay.Scenarios.Events {
             string oldCivName = _piece.CivName;
             string newCivName = GetCivName(category);
             if (!_civilizations.ContainsKey(newCivName)) {
-                Civilization civ = new(newCivName);
-                _civilizations[newCivName] = civ;
+                _civilizations[newCivName] = new(newCivName);
             }
             _civilizations[newCivName].AddPiece(_piece, newCivName, category);
             _civilizations[oldCivName].RemovePiece(_piece.RegionID);

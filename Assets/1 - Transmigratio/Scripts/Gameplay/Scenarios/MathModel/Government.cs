@@ -12,6 +12,8 @@ namespace Gameplay.Scenarios {
 
         private static Paramiter _government;
 
+        public static Action<CivPiece> OnUpdateGovernment;
+
         private static float Leaderism {
             get => _government["Leaderism"];
             set {
@@ -47,6 +49,8 @@ namespace Gameplay.Scenarios {
 
             if(ecoCulture == "Farmers") Monarchy += add_M_F;
             if (prodMode == "Slavery") Monarchy += add_M_S;
+
+            OnUpdateGovernment?.Invoke(_piece);
         }
 
         [Serializable]
