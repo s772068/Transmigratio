@@ -36,7 +36,7 @@ namespace Gameplay.Scenarios.Events {
         private void OnUpgradeToMonarchy(float prev, float cur, CivPiece piece) {
             if (prev == 0 && cur > 0 && _piece.Category == 3) {
                 UpgradeCiv(2);
-                News.NewsTrigger?.Invoke("CivilizationFirstCategory");
+                News.NewsTrigger?.Invoke("CivilizationSecondCategory");
             }
         }
 
@@ -45,7 +45,7 @@ namespace Gameplay.Scenarios.Events {
                 // prev == 0 && cur > 0 происходит только один раз
                 if (_random.Next(1, 100) <= 60) {
                     UpgradeCiv(1);
-                    News.NewsTrigger?.Invoke("CivilizationSecondCategory");
+                    News.NewsTrigger?.Invoke("CivilizationFirstCategory");
                 }
             }
         }
