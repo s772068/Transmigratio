@@ -14,24 +14,24 @@ namespace Chronicles {
 
         public void AddActive(string eventName, int regionID, Action<CivPiece> onClick) {
             _activeEvents.Add(new() {
-                isActive = true,
-                eventName = eventName,
-                regionID = regionID,
-                startYear = Transmigratio.Instance.TMDB.Year,
-                onClick = onClick,
+                IsActive = true,
+                EventName = eventName,
+                RegionID = regionID,
+                StartYear = Transmigratio.Instance.TMDB.Year,
+                Click = onClick,
             });
             UpdatePanel();
         }
 
         public void AddPassive(string eventName, int regionID, Sprite sprite, string description) {
             _passiveEvents.Add(new() {
-                isActive = false,
-                eventName = eventName,
-                description = description,
-                regionID = regionID,
-                startYear = Transmigratio.Instance.TMDB.Year,
-                sprite = sprite,
-                onClick = default
+                IsActive = false,
+                EventName = eventName,
+                DescriptionName = description,
+                RegionID = regionID,
+                StartYear = Transmigratio.Instance.TMDB.Year,
+                Sprite = sprite,
+                Click = default
             });
             UpdatePanel();
         }
@@ -45,8 +45,8 @@ namespace Chronicles {
 
         private bool RemoveElement(List<Element> list, string eventName, int regionID) {
             for (int i = 0; i < list.Count; ++i) {
-                if (list[i].eventName == eventName &&
-                    list[i].regionID == regionID) {
+                if (list[i].EventName == eventName &&
+                    list[i].RegionID == regionID) {
                     list.RemoveAt(i);
                     return true;
                 }

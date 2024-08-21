@@ -18,16 +18,16 @@ namespace Chronicles.Prefabs.Panel {
 
         public Data.Panel.Element Data { set {
                 _data = value;
-                textEventName.text = value.eventName;
-                textRegion.text = Transmigratio.Instance.TMDB.map.AllRegions[value.regionID].Name;
-                textStartYear.text = $"{value.startYear.ToString("### ###")} {Localization.Load("Base", "BCE")}";
-                background.sprite = value.isActive ? activeBack : passiveBack;
+                textEventName.text = value.EventName;
+                textRegion.text = Transmigratio.Instance.TMDB.map.AllRegions[value.RegionID].Name;
+                textStartYear.text = $"{value.StartYear.ToString("### ###")} {Localization.Load("Base", "BCE")}";
+                background.sprite = value.IsActive ? activeBack : passiveBack;
             }
         }
 
         public void Click() {
-            if (_data.isActive) {
-                _data.onClick?.Invoke(_data.piece);
+            if (_data.IsActive) {
+                _data.Click?.Invoke(_data.Piece);
             } else {
                 onClick?.Invoke(_data);
             }
