@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 
 namespace Gameplay.Scenarios.Events.StateMachines {
-    [CreateAssetMenu(menuName = "Gameplay/Events/StateMachines/Volcano", fileName = "Volcano")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Scenarios/Events/StateMachines/Volcano", fileName = "Volcano")]
     public sealed class Volcano : Base {
         [Header("States")]
         [SerializeField] private SerializedDictionary<State, Data.State> states;

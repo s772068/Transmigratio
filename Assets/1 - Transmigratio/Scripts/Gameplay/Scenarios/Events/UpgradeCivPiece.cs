@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 namespace Gameplay.Scenarios.Events {
-    [CreateAssetMenu(menuName = "Gameplay/UpgradeCivPiece", fileName = "UpgradeCivPiece")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Scenarios/Events/UpgradeCivPiece", fileName = "UpgradeCivPiece")]
     public class UpgradeCivPiece : Scenarios.Base {
         [SerializeField] private List<string> category1;
         [SerializeField] private List<string> category2;
@@ -34,21 +34,23 @@ namespace Gameplay.Scenarios.Events {
         }
 
         private void OnUpgradeToMonarchy(float prev, float cur, CivPiece piece) {
-            if (prev == 0 && cur > 0) {
-                int newCategory = _random.Next(1, 100) <= 60 || _piece.Category == 3 ? 2 : 3;
-                UpgradeCiv(newCategory);
+            if (prev == 0 && cur > 0 && _piece.Category == 3) {
+                UpgradeCiv(2);
+                News.NewsTrigger?.Invoke("CivilizationFirstCategory");
             }
         }
 
         private void OnUpgradeToCityState(float prev, float cur, CivPiece piece) {
-            if (prev == 0 && cur > 0) {
-                int newCategory = _random.Next(1, 100) <= 60 || _piece.Category == 3 ? 1 : 2;
-                UpgradeCiv(newCategory);
+            if (prev == 0 && cur > 0 && _piece.Category == 2) {
+                // prev == 0 && cur > 0 происходит только один раз
+                if (_random.Next(1, 100) <= 60) {
+                    UpgradeCiv(1);
+                    News.NewsTrigger?.Invoke("CivilizationSecondCategory");
+                }
             }
         }
 
         private void UpgradeCiv(int category) {
-            if (category == 3) return;
             string oldCivName = _piece.CivName;
             string newCivName = GetCivName(category);
             if (!_civilizations.ContainsKey(newCivName)) {

@@ -6,7 +6,7 @@ using UnityEngine;
 using System;
 
 namespace Gameplay.Scenarios.Events.Global {
-    [CreateAssetMenu(menuName = "Gameplay/Events/Global/Migration", fileName = "Migration")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Scenarios/Events/Global/Migration", fileName = "Migration")]
     public sealed class Migration : Base {
         [Header("Line")]
         [SerializeField] private Material lineMaterial;

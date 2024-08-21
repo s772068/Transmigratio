@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Gameplay.Scenarios {
-    [CreateAssetMenu(menuName = "Gameplay/MathModel", fileName = "MathModel")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Scenarios/MathModel", fileName = "MathModel")]
     public class MathModel : Base {
         [SerializeField] private EcoCulture.Data ecoCulture = new();
         [SerializeField] private ProdMode.Data prodMode = new();

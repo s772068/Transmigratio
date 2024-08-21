@@ -4,7 +4,7 @@ using System;
 using MigrationEvent = Gameplay.Scenarios.Events.Global.Migration;
 
 namespace Gameplay.Scenarios.Events.Local {
-    [CreateAssetMenu(menuName = "Gameplay/Events/Local/Hunger", fileName = "Hunger")]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Scenarios/Events/Local/Hunger", fileName = "Hunger")]
     public sealed class Hunger : Base {
         [Header("Desidion")]
         [SerializeField, Min(0)] private int foodPerPerson;
