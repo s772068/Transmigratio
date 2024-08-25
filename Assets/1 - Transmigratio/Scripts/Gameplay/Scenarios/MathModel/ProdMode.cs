@@ -8,6 +8,8 @@ namespace Gameplay.Scenarios {
         private static Paramiter _prodMode;
         private static Paramiter _ecoCulture;
 
+        public static Action<CivPiece> OnUpdateProdMode;
+
         private static float PrimitiveCommunism {
             get => _prodMode["PrimitiveCommunism"];
             set {
@@ -50,6 +52,8 @@ namespace Gameplay.Scenarios {
                 Slavery += data.add_Slavery;
                 Feodalism += data.add_Feodalism;
             }
+
+            OnUpdateProdMode?.Invoke(_piece);
         }
 
         [Serializable]

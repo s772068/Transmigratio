@@ -8,6 +8,8 @@ namespace Gameplay.Scenarios {
         private static Paramiter _ecoCulture;
         private static Paramiter _terrain;
 
+        public static Action<CivPiece> OnUpdateEcoCulture;
+
         private static float Hunters {
             get => _ecoCulture["Hunters"];
             set {
@@ -54,6 +56,8 @@ namespace Gameplay.Scenarios {
             Hunters += (Forest + Mountain + Steppe + Tundra) /data.huntersDivision;
             Farmers += Plain / data.farmersDivision;
             Nomads += (Desert + Mountain + Steppe) / data.nomadsDivision;
+
+            OnUpdateEcoCulture?.Invoke(_piece);
 
             if (_ecoCulture.GetMax().key == "Farmers")
                 News.NewsTrigger?.Invoke("GreenRevolution");

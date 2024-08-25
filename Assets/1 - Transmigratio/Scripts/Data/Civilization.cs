@@ -78,6 +78,7 @@ public class Civilization {
         Pieces[piece.RegionID] = piece;
         Pieces[piece.RegionID].CivName = newCivName;
         Pieces[piece.RegionID].Category = newCategory;
+        piece.Region.AddCivilization(newCivName);
         onAddPiece?.Invoke(piece);
     }
 
