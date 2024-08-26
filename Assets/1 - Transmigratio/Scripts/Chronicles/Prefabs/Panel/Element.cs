@@ -11,6 +11,7 @@ namespace Chronicles.Prefabs.Panel {
         [SerializeField] private Image background;
         [SerializeField] private Sprite activeBack;
         [SerializeField] private Sprite passiveBack;
+        [SerializeField] private GameObject activate;
 
         private Data.Panel.Element _data;
         
@@ -26,6 +27,8 @@ namespace Chronicles.Prefabs.Panel {
         }
 
         public void Click() {
+            activate.SetActive(true);
+
             if (_data.IsActive) {
                 _data.Click?.Invoke(_data.Piece);
             } else {
