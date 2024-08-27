@@ -6,9 +6,8 @@ using System;
 namespace Chronicles {
     public class Controller : Singleton<Controller> {
         [SerializeField] private Prefabs.Panel.Panel panel;
-        [SerializeField] private Prefabs.Consequence consequence;
-        
-        private int numList;
+        [SerializeField] private GameObject _descriptionBlock;
+
         private List<Element> _activeEvents = new();
         private List<Element> _passiveEvents = new();
 
@@ -56,32 +55,13 @@ namespace Chronicles {
 
         public void OpenChronicle() {
             panel.gameObject.SetActive(true);
-            panel.onClickElement = OpenConsequence;
-            numList = 0;
+            panel.onClickElement = UpdateDescription;
             UpdatePanel();
         }
 
-        public void OpenConsequence(Element element) {
-            consequence.gameObject.SetActive(true);
-            consequence.Init(element);
-        }
-
-        public void PrevPage() {
-            if (numList != 0) {
-                --numList;
-                UpdatePanel();
-            }
-        }
-
-        public void NextPage() {
-            int listCount = _activeEvents.Count + _passiveEvents.Count;
-            int count = panel.CountElements;
-            int index = numList * count;
-
-            if (listCount > (numList + 1) * count) {
-                ++numList;
-                UpdatePanel();
-            }
+        public void UpdateDescription(Element element) {
+            _descriptionBlock.gameObject.SetActive(true);
+            panel.InitDescription(element);
         }
 
         private void UpdatePanel() {
@@ -91,13 +71,7 @@ namespace Chronicles {
             list.AddRange(_activeEvents);
             list.AddRange(_passiveEvents);
 
-            int count = panel.CountElements;
-            int index = numList * count;
-            count = list.Count - index < count ? list.Count - index : count;
-
-            List<Element> list2 = list.GetRange(index, count);
-
-            panel.Elements = list.GetRange(index, count);
+            panel.Elements = list;
         }
 
         //private void SaveToJSON() {

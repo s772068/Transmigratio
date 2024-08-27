@@ -14,7 +14,7 @@ namespace Chronicles.Prefabs {
             image.sprite = data.Sprite;
             _title.text = data.EventName;
             _description.SetEntry(data.DescriptionName);
-            _result.text = $"{Localization.Load("Chronicles", "Desidion")}{data.Desidion}\n {Localization.Load("Chronicles", "Result")}{data.Result}";
+            _result.text = $"{Localization.Load("Chronicles", "Desidion")}{data.DesidionName}\n {Localization.Load("Chronicles", "Result")}{data.ResultName}";
         }
     }
 }

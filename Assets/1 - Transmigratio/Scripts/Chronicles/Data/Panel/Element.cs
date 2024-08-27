@@ -7,8 +7,8 @@ namespace Chronicles.Data.Panel {
         public CivPiece Piece;
         public string EventName;
         public string DescriptionName;
-        public string Desidion;
-        public string Result;
+        public string DesidionName;
+        public string ResultName;
         public int RegionID;
         public int StartYear;
         public bool IsActive;

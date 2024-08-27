@@ -1,4 +1,3 @@
-using UnityEngine.UI;
 using UnityEngine;
 using System;
 using TMPro;
@@ -8,9 +7,6 @@ namespace Chronicles.Prefabs.Panel {
         [SerializeField] private TMP_Text textEventName;
         [SerializeField] private TMP_Text textRegion;
         [SerializeField] private TMP_Text textStartYear;
-        [SerializeField] private Image background;
-        [SerializeField] private Sprite activeBack;
-        [SerializeField] private Sprite passiveBack;
         [SerializeField] private GameObject activate;
 
         private Data.Panel.Element _data;
@@ -22,7 +18,6 @@ namespace Chronicles.Prefabs.Panel {
                 textEventName.text = value.EventName;
                 textRegion.text = Transmigratio.Instance.TMDB.map.AllRegions[value.RegionID].Name;
                 textStartYear.text = $"{value.StartYear.ToString("### ###")} {Localization.Load("Base", "BCE")}";
-                background.sprite = value.IsActive ? activeBack : passiveBack;
             }
         }
 
