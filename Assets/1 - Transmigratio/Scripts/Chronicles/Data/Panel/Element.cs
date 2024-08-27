@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 namespace Chronicles.Data.Panel {
     public struct Element {
@@ -15,7 +14,5 @@ namespace Chronicles.Data.Panel {
 
         public int StartPop;
         public int EndPop;
-
-        public Action<CivPiece> Click;
     }
 }

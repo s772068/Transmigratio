@@ -2,14 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Localization.Components;
+using TMPro;
 
 namespace Chronicles.Prefabs.Panel {
     public class Panel : UI.Panel {
+        [SerializeField] private GameObject _descriptionBlock;
         [SerializeField] private Element elementPrefab;
         [SerializeField] private RectTransform elementContent;
         [SerializeField] private LocalizeStringEvent _description;
         [SerializeField] private LocalizeStringEvent _result;
-        [SerializeField] private LocalizeStringEvent _desidion;
+        [SerializeField] private TMP_Text _desidion;
 
         private List<Element> _elements = new();
 
@@ -31,9 +33,10 @@ namespace Chronicles.Prefabs.Panel {
 
         public void InitDescription(Data.Panel.Element element)
         {
-            _description.SetEntry(element.DescriptionName);
-            _result.SetEntry(element.ResultName);
-            _desidion.SetEntry(element.DesidionName);
+            _descriptionBlock.gameObject.SetActive(true);
+            _description.SetEntry("Test");
+            _result.SetEntry("Test");
+            _desidion.text = "Test Desidion";
         }
     }
 }

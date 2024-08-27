@@ -22,13 +22,8 @@ namespace Chronicles.Prefabs.Panel {
         }
 
         public void Click() {
-            activate.SetActive(true);
-
-            if (_data.IsActive) {
-                _data.Click?.Invoke(_data.Piece);
-            } else {
-                onClick?.Invoke(_data);
-            }
+            //activate.SetActive(true);
+            onClick?.Invoke(_data);
         }
         public void Destroy() => Destroy(gameObject);
     }

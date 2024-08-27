@@ -6,7 +6,6 @@ using System;
 namespace Chronicles {
     public class Controller : Singleton<Controller> {
         [SerializeField] private Prefabs.Panel.Panel panel;
-        [SerializeField] private GameObject _descriptionBlock;
 
         private List<Element> _activeEvents = new();
         private List<Element> _passiveEvents = new();
@@ -17,7 +16,6 @@ namespace Chronicles {
                 EventName = eventName,
                 RegionID = regionID,
                 StartYear = Transmigratio.Instance.TMDB.Year,
-                Click = onClick,
             });
             UpdatePanel();
         }
@@ -30,7 +28,6 @@ namespace Chronicles {
                 RegionID = regionID,
                 StartYear = Transmigratio.Instance.TMDB.Year,
                 Sprite = sprite,
-                Click = default
             });
             UpdatePanel();
         }
@@ -60,7 +57,6 @@ namespace Chronicles {
         }
 
         public void UpdateDescription(Element element) {
-            _descriptionBlock.gameObject.SetActive(true);
             panel.InitDescription(element);
         }
 

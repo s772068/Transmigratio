@@ -42,6 +42,7 @@ namespace Gameplay.Scenarios.Events {
         public override void Init() {
             InitDesidions();
             ActivateEvents();
+            AutoChoice = false;
             Civilization.onAddPiece += OnAddPiece;
             Civilization.onRemovePiece += OnRemovePiece;
         }
