@@ -64,7 +64,7 @@ public class Map {
     }
 
     public void UnselectRegion() {
-        WMSK.ToggleCountrySurface(_selectedCountry, false, new Color(1, 0.92f, 0.16f, 0.25f));
-        WMSK.ToggleCountryOutline(_selectedCountry, false, borderTexture, 0.5f, Color.yellow);
+        WMSK.ToggleCountrySurface(_selectedCountry, true, Color.clear);
+        WMSK.ToggleCountryOutline(_selectedCountry, true, borderWidth: 0.2f, tintColor: WMSK.frontiersColor);
     }
 }

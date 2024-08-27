@@ -58,6 +58,8 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
 
         TMDB.map.WMSK.OnCountryClick += OnClickFromMain;
         TMDB.map.WMSK.OnCountryLongClick += OnLongClickFromMain;
+        TMDB.map.WMSK.OnCountryHighlight += OnCountryHighlight;
+        //TMDB.map.WMSK.OnCountryExit += OnCountryExit;
 
         TMDB.map.WMSK.OnMarkerMouseDown += OnMarkerMouseDown;
         TMDB.map.WMSK.OnMarkerMouseEnter += OnMarkerEnter;
@@ -81,7 +83,18 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
         _tmdb.map.SelectRegion(countryIndex);
     }
 
-    public void UnselectRegion() => _tmdb.map.UnselectRegion();
+    public void UnselectRegion() {
+        _tmdb.map.UnselectRegion();
+    }
+
+    private void OnCountryHighlight(int countryIndex, int regionIndex, ref bool allowHighlight) {
+        //_tmdb.map.WMSK.ToggleCountrySurface(countryIndex, true, _tmdb.map.WMSK.fillColor);
+        _tmdb.map.WMSK.ToggleCountryOutline(countryIndex, true, borderWidth: 0.2f, tintColor: _tmdb.map.WMSK.outlineColor);
+    }
+
+    //private void OnCountryExit(int countryIndex, int regionIndex) {
+    //    _tmdb.map.WMSK.ToggleCountrySurface(countryIndex, true, Color.clear);
+    //}
 
     private void OnMarkerEnter(MarkerClickHandler marker) {
         IsClickableMarker = true;
