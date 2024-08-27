@@ -2,15 +2,19 @@ using System.Collections.Generic;
 using WorldMapStrategyKit;
 using Newtonsoft.Json;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// Класс для работы с картой. Через него же взаимодействие с wmsk
 /// </summary>
 [System.Serializable]
 public class Map {
+    public Texture2D borderTexture;
     public List<TM_Region> AllRegions;
 
     [HideInInspector] public WMSK WMSK;
+
+    private int _selectedCountry;
 
     public void Init() {
         WMSK = WMSK.instance;
@@ -51,5 +55,16 @@ public class Map {
             if (region.Id == WMSKId) return region;
         }
         return null;
+    }
+
+    public void SelectRegion(int index) {
+        _selectedCountry = index;
+        WMSK.ToggleCountrySurface(index, true, new Color(1, 0.92f, 0.16f, 0.25f));
+        WMSK.ToggleCountryOutline(index, true, borderTexture, 2f, Color.yellow, animationSpeed: 10);
+    }
+
+    public void UnselectRegion() {
+        WMSK.ToggleCountrySurface(_selectedCountry, false, new Color(1, 0.92f, 0.16f, 0.25f));
+        WMSK.ToggleCountryOutline(_selectedCountry, false, borderTexture, 0.5f, Color.yellow);
     }
 }

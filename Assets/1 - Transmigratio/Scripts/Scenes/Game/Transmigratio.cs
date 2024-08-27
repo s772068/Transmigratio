@@ -72,11 +72,16 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     private void OnClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
         _activeRegion = countryIndex;
         _hud.ShowRegionDetails(_activeRegion);
+        _tmdb.map.SelectRegion(countryIndex);
     }
+
     private void OnLongClickFromMain(int countryIndex, int regionIndex, int buttonIndex) {
         _activeRegion = countryIndex;
         _hud.ShowRegionDetails(_activeRegion);
+        _tmdb.map.SelectRegion(countryIndex);
     }
+
+    public void UnselectRegion() => _tmdb.map.UnselectRegion();
 
     private void OnMarkerEnter(MarkerClickHandler marker) {
         IsClickableMarker = true;
