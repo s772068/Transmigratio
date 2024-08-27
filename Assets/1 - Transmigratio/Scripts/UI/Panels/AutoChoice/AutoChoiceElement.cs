@@ -18,6 +18,7 @@ namespace Gameplay.Scenarios.Events {
 
             _event = newEvent;
             _title.text = _event.Local("Title");
+            _image.sprite = newEvent.PanelSprite;
         }
 
         public void Select() => SelectElement?.Invoke(_event);
