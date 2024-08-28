@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Chronicles.Prefabs.Panel {
     public class Element : MonoBehaviour {
@@ -8,6 +9,9 @@ namespace Chronicles.Prefabs.Panel {
         [SerializeField] private TMP_Text textRegion;
         [SerializeField] private TMP_Text textStartYear;
         [SerializeField] private GameObject activate;
+        [SerializeField] private Toggle _toggle;
+
+        public Toggle Toggle => _toggle;
 
         private Data.Panel.Element _data;
         
