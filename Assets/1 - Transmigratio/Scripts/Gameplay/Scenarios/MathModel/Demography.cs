@@ -37,6 +37,8 @@ namespace Gameplay.Scenarios {
         private static float ReserveFood {
             get => _piece.ReserveFood.value;
             set {
+                if (value < 0) value = 0;
+
                 _piece.ReserveFood.onUpdate?.Invoke(ReserveFood, value, _piece);
                 _piece.ReserveFood.value = value;
             }

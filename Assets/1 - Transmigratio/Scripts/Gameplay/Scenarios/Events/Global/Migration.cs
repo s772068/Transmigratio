@@ -4,6 +4,7 @@ using WorldMapStrategyKit;
 using System.Linq;
 using UnityEngine;
 using System;
+using System.Reflection;
 
 namespace Gameplay.Scenarios.Events.Global {
     [CreateAssetMenu(menuName = "ScriptableObjects/Scenarios/Events/Global/Migration", fileName = "Migration")]
@@ -111,22 +112,23 @@ namespace Gameplay.Scenarios.Events.Global {
             _migrations[from.Id] = newMigration;
 
             if (!to.CivsList.Contains(civ.Name)) {
-                newMigration.CurPopulations += newMigration.StepPopulations;
-                civ.AddPiece(to.Id, newMigration.StepPopulations);
+                newMigration.CurPopulations += newMigration.StepPopulations < 50 ? 51 : newMigration.StepPopulations;
+                civ.AddPiece(to.Id, newMigration.CurPopulations);
                 to.AddCivilization(civ.Name);
             }
-            
-            _fromPiece = civ.Pieces[from.Id];
-            _toPiece = civ.Pieces[to.Id];
 
+            newMigration.CivFrom = civ.Pieces[from.Id];
+            newMigration.CivTo = civ.Pieces[to.Id];
+            _fromPiece = newMigration.CivFrom;
+            _toPiece = newMigration.CivTo;
             ChroniclesController.AddActive(Name, from.Id, OpenPanel);
 
             if (!AutoChoice) {
-                _fromPiece.AddEvent(this);
-                _toPiece.AddEvent(this);
-                OpenPanel(_fromPiece);
+                newMigration.CivFrom.AddEvent(this);
+                newMigration.CivTo.AddEvent(this);
+                OpenPanel(newMigration.CivFrom);
             } 
-            else Events.AutoChoice.Events[this][0].ActionClick?.Invoke(_fromPiece, Events.AutoChoice.Events[this][0].CostFunc);
+            else Events.AutoChoice.Events[this][0].ActionClick?.Invoke(newMigration.CivFrom, Events.AutoChoice.Events[this][0].CostFunc);
         }
 
         private LineMarkerAnimator CreateLine(Vector2 start, Vector2 end) {
@@ -181,7 +183,7 @@ namespace Gameplay.Scenarios.Events.Global {
                         }
                     }
                     // Удаление миграции
-                    if (migration.CurPopulations == migration.FullPopulations) {
+                    if (migration.CurPopulations >= migration.FullPopulations) {
                         RemoveMigration(curID);
                     }
                 }
@@ -189,16 +191,7 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         private void RemoveMigration(CivPiece civPiece) {
-            if (_migrations.ContainsKey(civPiece.Region.Id)) {
-                RemoveMigration(civPiece.Region.Id);
-                return;
-            }
-            foreach (var pair in _migrations) {
-                if (pair.Value.To.Id == civPiece.Region.Id) {
-                    RemoveMigration(pair.Value.From.Id);
-                    break;
-                }
-            }
+            DestroyMarker(civPiece.RegionID);
             civPiece.RemoveEvent(this);
         }
 
@@ -206,8 +199,8 @@ namespace Gameplay.Scenarios.Events.Global {
             Debug.Log("RemoveMigration");
             _migrations[index].Line.Destroy();
             DestroyMarker(index);
-            _fromPiece.RemoveEvent(this);
-            _toPiece.RemoveEvent(this);
+            _migrations[index].CivFrom?.RemoveEvent(this);
+            _migrations[index].CivTo?.RemoveEvent(this);
             _migrations.Remove(index);
         }
 
@@ -251,8 +244,9 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         private void DestroyMarker(int index) {
-            if (_migrations[index].Marker != null)
-                _migrations[index].Marker.Destroy();
+            if (_migrations.TryGetValue(index, out MigrationData migration))
+                if(migration.Marker != null)
+                    migration.Marker.Destroy();
         }
 
         private T GetMax<T>(List<T> list, Func<T, float> GetValue) {
