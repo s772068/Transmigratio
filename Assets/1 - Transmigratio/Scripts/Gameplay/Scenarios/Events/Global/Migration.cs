@@ -4,7 +4,6 @@ using WorldMapStrategyKit;
 using System.Linq;
 using UnityEngine;
 using System;
-using System.Reflection;
 
 namespace Gameplay.Scenarios.Events.Global {
     [CreateAssetMenu(menuName = "ScriptableObjects/Scenarios/Events/Global/Migration", fileName = "Migration")]
@@ -25,6 +24,7 @@ namespace Gameplay.Scenarios.Events.Global {
         private CivPiece _fromPiece;
         private CivPiece _toPiece;
         private Dictionary<int, MigrationData> _migrations = new();
+        private Dictionary<MigrationData, EventPanel> _eventPanels = new();
 
         public static Action<CivPiece> OnMigration;
         public static Func<int> GetPopulation;
@@ -47,8 +47,8 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         private protected override void OpenPanel(CivPiece piece) {
-            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, piece, panelSprite, Local("Title"),
-                                    Territory(piece), Local("Description"), _desidions);
+            _eventPanels.Add(_migrations[piece.Region.Id], PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, piece, panelSprite, Local("Title"),
+                                    Territory(piece), Local("Description"), _desidions));
         }
 
         private protected override void InitDesidions() {
@@ -112,7 +112,7 @@ namespace Gameplay.Scenarios.Events.Global {
             _migrations[from.Id] = newMigration;
 
             if (!to.CivsList.Contains(civ.Name)) {
-                newMigration.CurPopulations += newMigration.StepPopulations < 50 ? 51 : newMigration.StepPopulations;
+                newMigration.CurPopulations += newMigration.StepPopulations < Demography.data.MinPiecePopulation ? Demography.data.MinPiecePopulation + 1 : newMigration.StepPopulations;
                 civ.AddPiece(to.Id, newMigration.CurPopulations);
                 to.AddCivilization(civ.Name);
             }
@@ -160,7 +160,11 @@ namespace Gameplay.Scenarios.Events.Global {
             for (int i = 0; i < _migrations.Count; ++i) {
                 // Этап перед началом миграции
                 MigrationData migration = _migrations.Values.ElementAt(i);
-                if (!migration.Civilization.Pieces.ContainsKey(migration.To.Id)) continue;
+                if (!migration.Civilization.Pieces.ContainsKey(migration.To.Id))
+                {
+
+                    continue;
+                }
                 int curID = _migrations.Keys.ElementAt(i);
                 if (migration.TimerToStart < startTime) {
                     ++migration.TimerToStart;
@@ -172,6 +176,13 @@ namespace Gameplay.Scenarios.Events.Global {
                     } else {
                         migration.TimerInterval = 0;
                     }
+
+                    if(!migration.Civilization.Pieces.TryGetValue(migration.To.Id, out CivPiece civPiece))
+                    {
+                        Break(migration.CivFrom);
+                        continue;
+                    }
+
                     //Перенос людей
                     if (migration.FullPopulations > migration.CurPopulations) {
                         if (migration.FullPopulations - migration.CurPopulations >= migration.StepPopulations) {
@@ -191,16 +202,37 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         private void RemoveMigration(CivPiece civPiece) {
-            DestroyMarker(civPiece.RegionID);
+            if(!_migrations.ContainsKey(civPiece.Region.Id))
+            {
+                foreach (var pair in _migrations)
+                {
+                    if (pair.Value.To.Id == civPiece.Region.Id)
+                    {
+                        RemoveMigration(pair.Value.From.Id);
+                        return;
+                    }
+                }
+                new Exception("Dont find migration");
+            }
+
+            DestroyMarker(civPiece.Region.Id);
             civPiece.RemoveEvent(this);
         }
 
         private void RemoveMigration(int index) {
             Debug.Log("RemoveMigration");
-            _migrations[index].Line.Destroy();
+            _migrations[index].Line?.Destroy();
             DestroyMarker(index);
             _migrations[index].CivFrom?.RemoveEvent(this);
-            _migrations[index].CivTo?.RemoveEvent(this);
+            _migrations[index].CivFrom?.RemoveEvent(this);
+
+            if (_eventPanels.ContainsKey(_migrations[index]))
+            {
+                if (_eventPanels[_migrations[index]] != null)
+                    _eventPanels[_migrations[index]].CloseWindow();
+                _eventPanels.Remove(_migrations[index]);
+            }
+
             _migrations.Remove(index);
         }
 
@@ -215,12 +247,18 @@ namespace Gameplay.Scenarios.Events.Global {
             if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
+            Break(piece);
+            return true;
+        }
+
+        //Отмена миграции по внутренней логике
+        private void Break(CivPiece piece)
+        {
             int fromID = piece.Region.Id;
             MigrationData data = _migrations[piece.Region.Id];
             piece.Population.Value += data.FullPopulations - data.CurPopulations;
             ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "Break");
             RemoveMigration(fromID);
-            return true;
         }
 
         private bool Nothing(CivPiece piece, Func<CivPiece, int> interventionPoints) {

@@ -66,7 +66,7 @@ namespace Gameplay.Scenarios.Events {
                 _civilizations[newCivName] = new(newCivName);
             }
             _civilizations[newCivName].AddPiece(_piece, newCivName, category);
-            _civilizations[oldCivName].RemovePiece(_piece.RegionID);
+            _civilizations[oldCivName].RemovePiece(_piece.Region.Id);
         }
 
         private string GetCivName(int category) {

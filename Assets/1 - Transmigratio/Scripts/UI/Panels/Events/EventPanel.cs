@@ -46,5 +46,4 @@ public class EventPanel : Panel {
         EventPanelClose?.Invoke(true);
         _event.AutoChoice = AutoChoice;
     }
-
 }
