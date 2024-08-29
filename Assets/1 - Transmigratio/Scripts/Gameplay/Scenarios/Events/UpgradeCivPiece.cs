@@ -10,6 +10,9 @@ namespace Gameplay.Scenarios.Events {
         [SerializeField] private List<string> category1;
         [SerializeField] private List<string> category2;
 
+        private bool _firstUpgrade = false;
+        private bool _secondUpgrade = false;
+
         private System.Random _random;
         SerializedDictionary<string, Civilization> _civilizations;
 
@@ -18,6 +21,9 @@ namespace Gameplay.Scenarios.Events {
         public override void Init() {
             _random = new();
             _civilizations = Transmigratio.Instance.TMDB.humanity.Civilizations;
+
+            _firstUpgrade = false;
+            _secondUpgrade = false;
 
             Civilization.onAddPiece += OnAddPiece;
             Civilization.onRemovePiece += OnRemovePiece;
@@ -49,13 +55,21 @@ namespace Gameplay.Scenarios.Events {
 
         private void OnUpgradeToMonarchy() {
             UpgradeCiv(2);
-            News.NewsTrigger?.Invoke("CivilizationSecondCategory");
+            if (!_firstUpgrade)
+            {
+                _firstUpgrade = true;
+                News.NewsTrigger?.Invoke("FirstUpgradeCivilization");
+            }
         }
 
         private void OnUpgradeToCityState() {
             if (_random.Next(1, 100) <= 60) {
                 UpgradeCiv(1);
-                News.NewsTrigger?.Invoke("CivilizationFirstCategory");
+                if (!_secondUpgrade)
+                {
+                    _secondUpgrade = true;
+                    News.NewsTrigger?.Invoke("SecondUpgradeCivilization");
+                }
             }
         }
 
@@ -66,7 +80,7 @@ namespace Gameplay.Scenarios.Events {
                 _civilizations[newCivName] = new(newCivName);
             }
             _civilizations[newCivName].AddPiece(_piece, newCivName, category);
-            _civilizations[oldCivName].RemovePiece(_piece.RegionID);
+            _civilizations[oldCivName].RemovePiece(_piece.Region.Id);
         }
 
         private string GetCivName(int category) {

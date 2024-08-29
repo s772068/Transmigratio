@@ -37,6 +37,8 @@ namespace Gameplay.Scenarios {
         private static float ReserveFood {
             get => _piece.ReserveFood.value;
             set {
+                if (value < 0) value = 0;
+
                 _piece.ReserveFood.onUpdate?.Invoke(ReserveFood, value, _piece);
                 _piece.ReserveFood.value = value;
             }
@@ -137,7 +139,7 @@ namespace Gameplay.Scenarios {
             public float prodModeK_S = 0.65f;
             public float governmentCorruption_L = 0.4f;
             public float governmentCorruption_M = 0.45f;
-            public float MinPiecePopulation = 50;
+            public int MinPiecePopulation = 50;
             public float val1 = 50f;
             public float val2 = 60f;
             public float val3 = 50f;

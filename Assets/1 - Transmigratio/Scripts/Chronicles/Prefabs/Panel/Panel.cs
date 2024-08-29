@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using UnityEngine.Localization.Components;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Chronicles.Prefabs.Panel {
     public class Panel : UI.Panel {
@@ -12,6 +13,7 @@ namespace Chronicles.Prefabs.Panel {
         [SerializeField] private LocalizeStringEvent _description;
         [SerializeField] private LocalizeStringEvent _result;
         [SerializeField] private TMP_Text _desidion;
+        [SerializeField] private ToggleGroup _group;
 
         private List<Element> _elements = new();
 
@@ -24,7 +26,7 @@ namespace Chronicles.Prefabs.Panel {
                 _elements.Clear();
 
                 for (int i = 0; i < value.Count; ++i) {
-                    Element element = Factory.CreatePanelElement(elementContent, elementPrefab, value[i]);
+                    Element element = Factory.CreatePanelElement(elementContent, elementPrefab, value[i], _group);
                     element.onClick = onClickElement;
                     _elements.Add(element);
                 }
