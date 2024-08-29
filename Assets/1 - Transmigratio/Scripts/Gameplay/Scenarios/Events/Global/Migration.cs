@@ -256,7 +256,7 @@ namespace Gameplay.Scenarios.Events.Global {
         {
             int fromID = piece.Region.Id;
             MigrationData data = _migrations[piece.Region.Id];
-            piece.Population.Value += data.FullPopulations - data.CurPopulations;
+            piece.Population.Value += (data.FullPopulations - data.CurPopulations) >= 0 ? data.FullPopulations - data.CurPopulations : 0;
             ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "Break");
             RemoveMigration(fromID);
         }
