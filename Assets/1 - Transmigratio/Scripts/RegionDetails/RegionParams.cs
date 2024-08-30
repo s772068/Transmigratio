@@ -13,6 +13,15 @@ public class RegionParams : MonoBehaviour {
 
     public Action<string> onClick;
 
+    public void UpdateParamiters(int RegionID, string element) {
+        ClearParams();
+        Dictionary<string, float> _dic = Transmigratio.Instance.TMDB.GetParam(RegionID, element);
+        foreach (var pair in _dic) {
+            if (pair.Value == 0) continue;
+            SetParamiter(element, pair.Key, pair.Value);
+        }
+    }
+
     public void SetParamiter(string element, string title, float value) {
         if (!paramiters.ContainsKey(title)) {
             var _paramiter = Instantiate(paramiter, content);

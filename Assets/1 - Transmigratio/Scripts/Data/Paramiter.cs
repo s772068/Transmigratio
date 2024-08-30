@@ -11,63 +11,73 @@ public class Paramiter {
     private bool _isPercent;
 
     // For JSON
-    public SerializedDictionary<string, int> Quantities {
+    public SerializedDictionary<string, float> Quantities {
         set {
             foreach(var pair in value) {
-                quantities.Add(pair.Key, new());
-                quantities[pair.Key].Max = pair.Value;
-                quantities[pair.Key].Value = pair.Value;
-            }
-            foreach (var pair in quantities) {
-                quantities[pair.Key].Percent = UpdateQuantityProcent(pair.Key);
+                quantities.Add(pair.Key, new(pair.Value));
             }
         }
-    }
-
-    public Dictionary<string, int> GetQuantities() {
-        Dictionary<string, int> res = new();
-        foreach (var pair in quantities) {
-            res[pair.Key] = _isPercent ? pair.Value.Percent : pair.Value.Value;
-        }
-        return res;
     }
 
     public Paramiter(bool isPercent) {
-        this._isPercent = isPercent;
+        _isPercent = isPercent;
     }
 
-    public ParamiterValue this[string key] {
-        get => quantities[key];
+    public float this[string key] {
+        get => quantities[key].value;
         set {
             if (!quantities.ContainsKey(key)) {
-                quantities.Add(key, new() { Max = value.Value });
+                quantities.Add(key, new(value));
             }
-            quantities[key].Value = value.Value;
-            foreach (var pair in quantities) {
-                quantities[pair.Key].Percent = UpdateQuantityProcent(pair.Key);
-            }
+            quantities[key].value = value;
         }
     }
 
-    public void Init(params string[] quantityNames) {
-        for(int i = 0; i < quantityNames.Length; ++i) {
-            quantities[quantityNames[i]] = new();
-        }
-    }
+    public ParamiterValue GetValue(string key) => quantities[key];
+    public float GetStartValue(string key) => quantities[key].StartValue;
 
-    public (string key, int value) GetMaxQuantity() {
-        (string key, int value) res = default;
+    public Dictionary<string, float> GetValues() {
+        Dictionary<string, float> res = new();
+        float full = quantities.Values.Sum(v => v.value);
         foreach (var pair in quantities) {
-            if(pair.Value.Value > res.value) {
+            res[pair.Key] = _isPercent ? pair.Value.value / full * 100 : pair.Value.value;
+        }
+        return res;
+    }
+
+    public void Init(params (string, float)[] quantity) {
+        for (int i = 0; i < quantity.Length; ++i) {
+            ParamiterValue val = new(quantity[i].Item2);
+            quantities[quantity[i].Item1] = val;
+        }
+    }
+
+    public void Init(params string[] quantity) {
+        for (int i = 0; i < quantity.Length; ++i) {
+            ParamiterValue val = new(0);
+            quantities[quantity[i]] = val;
+        }
+    }
+
+    public (string key, float value) GetMax() {
+        (string key, float value) res = default;
+        foreach (var pair in quantities) {
+            if(pair.Value.value > res.value) {
                 res.key = pair.Key;
-                res.value = pair.Value.Value;
+                res.value = pair.Value.value;
             }
         }
         return res;
     }
 
-    private int UpdateQuantityProcent(string name) {
-        float sum = quantities.Sum(x => x.Value.Value);
-        return (int) (quantities[name].Value / sum * 100);
+    public static Paramiter operator +(Paramiter p1, Paramiter p2) {
+        Paramiter paramiter = new(p1._isPercent || p1._isPercent);
+        foreach(var quantity in p1.quantities) {
+            paramiter[quantity.Key] = quantity.Value.value;
+        }
+        foreach(var quantity in p2.quantities) {
+            paramiter[quantity.Key] = quantity.Value.value;
+        }
+        return paramiter;
     }
 }

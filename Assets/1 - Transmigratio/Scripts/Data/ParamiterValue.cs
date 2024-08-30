@@ -1,6 +1,20 @@
-[System.Serializable]
+using System;
+using UnityEngine;
+
+[Serializable]
 public class ParamiterValue {
-    public int Max;
-    public int Value;
-    public int Percent;
+    [SerializeField] private float _startValue;
+    public float value;
+    
+    // prev, cur, piece
+    public Action<float, float, CivPiece> onUpdate;
+
+    public float StartValue => _startValue;
+    
+    public ParamiterValue() { }
+
+    public ParamiterValue(float val) {
+        _startValue = val;
+        value = val;
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-using GlobalEvents = Events.Controllers.Global;
+using GlobalEvents = Gameplay.Scenarios.Events.Global;
 
 /// <summary>
 /// Класс "человечество" - суммарная/усреднённая инфа по цивилизациям
@@ -17,8 +17,11 @@ public class Humanity {
 
     public void Init() {
         Civilizations = new();
-        Civilizations.Clear();
         Debug.Log("Humanity init");
+
+        for(int i = 0; i < scenarios.Count; ++i) {
+            scenarios[i].Init();
+        }
 
         Timeline.TickLogic += Play;
     }
@@ -26,16 +29,23 @@ public class Humanity {
     /// <summary>
     /// Создание первоначальной цивилизации (старт игры)
     /// </summary>
-    public Civilization AddCivilization(int region, string civName) {
-        Civilization newCiv = new Civilization();
-        newCiv.Init(region, civName);
+    public Civilization StartGame(int region, string civName) {
+        Civilization newCiv = new Civilization(civName);
+        newCiv.StartGame(region);
         Civilizations[civName] = newCiv;
         return newCiv;
     }
 
     public void Play() {
-        for (int i = 0; i < Civilizations.Count; ++i) {
+        int count = Civilizations.Count;
+        for (int i = 0; i < count; ++i) {
             Civilizations.ElementAt(i).Value.Play();
         }
+    }
+
+    public void RemovePiece(string civName, int region) {
+        Civilizations[civName].RemovePiece(region);
+        if(Civilizations[civName].Pieces.Count == 0)
+            Civilizations.Remove(civName);
     }
 }

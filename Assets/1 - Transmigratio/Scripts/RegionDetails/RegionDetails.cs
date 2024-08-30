@@ -12,7 +12,7 @@ public class RegionDetails : MonoBehaviour {
 
     public int RegionID;
 
-    private Dictionary<string, int> _dic;
+    private Dictionary<string, float> _dic;
     private string _element;
 
     private TM_Region Region => Transmigratio.Instance.TMDB.map.AllRegions[RegionID];
@@ -51,12 +51,8 @@ public class RegionDetails : MonoBehaviour {
     }
 
     private void UpdateParams() {
-        if (_element == null) return;
-        _dic = Transmigratio.Instance.TMDB.GetParam(RegionID, _element);
-        foreach (var pair in _dic) {
-            if (pair.Value == 0) continue;
-            _centerSide.SetParamiter(_element, pair.Key, pair.Value);
-        }
+        if (_element != null)
+            _centerSide.UpdateParamiters(RegionID, _element);
     }
 
     private void OnClickParamiter(string key) {

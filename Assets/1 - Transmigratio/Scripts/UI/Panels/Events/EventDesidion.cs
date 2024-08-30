@@ -1,7 +1,7 @@
+using Gameplay.Scenarios.Events.Data;
 using UnityEngine;
 using System;
 using TMPro;
-using Events.Data;
 
 public class EventDesidion : MonoBehaviour {
     [SerializeField] private TMP_Text _title;

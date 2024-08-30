@@ -1,12 +1,14 @@
-using UnityEngine;
-using Events.Data;
+using Gameplay.Scenarios.Events.Data;
 using System.Collections.Generic;
-using UI;
+using UnityEngine;
 using Gameplay;
+using UI;
+
+using Events = Gameplay.Scenarios.Events;
 
 public static class PanelFabric
 {
-    public static void CreateEvent(Transform parent, EventDesidion desidionPrefab, EventPanel eventPrefab, Events.Controllers.Base baseEvent,
+    public static EventPanel CreateEvent(Transform parent, EventDesidion desidionPrefab, EventPanel eventPrefab, Events.Base baseEvent,
                         CivPiece piece, Sprite sprite, string title, string territory, string description, List<Desidion> desidions)
     {
         EventPanel panel = EventPanel.Instantiate(eventPrefab, parent);
@@ -17,6 +19,8 @@ public static class PanelFabric
         panel.Description = description;
         foreach (var desidion in desidions)
             AddDesidion(desidionPrefab, piece, desidion, panel.Desidions, panel);
+
+        return panel;
     }
 
     private static void AddDesidion(EventDesidion prefab, CivPiece piece, Desidion desidion, Transform parent, EventPanel panel)
