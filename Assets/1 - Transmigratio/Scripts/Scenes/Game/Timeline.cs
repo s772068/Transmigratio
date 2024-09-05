@@ -22,12 +22,12 @@ public class Timeline : PersistentSingleton<Timeline> {
             {
                 if (_windowsCount < 0)
                     _windowsCount = 0;
-                Transmigratio.Instance.IsClickableMarker = true;
+                MapData.IsClickableMarker = true;
                 Resume();
             }
             else
             {
-                Transmigratio.Instance.IsClickableMarker = false;
+                MapData.IsClickableMarker = false;
                 Pause();
             }
         }
@@ -52,14 +52,14 @@ public class Timeline : PersistentSingleton<Timeline> {
 
     public void Pause() {
         _isPlay = false;
-        _buttonsGroup.Click(0);
+        _buttonsGroup.Select(0);
     }
 
     public void Stop()
     {
         _isPlay = false;
         _timeDelay = 0;
-        _buttonsGroup.Click(0);
+        _buttonsGroup.Select(0);
     }
 
     public void Resume()
@@ -82,7 +82,7 @@ public class Timeline : PersistentSingleton<Timeline> {
         Debug.Log("Play");
         _timeDelay = _timeDelayLimit.y;
         if (!_isPlay) StartCoroutine(TickPlay());
-        _buttonsGroup.Click(1);
+        _buttonsGroup.Select(1);
     }
 
     public void Rewind() {
@@ -94,7 +94,7 @@ public class Timeline : PersistentSingleton<Timeline> {
 
         _timeDelay = _timeDelayLimit.x;
         if (!_isPlay) StartCoroutine(TickPlay());
-        _buttonsGroup.Click(2);
+        _buttonsGroup.Select(2);
     }
 
     private IEnumerator TickPlay() {

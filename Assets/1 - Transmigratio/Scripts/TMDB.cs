@@ -1,3 +1,4 @@
+using AYellowpaper.SerializedCollections;
 using Gameplay;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TMDB", menuName = "ScriptableObjects/TMDB", order = 1)]
 public class TMDB : ScriptableObject {
     public int startAge;
-    [SerializeField] private List<NewsSO> _news;
-    public Humanity humanity = new();
     public Map map = new();
+    public Humanity humanity = new();
+    [SerializeField] private List<NewsSO> _news;
+    [SerializeField] private SerializedDictionary<string, SerializedDictionary<string, Color>> _paramiterColors;
 
     public List<NewsSO> News => _news;
 
     public int Year => startAge - Timeline.Instance.Tick * GameSettings.YearsByTick;
+
+    public Color GetParamiterColor(string paramiter, string element) {
+        return _paramiterColors[paramiter][element];
+    }
 
     public Dictionary<string, float> GetParam(int index, string name) => name switch {
         "Flora" => map.AllRegions[index].Flora.GetValues(),

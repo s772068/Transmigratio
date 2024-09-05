@@ -8,18 +8,19 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     [SerializeField] private Sprite activeSprite;
     [SerializeField] private Sprite deactiveSprite;
     [SerializeField] private Sprite highlightedSprite;
+    
     public bool IsInterectable = true;
 
     [Space]
     public UnityEvent<int> onClick = new UnityEvent<int>();
 
-    private bool _isActive;
     private Image _image;
+    private bool _isActive;
 
     public int Index { private get; set; }
     
     private void Awake() {
-        _image = GetComponent<Image>();
+        _image ??= GetComponent<Image>();
     }
 
     public void Activate() {

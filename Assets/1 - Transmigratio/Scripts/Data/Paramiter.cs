@@ -71,7 +71,7 @@ public class Paramiter {
     }
 
     public static Paramiter operator +(Paramiter p1, Paramiter p2) {
-        Paramiter paramiter = new(p1._isPercent || p1._isPercent);
+        Paramiter paramiter = new(p1._isPercent || p2._isPercent);
         foreach(var quantity in p1.quantities) {
             paramiter[quantity.Key] = quantity.Value.value;
         }

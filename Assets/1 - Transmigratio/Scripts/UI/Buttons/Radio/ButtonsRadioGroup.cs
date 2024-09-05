@@ -13,17 +13,14 @@ namespace UI
 
         public Action<int> onClick;
 
-        private void Start()
-        {
-            for (int i = 0; i < buttons.Count; ++i)
-            {
+        private void Start() {
+            for (int i = 0; i < buttons.Count; ++i) {
                 buttons[i].Index = i;
+                buttons[i].onClick.AddListener(Select);
             }
 
-            if (_waitGameStart)
-            {
-                foreach (var button in buttons)
-                {
+            if (_waitGameStart) {
+                foreach (var button in buttons) {
                     button.Deactivate();
                     button.IsInterectable = false;
                 }
@@ -31,13 +28,11 @@ namespace UI
             }
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() {
             Transmigratio.GameStarted -= OnGameStarted;
         }
 
-        public void Click(int newActiveIndex)
-        {
+        public void Select(int newActiveIndex) {
             if (_waitGameStart)
                 return;
 
@@ -47,8 +42,7 @@ namespace UI
             onClick?.Invoke(_activeElement);
         }
 
-        private void OnGameStarted()
-        {
+        private void OnGameStarted() {
             _waitGameStart = false;
             foreach (var button in buttons)
                 button.IsInterectable = true;
