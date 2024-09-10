@@ -75,11 +75,8 @@ public class Civilization {
     }
 
     public void AddPiece(CivPiece piece, string newCivName, int newCategory) {
-        Pieces[piece.RegionID] = piece;
-        Pieces[piece.RegionID].CivName = newCivName;
-        Pieces[piece.RegionID].Category = newCategory;
         piece.Region.AddCivilization(newCivName);
-        onAddPiece?.Invoke(piece);
+        AddPiece(piece.RegionID, piece.Population.Value);
     }
 
     /// <summary>

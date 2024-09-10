@@ -96,8 +96,8 @@ public class CivPiece {
             Population.Value / Demography.data.val13 * ProdModeK * _floraKr :
             Population.Value / Demography.data.val14 * ProdModeK * _faunaKr);
 
-        ReserveFood = new(TakenFood.value);
         RequestFood = new(Population.Value / Demography.data.val4);
+        ReserveFood = new(RequestFood.value * 2);
         GivenFood = new(ReserveFood.value > RequestFood.value ? RequestFood.value : ReserveFood.value);
     }
 

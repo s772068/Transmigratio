@@ -39,7 +39,8 @@ public class TM_Region {
     }
 
     public void AddCivilization(string civName) {
-        CivsList.Add(civName);
+        if (!CivsList.Contains(civName))
+            CivsList.Add(civName);
     }
 
     public Dictionary<string, float> GetCivParamiter() {
