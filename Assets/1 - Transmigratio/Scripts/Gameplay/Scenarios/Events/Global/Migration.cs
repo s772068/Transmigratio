@@ -127,12 +127,20 @@ namespace Gameplay.Scenarios.Events.Global {
             _toPiece = newMigration.CivTo;
             ChroniclesController.AddActive(Name, from.Id, OpenPanel);
 
-            if (!AutoChoice) {
+            if (!AutoChoice)
+            {
                 newMigration.CivFrom.AddEvent(this);
                 newMigration.CivTo.AddEvent(this);
                 OpenPanel(newMigration.CivFrom);
-            } 
-            else Events.AutoChoice.Events[this][0].ActionClick?.Invoke(newMigration.CivFrom, Events.AutoChoice.Events[this][0].CostFunc);
+            }
+            else
+            {
+                foreach (var autochoice in Events.AutoChoice.Events [this])
+                {
+                    if (AutoChoice && autochoice.CostFunc(_fromPiece) <= MaxAutoInterventionPoints)
+                        autochoice.ActionClick?.Invoke(newMigration.CivFrom, autochoice.CostFunc);
+                }
+            }
         }
 
         private LineMarkerAnimator CreateLine(Vector2 start, Vector2 end) {
@@ -248,6 +256,9 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         private bool Break(CivPiece piece, Func<CivPiece, int> interventionPoints) {
+            if (AutoChoice && interventionPoints(piece) > MaxAutoInterventionPoints)
+                return false;
+
             if (!_useIntervention(interventionPoints(piece)))
                 return false;
 

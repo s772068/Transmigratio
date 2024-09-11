@@ -45,8 +45,14 @@ namespace Gameplay.Scenarios.Events.StateMachines {
                 CreateMarker();
                 _piece.AddEvent(this);
                 OpenPanel(_piece);
-            } else {
-                Events.AutoChoice.Events[this][0].ActionClick?.Invoke(_piece, Events.AutoChoice.Events[this][0].CostFunc);
+            }
+            else
+            {
+                foreach (var autochoice in Events.AutoChoice.Events[this])
+                {
+                    if (AutoChoice && autochoice.CostFunc(_piece) <= MaxAutoInterventionPoints)
+                        autochoice.ActionClick?.Invoke(_piece, autochoice.CostFunc);
+                }
             }
         }
 

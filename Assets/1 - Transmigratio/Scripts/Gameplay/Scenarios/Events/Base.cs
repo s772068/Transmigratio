@@ -24,6 +24,7 @@ namespace Gameplay.Scenarios.Events {
         public Sprite PanelSprite => panelSprite;
         public List<Desidion> Desidions => _desidions;
         public bool AutoChoice = false;
+        public int MaxAutoInterventionPoints = 10;
 
         private protected abstract string Name { get; }
         private protected abstract string Territory(CivPiece piece);
