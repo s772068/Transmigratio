@@ -2,21 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace UI
-{
-    public class ButtonsRadioGroup : MonoBehaviour
-    {
+namespace UI {
+    public class ButtonsRadioGroup : MonoBehaviour {
         [SerializeField] private List<ButtonRadio> buttons;
         [SerializeField] private bool _waitGameStart = false;
+        [SerializeField] private int selectedIndex;
 
         private int _activeElement = -1;
 
-        public Action<int> onClick;
+        public Action<int> onSelect;
 
         private void Start() {
             for (int i = 0; i < buttons.Count; ++i) {
                 buttons[i].Index = i;
-                buttons[i].onClick.AddListener(Select);
+                buttons[i].onUnselect.AddListener(Select);
             }
 
             if (_waitGameStart) {
@@ -39,7 +38,7 @@ namespace UI
             if (_activeElement != -1) buttons[_activeElement].Deactivate();
             _activeElement = newActiveIndex;
             buttons[_activeElement].Activate();
-            onClick?.Invoke(_activeElement);
+            onSelect?.Invoke(_activeElement);
         }
 
         private void OnGameStarted() {

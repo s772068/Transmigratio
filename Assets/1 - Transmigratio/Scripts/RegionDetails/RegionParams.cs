@@ -14,9 +14,9 @@ namespace RegionDetails.Old {
 
         public Action<string> onClick;
 
-        public void UpdateParamiters(int RegionID, string element) {
+        public void UpdateParamiters(string element) {
             ClearParams();
-            Dictionary<string, float> _dic = Transmigratio.Instance.TMDB.GetParam(RegionID, element);
+            Dictionary<string, float> _dic = Transmigratio.Instance.TMDB.GetParam(default);
             foreach (var pair in _dic) {
                 if (pair.Value == 0) continue;
                 SetParamiter(element, pair.Key, pair.Value);

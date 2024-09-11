@@ -28,6 +28,7 @@ namespace RegionDetails.StartGame {
             _paramiter = (EParamiter)paramiter;
             UpdateElements();
         }
+
         public void PrevRegion() => SelectRegion(MapData.RegionID - 1);
         public void NextRegion() => SelectRegion(MapData.RegionID + 1);
 
@@ -45,7 +46,7 @@ namespace RegionDetails.StartGame {
         }
 
         private void CreateParamiter() {
-            _elements = Factory.CreateElements(_elementPrefab, _content, _paramiter.ToString());
+            _elements = Factory.Create(_elementPrefab, _content, _paramiter.ToString());
         }
 
         private void UpdateElements() {

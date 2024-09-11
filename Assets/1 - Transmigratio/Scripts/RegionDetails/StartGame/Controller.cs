@@ -26,7 +26,7 @@ namespace RegionDetails {
         }
 
         private void OpenStartPanel(int regionID) {
-            __startPanel = StartGame.Factory.CreateController(_startPanel, transform);
+            __startPanel = StartGame.Factory.Create(_startPanel, transform);
             _closeBtn.gameObject.SetActive(true);
             onOpenRegionPanel?.Invoke(true);
             onClose = CloseStartPanel;

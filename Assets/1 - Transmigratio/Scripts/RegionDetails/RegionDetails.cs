@@ -20,7 +20,7 @@ namespace RegionDetails.Old {
         public Sprite Avatar { set => _civAvatar.sprite = value; }
 
         private void Awake() {
-            _tabs.onClick = OnClickTabs;
+            _tabs.onSelect = OnClickTabs;
             _leftSide.onClick = OnClickElement;
             _centerSide.onClick = OnClickParamiter;
         }
@@ -53,7 +53,7 @@ namespace RegionDetails.Old {
 
         private void UpdateParams() {
             if (_element != null)
-                _centerSide.UpdateParamiters(RegionID, _element);
+                _centerSide.UpdateParamiters(_element);
         }
 
         private void OnClickParamiter(string key) {

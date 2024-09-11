@@ -12,10 +12,11 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public bool IsInterectable = true;
 
     [Space]
-    public UnityEvent<int> onClick = new UnityEvent<int>();
+    public UnityEvent<int> onSelect = new UnityEvent<int>();
+    public UnityEvent<int> onUnselect = new UnityEvent<int>();
 
     private Image _image;
-    private bool _isActive;
+    private bool _isSelected;
 
     public int Index { private get; set; }
     
@@ -24,28 +25,28 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     }
 
     public void Activate() {
-        _isActive = true;
+        _isSelected = true;
         _image.sprite = activeSprite;
     }
 
     public void Deactivate() {
-        _isActive = false;
+        _isSelected = false;
         _image.sprite = deactiveSprite;
     }
 
     public void OnPointerClick(PointerEventData eventData) {
         if (IsInterectable)
-            onClick.Invoke(Index);
+            onSelect.Invoke(Index);
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
         if(highlightedSprite == null) return;
-        if (!_isActive) _image.sprite = highlightedSprite;
+        if (!_isSelected) _image.sprite = highlightedSprite;
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         if (highlightedSprite == null) return;
-        if (_isActive) Activate();
+        if (_isSelected) Activate();
         else Deactivate();
     }
 }

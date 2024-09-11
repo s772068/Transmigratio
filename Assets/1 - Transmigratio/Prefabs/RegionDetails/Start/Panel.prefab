@@ -390,7 +390,7 @@ MonoBehaviour:
   deactiveSprite: {fileID: 21300000, guid: 71eb2d7162b003d4d90b53880cdb77f0, type: 3}
   highlightedSprite: {fileID: 0}
   IsInterectable: 1
-  onClick:
+  onSelect:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6613186884515267972}
@@ -402,9 +402,12 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Terrain
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onUnselect:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4001112986339723245
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,7 +892,7 @@ MonoBehaviour:
   deactiveSprite: {fileID: 21300000, guid: 71eb2d7162b003d4d90b53880cdb77f0, type: 3}
   highlightedSprite: {fileID: 0}
   IsInterectable: 1
-  onClick:
+  onSelect:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6613186884515267972}
@@ -901,9 +904,12 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: Fauna
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onUnselect:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4494649107692937554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,7 +1578,7 @@ MonoBehaviour:
   deactiveSprite: {fileID: 21300000, guid: 71eb2d7162b003d4d90b53880cdb77f0, type: 3}
   highlightedSprite: {fileID: 0}
   IsInterectable: 1
-  onClick:
+  onSelect:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6613186884515267972}
@@ -1584,9 +1590,12 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
           m_FloatArgument: 0
-          m_StringArgument: Flora
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onUnselect:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7210480030329425981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,6 +1694,7 @@ MonoBehaviour:
   - {fileID: 588232153569652083}
   - {fileID: 7199178196139022369}
   _waitGameStart: 0
+  selectedIndex: 0
 --- !u!1 &7695305078010627543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,7 +1953,7 @@ MonoBehaviour:
   deactiveSprite: {fileID: 21300000, guid: 71eb2d7162b003d4d90b53880cdb77f0, type: 3}
   highlightedSprite: {fileID: 0}
   IsInterectable: 1
-  onClick:
+  onSelect:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6613186884515267972}
@@ -1955,9 +1965,12 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: Climate
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onUnselect:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7972371531922229634
 GameObject:
   m_ObjectHideFlags: 0
