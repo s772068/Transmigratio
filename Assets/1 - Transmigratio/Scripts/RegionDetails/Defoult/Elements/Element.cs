@@ -7,6 +7,7 @@ namespace RegionDetails.Defoult.Elements {
         [SerializeField] private GameObject _select;
 
         public int Index { private get; set; }
+        public bool IsSelectable { private get; set; }
         private bool _isSelected;
 
         public Action<int> onSelect;
@@ -19,6 +20,7 @@ namespace RegionDetails.Defoult.Elements {
         }
 
         public void OnPointerClick(PointerEventData eventData) {
+            if (!IsSelectable) return;
             Select(true);
         }
     }

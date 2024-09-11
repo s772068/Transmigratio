@@ -4,7 +4,7 @@ using System;
 using TMPro;
 
 namespace RegionDetails.Defoult.Descriptions {
-    public class Civilization : MonoBehaviour {
+    public class Civilization : BaseDescription {
         [SerializeField] private TMP_Text _label;
         [SerializeField] private Image _avatar;
         [SerializeField] private TMP_Text _descriptionCiv;

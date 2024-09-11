@@ -15,6 +15,7 @@ namespace RegionDetails.Defoult.Elements {
         public Action<string> onSelect;
 
         public string Label { set => _label.text = value; }
+        public bool IsSelectable { private get; set; }
 
         public void UpdateElements(string paramiter) {
             Clear();
@@ -31,6 +32,7 @@ namespace RegionDetails.Defoult.Elements {
             dic = Transmigratio.Instance.TMDB.GetParam(paramiter);
             foreach (var pair in dic) {
                 Element element = Factory.Create(_elementPref, _content, _elements.Count, pair.Key, pair.Value);
+                element.IsSelectable = IsSelectable;
                 element.onSelect = OnSelect;
                 _elements.Add(element);
             }
@@ -41,6 +43,7 @@ namespace RegionDetails.Defoult.Elements {
             for (int i = 0; i < _elements.Count; ++i) {
                 _elements[i].Destroy();
             }
+            _selectedElement = null;
             _elements.Clear();
         }
 

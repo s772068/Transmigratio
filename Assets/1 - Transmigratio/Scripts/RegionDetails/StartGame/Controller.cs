@@ -6,8 +6,10 @@ namespace RegionDetails {
     public class Controller : MonoBehaviour {
         [SerializeField] private Button _closeBtn;
         [SerializeField] private StartGame.Panel _startPanel;
+        [SerializeField] private Defoult.Panel _defPanel;
 
         private StartGame.Panel __startPanel;
+        private bool _isStartedGame;
 
         public Action onClose;
 
@@ -16,8 +18,9 @@ namespace RegionDetails {
         public static event Action onStartGame;
 
         private void Awake() {
-            MapData.onClickRegion += OpenStartPanel;
+            MapData.onClickRegion += OpenPanel;
             _closeBtn.onClick.AddListener(Close);
+            StartGame.Panel.onStartGame += OnStartGame;
         }
 
         public void Close() {
@@ -25,7 +28,14 @@ namespace RegionDetails {
             onClose?.Invoke();
         }
 
-        private void OpenStartPanel(int regionID) {
+        private void OpenPanel(int regionID) {
+            if (_isStartedGame)
+                Defoult.Factory.Create(_defPanel, transform);
+            else
+                OpenStartPanel();
+        }
+
+        private void OpenStartPanel() {
             __startPanel = StartGame.Factory.Create(_startPanel, transform);
             _closeBtn.gameObject.SetActive(true);
             onOpenRegionPanel?.Invoke(true);
@@ -33,7 +43,13 @@ namespace RegionDetails {
         }
 
         private void CloseStartPanel() {
-            __startPanel.Close();
+            __startPanel?.Close();
+        }
+
+        private void OnStartGame() {
+            _isStartedGame = true;
+            __startPanel = null;
+            Defoult.Factory.Create(_defPanel, transform);
         }
     }
 }

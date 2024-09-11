@@ -17,7 +17,7 @@ namespace RegionDetails.Base {
 
         public float Percent {
             set {
-                _percent.text = $"{value}%";
+                _percent.text = $"{(int)value}%";
                 _slider.value = value / 100f;
             }
         }

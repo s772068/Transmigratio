@@ -37,7 +37,10 @@ namespace RegionDetails.StartGame {
             Destroy(gameObject);
         }
 
-        public void Close() => Destroy(gameObject);
+        public void Close() {
+            MapData.WMSK.ToggleCountrySurface(MapData.RegionID, true, Color.clear);
+            Destroy(gameObject);
+        }
 
         private void SelectRegion(int regionID) {
             MapData.UpdateRegion(regionID);
