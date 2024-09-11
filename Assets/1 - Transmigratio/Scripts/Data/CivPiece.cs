@@ -100,6 +100,28 @@ public class CivPiece {
         ReserveFood = new(RequestFood.value * 2);
         GivenFood = new(ReserveFood.value > RequestFood.value ? RequestFood.value : ReserveFood.value);
     }
+    //Создание CivPiece при его обновлении (например улучшения уровня цивилизации)
+    public void Init(CivPiece piece, string civilization, int category)
+    {
+        EcoCulture.Init(piece.EcoCulture.QuantitiesDictionary);
+        ProdMode.Init(piece.ProdMode.QuantitiesDictionary);
+        Government.Init(piece.Government.QuantitiesDictionary);
+
+        Category = category;
+        RegionID = piece.RegionID;
+        CivName = civilization;
+        Population = new(piece.Population.Value);
+
+        float _floraKr = (float)(Math.Pow(Region.Flora["Flora"], Demography.data.val9) / Demography.data.val10);
+        float _faunaKr = (float)(Math.Pow(Region.Fauna["Fauna"], Demography.data.val11) / Demography.data.val12);
+
+        TakenFood = new(IsFarmers ?
+            Population.Value / Demography.data.val13 * ProdModeK * _floraKr :
+            Population.Value / Demography.data.val14 * ProdModeK * _faunaKr);
+        RequestFood = new(Population.Value / Demography.data.val4);
+        ReserveFood = new(piece.ReserveFood.value);
+        GivenFood = new(ReserveFood.value > RequestFood.value ? RequestFood.value : ReserveFood.value);
+    }
 
     public void AddEvent(Events.Base e) => events.Add(e);
     public void RemoveEvent(Events.Base e) => events.Remove(e);

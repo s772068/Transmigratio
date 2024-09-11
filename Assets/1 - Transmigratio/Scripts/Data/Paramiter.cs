@@ -19,6 +19,8 @@ public class Paramiter {
         }
     }
 
+    public SerializedDictionary<string, ParamiterValue> QuantitiesDictionary => quantities;
+
     public Paramiter(bool isPercent) {
         _isPercent = isPercent;
     }
@@ -57,6 +59,10 @@ public class Paramiter {
             ParamiterValue val = new(0);
             quantities[quantity[i]] = val;
         }
+    }
+    public void Init(SerializedDictionary<string, ParamiterValue> quantities)
+    {
+        this.quantities = quantities;
     }
 
     public (string key, float value) GetMax() {
