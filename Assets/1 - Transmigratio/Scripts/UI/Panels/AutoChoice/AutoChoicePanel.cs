@@ -20,6 +20,11 @@ namespace Gameplay.Scenarios.Events {
         [SerializeField] private Toggle _autoEnable;
         [SerializeField] private Image _eventImage;
         [SerializeField] private Transform _autoPriority;
+        [Header("AutoChoice Slider")]
+        [SerializeField] private Slider _slider;
+        [SerializeField] private TMP_Text _pointsTMP;
+        [SerializeField] private int _maxPoints = 100;
+        private int _curPoints = 0;
         private Dictionary<DragElement, Data.Desidion> _autoChoicePriority = new();
 
         public static event Action<Base, List<Data.Desidion>, bool> AutoChoiceUpdate;
@@ -81,6 +86,10 @@ namespace Gameplay.Scenarios.Events {
                 _dragPanel.Elements[i].GetComponent<AutoChoiceDesidion>().Title.text = desidions[i].Title;
                 _autoChoicePriority.Add(_dragPanel.Elements[i], desidions[i]);
             }
+
+            _curPoints = selectEvent.MaxAutoInterventionPoints;
+            _pointsTMP.text = _curPoints.ToString();
+            _slider.value = _slider.maxValue / _maxPoints * _curPoints;
         }
 
         private void OnPriorityUpdate() {
@@ -93,6 +102,13 @@ namespace Gameplay.Scenarios.Events {
             }
 
             AutoChoiceUpdate?.Invoke(_selectEvent, newDesidions, _autoEnable.isOn);
+        }
+
+        public void UpdateSlider()
+        {
+            _curPoints = (int)(_maxPoints * _slider.value);
+            _pointsTMP.text = _curPoints.ToString();
+            _selectEvent.MaxAutoInterventionPoints = _curPoints;
         }
 
         public void AutoChoiceEnable() => AutoChoiceModeUpdate?.Invoke(_selectEvent, _autoEnable.isOn);

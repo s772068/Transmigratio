@@ -22,9 +22,14 @@ namespace Gameplay.Scenarios.Events.Local {
                 piece.AddEvent(this);
                 CreateMarker(piece);
                 OpenPanel(piece);
-            } 
-            else {
-                Events.AutoChoice.Events[this][0].ActionClick?.Invoke(piece, Events.AutoChoice.Events[this][0].CostFunc);
+            }
+            else
+            {
+                foreach (var autochoice in Events.AutoChoice.Events[this])
+                {
+                    if (AutoChoice && autochoice.CostFunc(piece) <= MaxAutoInterventionPoints)
+                        autochoice.ActionClick?.Invoke(piece, autochoice.CostFunc);
+                }
             }
         }
 
