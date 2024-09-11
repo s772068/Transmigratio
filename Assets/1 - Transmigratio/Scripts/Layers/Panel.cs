@@ -28,7 +28,7 @@ namespace Layers {
         private Action Paint;
 
         private Map Map => Transmigratio.Instance.TMDB.map;
-        private WMSK WMSK => Map.WMSK;
+        private WMSK WMSK => MapData.WMSK;
         private int CountRegions => Map.AllRegions.Count;
         private TM_Region GetRegion(int index) => Map.AllRegions[index];
 
