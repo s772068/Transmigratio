@@ -6,7 +6,7 @@ using UI;
 
 namespace RegionDetails.StartGame {
     public enum EParamiter { Terrain, Climate, Fauna, Flora }
-    public class Panel : MonoBehaviour {
+    public class Panel : UI.Panel {
         [SerializeField] private TMP_Text _label;
         [SerializeField] private Element _elementPrefab;
         [SerializeField] private Transform _content;

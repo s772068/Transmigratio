@@ -5,7 +5,7 @@ using TMPro;
 using WorldMapStrategyKit;
 
 namespace RegionDetails.Defoult {
-    public class Panel : MonoBehaviour {
+    public class Panel : UI.Panel {
         [SerializeField] private TMP_Text _region;
         [SerializeField] private Paramiters.Group _paramiters;
         [SerializeField] private Elements.Group _elements;
