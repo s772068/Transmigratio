@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using WorldMapStrategyKit;
 
 /// <summary>
 /// Экземпляр Civilization - это одна цивилизация
@@ -75,11 +76,12 @@ public class Civilization {
     }
 
     public void AddPiece(CivPiece piece, string newCivName, int newCategory) {
-        Pieces[piece.RegionID] = piece;
-        Pieces[piece.RegionID].CivName = newCivName;
-        Pieces[piece.RegionID].Category = newCategory;
         piece.Region.AddCivilization(newCivName);
-        onAddPiece?.Invoke(piece);
+        CivPiece newPieceOfCiv = new();
+        newPieceOfCiv.Init(piece, newCivName, newCategory);
+        newPieceOfCiv.Destroy = () => RemovePiece(newPieceOfCiv.RegionID);
+        Pieces[newPieceOfCiv.RegionID] = newPieceOfCiv;
+        onAddPiece?.Invoke(newPieceOfCiv);
     }
 
     /// <summary>

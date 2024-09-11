@@ -13,7 +13,7 @@ namespace Gameplay.Scenarios {
 
         private static Paramiter _government;
 
-        public static Action<string> OnUpdateMaxGovernment;
+        public static Action<string, CivPiece> OnUpdateMaxGovernment;
         public static Action<CivPiece> OnUpdateGovernment;
 
         private static float Leaderism {
@@ -56,7 +56,7 @@ namespace Gameplay.Scenarios {
 
             string curMax = _government.GetMax().key;
             if (curMax != prevMax)
-                OnUpdateMaxGovernment?.Invoke(curMax);
+                OnUpdateMaxGovernment?.Invoke(curMax, _piece);
 
             OnUpdateGovernment?.Invoke(_piece);
         }

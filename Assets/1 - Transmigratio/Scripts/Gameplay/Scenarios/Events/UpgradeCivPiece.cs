@@ -41,20 +41,20 @@ namespace Gameplay.Scenarios.Events {
             // civPiece.Government.GetValue("CityState").onUpdate -= OnUpgradeToCityState;
         }
 
-        private void OnUpdateMaxGovernment(string maxGovernment) {
+        private void OnUpdateMaxGovernment(string maxGovernment, CivPiece piece) {
             switch (maxGovernment) {
                 case "Monarchy":
-                    OnUpgradeToMonarchy();
+                    OnUpgradeToMonarchy(piece);
                     break;
                 case "CityState": {
-                        OnUpgradeToCityState();
+                        OnUpgradeToCityState(piece);
                         break;
                     }
             }
         }
 
-        private void OnUpgradeToMonarchy() {
-            UpgradeCiv(2);
+        private void OnUpgradeToMonarchy(CivPiece piece) {
+            UpgradeCiv(2, piece);
             if (!_firstUpgrade)
             {
                 _firstUpgrade = true;
@@ -62,9 +62,9 @@ namespace Gameplay.Scenarios.Events {
             }
         }
 
-        private void OnUpgradeToCityState() {
+        private void OnUpgradeToCityState(CivPiece piece) {
             if (_random.Next(1, 100) <= 60) {
-                UpgradeCiv(1);
+                UpgradeCiv(1, piece);
                 if (!_secondUpgrade)
                 {
                     _secondUpgrade = true;
@@ -73,14 +73,14 @@ namespace Gameplay.Scenarios.Events {
             }
         }
 
-        private void UpgradeCiv(int category) {
-            string oldCivName = _piece.CivName;
+        private void UpgradeCiv(int category, CivPiece piece) {
+            string oldCivName = piece.CivName;
             string newCivName = GetCivName(category);
             if (!_civilizations.ContainsKey(newCivName)) {
                 _civilizations[newCivName] = new(newCivName);
             }
-            _civilizations[newCivName].AddPiece(_piece, newCivName, category);
-            _civilizations[oldCivName].RemovePiece(_piece.Region.Id);
+            _civilizations[newCivName].AddPiece(piece, newCivName, category);
+            _civilizations[oldCivName].RemovePiece(piece.Region.Id);
         }
 
         private string GetCivName(int category) {
