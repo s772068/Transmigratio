@@ -1,8 +1,8 @@
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Tutorial : MonoBehaviour
-{
+public class Tutorial : MonoBehaviour {
     #region Consts
 
     private const int WELCOME_SHIFT = 1 << 1;
@@ -52,34 +52,28 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject _autoChoice;
     
 
-    private void OnEnable()
-    {
-        HUD.EventRegionPanelOpen += InfoPanel;
+    private void OnEnable() {
+        RegionDetails.Controller.onOpenRegionPanel += OpenRegionDetails;
         EventPanel.EventPanelOpen += GameEvent;
         EventPanel.EventPanelClose += GameMarker;
     }
 
-    private void OnDisable()
-    {
-        HUD.EventRegionPanelOpen -= InfoPanel;
+    private void OnDisable() {
+        RegionDetails.Controller.onOpenRegionPanel -= OpenRegionDetails;
         EventPanel.EventPanelOpen -= GameEvent;
         EventPanel.EventPanelClose -= GameMarker;
     }
 
-    private void Start()
-    {
-        if (_suggestTutorial)
-        {
+    private void Start() {
+        if (_suggestTutorial) {
             ActivateZone(true);
             _welcome.SetActive(true);
             _steps += (int)TutorialSteps.Welcome;
         }
-        else
-            _tutorialEnded = true;
+        else _tutorialEnded = true;
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         if (_tutorialEnded)
             gameObject.SetActive(false);
 
@@ -87,8 +81,7 @@ public class Tutorial : MonoBehaviour
             _tutorialEnded = true;
     }
 
-    public void GameGoal(bool open)
-    {
+    public void GameGoal(bool open) {
         if (open && _steps.HasFlag(TutorialSteps.Goal))
             return;
         else if (!open && !_steps.HasFlag(TutorialSteps.Goal))
@@ -98,35 +91,25 @@ public class Tutorial : MonoBehaviour
         ActivateZone(open);
     }
 
-    public void InfoPanel(bool open)
-    {
-        if (open && !_steps.HasFlag(TutorialSteps.Info))
-        {
+    public void OpenRegionDetails(bool open) {
+        if (open && !_steps.HasFlag(TutorialSteps.Info)) {
             _infoPanel.SetActive(true);
             _uiZones["InfoPanel"].SetActive(true);
             ActivateZone(true);
-        }
-        else
-        {
-            if (!_steps.HasFlag(TutorialSteps.Info))
-                _steps += (int)TutorialSteps.Info;
-
+        } else if (!_steps.HasFlag(TutorialSteps.Info)) {
+            _steps += (int) TutorialSteps.Info;
             _infoPanel.SetActive(false);
             _uiZones["InfoPanel"].SetActive(false);
             ActivateZone(false);
         }
     }
 
-    public void GameStarted(bool open)
-    {
-        if (open && !_steps.HasFlag(TutorialSteps.Start))
-        {
+    public void GameStarted(bool open) {
+        if (open && !_steps.HasFlag(TutorialSteps.Start)) {
             _startGame.SetActive(true);
             _uiZones["Timer"].SetActive(true);
             ActivateZone(true);
-        }
-        else
-        {
+        } else {
             if (!_steps.HasFlag(TutorialSteps.Start))
                 _steps += (int)TutorialSteps.Start;
 
@@ -136,16 +119,12 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    public void GameEvent(bool open)
-    {
-        if (open && !_steps.HasFlag(TutorialSteps.Event))
-        {
+    public void GameEvent(bool open) {
+        if (open && !_steps.HasFlag(TutorialSteps.Event)) {
             _gameEvent.SetActive(true);
             _uiZones["Event"].SetActive(true);
             ActivateZone(true);
-        }
-        else
-        {
+        } else {
             if (!_steps.HasFlag(TutorialSteps.Event))
                 _steps += (int)TutorialSteps.Event;
 
@@ -155,16 +134,12 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    public void GameMarker(bool open)
-    {
-        if (!open && !_steps.HasFlag(TutorialSteps.Markers))
-        {
+    public void GameMarker(bool open) {
+        if (!open && !_steps.HasFlag(TutorialSteps.Markers)) {
             _markers.SetActive(open);
             ActivateZone(open);
             _steps += (int)TutorialSteps.Markers;
-        }
-        else if (open && !_steps.HasFlag(TutorialSteps.Markers))
-        {
+        } else if (open && !_steps.HasFlag(TutorialSteps.Markers)) {
             _markers.SetActive(open);
             ActivateZone(open);
         }
@@ -172,14 +147,11 @@ public class Tutorial : MonoBehaviour
 
     public void GameLayers(bool open)
     {
-        if (open && !_steps.HasFlag(TutorialSteps.Layers))
-        {
+        if (open && !_steps.HasFlag(TutorialSteps.Layers)) {
             _layers.SetActive(true);
             _uiZones["Layers"].SetActive(true);
             ActivateZone(true);
-        }
-        else
-        {
+        } else {
             if (!_steps.HasFlag(TutorialSteps.Layers))
                 _steps += (int)TutorialSteps.Layers;
 
@@ -189,16 +161,12 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    public void Chronicles(bool open)
-    {
-        if (open && !_steps.HasFlag(TutorialSteps.Chronicles))
-        {
+    public void Chronicles(bool open) {
+        if (open && !_steps.HasFlag(TutorialSteps.Chronicles)) {
             _chrono.SetActive(true);
             _uiZones["Chronicles"].SetActive(true);
             ActivateZone(true);
-        }
-        else
-        {
+        } else {
             if (!_steps.HasFlag(TutorialSteps.Chronicles))
                 _steps += (int)TutorialSteps.Chronicles;
 
@@ -208,16 +176,13 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    public void AutoChoice(bool open)
-    {
+    public void AutoChoice(bool open) {
         if (open && !_steps.HasFlag(TutorialSteps.AutoChoice))
         {
             _autoChoice.SetActive(true);
             _uiZones["AutoChoice"].SetActive(true);
             ActivateZone(true);
-        }
-        else
-        {
+        } else {
             if (!_steps.HasFlag(TutorialSteps.AutoChoice))
                 _steps += (int)TutorialSteps.AutoChoice;
 

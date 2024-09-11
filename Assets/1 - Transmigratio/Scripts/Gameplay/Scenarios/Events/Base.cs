@@ -31,7 +31,7 @@ namespace Gameplay.Scenarios.Events {
 
         private protected Chronicles.Controller ChroniclesController => Chronicles.Controller.Instance;
         private protected Map Map => Transmigratio.Instance.TMDB.map;
-        private protected WMSK WMSK => Map.WMSK;
+        private protected WMSK WMSK => MapData.WMSK;
         private protected Func<int, bool> _useIntervention => Gameplay.Intervention.UseIntervention;
         public string Local(string key) => Localization.Load(Name, key);
 

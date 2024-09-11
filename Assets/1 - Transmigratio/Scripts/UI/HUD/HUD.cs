@@ -1,22 +1,16 @@
-using System;
 using UnityEngine;
 
 /// <summary>
 /// Интерфейс, всплывающие окна и тд
 /// </summary>
-public class HUD : StaticInstance<HUD>
-{
-    public static event Action<bool> EventRegionPanelOpen;
-    
-
+public class HUD : StaticInstance<HUD> {
     [SerializeField] private Messanger _messanger;
     [SerializeField] private Transform _panelsParent;
 
-    [Header("Region Details")]
-    [SerializeField] private RegionDetails _regionDetails;        //окно с информацией о выбранном регионе
     [SerializeField] private Migration _migration;
 
     public bool IsShowMigration = true;
+
     public Transform PanelsParent => _panelsParent;
 
     protected override void Awake() {
@@ -31,11 +25,5 @@ public class HUD : StaticInstance<HUD>
     public void ShowMigration() {
         if (!IsShowMigration) return;
         //migration
-    }
-
-    public void ShowRegionDetails(int region) {
-        _regionDetails.RegionID = region;
-        _regionDetails.gameObject.SetActive(true);
-        EventRegionPanelOpen?.Invoke(true);
     }
 }
