@@ -20,6 +20,8 @@ namespace Gameplay.Scenarios.Events.Global {
         [Header("Points")]
         [SerializeField, Min(0)] private int breakPoints;
         [SerializeField, Min(0)] private int speedUpPoints;
+        [Header("Parametrs")]
+        [SerializeField] private int _minPopulation = 210;
 
         private CivPiece _fromPiece;
         private CivPiece _toPiece;
@@ -60,6 +62,9 @@ namespace Gameplay.Scenarios.Events.Global {
         public void TryMigration(CivPiece civPiece) {
             if (_migrations.ContainsKey(civPiece.Region.Id)) return;
 
+            if (civPiece.Population.Value < _minPopulation)
+                return;
+
             TM_Region curRegion = civPiece.Region;
             List<Country> neighbourRegions = WMSK.CountryNeighbours(curRegion.Id);
             if (neighbourRegions.Count == 0) return;
@@ -75,7 +80,7 @@ namespace Gameplay.Scenarios.Events.Global {
                 TM_Region neighbourRegion = Map.GetRegionBywmskId(regionID);
                 if (neighbourRegion.Fauna["Fauna"] > 0) {
                     allNeighbourRegionsList.Add(neighbourRegion);
-                    if (neighbourRegion.Fauna["Fauna"] > curRegion.Fauna["Fauna"]) {
+                    if (neighbourRegion.Population == 0) {
                         targetList.Add(neighbourRegion);
                     }
                 }
@@ -84,8 +89,7 @@ namespace Gameplay.Scenarios.Events.Global {
             if (targetList.Count > 0) {
                 targetRegion = GetMax(targetList, (TM_Region region) => region.Fauna["Fauna"]);
             } else if (allNeighbourRegionsList.Count > 0) {
-                System.Random r = new System.Random();
-                targetRegion = allNeighbourRegionsList[r.Next(0, allNeighbourRegionsList.Count)];
+                targetRegion = GetMax(allNeighbourRegionsList, (TM_Region region) => region.Fauna["Fauna"]);
             } else return;
 
             if (!civPiece.Civilization.Pieces.ContainsKey(civPiece.Region.Id))
@@ -112,11 +116,11 @@ namespace Gameplay.Scenarios.Events.Global {
             _migrations[from.Id] = newMigration;
 
             if (!to.CivsList.Contains(civ.Name)) {
-                newMigration.CurPopulations += newMigration.StepPopulations < Demography.data.MinPiecePopulation ? Demography.data.MinPiecePopulation + 1 : newMigration.StepPopulations;
+                newMigration.CurPopulations += newMigration.StepPopulations < Demography.data.MinPiecePopulation * 2 ? Demography.data.MinPiecePopulation * 2 + 1 : newMigration.StepPopulations;
                 civ.AddPiece(to.Id, newMigration.CurPopulations);
                 to.AddCivilization(civ.Name);
             }
-
+            
             newMigration.CivFrom = civ.Pieces[from.Id];
             newMigration.CivTo = civ.Pieces[to.Id];
             _fromPiece = newMigration.CivFrom;
