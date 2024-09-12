@@ -88,6 +88,9 @@ public class Civilization {
     /// уберает цивилизацию из этого региона
     /// </summary>
     public void RemovePiece(int region) {
+        if (!Pieces.ContainsKey(region)) 
+            return;
+
         onRemovePiece?.Invoke(Pieces[region]);
         Pieces[region].Region.CivsList.Remove(Name);
         Pieces.Remove(region);
