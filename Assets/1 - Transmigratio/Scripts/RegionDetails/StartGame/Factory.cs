@@ -19,7 +19,7 @@ namespace RegionDetails.StartGame {
         public static Element Create(Element prefab, Transform parent, string paramiter, string name, float value) {
             Element element = Object.Instantiate(prefab, parent);
             element.Label = name;
-            element.Percent = value;
+            element.SetValue(value);
             element.Color = Transmigratio.Instance.TMDB.GetParamiterColor(paramiter, name);
             return element;
         }

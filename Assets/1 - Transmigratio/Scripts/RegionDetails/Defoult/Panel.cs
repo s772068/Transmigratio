@@ -1,8 +1,6 @@
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
-using System;
 using TMPro;
-using WorldMapStrategyKit;
 
 namespace RegionDetails.Defoult {
     public class Panel : UI.Panel {

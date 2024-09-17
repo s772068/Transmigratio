@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Device;
 
 namespace UI.ScrollVew {
     public class Scroller : MonoBehaviour {
@@ -8,6 +9,7 @@ namespace UI.ScrollVew {
         public Scrollbar scrollbar;
         [SerializeField] private protected float timeToAlignment;
         [SerializeField] private protected List<Element> elements;
+        [SerializeField] private protected VerticalLayoutGroup layoutGroup;
 
         private protected int _selectedIndex;
 
