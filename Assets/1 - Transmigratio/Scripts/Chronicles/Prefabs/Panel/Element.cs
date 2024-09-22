@@ -17,7 +17,8 @@ namespace Chronicles.Prefabs.Panel {
         
         public Action<Data.Panel.Element> onClick;
 
-        public Data.Panel.Element Data { set {
+        public Data.Panel.Element Data { 
+            set {
                 _data = value;
                 textEventName.text = value.EventName;
                 textRegion.text = Transmigratio.Instance.TMDB.map.AllRegions[value.RegionID].Name;

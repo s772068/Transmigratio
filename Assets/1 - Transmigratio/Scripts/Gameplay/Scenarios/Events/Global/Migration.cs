@@ -125,7 +125,8 @@ namespace Gameplay.Scenarios.Events.Global {
             newMigration.CivTo = civ.Pieces[to.Id];
             _fromPiece = newMigration.CivFrom;
             _toPiece = newMigration.CivTo;
-            ChroniclesController.AddActive(Name, from.Id, OpenPanel);
+            ChroniclesController.AddActive(Name, from.Id, OpenPanel, 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = newMigration.CivFrom.Region.Name, RegionSecond = newMigration.CivTo.Region.Name, Count = newMigration.CurPopulations });
 
             if (!AutoChoice)
             {
@@ -272,7 +273,8 @@ namespace Gameplay.Scenarios.Events.Global {
             int fromID = piece.Region.Id;
             MigrationData data = _migrations[piece.Region.Id];
             piece.Population.Value += (data.FullPopulations - data.CurPopulations) >= 0 ? data.FullPopulations - data.CurPopulations : 0;
-            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "Break");
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "Break", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = data.From.Name, RegionSecond = data.To.Name, Count = data.FullPopulations - data.CurPopulations });
             RemoveMigration(fromID);
         }
 
@@ -280,7 +282,10 @@ namespace Gameplay.Scenarios.Events.Global {
             if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            ChroniclesController.AddPassive(Name, piece.RegionID, panelSprite, "Nothing");
+            MigrationData data = _migrations[piece.Region.Id];
+
+            ChroniclesController.AddPassive(Name, piece.RegionID, panelSprite, "Nothing",
+                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = data.From.Name, RegionSecond = data.To.Name, Count = _migrations[piece.Region.Id].FullPopulations });
             DestroyMarker(piece.Region.Id);
             return true;
         }
@@ -290,9 +295,13 @@ namespace Gameplay.Scenarios.Events.Global {
                 return false;
 
             int fromID = piece.Region.Id;
-            _migrations[fromID].StepPopulations *= 2;
+            MigrationData data = _migrations[piece.Region.Id];
+            data.StepPopulations *= 2;
+
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "SpeedUp", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = data.From.Name, RegionSecond = data.To.Name, Count = _migrations[fromID].FullPopulations });
+            
             DestroyMarker(fromID);
-            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "SpeedUp");
             return true;
         }
 

@@ -42,7 +42,8 @@ namespace Gameplay.Scenarios.Events.StateMachines {
             if (!_useIntervention(interventionPoints(_piece)))
                 return false;
 
-            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "CalmVolcano");
+            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "CalmVolcano", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { Count = (int)Math.Abs(piece.PopulationGrow.value) });
             EndEvent();
             return true;
         }
@@ -51,19 +52,23 @@ namespace Gameplay.Scenarios.Events.StateMachines {
             if (!_useIntervention(interventionPoints(_piece)))
                 return false;
 
-            _piece.Population.Value -= (int) (_piece.Population.Value * fullPercentFood * partPercentPopulation);
+            int dead = (int)(_piece.Population.Value * fullPercentFood * partPercentPopulation);
+            _piece.Population.Value -= dead;
             _piece.ReserveFood.value -= _piece.ReserveFood.value * fullPercentFood * partPercentFood;
             Global.Migration.OnMigration(_piece);
-            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "ReduceLosses");
+            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "ReduceLosses", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { Count = dead });
             EndEvent();
             return true;
         }
 
         public void ActivateVolcano() {
-            _piece.Population.Value -= (int) (_piece.Population.Value * fullPercentFood);
+            int dead = (int)(_piece.Population.Value * fullPercentFood);
+            _piece.Population.Value -= dead;
             _piece.ReserveFood.value -= _piece.ReserveFood.value * fullPercentFood;
             Global.Migration.OnMigration(_piece);
-            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "ActivateVolcano");
+            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "ActivateVolcano", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { Count = dead });
             EndEvent();
         }
 
@@ -71,7 +76,7 @@ namespace Gameplay.Scenarios.Events.StateMachines {
             if (!_useIntervention(interventionPoints(_piece)))
                 return false;
 
-            ChroniclesController.AddPassive(Name, _piece.RegionID, panelSprite, "Nothing");
+            ActivateVolcano();
             return true;
         }
 

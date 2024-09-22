@@ -1,18 +1,25 @@
+using System;
 using UnityEngine;
 
 namespace Chronicles.Data.Panel {
     public struct Element {
         public Sprite Sprite;
-        public CivPiece Piece;
         public string EventName;
-        public string DescriptionName;
+        public string Desidion;
         public string DesidionName;
         public string ResultName;
         public int RegionID;
         public int StartYear;
         public bool IsActive;
 
-        public int StartPop;
-        public int EndPop;
+        public LocalVariablesChronicles LocalVariables;
+    }
+
+    [Serializable]
+    public struct LocalVariablesChronicles
+    {
+        public string RegionFirst;
+        public string RegionSecond;
+        public int Count;
     }
 }

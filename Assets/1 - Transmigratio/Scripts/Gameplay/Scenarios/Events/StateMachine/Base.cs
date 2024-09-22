@@ -39,7 +39,7 @@ namespace Gameplay.Scenarios.Events.StateMachines {
             if (civilizations.Count == 0) return;
             _piece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
 
-            ChroniclesController.AddActive(Name, _piece.RegionID, OnClickMarker);
+            ChroniclesController.AddActive(Name, _piece.RegionID, OnClickMarker, new Chronicles.Data.Panel.LocalVariablesChronicles { Count = 0 });
 
             if (!AutoChoice) {
                 CreateMarker();
