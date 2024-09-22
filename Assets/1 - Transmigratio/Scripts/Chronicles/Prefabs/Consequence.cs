@@ -13,7 +13,7 @@ namespace Chronicles.Prefabs {
         public void Init(Data.Panel.Element data) {
             image.sprite = data.Sprite;
             _title.text = data.EventName;
-            _description.SetEntry(data.DescriptionName);
+            _description.SetEntry(data.Desidion);
             _result.text = $"{Localization.Load("Chronicles", "Desidion")}{data.DesidionName}\n {Localization.Load("Chronicles", "Result")}{data.ResultName}";
         }
     }
