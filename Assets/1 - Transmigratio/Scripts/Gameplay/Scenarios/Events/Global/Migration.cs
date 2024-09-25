@@ -128,10 +128,11 @@ namespace Gameplay.Scenarios.Events.Global {
             ChroniclesController.AddActive(Name, from.Id, OpenPanel, 
                 new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = newMigration.CivFrom.Region.Name, RegionSecond = newMigration.CivTo.Region.Name, Count = newMigration.CurPopulations });
 
+            newMigration.CivFrom.AddEvent(this);
+            newMigration.CivTo.AddEvent(this);
+
             if (!AutoChoice)
             {
-                newMigration.CivFrom.AddEvent(this);
-                newMigration.CivTo.AddEvent(this);
                 OpenPanel(newMigration.CivFrom);
             }
             else
@@ -139,7 +140,10 @@ namespace Gameplay.Scenarios.Events.Global {
                 foreach (var autochoice in Events.AutoChoice.Events [this])
                 {
                     if (AutoChoice && autochoice.CostFunc(_fromPiece) <= MaxAutoInterventionPoints)
-                        autochoice.ActionClick?.Invoke(newMigration.CivFrom, autochoice.CostFunc);
+                    {
+                        if (autochoice.ActionClick.Invoke(newMigration.CivFrom, autochoice.CostFunc))
+                            break;
+                    }
                 }
             }
         }

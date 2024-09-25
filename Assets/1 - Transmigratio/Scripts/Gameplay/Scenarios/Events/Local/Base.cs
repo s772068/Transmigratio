@@ -18,9 +18,10 @@ namespace Gameplay.Scenarios.Events.Local {
             if (pieces.Contains(piece)) return;
 
             pieces.Add(piece);
+            piece.AddEvent(this);
+            CreateMarker(piece);
+
             if (!AutoChoice) {
-                piece.AddEvent(this);
-                CreateMarker(piece);
                 OpenPanel(piece);
             }
             else
@@ -28,7 +29,10 @@ namespace Gameplay.Scenarios.Events.Local {
                 foreach (var autochoice in Events.AutoChoice.Events[this])
                 {
                     if (AutoChoice && autochoice.CostFunc(piece) <= MaxAutoInterventionPoints)
-                        autochoice.ActionClick?.Invoke(piece, autochoice.CostFunc);
+                    {
+                        if (autochoice.ActionClick.Invoke(piece, autochoice.CostFunc))
+                            break;
+                    }
                 }
             }
         }
