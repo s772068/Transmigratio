@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-8861445682108839664
+--- !u!21 &-1273925916574027576
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 1
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 994fe49562c73914d96c941905c92f01, type: 3}
+        m_Texture: {fileID: 2800000, guid: ae35e368b0004ff4cafc42b266daaef6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -53,8 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
   m_Name: Icons
   m_EditorClassIdentifier: 
-  hashCode: 83117176
-  material: {fileID: -8861445682108839664}
+  hashCode: -1552100534
+  material: {fileID: -1273925916574027576}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
@@ -79,7 +79,7 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 0
     m_TabWidth: 0
-  spriteSheet: {fileID: 2800000, guid: 994fe49562c73914d96c941905c92f01, type: 3}
+  spriteSheet: {fileID: 2800000, guid: ae35e368b0004ff4cafc42b266daaef6, type: 3}
   m_SpriteCharacterTable:
   - m_ElementType: 2
     m_Unicode: 65534
@@ -99,6 +99,24 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: Population
     m_HashCode: 533316299
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 3
+    m_Scale: 3
+    m_Name: Government
+    m_HashCode: 468230709
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 4
+    m_Scale: 3
+    m_Name: ProdMode
+    m_HashCode: 992649418
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 5
+    m_Scale: 3
+    m_Name: EcoCulture
+    m_HashCode: 332534053
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -109,13 +127,13 @@ MonoBehaviour:
       m_HorizontalAdvance: 69
     m_GlyphRect:
       m_X: 22
-      m_Y: 25
+      m_Y: 99
       m_Width: 69
       m_Height: 62
     m_Scale: 2
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: 1281354880, guid: 994fe49562c73914d96c941905c92f01, type: 3}
+    sprite: {fileID: 1155075418, guid: ae35e368b0004ff4cafc42b266daaef6, type: 3}
   - m_Index: 1
     m_Metrics:
       m_Width: 72
@@ -125,13 +143,13 @@ MonoBehaviour:
       m_HorizontalAdvance: 72
     m_GlyphRect:
       m_X: 106
-      m_Y: 22
+      m_Y: 96
       m_Width: 72
       m_Height: 66
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: -383795163, guid: 994fe49562c73914d96c941905c92f01, type: 3}
+    sprite: {fileID: -2100095403, guid: ae35e368b0004ff4cafc42b266daaef6, type: 3}
   - m_Index: 2
     m_Metrics:
       m_Width: 70
@@ -140,13 +158,61 @@ MonoBehaviour:
       m_HorizontalBearingY: 47.2
       m_HorizontalAdvance: 70
     m_GlyphRect:
-      m_X: 193
-      m_Y: 19
-      m_Width: 70
+      m_X: 192
+      m_Y: 93
+      m_Width: 71
       m_Height: 72
     m_Scale: 2
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: 496089215, guid: 994fe49562c73914d96c941905c92f01, type: 3}
+    sprite: {fileID: 1862708005, guid: ae35e368b0004ff4cafc42b266daaef6, type: 3}
+  - m_Index: 3
+    m_Metrics:
+      m_Width: 68
+      m_Height: 70
+      m_HorizontalBearingX: -34
+      m_HorizontalBearingY: 35
+      m_HorizontalAdvance: 68
+    m_GlyphRect:
+      m_X: 22
+      m_Y: 15
+      m_Width: 68
+      m_Height: 70
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 983008634, guid: ae35e368b0004ff4cafc42b266daaef6, type: 3}
+  - m_Index: 4
+    m_Metrics:
+      m_Width: 74
+      m_Height: 70
+      m_HorizontalBearingX: -37
+      m_HorizontalBearingY: 35
+      m_HorizontalAdvance: 74
+    m_GlyphRect:
+      m_X: 105
+      m_Y: 15
+      m_Width: 74
+      m_Height: 70
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 1974734906, guid: ae35e368b0004ff4cafc42b266daaef6, type: 3}
+  - m_Index: 5
+    m_Metrics:
+      m_Width: 80
+      m_Height: 71
+      m_HorizontalBearingX: -40
+      m_HorizontalBearingY: 35.5
+      m_HorizontalAdvance: 80
+    m_GlyphRect:
+      m_X: 188
+      m_Y: 15
+      m_Width: 80
+      m_Height: 71
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -169696963, guid: ae35e368b0004ff4cafc42b266daaef6, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

@@ -15,7 +15,7 @@ namespace UI {
         private void Start() {
             for (int i = 0; i < buttons.Count; ++i) {
                 buttons[i].Index = i;
-                buttons[i].onUnselect.AddListener(Select);
+                buttons[i].onSelect.AddListener(Select);
             }
 
             if (_waitGameStart) {

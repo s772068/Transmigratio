@@ -8,10 +8,27 @@ namespace RegionDetails.Defoult.Paramiters {
         [SerializeField] private Element _paramiterPref;
         [SerializeField] private Transform _content;
         [SerializeField] private SerializedDictionary<string, Sprite> _elements;
-        
+
         private Dictionary<string, Element> _elementsDic = new();
         private Element _selectedElement;
+        private bool _isActive;
         
+        public bool IsActive {
+            get => _isActive;
+            set {
+                _isActive = value;
+                foreach(var pair in _elementsDic) {
+                    pair.Value.isActive = value;
+                }
+            }
+        }
+
+        public void SetActiveParamiter(string paramiter, bool isActive) {
+            if (paramiter == "All") IsActive = isActive;
+            else _elementsDic[paramiter].isActive = isActive;
+        }
+
+
         public Action<string> onSelect;
 
         private void Awake() {
@@ -26,7 +43,7 @@ namespace RegionDetails.Defoult.Paramiters {
             _elementsDic[name] = element;
         }
 
-        private void OnSelect(string name) {
+        public void OnSelect(string name) {
             _selectedElement?.Select(false);
             _selectedElement = _elementsDic[name];
             onSelect?.Invoke(name);
