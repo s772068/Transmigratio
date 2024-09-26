@@ -41,6 +41,8 @@ namespace Layers {
 
         private void Awake() {
             Tutorial.OnShowTutorial += ShowTutorial;
+            RegionDetails.Defoult.Panel.onClose += (bool b) => ColorBySelectedElement();
+            RegionDetails.StartGame.Panel.onClose += ColorBySelectedElement;
         }
 
         private protected override void OnEnable() {
@@ -73,7 +75,7 @@ namespace Layers {
 
         public void Open() {
             gameObject.SetActive(true);
-            SelectElement();
+            ColorBySelectedElement();
             _gradient.DOPause();
             _scrollView.DOPause();
             _gradient.DOFade(1, 1);
@@ -150,7 +152,7 @@ namespace Layers {
             return default;
         }
 
-        private protected override void SelectElement() {
+        private protected override void ColorBySelectedElement() {
             switch (GetSelectedElement<LayerElement>().index) {
                 case 0: PaintByName(_terrain, (int i) => GetRegion(i).Terrain.GetMax().key); break;
                 case 1: PaintByName(_climate, (int i) => GetRegion(i).Climate.GetMax().key); break;

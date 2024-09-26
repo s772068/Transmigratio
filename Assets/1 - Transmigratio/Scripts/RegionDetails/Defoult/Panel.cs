@@ -21,17 +21,7 @@ namespace RegionDetails.Defoult {
         private string _paramiter;
         private string _element;
 
-        public static event Action<bool> onCloseRegionDetails;
-
-        public void SetActiveParamiter(string paramiter) {
-            _paramiters.SetActiveParamiter(paramiter, true);
-        }
-        public bool IsActiveParamiters {
-            set => _paramiters.IsActive = value;
-        }
-        public bool IsActiveElements {
-            set => _elements.IsActive = value;
-        }
+        public static event Action<bool> onClose;
 
         private void Awake() {
             Tutorial.OnShowTutorial += ShowTutorial;
@@ -41,12 +31,11 @@ namespace RegionDetails.Defoult {
 
         private void Start() {
             _region.text = Transmigratio.Instance.TMDB.map.AllRegions[MapData.RegionID].Name;
-            IsActiveParamiters = true;
         }
 
         private void ShowTutorial(string tutName) {
             if (tutName == "RegionDetails") {
-                IsActiveParamiters = false;
+                Debug.Log("Test RegionDetails");
                 _tutorial?.SetActive(true);
             }
         }
@@ -89,7 +78,7 @@ namespace RegionDetails.Defoult {
 
         public void Close() {
             MapData.WMSK.ToggleCountrySurface(MapData.RegionID, true, Color.clear);
-            onCloseRegionDetails?.Invoke(true);
+            onClose?.Invoke(true);
             Destroy(gameObject);
         }
     }

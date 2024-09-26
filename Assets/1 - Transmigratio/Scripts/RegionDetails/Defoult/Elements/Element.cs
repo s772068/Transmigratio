@@ -8,7 +8,6 @@ namespace RegionDetails.Defoult.Elements {
 
         public int Index { private get; set; }
         public bool IsSelectable { private get; set; }
-        public bool IsActive { get; set; }
 
         private bool _isSelected;
 
@@ -22,7 +21,6 @@ namespace RegionDetails.Defoult.Elements {
         }
 
         public void OnPointerClick(PointerEventData eventData) {
-            if (!IsActive) return;
             if (!IsSelectable) return;
             Select(true);
         }

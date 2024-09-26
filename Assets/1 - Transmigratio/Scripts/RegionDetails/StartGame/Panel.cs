@@ -17,6 +17,7 @@ namespace RegionDetails.StartGame {
         private List<Element> _elements = new();
 
         public static event Action onStartGame;
+        public static event Action onClose;
 
         private void Awake() {
             Tutorial.OnShowTutorial += ShowTutorial;
@@ -49,6 +50,7 @@ namespace RegionDetails.StartGame {
 
         public void Close() {
             MapData.WMSK.ToggleCountrySurface(MapData.RegionID, true, Color.clear);
+            onClose?.Invoke();
             Destroy(gameObject);
         }
 

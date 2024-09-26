@@ -11,23 +11,6 @@ namespace RegionDetails.Defoult.Paramiters {
 
         private Dictionary<string, Element> _elementsDic = new();
         private Element _selectedElement;
-        private bool _isActive;
-        
-        public bool IsActive {
-            get => _isActive;
-            set {
-                _isActive = value;
-                foreach(var pair in _elementsDic) {
-                    pair.Value.isActive = value;
-                }
-            }
-        }
-
-        public void SetActiveParamiter(string paramiter, bool isActive) {
-            if (paramiter == "All") IsActive = isActive;
-            else _elementsDic[paramiter].isActive = isActive;
-        }
-
 
         public Action<string> onSelect;
 

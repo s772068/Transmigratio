@@ -9,7 +9,6 @@ namespace RegionDetails.Defoult.Paramiters {
         [SerializeField] private Image _pictogram;
 
         private bool _isSelected;
-        public bool isActive;
 
         public Action<string> onSelect;
 
@@ -24,7 +23,6 @@ namespace RegionDetails.Defoult.Paramiters {
         }
 
         public void OnPointerClick(PointerEventData eventData) {
-            if (!isActive) return;
             Select(true);
         }
     }

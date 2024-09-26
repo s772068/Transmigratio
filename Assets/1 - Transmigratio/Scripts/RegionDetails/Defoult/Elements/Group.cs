@@ -9,20 +9,8 @@ namespace RegionDetails.Defoult.Elements {
         [SerializeField] private Element _elementPref;
         [SerializeField] private Transform _content;
 
-
         private List<Element> _elements = new();
         private Element _selectedElement;
-        private bool _isActive;
-
-        public bool IsActive {
-            get => _isActive;
-            set {
-                _isActive = value;
-                for (int i = 0; i < _elements.Count; ++i) {
-                    _elements[i].IsActive = value;
-                }
-            }
-        }
 
         public Action<string> onSelect;
 
@@ -47,7 +35,6 @@ namespace RegionDetails.Defoult.Elements {
                 Element element = Factory.Create(_elementPref, _content, _elements.Count, pair.Key, pair.Value, paramiter != "Civilizations");
                 element.IsSelectable = IsSelectable;
                 element.onSelect = OnSelect;
-                element.IsActive = _isActive;
                 _elements.Add(element);
             }
         }

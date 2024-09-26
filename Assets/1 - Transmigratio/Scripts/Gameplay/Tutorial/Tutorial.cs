@@ -63,7 +63,7 @@ public class Tutorial : MonoBehaviour {
     private void OnEnable() {
         RegionDetails.Controller.onOpenStartRegionPanel += OpenStartRegionDetails;
         RegionDetails.Controller.onOpenRegionPanel += OpenRegionDetails;
-        RegionDetails.Defoult.Panel.onCloseRegionDetails += TutorialByHUD;
+        RegionDetails.Defoult.Panel.onClose += TutorialByHUD;
         Gameplay.Scenarios.Events.AutoChoicePanel.onOpen += TutorialByAutoChoice;
         Layers.Panel.onOpen += TutorialByLayers;
         // EventPanel.EventPanelOpen += GameEvent;
@@ -73,7 +73,7 @@ public class Tutorial : MonoBehaviour {
     private void OnDisable() {
         RegionDetails.Controller.onOpenStartRegionPanel -= OpenStartRegionDetails;
         RegionDetails.Controller.onOpenRegionPanel -= OpenRegionDetails;
-        RegionDetails.Defoult.Panel.onCloseRegionDetails -= TutorialByHUD;
+        RegionDetails.Defoult.Panel.onClose -= TutorialByHUD;
         Gameplay.Scenarios.Events.AutoChoicePanel.onOpen -= TutorialByAutoChoice;
         Layers.Panel.onOpen -= TutorialByLayers;
         // EventPanel.EventPanelOpen -= GameEvent;
