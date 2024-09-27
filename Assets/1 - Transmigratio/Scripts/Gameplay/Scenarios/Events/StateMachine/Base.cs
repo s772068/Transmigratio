@@ -38,7 +38,7 @@ namespace Gameplay.Scenarios.Events.StateMachines {
             Random rand = new();
             var civilizations = Transmigratio.Instance.TMDB.humanity.Civilizations;
             if (civilizations.Count == 0) return;
-            _eventPiece = civilizations.ElementAt(rand.Next(0, civilizations.Count)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count)).Value;
+            _eventPiece = civilizations.ElementAt(rand.Next(0, civilizations.Count - 1)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count - 1)).Value;
 
             ChroniclesController.AddActive(Name, _eventPiece.RegionID, OnClickMarker, new Chronicles.Data.Panel.LocalVariablesChronicles { Count = 0 });
 

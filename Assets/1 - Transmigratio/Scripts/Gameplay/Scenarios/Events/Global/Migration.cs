@@ -54,8 +54,8 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         private protected override void InitDesidions() {
-            AddDesidion(Break, Local("Break"), (piece) => breakPoints);
             AddDesidion(Nothing, Local("Nothing"), (piece) => 0);
+            AddDesidion(Break, Local("Break"), (piece) => breakPoints);
             AddDesidion(SpeedUp, Local("SpeedUp"), (piece) => speedUpPoints);
         }
 
