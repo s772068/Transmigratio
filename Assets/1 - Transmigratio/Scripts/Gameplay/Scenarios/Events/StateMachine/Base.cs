@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using WorldMapStrategyKit;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace Gameplay.Scenarios.Events.StateMachines {
     public abstract class Base : Events.Base {
@@ -37,8 +38,18 @@ namespace Gameplay.Scenarios.Events.StateMachines {
         public void CreateEvent() {
             Random rand = new();
             var civilizations = Transmigratio.Instance.TMDB.humanity.Civilizations;
-            if (civilizations.Count == 0) return;
-            _eventPiece = civilizations.ElementAt(rand.Next(0, civilizations.Count - 1)).Value.Pieces.ElementAt(rand.Next(0, civilizations.Count - 1)).Value;
+            List<Civilization> civs = new();
+
+            foreach(var emptyCiv in civilizations)
+            {
+                if (emptyCiv.Value.Pieces.Count > 0)
+                    civs.Add(emptyCiv.Value);
+            }
+
+            if (civs.Count <= 0) return;
+
+            Civilization civ = civs.ElementAt(rand.Next(0, civs.Count - 1));
+            _eventPiece = civ.Pieces.ElementAt(rand.Next(0, civ.Pieces.Count - 1)).Value;
 
             ChroniclesController.AddActive(Name, _eventPiece.RegionID, OnClickMarker, new Chronicles.Data.Panel.LocalVariablesChronicles { Count = 0 });
 

@@ -101,8 +101,8 @@ namespace Gameplay.Scenarios.Events.Global {
         private void AddMigration(TM_Region from, TM_Region to, Civilization civ) {
             MigrationData newMigration = new();
 
-            Vector2 start = WMSK.countries[from.Id].center;
-            Vector2 end = WMSK.countries[to.Id].center;
+            Vector2 start = WMSK.countries[from.Id].centroid;
+            Vector2 end = WMSK.countries[to.Id].centroid;
 
             newMigration.From = from;
             newMigration.To = to;
@@ -255,8 +255,8 @@ namespace Gameplay.Scenarios.Events.Global {
 
         private protected override void CreateMarker(CivPiece piece = null) {
             if (!_migrations.ContainsKey(piece.RegionID)) return;
-            Vector2 start = WMSK.countries[piece.RegionID].center;
-            Vector2 end = WMSK.countries[_toPiece.RegionID].center;
+            Vector2 start = WMSK.countries[piece.RegionID].centroid;
+            Vector2 end = WMSK.countries[_toPiece.RegionID].centroid;
             CreateMarker(start, end);
         }
 
