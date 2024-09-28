@@ -34,8 +34,8 @@ namespace Gameplay.Scenarios.Events.StateMachines {
 
         private protected override void InitDesidions() {
             AddDesidion(Nothing, Local("Nothing"), (piece) => 0);
-            AddDesidion(CalmVolcano, Local("CalmVolcano"), (piece) => CalmVolcanoPoints);
-            AddDesidion(ReduceLosses, Local("ReduceLosses"), (piece) => reduceLossesPoints);
+            AddDesidion(CalmVolcano, Local("CalmVolcano"), (piece) => GetDesidionCost(CalmVolcanoPoints));
+            AddDesidion(ReduceLosses, Local("ReduceLosses"), (piece) => GetDesidionCost(reduceLossesPoints));
         }
 
         private bool CalmVolcano(CivPiece piece, Func<CivPiece, int> interventionPoints) {

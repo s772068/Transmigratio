@@ -55,8 +55,8 @@ namespace Gameplay.Scenarios.Events.Global {
 
         private protected override void InitDesidions() {
             AddDesidion(Nothing, Local("Nothing"), (piece) => 0);
-            AddDesidion(Break, Local("Break"), (piece) => breakPoints);
-            AddDesidion(SpeedUp, Local("SpeedUp"), (piece) => speedUpPoints);
+            AddDesidion(Break, Local("Break"), (piece) => GetDesidionCost(breakPoints));
+            AddDesidion(SpeedUp, Local("SpeedUp"), (piece) => GetDesidionCost(speedUpPoints));
         }
 
         public void TryMigration(CivPiece civPiece) {

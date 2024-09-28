@@ -46,8 +46,8 @@ namespace Gameplay.Scenarios.Events.Local {
 
         private protected override void InitDesidions() {
             AddDesidion(Nothing, Local("Nothing"), (piece) => 0);
-            AddDesidion(AddFood, Local("AddFood"), (piece) => AddFoodPoints(piece));
-            AddDesidion(AddSomeFood, Local("AddSomeFood"), (piece) => AddSomeFoodPoints(piece));
+            AddDesidion(AddFood, Local("AddFood"), (piece) => GetDesidionCost(AddFoodPoints(piece)));
+            AddDesidion(AddSomeFood, Local("AddSomeFood"), (piece) => GetDesidionCost(AddSomeFoodPoints(piece)));
         }
 
         private bool AddFood(CivPiece piece, Func<CivPiece, int> interventionPoints)

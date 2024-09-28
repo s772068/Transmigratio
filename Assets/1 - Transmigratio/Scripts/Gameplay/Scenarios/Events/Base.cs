@@ -16,6 +16,10 @@ namespace Gameplay.Scenarios.Events {
         [Header("Colors")]
         [SerializeField] private protected Color regionColor;
         [SerializeField] private protected Color civColor;
+        [Header("Desidions Settings")]
+        [SerializeField] protected int _minDesidionCost = 1;
+
+        public int GetDesidionCost(int cost) => cost >= _minDesidionCost ? cost : _minDesidionCost;
 
         private protected Desidion _activeDesidion => _desidions[_activateIndex];
         private protected List<Desidion> _desidions = new();
