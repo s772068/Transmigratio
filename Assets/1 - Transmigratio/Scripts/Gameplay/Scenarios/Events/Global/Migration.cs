@@ -60,7 +60,9 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         public void TryMigration(CivPiece civPiece) {
-            if (_migrations.ContainsKey(civPiece.Region.Id)) return;
+            if (_migrations.ContainsKey(civPiece.Region.Id))
+                if (_migrations[civPiece.Region.Id].Civilization == civPiece.Civilization) 
+                    return;
 
             if (civPiece.Population.Value < _minPopulation)
                 return;
@@ -75,7 +77,9 @@ namespace Gameplay.Scenarios.Events.Global {
 
             for (int i = 0; i < neighbourRegions.Count; ++i) {
                 int regionID = WMSK.GetCountryIndex(neighbourRegions[i].name);
-                if (_migrations.ContainsKey(regionID)) continue;
+                if (_migrations.ContainsKey(regionID)) 
+                    if (_migrations[regionID].Civilization == civPiece.Civilization) 
+                        continue;
 
                 TM_Region neighbourRegion = Map.GetRegionBywmskId(regionID);
                 if (neighbourRegion.Fauna["Fauna"] > 0) {
