@@ -39,7 +39,8 @@ namespace Layers {
         private int CountRegions => Map.AllRegions.Count;
         private TM_Region GetRegion(int index) => Map.AllRegions[index];
 
-        private void Awake() {
+        private protected override void Awake() {
+            base.Awake();
             Tutorial.OnShowTutorial += ShowTutorial;
             RegionDetails.Defoult.Panel.onClose += (bool b) => ColorBySelectedElement();
             RegionDetails.StartGame.Panel.onClose += ColorBySelectedElement;

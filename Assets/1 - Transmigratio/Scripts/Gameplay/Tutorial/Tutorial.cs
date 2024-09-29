@@ -23,8 +23,6 @@ public class Tutorial : MonoBehaviour {
     #endregion
 
     [SerializeField] private bool _suggestTutorial = true;
-    [SerializeField] private GameObject _zones;
-    [SerializeField] private SerializedDictionary<string, GameObject> _uiZones;
     [SerializeField] private TutorialSteps _steps;
     private bool _tutorialEnded = false;
     
@@ -82,7 +80,6 @@ public class Tutorial : MonoBehaviour {
 
     private void Start() {
         if (_suggestTutorial) {
-            ActivateZone(true);
             _welcome.SetActive(true);
             _steps += (int)TutorialSteps.Welcome;
         }
@@ -104,12 +101,12 @@ public class Tutorial : MonoBehaviour {
             _steps += (int)TutorialSteps.Goal;
         
         _gameGoal.SetActive(open);
-        ActivateZone(open);
     }
 
     public void OpenStartRegionDetails(bool open) {
         if (!_steps.HasFlag(TutorialSteps.StartRegionDetails)) {
             if(open) OnShowTutorial?.Invoke("StartRegionDetails");
+            _gameGoal.SetActive(false);
             _steps += (int) TutorialSteps.StartRegionDetails;
         }
     }
@@ -228,6 +225,4 @@ public class Tutorial : MonoBehaviour {
     //}
 
     public void Skip() => _tutorialEnded = true;
-
-    private void ActivateZone(bool status) => _zones.SetActive(status);
 }

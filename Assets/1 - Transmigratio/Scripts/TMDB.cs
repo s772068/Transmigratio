@@ -7,6 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TMDB", menuName = "ScriptableObjects/TMDB", order = 1)]
 public class TMDB : ScriptableObject {
     public int startAge;
+    public int maxPopulation;
     public Map map = new();
     public Humanity humanity = new();
     [SerializeField] private List<NewsSO> _news;

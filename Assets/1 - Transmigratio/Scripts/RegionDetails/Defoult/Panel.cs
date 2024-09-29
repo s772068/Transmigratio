@@ -35,8 +35,8 @@ namespace RegionDetails.Defoult {
 
         private void ShowTutorial(string tutName) {
             if (tutName == "RegionDetails") {
-                Debug.Log("Test RegionDetails");
                 _tutorial?.SetActive(true);
+                _elements?.gameObject.SetActive(false);
             }
         }
 

@@ -45,6 +45,7 @@ namespace RegionDetails.StartGame {
 
         public void StartGame() {
             onStartGame?.Invoke();
+            Transmigratio.Instance.StartGame();
             Destroy(gameObject);
         }
 
