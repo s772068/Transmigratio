@@ -2,6 +2,7 @@ using AYellowpaper.SerializedCollections;
 using UnityEngine;
 using System;
 using TMPro;
+using WorldMapStrategyKit;
 
 namespace RegionDetails.Defoult {
     public class Panel : UI.Panel {
@@ -9,7 +10,6 @@ namespace RegionDetails.Defoult {
         [SerializeField] private Paramiters.Group _paramiters;
         [SerializeField] private Elements.Group _elements;
         [SerializeField] private Transform _descriptionContent;
-        [SerializeField] private GameObject _tutorial;
 
         [Header("Prefabs")]
         [SerializeField] private Descriptions.Civilization _civDescriptionPref;
@@ -21,27 +21,13 @@ namespace RegionDetails.Defoult {
         private string _paramiter;
         private string _element;
 
-        public static event Action<bool> onClose;
-
-        private void Awake() {
-            Tutorial.OnShowTutorial += ShowTutorial;
+        private void Start() {
+            _region.text = Transmigratio.Instance.TMDB.map.AllRegions[MapData.RegionID].Name;
             _paramiters.onSelect = OnSelectParamiter;
             _elements.onSelect = OnSelectElement;
         }
 
-        private void Start() {
-            _region.text = Transmigratio.Instance.TMDB.map.AllRegions[MapData.RegionID].Name;
-        }
-
-        private void ShowTutorial(string tutName) {
-            if (tutName == "RegionDetails") {
-                _tutorial?.SetActive(true);
-                _elements?.gameObject.SetActive(false);
-            }
-        }
-
-
-        public void OnSelectParamiter(string paramiter) {
+        private void OnSelectParamiter(string paramiter) {
             _elements.Label = paramiter;
             _paramiter = paramiter;
             /// Избавится от этого костыля
@@ -49,7 +35,7 @@ namespace RegionDetails.Defoult {
             _description = null;
             _elements.IsSelectable = paramiter == "Government" ||
                paramiter == "EcoCulture" ||
-               paramiter == "ProdMode" ||
+               paramiter == "Prodmode" ||
                paramiter == "Civilizations";
             if (_paramiter != "Civilizations") {
                 _description = Factory.Create(_defDescriptionPref, _descriptionContent, Localization.Load(paramiter, $"{paramiter}Describe"));
@@ -58,7 +44,7 @@ namespace RegionDetails.Defoult {
             _elements.UpdateElements(paramiter);
         }
 
-        public void OnSelectElement(string element) {
+        private void OnSelectElement(string element) {
             _element = element;
             _description?.Destroy();
             if (_paramiter == "Civilizations") {
@@ -78,7 +64,6 @@ namespace RegionDetails.Defoult {
 
         public void Close() {
             MapData.WMSK.ToggleCountrySurface(MapData.RegionID, true, Color.clear);
-            onClose?.Invoke(true);
             Destroy(gameObject);
         }
     }

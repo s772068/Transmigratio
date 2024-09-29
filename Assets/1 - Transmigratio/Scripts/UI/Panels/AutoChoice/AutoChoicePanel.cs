@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 using TMPro;
 using UI;
-using RegionDetails.Defoult.Tutorials;
 
 namespace Gameplay.Scenarios.Events {
     public class AutoChoicePanel : Panel {
@@ -25,22 +24,14 @@ namespace Gameplay.Scenarios.Events {
         [SerializeField] private Slider _slider;
         [SerializeField] private TMP_Text _pointsTMP;
         [SerializeField] private int _maxPoints = 100;
-        [SerializeField] private GameObject _tutorial;
-
         private int _curPoints = 0;
         private Dictionary<DragElement, Data.Desidion> _autoChoicePriority = new();
 
         public static event Action<Base, List<Data.Desidion>, bool> AutoChoiceUpdate;
         public static event Action<Base, bool> AutoChoiceModeUpdate;
-        public static event Action<bool> onOpen;
-
-        private void Awake() {
-            Tutorial.OnShowTutorial += ShowTutorial;
-        }
 
         private protected override void OnEnable() {
             base.OnEnable();
-            onOpen?.Invoke(true);
             AddChoiceElement();
             DragPanelControl.DragElementsSorted += OnPriorityUpdate;
             AutoChoiceElement.SelectElement += OnSelectEvent;
@@ -60,12 +51,6 @@ namespace Gameplay.Scenarios.Events {
             base.OnDisable();
             DragPanelControl.DragElementsSorted -= OnPriorityUpdate;
             AutoChoiceElement.SelectElement -= OnSelectEvent;
-        }
-
-        private void ShowTutorial(string tutName) {
-            if (tutName == "AutoChoice") {
-                _tutorial?.SetActive(true);
-            }
         }
 
         private void AddChoiceElement() {

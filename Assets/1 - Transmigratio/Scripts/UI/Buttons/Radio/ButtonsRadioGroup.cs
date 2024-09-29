@@ -15,10 +15,10 @@ namespace UI {
         private void Start() {
             for (int i = 0; i < buttons.Count; ++i) {
                 buttons[i].Index = i;
-                buttons[i].onSelect.AddListener(Select);
+                buttons[i].onUnselect.AddListener(Select);
             }
 
-            if (_waitGameStart && !Tutorial.isShow) {
+            if (_waitGameStart) {
                 foreach (var button in buttons) {
                     button.Deactivate();
                     button.IsInterectable = false;
@@ -32,7 +32,6 @@ namespace UI {
         }
 
         public void Select(int newActiveIndex) {
-            Debug.Log($"WaitGameStart: {_waitGameStart}");
             if (_waitGameStart)
                 return;
 
@@ -46,7 +45,6 @@ namespace UI {
             _waitGameStart = false;
             foreach (var button in buttons)
                 button.IsInterectable = true;
-            Debug.Log($"GameStarted: WaitGameStart: {_waitGameStart}");
         }
     }
 }

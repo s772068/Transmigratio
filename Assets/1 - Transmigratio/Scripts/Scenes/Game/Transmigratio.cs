@@ -22,8 +22,6 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
 
     public TMDB TMDB => _tmdb;
     public Intervention Intervention => _intervention;
-    public int MaxInterventionPoints => _intervetionPoints;
-
     public static event Action GameStarted;
 
     public TM_Region GetRegion(int index) => TMDB.map.AllRegions[index];

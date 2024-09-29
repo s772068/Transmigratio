@@ -7,7 +7,7 @@ namespace RegionDetails.Base {
         [SerializeField] private TMP_Text _label;
         [SerializeField] private TMP_Text _percent;
         [SerializeField] private Slider _slider;
-        
+
         public string Label {
             set {
                 _label.text = value;
@@ -15,9 +15,11 @@ namespace RegionDetails.Base {
             }
         }
 
-        public void SetValue(float value, bool isPercent = true) {
-            _percent.text = $"{(int) value}{(isPercent ? "%" : "")}";
-            _slider.value = value / 100f;
+        public float Percent {
+            set {
+                _percent.text = $"{(int)value}%";
+                _slider.value = value / 100f;
+            }
         }
 
         public void Destroy() {

@@ -29,21 +29,17 @@ namespace RegionDetails {
         }
 
         private void OpenPanel(int regionID) {
-            if (_isStartedGame) OpenDefoultPanel();
-            else                OpenStartPanel();
+            if (_isStartedGame)
+                Defoult.Factory.Create(_defPanel, transform);
+            else
+                OpenStartPanel();
         }
-
 
         private void OpenStartPanel() {
             __startPanel = StartGame.Factory.Create(_startPanel, transform);
             _closeBtn.gameObject.SetActive(true);
-            onOpenStartRegionPanel?.Invoke(true);
-            onClose = CloseStartPanel;
-        }
-
-        private void OpenDefoultPanel() {
-            Defoult.Factory.Create(_defPanel, transform);
             onOpenRegionPanel?.Invoke(true);
+            onClose = CloseStartPanel;
         }
 
         private void CloseStartPanel() {
@@ -55,7 +51,6 @@ namespace RegionDetails {
             __startPanel = null;
             _closeBtn.gameObject.SetActive(false);
             Defoult.Factory.Create(_defPanel, transform);
-            onOpenRegionPanel?.Invoke(true);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace RegionDetails.Defoult.Elements {
 
         public int Index { private get; set; }
         public bool IsSelectable { private get; set; }
-
         private bool _isSelected;
 
         public Action<int> onSelect;

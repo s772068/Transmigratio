@@ -8,10 +8,10 @@ namespace RegionDetails.Defoult.Paramiters {
         [SerializeField] private Element _paramiterPref;
         [SerializeField] private Transform _content;
         [SerializeField] private SerializedDictionary<string, Sprite> _elements;
-
+        
         private Dictionary<string, Element> _elementsDic = new();
         private Element _selectedElement;
-
+        
         public Action<string> onSelect;
 
         private void Awake() {
@@ -26,7 +26,7 @@ namespace RegionDetails.Defoult.Paramiters {
             _elementsDic[name] = element;
         }
 
-        public void OnSelect(string name) {
+        private void OnSelect(string name) {
             _selectedElement?.Select(false);
             _selectedElement = _elementsDic[name];
             onSelect?.Invoke(name);

@@ -11,27 +11,16 @@ namespace RegionDetails.StartGame {
         [SerializeField] private Element _elementPrefab;
         [SerializeField] private Transform _content;
         [SerializeField] private ButtonsRadioGroup selector;
-        [SerializeField] private GameObject _tutorial;
         [SerializeField] private EParamiter _paramiter;
 
         private List<Element> _elements = new();
 
         public static event Action onStartGame;
-        public static event Action onClose;
-
-        private void Awake() {
-            Tutorial.OnShowTutorial += ShowTutorial;
-        }
 
         private void Start() {
             _label.text = Transmigratio.Instance.TMDB.map.AllRegions[MapData.RegionID].Name;
             selector.Select((int)_paramiter);
             Click((int) _paramiter);
-        }
-
-        private void ShowTutorial(string tutName) {
-            if (tutName == "StartRegionDetails")
-                _tutorial?.SetActive(true);
         }
 
         public void Click(int paramiter) {
@@ -45,13 +34,11 @@ namespace RegionDetails.StartGame {
 
         public void StartGame() {
             onStartGame?.Invoke();
-            Transmigratio.Instance.StartGame();
             Destroy(gameObject);
         }
 
         public void Close() {
             MapData.WMSK.ToggleCountrySurface(MapData.RegionID, true, Color.clear);
-            onClose?.Invoke();
             Destroy(gameObject);
         }
 
