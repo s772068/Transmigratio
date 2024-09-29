@@ -31,7 +31,8 @@ namespace RegionDetails.Defoult.Elements {
         private void CreateElements(ref Dictionary<string, float> dic, string paramiter) {
             dic = Transmigratio.Instance.TMDB.GetParam(paramiter);
             foreach (var pair in dic) {
-                Element element = Factory.Create(_elementPref, _content, _elements.Count, pair.Key, pair.Value);
+                Debug.Log(paramiter);
+                Element element = Factory.Create(_elementPref, _content, _elements.Count, pair.Key, pair.Value, paramiter != "Civilizations");
                 element.IsSelectable = IsSelectable;
                 element.onSelect = OnSelect;
                 _elements.Add(element);
