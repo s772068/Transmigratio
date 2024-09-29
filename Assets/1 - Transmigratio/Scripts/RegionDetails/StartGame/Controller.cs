@@ -53,7 +53,9 @@ namespace RegionDetails {
         private void OnStartGame() {
             _isStartedGame = true;
             __startPanel = null;
-            OpenDefoultPanel();
+            _closeBtn.gameObject.SetActive(false);
+            Defoult.Factory.Create(_defPanel, transform);
+            onOpenRegionPanel?.Invoke(true);
         }
     }
 }

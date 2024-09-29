@@ -62,7 +62,9 @@ public class Paramiter {
     }
     public void Init(SerializedDictionary<string, ParamiterValue> quantities)
     {
-        this.quantities = quantities;
+        foreach (var pair in quantities) {
+            this.quantities[pair.Key] = new ParamiterValue(pair.Value.value);
+        }
     }
 
     public (string key, float value) GetMax() {

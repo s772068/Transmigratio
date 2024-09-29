@@ -10,31 +10,33 @@ namespace Chronicles {
         private List<Element> _activeEvents = new();
         private List<Element> _passiveEvents = new();
 
-        public void AddActive(string eventName, int regionID, Action<CivPiece> onClick) {
+        public void AddActive(string eventName, int regionID, Action<CivPiece> onClick, LocalVariablesChronicles variables) {
             _activeEvents.Add(new() {
                 IsActive = true,
                 EventName = eventName,
                 RegionID = regionID,
                 StartYear = Transmigratio.Instance.TMDB.Year,
+                LocalVariables = variables
             });
             UpdatePanel();
         }
 
-        public void AddPassive(string eventName, int regionID, Sprite sprite, string description) {
+        public void AddPassive(string eventName, int regionID, Sprite sprite, string desidion, LocalVariablesChronicles variables) {
             _passiveEvents.Add(new() {
                 IsActive = false,
                 EventName = eventName,
-                DescriptionName = description,
+                Desidion = desidion,
                 RegionID = regionID,
                 StartYear = Transmigratio.Instance.TMDB.Year,
                 Sprite = sprite,
+                LocalVariables  = variables
             });
             UpdatePanel();
         }
 
-        public void Deactivate(string eventName, int regionID, Sprite sprite, string description) {
+        public void Deactivate(string eventName, int regionID, Sprite sprite, string desidion, LocalVariablesChronicles variables) {
             Debug.Log("Deactivate");
-            AddPassive(eventName, regionID, sprite, description);
+            AddPassive(eventName, regionID, sprite, desidion, variables);
             RemoveElement(_activeEvents, eventName, regionID);
             UpdatePanel();
         }

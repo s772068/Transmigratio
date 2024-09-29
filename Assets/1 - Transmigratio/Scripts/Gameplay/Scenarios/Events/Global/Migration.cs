@@ -54,13 +54,15 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         private protected override void InitDesidions() {
-            AddDesidion(Break, Local("Break"), (piece) => breakPoints);
             AddDesidion(Nothing, Local("Nothing"), (piece) => 0);
-            AddDesidion(SpeedUp, Local("SpeedUp"), (piece) => speedUpPoints);
+            AddDesidion(Break, Local("Break"), (piece) => GetDesidionCost(breakPoints));
+            AddDesidion(SpeedUp, Local("SpeedUp"), (piece) => GetDesidionCost(speedUpPoints));
         }
 
         public void TryMigration(CivPiece civPiece) {
-            if (_migrations.ContainsKey(civPiece.Region.Id)) return;
+            if (_migrations.ContainsKey(civPiece.Region.Id))
+                if (_migrations[civPiece.Region.Id].Civilization == civPiece.Civilization) 
+                    return;
 
             if (civPiece.Population.Value < _minPopulation)
                 return;
@@ -75,7 +77,9 @@ namespace Gameplay.Scenarios.Events.Global {
 
             for (int i = 0; i < neighbourRegions.Count; ++i) {
                 int regionID = WMSK.GetCountryIndex(neighbourRegions[i].name);
-                if (_migrations.ContainsKey(regionID)) continue;
+                if (_migrations.ContainsKey(regionID)) 
+                    if (_migrations[regionID].Civilization == civPiece.Civilization) 
+                        continue;
 
                 TM_Region neighbourRegion = Map.GetRegionBywmskId(regionID);
                 if (neighbourRegion.Fauna["Fauna"] > 0) {
@@ -101,8 +105,8 @@ namespace Gameplay.Scenarios.Events.Global {
         private void AddMigration(TM_Region from, TM_Region to, Civilization civ) {
             MigrationData newMigration = new();
 
-            Vector2 start = WMSK.countries[from.Id].center;
-            Vector2 end = WMSK.countries[to.Id].center;
+            Vector2 start = WMSK.countries[from.Id].centroid;
+            Vector2 end = WMSK.countries[to.Id].centroid;
 
             newMigration.From = from;
             newMigration.To = to;
@@ -125,12 +129,14 @@ namespace Gameplay.Scenarios.Events.Global {
             newMigration.CivTo = civ.Pieces[to.Id];
             _fromPiece = newMigration.CivFrom;
             _toPiece = newMigration.CivTo;
-            ChroniclesController.AddActive(Name, from.Id, OpenPanel);
+            ChroniclesController.AddActive(Name, from.Id, OpenPanel, 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = newMigration.CivFrom.Region.Name, RegionSecond = newMigration.CivTo.Region.Name, Count = newMigration.CurPopulations });
+
+            newMigration.CivFrom.AddEvent(this);
+            newMigration.CivTo.AddEvent(this);
 
             if (!AutoChoice)
             {
-                newMigration.CivFrom.AddEvent(this);
-                newMigration.CivTo.AddEvent(this);
                 OpenPanel(newMigration.CivFrom);
             }
             else
@@ -138,7 +144,10 @@ namespace Gameplay.Scenarios.Events.Global {
                 foreach (var autochoice in Events.AutoChoice.Events [this])
                 {
                     if (AutoChoice && autochoice.CostFunc(_fromPiece) <= MaxAutoInterventionPoints)
-                        autochoice.ActionClick?.Invoke(newMigration.CivFrom, autochoice.CostFunc);
+                    {
+                        if (autochoice.ActionClick.Invoke(newMigration.CivFrom, autochoice.CostFunc))
+                            break;
+                    }
                 }
             }
         }
@@ -250,8 +259,8 @@ namespace Gameplay.Scenarios.Events.Global {
 
         private protected override void CreateMarker(CivPiece piece = null) {
             if (!_migrations.ContainsKey(piece.RegionID)) return;
-            Vector2 start = WMSK.countries[piece.RegionID].center;
-            Vector2 end = WMSK.countries[_toPiece.RegionID].center;
+            Vector2 start = WMSK.countries[piece.RegionID].centroid;
+            Vector2 end = WMSK.countries[_toPiece.RegionID].centroid;
             CreateMarker(start, end);
         }
 
@@ -272,7 +281,8 @@ namespace Gameplay.Scenarios.Events.Global {
             int fromID = piece.Region.Id;
             MigrationData data = _migrations[piece.Region.Id];
             piece.Population.Value += (data.FullPopulations - data.CurPopulations) >= 0 ? data.FullPopulations - data.CurPopulations : 0;
-            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "Break");
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "Break", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = data.From.Name, RegionSecond = data.To.Name, Count = data.FullPopulations - data.CurPopulations });
             RemoveMigration(fromID);
         }
 
@@ -280,7 +290,10 @@ namespace Gameplay.Scenarios.Events.Global {
             if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            ChroniclesController.AddPassive(Name, piece.RegionID, panelSprite, "Nothing");
+            MigrationData data = _migrations[piece.Region.Id];
+
+            ChroniclesController.AddPassive(Name, piece.RegionID, panelSprite, "Nothing",
+                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = data.From.Name, RegionSecond = data.To.Name, Count = _migrations[piece.Region.Id].FullPopulations });
             DestroyMarker(piece.Region.Id);
             return true;
         }
@@ -290,9 +303,13 @@ namespace Gameplay.Scenarios.Events.Global {
                 return false;
 
             int fromID = piece.Region.Id;
-            _migrations[fromID].StepPopulations *= 2;
+            MigrationData data = _migrations[piece.Region.Id];
+            data.StepPopulations *= 2;
+
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "SpeedUp", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = data.From.Name, RegionSecond = data.To.Name, Count = _migrations[fromID].FullPopulations });
+            
             DestroyMarker(fromID);
-            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "SpeedUp");
             return true;
         }
 

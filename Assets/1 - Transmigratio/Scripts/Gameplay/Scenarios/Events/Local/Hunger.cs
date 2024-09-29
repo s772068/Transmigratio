@@ -45,9 +45,9 @@ namespace Gameplay.Scenarios.Events.Local {
         }
 
         private protected override void InitDesidions() {
-            AddDesidion(AddFood, Local("AddFood"), (piece) => AddFoodPoints(piece));
-            AddDesidion(AddSomeFood, Local("AddSomeFood"), (piece) => AddSomeFoodPoints(piece));
             AddDesidion(Nothing, Local("Nothing"), (piece) => 0);
+            AddDesidion(AddFood, Local("AddFood"), (piece) => GetDesidionCost(AddFoodPoints(piece)));
+            AddDesidion(AddSomeFood, Local("AddSomeFood"), (piece) => GetDesidionCost(AddSomeFoodPoints(piece)));
         }
 
         private bool AddFood(CivPiece piece, Func<CivPiece, int> interventionPoints)
@@ -56,7 +56,8 @@ namespace Gameplay.Scenarios.Events.Local {
                 return false;
 
             piece.ReserveFood.value += piece.Population.Value / foodPerPerson;
-            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "AddFood");
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "AddFood", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { Count = (int)Math.Abs(piece.PopulationGrow.value) });
             RemoveEvent(piece);
             return true;
         }
@@ -67,7 +68,8 @@ namespace Gameplay.Scenarios.Events.Local {
                 return false;
 
             piece.ReserveFood.value += piece.Population.Value / foodPerPerson / 2;
-            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "AddSomeFood");
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "AddSomeFood", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { Count = (int)Math.Abs(piece.PopulationGrow.value) });
             RemoveEvent(piece);
             return true;
         }
@@ -76,7 +78,8 @@ namespace Gameplay.Scenarios.Events.Local {
             if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            ChroniclesController.AddPassive(Name, piece.RegionID, panelSprite, "Nothing");
+            ChroniclesController.AddPassive(Name, piece.RegionID, panelSprite, "Nothing", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { Count = (int)Math.Abs(piece.PopulationGrow.value) });
             RemoveEvent(piece);
             return true;
         }
