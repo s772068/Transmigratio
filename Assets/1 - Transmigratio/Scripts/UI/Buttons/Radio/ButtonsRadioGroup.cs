@@ -18,7 +18,7 @@ namespace UI {
                 buttons[i].onSelect.AddListener(Select);
             }
 
-            if (_waitGameStart) {
+            if (_waitGameStart && !Tutorial.isShow) {
                 foreach (var button in buttons) {
                     button.Deactivate();
                     button.IsInterectable = false;

@@ -26,7 +26,7 @@ public class Tutorial : MonoBehaviour {
     [SerializeField] private TutorialSteps _steps;
     private bool _tutorialEnded = false;
     
-    public static bool isShow;
+    public static bool isShow = false;
 
     public static Action<string> OnShowTutorial;
     
@@ -97,9 +97,10 @@ public class Tutorial : MonoBehaviour {
     public void GameGoal(bool open) {
         if (open && _steps.HasFlag(TutorialSteps.Goal))
             return;
-        else if (!open && !_steps.HasFlag(TutorialSteps.Goal))
+        else if (!open && !_steps.HasFlag(TutorialSteps.Goal)) {
             _steps += (int)TutorialSteps.Goal;
-        
+        }
+        isShow = true;
         _gameGoal.SetActive(open);
     }
 
