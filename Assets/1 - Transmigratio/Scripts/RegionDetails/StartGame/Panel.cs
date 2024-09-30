@@ -40,8 +40,16 @@ namespace RegionDetails.StartGame {
             UpdateElements();
         }
 
-        public void PrevRegion() => SelectRegion(MapData.RegionID - 1);
-        public void NextRegion() => SelectRegion(MapData.RegionID + 1);
+        public void PrevRegion() {
+            SelectRegion(MapData.RegionID > 0 ?
+                         MapData.RegionID - 1 :
+                         Transmigratio.Instance.TMDB.map.AllRegions.Count - 1);
+        }
+
+        public void NextRegion() {
+            SelectRegion(MapData.RegionID < Transmigratio.Instance.TMDB.map.AllRegions.Count - 1 ?
+                         MapData.RegionID + 1 : 0);
+        }
 
         public void StartGame() {
             onStartGame?.Invoke();
