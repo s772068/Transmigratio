@@ -25,8 +25,7 @@ namespace Gameplay.Scenarios.Events.Global {
 
         private CivPiece _fromPiece;
         private CivPiece _toPiece;
-        private Dictionary<int, MigrationData> _migrations = new();
-        private Dictionary<MigrationData, EventPanel> _eventPanels = new();
+        private Dictionary<string, MigrationData> _migrations = new();
 
         public static Action<CivPiece> OnMigration;
         public static Func<int> GetPopulation;
@@ -49,8 +48,8 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         private protected override void OpenPanel(CivPiece piece) {
-            _eventPanels.Add(_migrations[piece.Region.Id], PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, piece, panelSprite, Local("Title"),
-                                    Territory(piece), Local("Description"), _desidions));
+            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, piece, panelSprite, Local("Title"),
+                                    Territory(piece), Local("Description"), _desidions);
         }
 
         private protected override void InitDesidions() {
@@ -60,8 +59,7 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         public void TryMigration(CivPiece civPiece) {
-            if (_migrations.ContainsKey(civPiece.Region.Id))
-                if (_migrations[civPiece.Region.Id].Civilization == civPiece.Civilization) 
+            if (_migrations.ContainsKey($"{civPiece.Civilization.Name}-{civPiece.Region.Id}"))
                     return;
 
             if (civPiece.Population.Value < _minPopulation)
@@ -77,8 +75,7 @@ namespace Gameplay.Scenarios.Events.Global {
 
             for (int i = 0; i < neighbourRegions.Count; ++i) {
                 int regionID = WMSK.GetCountryIndex(neighbourRegions[i].name);
-                if (_migrations.ContainsKey(regionID)) 
-                    if (_migrations[regionID].Civilization == civPiece.Civilization) 
+                if (_migrations.ContainsKey($"{civPiece.Civilization.Name}-{regionID}")) 
                         continue;
 
                 TM_Region neighbourRegion = Map.GetRegionBywmskId(regionID);
@@ -108,16 +105,18 @@ namespace Gameplay.Scenarios.Events.Global {
             Vector2 start = WMSK.countries[from.Id].centroid;
             Vector2 end = WMSK.countries[to.Id].centroid;
 
+            string migrationId = $"{civ.Name}-{from.Id}"; 
+
             newMigration.From = from;
             newMigration.To = to;
             newMigration.Civilization = civ;
             newMigration.Line = CreateLine(start, end);
-            newMigration.Marker = CreateMarker(start, end);
+            newMigration.Marker = CreateMarker(start, end, civ.Pieces[from.Id]);
             newMigration.FullPopulations = (int) (civ.Pieces[from.Id].Population.Value / 100f * percentToMigration);
             newMigration.StepPopulations = (int) (newMigration.FullPopulations / 100f * stepPercent);
 
             civ.Pieces[from.Id].Population.Value -= newMigration.FullPopulations;
-            _migrations[from.Id] = newMigration;
+            _migrations[$"{civ.Name}-{from.Id}"] = newMigration;
 
             if (!to.CivsList.Contains(civ.Name)) {
                 newMigration.CurPopulations += newMigration.StepPopulations < Demography.data.MinPiecePopulation * 2 ? Demography.data.MinPiecePopulation * 2 + 1 : newMigration.StepPopulations;
@@ -163,12 +162,12 @@ namespace Gameplay.Scenarios.Events.Global {
             return lma;
         }
 
-        private IconMarker CreateMarker(Vector2 start, Vector2 end) {
+        private IconMarker CreateMarker(Vector2 start, Vector2 end, CivPiece piece) {
             Vector3 position = (start + end) / 2;
             IconMarker marker = Instantiate(markerPrefab);
             marker.Sprite = markerSprite;
             marker.onClick += OpenPanel;
-            //marker.Index = from;
+            marker.Piece = piece;
             position.z = -0.1f;
 
             MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
@@ -186,7 +185,7 @@ namespace Gameplay.Scenarios.Events.Global {
 
                     continue;
                 }
-                int curID = _migrations.Keys.ElementAt(i);
+                string curID = _migrations.Keys.ElementAt(i);
                 if (migration.TimerToStart < startTime) {
                     ++migration.TimerToStart;
                 } else {
@@ -223,45 +222,38 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         private void RemoveMigration(CivPiece civPiece) {
-            if(!_migrations.ContainsKey(civPiece.Region.Id))
+            if(!_migrations.ContainsKey($"{civPiece.Civilization.Name}-{civPiece.Region.Id}"))
             {
                 foreach (var pair in _migrations)
                 {
                     if (pair.Value.To.Id == civPiece.Region.Id)
                     {
-                        RemoveMigration(pair.Value.From.Id);
+                        RemoveMigration($"{civPiece.Civilization.Name}-{pair.Value.From.Id}");
                         return;
                     }
                 }
                 new Exception("Dont find migration");
             }
 
-            DestroyMarker(civPiece.Region.Id);
+            DestroyMarker($"{civPiece.Civilization.Name}-{civPiece.Region.Id}");
             civPiece.RemoveEvent(this);
         }
 
-        private void RemoveMigration(int index) {
+        private void RemoveMigration(string index) {
             Debug.Log("RemoveMigration");
             _migrations[index].Line?.Destroy();
             DestroyMarker(index);
             _migrations[index].CivFrom?.RemoveEvent(this);
             _migrations[index].CivFrom?.RemoveEvent(this);
 
-            if (_eventPanels.ContainsKey(_migrations[index]))
-            {
-                if (_eventPanels[_migrations[index]] != null)
-                    _eventPanels[_migrations[index]].CloseWindow();
-                _eventPanels.Remove(_migrations[index]);
-            }
-
             _migrations.Remove(index);
         }
 
         private protected override void CreateMarker(CivPiece piece = null) {
-            if (!_migrations.ContainsKey(piece.RegionID)) return;
+            if (!_migrations.ContainsKey($"{piece.Civilization.Name}-{piece.Region.Id}")) return;
             Vector2 start = WMSK.countries[piece.RegionID].centroid;
             Vector2 end = WMSK.countries[_toPiece.RegionID].centroid;
-            CreateMarker(start, end);
+            CreateMarker(start, end, piece);
         }
 
         private bool Break(CivPiece piece, Func<CivPiece, int> interventionPoints) {
@@ -278,23 +270,22 @@ namespace Gameplay.Scenarios.Events.Global {
         //Отмена миграции по внутренней логике
         private void Break(CivPiece piece)
         {
-            int fromID = piece.Region.Id;
-            MigrationData data = _migrations[piece.Region.Id];
+            MigrationData data = _migrations[$"{piece.Civilization.Name}-{piece.Region.Id}"];
             piece.Population.Value += (data.FullPopulations - data.CurPopulations) >= 0 ? data.FullPopulations - data.CurPopulations : 0;
             ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "Break", 
                 new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = data.From.Name, RegionSecond = data.To.Name, Count = data.FullPopulations - data.CurPopulations });
-            RemoveMigration(fromID);
+            RemoveMigration(piece);
         }
 
         private bool Nothing(CivPiece piece, Func<CivPiece, int> interventionPoints) {
             if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            MigrationData data = _migrations[piece.Region.Id];
+            MigrationData data = _migrations[$"{piece.Civilization.Name}-{piece.Region.Id}"];
 
             ChroniclesController.AddPassive(Name, piece.RegionID, panelSprite, "Nothing",
-                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = data.From.Name, RegionSecond = data.To.Name, Count = _migrations[piece.Region.Id].FullPopulations });
-            DestroyMarker(piece.Region.Id);
+                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = data.From.Name, RegionSecond = data.To.Name, Count = _migrations[$"{piece.Civilization.Name}-{piece.Region.Id}"].FullPopulations });
+            DestroyMarker($"{piece.Civilization.Name}-{piece.Region.Id}");
             return true;
         }
 
@@ -302,18 +293,17 @@ namespace Gameplay.Scenarios.Events.Global {
             if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            int fromID = piece.Region.Id;
-            MigrationData data = _migrations[piece.Region.Id];
+            MigrationData data = _migrations[$"{piece.Civilization.Name}-{piece.Region.Id}"];
             data.StepPopulations *= 2;
 
             ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "SpeedUp", 
-                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = data.From.Name, RegionSecond = data.To.Name, Count = _migrations[fromID].FullPopulations });
+                new Chronicles.Data.Panel.LocalVariablesChronicles { RegionFirst = data.From.Name, RegionSecond = data.To.Name, Count = _migrations[$"{piece.Civilization.Name}-{piece.Region.Id}"].FullPopulations });
             
-            DestroyMarker(fromID);
+            DestroyMarker($"{piece.Civilization.Name}-{piece.Region.Id}");
             return true;
         }
 
-        private void DestroyMarker(int index) {
+        private void DestroyMarker(string index) {
             if (_migrations.TryGetValue(index, out MigrationData migration))
                 if(migration.Marker != null)
                     migration.Marker.Destroy();
