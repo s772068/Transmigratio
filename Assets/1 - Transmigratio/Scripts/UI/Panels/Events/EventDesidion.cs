@@ -14,7 +14,7 @@ public class EventDesidion : MonoBehaviour {
     public event Action Close;
 
     public string Title { set => _title.text = value; }
-    public int Points { set => _points.text = $"{value} {Localization.Load("Events", "Points")}"; }
+    public int Points { set => _points.text = $"<sprite=\"Icons-Inter\" name=\"Intervention\">{value}"; }
 
     public void Init(CivPiece piece, Desidion desidion)
     {

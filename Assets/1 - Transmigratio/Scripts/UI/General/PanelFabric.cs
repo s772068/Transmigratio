@@ -15,8 +15,8 @@ public static class PanelFabric
         panel.Event = baseEvent;
         panel.Image = sprite;
         panel.Title = title;
-        panel.Territory = territory;
-        panel.Description = description;
+        panel.Description.text = territory;
+        panel.Description.text += "\n" + description;
         foreach (var desidion in desidions)
             AddDesidion(desidionPrefab, piece, desidion, panel.Desidions, panel);
 
