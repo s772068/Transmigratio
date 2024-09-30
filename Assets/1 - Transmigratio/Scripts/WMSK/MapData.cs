@@ -27,6 +27,8 @@ public static class MapData {
 
         onClickRegion += UpdateRegion;
 
+        _borderTexture = borderTexture;
+
         foreach (TM_Region region in Transmigratio.Instance.TMDB.map.AllRegions) {
             _wmsk.ToggleCountrySurface(region.Id, true, Color.clear);
         }
@@ -53,12 +55,12 @@ public static class MapData {
 
     public static void SelectRegion() {
         _wmsk.ToggleCountrySurface(_regionID, true, new Color(1, 0.92f, 0.16f, 0.25f));
-        _wmsk.ToggleCountryOutline(_regionID, true, _borderTexture, 2f, Color.yellow, animationSpeed: 10);
+        _wmsk.ToggleCountryOutline(_regionID, true, _borderTexture, 2, new Color(0.46f, 0.78f, 1, 1));
     }
 
     public static void UnselectRegion() {
         _wmsk.ToggleCountrySurface(_regionID, true, Color.clear);
-        _wmsk.ToggleCountryOutline(_regionID, true, borderWidth: 0.2f, tintColor: _wmsk.frontiersColor);
+        _wmsk.ToggleCountryOutline(_regionID, true, borderWidth: 0.1f, tintColor: _wmsk.frontiersColor);
     }
 
     private static void OnClickRegion(int countryIndex, int regionIndex, int buttonIndex) {
