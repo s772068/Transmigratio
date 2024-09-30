@@ -10,12 +10,12 @@ namespace RegionDetails.Defoult.Paramiters {
         [SerializeField] private SerializedDictionary<string, Sprite> _elements;
 
         private Dictionary<string, Element> _elementsDic = new();
-        private Element _selectedElement;
+        private string _selected = "";
 
         public Action<string> onSelect;
 
         private void Awake() {
-            foreach(var pair in _elements) {
+            foreach (var pair in _elements) {
                 AddParamiter(pair.Key, pair.Value);
             }
         }
@@ -27,8 +27,10 @@ namespace RegionDetails.Defoult.Paramiters {
         }
 
         public void OnSelect(string name) {
-            _selectedElement?.Select(false);
-            _selectedElement = _elementsDic[name];
+            if (_selected == name) return;
+            if (_selected != "") _elementsDic[_selected].Select(false);
+            _selected = name;
+            _elementsDic[name]?.Select(true);
             onSelect?.Invoke(name);
         }
     }
