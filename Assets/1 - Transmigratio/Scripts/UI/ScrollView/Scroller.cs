@@ -45,9 +45,6 @@ namespace UI.ScrollVew {
         private void FixedUpdate() {
             if (_positions == null) return;
             for (int i = 0; i < _positions.Length; i++) {
-                Debug.Log($"---");
-                Debug.Log($"{_positions[i]}");
-                Debug.Log($"---");
                 UpdateSelectedIndex(i);
                 if (_isClicked) _scrollPosition = scrollbar.value;
                 else Alignment(_selectedIndex);

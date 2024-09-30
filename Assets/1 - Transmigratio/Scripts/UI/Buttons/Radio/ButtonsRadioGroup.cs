@@ -32,7 +32,6 @@ namespace UI {
         }
 
         public void Select(int newActiveIndex) {
-            Debug.Log($"WaitGameStart: {_waitGameStart}");
             if (_waitGameStart)
                 return;
 
@@ -46,7 +45,6 @@ namespace UI {
             _waitGameStart = false;
             foreach (var button in buttons)
                 button.IsInterectable = true;
-            Debug.Log($"GameStarted: WaitGameStart: {_waitGameStart}");
         }
     }
 }
