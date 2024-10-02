@@ -24,6 +24,24 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         _image ??= GetComponent<Image>();
     }
 
+    public void OnPointerClick(PointerEventData eventData) => Click();
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        if (highlightedSprite == null) return;
+        if (!_isSelected) _image.sprite = highlightedSprite;
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        if (highlightedSprite == null) return;
+        if (_isSelected) Activate();
+        else Deactivate();
+    }
+
+    public void Click() {
+        if (IsInterectable)
+            onSelect.Invoke(Index);
+    }
+
     public void Activate() {
         _isSelected = true;
         _image.sprite = activeSprite;
@@ -32,21 +50,5 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public void Deactivate() {
         _isSelected = false;
         _image.sprite = deactiveSprite;
-    }
-
-    public void OnPointerClick(PointerEventData eventData) {
-        if (IsInterectable)
-            onSelect.Invoke(Index);
-    }
-
-    public void OnPointerEnter(PointerEventData eventData) {
-        if(highlightedSprite == null) return;
-        if (!_isSelected) _image.sprite = highlightedSprite;
-    }
-
-    public void OnPointerExit(PointerEventData eventData) {
-        if (highlightedSprite == null) return;
-        if (_isSelected) Activate();
-        else Deactivate();
     }
 }

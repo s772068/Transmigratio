@@ -20,6 +20,11 @@ public class HUD : StaticInstance<HUD> {
         RegionDetails.StartGame.Panel.onStartGame += OnStartGame;
     }
 
+    private void Start() {
+        _topPanels.SetActive(false);
+        _bottomPanels.SetActive(false);
+    }
+
     private void OnShowMessage(string message) {
         _messanger.gameObject.SetActive(true);
         _messanger.Message = message;

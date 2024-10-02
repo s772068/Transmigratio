@@ -12,13 +12,13 @@ namespace UI {
 
         public Action<int> onSelect;
 
-        private void Start() {
+        private void Awake() {
             for (int i = 0; i < buttons.Count; ++i) {
                 buttons[i].Index = i;
                 buttons[i].onSelect.AddListener(Select);
             }
 
-            if (_waitGameStart && !Tutorial.isShow) {
+            if (_waitGameStart) {
                 foreach (var button in buttons) {
                     button.Deactivate();
                     button.IsInterectable = false;
