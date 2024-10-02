@@ -6,7 +6,6 @@ using System;
 namespace RegionDetails.Defoult.Paramiters {
     public class Group : MonoBehaviour {
         [SerializeField] private Element _paramiterPref;
-        [SerializeField] private Transform _content;
         [SerializeField] private SerializedDictionary<string, Sprite> _elements;
 
         private Dictionary<string, Element> _elementsDic = new();
@@ -21,7 +20,7 @@ namespace RegionDetails.Defoult.Paramiters {
         }
 
         private void AddParamiter(string name, Sprite pictogram) {
-            Element element = Factory.Create(_paramiterPref, _content, name, pictogram);
+            Element element = Factory.Create(_paramiterPref, transform, name, pictogram);
             element.onSelect = OnSelect;
             _elementsDic[name] = element;
         }
