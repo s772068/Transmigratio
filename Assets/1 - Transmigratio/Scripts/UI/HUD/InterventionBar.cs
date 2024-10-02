@@ -22,7 +22,7 @@ namespace UI {
         }
 
         private void UpdateBar() {
-            int value = Points / MaxPoints;
+            float value = (float)Points / (float)MaxPoints;
             _handle.gameObject.SetActive(value > 0);
             _progressBar.value = value;
             _tmpPoints.text = $"<sprite=\"Icons\" name=\"Intervention\">{value * 100}%";
