@@ -23,7 +23,6 @@ namespace Chronicles.Prefabs.Panel {
         public string RegionFirst = "";
         public string RegionSecond = "";
 
-
         public List<Data.Panel.Element> Elements { set {
                 for(int i = 0; i < _elements.Count; ++i) {
                     _elements[i].Destroy();

@@ -5,7 +5,7 @@ using UnityEngine;
 
 [System.Serializable]
 public class Paramiter {
-    // Set через paramiter[key] = value
+    // Set пїЅпїЅпїЅпїЅпїЅ paramiter[key] = value
     [SerializeField] private SerializedDictionary<string, ParamiterValue> quantities = new();
 
     private bool _isPercent;

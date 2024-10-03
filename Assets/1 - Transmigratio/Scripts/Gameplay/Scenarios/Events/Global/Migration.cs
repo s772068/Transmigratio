@@ -178,7 +178,7 @@ namespace Gameplay.Scenarios.Events.Global {
 
         private void OnTickLogic() {
             for (int i = 0; i < _migrations.Count; ++i) {
-                // Этап перед началом миграции
+                // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 MigrationData migration = _migrations.Values.ElementAt(i);
                 if (!migration.Civilization.Pieces.ContainsKey(migration.To.Id))
                 {
@@ -189,7 +189,7 @@ namespace Gameplay.Scenarios.Events.Global {
                 if (migration.TimerToStart < startTime) {
                     ++migration.TimerToStart;
                 } else {
-                    //Интервал
+                    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                     if (migration.TimerInterval < interval) {
                         ++migration.TimerInterval;
                         continue;
@@ -203,7 +203,7 @@ namespace Gameplay.Scenarios.Events.Global {
                         continue;
                     }
 
-                    //Перенос людей
+                    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                     if (migration.FullPopulations > migration.CurPopulations) {
                         if (migration.FullPopulations - migration.CurPopulations >= migration.StepPopulations) {
                             migration.CurPopulations += migration.StepPopulations;
@@ -213,7 +213,7 @@ namespace Gameplay.Scenarios.Events.Global {
                             migration.Civilization.Pieces[migration.To.Id].Population.Value += migration.FullPopulations - migration.CurPopulations;
                         }
                     }
-                    // Удаление миграции
+                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                     if (migration.CurPopulations >= migration.FullPopulations) {
                         RemoveMigration(curID);
                     }
@@ -267,7 +267,7 @@ namespace Gameplay.Scenarios.Events.Global {
             return true;
         }
 
-        //Отмена миграции по внутренней логике
+        //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         private void Break(CivPiece piece)
         {
             MigrationData data = _migrations[$"{piece.Civilization.Name}-{piece.Region.Id}"];

@@ -6,8 +6,8 @@ using System;
 using Events = Gameplay.Scenarios.Events;
 
 /// <summary>
-/// Экземпляр CivPiece - это один "кусочек" цивилизации в конкретном регионе. 
-/// Если цивилизация есть в трёх регионах, это значит, что она состоит из трёх объектов CivPiece
+/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ CivPiece - пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. 
+/// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ CivPiece
 /// </summary>
 [Serializable]
 public class CivPiece {
@@ -73,7 +73,7 @@ public class CivPiece {
     }
 
     /// <summary>
-    /// Инициализация при появлении в области после миграции или при старте игры
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     /// </summary>
     public void Init(int region, string civilization, int startPopulation) {
         EcoCulture.Init(("Hunters", GameSettings.StartHunters));
@@ -100,7 +100,7 @@ public class CivPiece {
         ReserveFood = new(RequestFood.value * 2);
         GivenFood = new(ReserveFood.value > RequestFood.value ? RequestFood.value : ReserveFood.value);
     }
-    //Создание CivPiece при его обновлении (например улучшения уровня цивилизации)
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ CivPiece пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
     public void Init(CivPiece piece, string civilization, int category)
     {
         EcoCulture.Init(piece.EcoCulture.QuantitiesDictionary);

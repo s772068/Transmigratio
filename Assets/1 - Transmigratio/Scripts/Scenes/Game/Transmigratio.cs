@@ -5,12 +5,12 @@ using UI;
 
 //using UnityEditor.Localization.Plugins.XLIFF.V12;
 /// <summary>
-/// "Главный" синглтон
+/// "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 /// 
-/// Потом разнести всякие классы по разным файлам
+/// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 /// </summary>
 public class Transmigratio : PersistentSingleton<Transmigratio> {
-    [SerializeField] private TMDB _tmdb;            // база данных ScriptableObjects
+    [SerializeField] private TMDB _tmdb;            // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ScriptableObjects
     [SerializeField] private HUD _hud;
     [SerializeField] private int _intervetionPoints = 100;
     [SerializeField] private NewsPanel _newsPrefab;

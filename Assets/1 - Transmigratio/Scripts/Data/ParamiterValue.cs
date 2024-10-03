@@ -6,7 +6,6 @@ using UnityEngine;
 public class ParamiterValue {
     [SerializeField] private float _startValue;
     public float value;
-
     // prev, cur, piece
     public Action<float, float, CivPiece> onUpdate;
 
