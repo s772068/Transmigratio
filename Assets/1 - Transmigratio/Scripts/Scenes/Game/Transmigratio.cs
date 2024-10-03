@@ -2,19 +2,16 @@ using UnityEngine;
 using Gameplay;
 using System;
 using UI;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization;
 
-//using UnityEditor.Localization.Plugins.XLIFF.V12;
-/// <summary>
-/// "�������" ��������
-/// 
-/// ����� �������� ������ ������ �� ������ ������
-/// </summary>
 public class Transmigratio : PersistentSingleton<Transmigratio> {
-    [SerializeField] private TMDB _tmdb;            // ���� ������ ScriptableObjects
+    [SerializeField] private TMDB _tmdb;
     [SerializeField] private HUD _hud;
     [SerializeField] private int _intervetionPoints = 100;
     [SerializeField] private NewsPanel _newsPrefab;
     [SerializeField] private Texture2D borderTexture;
+    [SerializeField] private Locale _local;
 
     private Intervention _intervention;
     private News _news;
@@ -40,6 +37,8 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     }
 
     public new void Awake() {
+        LocalizationSettings.SelectedLocale = _local;
+
         base.Awake();
         TMDB.TMDBInit();
         MapData.Init(borderTexture);
