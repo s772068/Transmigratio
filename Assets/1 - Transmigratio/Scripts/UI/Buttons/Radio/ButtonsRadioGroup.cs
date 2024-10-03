@@ -12,7 +12,7 @@ namespace UI {
 
         public Action<int> onSelect;
 
-        private void Awake() {
+        private void Start() {
             for (int i = 0; i < buttons.Count; ++i) {
                 buttons[i].Index = i;
                 buttons[i].onSelect.AddListener(Select);
@@ -41,7 +41,7 @@ namespace UI {
             onSelect?.Invoke(_activeElement);
         }
 
-        private void OnGameStarted() {
+        public void OnGameStarted() {
             _waitGameStart = false;
             foreach (var button in buttons)
                 button.IsInterectable = true;
