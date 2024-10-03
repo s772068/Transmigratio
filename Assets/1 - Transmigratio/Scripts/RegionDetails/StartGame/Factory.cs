@@ -18,9 +18,7 @@ namespace RegionDetails.StartGame {
 
         public static Element Create(Element prefab, Transform parent, string paramiter, string name, float value) {
             Element element = Object.Instantiate(prefab, parent);
-            element.Label = name;
-            element.SetValue(value);
-            element.Color = Transmigratio.Instance.TMDB.GetParamiterColor(paramiter, name);
+            element.Init(Transmigratio.Instance.TMDB.GetParamiterColor(paramiter, name), paramiter, name, value);
             return element;
         }
     }
