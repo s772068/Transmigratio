@@ -21,6 +21,7 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     private bool _isClickableMarker = true;
 
     public TMDB TMDB => _tmdb;
+    public HUD HUD => _hud;
     public Intervention Intervention => _intervention;
     public int MaxInterventionPoints => _intervetionPoints;
 

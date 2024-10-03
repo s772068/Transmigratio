@@ -7,7 +7,6 @@ using UI;
 using System;
 
 public class EventPanel : Panel {
-
     [SerializeField] private Button _close;
     [SerializeField] private TMP_Text _title;
     [SerializeField] private TMP_Text _description;
@@ -40,4 +39,6 @@ public class EventPanel : Panel {
         base.OnDisable();
         EventPanelClose?.Invoke(true);
     }
+
+    public void OpenAutoChoice() => Transmigratio.Instance.HUD.OpenAutoChoice();
 }

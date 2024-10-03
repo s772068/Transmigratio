@@ -3,15 +3,18 @@ using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
 
-public class DragPanelControl : MonoBehaviour
-{
+public class DragPanelControl : MonoBehaviour {
     [SerializeField] private bool _horizontal = true;
     [SerializeField] private bool _vertical = true;
     [SerializeField] private DragElement _draggingObj;
     [SerializeField] private float _dragSpeed = 15;
     [SerializeField] private float _swap_gap = 10;
-    private static event Action<List<DragElement>> EndDrag;
+
+    public delegate void ActionSwapOriginPos(DragElement dragable, DragElement swapElement);
+
     public static event Action DragElementsSorted;
+    public static event ActionSwapOriginPos onSwapOriginPos;
+    private static event Action<List<DragElement>> EndDrag;
 
     private Vector2 _maxYPoints;
 
@@ -22,22 +25,18 @@ public class DragPanelControl : MonoBehaviour
 
     public List<DragElement> Elements => _elements;
 
-    private void Awake()
-    {
+
+    private void Awake() {
         int i = 0;
-        foreach (Transform child in transform)
-        {
+        foreach (Transform child in transform) {
             _elements.Add(child.GetComponent<DragElement>());
             ElementsOriginPos.Add(child.transform.position);
 
-            if (_elements.Count > i)
-            {
+            if (_elements.Count > i) {
                 DragElement element = _elements[i].GetComponent<DragElement>();
 
                 element.SortOrder = i;
-            }
-            else
-            {
+            } else {
                 _elements[i].gameObject.SetActive(false);
                 _elements[i].GetComponent<DragElement>().SortOrder = 999 + i;
                 i++;
@@ -70,25 +69,23 @@ public class DragPanelControl : MonoBehaviour
         _maxYPoints.x = transform.position.y + rect.sizeDelta.y / 2;
         _maxYPoints.y = transform.position.y - rect.sizeDelta.y / 2;
     }
-    private void OnDestroy()
-    {
-        DragFingerControler.OnTouched -= Dragging;
-    }
 
-    public void Dragging(Vector2 goal)
-    {
-        if (_draggingObj == null) { return; }
+    private void OnDestroy() => DragFingerControler.OnTouched -= Dragging;
+
+    public void Dragging(Vector2 goal) {
+        if (_draggingObj == null) return;
         Vector3 move = _draggingObj.transform.position;
 
         if (_horizontal)
             move.x = Mathf.Lerp(_draggingObj.transform.position.x, goal.x, _dragSpeed * Time.deltaTime);
         if (_vertical)
             move.y = Mathf.Lerp(_draggingObj.transform.position.y, goal.y, _dragSpeed * Time.deltaTime);
-        /*
-        Vector3 _move = new Vector3(
-                        graggingObj.transform.position.x,
-                        Mathf.Lerp(graggingObj.transform.position.y, _goal.y, gragSpeed * Time.deltaTime),
-                        0);*/
+
+        // Vector3 _move = new Vector3(
+        //                 graggingObj.transform.position.x,
+        //                 Mathf.Lerp(graggingObj.transform.position.y, _goal.y, gragSpeed * Time.deltaTime),
+        //                 0);
+
         if (move.y > _maxYPoints.x)
             move.y = _maxYPoints.x;
         else if (move.y < _maxYPoints.y)
@@ -97,8 +94,7 @@ public class DragPanelControl : MonoBehaviour
         _draggingObj.transform.position = move;
     }
 
-    public void Element_OnSelected()
-    {
+    public void Element_OnSelected() {
         if (EventSystem.current.currentSelectedGameObject == null)
             return;
 
@@ -110,14 +106,10 @@ public class DragPanelControl : MonoBehaviour
         _draggingObj = selected;
     }
 
-    public void SortWhenDragging()
-    {
-        foreach (DragElement element in _elements)
-        {
-            if (element == _draggingObj || _draggingObj == null) { continue; }
-
-            if (Vector2.Distance(_draggingObj.transform.position, element.transform.position) < _swap_gap)
-            {
+    public void SortWhenDragging() {
+        foreach (DragElement element in _elements) {
+            if (element == _draggingObj || _draggingObj == null) continue;
+            if (Vector2.Distance(_draggingObj.transform.position, element.transform.position) < _swap_gap) {
                 //Debug.Log(graggingObj.name + " swap " + _ui.name + " : " + Vector2.Distance(graggingObj.transform.position, _ui.transform.position));
                 SwapOriginPos(_draggingObj, element);
                 break;
@@ -127,9 +119,7 @@ public class DragPanelControl : MonoBehaviour
         }
     }
 
-    void SwapOriginPos(DragElement dragable, DragElement swapElement)
-    {
-
+    void SwapOriginPos(DragElement dragable, DragElement swapElement) {
         dragable.transform.position = ElementsOriginPos[swapElement.SortOrder];
         swapElement.transform.position = ElementsOriginPos[dragable.SortOrder];
 
@@ -140,19 +130,16 @@ public class DragPanelControl : MonoBehaviour
         int temp_order = dragable.SortOrder;
         dragable.SortOrder = swapElement.SortOrder;
         swapElement.SortOrder = temp_order;
-
+        onSwapOriginPos?.Invoke(dragable, swapElement);
     }
 
-    void OnEndDrag()
-    {
+    void OnEndDrag() {
         _draggingObj.transform.position = ElementsOriginPos[_draggingObj.SortOrder];
         List<DragElement> oldElements = new(_elements);
         _elements.Sort((x, y) => x.SortOrder.CompareTo(y.SortOrder));
 
-        for (int i = 0; i < oldElements.Count; i++)
-        {
-            if (oldElements[i] != _elements[i])
-            {
+        for (int i = 0; i < oldElements.Count; i++) {
+            if (oldElements[i] != _elements[i]) {
                 DragElementsSorted?.Invoke();
                 break;
             }

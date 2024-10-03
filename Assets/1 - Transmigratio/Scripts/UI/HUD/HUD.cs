@@ -8,6 +8,7 @@ public class HUD : StaticInstance<HUD> {
     [SerializeField] private Transform _panelsParent;
     [SerializeField] private GameObject _topPanels;
     [SerializeField] private GameObject _bottomPanels;
+    [SerializeField] private GameObject _autoChoicePanel;
 
     [SerializeField] private Migration _migration;
 
@@ -38,5 +39,9 @@ public class HUD : StaticInstance<HUD> {
     private void OnStartGame() {
         _topPanels.SetActive(true);
         _bottomPanels.SetActive(true);
+    }
+
+    public void OpenAutoChoice() {
+        _autoChoicePanel.SetActive(true);
     }
 }
