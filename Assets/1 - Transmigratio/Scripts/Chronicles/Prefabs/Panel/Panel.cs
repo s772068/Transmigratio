@@ -10,6 +10,7 @@ namespace Chronicles.Prefabs.Panel {
         [SerializeField] private GameObject _descriptionBlock;
         [SerializeField] private Element elementPrefab;
         [SerializeField] private RectTransform elementContent;
+        [SerializeField] private LocalizeStringEvent _eventActionName;
         [SerializeField] private LocalizeStringEvent _description;
         [SerializeField] private LocalizeStringEvent _result;
         [SerializeField] private TMP_Text _desidion;
@@ -18,6 +19,9 @@ namespace Chronicles.Prefabs.Panel {
         private List<Element> _elements = new();
 
         public Action<Data.Panel.Element> onClickElement;
+        public int Count = 0;
+        public string RegionFirst = "";
+        public string RegionSecond = "";
 
         public List<Data.Panel.Element> Elements { set {
                 for(int i = 0; i < _elements.Count; ++i) {
@@ -35,10 +39,24 @@ namespace Chronicles.Prefabs.Panel {
 
         public void InitDescription(Data.Panel.Element element)
         {
-            _descriptionBlock.gameObject.SetActive(true);
-            _description.SetEntry("Test");
-            _result.SetEntry("Test");
-            _desidion.text = "Test Desidion";
+            Count = element.LocalVariables.Count;
+            RegionFirst = element.LocalVariables.RegionFirst;
+            RegionSecond = element.LocalVariables.RegionSecond;
+
+            _descriptionBlock.SetActive(true);
+            _description.SetEntry(element.EventName);
+            _desidion.text = element.Desidion;
+            _result.RefreshString();
+
+            switch (element.EventName)
+            {
+                case "Migration":
+                    _eventActionName.SetEntry("ResultMigration");
+                    break;
+                default:
+                    _eventActionName.SetEntry("ResultDied");
+                    break;
+            }
         }
     }
 }

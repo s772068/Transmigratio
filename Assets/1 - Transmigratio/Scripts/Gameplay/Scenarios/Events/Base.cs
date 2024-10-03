@@ -16,6 +16,10 @@ namespace Gameplay.Scenarios.Events {
         [Header("Colors")]
         [SerializeField] private protected Color regionColor;
         [SerializeField] private protected Color civColor;
+        [Header("Desidions Settings")]
+        [SerializeField] protected int _minDesidionCost = 1;
+
+        public int GetDesidionCost(int cost) => cost >= _minDesidionCost ? cost : _minDesidionCost;
 
         private protected Desidion _activeDesidion => _desidions[_activateIndex];
         private protected List<Desidion> _desidions = new();
@@ -24,13 +28,14 @@ namespace Gameplay.Scenarios.Events {
         public Sprite PanelSprite => panelSprite;
         public List<Desidion> Desidions => _desidions;
         public bool AutoChoice = false;
+        public int MaxAutoInterventionPoints = 10;
 
         private protected abstract string Name { get; }
         private protected abstract string Territory(CivPiece piece);
 
         private protected Chronicles.Controller ChroniclesController => Chronicles.Controller.Instance;
         private protected Map Map => Transmigratio.Instance.TMDB.map;
-        private protected WMSK WMSK => Map.WMSK;
+        private protected WMSK WMSK => MapData.WMSK;
         private protected Func<int, bool> _useIntervention => Gameplay.Intervention.UseIntervention;
         public string Local(string key) => Localization.Load(Name, key);
 

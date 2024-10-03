@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 359895691688070463, guid: c47213b161616324388f4e6c8fb55875, type: 3}
   _desidionPrefab: {fileID: 403973372752421938, guid: 0054cba83f08b6b4296867997956dd96, type: 3}
-  panelSprite: {fileID: 966951630, guid: b7247bfca1704b445b8723d805a10d91, type: 3}
+  panelSprite: {fileID: 21300000, guid: b7247bfca1704b445b8723d805a10d91, type: 3}
   markerPrefab: {fileID: 5296191554952630010, guid: 1bea2eb4b7054814c9055a48d6f2abeb, type: 3}
   markerSprite: {fileID: 21300000, guid: a2a6e6af1255b40499d8427b7f91a1f6, type: 3}
   regionColor: {r: 1, g: 0.14117648, b: 0, a: 1}
   civColor: {r: 0, g: 0.49803922, b: 1, a: 1}
   AutoChoice: 0
+  MaxAutoInterventionPoints: 10
   states:
     _serializedList:
     - Key: 0
@@ -28,8 +29,8 @@ MonoBehaviour:
         onEndTime:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 0}
-              m_TargetAssemblyTypeName: Events.Controllers.StateMachines.Base`1[[Events.Controllers.StateMachines.Volcano,
+            - m_Target: {fileID: 11400000}
+              m_TargetAssemblyTypeName: Gameplay.Scenarios.Events.StateMachines.Base,
                 Assembly-CSharp
               m_MethodName: CreateEvent
               m_Mode: 1
@@ -47,11 +48,11 @@ MonoBehaviour:
         onEndTime:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 0}
-              m_TargetAssemblyTypeName: Events.Controllers.StateMachines.Volcano,
+            - m_Target: {fileID: 11400000}
+              m_TargetAssemblyTypeName: Gameplay.Scenarios.Events.StateMachines.Volcano,
                 Assembly-CSharp
               m_MethodName: ActivateVolcano
-              m_Mode: 1
+              m_Mode: 6
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
                 m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -66,8 +67,8 @@ MonoBehaviour:
         onEndTime:
           m_PersistentCalls:
             m_Calls:
-            - m_Target: {fileID: 0}
-              m_TargetAssemblyTypeName: Events.Controllers.StateMachines.Base`1[[Events.Controllers.StateMachines.Volcano,
+            - m_Target: {fileID: 11400000}
+              m_TargetAssemblyTypeName: Gameplay.Scenarios.Events.StateMachines.Base,
                 Assembly-CSharp
               m_MethodName: CreateEvent
               m_Mode: 1

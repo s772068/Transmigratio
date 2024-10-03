@@ -13,8 +13,7 @@ namespace Gameplay.Scenarios {
 
         private static Paramiter _government;
 
-        public static Action<string> OnUpdateMaxGovernment;
-        public static Action<CivPiece> OnUpdateGovernment;
+        public static Action<string, CivPiece> OnUpdateMaxGovernment;
 
         private static float Leaderism {
             get => _government["Leaderism"];
@@ -55,10 +54,21 @@ namespace Gameplay.Scenarios {
             if (prodMode == "Slavery") Monarchy += add_M_S;
 
             string curMax = _government.GetMax().key;
-            if (curMax != prevMax)
-                OnUpdateMaxGovernment?.Invoke(curMax);
+            if (SplitCheck())
+                OnUpdateMaxGovernment?.Invoke(curMax, _piece);
+        }
 
-            OnUpdateGovernment?.Invoke(_piece);
+        private static bool SplitCheck()
+        {
+            if (_piece.Civilization.Pieces.Count < 2) return false;
+
+            foreach (CivPiece piece in _piece.Civilization.Pieces.Values)
+            {
+                if (piece.Government.GetMax().key != _piece.Government.GetMax().key)
+                    return true;
+            }
+
+            return false;
         }
 
         [Serializable]

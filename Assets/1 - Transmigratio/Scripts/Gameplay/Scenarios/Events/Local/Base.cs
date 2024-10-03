@@ -18,13 +18,22 @@ namespace Gameplay.Scenarios.Events.Local {
             if (pieces.Contains(piece)) return;
 
             pieces.Add(piece);
+            piece.AddEvent(this);
+            CreateMarker(piece);
+
             if (!AutoChoice) {
-                piece.AddEvent(this);
-                CreateMarker(piece);
                 OpenPanel(piece);
-            } 
-            else {
-                Events.AutoChoice.Events[this][0].ActionClick?.Invoke(piece, Events.AutoChoice.Events[this][0].CostFunc);
+            }
+            else
+            {
+                foreach (var autochoice in Events.AutoChoice.Events[this])
+                {
+                    if (AutoChoice && autochoice.CostFunc(piece) <= MaxAutoInterventionPoints)
+                    {
+                        if (autochoice.ActionClick.Invoke(piece, autochoice.CostFunc))
+                            break;
+                    }
+                }
             }
         }
 
@@ -36,7 +45,7 @@ namespace Gameplay.Scenarios.Events.Local {
 
         private protected override void CreateMarker(CivPiece piece) {
             if (piece.Region.Marker == null)
-                piece.Region.Marker = CreateMarker(WMSK.countries[piece.Region.Id].center, piece);
+                piece.Region.Marker = CreateMarker(WMSK.countries[piece.Region.Id].centroid, piece);
             piece.Region.Marker.onClick += (piece) => OnClickMarker(piece);
         }
 

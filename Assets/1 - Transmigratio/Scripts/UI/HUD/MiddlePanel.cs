@@ -1,23 +1,24 @@
-using TMPro;
+using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
-public class MiddlePanel : MonoBehaviour
-{
+public class MiddlePanel : MonoBehaviour {
     [SerializeField] private TMP_Text _populationTxt;
-    private int Population => Transmigratio.Instance.TMDB.humanity.TotalEarthPop;
+    [SerializeField] private Slider _populationSlider;
 
-    private void Awake()
-    {
+    private int Population => Transmigratio.Instance.TMDB.humanity.TotalEarthPop;
+    private int MaxPopulation => Transmigratio.Instance.TMDB.maxPopulation;
+
+    private void Awake() {
         Timeline.TickShow += UpdatePopulation;
     }
 
-    private void OnDestroy()
-    {
+    private void OnDestroy() {
         Timeline.TickShow -= UpdatePopulation;
     }
 
-    private void UpdatePopulation()
-    {
+    private void UpdatePopulation() {
         _populationTxt.text = $"{Population.ToString("### ### ###")}";
+        _populationSlider.value = Population / MaxPopulation;
     }
 }

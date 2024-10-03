@@ -2,28 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace UI
-{
-    public class ButtonsRadioGroup : MonoBehaviour
-    {
+namespace UI {
+    public class ButtonsRadioGroup : MonoBehaviour {
         [SerializeField] private List<ButtonRadio> buttons;
         [SerializeField] private bool _waitGameStart = false;
+        [SerializeField] private int selectedIndex;
 
         private int _activeElement = -1;
 
-        public Action<int> onClick;
+        public Action<int> onSelect;
 
-        private void Start()
-        {
-            for (int i = 0; i < buttons.Count; ++i)
-            {
+        private void Awake() {
+            for (int i = 0; i < buttons.Count; ++i) {
                 buttons[i].Index = i;
+                buttons[i].onSelect.AddListener(Select);
             }
 
-            if (_waitGameStart)
-            {
-                foreach (var button in buttons)
-                {
+            if (_waitGameStart) {
+                foreach (var button in buttons) {
                     button.Deactivate();
                     button.IsInterectable = false;
                 }
@@ -31,24 +27,21 @@ namespace UI
             }
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() {
             Transmigratio.GameStarted -= OnGameStarted;
         }
 
-        public void Click(int newActiveIndex)
-        {
+        public void Select(int newActiveIndex) {
             if (_waitGameStart)
                 return;
 
             if (_activeElement != -1) buttons[_activeElement].Deactivate();
             _activeElement = newActiveIndex;
             buttons[_activeElement].Activate();
-            onClick?.Invoke(_activeElement);
+            onSelect?.Invoke(_activeElement);
         }
 
-        private void OnGameStarted()
-        {
+        private void OnGameStarted() {
             _waitGameStart = false;
             foreach (var button in buttons)
                 button.IsInterectable = true;

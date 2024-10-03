@@ -27,17 +27,7 @@ public class ButtonSwitch : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     private void Start() { }
 
-    public void OnPointerClick(PointerEventData eventData) {
-        if (onGroupClick != default) {
-            onGroupClick?.Invoke(this);
-        } else if (_isActive) {
-            _isActive = false;
-            Deactivate();
-        } else {
-            _isActive = true;
-            Activate();
-        }
-    }
+    public void OnPointerClick(PointerEventData eventData) => Click();
 
     public void OnPointerEnter(PointerEventData eventData) {
         if (highlightedSprite == null) return;
@@ -48,6 +38,18 @@ public class ButtonSwitch : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         if (highlightedSprite == null) return;
         if (_isActive && activeSprite != null) _image.sprite = activeSprite;
         else if (deactiveSprite != null) _image.sprite = deactiveSprite;
+    }
+
+    public void Click() {
+        if (onGroupClick != default) {
+            onGroupClick?.Invoke(this);
+        } else if (_isActive) {
+            _isActive = false;
+            Deactivate();
+        } else {
+            _isActive = true;
+            Activate();
+        }
     }
 
     public void Activate() {

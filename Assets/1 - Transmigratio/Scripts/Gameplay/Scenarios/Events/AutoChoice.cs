@@ -13,7 +13,8 @@ namespace Gameplay.Scenarios.Events {
         }
 
         public static void NewEvent(Base newEvent, List<Desidion> desidions) {
-            _events.Add(newEvent, new (desidions));
+            if (!_events.ContainsKey(newEvent))
+                _events.Add(newEvent, new (desidions));
         }
 
         public static void RemoveEvent(Base removeEvent) {

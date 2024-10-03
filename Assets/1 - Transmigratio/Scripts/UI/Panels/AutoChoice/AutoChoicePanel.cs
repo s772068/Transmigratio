@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using TMPro;
 using UI;
+using RegionDetails.Defoult.Tutorials;
 
 namespace Gameplay.Scenarios.Events {
     public class AutoChoicePanel : Panel {
@@ -20,13 +21,26 @@ namespace Gameplay.Scenarios.Events {
         [SerializeField] private Toggle _autoEnable;
         [SerializeField] private Image _eventImage;
         [SerializeField] private Transform _autoPriority;
+        [Header("AutoChoice Slider")]
+        [SerializeField] private Slider _slider;
+        [SerializeField] private TMP_Text _pointsTMP;
+        [SerializeField] private int _maxPoints = 100;
+        [SerializeField] private GameObject _tutorial;
+
+        private int _curPoints = 0;
         private Dictionary<DragElement, Data.Desidion> _autoChoicePriority = new();
 
         public static event Action<Base, List<Data.Desidion>, bool> AutoChoiceUpdate;
         public static event Action<Base, bool> AutoChoiceModeUpdate;
+        public static event Action<bool> onOpen;
+
+        private void Awake() {
+            Tutorial.OnShowTutorial += ShowTutorial;
+        }
 
         private protected override void OnEnable() {
             base.OnEnable();
+            onOpen?.Invoke(true);
             AddChoiceElement();
             DragPanelControl.DragElementsSorted += OnPriorityUpdate;
             AutoChoiceElement.SelectElement += OnSelectEvent;
@@ -46,6 +60,12 @@ namespace Gameplay.Scenarios.Events {
             base.OnDisable();
             DragPanelControl.DragElementsSorted -= OnPriorityUpdate;
             AutoChoiceElement.SelectElement -= OnSelectEvent;
+        }
+
+        private void ShowTutorial(string tutName) {
+            if (tutName == "AutoChoice") {
+                _tutorial?.SetActive(true);
+            }
         }
 
         private void AddChoiceElement() {
@@ -81,6 +101,10 @@ namespace Gameplay.Scenarios.Events {
                 _dragPanel.Elements[i].GetComponent<AutoChoiceDesidion>().Title.text = desidions[i].Title;
                 _autoChoicePriority.Add(_dragPanel.Elements[i], desidions[i]);
             }
+
+            _curPoints = selectEvent.MaxAutoInterventionPoints;
+            _pointsTMP.text = _curPoints.ToString();
+            _slider.value = _slider.maxValue / _maxPoints * _curPoints;
         }
 
         private void OnPriorityUpdate() {
@@ -93,6 +117,13 @@ namespace Gameplay.Scenarios.Events {
             }
 
             AutoChoiceUpdate?.Invoke(_selectEvent, newDesidions, _autoEnable.isOn);
+        }
+
+        public void UpdateSlider()
+        {
+            _curPoints = (int)(_maxPoints * _slider.value);
+            _pointsTMP.text = _curPoints.ToString();
+            _selectEvent.MaxAutoInterventionPoints = _curPoints;
         }
 
         public void AutoChoiceEnable() => AutoChoiceModeUpdate?.Invoke(_selectEvent, _autoEnable.isOn);

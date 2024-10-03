@@ -20,9 +20,9 @@ namespace UI.ScrollVew {
         private protected T GetElement<T>(int index) where T : Element => (T) elements[index];
 
         private protected virtual void UpdateElements(int index) { }
-        private protected virtual void SelectElement() { }
+        private protected virtual void ColorBySelectedElement() { }
 
-        private void Awake() {
+        private protected virtual void Awake() {
             _positions = new float[elements.Count];
             _distance = 1f / (elements.Count - 1f);
             for (int i = 0; i < elements.Count; i++) {
@@ -31,8 +31,8 @@ namespace UI.ScrollVew {
             }
         }
 
-        private void OnEnable() {
-            SelectElement();
+        private protected virtual void OnEnable() {
+            ColorBySelectedElement();
         }
 
         private void Update() {
@@ -43,6 +43,7 @@ namespace UI.ScrollVew {
         }
 
         private void FixedUpdate() {
+            if (_positions == null) return;
             for (int i = 0; i < _positions.Length; i++) {
                 UpdateSelectedIndex(i);
                 if (_isClicked) _scrollPosition = scrollbar.value;
@@ -56,7 +57,7 @@ namespace UI.ScrollVew {
                 _scrollPosition > _positions[index] - (_distance / 2) &&
                 index != _selectedIndex) {
                     _selectedIndex = index;
-                    SelectElement();
+                    ColorBySelectedElement();
             }
         }
 

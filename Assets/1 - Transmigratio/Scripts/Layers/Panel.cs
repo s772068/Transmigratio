@@ -3,44 +3,69 @@ using System.Collections.Generic;
 using WorldMapStrategyKit;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using DG.Tweening;
+using Unity.VisualScripting;
 
 namespace Layers {
     public class Panel : UI.ScrollVew.Scroller {
-        //Не рефакторить данные
+        [Header("LayersPanel")]
+        [SerializeField] private Image _gradient;
+        [SerializeField] private RectTransform _scrollView;
 
         [Header("LayersElement")]
-        [SerializeField] private protected float timeToUpdateSize;
-        [SerializeField] private protected float timeToUpdateAlpha;
-        [SerializeField] private List<Vector2> sizes;
-        [SerializeField] private List<float> alphas;
+        [SerializeField] private protected float _timeToUpdateSize;
+        [SerializeField] private protected float _timeToUpdateAlpha;
+        [SerializeField] private GameObject _tutorial;
+        [SerializeField] private List<Vector2> _sizes;
+        [SerializeField] private List<float> _alphas;
 
         [Header("Colors")]
-        [SerializeField] private SerializedDictionary<string, Color> terrain = new();
-        [SerializeField] private SerializedDictionary<string, Color> climate = new();
-        [SerializeField] private SerializedDictionary<float, Color> flora = new();
-        [SerializeField] private SerializedDictionary<float, Color> fauna = new();
-        [SerializeField] private SerializedDictionary<float, Color> population = new();
-        [SerializeField] private SerializedDictionary<string, Color> ecoCulture = new();
-        [SerializeField] private SerializedDictionary<string, Color> prodMode = new();
-        [SerializeField] private SerializedDictionary<string, Color> government = new();
-        [SerializeField] private SerializedDictionary<string, Color> civilization = new();
+        [SerializeField] private SerializedDictionary<string, Color> _terrain = new();
+        [SerializeField] private SerializedDictionary<string, Color> _climate = new();
+        [SerializeField] private SerializedDictionary<float, Color> _flora = new();
+        [SerializeField] private SerializedDictionary<float, Color> _fauna = new();
+        [SerializeField] private SerializedDictionary<float, Color> _population = new();
+        [SerializeField] private SerializedDictionary<string, Color> _ecoCulture = new();
+        [SerializeField] private SerializedDictionary<string, Color> _prodMode = new();
+        [SerializeField] private SerializedDictionary<string, Color> _government = new();
+        [SerializeField] private SerializedDictionary<string, Color> _civilization = new();
 
+        public static event Action<bool> onOpen;
         private Action Paint;
 
         private Map Map => Transmigratio.Instance.TMDB.map;
-        private WMSK WMSK => Map.WMSK;
+        private WMSK WMSK => MapData.WMSK;
         private int CountRegions => Map.AllRegions.Count;
         private TM_Region GetRegion(int index) => Map.AllRegions[index];
 
-        public void ClickTerrain() => OnClick(() => PaintByName(terrain, (int i) => GetRegion(i).Terrain.GetMax().key));
-        public void ClickClimate() => OnClick(() => PaintByName(climate, (int i) => GetRegion(i).Climate.GetMax().key));
-        public void ClickFlora() => OnClick(() => PaintByPercent(flora, (int i) => GetRegion(i).Flora.GetMax().value));
-        public void ClickFauna() => OnClick(() => PaintByPercent(fauna, (int i) => GetRegion(i).Fauna.GetMax().value));
-        public void ClickPopulation() => OnClick(() => PaintByMax(population, (int i) => GetRegion(i).Population));
-        public void ClickEcoCulture() => OnClick(() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.EcoCulture.GetMax().key));
-        public void ClickProdMode() => OnClick(() => PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ProdMode.GetMax().key));
-        public void ClickGovernment() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.Government.GetMax().key));
-        public void ClickCivilization() => OnClick(() => PaintByName(government, (int i) => GetRegion(i).CivMain.Name));
+        private protected override void Awake() {
+            base.Awake();
+            Tutorial.OnShowTutorial += ShowTutorial;
+            RegionDetails.Defoult.Panel.onClose += (bool b) => ColorBySelectedElement();
+            RegionDetails.StartGame.Panel.onClose += ColorBySelectedElement;
+        }
+
+        private protected override void OnEnable() {
+            base.OnEnable();
+            onOpen?.Invoke(true);
+        }
+
+        private void ShowTutorial(string tutName) {
+            if (tutName == "Layers") {
+                _tutorial?.SetActive(true);
+            }
+        }
+
+        public void ClickTerrain() => OnClick(() => PaintByName(_terrain, (int i) => GetRegion(i).Terrain.GetMax().key));
+        public void ClickClimate() => OnClick(() => PaintByName(_climate, (int i) => GetRegion(i).Climate.GetMax().key));
+        public void ClickFlora() => OnClick(() => PaintByPercent(_flora, (int i) => GetRegion(i).Flora.GetMax().value));
+        public void ClickFauna() => OnClick(() => PaintByPercent(_fauna, (int i) => GetRegion(i).Fauna.GetMax().value));
+        public void ClickPopulation() => OnClick(() => PaintByMax(_population, (int i) => GetRegion(i).Population));
+        public void ClickEcoCulture() => OnClick(() => PaintByName(_ecoCulture, (int i) => GetRegion(i).CivMain.EcoCulture.GetMax().key));
+        public void ClickProdMode() => OnClick(() => PaintByName(_ecoCulture, (int i) => GetRegion(i).CivMain.ProdMode.GetMax().key));
+        public void ClickGovernment() => OnClick(() => PaintByName(_government, (int i) => GetRegion(i).CivMain.Government.GetMax().key));
+        public void ClickCivilization() => OnClick(() => PaintByName(_government, (int i) => GetRegion(i).CivMain.Name));
 
         private void OnClick(Action PaintAction) {
             Timeline.TickShow -= Paint;
@@ -48,6 +73,26 @@ namespace Layers {
             Timeline.TickShow += Paint;
             PaintAction?.Invoke();
         }
+
+        public void Open() {
+            gameObject.SetActive(true);
+            ColorBySelectedElement();
+            _gradient.DOPause();
+            _scrollView.DOPause();
+            _gradient.DOFade(1, 1);
+            _scrollView.DOAnchorPosY(0, 1);
+        }
+
+        public void Close() {
+            _gradient.DOPause();
+            _scrollView.DOPause();
+            _gradient.DOFade(0, 1);
+            _scrollView.DOAnchorPosY(-1000, 1)
+                       .OnComplete(() => gameObject.SetActive(false));
+            Clear();
+        }
+
+        public void Hide() => gameObject.SetActive(false);
 
         private void PaintByName(SerializedDictionary<string, Color> dictionary, Func<int, string> GetName) {
             if (dictionary.Count == 0) return;
@@ -108,17 +153,17 @@ namespace Layers {
             return default;
         }
 
-        private protected override void SelectElement() {
+        private protected override void ColorBySelectedElement() {
             switch (GetSelectedElement<LayerElement>().index) {
-                case 0: PaintByName(terrain, (int i) => GetRegion(i).Terrain.GetMax().key); break;
-                case 1: PaintByName(climate, (int i) => GetRegion(i).Climate.GetMax().key); break;
-                case 2: PaintByPercent(flora, (int i) => GetRegion(i).Flora.GetMax().value); break;
-                case 3: PaintByPercent(fauna, (int i) => GetRegion(i).Fauna.GetMax().value); break;
-                case 4: PaintByMax(population, (int i) => GetRegion(i).Population); break;
-                case 5: PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.EcoCulture.GetMax().key); break;
-                case 6: PaintByName(ecoCulture, (int i) => GetRegion(i).CivMain.ProdMode.GetMax().key); break;
-                case 7: PaintByName(government, (int i) => GetRegion(i).CivMain.Government.GetMax().key); break;
-                case 8: PaintByName(government, (int i) => GetRegion(i).CivMain.Name); break;
+                case 0: PaintByName(_terrain, (int i) => GetRegion(i).Terrain.GetMax().key); break;
+                case 1: PaintByName(_climate, (int i) => GetRegion(i).Climate.GetMax().key); break;
+                case 2: PaintByPercent(_flora, (int i) => GetRegion(i).Flora.GetMax().value); break;
+                case 3: PaintByPercent(_fauna, (int i) => GetRegion(i).Fauna.GetMax().value); break;
+                case 4: PaintByMax(_population, (int i) => GetRegion(i).Population); break;
+                case 5: PaintByName(_ecoCulture, (int i) => GetRegion(i).CivMain.EcoCulture.GetMax().key); break;
+                case 6: PaintByName(_ecoCulture, (int i) => GetRegion(i).CivMain.ProdMode.GetMax().key); break;
+                case 7: PaintByName(_government, (int i) => GetRegion(i).CivMain.Government.GetMax().key); break;
+                case 8: PaintByName(_government, (int i) => GetRegion(i).CivMain.Name); break;
             }
         }
 
@@ -129,19 +174,19 @@ namespace Layers {
 
         private void UpdateSize(int index) {
             int sizeIndex = Mathf.Abs(index - _selectedIndex);
-            if (sizes.Count == 0) {
-                GetElement<LayerElement>(index).UpdateSize(Vector2.one, timeToUpdateSize);
-            } else if (sizeIndex < sizes.Count) {
-                GetElement<LayerElement>(index).UpdateSize(sizes[sizeIndex], timeToUpdateSize);
+            if (_sizes.Count == 0) {
+                GetElement<LayerElement>(index).UpdateSize(Vector2.one, _timeToUpdateSize);
+            } else if (sizeIndex < _sizes.Count) {
+                GetElement<LayerElement>(index).UpdateSize(_sizes[sizeIndex], _timeToUpdateSize);
             }
         }
 
         private void UpdateAlpha(int index) {
             int alphaIndex = Mathf.Abs(index - _selectedIndex);
-            if (alphas.Count == 0) {
-                GetElement<LayerElement>(index).UpdateAlpha(1f, timeToUpdateAlpha);
-            } else if (alphaIndex < alphas.Count) {
-                GetElement<LayerElement>(index).UpdateAlpha(alphas[alphaIndex], timeToUpdateAlpha);
+            if (_alphas.Count == 0) {
+                GetElement<LayerElement>(index).UpdateAlpha(1f, _timeToUpdateAlpha);
+            } else if (alphaIndex < _alphas.Count) {
+                GetElement<LayerElement>(index).UpdateAlpha(_alphas[alphaIndex], _timeToUpdateAlpha);
             }
         }
     }

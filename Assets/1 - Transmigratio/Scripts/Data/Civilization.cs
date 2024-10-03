@@ -3,15 +3,16 @@ using System.Linq;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using WorldMapStrategyKit;
 
 /// <summary>
-/// Экземпляр Civilization - это одна цивилизация
+/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Civilization - пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 /// </summary>
 [System.Serializable]
 public class Civilization {
     public string Name;
 
-    public SerializedDictionary<int, CivPiece> Pieces;      //суммируем население цивилизации - собираем с "кусочков"
+    public SerializedDictionary<int, CivPiece> Pieces;      //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 
     public Paramiter EcoCulture { get {
             Paramiter res = new(true);
@@ -38,11 +39,11 @@ public class Civilization {
         }
     }
 
-    //их нужно засунуть в CivParam
+    //пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ CivParam
     /// <summary>
-    /// Коэффициент способа производства
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     /// </summary>
-    public float GovernmentCorruption = 0.4f;      // коррупция
+    public float GovernmentCorruption = 0.4f;      // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     public static Action<CivPiece> onAddPiece;
     public static Action<CivPiece> onRemovePiece;
@@ -55,7 +56,7 @@ public class Civilization {
     }
 
     /// <summary>
-    /// версия для старта игры. Для других цивилизаций нужна перегрузка
+    /// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ. пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     /// </summary>
     public void StartGame(int region) {
         AddPiece(region, GameSettings.StartPopulation);
@@ -63,7 +64,7 @@ public class Civilization {
     }
 
     /// <summary>
-    /// Когда цивилизация появляется на новой территории, создаем новый экземпляр CivPiece. Передаём туда стартовое население, id региона
+    /// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ CivPiece. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, id пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     /// </summary>
     public void AddPiece(int region, int population) {
         CivPiece newPieceOfCiv = new CivPiece();
@@ -75,23 +76,27 @@ public class Civilization {
     }
 
     public void AddPiece(CivPiece piece, string newCivName, int newCategory) {
-        Pieces[piece.RegionID] = piece;
-        Pieces[piece.RegionID].CivName = newCivName;
-        Pieces[piece.RegionID].Category = newCategory;
         piece.Region.AddCivilization(newCivName);
-        onAddPiece?.Invoke(piece);
+        CivPiece newPieceOfCiv = new();
+        newPieceOfCiv.Init(piece, newCivName, newCategory);
+        newPieceOfCiv.Destroy = () => RemovePiece(newPieceOfCiv.RegionID);
+        Pieces[newPieceOfCiv.RegionID] = newPieceOfCiv;
+        onAddPiece?.Invoke(newPieceOfCiv);
     }
 
     /// <summary>
-    /// уберает цивилизацию из этого региона
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     /// </summary>
     public void RemovePiece(int region) {
+        if (!Pieces.ContainsKey(region)) 
+            return;
+
         onRemovePiece?.Invoke(Pieces[region]);
         Pieces[region].Region.CivsList.Remove(Name);
         Pieces.Remove(region);
     }
 
-    //UNDONE: Каждый тик происходит аллокация памяти
+    //UNDONE: пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     public void Play() {
         Dictionary<int, CivPiece> tickPieces = new(Pieces);
         foreach (var piece in tickPieces) {

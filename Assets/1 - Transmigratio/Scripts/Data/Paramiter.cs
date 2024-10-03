@@ -5,7 +5,7 @@ using UnityEngine;
 
 [System.Serializable]
 public class Paramiter {
-    // Set через paramiter[key] = value
+    // Set пїЅпїЅпїЅпїЅпїЅ paramiter[key] = value
     [SerializeField] private SerializedDictionary<string, ParamiterValue> quantities = new();
 
     private bool _isPercent;
@@ -18,6 +18,8 @@ public class Paramiter {
             }
         }
     }
+
+    public SerializedDictionary<string, ParamiterValue> QuantitiesDictionary => quantities;
 
     public Paramiter(bool isPercent) {
         _isPercent = isPercent;
@@ -58,6 +60,12 @@ public class Paramiter {
             quantities[quantity[i]] = val;
         }
     }
+    public void Init(SerializedDictionary<string, ParamiterValue> quantities)
+    {
+        foreach (var pair in quantities) {
+            this.quantities[pair.Key] = new ParamiterValue(pair.Value.value);
+        }
+    }
 
     public (string key, float value) GetMax() {
         (string key, float value) res = default;
@@ -71,7 +79,7 @@ public class Paramiter {
     }
 
     public static Paramiter operator +(Paramiter p1, Paramiter p2) {
-        Paramiter paramiter = new(p1._isPercent || p1._isPercent);
+        Paramiter paramiter = new(p1._isPercent || p2._isPercent);
         foreach(var quantity in p1.quantities) {
             paramiter[quantity.Key] = quantity.Value.value;
         }

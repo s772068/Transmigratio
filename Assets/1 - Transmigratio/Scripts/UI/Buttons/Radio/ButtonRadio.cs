@@ -8,43 +8,47 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     [SerializeField] private Sprite activeSprite;
     [SerializeField] private Sprite deactiveSprite;
     [SerializeField] private Sprite highlightedSprite;
+    
     public bool IsInterectable = true;
 
     [Space]
-    public UnityEvent<int> onClick = new UnityEvent<int>();
+    public UnityEvent<int> onSelect = new UnityEvent<int>();
+    public UnityEvent<int> onUnselect = new UnityEvent<int>();
 
-    private bool _isActive;
     private Image _image;
+    private bool _isSelected;
 
     public int Index { private get; set; }
     
     private void Awake() {
-        _image = GetComponent<Image>();
+        _image ??= GetComponent<Image>();
     }
 
-    public void Activate() {
-        _isActive = true;
-        _image.sprite = activeSprite;
-    }
-
-    public void Deactivate() {
-        _isActive = false;
-        _image.sprite = deactiveSprite;
-    }
-
-    public void OnPointerClick(PointerEventData eventData) {
-        if (IsInterectable)
-            onClick.Invoke(Index);
-    }
+    public void OnPointerClick(PointerEventData eventData) => Click();
 
     public void OnPointerEnter(PointerEventData eventData) {
-        if(highlightedSprite == null) return;
-        if (!_isActive) _image.sprite = highlightedSprite;
+        if (highlightedSprite == null) return;
+        if (!_isSelected) _image.sprite = highlightedSprite;
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         if (highlightedSprite == null) return;
-        if (_isActive) Activate();
+        if (_isSelected) Activate();
         else Deactivate();
+    }
+
+    public void Click() {
+        if (IsInterectable)
+            onSelect.Invoke(Index);
+    }
+
+    public void Activate() {
+        _isSelected = true;
+        _image.sprite = activeSprite;
+    }
+
+    public void Deactivate() {
+        _isSelected = false;
+        _image.sprite = deactiveSprite;
     }
 }

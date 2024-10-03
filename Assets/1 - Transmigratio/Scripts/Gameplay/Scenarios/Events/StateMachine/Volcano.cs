@@ -19,7 +19,7 @@ namespace Gameplay.Scenarios.Events.StateMachines {
         private State _state = State.Start;
 
         private protected override string Name => "Volcano";
-        private int CalmVolcanoPoints => (int) (_piece.Population.Value / calmVolcanoPointsDivision);
+        private int CalmVolcanoPoints => (int) (_eventPiece.Population.Value / calmVolcanoPointsDivision);
 
         public override void Init() {
             base.Init();
@@ -33,56 +33,62 @@ namespace Gameplay.Scenarios.Events.StateMachines {
         }
 
         private protected override void InitDesidions() {
-            AddDesidion(CalmVolcano, Local("CalmVolcano"), (piece) => CalmVolcanoPoints);
-            AddDesidion(ReduceLosses, Local("ReduceLosses"), (piece) => reduceLossesPoints);
             AddDesidion(Nothing, Local("Nothing"), (piece) => 0);
+            AddDesidion(CalmVolcano, Local("CalmVolcano"), (piece) => GetDesidionCost(CalmVolcanoPoints));
+            AddDesidion(ReduceLosses, Local("ReduceLosses"), (piece) => GetDesidionCost(reduceLossesPoints));
         }
 
         private bool CalmVolcano(CivPiece piece, Func<CivPiece, int> interventionPoints) {
-            if (!_useIntervention(interventionPoints(_piece)))
+            if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "CalmVolcano");
-            EndEvent();
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "CalmVolcano", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { Count = (int)Math.Abs(piece.PopulationGrow.value) });
+            EndEvent(true);
             return true;
         }
 
         private bool ReduceLosses(CivPiece piece, Func<CivPiece, int> interventionPoints) {
-            if (!_useIntervention(interventionPoints(_piece)))
+            if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            _piece.Population.Value -= (int) (_piece.Population.Value * fullPercentFood * partPercentPopulation);
-            _piece.ReserveFood.value -= _piece.ReserveFood.value * fullPercentFood * partPercentFood;
-            Global.Migration.OnMigration(_piece);
-            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "ReduceLosses");
-            EndEvent();
+            int dead = (int)(piece.Population.Value * fullPercentFood * partPercentPopulation);
+            piece.Population.Value -= dead;
+            piece.ReserveFood.value -= piece.ReserveFood.value * fullPercentFood * partPercentFood;
+            Global.Migration.OnMigration(piece);
+            ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "ReduceLosses", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { Count = dead });
+            EndEvent(true);
             return true;
         }
 
-        public void ActivateVolcano() {
-            _piece.Population.Value -= (int) (_piece.Population.Value * fullPercentFood);
-            _piece.ReserveFood.value -= _piece.ReserveFood.value * fullPercentFood;
+        public void ActivateVolcano(bool nextState = false) {
+            int dead = (int)(_eventPiece.Population.Value * fullPercentFood);
+            _eventPiece.Population.Value -= dead;
+            _eventPiece.ReserveFood.value -= _eventPiece.ReserveFood.value * fullPercentFood;
             Global.Migration.OnMigration(_piece);
-            ChroniclesController.Deactivate(Name, _piece.RegionID, panelSprite, "ActivateVolcano");
-            EndEvent();
+            ChroniclesController.Deactivate(Name, _eventPiece.RegionID, panelSprite, "ActivateVolcano", 
+                new Chronicles.Data.Panel.LocalVariablesChronicles { Count = dead });
+            EndEvent(nextState);
         }
 
         private bool Nothing(CivPiece piece, Func<CivPiece, int> interventionPoints) {
-            if (!_useIntervention(interventionPoints(_piece)))
+            if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            ChroniclesController.AddPassive(Name, _piece.RegionID, panelSprite, "Nothing");
+            ActivateVolcano(true);
             return true;
         }
 
-        private void EndEvent() {
-            _piece.RemoveEvent(this);
+        private void EndEvent(bool nextState = false) {
+            _eventPiece.RemoveEvent(this);
             CheckMarker();
-            NextState();
+            if (nextState)
+                NextState();
         }
 
         private protected override void OpenPanel(CivPiece piece = null) {
-            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, _piece, panelSprite, Local("Title"),
+            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, _eventPiece, panelSprite, Local("Title"),
                                     Territory(), Local("Description"), _desidions);
         }
 

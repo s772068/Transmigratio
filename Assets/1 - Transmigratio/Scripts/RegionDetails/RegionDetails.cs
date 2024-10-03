@@ -3,78 +3,80 @@ using UnityEngine.UI;
 using UnityEngine;
 using UI;
 
-public class RegionDetails : MonoBehaviour {
-    [SerializeField] private RegionElements _leftSide;
-    [SerializeField] private RegionParams _centerSide;
-    [SerializeField] private RegionDetailsRightSide _rightSide;
-    [SerializeField] private ButtonsRadioGroup _tabs;
-    [SerializeField] private Image _civAvatar;
+namespace RegionDetails.Old {
+    public class RegionDetails : MonoBehaviour {
+        [SerializeField] private RegionElements _leftSide;
+        [SerializeField] private RegionParams _centerSide;
+        [SerializeField] private RegionDetailsRightSide _rightSide;
+        [SerializeField] private ButtonsRadioGroup _tabs;
+        [SerializeField] private Image _civAvatar;
 
-    public int RegionID;
+        public int RegionID;
 
-    private Dictionary<string, float> _dic;
-    private string _element;
+        private Dictionary<string, float> _dic;
+        private string _element;
 
-    private TM_Region Region => Transmigratio.Instance.TMDB.map.AllRegions[RegionID];
-    public Sprite Avatar { set => _civAvatar.sprite = value; }
-    
-    private void Awake() {
-        _tabs.onClick = OnClickTabs;
-        _leftSide.onClick = OnClickElement;
-        _centerSide.onClick = OnClickParamiter;
-    }
+        private TM_Region Region => Transmigratio.Instance.TMDB.map.AllRegions[RegionID];
+        public Sprite Avatar { set => _civAvatar.sprite = value; }
 
-    private void OnEnable() {
-        SetRegion(RegionID);
-        Timeline.TickShow += UpdateParams;
-    }
+        private void Awake() {
+            _tabs.onSelect = OnClickTabs;
+            _leftSide.onClick = OnClickElement;
+            _centerSide.onClick = OnClickParamiter;
+        }
 
-    private void OnDisable() {
-        Timeline.TickShow -= UpdateParams;
-    }
+        private void OnEnable() {
+            SetRegion(RegionID);
+            Timeline.TickShow += UpdateParams;
+        }
 
-    public void ClickStartGame() {
-        _leftSide.ClickCivTab();
-        _tabs.gameObject.SetActive(true);
-    }
+        private void OnDisable() {
+            Timeline.TickShow -= UpdateParams;
+        }
 
-    private void OnClickTabs(int i) {
-        _centerSide.ClearParams();
-        _rightSide.gameObject.SetActive(false);
-    }
+        public void ClickStartGame() {
+            _leftSide.ClickCivTab();
+            _tabs.gameObject.SetActive(true);
+        }
 
-    public void OnClickElement(string key) {
-        _centerSide.ClearParams();
-        _rightSide.gameObject.SetActive(false);
-        _element = key;
-        UpdateParams();
-    }
+        private void OnClickTabs(int i) {
+            _centerSide.ClearParams();
+            _rightSide.gameObject.SetActive(false);
+        }
 
-    private void UpdateParams() {
-        if (_element != null)
-            _centerSide.UpdateParamiters(RegionID, _element);
-    }
+        public void OnClickElement(string key) {
+            _centerSide.ClearParams();
+            _rightSide.gameObject.SetActive(false);
+            _element = key;
+            UpdateParams();
+        }
 
-    private void OnClickParamiter(string key) {
-        _rightSide.gameObject.SetActive(true);
-        _rightSide.UpdateData(_element, key);
-    }
+        private void UpdateParams() {
+            if (_element != null)
+                _centerSide.UpdateParamiters(_element);
+        }
 
-    public void NextRegion() => SetRegion((RegionID + 1) % Transmigratio.Instance.TMDB.map.AllRegions.Count);
-    public void PrevRegion() => SetRegion(RegionID == 0 ? (Transmigratio.Instance.TMDB.map.AllRegions.Count - 1) : (RegionID - 1));
+        private void OnClickParamiter(string key) {
+            _rightSide.gameObject.SetActive(true);
+            _rightSide.UpdateData(_element, key);
+        }
 
-    private void SetRegion(int index) {
-        RegionID = index;
-        _leftSide.ClearElements();
-        _centerSide.ClearParams();
+        public void NextRegion() => SetRegion((RegionID + 1) % Transmigratio.Instance.TMDB.map.AllRegions.Count);
+        public void PrevRegion() => SetRegion(RegionID == 0 ? (Transmigratio.Instance.TMDB.map.AllRegions.Count - 1) : (RegionID - 1));
 
-        bool isHasCiv = Region.CivMain != null;
-        if (isHasCiv) _leftSide.ClickCivTab();
-        else _leftSide.ClickRegionTab();
+        private void SetRegion(int index) {
+            RegionID = index;
+            _leftSide.ClearElements();
+            _centerSide.ClearParams();
 
-        _tabs.gameObject.SetActive(isHasCiv);
-        _centerSide.Title = Region.Name;
-        _leftSide.ClickRegionTab();
-        _leftSide.SelectElement("Climate");
+            bool isHasCiv = Region.CivMain != null;
+            if (isHasCiv) _leftSide.ClickCivTab();
+            else _leftSide.ClickRegionTab();
+
+            _tabs.gameObject.SetActive(isHasCiv);
+            _centerSide.Title = Region.Name;
+            _leftSide.ClickRegionTab();
+            _leftSide.SelectElement("Climate");
+        }
     }
 }
