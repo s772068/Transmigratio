@@ -42,7 +42,8 @@ namespace RegionDetails.Defoult {
 
 
         public void OnSelectParamiter(string paramiter) {
-            _elements.Label = paramiter;
+            if(!_elements.gameObject.activeSelf) _elements.gameObject.SetActive(true);
+            _elements.Label = Localization.Load(paramiter, paramiter);
             _paramiter = paramiter;
             /// Избавится от этого костыля
             _description?.Destroy();
