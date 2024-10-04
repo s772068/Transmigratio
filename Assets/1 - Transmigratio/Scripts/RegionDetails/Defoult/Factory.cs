@@ -14,11 +14,9 @@ namespace RegionDetails.Defoult {
             return res;
         }
 
-        public static Elements.Element Create(Elements.Element prefab, Transform parent, int index, string label, float value, bool isPercent) {
+        public static Elements.Element Create(Elements.Element prefab, Transform parent, int index, string paramiter, string label, float value) {
             Elements.Element res = Object.Instantiate(prefab, parent);
-            res.Index = index;
-            res.Label = label;
-            res.SetValue(value, isPercent);
+            res.Init(index, paramiter, label, value);
             return res;
         }
 

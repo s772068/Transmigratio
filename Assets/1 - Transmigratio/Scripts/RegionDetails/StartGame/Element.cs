@@ -1,4 +1,3 @@
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -7,8 +6,10 @@ namespace RegionDetails.StartGame {
         [SerializeField] private Image _backGradient;
 
         public Color Color { set { if (_backGradient != null) _backGradient.color = value; } }
-
-        public void OnPointerClick(PointerEventData eventData) {
+        public void Init(Color color, string paramiter, string label, float value) {
+            Label = Localization.Load(paramiter, label);
+            SetValue(value, false);
+            Color = color;
         }
     }
 }

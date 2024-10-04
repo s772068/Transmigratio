@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using RegionDetails.StartGame;
 
 namespace RegionDetails.Base {
     public class Element : MonoBehaviour {

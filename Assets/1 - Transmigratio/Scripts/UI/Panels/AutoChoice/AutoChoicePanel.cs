@@ -5,6 +5,7 @@ using System;
 using TMPro;
 using UI;
 using RegionDetails.Defoult.Tutorials;
+using static UnityEngine.Tilemaps.TilemapRenderer;
 
 namespace Gameplay.Scenarios.Events {
     public class AutoChoicePanel : Panel {
@@ -43,6 +44,7 @@ namespace Gameplay.Scenarios.Events {
             onOpen?.Invoke(true);
             AddChoiceElement();
             DragPanelControl.DragElementsSorted += OnPriorityUpdate;
+            DragPanelControl.onSwapOriginPos += OnSwapOriginPos;
             AutoChoiceElement.SelectElement += OnSelectEvent;
         }
 
@@ -54,11 +56,13 @@ namespace Gameplay.Scenarios.Events {
             }
             if (selectEvent != null)
                 OnSelectEvent(selectEvent);
+            InitSortedOrders();
         }
 
         private protected override void OnDisable() {
             base.OnDisable();
             DragPanelControl.DragElementsSorted -= OnPriorityUpdate;
+            DragPanelControl.onSwapOriginPos -= OnSwapOriginPos;
             AutoChoiceElement.SelectElement -= OnSelectEvent;
         }
 
@@ -106,6 +110,31 @@ namespace Gameplay.Scenarios.Events {
             _pointsTMP.text = _curPoints.ToString();
             _slider.value = _slider.maxValue / _maxPoints * _curPoints;
         }
+
+        // Можно выделить в отдельный класс
+        private void InitSortedOrders() {
+            for(int i = 0; i < _dragPanel.Elements.Count; ++i) {
+                UpdateSortedOrder(_dragPanel.Elements[i]);
+            }
+        }
+
+        private void OnSwapOriginPos(DragElement dragable, DragElement swapElement) {
+            UpdateSortedOrder(dragable);
+            UpdateSortedOrder(swapElement);
+        }
+
+        private void UpdateSortedOrder(DragElement element) {
+            element.GetComponent<AutoChoiceDesidion>().Num.text = SortedToString(element.SortOrder);
+        }
+
+        private string SortedToString(int sortedOrder) {
+            string res = "";
+            for (int i = 0; i < sortedOrder + 1; ++i) {
+                res += "I";
+            }
+            return res;
+        }
+        //
 
         private void OnPriorityUpdate() {
             List<Data.Desidion> newDesidions = new(AutoChoice.Events[_selectEvent]);

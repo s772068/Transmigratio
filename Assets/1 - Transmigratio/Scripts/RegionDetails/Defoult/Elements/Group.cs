@@ -32,7 +32,7 @@ namespace RegionDetails.Defoult.Elements {
             dic = Transmigratio.Instance.TMDB.GetParam(paramiter);
             foreach (var pair in dic) {
                 Debug.Log(paramiter);
-                Element element = Factory.Create(_elementPref, _content, _elements.Count, pair.Key, pair.Value, paramiter != "Civilizations");
+                Element element = Factory.Create(_elementPref, _content, _elements.Count, paramiter, pair.Key, pair.Value);
                 element.IsSelectable = IsSelectable;
                 element.onSelect = OnSelect;
                 _elements.Add(element);

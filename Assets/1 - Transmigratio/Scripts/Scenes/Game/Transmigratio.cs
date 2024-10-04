@@ -1,9 +1,9 @@
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization;
 using UnityEngine;
 using Gameplay;
 using System;
 using UI;
-using UnityEngine.Localization.Settings;
-using UnityEngine.Localization;
 
 public class Transmigratio : PersistentSingleton<Transmigratio> {
     [SerializeField] private TMDB _tmdb;
@@ -18,6 +18,7 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     private bool _isClickableMarker = true;
 
     public TMDB TMDB => _tmdb;
+    public HUD HUD => _hud;
     public Intervention Intervention => _intervention;
     public int MaxInterventionPoints => _intervetionPoints;
 
