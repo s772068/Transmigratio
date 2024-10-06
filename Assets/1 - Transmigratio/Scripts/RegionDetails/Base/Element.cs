@@ -9,12 +9,7 @@ namespace RegionDetails.Base {
         [SerializeField] private TMP_Text _percent;
         [SerializeField] private Slider _slider;
         
-        public string Label {
-            set {
-                _label.text = value;
-                name = value;
-            }
-        }
+        public string Label { set => _label.text = value; }
 
         public void SetValue(float value, bool isPercent = true) {
             _percent.text = $"{(int) value}{(isPercent ? "%" : "")}";

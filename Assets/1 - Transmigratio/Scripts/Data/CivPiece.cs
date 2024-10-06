@@ -77,7 +77,7 @@ public class CivPiece {
     /// </summary>
     public void Init(int region, string civilization, int startPopulation) {
         EcoCulture.Init(("Hunters", GameSettings.StartHunters));
-        EcoCulture.Init("Farmers", "Nomads", "Mountain", "City");
+        EcoCulture.Init("Farmers", "Nomads", "City");
 
         ProdMode.Init(("PrimitiveCommunism", GameSettings.StartPrimitiveCommunism));
         ProdMode.Init("Slavery", "Feodalism", "Capitalism", "Socialism", "Communism");

@@ -17,6 +17,7 @@ namespace RegionDetails.Defoult {
         public static Elements.Element Create(Elements.Element prefab, Transform parent, int index, string paramiter, string label, float value) {
             Elements.Element res = Object.Instantiate(prefab, parent);
             res.Init(index, paramiter, label, value);
+            res.name = label;
             return res;
         }
 
