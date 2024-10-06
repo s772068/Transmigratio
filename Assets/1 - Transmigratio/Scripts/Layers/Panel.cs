@@ -42,13 +42,17 @@ namespace Layers {
         private protected override void Awake() {
             base.Awake();
             Tutorial.OnShowTutorial += ShowTutorial;
-            RegionDetails.Defoult.Panel.onClose += (bool b) => ColorBySelectedElement();
             RegionDetails.StartGame.Panel.onClose += ColorBySelectedElement;
         }
 
         private protected override void OnEnable() {
             base.OnEnable();
             onOpen?.Invoke(true);
+            Timeline.TickShow += ColorBySelectedElement;
+        }
+
+        private void OnDisable() {
+            Timeline.TickShow -= ColorBySelectedElement;
         }
 
         private void ShowTutorial(string tutName) {
@@ -75,6 +79,7 @@ namespace Layers {
         }
 
         public void Open() {
+            Timeline.TickShow += Paint;
             gameObject.SetActive(true);
             ColorBySelectedElement();
             _gradient.DOPause();
@@ -84,6 +89,7 @@ namespace Layers {
         }
 
         public void Close() {
+            Timeline.TickShow -= Paint;
             _gradient.DOPause();
             _scrollView.DOPause();
             _gradient.DOFade(0, 1);
@@ -138,7 +144,6 @@ namespace Layers {
         }
 
         public void Clear() {
-            Timeline.TickShow -= Paint;
             for (int i = 0; i < CountRegions; ++i) {
                 WMSK.ToggleCountrySurface(i, true, Color.clear);
             }
