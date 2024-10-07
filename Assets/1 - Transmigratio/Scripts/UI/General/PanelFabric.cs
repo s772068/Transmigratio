@@ -36,6 +36,7 @@ public static class PanelFabric
     public static void CreateNews(Transform parent, NewsPanel newsPrefab, NewsSO news)
     {
         NewsPanel panel = NewsPanel.Instantiate(newsPrefab, parent);
+        panel.gameObject.SetActive(false);
         panel.Init(news);
     }
 }
