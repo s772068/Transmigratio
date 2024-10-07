@@ -28,6 +28,7 @@ namespace UI
             _image.sprite = news.Image;
             _title.SetEntry(news.Title);
             _description.SetEntry(news.Description);
+            gameObject.SetActive(true);
         }
     }
 }

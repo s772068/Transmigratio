@@ -146,6 +146,8 @@ namespace Gameplay.Scenarios.Events {
             }
 
             AutoChoiceUpdate?.Invoke(_selectEvent, newDesidions, _autoEnable.isOn);
+            
+            _elements[_selectEvent].UpdateTextPriority(newDesidions);
         }
 
         public void UpdateSlider()

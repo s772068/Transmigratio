@@ -4,6 +4,7 @@ using System;
 using UnityEngine.EventSystems;
 
 public class DragPanelControl : MonoBehaviour {
+    [SerializeField] private bool _useAncorsPoints = false;
     [SerializeField] private bool _horizontal = true;
     [SerializeField] private bool _vertical = true;
     [SerializeField] private DragElement _draggingObj;
@@ -66,8 +67,16 @@ public class DragPanelControl : MonoBehaviour {
 
         DragFingerControler.OnTouched += Dragging;
         RectTransform rect = GetComponent<RectTransform>();
-        _maxYPoints.x = transform.position.y + rect.sizeDelta.y / 2;
-        _maxYPoints.y = transform.position.y - rect.sizeDelta.y / 2;
+        if (!_useAncorsPoints)
+        {
+            _maxYPoints.x = transform.position.y + rect.sizeDelta.y / 2;
+            _maxYPoints.y = transform.position.y - rect.sizeDelta.y / 2;
+        }    
+        else
+        {
+            _maxYPoints.x = transform.position.y + rect.rect.height / 2;
+            _maxYPoints.y = transform.position.y - rect.rect.height / 2;
+        }
     }
 
     private void OnDestroy() => DragFingerControler.OnTouched -= Dragging;
