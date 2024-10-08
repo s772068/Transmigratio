@@ -21,7 +21,7 @@ namespace Gameplay.Scenarios.Events.Local {
             piece.AddEvent(this);
             CreateMarker(piece);
 
-            if (!AutoChoice) {
+            if (!AutoChoice && _isAutoOpenPanel) {
                 OpenPanel(piece);
             }
             else

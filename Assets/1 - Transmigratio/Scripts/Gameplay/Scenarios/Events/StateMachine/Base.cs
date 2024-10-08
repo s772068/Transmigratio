@@ -56,7 +56,7 @@ namespace Gameplay.Scenarios.Events.StateMachines {
             CreateMarker();
             _eventPiece.AddEvent(this);
 
-            if (!AutoChoice)
+            if (!AutoChoice && _isAutoOpenPanel)
                 OpenPanel(_eventPiece);
             else
             {
