@@ -6,10 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    [SerializeField] private bool _debugLoad = false;
 
     public void OpenScene(int index)
     {
-        StartCoroutine(DebugLoad(index));
+        if (_debugLoad)
+            StartCoroutine(DebugLoad(index));
+        else
+            SceneManager.LoadScene(index);
     }
 
     private IEnumerator DebugLoad(int index)
