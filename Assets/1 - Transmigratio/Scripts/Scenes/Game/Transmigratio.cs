@@ -38,8 +38,6 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     }
 
     public new void Awake() {
-        LocalizationSettings.SelectedLocale = _local;
-
         base.Awake();
         TMDB.TMDBInit();
         MapData.Init(borderTexture);
@@ -50,6 +48,11 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
         _news = new News(HUD.Instance.PanelsParent, _newsPrefab, TMDB.News);
 
         RegionDetails.StartGame.Panel.onStartGame += StartGame;
+    }
+
+    private void Start()
+    {
+        LocalizationSettings.SelectedLocale = _local;
     }
 
     public void UnselectRegion() {
