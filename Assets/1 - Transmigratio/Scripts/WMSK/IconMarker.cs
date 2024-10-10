@@ -3,7 +3,7 @@ using System;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class IconMarker : MonoBehaviour {
-    private SpriteRenderer _sr;
+    [SerializeField] private SpriteRenderer _sr;
 
     public Sprite Sprite { set => _sr.sprite = value; }
     public CivPiece Piece;
@@ -17,7 +17,4 @@ public class IconMarker : MonoBehaviour {
 
     public void Destroy() => Destroy(gameObject);
 
-    private void Awake() {
-        _sr = GetComponent<SpriteRenderer>();
-    }
 }

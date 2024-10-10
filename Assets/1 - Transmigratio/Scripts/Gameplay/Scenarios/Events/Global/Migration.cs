@@ -165,7 +165,7 @@ namespace Gameplay.Scenarios.Events.Global {
             marker.Piece = piece;
             position.z = -0.1f;
 
-            MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.03f, true, true);
+            MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.018f, true, true);
             handler.allowDrag = false;
 
             return marker;
