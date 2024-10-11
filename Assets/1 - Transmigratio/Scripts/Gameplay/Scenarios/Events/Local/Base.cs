@@ -46,6 +46,8 @@ namespace Gameplay.Scenarios.Events.Local {
         private protected override void CreateMarker(CivPiece piece) {
             if (piece.Region.Marker == null)
                 piece.Region.Marker = CreateMarker(WMSK.countries[piece.Region.Id].centroid, piece);
+            else
+                piece.Region.Marker.SetCount += 1;
             piece.Region.Marker.onClick += (piece) => OnClickMarker(piece);
         }
 
@@ -59,7 +61,10 @@ namespace Gameplay.Scenarios.Events.Local {
                 piece.Region.Marker = null;
             }    
             else if (piece.Region.Marker != null)
+            {
+                piece.Region.Marker.SetCount -= 1;
                 piece.Region.Marker.onClick -= (piece) => OnClickMarker(piece);
+            }
         }
     }
 }

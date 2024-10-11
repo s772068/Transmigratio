@@ -61,6 +61,7 @@ namespace Gameplay.Scenarios.Events {
             IconMarker marker = Instantiate(markerPrefab);
             marker.Piece = piece;
             marker.Sprite = markerSprite;
+            marker.SetCount = 1;
             position.z = -0.1f;
 
             MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.018f, true, true);
