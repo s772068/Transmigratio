@@ -28,6 +28,13 @@ public class IconMarker : MonoBehaviour {
     public Action<CivPiece> onClick;
     public Action OnTimeDestroy;
 
+    public static event Action MarkerInst;
+
+    private void Start()
+    {
+        MarkerInst?.Invoke();
+    }
+
     public void Click() {
         onClick?.Invoke(Piece);
     }

@@ -4,8 +4,6 @@ using UnityEngine;
 using System;
 using TMPro;
 using UI;
-using RegionDetails.Defoult.Tutorials;
-using static UnityEngine.Tilemaps.TilemapRenderer;
 
 namespace Gameplay.Scenarios.Events {
     public class AutoChoicePanel : Panel {
