@@ -69,7 +69,7 @@ public class Timeline : PersistentSingleton<Timeline> {
         else if (_timeDelay == _timeDelayLimit.x)
             Rewind();
         else
-            Pause();
+            Stop();
     }
 
     public void Play() {

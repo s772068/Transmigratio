@@ -10,12 +10,12 @@ public class Tutorial : MonoBehaviour {
     private const int START_REGION_DETAILS_SHIFT = 1 << 3;
     private const int REGION_DETAILS_SHIFT = 1 << 4;
     private const int HUD_SHIFT = 1 << 5;
+    private const int EVENT_SHIFT = 1 << 6;
+    private const int MARKERS_SHIFT = 1 << 7;
+    private const int LAYERS_SHIFT = 1 << 8;
+    private const int AUTOCHOICE_SHIFT = 1 << 9;
     // private const int START_SHIFT = 1 << 6;
-    private const int EVENT_SHIFT = 1 << 7;
-    // private const int MARKERS_SHIFT = 1 << 8;
-    private const int LAYERS_SHIFT = 1 << 9;
     // private const int CHRONICLES_SHIFT = 1 << 10;
-    private const int AUTOCHOICE_SHIFT = 1 << 11;
 
     private const TutorialSteps _allSteps = TutorialSteps.Welcome | TutorialSteps.Goal | TutorialSteps.StartRegionDetails |
                   TutorialSteps.RegionDetails | TutorialSteps.HUD/* | TutorialSteps.Start*/ | TutorialSteps.Event | /*TutorialSteps.Markers |*/
@@ -24,6 +24,7 @@ public class Tutorial : MonoBehaviour {
 
     [SerializeField] private bool _suggestTutorial = true;
     [SerializeField] private TutorialSteps _steps;
+    [SerializeField] private GameObject _blurBG;
     private bool _tutorialEnded = false;
     
     public static Action<string> OnShowTutorial;
@@ -38,7 +39,7 @@ public class Tutorial : MonoBehaviour {
         HUD = HUD_SHIFT,
         //Start = START_SHIFT,
         Event = EVENT_SHIFT,
-        //Markers = MARKERS_SHIFT,
+        Markers = MARKERS_SHIFT,
         Layers = LAYERS_SHIFT,
         //Chronicles = CHRONICLES_SHIFT,
         AutoChoice = AUTOCHOICE_SHIFT,
@@ -50,7 +51,7 @@ public class Tutorial : MonoBehaviour {
     [SerializeField] private GameObject _HUD;
     [SerializeField] private GameObject _startGame;
     //[SerializeField] private GameObject _gameEvent;
-    //[SerializeField] private GameObject _markers;
+    [SerializeField] private GameObject _markers;
     //[SerializeField] private GameObject _layers;
     //[SerializeField] private GameObject _chrono;
     //[SerializeField] private GameObject _autoChoice;
@@ -62,8 +63,9 @@ public class Tutorial : MonoBehaviour {
         RegionDetails.Defoult.Panel.onClose += TutorialByHUD;
         Gameplay.Scenarios.Events.AutoChoicePanel.onOpen += TutorialByAutoChoice;
         Layers.Panel.onOpen += TutorialByLayers;
+        EventPanel.PanelOpen += TutorialByEvent;
+        IconMarker.MarkerInst += TutorialByMarker;
         // EventPanel.EventPanelOpen += GameEvent;
-        // EventPanel.EventPanelClose += GameMarker;
     }
 
     private void OnDisable() {
@@ -72,8 +74,9 @@ public class Tutorial : MonoBehaviour {
         RegionDetails.Defoult.Panel.onClose -= TutorialByHUD;
         Gameplay.Scenarios.Events.AutoChoicePanel.onOpen -= TutorialByAutoChoice;
         Layers.Panel.onOpen -= TutorialByLayers;
+        EventPanel.PanelOpen -= TutorialByEvent;
+        IconMarker.MarkerInst -= TutorialByMarker;
         // EventPanel.EventPanelOpen -= GameEvent;
-        // EventPanel.EventPanelClose -= GameMarker;
     }
 
     private void Start() {
@@ -138,6 +141,16 @@ public class Tutorial : MonoBehaviour {
         }
     }
 
+    public void TutorialByEvent(bool open)
+    {
+        if (!_steps.HasFlag(TutorialSteps.Event))
+        {
+            if (open) OnShowTutorial?.Invoke("Event");
+            Debug.Log("Event");
+            _steps += (int)TutorialSteps.AutoChoice;
+        }
+    }
+
     //public void GameStarted(bool open) {
     //    if (!_steps.HasFlag(TutorialSteps.Start)) {
     //        if (open) {
@@ -164,16 +177,14 @@ public class Tutorial : MonoBehaviour {
     //    }
     //}
 
-    //public void GameMarker(bool open) {
-    //    if (!open && !_steps.HasFlag(TutorialSteps.Markers)) {
-    //        _markers.SetActive(open);
-    //        ActivateZone(open);
-    //        _steps += (int)TutorialSteps.Markers;
-    //    } else if (open && !_steps.HasFlag(TutorialSteps.Markers)) {
-    //        _markers.SetActive(open);
-    //        ActivateZone(open);
-    //    }
-    //}
+    public void TutorialByMarker() {
+        if (!_steps.HasFlag(TutorialSteps.Markers)) {
+            Timeline.Instance.Pause();
+            _blurBG.SetActive(true);
+            _markers.SetActive(true);
+            _steps += (int)TutorialSteps.Markers;
+        }
+    }
 
     //public void GameLayers(bool open)
     //{
