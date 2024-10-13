@@ -118,17 +118,17 @@ namespace Gameplay.Scenarios {
             Population += (int) PopulationGrow;
             if (Population <= data.MinPiecePopulation) { _piece.Destroy?.Invoke(); return; }
             ReserveFood += TakenFood - GivenFood;
-            RequestFood = Population / data.val4;
+            RequestFood = Population / data.peopleForFood;
             GivenFood = ReserveFood > RequestFood ? RequestFood : ReserveFood;
-            PopulationGrow = Population * _governmentCorruption * GivenFood / RequestFood - Population / data.val5;
+            PopulationGrow = Population * _governmentCorruption * GivenFood / RequestFood - Population / data.peopleNaturalLoss;
             _populationGrowPercent = PopulationGrow / Population * data.val6;
             Flora = Math.Min(Flora - TakenFood/ data.val7 + _floraGrow, _flora.GetStartValue("Flora"));
             Fauna = Math.Min(Fauna - TakenFood/ data.val8 + _faunaGrow, _fauna.GetStartValue("Fauna"));
-            _floraKr = (float) (Math.Pow(Flora, data.val9) / data.val10);
-            _faunaKr = (float) (Math.Pow(Fauna, data.val11) / data.val12);
+            _floraKr = (float) (Math.Pow(Flora, data.krDegree) / data.krModifier);
+            _faunaKr = (float) (Math.Pow(Fauna, data.krDegree) / data.krModifier);
             TakenFood = ecoCulture == "Farmers" ?
-                Population / data.val13 * _prodModeK * _floraKr :
-                Population / data.val14 * _prodModeK * _faunaKr;
+                Population / data.takenFoodModifier * _prodModeK * _floraKr :
+                Population / data.takenFoodModifier * _prodModeK * _faunaKr;
 
             OnUpdateDemography?.Invoke(_piece);
         }
@@ -143,17 +143,14 @@ namespace Gameplay.Scenarios {
             public float val1 = 50f;
             public float val2 = 60f;
             public float val3 = 50f;
-            public float val4 = 150f;
-            public float val5 = 3f;
+            public float peopleForFood = 150f;
+            public float peopleNaturalLoss = 3f;
             public float val6 = 100f;
             public float val7 = 10f;
             public float val8 = 10f;
-            public double val9 = 0.58d;
-            public float val10 = 10f;
-            public double val11 = 0.58d;
-            public float val12 = 10f;
-            public float val13 = 100f;
-            public float val14 = 100f;
+            public double krDegree = 0.58d;
+            public float krModifier = 10f;
+            public float takenFoodModifier = 100f;
         }
     }
 }

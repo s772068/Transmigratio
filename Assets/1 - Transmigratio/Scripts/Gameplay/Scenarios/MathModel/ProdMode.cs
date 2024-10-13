@@ -47,20 +47,20 @@ namespace Gameplay.Scenarios {
 
         private static void Update() {
             string ecoCulture = _ecoCulture.GetMax().key;
-            if (ecoCulture == "Hunters") PrimitiveCommunism += data.add_PC;
-            if (ecoCulture == "Farmers" || ecoCulture == "Nomads") {
-                Slavery += data.add_Slavery;
-                Feodalism += data.add_Feodalism;
+            if (ecoCulture == "Hunters") PrimitiveCommunism += data.AddProdMode;
+            if (ecoCulture == "Farmers") {
+                Slavery += data.AddProdMode;
+                Feodalism += data.AddProdMode;
             }
+            if (ecoCulture == "Nomads")
+                Feodalism += data.AddProdMode;
 
             OnUpdateProdMode?.Invoke(_piece);
         }
 
         [Serializable]
         public class Data {
-            public float add_PC = 1;
-            public float add_Slavery = 1;
-            public float add_Feodalism = 1;
+            public float AddProdMode = 1f;
         }
     }
 }
