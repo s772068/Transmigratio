@@ -34,6 +34,16 @@ namespace Gameplay.Scenarios {
             }
         }
 
+        private static float Townsman
+        {
+            get => _ecoCulture["Townsman"];
+            set
+            {
+                _ecoCulture.GetValue("Townsman").onUpdate?.Invoke(Townsman, value, _piece);
+                _ecoCulture["Townsman"] = value;
+            }
+        }
+
         private static float Plain => _terrain["Plain"];
         private static float Forest => _terrain["Forest"];
         private static float Desert => _terrain["Desert"];
@@ -53,9 +63,12 @@ namespace Gameplay.Scenarios {
         }
 
         private static void Update() {
-            Hunters += (Forest + Mountain + Steppe + Tundra) /data.huntersDivision;
-            Farmers += Plain / data.farmersDivision;
-            Nomads += (Desert + Mountain + Steppe) / data.nomadsDivision;
+            Hunters += (Forest + Mountain + Steppe + Tundra) /data.EcoCultureDivider;
+            Farmers += Plain / data.EcoCultureDivider;
+            Nomads += (Desert + Mountain + Steppe) / data.EcoCultureDivider;
+
+            if (_piece.Population.Value > data.UrbanMinPop)
+                Townsman += (Farmers + Nomads) / data.EcoCultureDivider;
 
             OnUpdateEcoCulture?.Invoke(_piece);
 
@@ -65,9 +78,8 @@ namespace Gameplay.Scenarios {
 
         [Serializable]
         public class Data {
-            public float huntersDivision;
-            public float farmersDivision;
-            public float nomadsDivision;
+            public float EcoCultureDivider = 100f;
+            public float UrbanMinPop = 1000f;
         }
     }
 }

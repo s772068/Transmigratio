@@ -1,15 +1,10 @@
 using System;
-using UnityEngine;
 
 namespace Gameplay.Scenarios {
     public static class Government {
         public static Data data;
 
         private static CivPiece _piece;
-        private static float add_L_H = 1;
-        private static float add_L_PC = 1;
-        private static float add_M_F = 1;
-        private static float add_M_S = 1;
 
         private static Paramiter _government;
 
@@ -31,6 +26,26 @@ namespace Gameplay.Scenarios {
             }
         }
 
+        private static float CityState
+        {
+            get => _government["CityState"];
+            set
+            {
+                _government.GetValue("CityState").onUpdate?.Invoke(CityState, value, _piece);
+                _government["CityState"] = value;
+            }
+        }
+
+        private static float Empire
+        {
+            get => _government["Empire"];
+            set
+            {
+                _government.GetValue("Empire").onUpdate?.Invoke(Empire, value, _piece);
+                _government["Empire"] = value;
+            }
+        }
+
         public static void Play(CivPiece piece) {
             Init(piece);
             Update();
@@ -47,11 +62,14 @@ namespace Gameplay.Scenarios {
 
             string prevMax = _government.GetMax().key;
 
-            if (ecoCulture == "Hunters") Leaderism += add_L_H;
-            if (prodMode == "PrimitiveCommunism") Leaderism += add_L_PC;
+            if (ecoCulture == "Hunters") Leaderism += data.AddGov;
+            if (prodMode == "PrimitiveCommunism") Leaderism += data.AddGov;
 
-            if(ecoCulture == "Farmers") Monarchy += add_M_F;
-            if (prodMode == "Slavery") Monarchy += add_M_S;
+            if (prodMode != "PrimitiveCommunism" || ecoCulture != "Hunters") 
+                CityState += _piece.EcoCulture.GetValue("Townsman").value * data.AddGov * data.CityStateMultiplier;
+
+            if(ecoCulture == "Farmers" || ecoCulture == "Nomads") Monarchy += data.AddGov;
+            if (prodMode == "Slavery") Monarchy += data.AddGov;
 
             string curMax = _government.GetMax().key;
             if (SplitCheck())
@@ -73,10 +91,8 @@ namespace Gameplay.Scenarios {
 
         [Serializable]
         public class Data {
-            public float add_L_H = 1;
-            public float add_L_PC = 1;
-            public float add_M_F = 1;
-            public float add_M_S = 1;
+            public float AddGov = 1f;
+            public float CityStateMultiplier = 100f;
         }
     }
 }

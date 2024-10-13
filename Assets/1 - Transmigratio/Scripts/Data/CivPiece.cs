@@ -66,7 +66,8 @@ public class CivPiece {
             List<float> list = new() {
                 EcoCulture["Farmers"],
                 EcoCulture["Hunters"],
-                EcoCulture["Nomads"]
+                EcoCulture["Nomads"],
+                EcoCulture["Townsman"]
             };
             return list.IndexOf(list.Max()) == 0;
         }
@@ -77,26 +78,26 @@ public class CivPiece {
     /// </summary>
     public void Init(int region, string civilization, int startPopulation) {
         EcoCulture.Init(("Hunters", GameSettings.StartHunters));
-        EcoCulture.Init("Farmers", "Nomads", "City");
+        EcoCulture.Init("Farmers", "Nomads", "Townsman");
 
         ProdMode.Init(("PrimitiveCommunism", GameSettings.StartPrimitiveCommunism));
         ProdMode.Init("Slavery", "Feodalism", "Capitalism", "Socialism", "Communism");
 
         Government.Init(("Leaderism", GameSettings.StartLeaderism));
-        Government.Init("Monarchy", "CityState", "Imperium", "Federation", "NationalState", "Anarchy");
+        Government.Init("Monarchy", "CityState", "Empire", "Federation", "NationalState", "Anarchy");
 
         Category = 3;
         RegionID = region;
         CivName = civilization;
         Population = new(startPopulation);
 
-        float _floraKr = (float)(Math.Pow(Region.Flora["Flora"], Demography.data.val9) / Demography.data.val10);
-        float _faunaKr = (float)(Math.Pow(Region.Fauna["Fauna"], Demography.data.val11) / Demography.data.val12);
+        float _floraKr = (float)(Math.Pow(Region.Flora["Flora"], Demography.data.krDegree) / Demography.data.krModifier);
+        float _faunaKr = (float)(Math.Pow(Region.Fauna["Fauna"], Demography.data.krDegree) / Demography.data.krModifier);
         TakenFood = new(IsFarmers ?
-            Population.Value / Demography.data.val13 * ProdModeK * _floraKr :
-            Population.Value / Demography.data.val14 * ProdModeK * _faunaKr);
+            Population.Value / Demography.data.takenFoodModifier * ProdModeK * _floraKr :
+            Population.Value / Demography.data.takenFoodModifier * ProdModeK * _faunaKr);
 
-        RequestFood = new(Population.Value / Demography.data.val4);
+        RequestFood = new(Population.Value / Demography.data.peopleForFood);
         ReserveFood = new(RequestFood.value * 2);
         GivenFood = new(ReserveFood.value > RequestFood.value ? RequestFood.value : ReserveFood.value);
     }
@@ -112,13 +113,13 @@ public class CivPiece {
         CivName = civilization;
         Population = new(piece.Population.Value);
 
-        float _floraKr = (float)(Math.Pow(Region.Flora["Flora"], Demography.data.val9) / Demography.data.val10);
-        float _faunaKr = (float)(Math.Pow(Region.Fauna["Fauna"], Demography.data.val11) / Demography.data.val12);
+        float _floraKr = (float)(Math.Pow(Region.Flora["Flora"], Demography.data.krDegree) / Demography.data.krModifier);
+        float _faunaKr = (float)(Math.Pow(Region.Fauna["Fauna"], Demography.data.krDegree) / Demography.data.krModifier);
 
         TakenFood = new(IsFarmers ?
-            Population.Value / Demography.data.val13 * ProdModeK * _floraKr :
-            Population.Value / Demography.data.val14 * ProdModeK * _faunaKr);
-        RequestFood = new(Population.Value / Demography.data.val4);
+            Population.Value / Demography.data.takenFoodModifier * ProdModeK * _floraKr :
+            Population.Value / Demography.data.takenFoodModifier * ProdModeK * _faunaKr);
+        RequestFood = new(Population.Value / Demography.data.peopleForFood);
         ReserveFood = new(piece.ReserveFood.value);
         GivenFood = new(ReserveFood.value > RequestFood.value ? RequestFood.value : ReserveFood.value);
     }
