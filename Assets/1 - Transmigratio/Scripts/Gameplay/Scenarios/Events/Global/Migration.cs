@@ -4,6 +4,7 @@ using WorldMapStrategyKit;
 using System.Linq;
 using UnityEngine;
 using System;
+using Gameplay.Scenarios.Events.Data;
 
 namespace Gameplay.Scenarios.Events.Global {
     [CreateAssetMenu(menuName = "ScriptableObjects/Scenarios/Events/Global/Migration", fileName = "Migration")]
@@ -48,8 +49,8 @@ namespace Gameplay.Scenarios.Events.Global {
         }
 
         private protected override void OpenPanel(CivPiece piece) {
-            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, piece, panelSprite, Local("Title"),
-                                    Territory(piece), Local("Description"), _desidions);
+            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, panelSprite, Local("Title"),
+                                    Territory(piece), Local("Description"), _desidions, piece);
         }
 
         private protected override void InitDesidions() {
@@ -134,13 +135,18 @@ namespace Gameplay.Scenarios.Events.Global {
             newMigration.CivFrom.AddEvent(this);
             newMigration.CivTo.AddEvent(this);
 
-            if (!AutoChoice && _isAutoOpenPanel) {
+            if (!AutoChoice) {
                 OpenPanel(newMigration.CivFrom);
             } else {
-                foreach (var autochoice in Events.AutoChoice.Events[this]) {
-                    if (AutoChoice && autochoice.CostFunc(_fromPiece) <= MaxAutoInterventionPoints) {
-                        if (autochoice.ActionClick.Invoke(newMigration.CivFrom, autochoice.CostFunc))
-                            break;
+                foreach (var autochoice in Events.AutoChoice.Events[this])
+                {
+                    if (autochoice is DesidionPiece desP)
+                    {
+                        if (desP.CostFunc(newMigration.CivFrom) <= MaxAutoInterventionPoints)
+                        {
+                            if (desP.ActionClick.Invoke(newMigration.CivFrom, desP.CostFunc))
+                                break;
+                        }
                     }
                 }
             }

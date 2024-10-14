@@ -88,8 +88,8 @@ namespace Gameplay.Scenarios.Events.StateMachines {
         }
 
         private protected override void OpenPanel(CivPiece piece = null) {
-            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, _eventPiece, panelSprite, Local("Title"),
-                                    Territory(), Local("Description"), _desidions);
+            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, panelSprite, Local("Title"),
+                                    Territory(), Local("Description"), _desidions, _eventPiece);
         }
 
         private protected override void NextState() {
