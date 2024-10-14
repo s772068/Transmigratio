@@ -5,7 +5,7 @@ using System;
 using DG.Tweening;
 
 namespace RegionDetails.Defoult.Paramiters {
-    public class Element : MonoBehaviour, IPointerClickHandler {
+    public class Element : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
         [SerializeField] private GameObject _select;
         [SerializeField] private Image _pictogram;
 
@@ -21,15 +21,18 @@ namespace RegionDetails.Defoult.Paramiters {
             _isSelected = isSelected;
             if (isSelected) {
                 onSelect?.Invoke(name);
-                _pictogram.transform.DOScale(Vector2.one * 0.8f, 0.2f).SetEase(Ease.InBack);
-            } else {
-                _pictogram.transform.DOScale(Vector2.one, 0.2f).SetEase(Ease.OutBack);
+                _pictogram.transform.DOScale(Vector2.one * 0.8f, 0.15f).SetEase(Ease.InBack);
             }
             _select.SetActive(isSelected);
         }
 
-        public void OnPointerClick(PointerEventData eventData) {
+        public void OnPointerDown(PointerEventData eventData) {
             Select(true);
+        }
+
+        public void OnPointerUp(PointerEventData eventData) {
+            _pictogram.transform.DOPause();
+            _pictogram.transform.DOScale(Vector2.one, 0.15f).SetEase(Ease.OutBack);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace RegionDetails.StartGame {
         public Color Color { set { if (_backGradient != null) _backGradient.color = value; } }
         public void Init(Color color, string paramiter, string label, float value) {
             Label = Localization.Load(paramiter, label);
-            SetValue(value, false);
+            SetValue(value, true);
             Color = color;
         }
     }
