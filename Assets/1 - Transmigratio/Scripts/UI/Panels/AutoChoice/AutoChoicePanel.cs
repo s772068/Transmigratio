@@ -27,9 +27,9 @@ namespace Gameplay.Scenarios.Events {
         [SerializeField] private GameObject _tutorial;
 
         private int _curPoints = 0;
-        private Dictionary<DragElement, Data.Desidion> _autoChoicePriority = new();
+        private Dictionary<DragElement, Data.IDesidion> _autoChoicePriority = new();
 
-        public static event Action<Base, List<Data.Desidion>, bool> AutoChoiceUpdate;
+        public static event Action<Base, List<Data.IDesidion>, bool> AutoChoiceUpdate;
         public static event Action<Base, bool> AutoChoiceModeUpdate;
         public static event Action<bool> onOpen;
 
@@ -98,7 +98,7 @@ namespace Gameplay.Scenarios.Events {
             _description.text = selectEvent.Local("Description");
             _autoEnable.isOn = selectEvent.AutoChoice;
             _eventImage.sprite = selectEvent.PanelSprite;
-            List<Data.Desidion> desidions = AutoChoice.Events[selectEvent];
+            List<Data.IDesidion> desidions = AutoChoice.Events[selectEvent];
             for (int i = 0; i < _dragPanel.Elements.Count; i++) {
                 _dragPanel.Elements[i].GetComponent<AutoChoiceDesidion>().Title.text = desidions[i].Title;
                 _autoChoicePriority.Add(_dragPanel.Elements[i], desidions[i]);
@@ -135,7 +135,7 @@ namespace Gameplay.Scenarios.Events {
         //
 
         private void OnPriorityUpdate() {
-            List<Data.Desidion> newDesidions = new(AutoChoice.Events[_selectEvent]);
+            List<Data.IDesidion> newDesidions = new(AutoChoice.Events[_selectEvent]);
 
             int index = 0;
             foreach (var dragElement in _dragPanel.Elements) {

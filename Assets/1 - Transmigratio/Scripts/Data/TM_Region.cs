@@ -15,6 +15,27 @@ public class TM_Region {
         }
     }
 
+    public float PopulationGrow {
+        get {
+            float res = 0;
+            for (int i = 0; i < CivsList.Count; ++i)
+            {
+                res += Transmigratio.Instance.GetCivPice(Id, CivsList[i]).PopulationGrow.value;
+            }
+            return res;
+        }
+    }
+
+    public List<CivPiece> GetPieces {
+        get {
+            List<CivPiece> pieces = new();
+            foreach (var civ in  CivsList) {
+                pieces.Add(Transmigratio.Instance.GetCivPice(Id, civ));
+            }
+
+            return pieces;
+        }
+    }
     private int _mainCivIndex;
 
     public Paramiter Flora;
