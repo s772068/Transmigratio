@@ -25,6 +25,8 @@ namespace Gameplay.Scenarios.Events.StateMachines {
         private protected override void CreateMarker(CivPiece piece = null) {
             if (_eventPiece.Region.Marker == null)
                 _eventPiece.Region.Marker = CreateMarker(WMSK.countries[_eventPiece.Region.Id].center, piece);
+            else
+                _eventPiece.Region.Marker.SetCount += 1;
             _eventPiece.Region.Marker.onClick += (_piece) => OnClickMarker();
         }
 
@@ -97,7 +99,10 @@ namespace Gameplay.Scenarios.Events.StateMachines {
                 _eventPiece.Region.Marker = null;
             }
             else if (_eventPiece.Region.Marker != null)
+            {
+                _eventPiece.Region.Marker.SetCount -= 1;
                 _eventPiece.Region.Marker.onClick -= (_piece) => OnClickMarker();
+            }    
         }
     }
 }

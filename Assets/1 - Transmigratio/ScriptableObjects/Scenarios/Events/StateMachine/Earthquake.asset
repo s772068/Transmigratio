@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed90d16ff31070d4488e7aa26cbf311b, type: 3}
-  m_Name: Volcano
+  m_Script: {fileID: 11500000, guid: 929f3c5db5419a4428a1c9601ca744af, type: 3}
+  m_Name: Earthquake
   m_EditorClassIdentifier: 
   panel: {fileID: 359895691688070463, guid: c47213b161616324388f4e6c8fb55875, type: 3}
   _desidionPrefab: {fileID: 403973372752421938, guid: 0054cba83f08b6b4296867997956dd96, type: 3}
-  panelSprite: {fileID: 21300000, guid: b7247bfca1704b445b8723d805a10d91, type: 3}
+  panelSprite: {fileID: 21300000, guid: b821747bc24f9cb48ba631531c173fe0, type: 3}
   markerPrefab: {fileID: 5296191554952630010, guid: 1bea2eb4b7054814c9055a48d6f2abeb, type: 3}
   markerSprite: {fileID: 21300000, guid: e8d1eb0ce835ca043aa8db1e101feb44, type: 3}
   regionColor: {r: 1, g: 0.14117648, b: 0, a: 1}
@@ -26,7 +26,7 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value:
-        ticks: 28000000
+        ticks: 0a000000
         onEndTime:
           m_PersistentCalls:
             m_Calls:
@@ -50,9 +50,9 @@ MonoBehaviour:
           m_PersistentCalls:
             m_Calls:
             - m_Target: {fileID: 11400000}
-              m_TargetAssemblyTypeName: Gameplay.Scenarios.Events.StateMachines.Volcano,
+              m_TargetAssemblyTypeName: Gameplay.Scenarios.Events.StateMachines.Earthquake,
                 Assembly-CSharp
-              m_MethodName: ActivateVolcano
+              m_MethodName: ActivateEarthquake
               m_Mode: 6
               m_Arguments:
                 m_ObjectArgument: {fileID: 0}
@@ -64,7 +64,7 @@ MonoBehaviour:
               m_CallState: 2
     - Key: 2
       Value:
-        ticks: 0a00000014000000
+        ticks: 3c000000f0000000
         onEndTime:
           m_PersistentCalls:
             m_Calls:
@@ -81,7 +81,8 @@ MonoBehaviour:
                 m_StringArgument: 
                 m_BoolArgument: 0
               m_CallState: 2
-  fullPercentPopulation: 0.4
-  partPercentPopulation: 0.25
-  calmVolcanoPointsDivision: 450
-  reduceLossesPoints: 5
+  fullPercentFauna: 0.12
+  fullPercentPopulation: 0.15
+  partPercentFauna: 0.06
+  partPercentPopulation: 0.075
+  _calmEarthquakePointsDivision: 600
