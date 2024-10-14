@@ -31,6 +31,12 @@ namespace Gameplay.Scenarios.Events.StateMachines
             _curState.Start();
         }
 
+        private protected override void ActivateEvents()
+        {
+            Events.AutoChoice.NewEvent(this, _desidions);
+            base.ActivateEvents();
+        }
+
         private protected override void InitDesidions(){
             AddDesidion(Nothing, Local("Nothing"), (piece) => 0);
             AddDesidion(CalmEarthquake, Local("CalmEarthquake"), (piece) => GetDesidionCost(CalmEarthquackePoints));
