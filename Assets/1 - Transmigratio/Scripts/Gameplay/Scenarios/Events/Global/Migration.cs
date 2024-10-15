@@ -135,9 +135,10 @@ namespace Gameplay.Scenarios.Events.Global {
             newMigration.CivFrom.AddEvent(this);
             newMigration.CivTo.AddEvent(this);
 
-            if (!AutoChoice) {
+            if (!AutoChoice && _isAutoOpenPanel) {
                 OpenPanel(newMigration.CivFrom);
-            } else {
+            } 
+            else if (AutoChoice) {
                 foreach (var autochoice in Events.AutoChoice.Events[this])
                 {
                     if (autochoice is DesidionPiece desP)

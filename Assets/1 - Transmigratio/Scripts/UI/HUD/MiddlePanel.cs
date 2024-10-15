@@ -19,6 +19,6 @@ public class MiddlePanel : MonoBehaviour {
 
     private void UpdatePopulation() {
         _populationTxt.text = $"{Population.ToString("### ### ###")}";
-        _populationSlider.value = Population / MaxPopulation;
+        _populationSlider.value = (float)Population / (float)MaxPopulation;
     }
 }

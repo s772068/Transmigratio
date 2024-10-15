@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using UI;
 
-public class Timeline : PersistentSingleton<Timeline> {
+public class Timeline : MonoBehaviour {
     [SerializeField] private ButtonsRadioGroup _buttonsGroup;
     [SerializeField] private Vector2 _timeDelayLimit;
     private float _timeDelay;
@@ -11,6 +11,8 @@ public class Timeline : PersistentSingleton<Timeline> {
     private bool _isPlay;
     private int _tick;
     private int _windowsCount = 0;
+
+    public static Timeline Instance { get; private set; }
 
     public int WindowsCount
     {
@@ -38,16 +40,21 @@ public class Timeline : PersistentSingleton<Timeline> {
 
     public int Tick => _tick;
 
-    private void OnEnable()
+    private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+
         Panel.PanelOpen += _ => WindowsCount += 1;
         Panel.PanelClose += _ => WindowsCount -= 1;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         Panel.PanelOpen -= _ => WindowsCount += 1;
         Panel.PanelClose -= _ => WindowsCount -= 1;
+        Instance = null;
+        StopAllCoroutines();
     }
 
     public void Pause() {

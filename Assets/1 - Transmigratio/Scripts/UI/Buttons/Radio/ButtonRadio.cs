@@ -21,7 +21,7 @@ public class ButtonRadio : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public int Index { private get; set; }
     
     private void Awake() {
-        _image ??= GetComponent<Image>();
+        _image = GetComponent<Image>();
     }
 
     public void OnPointerClick(PointerEventData eventData) => Click();

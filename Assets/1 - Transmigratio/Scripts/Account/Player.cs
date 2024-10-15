@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private string _appmetricaKey;
-    private Player _inst;
+    private static Player _inst;
     private AppMetricaActivator _appmetrica;
 
 

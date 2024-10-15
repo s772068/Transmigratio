@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TMDB
   m_EditorClassIdentifier: 
   startAge: 40000
-  maxPopulation: 100000
+  maxPopulation: 1000000
   map:
     borderTexture: {fileID: 2800000, guid: 2fc53b65fc9aae04f87d515190814611, type: 3}
     AllRegions:
@@ -271,7 +271,8 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Uncivilized
       Marker: {fileID: 0}
     - Id: 4
       Name: "\u0412\u043E\u0441\u0442\u043E\u0447\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
@@ -335,7 +336,8 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Uncivilized
       Marker: {fileID: 0}
     - Id: 5
       Name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
@@ -352,7 +354,7 @@ MonoBehaviour:
           - Key: Fauna
             Value:
               _startValue: 60
-              value: 60
+              value: 49.639328
       Climate:
         quantities:
           _serializedList:
@@ -399,7 +401,11 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Uncivilized
+      - Romans
+      - Vikings
+      - Celts
       Marker: {fileID: 0}
     - Id: 6
       Name: "\u041C\u0430\u043B\u0430\u0439\u0437\u0438\u044F"
@@ -537,14 +543,14 @@ MonoBehaviour:
           - Key: Flora
             Value:
               _startValue: 80
-              value: 80
+              value: 10.2982645
       Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
               _startValue: 30
-              value: 30
+              value: 10.2982645
       Climate:
         quantities:
           _serializedList:
@@ -592,7 +598,8 @@ MonoBehaviour:
               _startValue: 0
               value: 0
       CivsList:
-      - Uncivilized
+      - Portuguese
+      - Etruscans
       Marker: {fileID: 0}
     - Id: 9
       Name: "\u0417\u0430\u043F\u0430\u0434\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
@@ -656,7 +663,9 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Vikings
+      - Celts
       Marker: {fileID: 0}
     - Id: 10
       Name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0410\u043C\u0435\u0440\u0438\u043A\u0430"
@@ -784,7 +793,8 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Romans
       Marker: {fileID: 0}
     - Id: 12
       Name: "\u0418\u043D\u0434\u043E\u0441\u0442\u0430\u043D"
@@ -923,7 +933,7 @@ MonoBehaviour:
           - Key: Flora
             Value:
               _startValue: 70
-              value: 70
+              value: 58.925007
       Fauna:
         quantities:
           _serializedList:
@@ -977,7 +987,11 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Poles
+      - Seljuks
+      - Germans
+      - Minoans
       Marker: {fileID: 0}
     - Id: 15
       Name: "\u041A\u043E\u0440\u0434\u0438\u043B\u044C\u0435\u0440\u044B"
@@ -1490,7 +1504,8 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Sumerians
       Marker: {fileID: 0}
     - Id: 23
       Name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0410\u0437\u0438\u044F"
@@ -1500,14 +1515,14 @@ MonoBehaviour:
           - Key: Flora
             Value:
               _startValue: 50
-              value: 50
+              value: 8.79074
       Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
               _startValue: 30
-              value: 30
+              value: 10.51939
       Climate:
         quantities:
           _serializedList:
@@ -1554,7 +1569,10 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Poles
+      - Germans
+      - Frenchies
       Marker: {fileID: 0}
     - Id: 24
       Name: "\u0412\u043E\u0441\u0442\u043E\u0447\u043D\u0430\u044F \u0412\u0435\u043B\u0438\u043A\u0430\u044F
@@ -1958,7 +1976,7 @@ MonoBehaviour:
           - Key: Fauna
             Value:
               _startValue: 40
-              value: 40
+              value: 36.488625
       Climate:
         quantities:
           _serializedList:
@@ -2005,7 +2023,9 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Quechua
+      - Han Chinese
       Marker: {fileID: 0}
     - Id: 31
       Name: "\u0426\u0435\u043D\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F \u0415\u0432\u0440\u043E\u043F\u0430"
@@ -2069,7 +2089,8 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Bantu
       Marker: {fileID: 0}
     - Id: 32
       Name: "\u0421\u0435\u0432\u0435\u0440\u043E-\u0417\u0430\u043F\u0430\u0434\u043D\u044B\u0435
@@ -2774,7 +2795,8 @@ MonoBehaviour:
             Value:
               _startValue: 5
               value: 5
-      CivsList: []
+      CivsList:
+      - Bantu
       Marker: {fileID: 0}
     - Id: 43
       Name: "\u0412\u0435\u043B\u0438\u043A\u0438\u0435 \u041E\u0437\u0451\u0440\u0430"
@@ -2978,14 +3000,14 @@ MonoBehaviour:
           - Key: Flora
             Value:
               _startValue: 30
-              value: 30
+              value: 29.99874
       Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
               _startValue: 70
-              value: 70
+              value: 64.82932
       Climate:
         quantities:
           _serializedList:
@@ -3032,7 +3054,8 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Han Chinese
       Marker: {fileID: 0}
     - Id: 47
       Name: "\u0421\u0435\u0432\u0435\u0440\u043D\u0430\u044F \u0410\u0444\u0440\u0438\u043A\u0430"
@@ -3042,14 +3065,14 @@ MonoBehaviour:
           - Key: Flora
             Value:
               _startValue: 60
-              value: 60
+              value: 12.9126
       Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
               _startValue: 30
-              value: 30
+              value: 12.9183235
       Climate:
         quantities:
           _serializedList:
@@ -3096,7 +3119,8 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Africans
       Marker: {fileID: 0}
     - Id: 48
       Name: "\u041C\u0430\u0434\u0430\u0433\u0430\u0441\u043A\u0430\u0440"
@@ -3352,7 +3376,9 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Aztec
+      - Bantu
       Marker: {fileID: 0}
     - Id: 52
       Name: "\u0414\u0430\u043B\u044C\u043D\u0438\u0439 \u0412\u043E\u0441\u0442\u043E\u043A"
@@ -3490,14 +3516,14 @@ MonoBehaviour:
           - Key: Flora
             Value:
               _startValue: 100
-              value: 100
+              value: 20.758415
       Fauna:
         quantities:
           _serializedList:
           - Key: Fauna
             Value:
               _startValue: 40
-              value: 40
+              value: -334.09216
       Climate:
         quantities:
           _serializedList:
@@ -3544,7 +3570,11 @@ MonoBehaviour:
             Value:
               _startValue: 0
               value: 0
-      CivsList: []
+      CivsList:
+      - Harappa
+      - Quechua
+      - Aztec
+      - Poles
       Marker: {fileID: 0}
   humanity:
     Civilizations:
@@ -3554,28 +3584,2581 @@ MonoBehaviour:
           Name: Uncivilized
           Pieces:
             _serializedList:
-            - Key: 8
+            - Key: 5
               Value:
                 CivName: Uncivilized
-                RegionID: 8
+                RegionID: 5
                 Category: 3
                 Population:
-                  _value: 1000
+                  _value: 957
+                PopulationGrow:
+                  _startValue: 0
+                  value: 1.5092134
+                ReserveFood:
+                  _startValue: 99.48
+                  value: 5.3418202
+                GivenFood:
+                  _startValue: 49.74
+                  value: 5.3418202
+                RequestFood:
+                  _startValue: 49.74
+                  value: 6.38
+                TakenFood:
+                  _startValue: 48.114506
+                  value: 5.4665
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 39.350006
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 17.700003
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 5.8999968
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 6.384001
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 60
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 119
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 4
+              Value:
+                CivName: Uncivilized
+                RegionID: 4
+                Category: 3
+                Population:
+                  _value: 1706
+                PopulationGrow:
+                  _startValue: 0
+                  value: -56.686928
+                ReserveFood:
+                  _startValue: 17.16
+                  value: 8.532995
+                GivenFood:
+                  _startValue: 8.58
+                  value: 8.532995
+                RequestFood:
+                  _startValue: 8.58
+                  value: 11.373333
+                TakenFood:
+                  _startValue: 6.5603137
+                  value: 8.696112
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 40.75
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 7.9500036
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 29.149986
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 9.737001
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 54
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 107
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 3
+              Value:
+                CivName: Uncivilized
+                RegionID: 3
+                Category: 3
+                Population:
+                  _value: 169
+                PopulationGrow:
+                  _startValue: 0
+                  value: -3.7284868
+                ReserveFood:
+                  _startValue: 2.6
+                  value: 0.8767474
+                GivenFood:
+                  _startValue: 1.3
+                  value: 0.8767474
+                RequestFood:
+                  _startValue: 1.3
+                  value: 1.1266667
+                TakenFood:
+                  _startValue: 0.99398696
+                  value: 0.8614553
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 25
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 21.600004
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 16.800007
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 49
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 97
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Harappa
+        Value:
+          Name: Harappa
+          Pieces:
+            _serializedList:
+            - Key: 54
+              Value:
+                CivName: Harappa
+                RegionID: 54
+                Category: 3
+                Population:
+                  _value: 56620
+                PopulationGrow:
+                  _startValue: 0
+                  value: 1422.3373
+                ReserveFood:
+                  _startValue: 1.3466667
+                  value: 135.30447
+                GivenFood:
+                  _startValue: 0.67333335
+                  value: 135.30447
+                RequestFood:
+                  _startValue: 0.67333335
+                  value: 377.46667
+                TakenFood:
+                  _startValue: 0.5148343
+                  value: 137.49239
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 13
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 31.199987
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 7.200003
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 7.5599985
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 3
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 46
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 46
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 8
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 89
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 9273.599
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Portuguese
+        Value:
+          Name: Portuguese
+          Pieces:
+            _serializedList:
+            - Key: 8
+              Value:
+                CivName: Portuguese
+                RegionID: 8
+                Category: 1
+                Population:
+                  _value: 31839
+                PopulationGrow:
+                  _startValue: 0
+                  value: 1166.3605
+                ReserveFood:
+                  _startValue: 33.012283
+                  value: 78.52907
+                GivenFood:
+                  _startValue: 33.012283
+                  value: 78.52907
+                RequestFood:
+                  _startValue: 99.486664
+                  value: 212.26
+                TakenFood:
+                  _startValue: 52.684734
+                  value: 80.03425
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1.8999991
+                        value: 4.7
+                    - Key: Farmers
+                      Value:
+                        _startValue: 12.5999975
+                        value: 51.800034
+                    - Key: Nomads
+                      Value:
+                        _startValue: 4.5
+                        value: 18.5
+                    - Key: Townsman
+                      Value:
+                        _startValue: 1.5959997
+                        value: 26.334007
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 2
+                        value: 2
+                    - Key: Slavery
+                      Value:
+                        _startValue: 17
+                        value: 73
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 17
+                        value: 73
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 5
+                        value: 5
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 32
+                        value: 144
+                    - Key: CityState
+                      Value:
+                        _startValue: 1033.5999
+                        value: 66576.016
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Sumerians
+        Value:
+          Name: Sumerians
+          Pieces:
+            _serializedList:
+            - Key: 22
+              Value:
+                CivName: Sumerians
+                RegionID: 22
+                Category: 3
+                Population:
+                  _value: 134
+                PopulationGrow:
+                  _startValue: 0
+                  value: -8.2255125
+                ReserveFood:
+                  _startValue: 1.92
+                  value: 0.53986895
+                GivenFood:
+                  _startValue: 0.96
+                  value: 0.53986895
+                RequestFood:
+                  _startValue: 0.96
+                  value: 0.8933333
+                TakenFood:
+                  _startValue: 0.32848364
+                  value: 0.5094538
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 4.499998
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 3.4999988
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 27.99999
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 2
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 34
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 5
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 34
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Quechua
+        Value:
+          Name: Quechua
+          Pieces:
+            _serializedList:
+            - Key: 54
+              Value:
+                CivName: Quechua
+                RegionID: 54
+                Category: 3
+                Population:
+                  _value: 222
+                PopulationGrow:
+                  _startValue: 0
+                  value: -22.28433
+                ReserveFood:
+                  _startValue: 1.8933333
+                  value: 0.7661581
+                GivenFood:
+                  _startValue: 0.94666666
+                  value: 0.7661581
+                RequestFood:
+                  _startValue: 0.94666666
+                  value: 1.48
+                TakenFood:
+                  _startValue: 0.7238264
+                  value: 0.6881208
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 9.25
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 21.449993
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 4.9500017
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 3
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 31
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 31
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 8
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 59
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 30
+              Value:
+                CivName: Quechua
+                RegionID: 30
+                Category: 3
+                Population:
+                  _value: 190
+                PopulationGrow:
+                  _startValue: 0
+                  value: -7.336028
+                ReserveFood:
+                  _startValue: 1.8533334
+                  value: 0.9332884
+                GivenFood:
+                  _startValue: 0.9266667
+                  value: 0.9332884
+                RequestFood:
+                  _startValue: 0.9266667
+                  value: 1.2666667
+                TakenFood:
+                  _startValue: 0.7085343
+                  value: 0.91824
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 15.249998
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 0.7500001
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 13.499998
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 16
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 31
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Poles
+        Value:
+          Name: Poles
+          Pieces:
+            _serializedList:
+            - Key: 14
+              Value:
+                CivName: Poles
+                RegionID: 14
+                Category: 1
+                Population:
+                  _value: 792
+                PopulationGrow:
+                  _startValue: 0
+                  value: 8.911084
+                ReserveFood:
+                  _startValue: 10.585857
+                  value: 4.548518
+                GivenFood:
+                  _startValue: 10.585857
+                  value: 4.548518
+                RequestFood:
+                  _startValue: 14.853333
+                  value: 5.28
+                TakenFood:
+                  _startValue: 10.14422
+                  value: 4.5949316
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 19.000006
+                        value: 35.200005
+                    - Key: Farmers
+                      Value:
+                        _startValue: 11.999997
+                        value: 22.799988
+                    - Key: Nomads
+                      Value:
+                        _startValue: 15
+                        value: 28.5
+                    - Key: Townsman
+                      Value:
+                        _startValue: 4.185
+                        value: 4.752
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 31
+                        value: 58
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 61
+                        value: 115
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 23
+              Value:
+                CivName: Poles
+                RegionID: 23
+                Category: 3
+                Population:
+                  _value: 373
+                PopulationGrow:
+                  _startValue: 0
+                  value: -41.26751
+                ReserveFood:
+                  _startValue: 3.7066667
+                  value: 1.3844304
+                GivenFood:
+                  _startValue: 1.8533334
+                  value: 1.3844304
+                RequestFood:
+                  _startValue: 1.8533334
+                  value: 2.4866667
+                TakenFood:
+                  _startValue: 1.199296
+                  value: 1.2259759
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 16.600004
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 5.1999993
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 16.899996
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 21
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 6
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 47
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 6
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 54
+              Value:
+                CivName: Poles
+                RegionID: 54
+                Category: 3
+                Population:
+                  _value: 74
+                PopulationGrow:
+                  _startValue: 0
+                  value: -5.764398
+                ReserveFood:
+                  _startValue: 1.3466667
+                  value: 0.28003362
+                GivenFood:
+                  _startValue: 0.67333335
+                  value: 0.28003362
+                RequestFood:
+                  _startValue: 0.67333335
+                  value: 0.49333334
+                TakenFood:
+                  _startValue: 0.5148343
+                  value: 0.2582715
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 6.75
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 14.949997
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 3.4500008
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 3
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 21
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 21
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 8
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 39
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Aztec
+        Value:
+          Name: Aztec
+          Pieces:
+            _serializedList:
+            - Key: 54
+              Value:
+                CivName: Aztec
+                RegionID: 54
+                Category: 3
+                Population:
+                  _value: 327
+                PopulationGrow:
+                  _startValue: 0
+                  value: -19.125586
+                ReserveFood:
+                  _startValue: 2.3466666
+                  value: 1.3314729
+                GivenFood:
+                  _startValue: 1.1733333
+                  value: 1.3314729
+                RequestFood:
+                  _startValue: 1.1733333
+                  value: 2.18
+                TakenFood:
+                  _startValue: 0.8971369
+                  value: 1.234337
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 7.5
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 16.899996
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 3.900001
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 3
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 24
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 24
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 8
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 45
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 51
+              Value:
+                CivName: Aztec
+                RegionID: 51
+                Category: 3
+                Population:
+                  _value: 148
+                PopulationGrow:
+                  _startValue: 0
+                  value: -3.4570127
+                ReserveFood:
+                  _startValue: 1.3466667
+                  value: 0.76460534
+                GivenFood:
+                  _startValue: 0.67333335
+                  value: 0.76460534
+                RequestFood:
+                  _startValue: 0.67333335
+                  value: 0.9866667
+                TakenFood:
+                  _startValue: 0.5148343
+                  value: 0.7544106
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 13.750002
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 2.25
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 10.499998
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 16
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 31
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Vikings
+        Value:
+          Name: Vikings
+          Pieces:
+            _serializedList:
+            - Key: 9
+              Value:
+                CivName: Vikings
+                RegionID: 9
+                Category: 3
+                Population:
+                  _value: 397
+                PopulationGrow:
+                  _startValue: 0
+                  value: -8.161435
+                ReserveFood:
+                  _startValue: 9.52
+                  value: 2.0695317
+                GivenFood:
+                  _startValue: 4.76
+                  value: 2.0695317
+                RequestFood:
+                  _startValue: 4.76
+                  value: 2.6466668
+                TakenFood:
+                  _startValue: 3.6395214
+                  value: 2.0236554
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 7.7999997
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 0.8000001
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 0.40000004
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 9
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 17
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 5
+              Value:
+                CivName: Vikings
+                RegionID: 5
+                Category: 3
+                Population:
+                  _value: 122
+                PopulationGrow:
+                  _startValue: 0
+                  value: 8.133334
+                ReserveFood:
+                  _startValue: 1.44
+                  value: 1.0294443
+                GivenFood:
+                  _startValue: 0.72
+                  value: 0.81333333
+                RequestFood:
+                  _startValue: 0.72
+                  value: 0.81333333
+                TakenFood:
+                  _startValue: 0.5643525
+                  value: 0.70483935
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 2.95
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 0.90000004
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 0.3
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 4
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 7
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Germans
+        Value:
+          Name: Germans
+          Pieces:
+            _serializedList:
+            - Key: 23
+              Value:
+                CivName: Germans
+                RegionID: 23
+                Category: 1
+                Population:
+                  _value: 32233
+                PopulationGrow:
+                  _startValue: 0
+                  value: 6427.63
+                ReserveFood:
+                  _startValue: 4.0896854
+                  value: 114.47976
+                GivenFood:
+                  _startValue: 4.0896854
+                  value: 114.47976
+                RequestFood:
+                  _startValue: 7.64
+                  value: 214.88667
+                TakenFood:
+                  _startValue: 4.9438605
+                  value: 126.198814
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 17.800005
+                        value: 31.600014
+                    - Key: Farmers
+                      Value:
+                        _startValue: 5.599999
+                        value: 10.199995
+                    - Key: Nomads
+                      Value:
+                        _startValue: 18.199995
+                        value: 33.14999
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0.53549993
+                        value: 8.355497
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 21
+                        value: 21
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 8
+                        value: 31
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 49
+                        value: 62
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 8
+                        value: 31
+                    - Key: CityState
+                      Value:
+                        _startValue: 261.8
+                        value: 10017.247
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 14
+              Value:
+                CivName: Germans
+                RegionID: 14
+                Category: 3
+                Population:
+                  _value: 8084
                 PopulationGrow:
                   _startValue: 0
                   value: 0
                 ReserveFood:
-                  _startValue: 13.333333
-                  value: 13.333333
+                  _startValue: 107.78667
+                  value: 107.78667
                 GivenFood:
-                  _startValue: 6.6666665
-                  value: 6.6666665
+                  _startValue: 53.893333
+                  value: 53.893333
                 RequestFood:
-                  _startValue: 6.6666665
-                  value: 6.6666665
+                  _startValue: 53.893333
+                  value: 53.893333
                 TakenFood:
-                  _startValue: 4.3140144
-                  value: 4.3140144
+                  _startValue: 46.90079
+                  value: 46.90079
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 1.6
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 0.4
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 0.5
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0.009
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 2
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 3
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Han Chinese
+        Value:
+          Name: Han Chinese
+          Pieces:
+            _serializedList:
+            - Key: 30
+              Value:
+                CivName: Han Chinese
+                RegionID: 30
+                Category: 2
+                Population:
+                  _value: 3721
+                PopulationGrow:
+                  _startValue: 0
+                  value: -152.49129
+                ReserveFood:
+                  _startValue: 148.4
+                  value: 18.130701
+                GivenFood:
+                  _startValue: 74.2
+                  value: 18.130701
+                RequestFood:
+                  _startValue: 74.2
+                  value: 24.806667
+                TakenFood:
+                  _startValue: 56.733715
+                  value: 17.600233
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1.95
+                        value: 13.349998
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0.05
+                        value: 0.6500001
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0.9
+                        value: 11.699999
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0.0095
+                        value: 0.86450005
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 2
+                        value: 14
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 3
+                        value: 27
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 46
+              Value:
+                CivName: Han Chinese
+                RegionID: 46
+                Category: 3
+                Population:
+                  _value: 2616
+                PopulationGrow:
+                  _startValue: 0
+                  value: 174.40001
+                ReserveFood:
+                  _startValue: 22.24
+                  value: 26.412804
+                GivenFood:
+                  _startValue: 11.12
+                  value: 17.44
+                RequestFood:
+                  _startValue: 11.12
+                  value: 17.44
+                TakenFood:
+                  _startValue: 11.762623
+                  value: 17.644789
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 6.5999994
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 2.3999999
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 4.7999997
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0.324
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 9
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 17
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Bantu
+        Value:
+          Name: Bantu
+          Pieces:
+            _serializedList:
+            - Key: 51
+              Value:
+                CivName: Bantu
+                RegionID: 51
+                Category: 2
+                Population:
+                  _value: 2660
+                PopulationGrow:
+                  _startValue: 0
+                  value: -57.34944
+                ReserveFood:
+                  _startValue: 67.94666
+                  value: 13.821954
+                GivenFood:
+                  _startValue: 33.97333
+                  value: 13.821954
+                RequestFood:
+                  _startValue: 33.97333
+                  value: 17.733334
+                TakenFood:
+                  _startValue: 25.976192
+                  value: 13.532993
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1.85
+                        value: 10.35
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0.15
+                        value: 1.6499999
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0.7
+                        value: 7.699999
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0.0084999995
+                        value: 0.56099993
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 2
+                        value: 12
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 3
+                        value: 23
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 31
+              Value:
+                CivName: Bantu
+                RegionID: 31
+                Category: 3
+                Population:
+                  _value: 443
+                PopulationGrow:
+                  _startValue: 0
+                  value: -4.5325494
+                ReserveFood:
+                  _startValue: 10.293333
+                  value: 2.3855686
+                GivenFood:
+                  _startValue: 5.1466665
+                  value: 2.3855686
+                RequestFood:
+                  _startValue: 5.1466665
+                  value: 2.9533334
+                TakenFood:
+                  _startValue: 3.9351687
+                  value: 2.2581344
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 4.2999997
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 2.7
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 0.6
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 7
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 13
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 42
+              Value:
+                CivName: Bantu
+                RegionID: 42
+                Category: 3
+                Population:
+                  _value: 116
+                PopulationGrow:
+                  _startValue: 0
+                  value: 7.733334
+                ReserveFood:
+                  _startValue: 1.5466666
+                  value: 1.5913575
+                GivenFood:
+                  _startValue: 0.7733333
+                  value: 0.7733333
+                RequestFood:
+                  _startValue: 0.7733333
+                  value: 0.7733333
+                TakenFood:
+                  _startValue: 0.8180241
+                  value: 0.8180241
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 1.4
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 0.6
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 0.05
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 2
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 3
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Frenchies
+        Value:
+          Name: Frenchies
+          Pieces:
+            _serializedList:
+            - Key: 23
+              Value:
+                CivName: Frenchies
+                RegionID: 23
+                Category: 1
+                Population:
+                  _value: 2615
+                PopulationGrow:
+                  _startValue: 0
+                  value: 256.31586
+                ReserveFood:
+                  _startValue: 4.2838163
+                  value: 7.519883
+                GivenFood:
+                  _startValue: 4.2838163
+                  value: 7.519883
+                RequestFood:
+                  _startValue: 7.9533334
+                  value: 17.433332
+                TakenFood:
+                  _startValue: 5.121363
+                  value: 7.5104465
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 18.400005
+                        value: 23.200008
+                    - Key: Farmers
+                      Value:
+                        _startValue: 5.7999988
+                        value: 7.399997
+                    - Key: Nomads
+                      Value:
+                        _startValue: 18.849995
+                        value: 24.049992
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0.49299994
+                        value: 2.7709994
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 21
+                        value: 21
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 9
+                        value: 17
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 50
+                        value: 58
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 9
+                        value: 17
+                    - Key: CityState
+                      Value:
+                        _startValue: 246.5
+                        value: 1630.2997
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Africans
+        Value:
+          Name: Africans
+          Pieces:
+            _serializedList:
+            - Key: 47
+              Value:
+                CivName: Africans
+                RegionID: 47
+                Category: 1
+                Population:
+                  _value: 15816
+                PopulationGrow:
+                  _startValue: 0
+                  value: 1187.5986
+                ReserveFood:
+                  _startValue: 75.49946
+                  value: 43.06399
+                GivenFood:
+                  _startValue: 75.49946
+                  value: 43.06399
+                RequestFood:
+                  _startValue: 142.88667
+                  value: 105.44
+                TakenFood:
+                  _startValue: 42.76532
+                  value: 45.331276
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 4.2000003
+                        value: 5.7999988
+                    - Key: Farmers
+                      Value:
+                        _startValue: 8
+                        value: 12
+                    - Key: Nomads
+                      Value:
+                        _startValue: 5.599999
+                        value: 8.399999
+                    - Key: Townsman
+                      Value:
+                        _startValue: 1.156
+                        value: 2.5499997
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 4
+                        value: 4
+                    - Key: Slavery
+                      Value:
+                        _startValue: 13
+                        value: 21
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 13
+                        value: 21
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 11
+                        value: 11
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 22
+                        value: 38
+                    - Key: CityState
+                      Value:
+                        _startValue: 685.1
+                        value: 2201.4998
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Celts
+        Value:
+          Name: Celts
+          Pieces:
+            _serializedList:
+            - Key: 9
+              Value:
+                CivName: Celts
+                RegionID: 9
+                Category: 3
+                Population:
+                  _value: 216
+                PopulationGrow:
+                  _startValue: 0
+                  value: -11.876204
+                ReserveFood:
+                  _startValue: 4.76
+                  value: 2.2020633
+                GivenFood:
+                  _startValue: 2.38
+                  value: 2.2020633
+                RequestFood:
+                  _startValue: 2.38
+                  value: 2.88
+                TakenFood:
+                  _startValue: 1.8197607
+                  value: 1.1010317
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 5.25
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 0.5
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 0.25
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 6
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 11
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 5
+              Value:
+                CivName: Celts
+                RegionID: 5
+                Category: 3
+                Population:
+                  _value: 101
+                PopulationGrow:
+                  _startValue: 0
+                  value: 0
+                ReserveFood:
+                  _startValue: 1.3466667
+                  value: 1.3466667
+                GivenFood:
+                  _startValue: 0.67333335
+                  value: 0.67333335
+                RequestFood:
+                  _startValue: 0.67333335
+                  value: 0.67333335
+                TakenFood:
+                  _startValue: 0.56683284
+                  value: 0.56683284
                 EcoCulture:
                   quantities:
                     _serializedList:
@@ -3654,6 +6237,525 @@ MonoBehaviour:
                         _startValue: 0
                         value: 0
           GovernmentCorruption: 0.4
+      - Key: Seljuks
+        Value:
+          Name: Seljuks
+          Pieces:
+            _serializedList:
+            - Key: 14
+              Value:
+                CivName: Seljuks
+                RegionID: 14
+                Category: 3
+                Population:
+                  _value: 563
+                PopulationGrow:
+                  _startValue: 0
+                  value: 37.533337
+                ReserveFood:
+                  _startValue: 6.6
+                  value: 5.286952
+                GivenFood:
+                  _startValue: 3.3
+                  value: 3.7533333
+                RequestFood:
+                  _startValue: 3.3
+                  value: 3.7533333
+                TakenFood:
+                  _startValue: 2.8718321
+                  value: 3.2663465
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 2.8
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 1.2
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 1.5
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 4
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 7
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Romans
+        Value:
+          Name: Romans
+          Pieces:
+            _serializedList:
+            - Key: 11
+              Value:
+                CivName: Romans
+                RegionID: 11
+                Category: 1
+                Population:
+                  _value: 605
+                PopulationGrow:
+                  _startValue: 0
+                  value: -22.100174
+                ReserveFood:
+                  _startValue: 3.2429767
+                  value: 1.1971099
+                GivenFood:
+                  _startValue: 3.2429767
+                  value: 1.1971099
+                RequestFood:
+                  _startValue: 9.526667
+                  value: 4.0333333
+                TakenFood:
+                  _startValue: 2.7024803
+                  value: 1.1441572
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 2.25
+                        value: 3.25
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Nomads
+                      Value:
+                        _startValue: 4.75
+                        value: 8.549999
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0.1425
+                        value: 0.1995
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 2
+                        value: 2
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 4
+                        value: 8
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 5
+                        value: 5
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 4
+                        value: 8
+                    - Key: CityState
+                      Value:
+                        _startValue: 32.3
+                        value: 112.09999
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+            - Key: 5
+              Value:
+                CivName: Romans
+                RegionID: 5
+                Category: 3
+                Population:
+                  _value: 201
+                PopulationGrow:
+                  _startValue: 0
+                  value: 13.400002
+                ReserveFood:
+                  _startValue: 2.3733332
+                  value: 1.6452435
+                GivenFood:
+                  _startValue: 1.1866666
+                  value: 1.34
+                RequestFood:
+                  _startValue: 1.1866666
+                  value: 1.34
+                TakenFood:
+                  _startValue: 0.92114186
+                  value: 1.1412299
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1
+                        value: 2.95
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0
+                        value: 0.90000004
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0
+                        value: 0.3
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0
+                        value: 0
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 1
+                        value: 4
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 1
+                        value: 7
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Etruscans
+        Value:
+          Name: Etruscans
+          Pieces:
+            _serializedList:
+            - Key: 8
+              Value:
+                CivName: Etruscans
+                RegionID: 8
+                Category: 2
+                Population:
+                  _value: 2111
+                PopulationGrow:
+                  _startValue: 0
+                  value: 227.768
+                ReserveFood:
+                  _startValue: 8.400061
+                  value: 6.2095647
+                GivenFood:
+                  _startValue: 8.400061
+                  value: 6.2095647
+                RequestFood:
+                  _startValue: 13.206667
+                  value: 14.073334
+                TakenFood:
+                  _startValue: 5.274865
+                  value: 6.5396156
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1.2499998
+                        value: 1.3499997
+                    - Key: Farmers
+                      Value:
+                        _startValue: 3.5
+                        value: 4.8999996
+                    - Key: Nomads
+                      Value:
+                        _startValue: 1.25
+                        value: 1.75
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0.1425
+                        value: 0.266
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 2
+                        value: 2
+                    - Key: Slavery
+                      Value:
+                        _startValue: 4
+                        value: 6
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 4
+                        value: 6
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 5
+                        value: 5
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 6
+                        value: 10
+                    - Key: CityState
+                      Value:
+                        _startValue: 32.3
+                        value: 78.85
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
+      - Key: Minoans
+        Value:
+          Name: Minoans
+          Pieces:
+            _serializedList:
+            - Key: 14
+              Value:
+                CivName: Minoans
+                RegionID: 14
+                Category: 2
+                Population:
+                  _value: 8084
+                PopulationGrow:
+                  _startValue: 0
+                  value: 0
+                ReserveFood:
+                  _startValue: 107.78667
+                  value: 107.78667
+                GivenFood:
+                  _startValue: 53.893333
+                  value: 53.893333
+                RequestFood:
+                  _startValue: 53.893333
+                  value: 53.893333
+                TakenFood:
+                  _startValue: 46.90079
+                  value: 46.90079
+                EcoCulture:
+                  quantities:
+                    _serializedList:
+                    - Key: Hunters
+                      Value:
+                        _startValue: 1.6
+                        value: 1.6
+                    - Key: Farmers
+                      Value:
+                        _startValue: 0.4
+                        value: 0.4
+                    - Key: Nomads
+                      Value:
+                        _startValue: 0.5
+                        value: 0.5
+                    - Key: Townsman
+                      Value:
+                        _startValue: 0.009
+                        value: 0.009
+                ProdMode:
+                  quantities:
+                    _serializedList:
+                    - Key: PrimitiveCommunism
+                      Value:
+                        _startValue: 2
+                        value: 2
+                    - Key: Slavery
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Feodalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Capitalism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Socialism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Communism
+                      Value:
+                        _startValue: 0
+                        value: 0
+                Government:
+                  quantities:
+                    _serializedList:
+                    - Key: Leaderism
+                      Value:
+                        _startValue: 3
+                        value: 3
+                    - Key: Monarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: CityState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Empire
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Federation
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: NationalState
+                      Value:
+                        _startValue: 0
+                        value: 0
+                    - Key: Anarchy
+                      Value:
+                        _startValue: 0
+                        value: 0
+          GovernmentCorruption: 0.4
     scenarios:
     - {fileID: 11400000, guid: efaf3952c1a721949a35cea9971d186c, type: 2}
     - {fileID: 11400000, guid: 8b4cf5007d949d64b92e672bde7077f2, type: 2}
@@ -3661,6 +6763,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a4ee14587b4384e418ebaf05511ec910, type: 2}
     - {fileID: 11400000, guid: 57df9b09706ee5e4aa2fced2101da31c, type: 2}
     - {fileID: 11400000, guid: f847c18cd4010d64988e7c6034c1c0b4, type: 2}
+    - {fileID: 11400000, guid: ad17a3bb7df8aa345802b9b980616158, type: 2}
   _news:
   - {fileID: 11400000, guid: 49e1717d32a258d4585a30522d64706e, type: 2}
   - {fileID: 11400000, guid: 368ef98bef08c8f40a62db8b78f51794, type: 2}

@@ -18,6 +18,7 @@ namespace Gameplay.Scenarios.Events {
         [SerializeField] private protected Color civColor;
         [Header("Desidions Settings")]
         [SerializeField] protected int _minDesidionCost = 1;
+        [SerializeField] private protected bool _isAutoOpenPanel = true;
 
         public int GetDesidionCost(int cost) => cost >= _minDesidionCost ? cost : _minDesidionCost;
 

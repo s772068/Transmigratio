@@ -1,9 +1,9 @@
 using Unity.VisualScripting;
 using WorldMapStrategyKit;
 using System.Linq;
-using System;
 using System.Collections.Generic;
 using Gameplay.Scenarios.Events.Data;
+using Random = System.Random;
 
 namespace Gameplay.Scenarios.Events.StateMachines {
     public abstract class Base : Events.Base {
@@ -61,9 +61,9 @@ namespace Gameplay.Scenarios.Events.StateMachines {
             CreateMarker();
             _eventPiece.AddEvent(this);
 
-            if (!AutoChoice)
+            if (!AutoChoice && _isAutoOpenPanel)
                 OpenPanel(_eventPiece);
-            else
+            else if (AutoChoice)
             {
                 foreach (var autochoice in Events.AutoChoice.Events[this])
                 {
