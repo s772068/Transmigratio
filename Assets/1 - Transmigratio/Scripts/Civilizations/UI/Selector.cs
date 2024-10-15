@@ -1,50 +1,79 @@
+using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using System.Linq;
 using System;
 
 namespace Civilizations {
     public class Selector : MonoBehaviour {
         [SerializeField] private Transform _content;
         [SerializeField] private Element _elementPref;
-        [SerializeField] private List<Element.Data> _elements;
+        [SerializeField] private SerializedDictionary<string, Sprite> _examples;
 
-        private Element _activeElement;
-        private bool isOpened;
-        private RectTransform rect;
+        private Dictionary<string, Element> _elements = new();
+        private RectTransform _rect;
+        private string _active;
+        private bool _isOpen;
 
-        public static event Action<string> onClick;
+        public static event Action<string> onSelect;
+        public static event Action onUnselect;
 
         private void Awake() {
-            rect = GetComponent<RectTransform>();
-        }
-
-        private void Start() {
-            InitElements();
+            _rect = GetComponent<RectTransform>();
         }
 
         private void ClickElement(Element element) {
-            _activeElement?.Disactivate();
-            _activeElement = element;
-            _activeElement.Activate();
-            onClick?.Invoke(element.Title);
-        }
-
-        private void InitElements() {
-            for(int i = 0; i < _elements.Count; ++i) {
-                AddElement(_elements[i]);
+            if(_active != null) _elements[_active]?.Disactivate();
+            if(element.Title == _active) {
+                _active = null;
+                onUnselect?.Invoke();
+            } else {
+                _active = element.Title;
+                _elements[_active].Activate();
+                onSelect?.Invoke(element.Title);
             }
         }
 
-        private void AddElement(Element.Data data) {
-            Element element = Factory.Create(_elementPref, _content, data);
+        private void UpdateElements() {
+            ClearElements();
+            string[] civs = GetCurCivs();
+            for (int i = 0; i < civs.Length; ++i) {
+                AddElement(civs[i]);
+            }
+        }
+
+        private string[] GetCurCivs() {
+            return Transmigratio.Instance.TMDB.humanity.Civilizations.Keys.ToArray();
+        }
+
+        private void AddElement(string title) {
+            Element element = Factory.Create(_elementPref, _content, title, _examples[title]);
             element.onClick += ClickElement;
+            if(title == _active) element.Activate();
+            _elements.Add(title, element);
+        }
+
+        private void ClearElements() {
+            for(int i = 0; i < _elements.Count; ++i) {
+                _elements.ElementAt(i).Value.Destroy();
+                _elements[_elements.ElementAt(i).Key] = null;
+            }
+            _elements.Clear();
         }
 
         public void Open() {
-            rect.DOPause();
-            rect.DOAnchorPosY(isOpened ? 410 : -370, 0.5f);
-            isOpened = !isOpened;
+            _isOpen = !_isOpen;
+            _rect.DOPause();
+            if (_isOpen) {
+                UpdateElements();
+                _rect.DOAnchorPosY(-370, 0.5f);
+                Timeline.TickShow += UpdateElements;
+            } else {
+                _rect.DOAnchorPosY(410, 0.5f).OnComplete(() => ClearElements());
+                Timeline.TickShow -= UpdateElements;
+                _active = null;
+            }
         }
     }
 }
