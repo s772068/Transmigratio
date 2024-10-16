@@ -26,6 +26,10 @@ public class Humanity {
 
         Timeline.TickLogic += Play;
     }
+    ~Humanity()
+    {
+        Timeline.TickLogic -= Play;
+    }
 
     /// <summary>
     /// —оздание первоначальной цивилизации (старт игры)

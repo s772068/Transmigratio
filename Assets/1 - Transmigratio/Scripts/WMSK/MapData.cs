@@ -33,6 +33,19 @@ public static class MapData {
             _wmsk.ToggleCountrySurface(region.Id, true, Color.clear);
         }
     }
+    public static void Clear()
+    {
+        _wmsk.OnCountryClick -= OnClickRegion;
+        _wmsk.OnCountryLongClick -= OnClickRegion;
+
+        _wmsk.OnMarkerMouseDown -= OnMarkerMouseDown;
+        _wmsk.OnMarkerMouseEnter -= OnMarkerEnter;
+        _wmsk.OnMarkerMouseExit -= OnMarkerExit;
+
+        _wmsk.OnCountryHighlight -= OnCountryHighlight;
+
+        onClickRegion -= UpdateRegion;
+    }
 
     public static bool IsClickableMarker {
         get => _isClickableMarker;

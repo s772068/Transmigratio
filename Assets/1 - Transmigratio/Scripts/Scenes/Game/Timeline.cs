@@ -45,14 +45,14 @@ public class Timeline : MonoBehaviour {
         if (Instance == null)
             Instance = this;
 
-        Panel.PanelOpen += _ => WindowsCount += 1;
-        Panel.PanelClose += _ => WindowsCount -= 1;
+        Panel.PanelOpen += WindowOpen;
+        Panel.PanelClose +=  WindowClose;
     }
 
     private void OnDestroy()
     {
-        Panel.PanelOpen -= _ => WindowsCount += 1;
-        Panel.PanelClose -= _ => WindowsCount -= 1;
+        Panel.PanelOpen -= WindowOpen;
+        Panel.PanelClose -= WindowClose;
         Instance = null;
         StopAllCoroutines();
     }
@@ -117,4 +117,7 @@ public class Timeline : MonoBehaviour {
             }
         }
     }
+
+    private void WindowOpen(bool panel) => WindowsCount += 1;
+    private void WindowClose(bool panel) => WindowsCount -= 1;
 }

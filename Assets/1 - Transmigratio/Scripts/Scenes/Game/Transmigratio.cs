@@ -5,7 +5,7 @@ using Gameplay;
 using System;
 using UI;
 
-public class Transmigratio : PersistentSingleton<Transmigratio> {
+public class Transmigratio : MonoBehaviour {
     [SerializeField] private TMDB _tmdb;
     [SerializeField] private HUD _hud;
     [SerializeField] private int _intervetionPoints = 100;
@@ -16,6 +16,8 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     private Intervention _intervention;
     private News _news;
     private bool _isClickableMarker = true;
+    public static Transmigratio Instance { get; private set; }
+
 
     public TMDB TMDB => _tmdb;
     public HUD HUD => _hud;
@@ -37,8 +39,10 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
         GameStarted?.Invoke();
     }
 
-    public new void Awake() {
-        base.Awake();
+    public void Awake() {
+        if (Instance == null) 
+            Instance = this;
+
         TMDB.TMDBInit();
         MapData.Init(borderTexture);
         
@@ -53,6 +57,12 @@ public class Transmigratio : PersistentSingleton<Transmigratio> {
     private void Start()
     {
         LocalizationSettings.SelectedLocale = _local;
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
+        MapData.Clear();
     }
 
     public void UnselectRegion() {
