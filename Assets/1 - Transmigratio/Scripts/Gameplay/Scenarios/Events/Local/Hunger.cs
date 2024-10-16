@@ -35,8 +35,8 @@ namespace Gameplay.Scenarios.Events.Local {
         }
 
         private protected override void OpenPanel(CivPiece piece) {
-            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, piece, panelSprite, Local("Title"),
-                                    Territory(piece), Local("Description"), _desidions);
+            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, panelSprite, Local("Title"),
+                                    Territory(piece), Local("Description"), _desidions, piece);
         }
 
         private protected override void ActivateEvents() {

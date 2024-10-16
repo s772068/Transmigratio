@@ -17,10 +17,16 @@ namespace RegionDetails {
         public static event Action<bool> onOpenRegionPanel;
         public static event Action onStartGame;
 
-        private void Awake() {
+        private void OnEnable() {
             MapData.onClickRegion += OpenPanel;
             _closeBtn.onClick.AddListener(Close);
             StartGame.Panel.onStartGame += OnStartGame;
+        }
+
+        private void OnDisable()
+        {
+            MapData.onClickRegion -= OpenPanel;
+            StartGame.Panel.onStartGame -= OnStartGame;
         }
 
         public void Close() {

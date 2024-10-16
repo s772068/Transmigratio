@@ -29,6 +29,10 @@ namespace UI {
 
         private void OnDestroy() {
             Transmigratio.GameStarted -= OnGameStarted;
+            for (int i = 0; i < buttons.Count; ++i)
+            {
+                buttons[i].onSelect.RemoveListener(Select);
+            }
         }
 
         public void Select(int newActiveIndex) {

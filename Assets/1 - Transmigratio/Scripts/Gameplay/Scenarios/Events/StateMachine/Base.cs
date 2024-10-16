@@ -1,14 +1,16 @@
 using Unity.VisualScripting;
 using WorldMapStrategyKit;
 using System.Linq;
-using System;
 using System.Collections.Generic;
+using Gameplay.Scenarios.Events.Data;
+using Random = System.Random;
 
 namespace Gameplay.Scenarios.Events.StateMachines {
     public abstract class Base : Events.Base {
         private protected Data.State _curState;
         private Random _rand = new();
         protected CivPiece _eventPiece;
+        protected TM_Region _eventRegion;
 
         private protected override string Territory(CivPiece piece = null) => Local("Territory1") + " " +
                               $"<color=#{regionColor.ToHexString()}>" +
@@ -23,6 +25,8 @@ namespace Gameplay.Scenarios.Events.StateMachines {
         private protected override void CreateMarker(CivPiece piece = null) {
             if (_eventPiece.Region.Marker == null)
                 _eventPiece.Region.Marker = CreateMarker(WMSK.countries[_eventPiece.Region.Id].center, piece);
+            else
+                _eventPiece.Region.Marker.SetCount += 1;
             _eventPiece.Region.Marker.onClick += (_piece) => OnClickMarker();
         }
 
@@ -50,6 +54,7 @@ namespace Gameplay.Scenarios.Events.StateMachines {
 
             Civilization civ = civs.ElementAt(rand.Next(0, civs.Count - 1));
             _eventPiece = civ.Pieces.ElementAt(rand.Next(0, civ.Pieces.Count - 1)).Value;
+            _eventRegion = _eventPiece.Region;
 
             ChroniclesController.AddActive(Name, _eventPiece.RegionID, OnClickMarker, new Chronicles.Data.Panel.LocalVariablesChronicles { Count = 0 });
 
@@ -58,14 +63,25 @@ namespace Gameplay.Scenarios.Events.StateMachines {
 
             if (!AutoChoice && _isAutoOpenPanel)
                 OpenPanel(_eventPiece);
-            else
+            else if (AutoChoice)
             {
                 foreach (var autochoice in Events.AutoChoice.Events[this])
                 {
-                    if (AutoChoice && autochoice.CostFunc(_eventPiece) <= MaxAutoInterventionPoints)
+                    if (autochoice is DesidionPiece desP)
                     {
-                        if (autochoice.ActionClick.Invoke(_eventPiece, autochoice.CostFunc))
-                            break;
+                        if (desP.CostFunc(_eventPiece) <= MaxAutoInterventionPoints)
+                        {
+                            if (desP.ActionClick.Invoke(_eventPiece, desP.CostFunc))
+                                break;
+                        }
+                    }
+                    else if (autochoice is DesidionRegion desR)
+                    {
+                        if (desR.CostFunc(_eventRegion) <= MaxAutoInterventionPoints)
+                        {
+                            if (desR.ActionClick.Invoke(_eventRegion, desR.CostFunc))
+                                break;
+                        }
                     }
                 }
             }
@@ -83,7 +99,10 @@ namespace Gameplay.Scenarios.Events.StateMachines {
                 _eventPiece.Region.Marker = null;
             }
             else if (_eventPiece.Region.Marker != null)
+            {
+                _eventPiece.Region.Marker.SetCount -= 1;
                 _eventPiece.Region.Marker.onClick -= (_piece) => OnClickMarker();
+            }    
         }
     }
 }

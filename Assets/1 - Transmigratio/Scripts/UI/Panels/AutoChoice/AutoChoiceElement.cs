@@ -26,7 +26,7 @@ namespace Gameplay.Scenarios.Events {
 
         public void Select() => SelectElement?.Invoke(_event);
 
-        public void UpdateTextPriority(List<Desidion> desidions)
+        public void UpdateTextPriority(List<IDesidion> desidions)
         {
             _priority.text = "";
             for (int i = 0; i < desidions.Count; ++i)

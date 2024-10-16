@@ -1,3 +1,4 @@
+using Gameplay.Scenarios.Events.Data;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using WorldMapStrategyKit;
@@ -24,14 +25,17 @@ namespace Gameplay.Scenarios.Events.Local {
             if (!AutoChoice && _isAutoOpenPanel) {
                 OpenPanel(piece);
             }
-            else
+            else if (AutoChoice)
             {
-                foreach (var autochoice in Events.AutoChoice.Events[this])
+                foreach(var autochoice in Events.AutoChoice.Events[this])
                 {
-                    if (AutoChoice && autochoice.CostFunc(piece) <= MaxAutoInterventionPoints)
+                    if (autochoice is DesidionPiece desP)
                     {
-                        if (autochoice.ActionClick.Invoke(piece, autochoice.CostFunc))
-                            break;
+                        if (desP.CostFunc(piece) <= MaxAutoInterventionPoints)
+                        {
+                            if (desP.ActionClick.Invoke(piece, desP.CostFunc))
+                                break;
+                        }
                     }
                 }
             }

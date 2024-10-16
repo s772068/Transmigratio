@@ -16,14 +16,19 @@ public class HUD : StaticInstance<HUD> {
 
     public Transform PanelsParent => _panelsParent;
 
-    protected override void Awake() {
-        base.Awake();
+    private void OnEnable()
+    {
         RegionDetails.StartGame.Panel.onStartGame += OnStartGame;
     }
 
     private void Start() {
         _topPanels.SetActive(false);
         _bottomPanels.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        RegionDetails.StartGame.Panel.onStartGame -= OnStartGame;
     }
 
     private void OnShowMessage(string message) {

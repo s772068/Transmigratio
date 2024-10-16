@@ -8,9 +8,7 @@ namespace Gameplay.Scenarios.Events.StateMachines {
         [Header("States")]
         [SerializeField] private SerializedDictionary<State, Data.State> states;
         [Header("Percents")]
-        [SerializeField, Range(0, 1)] private float fullPercentFood;
         [SerializeField, Range(0, 1)] private float fullPercentPopulation;
-        [SerializeField, Range(0, 1)] private float partPercentFood;
         [SerializeField, Range(0, 1)] private float partPercentPopulation;
         [Header("Points")]
         [SerializeField, Min(1)] private float calmVolcanoPointsDivision;
@@ -19,7 +17,7 @@ namespace Gameplay.Scenarios.Events.StateMachines {
         private State _state = State.Start;
 
         private protected override string Name => "Volcano";
-        private int CalmVolcanoPoints => (int) (_eventPiece.Population.Value / calmVolcanoPointsDivision);
+        private int CalmVolcanoPoints => (int) (_eventPiece.Population.Value / calmVolcanoPointsDivision) > reduceLossesPoints ? (int)(_eventPiece.Population.Value / calmVolcanoPointsDivision) : reduceLossesPoints + 1;
 
         public override void Init() {
             base.Init();
@@ -52,9 +50,8 @@ namespace Gameplay.Scenarios.Events.StateMachines {
             if (!_useIntervention(interventionPoints(piece)))
                 return false;
 
-            int dead = (int)(piece.Population.Value * fullPercentFood * partPercentPopulation);
+            int dead = (int)(piece.Population.Value * partPercentPopulation);
             piece.Population.Value -= dead;
-            piece.ReserveFood.value -= piece.ReserveFood.value * fullPercentFood * partPercentFood;
             Global.Migration.OnMigration(piece);
             ChroniclesController.Deactivate(Name, piece.RegionID, panelSprite, "ReduceLosses", 
                 new Chronicles.Data.Panel.LocalVariablesChronicles { Count = dead });
@@ -63,9 +60,8 @@ namespace Gameplay.Scenarios.Events.StateMachines {
         }
 
         public void ActivateVolcano(bool nextState = false) {
-            int dead = (int)(_eventPiece.Population.Value * fullPercentFood);
+            int dead = (int)(_eventPiece.Population.Value * fullPercentPopulation);
             _eventPiece.Population.Value -= dead;
-            _eventPiece.ReserveFood.value -= _eventPiece.ReserveFood.value * fullPercentFood;
             Global.Migration.OnMigration(_piece);
             ChroniclesController.Deactivate(Name, _eventPiece.RegionID, panelSprite, "ActivateVolcano", 
                 new Chronicles.Data.Panel.LocalVariablesChronicles { Count = dead });
@@ -88,8 +84,8 @@ namespace Gameplay.Scenarios.Events.StateMachines {
         }
 
         private protected override void OpenPanel(CivPiece piece = null) {
-            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, _eventPiece, panelSprite, Local("Title"),
-                                    Territory(), Local("Description"), _desidions);
+            PanelFabric.CreateEvent(HUD.Instance.PanelsParent, _desidionPrefab, panel, this, panelSprite, Local("Title"),
+                                    Territory(), Local("Description"), _desidions, _eventPiece);
         }
 
         private protected override void NextState() {

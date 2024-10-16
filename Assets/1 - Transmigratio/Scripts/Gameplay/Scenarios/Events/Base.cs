@@ -18,16 +18,16 @@ namespace Gameplay.Scenarios.Events {
         [SerializeField] private protected Color civColor;
         [Header("Desidions Settings")]
         [SerializeField] protected int _minDesidionCost = 1;
-        [SerializeField] private protected bool _isAutoOpenPanel;
+        [SerializeField] private protected bool _isAutoOpenPanel = true;
 
         public int GetDesidionCost(int cost) => cost >= _minDesidionCost ? cost : _minDesidionCost;
 
-        private protected Desidion _activeDesidion => _desidions[_activateIndex];
-        private protected List<Desidion> _desidions = new();
+        private protected IDesidion _activeDesidion => _desidions[_activateIndex];
+        private protected List<IDesidion> _desidions = new();
         private protected int _activateIndex;
 
         public Sprite PanelSprite => panelSprite;
-        public List<Desidion> Desidions => _desidions;
+        public List<IDesidion> Desidions => _desidions;
         public bool AutoChoice = false;
         public int MaxAutoInterventionPoints = 10;
 
@@ -54,7 +54,10 @@ namespace Gameplay.Scenarios.Events {
         }
 
         private protected void AddDesidion(Func<CivPiece, Func<CivPiece, int>, bool> click, string title, Func<CivPiece, int> points) {
-            _desidions.Add(new(click, title, points));
+            _desidions.Add(new DesidionPiece(click, title, points));
+        }
+        private protected void AddDesidion(Func<TM_Region, Func<TM_Region, int>, bool> click, string title, Func<TM_Region, int> points){
+            _desidions.Add(new DesidionRegion(click, title, points));
         }
 
         private protected virtual IconMarker CreateMarker(Vector3 position, CivPiece piece) {
