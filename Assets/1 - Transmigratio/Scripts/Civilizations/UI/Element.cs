@@ -12,6 +12,7 @@ namespace Civilizations {
 
         private Sprite _disactiveBtn;
         private string _name;
+        private bool _isActive;
 
         public event Action<Element> onClick;
 
@@ -33,10 +34,16 @@ namespace Civilizations {
 
         public void Activate() {
             _btnImg.sprite = _activeBtn;
+            _isActive = true;
         }
 
         public void Disactivate() {
             _btnImg.sprite = _disactiveBtn;
+            _isActive = false;
+        }
+
+        public void Destroy() {
+            Destroy(gameObject);
         }
 
         [Serializable]

@@ -10,6 +10,7 @@ using GlobalEvents = Gameplay.Scenarios.Events.Global;
 /// </summary>
 [System.Serializable]
 public class Humanity {
+    public int maxPopulation;
     public SerializedDictionary<string, Civilization> Civilizations;
     public List<Gameplay.Scenarios.Base> scenarios;
 
