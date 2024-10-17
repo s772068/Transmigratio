@@ -1,6 +1,5 @@
-using AYellowpaper.SerializedCollections;
-using System;
 using UnityEngine;
+using System;
 
 public class Tutorial : MonoBehaviour {
     #region Consts
@@ -60,7 +59,7 @@ public class Tutorial : MonoBehaviour {
     private void OnEnable() {
         RegionDetails.Controller.onOpenStartRegionPanel += OpenStartRegionDetails;
         RegionDetails.Controller.onOpenRegionPanel += OpenRegionDetails;
-        RegionDetails.Defoult.Panel.onClose += TutorialByHUD;
+        RegionDetails.StartGame.Panel.onStartGame += TutorialByHUD;
         Gameplay.Scenarios.Events.AutoChoicePanel.onOpen += TutorialByAutoChoice;
         Layers.Panel.onOpen += TutorialByLayers;
         EventPanel.PanelOpen += TutorialByEvent;
@@ -71,7 +70,7 @@ public class Tutorial : MonoBehaviour {
     private void OnDisable() {
         RegionDetails.Controller.onOpenStartRegionPanel -= OpenStartRegionDetails;
         RegionDetails.Controller.onOpenRegionPanel -= OpenRegionDetails;
-        RegionDetails.Defoult.Panel.onClose -= TutorialByHUD;
+        RegionDetails.StartGame.Panel.onClose -= TutorialByHUD;
         Gameplay.Scenarios.Events.AutoChoicePanel.onOpen -= TutorialByAutoChoice;
         Layers.Panel.onOpen -= TutorialByLayers;
         EventPanel.PanelOpen -= TutorialByEvent;
@@ -104,50 +103,46 @@ public class Tutorial : MonoBehaviour {
         _gameGoal.SetActive(open);
     }
 
-    public void OpenStartRegionDetails(bool open) {
+    public void OpenStartRegionDetails() {
         if (!_steps.HasFlag(TutorialSteps.StartRegionDetails)) {
-            if(open) OnShowTutorial?.Invoke("StartRegionDetails");
+            OnShowTutorial?.Invoke("StartRegionDetails");
             _gameGoal.SetActive(false);
             _steps += (int) TutorialSteps.StartRegionDetails;
         }
     }
 
-    public void OpenRegionDetails(bool open) {
+    public void OpenRegionDetails() {
         if (!_steps.HasFlag(TutorialSteps.RegionDetails)) {
-            if(open) OnShowTutorial?.Invoke("RegionDetails");
+            OnShowTutorial?.Invoke("RegionDetails");
             _steps += (int) TutorialSteps.RegionDetails;
         }
     }
 
-    public void TutorialByHUD(bool open) {
+    public void TutorialByHUD() {
         if (!_steps.HasFlag(TutorialSteps.HUD)) {
-            if(open) _HUD.SetActive(true);
+            _HUD.SetActive(true);
             _steps += (int) TutorialSteps.HUD;
         }
     }
 
-    public void TutorialByAutoChoice(bool open) {
+    public void TutorialByAutoChoice() {
         if (!_steps.HasFlag(TutorialSteps.AutoChoice)) {
-            if(open) OnShowTutorial?.Invoke("AutoChoice");
-            Debug.Log("AutoChoice");
+            OnShowTutorial?.Invoke("AutoChoice");
             _steps += (int) TutorialSteps.AutoChoice;
         }
     }
 
-    public void TutorialByLayers(bool open) {
+    public void TutorialByLayers() {
         if (!_steps.HasFlag(TutorialSteps.Layers)) {
-            if(open) OnShowTutorial?.Invoke("Layers");
+            OnShowTutorial?.Invoke("Layers");
             _steps += (int) TutorialSteps.Layers;
         }
     }
 
-    public void TutorialByEvent(bool open)
-    {
-        if (!_steps.HasFlag(TutorialSteps.Event))
-        {
-            if (open) OnShowTutorial?.Invoke("Event");
-            Debug.Log("Event");
-            _steps += (int)TutorialSteps.AutoChoice;
+    public void TutorialByEvent() {
+        if (!_steps.HasFlag(TutorialSteps.Event)) {
+            OnShowTutorial?.Invoke("Event");
+            _steps += (int)TutorialSteps.Event;
         }
     }
 

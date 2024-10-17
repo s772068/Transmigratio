@@ -9,18 +9,23 @@ namespace Civilizations {
     public class Selector : MonoBehaviour {
         [SerializeField] private Transform _content;
         [SerializeField] private Element _elementPref;
-        [SerializeField] private SerializedDictionary<string, Sprite> _examples;
 
+        private Humanity _humanity;
         private Dictionary<string, Element> _elements = new();
         private RectTransform _rect;
         private string _active;
         private bool _isOpen;
+
 
         public static event Action<string> onSelect;
         public static event Action onUnselect;
 
         private void Awake() {
             _rect = GetComponent<RectTransform>();
+        }
+
+        private void Start() {
+            _humanity = Transmigratio.Instance.TMDB.humanity;
         }
 
         private void ClickElement(Element element) {
@@ -44,11 +49,11 @@ namespace Civilizations {
         }
 
         private string[] GetCurCivs() {
-            return Transmigratio.Instance.TMDB.humanity.Civilizations.Keys.ToArray();
+            return _humanity.Civilizations.Keys.ToArray();
         }
 
         private void AddElement(string title) {
-            Element element = Factory.Create(_elementPref, _content, title, _examples[title]);
+            Element element = Factory.Create(_elementPref, _content, title, _humanity.GetIcon(title));
             element.onClick += ClickElement;
             if(title == _active) element.Activate();
             _elements.Add(title, element);

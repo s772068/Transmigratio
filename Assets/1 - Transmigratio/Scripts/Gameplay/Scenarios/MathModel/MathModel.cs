@@ -7,12 +7,14 @@ namespace Gameplay.Scenarios {
         [SerializeField] private ProdMode.Data prodMode = new();
         [SerializeField] private Government.Data government = new();
         [SerializeField] private Demography.Data demography = new();
+        [SerializeField] private GoldScenario.Data goldScenario = new();
 
         public override void Init() {
             EcoCulture.data = ecoCulture;
             ProdMode.data = prodMode;
             Government.data = government;
             Demography.data = demography;
+            GoldScenario.data = goldScenario;
         }
 
         private protected override void Play() {
@@ -20,6 +22,7 @@ namespace Gameplay.Scenarios {
             ProdMode.Play(_piece);
             Government.Play(_piece);
             Demography.Play(_piece);
+            GoldScenario.Play(_piece);
         }
     }
 }

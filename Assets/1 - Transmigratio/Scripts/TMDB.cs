@@ -9,11 +9,11 @@ public class TMDB : ScriptableObject {
     public int startAge;
     public Map map = new();
     public Humanity humanity = new();
+
     [SerializeField] private List<NewsSO> _news;
     [SerializeField] private SerializedDictionary<string, SerializedDictionary<string, Color>> _paramiterColors;
 
     public List<NewsSO> News => _news;
-
     public int Year => startAge - Timeline.Instance.Tick * GameSettings.YearsByTick;
 
     public Color GetParamiterColor(string paramiter, string element) {

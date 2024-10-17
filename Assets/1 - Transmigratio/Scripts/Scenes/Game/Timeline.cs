@@ -118,6 +118,6 @@ public class Timeline : MonoBehaviour {
         }
     }
 
-    private void WindowOpen(bool panel) => WindowsCount += 1;
-    private void WindowClose(bool panel) => WindowsCount -= 1;
+    private void WindowOpen() => WindowsCount += 1;
+    private void WindowClose() => WindowsCount -= 1;
 }

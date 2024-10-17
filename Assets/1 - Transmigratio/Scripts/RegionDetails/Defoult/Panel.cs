@@ -21,7 +21,7 @@ namespace RegionDetails.Defoult {
         private string _paramiter;
         private string _element;
 
-        public static event Action<bool> onClose;
+        public static event Action onClose;
 
         private void Awake() {
             Tutorial.OnShowTutorial += ShowTutorial;
@@ -79,7 +79,6 @@ namespace RegionDetails.Defoult {
 
         public void Close() {
             MapData.WMSK.ToggleCountrySurface(MapData.RegionID, true, Color.clear);
-            onClose?.Invoke(true);
             Destroy(gameObject);
         }
     }

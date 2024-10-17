@@ -14,6 +14,8 @@ public class Civilization {
 
     public SerializedDictionary<int, CivPiece> Pieces;      //��������� ��������� ����������� - �������� � "��������"
 
+    public float AllGold => Pieces.Sum(x => x.Value.gold);
+
     public Paramiter EcoCulture { get {
             Paramiter res = new(true);
             foreach (var piece in Pieces) {

@@ -31,7 +31,7 @@ namespace Gameplay.Scenarios.Events {
 
         public static event Action<Base, List<Data.IDesidion>, bool> AutoChoiceUpdate;
         public static event Action<Base, bool> AutoChoiceModeUpdate;
-        public static event Action<bool> onOpen;
+        public static event Action onOpen;
 
         private void Awake() {
             Tutorial.OnShowTutorial += ShowTutorial;
@@ -39,7 +39,7 @@ namespace Gameplay.Scenarios.Events {
 
         private protected override void OnEnable() {
             base.OnEnable();
-            onOpen?.Invoke(true);
+            onOpen?.Invoke();
             AddChoiceElement();
             DragPanelControl.DragElementsSorted += OnPriorityUpdate;
             DragPanelControl.onSwapOriginPos += OnSwapOriginPos;
