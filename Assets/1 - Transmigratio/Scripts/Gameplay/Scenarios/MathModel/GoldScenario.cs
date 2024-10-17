@@ -7,10 +7,10 @@ namespace Gameplay.Scenarios {
         private static CivPiece _piece;
 
         private static float Population => _piece.Population.Value;
-        private static float Hunters => _piece.EcoCulture["Hunters"] / AllEco * 100;
-        private static float Farmers => _piece.EcoCulture["Farmers"] / AllEco * 100;
-        private static float Nomads => _piece.EcoCulture["Nomads"] / AllEco * 100;
-        private static float Townsman => _piece.EcoCulture["Townsman"] / AllEco * 100;
+        private static float Hunters => _piece.EcoCulture["Hunters"] / AllEco;
+        private static float Farmers => _piece.EcoCulture["Farmers"] / AllEco;
+        private static float Nomads => _piece.EcoCulture["Nomads"] / AllEco;
+        private static float Townsman => _piece.EcoCulture["Townsman"] / AllEco;
         private static float AllEco => _piece.EcoCulture["Hunters"] +
                                        _piece.EcoCulture["Farmers"] +
                                        _piece.EcoCulture["Nomads"]  +
