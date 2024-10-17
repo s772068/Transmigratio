@@ -13,8 +13,8 @@ namespace RegionDetails {
 
         public Action onClose;
 
-        public static event Action<bool> onOpenStartRegionPanel;
-        public static event Action<bool> onOpenRegionPanel;
+        public static event Action onOpenStartRegionPanel;
+        public static event Action onOpenRegionPanel;
         public static event Action onStartGame;
 
         private void OnEnable() {
@@ -43,13 +43,13 @@ namespace RegionDetails {
         private void OpenStartPanel() {
             __startPanel = StartGame.Factory.Create(_startPanel, transform);
             _closeBtn.gameObject.SetActive(true);
-            onOpenStartRegionPanel?.Invoke(true);
+            onOpenStartRegionPanel?.Invoke();
             onClose = CloseStartPanel;
         }
 
         private void OpenDefoultPanel() {
             Defoult.Factory.Create(_defoultPanel, transform);
-            onOpenRegionPanel?.Invoke(true);
+            onOpenRegionPanel?.Invoke();
         }
 
         private void CloseStartPanel() {
@@ -60,8 +60,6 @@ namespace RegionDetails {
             _isStartedGame = true;
             __startPanel = null;
             _closeBtn.gameObject.SetActive(false);
-            Defoult.Factory.Create(_defoultPanel, transform);
-            onOpenRegionPanel?.Invoke(true);
         }
     }
 }

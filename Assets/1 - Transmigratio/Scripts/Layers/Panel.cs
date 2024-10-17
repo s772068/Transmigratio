@@ -30,7 +30,7 @@ namespace Layers {
         [SerializeField] private SerializedDictionary<string, Color> _government = new();
         [SerializeField] private SerializedDictionary<string, Color> _civilization = new();
 
-        public static event Action<bool> onOpen;
+        public static event Action onOpen;
         private Action Paint;
 
         private Map Map => Transmigratio.Instance.TMDB.map;
@@ -46,7 +46,7 @@ namespace Layers {
 
         private protected override void OnEnable() {
             base.OnEnable();
-            onOpen?.Invoke(true);
+            onOpen?.Invoke();
             Timeline.TickShow += ColorBySelectedElement;
         }
 
