@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -9,6 +10,7 @@ public class HUD : StaticInstance<HUD> {
     [SerializeField] private GameObject _topPanels;
     [SerializeField] private GameObject _bottomPanels;
     [SerializeField] private GameObject _autoChoicePanel;
+    [SerializeField] private TMP_Text _goldTxt;
 
     [SerializeField] private Migration _migration;
 
@@ -16,14 +18,18 @@ public class HUD : StaticInstance<HUD> {
 
     public Transform PanelsParent => _panelsParent;
 
+    private Humanity _humanity;
+
     private void OnEnable()
     {
         RegionDetails.StartGame.Panel.onStartGame += OnStartGame;
     }
 
     private void Start() {
+        _humanity = Transmigratio.Instance.TMDB.humanity;
         _topPanels.SetActive(false);
         _bottomPanels.SetActive(false);
+        Timeline.TickShow += UpdateShowGold;
     }
 
     private void OnDisable()
@@ -48,5 +54,9 @@ public class HUD : StaticInstance<HUD> {
 
     public void OpenAutoChoice() {
         _autoChoicePanel.SetActive(true);
+    }
+
+    private void UpdateShowGold() {
+        _goldTxt.text = ((int)_humanity.AllGold).ToString();
     }
 }

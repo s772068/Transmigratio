@@ -17,6 +17,7 @@ public class Humanity {
     [SerializeField] private SerializedDictionary<string, Sprite> _icons;
 
     public int TotalEarthPop => Civilizations.Sum(x => x.Value.Population) + GlobalEvents.Migration.GetPopulation();
+    public float AllGold => Civilizations.Sum(x => x.Value.AllGold);
 
     public Sprite GetIcon(string civName) => _icons[civName];
 
