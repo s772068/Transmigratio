@@ -5,7 +5,6 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using DG.Tweening;
-using Unity.VisualScripting;
 
 namespace Layers {
     public class Panel : UI.ScrollVew.Scroller {

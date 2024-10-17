@@ -14,7 +14,11 @@ public class Humanity {
     public SerializedDictionary<string, Civilization> Civilizations;
     public List<Gameplay.Scenarios.Base> scenarios;
 
+    [SerializeField] private SerializedDictionary<string, Sprite> _icons;
+
     public int TotalEarthPop => Civilizations.Sum(x => x.Value.Population) + GlobalEvents.Migration.GetPopulation();
+
+    public Sprite GetIcon(string civName) => _icons[civName];
 
     public void Init() {
         Civilizations = new();

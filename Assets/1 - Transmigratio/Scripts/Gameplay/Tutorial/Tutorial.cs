@@ -147,7 +147,7 @@ public class Tutorial : MonoBehaviour {
         {
             if (open) OnShowTutorial?.Invoke("Event");
             Debug.Log("Event");
-            _steps += (int)TutorialSteps.AutoChoice;
+            _steps += (int)TutorialSteps.Event;
         }
     }
 
