@@ -16,6 +16,7 @@ public class CivPiece {
     public string CivName;
     public int RegionID;
     public int Category;
+    public float gold;
 
     public Population Population;
     public ParamiterValue PopulationGrow = new();
