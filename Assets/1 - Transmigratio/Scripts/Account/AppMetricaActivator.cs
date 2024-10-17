@@ -1,14 +1,17 @@
 using Io.AppMetrica;
 
-public class AppMetricaActivator
+namespace Account
 {
-    public void Activate(string key)
+    public class AppMetricaActivator
     {
-        AppMetrica.Activate(new AppMetricaConfig(key)
+        public void Activate(string key)
         {
-            FirstActivationAsUpdate = true,
-            Logs = true,
+            AppMetrica.Activate(new AppMetricaConfig(key)
+            {
+                FirstActivationAsUpdate = true,
+                Logs = true,
 
-        });
+            });
+        }
     }
 }
