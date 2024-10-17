@@ -1,21 +1,38 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace Account
 {
-    [SerializeField] private string _appmetricaKey;
-    private static Player _inst;
-    private AppMetricaActivator _appmetrica;
-
-
-    private void Awake()
+    public class Player : MonoBehaviour
     {
-        if (_inst == null)
-            _inst = GetComponent<Player>();
-        else
-            Destroy(gameObject);
+        private static Player _inst;
+        private IServiceLocator _locator;
 
-        DontDestroyOnLoad(gameObject);
-        _appmetrica = new();
-        _appmetrica.Activate(_appmetricaKey);
+        [SerializeField] private string _appmetricaKey;
+        private AppMetricaActivator _appmetrica;
+
+        private FirebaseAnalytics _analytics;
+
+
+        private void Awake()
+        {
+            if (_inst == null)
+                _inst = GetComponent<Player>();
+            else
+                Destroy(gameObject);
+
+            _locator = new ServiceLocator();
+            _analytics = _locator.GetService<FirebaseAnalytics>();
+
+            _appmetrica = new();
+            _appmetrica.Activate(_appmetricaKey);
+            DontDestroyOnLoad(gameObject);
+        }
+
+        private void Start()
+        {
+#if Anroid
+        _analytics.FirebaseAnalyticsInitialize();
+#endif
+        }
     }
 }
