@@ -68,7 +68,7 @@ public static class MapData {
 
     public static void SelectRegion() {
         _wmsk.ToggleCountrySurface(_regionID, true, new Color(1, 0.92f, 0.16f, 0.25f));
-        _wmsk.ToggleCountryOutline(_regionID, true, _borderTexture, 2, new Color(0.46f, 0.78f, 1, 1));
+        _wmsk.ToggleCountryOutline(_regionID, true, _borderTexture, 4, new Color(0.46f, 0.78f, 1, 1));
     }
 
     public static void UnselectRegion() {

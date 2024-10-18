@@ -2,6 +2,7 @@ using Gameplay.Scenarios.Events.Data;
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +11,12 @@ namespace Gameplay.Scenarios.Events {
         [SerializeField] private TMP_Text _title;
         [SerializeField] private Image _image;
         [SerializeField] private TMP_Text _priority;
+        [SerializeField] private Image _select;
         private Base _event;
 
-        public static event Action<Base> SelectElement;
+        public static event Action<AutoChoiceElement> SelectElement;
+
+        public Base Event => _event;
 
         public void Init(Base newEvent) {
             if (_event != null)
@@ -24,7 +28,14 @@ namespace Gameplay.Scenarios.Events {
             UpdateTextPriority(newEvent.Desidions);
         }
 
-        public void Select() => SelectElement?.Invoke(_event);
+        public void Select() {
+            _select.enabled = true;
+            SelectElement?.Invoke(this);
+        }
+
+        public void Unselect() {
+            _select.enabled = false;
+        }
 
         public void UpdateTextPriority(List<IDesidion> desidions)
         {

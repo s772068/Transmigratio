@@ -14,6 +14,7 @@ namespace Gameplay.Scenarios.Events {
 
         [Header("Event AutoChoice")]
         private Base _selectEvent;
+        private AutoChoiceElement _selectElement;
         [SerializeField] private DragPanelControl _dragPanel;
         [SerializeField] private TMP_Text _title;
         [SerializeField] private TMP_Text _description;
@@ -47,13 +48,12 @@ namespace Gameplay.Scenarios.Events {
         }
 
         private void Start() {
-            Base selectEvent = null;
             foreach (var element in _elements) {
-                selectEvent = element.Key;
+                if (element.Value != null) {
+                    element.Value.Select();
+                }
                 break;
             }
-            if (selectEvent != null)
-                OnSelectEvent(selectEvent);
             InitSortedOrders();
         }
 
@@ -91,20 +91,23 @@ namespace Gameplay.Scenarios.Events {
             }
         }
 
-        private void OnSelectEvent(Base selectEvent) {
-            _selectEvent = selectEvent;
+        private void OnSelectEvent(AutoChoiceElement select) {
+            if(_selectElement == select) return;
+            _selectElement?.Unselect();
+            _selectElement = select;
+            _selectEvent = select.Event;
             _autoChoicePriority = new();
-            _title.text = selectEvent.Local("Title");
-            _description.text = selectEvent.Local("Description");
-            _autoEnable.isOn = selectEvent.AutoChoice;
-            _eventImage.sprite = selectEvent.PanelSprite;
-            List<Data.IDesidion> desidions = AutoChoice.Events[selectEvent];
+            _title.text = _selectEvent.Local("Title");
+            _description.text = _selectEvent.Local("Description");
+            _autoEnable.isOn = _selectEvent.AutoChoice;
+            _eventImage.sprite = _selectEvent.PanelSprite;
+            List<Data.IDesidion> desidions = AutoChoice.Events[_selectEvent];
             for (int i = 0; i < _dragPanel.Elements.Count; i++) {
                 _dragPanel.Elements[i].GetComponent<AutoChoiceDesidion>().Title.text = desidions[i].Title;
                 _autoChoicePriority.Add(_dragPanel.Elements[i], desidions[i]);
             }
 
-            _curPoints = selectEvent.MaxAutoInterventionPoints;
+            _curPoints = _selectEvent.MaxAutoInterventionPoints;
             _pointsTMP.text = _curPoints.ToString();
             _slider.value = _slider.maxValue / _maxPoints * _curPoints;
         }
