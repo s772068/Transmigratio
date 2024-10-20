@@ -24,8 +24,10 @@ public class Tutorial : MonoBehaviour {
     [SerializeField] private bool _suggestTutorial = true;
     [SerializeField] private TutorialSteps _steps;
     [SerializeField] private GameObject _blurBG;
-    private bool _tutorialEnded = false;
-    
+    private static bool _tutorialEnded = false;
+
+    public static bool Ended => _tutorialEnded;
+
     public static Action<string> OnShowTutorial;
     
     [System.Flags]
@@ -95,12 +97,12 @@ public class Tutorial : MonoBehaviour {
     }
 
     public void GameGoal(bool open) {
-        if (open && _steps.HasFlag(TutorialSteps.Goal))
-            return;
+        _tutorialEnded = !open;
+        if (open && _steps.HasFlag(TutorialSteps.Goal)) return;
         else if (!open && !_steps.HasFlag(TutorialSteps.Goal)) {
             _steps += (int)TutorialSteps.Goal;
         }
-        _gameGoal.SetActive(open);
+        _gameGoal.SetActive(true);
     }
 
     public void OpenStartRegionDetails() {

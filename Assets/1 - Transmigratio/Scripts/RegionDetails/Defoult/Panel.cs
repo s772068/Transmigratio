@@ -31,6 +31,7 @@ namespace RegionDetails.Defoult {
 
         private void Start() {
             _region.text = Transmigratio.Instance.TMDB.map.AllRegions[MapData.RegionID].Name;
+            if (Tutorial.Ended) OnSelectParamiter("Terrain");
         }
 
         private void ShowTutorial(string tutName) {
