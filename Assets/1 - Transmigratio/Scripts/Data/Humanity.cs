@@ -6,7 +6,7 @@ using UnityEngine;
 using GlobalEvents = Gameplay.Scenarios.Events.Global;
 
 /// <summary>
-/// Класс "человечество" - суммарная/усреднённая инфа по цивилизациям
+/// пїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 /// </summary>
 [System.Serializable]
 public class Humanity {
@@ -37,7 +37,7 @@ public class Humanity {
     }
 
     /// <summary>
-    /// Создание первоначальной цивилизации (старт игры)
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ)
     /// </summary>
     public Civilization StartGame(int region, string civName) {
         Civilization newCiv = new Civilization(civName);

@@ -226,8 +226,11 @@ namespace Gameplay.Scenarios.Events.Global {
             if (!_migrations.ContainsKey($"{civPiece.Civilization.Name}-{civPiece.Region.Id}")) {
                 foreach (var pair in _migrations) {
                     if (pair.Value.To.Id == civPiece.Region.Id) {
-                        RemoveMigration($"{civPiece.Civilization.Name}-{pair.Value.From.Id}");
-                        return;
+                        if (_migrations.ContainsKey($"{civPiece.Civilization.Name}-{pair.Value.From.Id}"))
+                        {
+                            RemoveMigration($"{civPiece.Civilization.Name}-{pair.Value.From.Id}");
+                            return;
+                        }
                     }
                 }
                 new Exception("Dont find migration");
