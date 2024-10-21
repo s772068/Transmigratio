@@ -156,7 +156,7 @@ namespace Gameplay.Scenarios.Events.Global {
         private LineMarkerAnimator CreateLine(Vector2 start, Vector2 end) {
             LineMarkerAnimator lma = WMSK.AddLine(start, end, Color.red, 0f, 4f);
             lma.lineMaterial = lineMaterial;
-            lma.lineWidth = 2f;
+            lma.lineWidth = 1f;
             lma.drawingDuration = 1.5f;
             lma.dashInterval = 0.005f;
             lma.dashAnimationDuration = 0.8f;

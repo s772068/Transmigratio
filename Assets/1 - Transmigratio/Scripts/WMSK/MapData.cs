@@ -20,6 +20,7 @@ public static class MapData {
         _wmsk.OnCountryLongClick += OnClickRegion;
 
         _wmsk.OnMarkerMouseDown += OnMarkerMouseDown;
+        _wmsk.OnMarkerMouseUp += OnMarkerMouseUp;
         _wmsk.OnMarkerMouseEnter += OnMarkerEnter;
         _wmsk.OnMarkerMouseExit += OnMarkerExit;
 
@@ -39,6 +40,7 @@ public static class MapData {
         _wmsk.OnCountryLongClick -= OnClickRegion;
 
         _wmsk.OnMarkerMouseDown -= OnMarkerMouseDown;
+        _wmsk.OnMarkerMouseUp -= OnMarkerMouseUp;
         _wmsk.OnMarkerMouseEnter -= OnMarkerEnter;
         _wmsk.OnMarkerMouseExit -= OnMarkerExit;
 
@@ -53,9 +55,11 @@ public static class MapData {
             if (value && !_isClickableMarker) {
                 _isClickableMarker = value;
                 _wmsk.OnMarkerMouseDown += OnMarkerMouseDown;
+                _wmsk.OnMarkerMouseUp += OnMarkerMouseUp;
             } else if (!value && _isClickableMarker) {
                 _isClickableMarker = value;
                 _wmsk.OnMarkerMouseDown -= OnMarkerMouseDown;
+                _wmsk.OnMarkerMouseUp -= OnMarkerMouseUp;
             }
         }
     }
@@ -89,7 +93,12 @@ public static class MapData {
     }
 
     private static void OnMarkerMouseDown(MarkerClickHandler marker, int buttonIndex) {
-        marker.GetComponent<IconMarker>().Click();
+        //marker.GetComponent<IconMarker>().Click();
+        marker.GetComponent<IconMarker>().MouseDown();
+    }
+
+    private static void OnMarkerMouseUp(MarkerClickHandler marker, int buttonIndex) {
+        marker.GetComponent<IconMarker>().MouseUp();
     }
 
     private static void OnCountryHighlight(int countryIndex, int regionIndex, ref bool allowHighlight) {
