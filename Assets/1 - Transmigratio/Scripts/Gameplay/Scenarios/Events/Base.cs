@@ -67,7 +67,7 @@ namespace Gameplay.Scenarios.Events {
             marker.SetCount = 1;
             position.z = -0.1f;
 
-            MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.018f, true, true);
+            MarkerClickHandler handler = WMSK.AddMarker2DSprite(marker.gameObject, position, 0.024f, true, true);
             handler.allowDrag = false;
             return marker;
         }
