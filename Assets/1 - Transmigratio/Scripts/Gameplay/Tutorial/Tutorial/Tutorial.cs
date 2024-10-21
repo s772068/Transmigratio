@@ -64,10 +64,11 @@ public class Tutorial : MonoBehaviour {
         RegionDetails.StartGame.Panel.onStartGame += TutorialByHUD;
         Gameplay.Scenarios.Events.AutoChoicePanel.onOpen += TutorialByAutoChoice;
         Layers.Panel.onOpen += TutorialByLayers;
-        EventPanel.PanelOpen += TutorialByEvent;
+        EventPanel.EventPanelOpen += TutorialByEvent;
         IconMarker.MarkerInst += TutorialByMarker;
         // EventPanel.EventPanelOpen += GameEvent;
     }
+
 
     private void OnDisable() {
         RegionDetails.Controller.onOpenStartRegionPanel -= OpenStartRegionDetails;
@@ -75,7 +76,7 @@ public class Tutorial : MonoBehaviour {
         RegionDetails.StartGame.Panel.onClose -= TutorialByHUD;
         Gameplay.Scenarios.Events.AutoChoicePanel.onOpen -= TutorialByAutoChoice;
         Layers.Panel.onOpen -= TutorialByLayers;
-        EventPanel.PanelOpen -= TutorialByEvent;
+        EventPanel.EventPanelOpen -= TutorialByEvent;
         IconMarker.MarkerInst -= TutorialByMarker;
         // EventPanel.EventPanelOpen -= GameEvent;
     }
@@ -141,7 +142,7 @@ public class Tutorial : MonoBehaviour {
         }
     }
 
-    public void TutorialByEvent() {
+    public void TutorialByEvent(bool open) {
         if (!_steps.HasFlag(TutorialSteps.Event)) {
             OnShowTutorial?.Invoke("Event");
             _steps += (int)TutorialSteps.Event;

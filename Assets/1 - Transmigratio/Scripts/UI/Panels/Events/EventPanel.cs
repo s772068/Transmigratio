@@ -36,15 +36,15 @@ public class EventPanel : Panel {
     private protected override void OnEnable()
     {
         base.OnEnable();
-        EventPanelOpen?.Invoke(true);
         Tutorial.OnShowTutorial += ShowTutorial;
+        EventPanelOpen?.Invoke(true);
     }
 
     private protected override void OnDisable()
     {
         base.OnDisable();
-        EventPanelClose?.Invoke(true);
         Tutorial.OnShowTutorial -= ShowTutorial;
+        EventPanelClose?.Invoke(true);
     }
 
     public void OpenAutoChoice() => Transmigratio.Instance.HUD.OpenAutoChoice();
