@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Интерфейс, всплывающие окна и тд
+/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ
 /// </summary>
 public class HUD : StaticInstance<HUD> {
     [SerializeField] private Messanger _messanger;
@@ -65,7 +65,7 @@ public class HUD : StaticInstance<HUD> {
     }
 
     private void UpdateShowGold() {
-        _goldTxt.text = ((int)_humanity.AllGold).ToString();
+        //_goldTxt.text = ((int)_humanity.AllGold).ToString();
     }
 
     public void OnShowLayers(bool isShow) {
