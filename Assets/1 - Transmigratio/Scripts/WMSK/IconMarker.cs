@@ -4,7 +4,7 @@ using System;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class IconMarker : MonoBehaviour {
-    [SerializeField] private SpriteRenderer _backGround;
+    // [SerializeField] private SpriteRenderer _backGround;
     [SerializeField] private SpriteRenderer _sr;
     [SerializeField] private SpriteRenderer _countSR;
     [SerializeField] private Sprite _clickedStateSprite;
@@ -33,21 +33,21 @@ public class IconMarker : MonoBehaviour {
 
     private void Start() {
         MarkerInst?.Invoke();
-        _standartStateSprite = _backGround.sprite;
+    //    _standartStateSprite = _backGround.sprite;
     }
 
     public void Click() {
-        //onClick?.Invoke(Piece);
+        onClick?.Invoke(Piece);
     }
 
     public void Destroy() => Destroy(gameObject);
 
-    public void MouseDown() {
-        _backGround.sprite = _clickedStateSprite;
-    }
+    // public void MouseDown() {
+    //     _backGround.sprite = _clickedStateSprite;
+    // }
 
-    public void MouseUp() {
-        _backGround.sprite = _standartStateSprite;
-        onClick?.Invoke(Piece);
-    }
+    // public void MouseUp() {
+    //     _backGround.sprite = _standartStateSprite;
+    //     onClick?.Invoke(Piece);
+    // }
 }
