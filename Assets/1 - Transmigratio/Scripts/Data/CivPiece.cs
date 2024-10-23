@@ -67,7 +67,7 @@ public class CivPiece {
             List<float> list = new() {
                 EcoCulture["Farmers"],
                 EcoCulture["Hunters"],
-                EcoCulture["Nomads"],
+                EcoCulture["СattleBreeders"],
                 EcoCulture["Townsman"]
             };
             return list.IndexOf(list.Max()) == 0;
@@ -79,7 +79,7 @@ public class CivPiece {
     /// </summary>
     public void Init(int region, string civilization, int startPopulation) {
         EcoCulture.Init(("Hunters", GameSettings.StartHunters));
-        EcoCulture.Init("Farmers", "Nomads", "Townsman");
+        EcoCulture.Init("Farmers", "СattleBreeders", "Townsman");
 
         ProdMode.Init(("PrimitiveCommunism", GameSettings.StartPrimitiveCommunism));
         ProdMode.Init("Slavery", "Feodalism", "Capitalism", "Socialism", "Communism");

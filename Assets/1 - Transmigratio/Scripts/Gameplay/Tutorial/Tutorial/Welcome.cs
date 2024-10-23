@@ -34,7 +34,10 @@ public class Welcome : MonoBehaviour {
 
     private void AddCompleted() {
         ++_curCompleted;
-        if(_allCompleted == _curCompleted) {
+        Debug.Log(_curCompleted + " : " + _allCompleted);
+        if (_curCompleted >= _allCompleted) {
+            _curCompleted = 0;
+            _allCompleted = 0;
             Completed();
         }
     }

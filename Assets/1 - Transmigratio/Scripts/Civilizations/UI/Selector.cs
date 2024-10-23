@@ -72,10 +72,10 @@ namespace Civilizations {
             _rect.DOPause();
             if (_isOpen) {
                 UpdateElements();
-                _rect.DOAnchorPosY(-370, 0.5f);
+                _rect.DOAnchorPosY(170, 0.5f);
                 Timeline.TickShow += UpdateElements;
             } else {
-                _rect.DOAnchorPosY(410, 0.5f).OnComplete(() => ClearElements());
+                _rect.DOAnchorPosY(950, 0.5f).OnComplete(() => ClearElements());
                 Timeline.TickShow -= UpdateElements;
                 _active = null;
             }
