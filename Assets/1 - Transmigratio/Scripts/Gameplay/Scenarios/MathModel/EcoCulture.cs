@@ -26,11 +26,11 @@ namespace Gameplay.Scenarios {
             }
         }
 
-        private static float ÑattleBreeders {
-            get => _ecoCulture["ÑattleBreeders"];
+        private static float CattleBreeders {
+            get => _ecoCulture["CattleBreeders"];
             set {
-                _ecoCulture.GetValue("ÑattleBreeders").onUpdate?.Invoke(ÑattleBreeders, value, _piece);
-                _ecoCulture["ÑattleBreeders"] = value;
+                _ecoCulture.GetValue("CattleBreeders").onUpdate?.Invoke(CattleBreeders, value, _piece);
+                _ecoCulture["CattleBreeders"] = value;
             }
         }
 
@@ -65,10 +65,10 @@ namespace Gameplay.Scenarios {
         private static void Update() {
             Hunters += (Forest + Mountain + Steppe + Tundra) /data.EcoCultureDivider;
             Farmers += Plain / data.EcoCultureDivider;
-            ÑattleBreeders += (Desert + Mountain + Steppe) / data.EcoCultureDivider;
+            CattleBreeders += (Desert + Mountain + Steppe) / data.EcoCultureDivider;
 
             if (_piece.Population.Value > data.UrbanMinPop)
-                Townsman += (Farmers + ÑattleBreeders) / data.EcoCultureDivider;
+                Townsman += (Farmers + CattleBreeders) / data.EcoCultureDivider;
 
             OnUpdateEcoCulture?.Invoke(_piece);
 
