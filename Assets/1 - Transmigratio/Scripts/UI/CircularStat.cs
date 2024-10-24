@@ -23,6 +23,9 @@ namespace UI
             float fill = 0f;
             for (int i = 0; i < _circulars.Count; i++)
             {
+                if (i >= values.Count)
+                    break;
+                
                 fill += values[i] / 100f;
                 _circulars[i].fillAmount = fill;
             }

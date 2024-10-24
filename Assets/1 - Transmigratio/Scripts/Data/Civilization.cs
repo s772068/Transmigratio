@@ -40,7 +40,7 @@ public class Civilization {
             return res;
         }
     }
-
+    
     //�� ����� �������� � CivParam
     /// <summary>
     /// ����������� ������� ������������

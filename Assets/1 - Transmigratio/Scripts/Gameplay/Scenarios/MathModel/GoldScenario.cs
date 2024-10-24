@@ -17,7 +17,7 @@ namespace Gameplay.Scenarios {
                                        _piece.EcoCulture["Townsman"];
         private static float Gold {
             get => _piece.gold;
-            set => _piece.gold += value;
+            set => _piece.gold = value;
         }
 
         public static void Play(CivPiece piece) {

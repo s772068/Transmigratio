@@ -4,6 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using System.Linq;
 using System;
+using UI.CivPanel;
 
 namespace Civilizations {
     public class Selector : MonoBehaviour {
@@ -80,5 +81,7 @@ namespace Civilizations {
                 _active = null;
             }
         }
+        
+        public void OpenCivPanel() => CivPanel.OpenCivPanel?.Invoke(_humanity.Civilizations[_active]);
     }
 }

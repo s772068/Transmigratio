@@ -6,17 +6,19 @@ using UnityEngine.UI;
 
 namespace UI.CivPanel
 {
-    public class PolitElement : MonoBehaviour
+    public class CivSystemElement : MonoBehaviour
     {
         [SerializeField] private TMP_Text _politName;
         [SerializeField] private TMP_Text _percent;
-        [SerializeField] private Image _circularFill;
         [SerializeField] private Transform _effectsParent;
         [SerializeField] private Image _effectsPrefab;
+        [SerializeField] private CircularStat _stat;
 
+        public string Percent => _percent.text;
+        
         private List<Image> _effects;
 
-        public void Init(string politName, int percent, List<Sprite> effects = null)
+        public void Init(string politName, float percent, float percentForStat = 0, List<Sprite> effects = null)
         {
             _politName.text = politName;
             _percent.text = $"{percent}%";
@@ -34,6 +36,7 @@ namespace UI.CivPanel
 
             if (effects != null)
             {
+                _effectsParent.gameObject.SetActive(true);
                 foreach (var effect in effects)
                 {
                     var effectObject = Instantiate(_effectsPrefab, _effectsParent);
@@ -41,6 +44,17 @@ namespace UI.CivPanel
                     _effects.Add(effectObject);
                 }
             }
+
+            _stat.gameObject.SetActive(true);
+            _stat.Init(new List<float>() { percentForStat,percent });
+        }
+
+        public void Clear()
+        {
+            _politName.text ="";
+            _percent.text = "";
+            _effectsParent.gameObject.SetActive(false);
+            _stat.gameObject.SetActive(false);
         }
     }
 }
