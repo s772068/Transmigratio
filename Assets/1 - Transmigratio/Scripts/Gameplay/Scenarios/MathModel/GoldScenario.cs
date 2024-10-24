@@ -9,11 +9,11 @@ namespace Gameplay.Scenarios {
         private static float Population => _piece.Population.Value;
         private static float Hunters => _piece.EcoCulture["Hunters"] / AllEco;
         private static float Farmers => _piece.EcoCulture["Farmers"] / AllEco;
-        private static float Nomads => _piece.EcoCulture["Nomads"] / AllEco;
+        private static float CattleBreeders => _piece.EcoCulture["CattleBreeders"] / AllEco;
         private static float Townsman => _piece.EcoCulture["Townsman"] / AllEco;
         private static float AllEco => _piece.EcoCulture["Hunters"] +
                                        _piece.EcoCulture["Farmers"] +
-                                       _piece.EcoCulture["Nomads"]  +
+                                       _piece.EcoCulture["CattleBreeders"]  +
                                        _piece.EcoCulture["Townsman"];
         private static float Gold {
             get => _piece.gold;
@@ -32,7 +32,7 @@ namespace Gameplay.Scenarios {
         private static void Update() {
             Gold += Population * (Hunters  * data.Hunters +
                                   Farmers  * data.Farmers +
-                                  Nomads   * data.Nomads  +
+                                  CattleBreeders * data.CattleBreeders +
                                   Townsman * data.Townsman) / data.GoldGeneralDivision;
         }
 
@@ -40,7 +40,7 @@ namespace Gameplay.Scenarios {
         public class Data {
             public float Hunters = 0f;
             public float Farmers = 0.1f;
-            public float Nomads = 0.1f;
+            public float CattleBreeders = 0.1f;
             public float Townsman = 1f;
             public float GoldGeneralDivision = 100f;
         }
